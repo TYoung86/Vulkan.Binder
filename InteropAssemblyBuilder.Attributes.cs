@@ -28,13 +28,30 @@ namespace Artilect.Vulkan.Binder {
 			| TypeAttributes.Abstract
 			| TypeAttributes.Interface;
 
-		private static readonly MethodAttributes PropertyMethodAttributes
+		private static readonly MethodAttributes PublicInterfaceImplementationMethodAttributes
+			= MethodAttributes.Public
+			| MethodAttributes.Virtual
+			| MethodAttributes.HideBySig;
+		
+		private static readonly MethodAttributes PublicStaticMethodAttributes
+			= MethodAttributes.Public
+			| MethodAttributes.Static
+			| MethodAttributes.HideBySig;
+		
+		private static readonly MethodAttributes PublicPropertyMethodAttributes
 			= MethodAttributes.Public
 			| MethodAttributes.SpecialName
 			| MethodAttributes.HideBySig;
 
+		private static readonly MethodAttributes HiddenPropertyMethodAttributes
+			= MethodAttributes.PrivateScope
+			| MethodAttributes.SpecialName
+			| MethodAttributes.HideBySig;
+
 		private static readonly MethodAttributes InterfaceMethodAttributes
-			= PropertyMethodAttributes
+			= MethodAttributes.Public
+			| MethodAttributes.SpecialName
+			| MethodAttributes.HideBySig
 			| MethodAttributes.Abstract
 			| MethodAttributes.Virtual;
 

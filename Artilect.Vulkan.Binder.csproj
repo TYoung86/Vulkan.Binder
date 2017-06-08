@@ -28,13 +28,6 @@
 		<PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
 		<PackageReference Include="System.Net.Http" Version="4.3.2" />
 		<PackageReference Include="System.Numerics.Vectors" Version="4.3.0" />
-		<PackageReference Include="System.Reflection" Version="4.3.0" />
-		<PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
-		<PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.3.0" />
-		<PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
-		<PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
-		<PackageReference Include="System.Reflection.Primitives" Version="4.3.0" />
-		<PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
 		<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.3.0" />
 		<PackageReference Include="System.Runtime.Extensions" Version="4.3.0" />
 	</ItemGroup>

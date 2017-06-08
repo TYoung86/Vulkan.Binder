@@ -6,8 +6,9 @@ using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Artilect.Vulkan.Binder {
+
 	[DebuggerDisplay("~ {"+nameof(ClassImpl)+"} {"+nameof(NameImpl)+"}")]
-	public class CustomParameterInfo : ParameterInfo {
+	public class CustomParameterInfo {
 		public CustomParameterInfo(string name, Type type, ParameterAttributes paramAttrs = default(ParameterAttributes), IEnumerable<AttributeInfo> customAttrs = null) {
 			NameImpl = name ?? "";
 			ClassImpl = type ?? throw new ArgumentNullException(nameof(type));
@@ -17,13 +18,21 @@ namespace Artilect.Vulkan.Binder {
 				( customAttrs ?? new AttributeInfo[0] );
 		}
 
-		public new ref string Name => ref NameImpl;
+		public ParameterAttributes AttrsImpl;
 
-		public new ref Type ParameterType => ref ClassImpl;
+		public Type ClassImpl;
 
-		public new ref ParameterAttributes Attributes => ref AttrsImpl;
+		public string NameImpl;
+
+		public int PositionImpl;
+
+		public ref string Name => ref NameImpl;
+
+		public ref Type ParameterType => ref ClassImpl;
+
+		public ref ParameterAttributes Attributes => ref AttrsImpl;
 		
-		public new ref int Position => ref PositionImpl;
+		public ref int Position => ref PositionImpl;
 
 		public int GetPosition() => PositionImpl;
 
@@ -48,7 +57,7 @@ namespace Artilect.Vulkan.Binder {
 		
 		private readonly ICollection<AttributeInfo> _attributeInfo;
 
-		public IEnumerable<AttributeInfo> AttributeInfos
+		public ICollection<AttributeInfo> AttributeInfos
 			=> _attributeInfo;
 		
 		public void AddCustomAttribute(AttributeInfo attribute)
@@ -63,17 +72,17 @@ namespace Artilect.Vulkan.Binder {
 		public bool RemoveCustomAttribute(AttributeInfo attribute)
 			=> _attributeInfo.Remove(attribute);
 
-		public override object[] GetCustomAttributes(bool inherit)
+		public object[] GetCustomAttributes(bool inherit)
 			=> _attributeInfo.Select(ai => ai.GetAttribute()).ToArray<object>();
 
-		public override object[] GetCustomAttributes(Type attributeType, bool inherit)
+		public object[] GetCustomAttributes(Type attributeType, bool inherit)
 			=> _attributeInfo.Where(ai => ai.Type == attributeType)
 				.Select(ai => ai.GetAttribute()).ToArray<object>();
 
-		public override IList<CustomAttributeData> GetCustomAttributesData()
+		public IList<CustomAttributeData> GetCustomAttributesData()
 			=> CustomAttributes.ToArray();
 
-		public override IEnumerable<CustomAttributeData> CustomAttributes
+		public IEnumerable<CustomAttributeData> CustomAttributes
 			=> _attributeInfo.Select(ai => ai.GetCustomAttributeData());
 	}
 }

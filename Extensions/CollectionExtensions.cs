@@ -3,11 +3,20 @@ using System.Collections.Generic;
 
 namespace Artilect.Vulkan.Binder.Extensions {
 	public static class CollectionExtensions {
+
 		public static IEnumerable<T> Reversed<T>(this LinkedList<T> linkedList) {
 			var node = linkedList.Last;
 			while (node != null) {
 				yield return node.Value;
 				node = node.Previous;
+			}
+		}
+		
+		public static IEnumerable<LinkedListNode<T>> Nodes<T>(this LinkedList<T> linkedList) {
+			var node = linkedList.First;
+			while (node != null) {
+				yield return node;
+				node = node.Next;
 			}
 		}
 

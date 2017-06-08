@@ -4,6 +4,8 @@ using Artilect.Interop;
 
 namespace Artilect.Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
+		private static readonly Type VoidPointerType = typeof(void*);
+
 		public delegate void TypeTransform(ref Type t);
 
 		public static void MakeArrayType(ref Type t) => t = t.MakeArrayType();
@@ -17,12 +19,11 @@ namespace Artilect.Vulkan.Binder {
 			=> t = typeof(Pointer64<>).MakeGenericType(t);
 
 		public static Type GetTypePointedTo(Type exterior, out LinkedList<TypeTransform> transform, bool directVoids = false) {
-			var voidPtrType = typeof(void*);
 			var type = exterior;
 			transform = new LinkedList<TypeTransform>();
 			while (type.HasElementType) {
 				if (type.IsPointer) {
-					if (directVoids || type != voidPtrType) {
+					if (directVoids || type != VoidPointerType) {
 						transform.AddFirst(MakePointerType);
 						type = type.GetElementType();
 					}
@@ -35,17 +36,16 @@ namespace Artilect.Vulkan.Binder {
 			return type;
 		}
 
-		public Type GetInteriorType(Type exterior, out LinkedList<TypeTransform> transform, bool directVoids = false) {
+		public static Type GetInteriorType(Type exterior, out LinkedList<TypeTransform> transform, bool directVoids = false) {
 			transform = new LinkedList<TypeTransform>();
 			return FindInteriorType(exterior, ref transform, directVoids);
 		}
 
-		public Type FindInteriorType(Type exterior, ref LinkedList<TypeTransform> transform, bool directVoids = false) {
-			var voidPtrType = typeof(void*);
+		public static Type FindInteriorType(Type exterior, ref LinkedList<TypeTransform> transform, bool directVoids = false) {
 			var type = exterior;
 			while (type.HasElementType) {
 				if (type.IsPointer) {
-					if (directVoids || type != voidPtrType) {
+					if (directVoids || type != VoidPointerType) {
 						transform.AddFirst(MakePointerType);
 						type = type.GetElementType();
 					}
