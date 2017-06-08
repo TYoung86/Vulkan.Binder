@@ -64,12 +64,12 @@ namespace Artilect.Vulkan.Binder {
 			FieldValues = fieldValues ?? new object[0];
 		}
 
-		public ConstructorInfo Constructor { get; }
-		public object[] Arguments { get; }
-		public PropertyInfo[] PropertiesInitialized { get; }
-		public object[] PropertyValues { get; }
-		public FieldInfo[] FieldsInitialized { get; }
-		public object[] FieldValues { get; }
+		public ConstructorInfo Constructor { get; set; }
+		public object[] Arguments { get; set; }
+		public PropertyInfo[] PropertiesInitialized { get; set; }
+		public object[] PropertyValues { get; set; }
+		public FieldInfo[] FieldsInitialized { get; set; }
+		public object[] FieldValues { get; set; }
 
 		public Type Type => Constructor.DeclaringType;
 

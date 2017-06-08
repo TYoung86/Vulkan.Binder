@@ -18,7 +18,7 @@ namespace Artilect.Vulkan.Binder {
 		private Func<Type[]> DefineClrType(ClangFunctionInfoBase funcInfo) {
 			TypeBuilder funcDef = Module.DefineType(funcInfo.Name,
 				DelegateTypeAttributes,
-				typeof(MulticastDelegate));
+				typeof(MulticastDelegate) );
 
 			var retParam = ResolveParameter(funcInfo.ReturnType);
 			if (!CallingConventionMap.TryGetValue(funcInfo.CallConvention, out var callConv))

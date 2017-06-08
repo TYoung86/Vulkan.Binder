@@ -5,8 +5,12 @@ using Artilect.Vulkan.Binder.Extensions;
 
 namespace Artilect.Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
+		private static readonly Type IntPtrType = typeof(IntPtr);
+		private static readonly Type UIntPtrType = typeof(UIntPtr);
+		private static readonly Type IHandleGtd = typeof(IHandle<>);
+
 		private static bool IsIntPtrOrUIntPtr(Type t) {
-			return t == typeof(IntPtr) || t == typeof(UIntPtr);
+			return t == IntPtrType || t == UIntPtrType;
 		}
 
 		private static bool IsHandleType(Type t) {
@@ -15,7 +19,7 @@ namespace Artilect.Vulkan.Binder {
 			if (t.IsPrimitive || t.IsIndirect()) return false;
 
 			try {
-				interfaceType = typeof(IHandle<>).MakeGenericType(t);
+				interfaceType = IHandleGtd.MakeGenericType(t);
 			}
 			catch {
 				return false;

@@ -5,10 +5,13 @@ using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
+using System.Runtime.Versioning;
 using ClangSharp;
 
 namespace Artilect.Vulkan.Binder {
+
 	public partial class InteropAssemblyBuilder {
+
 		private static ConcurrentBag<Func<Type[]>> DefinitionFuncs {
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			get;
@@ -34,7 +37,6 @@ namespace Artilect.Vulkan.Binder {
 			get;
 		} = clang.createIndex(0, 0);
 
-
 		public AssemblyName Name { get; }
 
 		private AssemblyBuilder Assembly { get; }
@@ -53,6 +55,7 @@ namespace Artilect.Vulkan.Binder {
 			Name = assemblyName;
 			Statistics = new ReadOnlyDictionary<string, long>(_statistics);
 			Assembly = AssemblyBuilder.DefineDynamicAssembly(Name, AssemblyBuilderAccess.Save);
+			Assembly.SetCustomAttribute(AttributeInfo.Create(() => new TargetFrameworkAttribute("")));
 			var moduleName = assemblyName.Name;
 			Module = Assembly.DefineDynamicModule(moduleName, $"{moduleName}.dll");
 			//Delegates = Module.DefineType("Delegates", TypeAttributes.Abstract | TypeAttributes.Sealed | TypeAttributes.Public);
