@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Artilect.Vulkan.Binder.Extensions;
 using ClangSharp;
+using Mono.Cecil;
+using Mono.Cecil.Rocks;
 
 namespace Artilect.Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
@@ -121,7 +123,7 @@ namespace Artilect.Vulkan.Binder {
 			return type.kind;
 		}
 
-		private CustomParameterInfo ResolveField(CXType originalType, string name = null, int index = 0) {
+		private ParameterInfo ResolveField(CXType originalType, string name = null, int index = 0) {
 			var type = originalType;
 
 			if (type.kind == CXTypeKind.CXType_FunctionProto)
@@ -134,50 +136,43 @@ namespace Artilect.Vulkan.Binder {
 				var pointeeType = clang.getPointeeType(type);
 				if (clang.getFunctionTypeCallingConv(pointeeType) != CXCallingConv.CXCallingConv_Invalid) {
 					var delegateTypeName = originalType.ToString();
-					var possibleDelegateType = Assembly.GetType(delegateTypeName, false, false);
+					var possibleDelegateType = Module.GetType(delegateTypeName);
 
 					if (possibleDelegateType != null)
-						return new CustomParameterInfo(name, possibleDelegateType) {Position = index};
+						return new ParameterInfo(name, possibleDelegateType, index);
 
-					return new CustomParameterInfo(name,
-						IncompleteType.Get(Assembly, Module, null, delegateTypeName)) {Position = index};
+					return new ParameterInfo(name,
+						IncompleteTypeReference.Get(Module, null, delegateTypeName), index);
 				}
 
 				var resolvedParameter = ResolveField(pointeeType);
-				if (resolvedParameter.Attributes != default(ParameterAttributes)
-					|| resolvedParameter.CustomAttributes.Any())
-					throw new NotImplementedException();
-				return new CustomParameterInfo(name,
-					resolvedParameter.ParameterType.MakePointerType());
+				return new ParameterInfo(name,
+					resolvedParameter.Type.MakePointerType(), index);
 			}
 			if (typeKind == CXTypeKind.CXType_ConstantArray) {
 				var arraySize = (int) clang.getArraySize(type);
 				var elementType = clang.getArrayElementType(type);
 				var resolvedParameter = ResolveField(elementType, name);
-				if (resolvedParameter.Attributes != default(ParameterAttributes)
-					|| resolvedParameter.CustomAttributes.Any())
-					throw new NotImplementedException();
-				var arrayType = resolvedParameter.ParameterType.MakeArrayType();
-				return new CustomParameterInfo(name,
-					arrayType, AttributeInfo.Create(() =>
-						new FixedBufferAttribute(arrayType, arraySize))) {Position = index};
+				var arrayType = resolvedParameter.Type.MakeArrayType();
+				return new ParameterInfo(name,
+					arrayType, index, ParameterAttributes.None, arraySize);
 			}
 			if (PrimitiveTypeMap.TryGetValue(typeKind, out var primitiveType)) {
 				if (primitiveType == null)
 					throw new NotImplementedException();
-				return new CustomParameterInfo(name, primitiveType) {Position = index};
+				return new ParameterInfo(name, primitiveType.Import(Module), index);
 			}
 
 			var typeName = typeDeclCursor.ToString();
-			var possibleType = Assembly.GetType(typeName, false, false);
+			var possibleType = Module.GetType(typeName);
 			if (possibleType != null)
-				return new CustomParameterInfo(name, possibleType) {Position = index};
+				return new ParameterInfo(name, possibleType, index);
 
-			return new CustomParameterInfo(name,
-				IncompleteType.Get(Assembly, Module, null, typeName)) {Position = index};
+			return new ParameterInfo(name,
+				IncompleteTypeReference.Get(Module, null, typeName), index);
 		}
 
-		private CustomParameterInfo ResolveParameter(CXType originalType, string name = null, int index = 0) {
+		private ParameterInfo ResolveParameter(CXType originalType, string name = null, int index = 0) {
 			var type = originalType;
 			if (type.kind == CXTypeKind.CXType_FunctionProto)
 				throw new NotImplementedException();
@@ -188,19 +183,16 @@ namespace Artilect.Vulkan.Binder {
 				var pointeeType = clang.getPointeeType(type);
 				if (clang.getFunctionTypeCallingConv(pointeeType) != CXCallingConv.CXCallingConv_Invalid) {
 					var delegateTypeName = originalType.ToString();
-					var possibleDelegateType = Assembly.GetType(delegateTypeName, false, false);
+					var possibleDelegateType = Module.GetType(delegateTypeName);
 					if (possibleDelegateType != null)
-						return new CustomParameterInfo(name, possibleDelegateType) {Position = index};
+						return new ParameterInfo(name, possibleDelegateType, index);
 
-					return new CustomParameterInfo(name,
-						IncompleteType.Get(Assembly, Module, null, delegateTypeName)) {Position = index};
+					return new ParameterInfo(name,
+						IncompleteTypeReference.Get(Module, null, delegateTypeName), index);
 				}
 				var resolvedParameter = ResolveParameter(pointeeType);
-				if (resolvedParameter.Attributes != default(ParameterAttributes)
-					|| resolvedParameter.CustomAttributes.Any())
-					throw new NotImplementedException();
-				return new CustomParameterInfo(name,
-					resolvedParameter.ParameterType.MakePointerType()) {Position = index};
+				return new ParameterInfo(name,
+					resolvedParameter.Type.MakePointerType(), index);
 			}
 			if (typeKind == CXTypeKind.CXType_DependentSizedArray) {
 				throw new NotImplementedException();
@@ -209,37 +201,30 @@ namespace Artilect.Vulkan.Binder {
 				var arraySize = (int) clang.getArraySize(type);
 				var elementType = clang.getArrayElementType(type);
 				var resolvedParameter = ResolveParameter(elementType, name);
-				if (resolvedParameter.Attributes != default(ParameterAttributes)
-					|| resolvedParameter.CustomAttributes.Any())
-					throw new NotImplementedException();
-				var clrElementType = resolvedParameter.ParameterType;
-				if (clrElementType.IsPointer) clrElementType = typeof(IntPtr);
-				var arrayType = resolvedParameter.ParameterType.MakeArrayType();
+				var clrElementType = resolvedParameter.Type;
+				if (clrElementType.IsPointer) clrElementType = IntPtrType;
+				var arrayType = resolvedParameter.Type.MakeArrayType();
 
-				if (!PrimitiveUnmanagedTypeMap.TryGetValue(clrElementType, out var unmanagedType)) {
+				if (!PrimitiveUnmanagedTypeMap.TryGetValue(clrElementType.GetRuntimeType(), out var unmanagedType)) {
 					throw new NotImplementedException();
 				}
 
-				return new CustomParameterInfo(name,
-					arrayType, AttributeInfo.Create(() =>
-						new MarshalAsAttribute(UnmanagedType.LPArray) {
-							ArraySubType = unmanagedType,
-							SizeConst = arraySize
-						})) {Position = index};
+				return new ParameterInfo(name,
+					arrayType, index, ParameterAttributes.None, arraySize);
 			}
 			if (PrimitiveTypeMap.TryGetValue(typeKind, out var primitiveType)) {
 				if (primitiveType == null)
 					throw new NotImplementedException();
-				return new CustomParameterInfo(name, primitiveType) {Position = index};
+				return new ParameterInfo(name, primitiveType.Import(Module), index);
 			}
 
 			var typeName = typeDeclCursor.ToString();
-			var possibleType = Assembly.GetType(typeName, false, false);
+			var possibleType = Module.GetType(typeName);
 			if (possibleType != null)
-				return new CustomParameterInfo(name, possibleType) {Position = index};
+				return new ParameterInfo(name, possibleType, index);
 
-			return new CustomParameterInfo(name,
-				IncompleteType.Get(Assembly, Module, null, typeName)) {Position = index};
+			return new ParameterInfo(name,
+				IncompleteTypeReference.Get( Module, null, typeName), index);
 		}
 
 		private static bool IsTypeSigned(Type type)
