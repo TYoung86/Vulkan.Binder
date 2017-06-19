@@ -2,7 +2,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using Artilect.Interop;
 using Artilect.Vulkan.Binder.Extensions;
 using Mono.Cecil;
 using Mono.Cecil.Rocks;

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Artilect.Interop;
 using Artilect.Vulkan.Binder.Extensions;
 using Mono.Cecil;
 using Mono.Cecil.Rocks;

@@ -84,14 +84,14 @@ namespace Artilect.Vulkan.Binder.Extensions {
 		public static FieldDefinition DefineLiteral(this TypeDefinition typeDef, string name, object value) {
 			var fd = new FieldDefinition(name,
 				FieldAttributes.Public
+				| FieldAttributes.HasDefault
 				| FieldAttributes.Static
-				| FieldAttributes.Literal, typeDef) {
-				Constant = value
-			};
-			//var bytes = value as byte[] ?? BitConverter.GetBytes((dynamic) value);
-			//fd.InitialValue = bytes;
+				| FieldAttributes.Literal, typeDef);
 			
 			typeDef.Fields.Add(fd);
+			fd.Constant = value;
+			//var bytes = value as byte[] ?? BitConverter.GetBytes((dynamic) value);
+			//fd.InitialValue = bytes;
 			return fd;
 		}
 

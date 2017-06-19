@@ -35,7 +35,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Artilect.Interop\Artilect.Interop.csproj" />
+	  <ProjectReference Include="..\Artilect.Interop\Interop.csproj" />
 	</ItemGroup>
 
 </Project>
