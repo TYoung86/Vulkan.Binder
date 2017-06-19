@@ -31,7 +31,7 @@ namespace Artilect.Vulkan.Binder {
 
 		private bool IsTypedHandle(TypeReference t) {
 			try {
-				return ITypedHandle.IsAssignableFrom(t);
+				return ITypedHandleType.IsAssignableFrom(t);
 			}
 			catch {
 				return false;

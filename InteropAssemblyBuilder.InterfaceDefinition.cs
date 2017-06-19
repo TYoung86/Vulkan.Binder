@@ -90,13 +90,13 @@ namespace Artilect.Vulkan.Binder {
 			interfacePropDef = null;
 			interfaceMethodDef = null;
 			
-			LinkedList<CecilExtensions.TypeReferenceTransform> transforms32;
-			LinkedList<CecilExtensions.TypeReferenceTransform> transforms64;
+			LinkedList<TypeReferenceTransform> transforms32;
+			LinkedList<TypeReferenceTransform> transforms64;
 
 			if (fieldType32.Is(IntType) && fieldType64.Is(LongType)) {
 				// IntPtr
-				var propType = typeof(IntPtr);
-				var propRefType = propType.MakeByRefType();
+				var propType = IntPtrType;
+				var propRefType = propType.MakeByReferenceType();
 
 				interfacePropDef =
 					DefineInterfaceGetProperty(interfaceDef, propRefType, propName);
@@ -104,8 +104,8 @@ namespace Artilect.Vulkan.Binder {
 			}
 			if (fieldType32.Is(UIntType) && fieldType64.Is(ULongType)) {
 				// UIntPtr
-				var propType = typeof(UIntPtr);
-				var propRefType = propType.MakeByRefType();
+				var propType = UIntPtrType;
+				var propRefType = propType.MakeByReferenceType();
 
 				interfacePropDef =
 					DefineInterfaceGetProperty(interfaceDef, propRefType, propName);
@@ -134,7 +134,7 @@ namespace Artilect.Vulkan.Binder {
 
 			if (fieldType32.IsPointer && fieldType64.Is(IntType)) {
 				// 32-bit handle
-				var handleType = HandleInt32Type.MakeGenericInstanceType(fieldElemType32);
+				var handleType = HandleInt32Gtd.MakeGenericInstanceType(fieldElemType32);
 				
 				fieldInfo32.Value.Type = handleType;
 				fieldInfo64.Value.Type = handleType;
@@ -145,7 +145,7 @@ namespace Artilect.Vulkan.Binder {
 			}
 			if (fieldType32.IsPointer && fieldType64.Is(UIntType)) {
 				// 32-bit handle
-				var handleType = HandleUInt32Type.MakeGenericInstanceType(fieldElemType32);
+				var handleType = HandleUInt32Gtd.MakeGenericInstanceType(fieldElemType32);
 				
 				fieldInfo32.Value.Type = handleType;
 				fieldInfo64.Value.Type = handleType;
@@ -156,7 +156,7 @@ namespace Artilect.Vulkan.Binder {
 			}
 			if (fieldType32.Is(LongType) && fieldType64.IsPointer) {
 				// 64-bit handle
-				var handleType = HandleInt64Type.MakeGenericInstanceType(fieldElemType64);
+				var handleType = HandleInt64Gtd.MakeGenericInstanceType(fieldElemType64);
 				
 				fieldInfo32.Value.Type = handleType;
 				fieldInfo64.Value.Type = handleType;
@@ -167,7 +167,7 @@ namespace Artilect.Vulkan.Binder {
 			}
 			if (fieldType32.Is(ULongType) && fieldType64.IsPointer) {
 				// 64-bit handle
-				var handleType = HandleUInt64Type.MakeGenericInstanceType(fieldElemType64);
+				var handleType = HandleUInt64Gtd.MakeGenericInstanceType(fieldElemType64);
 				
 				fieldInfo32.Value.Type = handleType;
 				fieldInfo64.Value.Type = handleType;
@@ -179,7 +179,7 @@ namespace Artilect.Vulkan.Binder {
 
 			if (fieldElemType64.Is(IntType) && IsHandleType(fieldElemType32)) {
 				// 32-bit handle
-				TypeReference handleType = HandleInt32Type.MakeGenericInstanceType(fieldElemType32);
+				TypeReference handleType = HandleInt32Gtd.MakeGenericInstanceType(fieldElemType32);
 
 				var updatedFieldType32 = handleType;
 				foreach (var transform in transforms32)
@@ -199,7 +199,7 @@ namespace Artilect.Vulkan.Binder {
 			}
 			if (fieldElemType64.Is(UIntType) && IsHandleType(fieldElemType32)) {
 				// 32-bit handle
-				TypeReference handleType = HandleUInt32Type.MakeGenericInstanceType(fieldElemType32);
+				TypeReference handleType = HandleUInt32Gtd.MakeGenericInstanceType(fieldElemType32);
 
 				var updatedFieldType32 = handleType;
 				foreach (var transform in transforms32)
@@ -219,7 +219,7 @@ namespace Artilect.Vulkan.Binder {
 			}
 			if (fieldElemType32.Is(LongType) && IsHandleType(fieldElemType64)) {
 				// 64-bit handle
-				TypeReference handleType = HandleInt64Type.MakeGenericInstanceType(fieldElemType64);
+				TypeReference handleType = HandleInt64Gtd.MakeGenericInstanceType(fieldElemType64);
 
 				var updatedFieldType32 = handleType;
 				foreach (var transform in transforms32)
@@ -239,7 +239,7 @@ namespace Artilect.Vulkan.Binder {
 			}
 			if (fieldElemType32.Is(ULongType) && IsHandleType(fieldElemType64)) {
 				// 64-bit handle
-				TypeReference handleType = HandleUInt64Type.MakeGenericInstanceType(fieldElemType64);
+				TypeReference handleType = HandleUInt64Gtd.MakeGenericInstanceType(fieldElemType64);
 
 				var updatedFieldType32 = handleType;
 				foreach (var transform in transforms32)
@@ -288,7 +288,7 @@ namespace Artilect.Vulkan.Binder {
 				var fieldElemType = fieldType64.DescendElementType();
 
 				if (IsHandleType(interiorType64)) {
-					var handleType = typeof(HandleUIntPtr<>).MakeGenericType(interiorType64);
+					var handleType = HandleUIntPtrGtd.MakeGenericInstanceType(interiorType64);
 					TypeReference handleElemType = handleType;
 					foreach (var transform in transforms64.Take(transforms64.Count - 2))
 						transform(ref handleElemType);
@@ -329,7 +329,7 @@ namespace Artilect.Vulkan.Binder {
 				var commonInterface = commonInterfaces.First();
 				splitPointerDefs.TryGetValue(commonInterface.FullName, out var splitPointerDef);
 				var propType = splitPointerDef
-					?? module.ImportReference(  typeof(SplitPointer<,,>).MakeGenericType(commonInterface, interiorType32, interiorType64) );
+					?? module.ImportReference( SplitPointerGtd.MakeGenericInstanceType(commonInterface, interiorType32, interiorType64) );
 				foreach (var transform in transforms32.Skip(1))
 					transform(ref propType);
 				var propRefType = propType.MakeByReferenceType();

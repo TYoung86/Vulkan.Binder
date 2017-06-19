@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,30 +28,69 @@ namespace Artilect.Vulkan.Binder.Extensions {
 				td.PackingSize = (short) packing;
 			if (packing >= 0)
 				td.ClassSize = size;
-			if ((typeAttrs & StructTypeAttributeMask) != 0)
+			if ((typeAttrs & StructTypeAttributeMask) != 0) {
 				td.BaseType = typeof(ValueType).Import(module);
+				td.Attributes |= TypeAttributes.Serializable;
+			}
 			td.Scope = module;
 			module.Types.Add(td);
 			return td;
 		}
 
 		public static TypeDefinition DefineEnum(this ModuleDefinition module, string name, TypeAttributes typeAttrs, TypeReference underlyingType = null) {
-			var td = new TypeDefinition(null, name, typeAttrs, module.ImportReference(typeof(Enum)));
-			var enumField = new FieldDefinition("value__", FieldAttributes.Public, underlyingType);
-			td.Fields.Add(enumField);
+			var td = new TypeDefinition(null, name, typeAttrs | TypeAttributes.Sealed | TypeAttributes.Serializable, module.ImportReference(typeof(Enum)));
+			if (underlyingType == null) {
+				underlyingType = typeof(int).Import(module);
+			}
+			var enumField = new FieldDefinition("value__",
+				FieldAttributes.Public
+				| FieldAttributes.SpecialName
+				| FieldAttributes.RTSpecialName, underlyingType);
+				td.Fields.Add(enumField);
 			td.Scope = module;
 			module.Types.Add(td);
 			return td;
+		}
+
+		public static void ChangeUnderlyingType(this TypeDefinition td, TypeReference underlyingType) {
+			if (!td.IsEnum) 
+				throw new NotImplementedException();
+			var valueField = td.Fields.First(fd => !fd.IsStatic && fd.Name == "value__");
+			valueField.FieldType = underlyingType;
+			if ( td.Fields.Any(fd => fd.IsLiteral) )
+				throw new NotImplementedException();
+			/*
+			foreach (var fd in td.Fields.Where(fd => fd.IsLiteral)) {
+				fd.Constant = Convert.ChangeType()
+			}
+			*/
+		}
+		
+		public static TypeReference GetUnderlyingType(this TypeDefinition td) {
+			if (!td.IsEnum) 
+				throw new NotImplementedException();
+			var valueField = td.Fields.First(fd => !fd.IsStatic && fd.Name == "value__");
+			return valueField.FieldType;
 		}
 
 		public static TypeDefinition DefineEnum(this ModuleDefinition module, string name, TypeAttributes typeAttrs, Type underlyingType = null) {
 			return DefineEnum(module, name, typeAttrs, underlyingType.Import(module));
 		}
 
+		public static TypeDefinition DefineEnum(this ModuleDefinition module, string name, TypeAttributes typeAttrs) {
+			return DefineEnum(module, name, typeAttrs, typeof(int).Import(module));
+		}
+
 		public static FieldDefinition DefineLiteral(this TypeDefinition typeDef, string name, object value) {
-			var fd = new FieldDefinition(name, FieldAttributes.Public | FieldAttributes.Literal, typeDef);
-			var bytes = value as byte[] ?? BitConverter.GetBytes((dynamic) value);
-			fd.InitialValue = bytes;
+			var fd = new FieldDefinition(name,
+				FieldAttributes.Public
+				| FieldAttributes.Static
+				| FieldAttributes.Literal, typeDef) {
+				Constant = value
+			};
+			//var bytes = value as byte[] ?? BitConverter.GetBytes((dynamic) value);
+			//fd.InitialValue = bytes;
+			
 			typeDef.Fields.Add(fd);
 			return fd;
 		}
@@ -147,8 +187,16 @@ namespace Artilect.Vulkan.Binder.Extensions {
 		private static IEnumerable<ParameterDefinition> CreateParametersDefinitions(IEnumerable<TypeReference> paramTypes)
 			=> paramTypes?.Select(typeRef => new ParameterDefinition(typeRef));
 
-		public static void SetCustomAttribute(this TypeDefinition methodDef, AttributeInfo attrInfo)
-			=> methodDef.CustomAttributes.Add(attrInfo.GetCecilCustomAttribute(methodDef.Module));
+		public static void SetCustomAttribute<T>(this TypeDefinition typeDef, Expression<Func<T>> expr) {
+			typeDef.SetCustomAttribute(AttributeInfo.Create(expr));
+		}
+
+		public static void SetCustomAttribute(this TypeDefinition typeDef, AttributeInfo attrInfo)
+			=> typeDef.CustomAttributes.Add(attrInfo.GetCecilCustomAttribute(typeDef.Module));
+		
+		public static void SetCustomAttribute<T>(this MethodDefinition methodDef, Expression<Func<T>> expr) {
+			methodDef.SetCustomAttribute(AttributeInfo.Create(expr));
+		}
 
 		public static void SetCustomAttribute(this MethodDefinition methodDef, AttributeInfo attrInfo)
 			=> methodDef.CustomAttributes.Add(attrInfo.GetCecilCustomAttribute(methodDef.Module));
@@ -218,7 +266,7 @@ namespace Artilect.Vulkan.Binder.Extensions {
 			=> propDef.GetMethod = methodDef;
 
 		public static bool Contains(this Collection<InterfaceImplementation> interfaces, TypeReference interfaceType)
-			=> interfaces.Any(ii => ii.InterfaceType.Is(interfaceType));
+			=> interfaces.Select(ii => ii.InterfaceType).Contains(interfaceType);
 
 		private const BindingFlags AnyAccessInstanceOrStaticBindingFlags
 			= BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance;
@@ -239,7 +287,7 @@ namespace Artilect.Vulkan.Binder.Extensions {
 		}
 
 		public static TypeReference Import(this Type type, ModuleDefinition module)
-			=> module.ImportReference(type);
+			=> module.GetType(type.FullName) ?? module.ImportReference(type);
 
 		public static Type GetRuntimeType(this TypeReference type)
 			=> Type.GetType(type.FullName, false)
@@ -314,9 +362,9 @@ namespace Artilect.Vulkan.Binder.Extensions {
 			TypeDefinition otherResolved = null;
 			foreach (var typeRef in typeRefs) {
 				var trMdt = typeRef.MetadataToken.ToUInt32();
-				if (trMdt == orMdt && typeRef.Scope == orScope)
+				if (trMdt == orMdt && typeRef.Scope == orScope && trMdt != 0x01000000 )
 					return true;
-				if (typeRef.Scope == orScope)
+				if (trMdt != 0x01000000 && typeRef.Scope == otherRef.Scope)
 					continue;
 				if (typeRef.IsValueType != orIsValueType || typeRef.IsPrimitive != orIsPrimitive)
 					continue;
@@ -348,9 +396,9 @@ namespace Artilect.Vulkan.Binder.Extensions {
 		public static bool Is(this TypeReference typeRef, TypeReference otherRef) {
 			var trMdt = typeRef.MetadataToken.ToUInt32();
 			var orMdt = otherRef.MetadataToken.ToUInt32();
-			if (trMdt == orMdt && typeRef.Scope == otherRef.Scope)
+			if (trMdt == orMdt && typeRef.Scope == otherRef.Scope && trMdt != 0x01000000 )
 				return true;
-			if (typeRef.Scope == otherRef.Scope)
+			if (trMdt != 0x01000000 && typeRef.Scope == otherRef.Scope)
 				return false;
 			if (typeRef.IsValueType != otherRef.IsValueType || typeRef.IsPrimitive != otherRef.IsPrimitive)
 				return false;
@@ -416,8 +464,7 @@ namespace Artilect.Vulkan.Binder.Extensions {
 					var otherDef = otherRef.ResolveDefinition();
 
 					if (typeDef.IsInterface
-						&& otherDef.Interfaces
-							.Any(ii => ii.InterfaceType.Resolve() == typeDef))
+						&& otherDef.Interfaces.Contains(typeDef))
 						return true;
 
 					otherRef = otherDef.BaseType?.Resolve();

@@ -7,6 +7,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Artilect.Vulkan.Binder.Extensions;
+using Mono.Cecil;
+using static Artilect.Vulkan.Binder.InteropAssemblyBuilder;
 
 namespace Artilect.Vulkan.Binder {
 	public static class Program {
@@ -57,11 +60,12 @@ namespace Artilect.Vulkan.Binder {
 			var startingDirectory = Environment.CurrentDirectory;
 			Environment.CurrentDirectory = workDirectory.FullName;
 
+			VkXmlConsumer consumer;
 			using (var client = new HttpClient()) {
 				var vkXmlConsumerTask = Task.FromResult(client)
-					.ContinueWith(async t => {
-						var vkXml = XDocument.Load(await t.Result.GetStreamAsync(Cdn.VkXml).ConfigureAwait(false));
-						var consumer = new VkXmlConsumer(vkXml);
+					.ContinueWith(t => {
+						var vkXml = XDocument.Load(t.Result.GetStreamAsync(Cdn.VkXml).Result);
+						return new VkXmlConsumer(vkXml);
 					});
 
 				var headerHttpFetchTasks = new[] {
@@ -92,16 +96,34 @@ namespace Artilect.Vulkan.Binder {
 					vkXmlConsumerTask,
 					cppSharpTask
 				);
+
+				consumer = vkXmlConsumerTask.Result;
 			}
 
 			
 			Console.WriteLine("Building Vulkan interop assembly.");
 
-			var asmBuilder = new InteropAssemblyBuilder("Vulkan");
+			var vkHeaderVersion = consumer.DefineTypes["VK_HEADER_VERSION"].LastNode.ToString().Trim();
+
+			var asmBuilder = new InteropAssemblyBuilder("Vulkan", "1.0." + vkHeaderVersion);
+
+			var knownTypes = ImmutableDictionary.CreateBuilder<string, KnownType>();
+
+			knownTypes.AddRange(
+				consumer.EnumTypes.Keys.Select(k => new KeyValuePair<string, KnownType>
+					(k, KnownType.Enum)));
+
+			knownTypes.AddRange(
+				consumer.BitmaskTypes.Keys.Select(k => new KeyValuePair<string, KnownType>
+					(k, KnownType.Bitmask)));
+
+			asmBuilder.KnownTypes = knownTypes.ToImmutable();
 
 			asmBuilder.ParseHeader("vulkan.h");
 
-			var asm = asmBuilder.CompileAndSave(startingDirectory);
+			asmBuilder.Compile();
+
+			var asm = asmBuilder.Save(startingDirectory);
 
 			if (!asm.Exists)
 				throw new NotImplementedException();

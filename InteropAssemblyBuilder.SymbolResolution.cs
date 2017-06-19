@@ -160,6 +160,14 @@ namespace Artilect.Vulkan.Binder {
 			if (PrimitiveTypeMap.TryGetValue(typeKind, out var primitiveType)) {
 				if (primitiveType == null)
 					throw new NotImplementedException();
+				var originalTypeName = originalType.ToString();
+				if (originalType.kind == CXTypeKind.CXType_Typedef
+					&& KnownTypes.ContainsKey(originalTypeName)) {
+					var knownType = Module.GetType(originalType.ToString());
+					if ( knownType == null )
+						throw new NotImplementedException();
+					return new ParameterInfo(name, knownType, index);
+				}
 				return new ParameterInfo(name, primitiveType.Import(Module), index);
 			}
 
@@ -215,6 +223,14 @@ namespace Artilect.Vulkan.Binder {
 			if (PrimitiveTypeMap.TryGetValue(typeKind, out var primitiveType)) {
 				if (primitiveType == null)
 					throw new NotImplementedException();
+				var originalTypeName = originalType.ToString();
+				if (originalType.kind == CXTypeKind.CXType_Typedef
+					&& KnownTypes.ContainsKey(originalTypeName)) {
+					var knownType = Module.GetType(originalType.ToString());
+					if ( knownType == null )
+						throw new NotImplementedException();
+					return new ParameterInfo(name, knownType, index);
+				}
 				return new ParameterInfo(name, primitiveType.Import(Module), index);
 			}
 

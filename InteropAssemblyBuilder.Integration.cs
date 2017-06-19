@@ -11,8 +11,10 @@ namespace Artilect.Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
 		private void IntegrateInteropTypes(IEnumerable<TypeDefinition> tds) {
 			foreach (var td in tds) {
+				td.Scope = Module;
 				UpdateMethodInliningAttributes(td);
 				foreach (var nt in td.NestedTypes) {
+					nt.Scope = Module;
 					UpdateMethodInliningAttributes(nt);
 				}
 			}
@@ -25,13 +27,15 @@ namespace Artilect.Vulkan.Binder {
 					.Where(md => md != null);
 			foreach (var md in tdMethods) {
 				var attrs = md.CustomAttributes;
+
 				if (NonVersionableAttribute != null) {
 					var nv = NonVersionableAttribute.AttributeType;
-					if (attrs.All(ca => !ca.AttributeType.Is(nv)))
+					if (!attrs.Select(ca => ca.AttributeType).Contains(nv))
 						attrs.Add(NonVersionableAttribute);
 				}
+
 				var mi = MethodImplAggressiveInliningAttribute.AttributeType;
-				if (attrs.All(ca => !ca.AttributeType.Is(mi)))
+				if (!attrs.Select(ca => ca.AttributeType).Contains(mi))
 					attrs.Add(MethodImplAggressiveInliningAttribute);
 			}
 		}

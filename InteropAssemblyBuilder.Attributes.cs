@@ -95,6 +95,8 @@ namespace Artilect.Vulkan.Binder {
 		//private static readonly AttributeInfo StructLayoutExplicitAttributeInfo
 		//	= AttributeInfo.Create(() => new StructLayoutAttribute(LayoutKind.Explicit));
 
+		private readonly CustomAttribute FlagsAttribute;
+
 		private static readonly AttributeInfo FlagsAttributeInfo
 			= AttributeInfo.Create(() => new FlagsAttribute());
 

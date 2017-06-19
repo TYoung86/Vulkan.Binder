@@ -32,7 +32,7 @@ namespace Artilect.Vulkan.Binder {
 			var handleDef = Module.DefineType(structInfo.Name,
 				PublicSealedStructTypeAttributes);
 			//handleDef.SetCustomAttribute(StructLayoutSequentialAttributeInfo);
-			var handleInterface = typeof(IHandle<>).MakeGenericType(handleDef);
+			var handleInterface = IHandleGtd.MakeGenericInstanceType(handleDef);
 			handleDef.AddInterfaceImplementation(handleInterface);
 			var handlePointerType = handleDef.MakePointerType();
 			var inputTypes = bits == null
@@ -60,10 +60,10 @@ namespace Artilect.Vulkan.Binder {
 
 		public readonly MethodReference ArgumentOutOfRangeCtor;
 
+		// TODO: convert to TypeReferences
 		private static readonly Type[] TypeArrayOfSingularVoidPointer = {typeof(void*)};
 		private static readonly Type[] TypeArrayOfSingularULong = {typeof(ulong)};
 		private static readonly Type[] TypeArrayOfSingularUInt = {typeof(uint)};
-		private static readonly Type FixedBufferAttributeType = typeof(FixedBufferAttribute);
 
 		private Func<TypeDefinition[]> DefineClrStructInternal(ClangStructInfo structInfo32, ClangStructInfo structInfo64) {
 			if (structInfo32.Size == 0 && structInfo64.Size == 0) {
@@ -96,8 +96,8 @@ namespace Artilect.Vulkan.Binder {
 					Size = (int) structInfo64.Size
 				}));
 			*/
-			_splitPointerDefs[interfaceDef.FullName] = typeof(SplitPointer<,,>)
-				.MakeGenericType(interfaceDef, structDef32, structDef64);
+			_splitPointerDefs[interfaceDef.FullName] = SplitPointerGtd
+				.MakeGenericInstanceType(interfaceDef, structDef32, structDef64);
 
 
 			if (!structDef32.Interfaces.Contains(interfaceDef))
