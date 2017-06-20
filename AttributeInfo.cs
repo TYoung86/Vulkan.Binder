@@ -5,6 +5,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
+using Mono.Cecil;
+using CecilCustomAttribute = Mono.Cecil.CustomAttribute;
+using CecilCustomAttributeNamedArgument = Mono.Cecil.CustomAttributeNamedArgument;
 
 namespace Artilect.Vulkan.Binder {
 	public sealed class AttributeInfo : ICloneable {
@@ -73,6 +77,45 @@ namespace Artilect.Vulkan.Binder {
 
 		public Type Type => Constructor.DeclaringType;
 
+		private readonly ConditionalWeakTable<ModuleDefinition, CecilCustomAttribute> _ccaCacheTable
+			= new ConditionalWeakTable<ModuleDefinition, CecilCustomAttribute>();
+
+		public CecilCustomAttribute GetCecilCustomAttribute(ModuleDefinition module) {
+			lock (_ccaCacheTable) {
+				if (_ccaCacheTable.TryGetValue(module, out var cca))
+					return cca;
+
+				cca = CreateCecilCustomAttribute(module);
+				_ccaCacheTable.Add(module, cca);
+				return cca;
+			}
+		}
+
+		private CecilCustomAttribute CreateCecilCustomAttribute(ModuleDefinition module) {
+			var ctorRef = module.ImportReference(Constructor);
+			var cca = new CecilCustomAttribute(ctorRef);
+			foreach (var clrArg in Arguments)
+				cca.ConstructorArguments.Add(CreateCustomAttributeArgument(module, clrArg));
+
+			for (var i = 0 ; i < PropertiesInitialized.Length ; ++i) {
+				var clrProp = PropertiesInitialized[i];
+				var value = PropertyValues[i];
+				cca.Properties.Add(new CecilCustomAttributeNamedArgument(clrProp.Name,
+					CreateCustomAttributeArgument(module, value)));
+			}
+
+			for (var i = 0 ; i < FieldsInitialized.Length ; ++i) {
+				var clrField = FieldsInitialized[i];
+				var value = FieldValues[i];
+				cca.Fields.Add(new CecilCustomAttributeNamedArgument(clrField.Name,
+					CreateCustomAttributeArgument(module, value)));
+			}
+			return cca;
+		}
+
+		private static CustomAttributeArgument CreateCustomAttributeArgument(ModuleDefinition module, object value)
+			=> new CustomAttributeArgument(module.ImportReference(value.GetType()), value);
+
 		private CustomAttributeBuilder _cabCache;
 
 		public CustomAttributeBuilder GetCustomAttributeBuilder()
@@ -102,10 +145,12 @@ namespace Artilect.Vulkan.Binder {
 						new CustomAttributeTypedArgument(p[i].ParameterType, o))
 					.ToArray(),
 				PropertiesInitialized.Select((pi, i) =>
-						new CustomAttributeNamedArgument(pi, new CustomAttributeTypedArgument(pi.PropertyType, PropertyValues[i])))
+						new System.Reflection.CustomAttributeNamedArgument
+							(pi, new CustomAttributeTypedArgument(pi.PropertyType, PropertyValues[i])))
 					.Concat(
 						FieldsInitialized.Select((fi, i) =>
-							new CustomAttributeNamedArgument(fi, new CustomAttributeTypedArgument(fi.FieldType, FieldValues[i]))))
+							new System.Reflection.CustomAttributeNamedArgument
+								(fi, new CustomAttributeTypedArgument(fi.FieldType, FieldValues[i]))))
 					.ToArray());
 		}
 

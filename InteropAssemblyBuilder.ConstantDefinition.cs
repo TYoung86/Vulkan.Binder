@@ -1,32 +1,43 @@
 using System;
-using System.Reflection;
+using Artilect.Vulkan.Binder.Extensions;
+using Mono.Cecil;
 
 namespace Artilect.Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
-		private Func<Type[]> DefineClrType(ClangEnumInfo enumInfo) {
+		private Func<TypeDefinition[]> DefineClrType(ClangEnumInfo enumInfo) {
 			var underlyingTypeInfo = ResolveParameter(enumInfo.UnderlyingType);
-			var underlyingType = underlyingTypeInfo.ParameterType;
+			var underlyingType = underlyingTypeInfo.Type;
 
-			var enumTypeDef = Module.DefineEnum(enumInfo.Name, TypeAttributes.Public, underlyingType);
-			enumTypeDef.SetCustomAttribute(FlagsAttributeInfo);
+			var name = enumInfo.Name;
+			
+			if (TypeRedirects.TryGetValue(name, out var renamed)) {
+				name = renamed;
+			}
+
+			var enumTypeDef = Module.GetType(name);
+			if (enumTypeDef == null)
+				Module.DefineEnum(name, TypeAttributes.Public, underlyingType);
+			else
+				enumTypeDef.ChangeUnderlyingType(underlyingType);
+			//enumTypeDef.SetCustomAttribute(FlagsAttributeInfo);
 
 			foreach (var enumDef in enumInfo.Definitions)
-				enumTypeDef.DefineLiteral(enumDef.Name, Convert.ChangeType(enumDef.Value, underlyingType));
+				enumTypeDef.DefineLiteral(enumDef.Name, Convert.ChangeType(enumDef.Value, underlyingType.GetRuntimeType()));
 
 			var enumType = enumTypeDef.CreateType();
 
 			return () => new[] {enumType};
 		}
 
-		private Func<Type[]> DefineClrType(ClangEnumInfo enumInfo32, ClangEnumInfo enumInfo64) {
+		private Func<TypeDefinition[]> DefineClrType(ClangEnumInfo enumInfo32, ClangEnumInfo enumInfo64) {
 			throw new NotImplementedException();
 		}
 
-		private Func<Type[]> DefineClrType(ClangFlagsInfo flagsInfo) {
+		private Func<TypeDefinition[]> DefineClrType(ClangFlagsInfo flagsInfo) {
 			throw new NotImplementedException();
 		}
 
-		private Func<Type[]> DefineClrType(ClangFlagsInfo flagsInfo32, ClangFlagsInfo flagsInfo64) {
+		private Func<TypeDefinition[]> DefineClrType(ClangFlagsInfo flagsInfo32, ClangFlagsInfo flagsInfo64) {
 			throw new NotImplementedException();
 		}
 	}

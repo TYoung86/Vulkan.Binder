@@ -2,6 +2,8 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Artilect.Vulkan.Binder.Extensions;
+using Mono.Cecil;
 
 namespace Artilect.Vulkan.Binder {
 	public static class ReflectionHelpers {
@@ -38,6 +40,12 @@ namespace Artilect.Vulkan.Binder {
 			if (expr is MethodCallExpression callExpr) {
 				var src = ResolveConst(callExpr.Object);
 				var args = callExpr.Arguments.Select(ResolveConst).ToArray();
+				if (callExpr.Method == ExpressionOnlyMethodInfo) {
+					var typeRef = args[0] as TypeReference;
+					if ( typeRef == null )
+						throw new NotImplementedException();
+					return typeRef;
+				}
 				return callExpr.Method.Invoke(src, args);
 			}
 
@@ -52,5 +60,7 @@ namespace Artilect.Vulkan.Binder {
 			throw new NotImplementedException();
 		}
 
+		public static readonly MethodInfo ExpressionOnlyMethodInfo
+			= typeof(CecilExtensions).GetMethod("ExpressionOnly", BindingFlags.Public | BindingFlags.Static);
 	}
 }

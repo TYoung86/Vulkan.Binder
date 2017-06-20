@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using Mono.Cecil;
 
 namespace Artilect.Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
@@ -8,7 +9,7 @@ namespace Artilect.Vulkan.Binder {
 
 			var definitionFuncCount = definitionFuncs.Count;
 
-			var retryDefinitionFuncs = new ConcurrentBag<Func<Type[]>>();
+			var retryDefinitionFuncs = new ConcurrentBag<Func<TypeDefinition[]>>();
 
 			var exceptions = new ConcurrentBag<Exception>();
 

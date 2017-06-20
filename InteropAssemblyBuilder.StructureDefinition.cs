@@ -2,16 +2,19 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using Artilect.Interop;
 using Artilect.Vulkan.Binder.Extensions;
+using Mono.Cecil;
+using Mono.Cecil.Cil;
+using Mono.Cecil.Rocks;
+using SConstructorInfo = System.Reflection.ConstructorInfo;
+using TypeReferenceTransform = Artilect.Vulkan.Binder.Extensions.CecilExtensions.TypeReferenceTransform;
+using BindingFlags = System.Reflection.BindingFlags;
 
 namespace Artilect.Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
-		private Func<Type[]> DefineClrType(ClangStructInfo structInfo32, ClangStructInfo structInfo64) {
+		private Func<TypeDefinition[]> DefineClrType(ClangStructInfo structInfo32, ClangStructInfo structInfo64) {
 			if (structInfo32 == null) {
 				return DefineClrHandleStructInternal(structInfo64, 64);
 			}
@@ -21,14 +24,19 @@ namespace Artilect.Vulkan.Binder {
 			return DefineClrStructInternal(structInfo32, structInfo64);
 		}
 
-		private Func<Type[]> DefineClrHandleStructInternal(ClangStructInfo structInfo, int? bits = null) {
+		private Func<TypeDefinition[]> DefineClrHandleStructInternal(ClangStructInfo structInfo, int? bits = null) {
 			if (structInfo.Size > 0)
 				throw new NotImplementedException();
+			var structName = structInfo.Name;
+
+			if (TypeRedirects.TryGetValue(structName, out var rename)) {
+				structName = rename;
+			}
 			// handle type
-			var handleDef = Module.DefineType(structInfo.Name,
-				PublicSealedStructTypeAttributes, null, 0, 0);
-			handleDef.SetCustomAttribute(StructLayoutSequentialAttributeInfo);
-			var handleInterface = typeof(IHandle<>).MakeGenericType(handleDef);
+			var handleDef = Module.DefineType(structName,
+				PublicSealedStructTypeAttributes);
+			//handleDef.SetCustomAttribute(StructLayoutSequentialAttributeInfo);
+			var handleInterface = IHandleGtd.MakeGenericInstanceType(handleDef);
 			handleDef.AddInterfaceImplementation(handleInterface);
 			var handlePointerType = handleDef.MakePointerType();
 			var inputTypes = bits == null
@@ -47,63 +55,73 @@ namespace Artilect.Vulkan.Binder {
 			return () => new[] {handleType};
 		}
 
-		private readonly ConcurrentDictionary<string, Type> _splitPointerDefs
-			= new ConcurrentDictionary<string, Type>();
+		private readonly ConcurrentDictionary<string, GenericInstanceType> _splitPointerDefs
+			= new ConcurrentDictionary<string, GenericInstanceType>();
 
-		private static readonly ConstructorInfo ArgumentOutOfRangeCtorInfo = typeof(ArgumentOutOfRangeException).GetConstructor(Type.EmptyTypes);
+		private static readonly SConstructorInfo ArgumentOutOfRangeCtorInfo
+			= typeof(ArgumentOutOfRangeException).GetConstructor(Type.EmptyTypes);
+
+
+		public readonly MethodReference ArgumentOutOfRangeCtor;
+
+		// TODO: convert to TypeReferences
 		private static readonly Type[] TypeArrayOfSingularVoidPointer = {typeof(void*)};
 		private static readonly Type[] TypeArrayOfSingularULong = {typeof(ulong)};
 		private static readonly Type[] TypeArrayOfSingularUInt = {typeof(uint)};
-		private static readonly Type FixedBufferAttributeType = typeof(FixedBufferAttribute);
 
-		private Func<Type[]> DefineClrStructInternal(ClangStructInfo structInfo32, ClangStructInfo structInfo64) {
+		private Func<TypeDefinition[]> DefineClrStructInternal(ClangStructInfo structInfo32, ClangStructInfo structInfo64) {
 			if (structInfo32.Size == 0 && structInfo64.Size == 0) {
 				return DefineClrHandleStructInternal(structInfo64);
 			}
 
 			var structName = structInfo32.Name;
+			
+			if (TypeRedirects.TryGetValue(structName, out var rename)) {
+				structName = rename;
+			}
+
 			var interfaceDef = Module.DefineType("I" + structName,
 				PublicInterfaceTypeAttributes);
 
 			var structDef32 = Module.DefineType(structName + "32",
 				PublicSealedStructTypeAttributes, null,
-				(PackingSize) structInfo32.Alignment,
+				(int) structInfo32.Alignment,
 				(int) structInfo32.Size);
-
+			/*
 			structDef32.SetCustomAttribute(AttributeInfo.Create(
 				() => new StructLayoutAttribute(LayoutKind.Sequential) {
 					Pack = (int) structInfo32.Alignment,
 					Size = (int) structInfo32.Size
 				}));
-
+			*/
 			var structDef64 = Module.DefineType(structName + "64",
 				PublicSealedStructTypeAttributes, null,
-				(PackingSize) structInfo64.Alignment,
+				(int) structInfo64.Alignment,
 				(int) structInfo64.Size);
-
+			/*
 			structDef64.SetCustomAttribute(AttributeInfo.Create(
 				() => new StructLayoutAttribute(LayoutKind.Sequential) {
 					Pack = (int) structInfo64.Alignment,
 					Size = (int) structInfo64.Size
 				}));
+			*/
+			_splitPointerDefs[interfaceDef.FullName] = SplitPointerGtd
+				.MakeGenericInstanceType(interfaceDef, structDef32, structDef64);
 
-			_splitPointerDefs[interfaceDef.FullName] = typeof(SplitPointer<,,>)
-				.MakeGenericType(interfaceDef, structDef32, structDef64);
 
-
-			if (!structDef32.ImplementedInterfaces.Contains(interfaceDef))
+			if (!structDef32.Interfaces.Contains(interfaceDef))
 				structDef32.AddInterfaceImplementation(interfaceDef);
 
-			if (!structDef64.ImplementedInterfaces.Contains(interfaceDef))
+			if (!structDef64.Interfaces.Contains(interfaceDef))
 				structDef64.AddInterfaceImplementation(interfaceDef);
 
-			var interfacePropDefs = new ConcurrentDictionary<string, PropertyBuilder>();
-			var interfaceMethodDefs = new ConcurrentDictionary<string, MethodBuilder>();
+			var interfacePropDefs = new ConcurrentDictionary<string, PropertyDefinition>();
+			var interfaceMethodDefs = new ConcurrentDictionary<string, MethodDefinition>();
 
 
-			var fieldParams32 = new LinkedList<CustomParameterInfo>(
+			var fieldParams32 = new LinkedList<ParameterInfo>(
 				structInfo32.Fields.Select(f => ResolveField(f.Type, f.Name, (int) f.Offset)));
-			var fieldParams64 = new LinkedList<CustomParameterInfo>(
+			var fieldParams64 = new LinkedList<ParameterInfo>(
 				structInfo64.Fields.Select(f => ResolveField(f.Type, f.Name, (int) f.Offset)));
 
 			var interfacePropNames = new LinkedList<string>(structInfo32.Fields
@@ -111,11 +129,11 @@ namespace Artilect.Vulkan.Binder {
 				.Union(structInfo64.Fields
 					.Select(f => f.Name)));
 
-			Type[] BuildInterfacePropsAndStructFields() {
+			TypeDefinition[] BuildInterfacePropsAndStructFields() {
 				foreach (var fieldParam in fieldParams32)
-					fieldParam.RequireCompleteTypes("32");
+					fieldParam.RequireCompleteTypeReferences(TypeRedirects, "32");
 				foreach (var fieldParam in fieldParams64)
-					fieldParam.RequireCompleteTypes("64");
+					fieldParam.RequireCompleteTypeReferences(TypeRedirects, "64");
 
 				interfacePropNames.ConsumeLinkedList(propName => {
 					BuildInterfaceByRefAccessor(interfaceDef, propName, _splitPointerDefs,
@@ -137,13 +155,13 @@ namespace Artilect.Vulkan.Binder {
 					structDef64.AddInterfaceImplementation(interfaceType);
 				*/
 
-				void BuildStructField(CustomParameterInfo fieldParam, TypeBuilder structDef, int bits) {
+				void BuildStructField(ParameterInfo fieldParam, TypeDefinition structDef, int bits) {
 					var ptrSizeForType = bits / 8;
 
 					var fieldName = fieldParam.Name;
-					var fieldType = fieldParam.ParameterType;
+					var fieldType = fieldParam.Type;
 
-					if (fieldType is IncompleteType)
+					if (fieldType is IncompleteTypeReference)
 						throw new InvalidProgramException("Encountered incomplete type in structure field definition.");
 
 					var isArray = fieldType.IsArray;
@@ -151,7 +169,7 @@ namespace Artilect.Vulkan.Binder {
 					// never define an array element on a struct
 					// there should be a fixed buffer attribute on the field
 					if (isArray)
-						fieldType = fieldType.GetElementType();
+						fieldType = fieldType.DescendElementType();
 
 					var fieldDef = PrepareAndDefineField(
 						structDef, isArray,
@@ -159,38 +177,39 @@ namespace Artilect.Vulkan.Binder {
 						out var fieldInteriorType,
 						out var fieldTransforms);
 
-					Type fieldRefType;
+					TypeReference fieldRefType;
 					if (isArray) {
-						fieldRefType = fieldType.MakeByRefType();
+						fieldRefType = fieldType.MakeByReferenceType();
 
 						var intfMethodInfo = interfaceType.GetMethod(fieldName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-						Type intfMethodType;
+						TypeReference intfMethodType;
 						try {
 							intfMethodType = intfMethodInfo.ReturnType;
 						}
 						catch {
 							intfMethodType = interfaceMethodDefs[fieldName].ReturnType;
 						}
-						var intfMethodElemType = intfMethodType.GetElementType();
-						var intfMethodInteriorType = GetInteriorType(intfMethodType, out var methodRetTransforms);
+						var intfMethodElemType = intfMethodType.DescendElementType();
+						var intfMethodInteriorType = intfMethodType.GetInteriorType(out var methodRetTransforms);
 
-						if (fieldRefType == intfMethodType
+						if (fieldRefType.Is(intfMethodType)
 							|| fieldType.IsPointer && intfMethodElemType.IsPointer
 							|| IsIntPtrOrUIntPtr(intfMethodElemType) && fieldType.UnsafeSizeOf() == ptrSizeForType
 							|| IsTypedHandle(intfMethodElemType, fieldType)
-							|| fieldInteriorType == intfMethodInteriorType && fieldTransforms.SequenceEqual(methodRetTransforms.Skip(1))) {
-							var fixedBufAttrInfo = fieldParam.AttributeInfos.First(ai => ai.Type == FixedBufferAttributeType);
-							var fixedBufSize = (int) fixedBufAttrInfo.Arguments[1];
+							|| fieldInteriorType.Is(intfMethodInteriorType) && fieldTransforms.SequenceEqual(methodRetTransforms.Skip(1))) {
+							//var fixedBufAttrInfo = fieldParam.AttributeInfos.First(ai => ai.Type == FixedBufferAttributeType);
+							var fixedBufSize = fieldParam.ArraySize;
 							var structGetter = structDef.DefineMethod(fieldName,
 								PublicInterfaceImplementationMethodAttributes,
-								intfMethodType, new[] {typeof(int)});
+								intfMethodType, typeof(int));
 							structDef.DefineMethodOverride(structGetter, intfMethodInfo);
 							structGetter.DefineParameter(1, ParameterAttributes.In, "index");
 							SetMethodInliningAttributes(structGetter);
 							structGetter.GenerateIL(il => {
-								var argOutOfRange = EmitBoundsChecks ? il.DefineLabel() : default(Label);
+								var argOutOfRange = default(CecilLabel);
 
 								if (EmitBoundsChecks) {
+									argOutOfRange = il.DefineLabel();
 									il.Emit(OpCodes.Ldarg_1); // index
 									il.EmitPushConst(0); // underflow
 									il.Emit(OpCodes.Blt, argOutOfRange);
@@ -207,15 +226,17 @@ namespace Artilect.Vulkan.Binder {
 								il.Emit(OpCodes.Sizeof, fieldType);
 								il.Emit(OpCodes.Mul);
 								il.Emit(OpCodes.Add);
-								if (intfMethodType.IsInterface) {
+								if (intfMethodType.Resolve().IsInterface) {
 									il.Emit(OpCodes.Box, fieldType);
 								}
 								il.Emit(OpCodes.Ret);
 
 								if (EmitBoundsChecks) {
 									il.MarkLabel(argOutOfRange);
-									il.Emit(OpCodes.Newobj, ArgumentOutOfRangeCtorInfo);
+									il.Emit(OpCodes.Newobj, ArgumentOutOfRangeCtor);
 									il.Emit(OpCodes.Throw);
+									// ReSharper disable once PossibleNullReferenceException
+									argOutOfRange.Cleanup();
 								}
 							});
 							return;
@@ -223,28 +244,28 @@ namespace Artilect.Vulkan.Binder {
 
 						throw new NotImplementedException();
 					}
-					fieldRefType = fieldType.MakeByRefType();
+					fieldRefType = fieldType.MakeByReferenceType();
 
 					var propInfo = interfaceType.GetProperty(fieldName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 					if (propInfo == null)
 						throw new NotImplementedException();
-					Type propType;
+					TypeReference propType;
 					try {
 						propType = propInfo.PropertyType;
 					}
 					catch {
 						propType = interfacePropDefs[fieldName].PropertyType;
 					}
-					var propInteriorType = GetInteriorType(propType, out var propTransforms);
+					var propInteriorType = propType.GetInteriorType(out var propTransforms);
 
 
-					var propElemType = propType.GetElementType();
+					var propElemType = propType.DescendElementType();
 
-					if (fieldRefType == propType
+					if (fieldRefType.Is(propType)
 						|| fieldType.IsPointer && propElemType.IsPointer
 						|| IsIntPtrOrUIntPtr(propElemType) && fieldType.UnsafeSizeOf() == ptrSizeForType
 						|| IsTypedHandle(propElemType, fieldType)
-						|| fieldInteriorType == propInteriorType && fieldTransforms.SequenceEqual(propTransforms.Skip(1))) {
+						|| fieldInteriorType.Is(propInteriorType) && fieldTransforms.SequenceEqual(propTransforms.Skip(1))) {
 						/*
 						var structProp = structDef.DefineProperty(fieldName,
 							PropertyAttributes.SpecialName,
@@ -253,11 +274,11 @@ namespace Artilect.Vulkan.Binder {
 						var structGetter = structDef.DefineMethod("get_" + fieldName, HiddenPropertyMethodAttributes | MethodAttributes.Virtual, propType, Type.EmptyTypes);
 						SetMethodInliningAttributes(structGetter);
 						//structProp.SetGetMethod(structGetter);
-						structDef.DefineMethodOverride(structGetter, propInfo.GetMethod);
+						structDef.DefineMethodOverride(structGetter, propInfo.Resolve().GetMethod);
 						structGetter.GenerateIL(il => {
 							il.Emit(OpCodes.Ldarg_0); // this
 							il.Emit(OpCodes.Ldflda, fieldDef);
-							if (propType.IsInterface) {
+							if (propType.Resolve().IsInterface) {
 								il.Emit(OpCodes.Box, fieldType);
 							}
 							il.Emit(OpCodes.Ret);
@@ -265,7 +286,7 @@ namespace Artilect.Vulkan.Binder {
 						return;
 					}
 
-					if (propType == typeof(object)) {
+					if (propType.Is(ObjectType)) {
 						// TODO: boxing reference
 						throw new NotImplementedException();
 					}
@@ -278,15 +299,11 @@ namespace Artilect.Vulkan.Binder {
 
 				fieldParams32.ConsumeLinkedList(fieldParam => BuildStructField(fieldParam, structDef32, 32));
 
-				var structType32 = structDef32.IsCreated()
-					? Module.GetType(structDef32.FullName)
-					: structDef32.CreateType();
+				var structType32 = structDef32;
 
 				fieldParams64.ConsumeLinkedList(fieldParam => BuildStructField(fieldParam, structDef64, 64));
 
-				var structType64 = structDef64.IsCreated()
-					? Module.GetType(structDef64.FullName)
-					: structDef64.CreateType();
+				var structType64 = structDef64;
 
 				return new[] {interfaceType, structType32, structType64};
 			}
@@ -294,39 +311,22 @@ namespace Artilect.Vulkan.Binder {
 			return BuildInterfacePropsAndStructFields;
 		}
 
-		private FieldBuilder PrepareAndDefineField(TypeBuilder structDef, bool isArray, CustomParameterInfo fieldParam, ref Type fieldType, out Type fieldInteriorType, out LinkedList<TypeTransform> fieldTransforms) {
+		private FieldDefinition PrepareAndDefineField(TypeDefinition structDef, bool isArray, ParameterInfo fieldParam, ref TypeReference fieldType, out TypeReference fieldInteriorType, out LinkedList<TypeReferenceTransform> fieldTransforms) {
 			var fieldName = fieldParam.Name;
-			var arrayLength = -1;
-			if (isArray) {
-				foreach (var ai in fieldParam.AttributeInfos) {
-					if (ai.Type != FixedBufferAttributeType)
-						continue;
-					arrayLength = (int) ai.Arguments[1];
-					ai.Arguments = new object[] {fieldType, arrayLength};
-					break;
-				}
-			}
+			var arrayLength = fieldParam.ArraySize;
 			if (arrayLength == 0)
 				throw new NotImplementedException();
 
-			FieldBuilder fieldDef;
+			FieldDefinition fieldDef;
 			if (isArray) {
 				// instead of building a structure and following fixed buffer quirks,
 				// just unroll the would-be fixed buffer structure ...
 				// define all of the fields, let the interface ref accessor property handle visibility
 
-				var fieldParamAttributeInfos = fieldParam.AttributeInfos
-					.Where(ai => ai.Type != FixedBufferAttributeType)
-					.ToArray();
-
-				fieldDef = structDef.DefineField($"{fieldName}[0]", fieldType, FieldAttributes.PrivateScope);
-				foreach (var attr in fieldParamAttributeInfos)
-					fieldDef.SetCustomAttribute(attr);
+				fieldDef = structDef.DefineField($"{fieldName}[0]", fieldType, FieldAttributes.Private);
 
 				for (var i = 1 ; i < arrayLength ; ++i) {
-					var subFieldDef = structDef.DefineField($"{fieldName}[{i}]", fieldType, FieldAttributes.PrivateScope);
-					foreach (var attr in fieldParamAttributeInfos)
-						subFieldDef.SetCustomAttribute(attr);
+					var subFieldDef = structDef.DefineField($"{fieldName}[{i}]", fieldType, FieldAttributes.Private);
 				}
 			}
 			else {
@@ -334,14 +334,16 @@ namespace Artilect.Vulkan.Binder {
 			}
 
 
-			fieldInteriorType = GetInteriorType(fieldType, out fieldTransforms);
+			fieldInteriorType = fieldType.GetInteriorType(out fieldTransforms);
 
-			if ((fieldInteriorType as TypeBuilder)?.IsCreated() ?? false) {
-				if (fieldInteriorType.IsDirect())
-					fieldInteriorType = Module.ResolveType(Module.GetTypeToken(fieldInteriorType).Token);
+			if ((fieldInteriorType as TypeDefinition)?.IsCreated() ?? false) {
+				//if (fieldInteriorType.IsDirect()) {
+					//fieldInteriorType = Module.GetType(fieldInteriorType.FullName);
+					//Module.ResolveType(Module.GetTypeToken(fieldInteriorType).Token);
+				//}
 
-				if (IsHandleType(fieldInteriorType))
-					throw new NotImplementedException();
+				//if (IsHandleType(fieldInteriorType))
+				//	throw new NotImplementedException();
 
 				var rebuiltFieldType = fieldInteriorType;
 				foreach (var transform in fieldTransforms)
@@ -353,30 +355,32 @@ namespace Artilect.Vulkan.Binder {
 			return fieldDef;
 		}
 
-		private Func<Type[]> DefineClrType(ClangStructInfo structInfo) {
+		private Func<TypeDefinition[]> DefineClrType(ClangStructInfo structInfo) {
 			if (structInfo.Size == 0) {
 				return DefineClrHandleStructInternal(structInfo);
 			}
-			TypeBuilder structDef = Module.DefineType(structInfo.Name,
+			var structName = structInfo.Name;
+			if (TypeRedirects.TryGetValue(structName, out var rename)) {
+				structName = rename;
+			}
+			TypeDefinition structDef = Module.DefineType(structName,
 				PublicSealedStructTypeAttributes, null,
-				(PackingSize) structInfo.Alignment,
+				(int) structInfo.Alignment,
 				(int) structInfo.Size);
 
-			var fieldParams = new LinkedList<CustomParameterInfo>(structInfo.Fields
+			var fieldParams = new LinkedList<ParameterInfo>(structInfo.Fields
 				.Select(f => ResolveField(f.Type, f.Name, (int) f.Offset)));
 			return () => {
 				foreach (var fieldParam in fieldParams)
-					fieldParam.RequireCompleteTypes(true);
+					fieldParam.RequireCompleteTypeReferences(TypeRedirects,true);
 				fieldParams.ConsumeLinkedList(fieldParam => {
 					var fieldName = fieldParam.Name;
 
-					var fieldType = fieldParam.ParameterType;
-					if (fieldType is IncompleteType)
+					var fieldType = fieldParam.Type;
+					if (fieldType is IncompleteTypeReference)
 						throw new InvalidProgramException("Encountered incomplete type in structure field definition.");
 
 					var fieldDef = structDef.DefineField(fieldName, fieldType, FieldAttributes.Public);
-					foreach (var attr in fieldParam.AttributeInfos)
-						fieldDef.SetCustomAttribute(attr);
 				});
 				return new[] {
 					structDef.CreateType()

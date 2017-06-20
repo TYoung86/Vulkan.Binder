@@ -1,16 +1,14 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Reflection.Emit;
-using OpCodes = System.Reflection.Emit.OpCodes;
+using System;
+using Mono.Cecil;
+using Mono.Cecil.Cil;
 
 namespace Artilect.Vulkan.Binder.Extensions {
-	public static class MethodBuilderEstensions {
-
-		[SuppressMessage("ReSharper", "InconsistentNaming")]
-		public static void GenerateIL(this MethodBuilder mb, Action<ILGenerator> generator)
-			=> generator(mb.GetILGenerator());
+	public static class MethodDefinitionEstensions {
 		
-		public static void EmitPushConst(this ILGenerator ilg, int value) {
+		public static void GenerateIL(this MethodDefinition methodDef, Action<ILProcessor> emitter)
+			=> emitter(methodDef.Body.GetILProcessor());
+
+		public static void EmitPushConst(this ILProcessor ilg, int value) {
 			switch (value) {
 				case -1: ilg.Emit(OpCodes.Ldc_I4_M1); return;
 				case 0: ilg.Emit(OpCodes.Ldc_I4_0); return;
@@ -30,15 +28,15 @@ namespace Artilect.Vulkan.Binder.Extensions {
 			ilg.Emit(OpCodes.Ldc_I4, value);
 		}
 
-		public static void EmitPushConst(this ILGenerator ilg, long value) {
+		public static void EmitPushConst(this ILProcessor ilg, long value) {
 			ilg.Emit(OpCodes.Ldc_I8, value);
 		}
 
-		public static void EmitPushConst(this ILGenerator ilg, float value) {
+		public static void EmitPushConst(this ILProcessor ilg, float value) {
 			ilg.Emit(OpCodes.Ldc_R4, value);
 		}
 
-		public static void EmitPushConst(this ILGenerator ilg, double value) {
+		public static void EmitPushConst(this ILProcessor ilg, double value) {
 			ilg.Emit(OpCodes.Ldc_R8, value);
 		}
 	}

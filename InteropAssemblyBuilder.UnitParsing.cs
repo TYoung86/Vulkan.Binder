@@ -5,6 +5,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using ClangSharp;
+using Mono.Cecil;
 
 namespace Artilect.Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
@@ -37,7 +38,7 @@ namespace Artilect.Vulkan.Binder {
 			foreach (var oddSymbol in oddSymbols) {
 				parseResults32.TryGetValue(oddSymbol, out var parseResult32);
 				parseResults64.TryGetValue(oddSymbol, out var parseResult64);
-				CollectDefinitionFunc((Func<Type[]>) DefineClrType((dynamic) parseResult32, (dynamic) parseResult64));
+				CollectDefinitionFunc((Func<TypeDefinition[]>) DefineClrType((dynamic) parseResult32, (dynamic) parseResult64));
 				//throw new NotImplementedException();
 			}
 
@@ -47,10 +48,10 @@ namespace Artilect.Vulkan.Binder {
 				var parseResult32 = parseResults32[evenSymbol];
 				var parseResult64 = parseResults64[evenSymbol];
 				if (parseResult32.Equals(parseResult64)) {
-					CollectDefinitionFunc((Func<Type[]>) DefineClrType((dynamic) parseResult64));
+					CollectDefinitionFunc((Func<TypeDefinition[]>) DefineClrType((dynamic) parseResult64));
 				}
 				else {
-					CollectDefinitionFunc((Func<Type[]>) DefineClrType((dynamic) parseResult32, (dynamic) parseResult64));
+					CollectDefinitionFunc((Func<TypeDefinition[]>) DefineClrType((dynamic) parseResult32, (dynamic) parseResult64));
 				}
 				//throw new NotImplementedException();
 			}
@@ -106,7 +107,7 @@ namespace Artilect.Vulkan.Binder {
 			return CXChildVisitResult.CXChildVisit_Continue;
 		}
 
-		private static void CollectDefinitionFunc(Func<Type[]> defFunc) {
+		private static void CollectDefinitionFunc(Func<TypeDefinition[]> defFunc) {
 			if (defFunc != null)
 				DefinitionFuncs.Add(defFunc);
 		}

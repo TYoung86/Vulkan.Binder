@@ -1,63 +1,63 @@
 ﻿using System;
 using System.Linq;
-using Artilect.Interop;
 using Artilect.Vulkan.Binder.Extensions;
+using Mono.Cecil;
+using Mono.Cecil.Rocks;
 
 namespace Artilect.Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
-		private static readonly Type IntPtrType = typeof(IntPtr);
-		private static readonly Type UIntPtrType = typeof(UIntPtr);
-		private static readonly Type IHandleGtd = typeof(IHandle<>);
 
-		private static bool IsIntPtrOrUIntPtr(Type t) {
-			return t == IntPtrType || t == UIntPtrType;
+		private bool IsIntPtrOrUIntPtr(TypeReference t) {
+			return t.Is(IntPtrType) || t.Is(UIntPtrType);
 		}
 
-		private static bool IsHandleType(Type t) {
-			Type interfaceType;
+		private bool IsHandleType(TypeReference t) {
+			TypeReference interfaceType;
 
 			if (t.IsPrimitive || t.IsIndirect()) return false;
 
 			try {
-				interfaceType = IHandleGtd.MakeGenericType(t);
+				interfaceType = IHandleGtd.MakeGenericInstanceType(t);
 			}
 			catch {
 				return false;
 			}
 
-			var result = t.GetInterfaces().Contains(interfaceType);
+			var result = t.GetInterfaces().Contains(interfaceType); //.Any( i => i.Is(interfaceType));
 
 			return result;
 		}
 
-		private static bool IsTypedHandle(Type t) {
+		private bool IsTypedHandle(TypeReference t) {
 			try {
-				return typeof(ITypedHandle).IsAssignableFrom(t);
+				return ITypedHandleType.IsAssignableFrom(t);
 			}
 			catch {
 				return false;
 			}
 		}
 
-		private static bool IsTypedHandle(Type t, Type e) {
-			Type interfaceType;
+		private bool IsTypedHandle(TypeReference t, TypeReference e) {
+			TypeReference interfaceType;
 
 			if (e.IsPointer) {
-				return IsTypedHandle(t)
-					&& t.GenericTypeArguments[0] == e.GetElementType();
+				if (IsTypedHandle(t)) {
+					var gt = (GenericInstanceType) t;
+					return gt.GenericArguments[0] == e.DescendElementType();
+				}
 			}
 
 			if (!e.IsPrimitive || e.IsIndirect()
 				|| t.IsPrimitive || t.IsIndirect()) return false;
 
 			try {
-				interfaceType = typeof(ITypedHandle<>).MakeGenericType(e);
+				interfaceType = ITypedHandleGtd.MakeGenericInstanceType(e);
 			}
 			catch {
 				return false;
 			}
-
-			var result = t.GetInterfaces().Contains(interfaceType);
+			
+			var result = t.GetInterfaces().Contains(interfaceType); //.Any( i => i.Is(interfaceType));
 
 			return result;
 		}

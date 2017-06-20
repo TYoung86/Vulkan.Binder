@@ -2,8 +2,14 @@
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+//using System.Reflection;
+//using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Artilect.Vulkan.Binder.Extensions;
+using Mono.Cecil;
+using MethodAttributes = Mono.Cecil.MethodAttributes;
+using TypeAttributes = Mono.Cecil.TypeAttributes;
 
 namespace Artilect.Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
@@ -44,7 +50,7 @@ namespace Artilect.Vulkan.Binder {
 			| MethodAttributes.HideBySig;
 
 		private static readonly MethodAttributes HiddenPropertyMethodAttributes
-			= MethodAttributes.PrivateScope
+			= MethodAttributes.Private // PrivateScope
 			| MethodAttributes.SpecialName
 			| MethodAttributes.HideBySig;
 
@@ -71,27 +77,33 @@ namespace Artilect.Vulkan.Binder {
 		private static readonly ConstructorInfo NonVersionableAttributeCtorInfo
 			= NonVersionableAttributeType?.GetConstructors().FirstOrDefault();
 
+		private readonly CustomAttribute NonVersionableAttribute;
+
 		private static readonly AttributeInfo NonVersionableAttributeInfo
 			= NonVersionableAttributeCtorInfo != null
 			? new AttributeInfo( NonVersionableAttributeCtorInfo )
 			: null;
 
+		private readonly CustomAttribute MethodImplAggressiveInliningAttribute;
+
 		private static readonly AttributeInfo MethodImplAggressiveInliningAttributeInfo
 			= AttributeInfo.Create(() => new MethodImplAttribute(MethodImplOptions.AggressiveInlining));
 
-		private static readonly AttributeInfo StructLayoutSequentialAttributeInfo
-			= AttributeInfo.Create(() => new StructLayoutAttribute(LayoutKind.Sequential));
+		//private static readonly AttributeInfo StructLayoutSequentialAttributeInfo
+		//	= AttributeInfo.Create(() => new StructLayoutAttribute(LayoutKind.Sequential));
 
-		private static readonly AttributeInfo StructLayoutExplicitAttributeInfo
-			= AttributeInfo.Create(() => new StructLayoutAttribute(LayoutKind.Explicit));
+		//private static readonly AttributeInfo StructLayoutExplicitAttributeInfo
+		//	= AttributeInfo.Create(() => new StructLayoutAttribute(LayoutKind.Explicit));
+
+		private readonly CustomAttribute FlagsAttribute;
 
 		private static readonly AttributeInfo FlagsAttributeInfo
 			= AttributeInfo.Create(() => new FlagsAttribute());
 
-		private static void SetMethodInliningAttributes(MethodBuilder method) {
+		private void SetMethodInliningAttributes(MethodDefinition method) {
 			if ( NonVersionableAttributeInfo != null )
-				method.SetCustomAttribute(NonVersionableAttributeInfo);
-			method.SetCustomAttribute(MethodImplAggressiveInliningAttributeInfo);
+				method.CustomAttributes.Add(NonVersionableAttribute);
+			method.CustomAttributes.Add(MethodImplAggressiveInliningAttribute);
 		}
 	}
 }

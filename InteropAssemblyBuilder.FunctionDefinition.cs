@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Reflection.Emit;
 using Artilect.Vulkan.Binder.Extensions;
+using Mono.Cecil;
+using Mono.Cecil.Rocks;
 
 namespace Artilect.Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
-		private Func<Type[]> DefineClrType(ClangFunctionInfoBase funcInfo32, ClangFunctionInfoBase funcInfo64) {
+		private Func<TypeDefinition[]> DefineClrType(ClangFunctionInfoBase funcInfo32, ClangFunctionInfoBase funcInfo64) {
 			if (funcInfo32 == funcInfo64) {
 				return DefineClrType(funcInfo64);
 			}
@@ -15,8 +15,13 @@ namespace Artilect.Vulkan.Binder {
 			throw new NotImplementedException();
 		}
 
-		private Func<Type[]> DefineClrType(ClangFunctionInfoBase funcInfo) {
-			TypeBuilder funcDef = Module.DefineType(funcInfo.Name,
+		private Func<TypeDefinition[]> DefineClrType(ClangFunctionInfoBase funcInfo) {
+			var funcName = funcInfo.Name;
+			if (TypeRedirects.TryGetValue(funcName, out var rename)) {
+				funcName = rename;
+			}
+
+			var funcDef = Module.DefineType(funcName,
 				DelegateTypeAttributes,
 				typeof(MulticastDelegate) );
 
@@ -25,25 +30,22 @@ namespace Artilect.Vulkan.Binder {
 				throw new NotImplementedException();
 			if (!ClrCallingConventionAttributeMap.TryGetValue(callConv, out var callConvAttr))
 				throw new NotImplementedException();
-			var argParams = new LinkedList<CustomParameterInfo>(funcInfo.Parameters.Select(p => ResolveParameter(p.Type, p.Name, (int) p.Index)));
+			var argParams = new LinkedList<ParameterInfo>(funcInfo.Parameters.Select(p => ResolveParameter(p.Type, p.Name, (int) p.Index)));
 
 			return () => {
-				retParam.RequireCompleteTypes(true);
+				retParam.RequireCompleteTypeReferences(TypeRedirects,true);
 
-				var retType = retParam.ParameterType;
+				var retType = retParam.Type;
 
 				foreach (var argParam in argParams)
-					argParam.RequireCompleteTypes(true);
+					argParam.RequireCompleteTypeReferences(TypeRedirects,true);
 
-				var clrArgTypes = argParams.Select(p => p.ParameterType).ToArray();
+				var clrArgTypes = argParams.Select(p => p.Type).ToArray();
 
 				try {
 					var ctor = funcDef.DefineConstructor(DelegateConstructorAttributes,
-						CallingConventions.Standard, new[] {typeof(object), typeof(IntPtr)});
+						typeof(object), typeof(IntPtr));
 					ctor.SetImplementationFlags(MethodImplAttributes.CodeTypeMask);
-
-					if (retParam.CustomAttributes.Any())
-						throw new NotImplementedException();
 
 					var method = funcDef.DefineMethod("Invoke",
 						DelegateInvokeMethodAttributes,
@@ -55,8 +57,6 @@ namespace Artilect.Vulkan.Binder {
 
 					argParams.ConsumeLinkedList((argParam, i) => {
 						var param = method.DefineParameter(i + 1, argParam.Attributes, argParam.Name);
-						foreach (var attrInfo in argParam.AttributeInfos)
-							param.SetCustomAttribute(attrInfo.GetCustomAttributeBuilder());
 					});
 
 					return new[] {funcDef.CreateType()};
