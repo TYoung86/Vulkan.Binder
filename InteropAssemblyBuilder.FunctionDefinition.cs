@@ -16,7 +16,12 @@ namespace Artilect.Vulkan.Binder {
 		}
 
 		private Func<TypeDefinition[]> DefineClrType(ClangFunctionInfoBase funcInfo) {
-			var funcDef = Module.DefineType(funcInfo.Name,
+			var funcName = funcInfo.Name;
+			if (TypeRedirects.TryGetValue(funcName, out var rename)) {
+				funcName = rename;
+			}
+
+			var funcDef = Module.DefineType(funcName,
 				DelegateTypeAttributes,
 				typeof(MulticastDelegate) );
 
@@ -28,12 +33,12 @@ namespace Artilect.Vulkan.Binder {
 			var argParams = new LinkedList<ParameterInfo>(funcInfo.Parameters.Select(p => ResolveParameter(p.Type, p.Name, (int) p.Index)));
 
 			return () => {
-				retParam.RequireCompleteTypeReferences(true);
+				retParam.RequireCompleteTypeReferences(TypeRedirects,true);
 
 				var retType = retParam.Type;
 
 				foreach (var argParam in argParams)
-					argParam.RequireCompleteTypeReferences(true);
+					argParam.RequireCompleteTypeReferences(TypeRedirects,true);
 
 				var clrArgTypes = argParams.Select(p => p.Type).ToArray();
 

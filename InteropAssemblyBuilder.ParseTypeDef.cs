@@ -14,6 +14,9 @@ namespace Artilect.Vulkan.Binder {
 			if (typeDeclCursor.kind == CXCursorKind.CXCursor_NoDeclFound) {
 				if (canonType.kind != CXTypeKind.CXType_Pointer) {
 					// likely simple type alias
+					if (TypeRedirects.TryGetValue(name, out var renamed)) {
+						name = renamed;
+					}
 					if (KnownTypes.ContainsKey(name)) {
 						if (PrimitiveTypeMap.TryGetValue(canonType.kind, out var primitiveType)) {
 							var existingType = Module.GetType(name);
@@ -46,7 +49,9 @@ namespace Artilect.Vulkan.Binder {
 					throw new NotImplementedException();
 				}
 				case CXCursorKind.CXCursor_EnumDecl: {
-					var typeName = typeDeclCursor.ToString();
+					if (TypeRedirects.TryGetValue(name, out var renamed)) {
+						name = renamed;
+					}
 					if (KnownTypes.TryGetValue(name, out var knownType)) {
 						var existingType = Module.GetType(name);
 						if (existingType != null)

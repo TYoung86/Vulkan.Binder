@@ -11,7 +11,6 @@ using Mono.Cecil.Rocks;
 
 namespace Artilect.Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
-
 		private static readonly ImmutableHashSet<CXTypeKind> SignedCxTypeKinds = (new[] {
 			CXTypeKind.CXType_Char_S, CXTypeKind.CXType_SChar, CXTypeKind.CXType_WChar,
 			CXTypeKind.CXType_Float, CXTypeKind.CXType_Double, CXTypeKind.CXType_LongDouble,
@@ -119,11 +118,12 @@ namespace Artilect.Vulkan.Binder {
 					break;
 				}
 			}
-			
+
 			return type.kind;
 		}
 
 		private ParameterInfo ResolveField(CXType originalType, string name = null, int index = 0) {
+			string renamed;
 			var type = originalType;
 
 			if (type.kind == CXTypeKind.CXType_FunctionProto)
@@ -161,17 +161,28 @@ namespace Artilect.Vulkan.Binder {
 				if (primitiveType == null)
 					throw new NotImplementedException();
 				var originalTypeName = originalType.ToString();
-				if (originalType.kind == CXTypeKind.CXType_Typedef
-					&& KnownTypes.ContainsKey(originalTypeName)) {
-					var knownType = Module.GetType(originalType.ToString());
-					if ( knownType == null )
-						throw new NotImplementedException();
-					return new ParameterInfo(name, knownType, index);
+
+				if (originalType.kind == CXTypeKind.CXType_Typedef) {
+					if (TypeRedirects.TryGetValue(originalTypeName, out renamed)) {
+						originalTypeName = renamed;
+					}
+
+					if (KnownTypes.ContainsKey(originalTypeName)) {
+						var knownType = Module.GetType(originalType.ToString());
+						if (knownType == null)
+							throw new NotImplementedException();
+						return new ParameterInfo(name, knownType, index);
+					}
 				}
 				return new ParameterInfo(name, primitiveType.Import(Module), index);
 			}
 
 			var typeName = typeDeclCursor.ToString();
+
+			if (TypeRedirects.TryGetValue(typeName, out renamed)) {
+				typeName = renamed;
+			}
+
 			var possibleType = Module.GetType(typeName);
 			if (possibleType != null)
 				return new ParameterInfo(name, possibleType, index);
@@ -181,6 +192,7 @@ namespace Artilect.Vulkan.Binder {
 		}
 
 		private ParameterInfo ResolveParameter(CXType originalType, string name = null, int index = 0) {
+			string renamed;
 			var type = originalType;
 			if (type.kind == CXTypeKind.CXType_FunctionProto)
 				throw new NotImplementedException();
@@ -224,23 +236,34 @@ namespace Artilect.Vulkan.Binder {
 				if (primitiveType == null)
 					throw new NotImplementedException();
 				var originalTypeName = originalType.ToString();
-				if (originalType.kind == CXTypeKind.CXType_Typedef
-					&& KnownTypes.ContainsKey(originalTypeName)) {
-					var knownType = Module.GetType(originalType.ToString());
-					if ( knownType == null )
-						throw new NotImplementedException();
-					return new ParameterInfo(name, knownType, index);
+
+				if (originalType.kind == CXTypeKind.CXType_Typedef) {
+					if (TypeRedirects.TryGetValue(originalTypeName, out renamed)) {
+						originalTypeName = renamed;
+					}
+					if (KnownTypes.ContainsKey(originalTypeName)) {
+						var knownType = Module.GetType(originalType.ToString());
+						if (knownType == null)
+							throw new NotImplementedException();
+						return new ParameterInfo(name, knownType, index);
+					}
 				}
+
 				return new ParameterInfo(name, primitiveType.Import(Module), index);
 			}
 
 			var typeName = typeDeclCursor.ToString();
+
+			if (TypeRedirects.TryGetValue(typeName, out renamed)) {
+				typeName = renamed;
+			}
+
 			var possibleType = Module.GetType(typeName);
 			if (possibleType != null)
 				return new ParameterInfo(name, possibleType, index);
 
 			return new ParameterInfo(name,
-				IncompleteTypeReference.Get( Module, null, typeName), index);
+				IncompleteTypeReference.Get(Module, null, typeName), index);
 		}
 
 		private static bool IsTypeSigned(Type type)

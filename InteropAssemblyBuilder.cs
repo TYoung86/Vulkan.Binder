@@ -91,9 +91,12 @@ namespace Artilect.Vulkan.Binder {
 		private static readonly string BaseInteropAsmName = BaseInteropAssembly.GetName().Name;
 		private static readonly string InteropAsmCodeBase = BaseInteropAssembly.CodeBase;
 		private static readonly string BaseInteropAsmPath = new Uri(InteropAsmCodeBase).LocalPath;
-
+		
 		public ImmutableDictionary<string, KnownType> KnownTypes
 			= ImmutableDictionary<string, KnownType>.Empty;
+
+		public ImmutableDictionary<string, string> TypeRedirects
+			= ImmutableDictionary<string, string>.Empty;
 
 		private readonly string ModuleName;
 
@@ -234,13 +237,19 @@ namespace Artilect.Vulkan.Binder {
 
 		private void PrepareKnownTypes() {
 			foreach (var knownType in KnownTypes) {
+				var name = knownType.Key;
+				if (TypeRedirects.TryGetValue(name, out var renamed)) {
+					name = renamed;
+				}
+				if ( Module.GetType(name) != null )
+					throw new NotImplementedException();
 				switch (knownType.Value) {
 					case KnownType.Enum: {
-						Module.DefineEnum(knownType.Key, TypeAttributes.Public);
+						Module.DefineEnum(name, TypeAttributes.Public);
 						break;
 					}
 					case KnownType.Bitmask: {
-						var def = Module.DefineEnum(knownType.Key, TypeAttributes.Public);
+						var def = Module.DefineEnum(name, TypeAttributes.Public);
 						def.CustomAttributes.Add(FlagsAttribute);
 						break;
 					}

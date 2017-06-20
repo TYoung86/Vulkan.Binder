@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -60,7 +61,7 @@ namespace Artilect.Vulkan.Binder {
 			var startingDirectory = Environment.CurrentDirectory;
 			Environment.CurrentDirectory = workDirectory.FullName;
 
-			VkXmlConsumer consumer;
+			VkXmlConsumer xml;
 			using (var client = new HttpClient()) {
 				var vkXmlConsumerTask = Task.FromResult(client)
 					.ContinueWith(t => {
@@ -97,27 +98,75 @@ namespace Artilect.Vulkan.Binder {
 					cppSharpTask
 				);
 
-				consumer = vkXmlConsumerTask.Result;
+				xml = vkXmlConsumerTask.Result;
 			}
 
 			
 			Console.WriteLine("Building Vulkan interop assembly.");
 
-			var vkHeaderVersion = consumer.DefineTypes["VK_HEADER_VERSION"].LastNode.ToString().Trim();
+			var vkHeaderVersion = xml.DefineTypes["VK_HEADER_VERSION"].LastNode.ToString().Trim();
 
 			var asmBuilder = new InteropAssemblyBuilder("Vulkan", "1.0." + vkHeaderVersion);
-
+			
 			var knownTypes = ImmutableDictionary.CreateBuilder<string, KnownType>();
+			var typeRedirs = ImmutableDictionary.CreateBuilder<string, string>();
 
-			knownTypes.AddRange(
-				consumer.EnumTypes.Keys.Select(k => new KeyValuePair<string, KnownType>
-					(k, KnownType.Enum)));
+			foreach (var enumType in xml.EnumTypes) {
+				knownTypes.Add( enumType.Key, KnownType.Enum);
+				var requires = enumType.Value.Attribute("requires")?.Value;
+				if ( requires != null )
+					typeRedirs.Add(requires, enumType.Key);
+			}
 
-			knownTypes.AddRange(
-				consumer.BitmaskTypes.Keys.Select(k => new KeyValuePair<string, KnownType>
-					(k, KnownType.Bitmask)));
+			foreach (var bitmaskType in xml.BitmaskTypes) {
+				knownTypes.Add( bitmaskType.Key, KnownType.Bitmask);
+				var requires = bitmaskType.Value.Attribute("requires")?.Value;
+				if ( requires != null )
+					typeRedirs.Add(requires, bitmaskType.Key);
+			}
+			
+			// make KnownTypes consistent with TypeRedirects
+			foreach (var typeRedir in typeRedirs) {
+				if (knownTypes.TryGetValue(typeRedir.Key, out var knownType)) {
+					knownTypes.Remove(typeRedir.Key);
+					if (!knownTypes.ContainsKey(typeRedir.Value)) {
+						knownTypes.Add(typeRedir.Value, knownType);
+					}
+				}
+			}
 
+			// handle remaining FlagBits -> Flags references that they missed
+			var compareInfo = CultureInfo.InvariantCulture.CompareInfo;
+			var verifyingKnownTypesIterator = knownTypes.Keys.ToArray().Where(n => knownTypes.ContainsKey(n));
+			foreach (var name in verifyingKnownTypesIterator) {
+				if (compareInfo.IndexOf(name, "Flags", CompareOptions.Ordinal) != -1) {
+					var otherName = name.Replace("Flags", "FlagBits");
+					if (!knownTypes.TryGetValue(otherName, out var otherType))
+						continue;
+					if (otherType == KnownType.Bitmask)
+						knownTypes[name] = KnownType.Bitmask;
+					knownTypes.Remove(otherName);
+					if (!typeRedirs.ContainsKey(otherName))
+						typeRedirs.Add(otherName, name);
+				} else if (compareInfo.IndexOf(name, "FlagBits", CompareOptions.Ordinal) != -1) {
+					var otherName = name.Replace("FlagBits", "Flags");
+					if (!knownTypes.TryGetValue(name, out var knownType))
+						continue;
+					if (knownType == KnownType.Bitmask)
+						knownTypes[otherName] = KnownType.Bitmask;
+					knownTypes.Remove(name);
+					if (!typeRedirs.ContainsKey(name))
+						typeRedirs.Add(name, otherName);
+				}
+			}
+
+			foreach (var handle in xml.HandleTypes.Keys) {
+				typeRedirs.Add(handle+"_T",handle);
+			}
+
+			
 			asmBuilder.KnownTypes = knownTypes.ToImmutable();
+			asmBuilder.TypeRedirects = typeRedirs.ToImmutable();
 
 			asmBuilder.ParseHeader("vulkan.h");
 

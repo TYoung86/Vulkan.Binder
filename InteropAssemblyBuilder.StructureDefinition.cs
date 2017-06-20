@@ -27,8 +27,13 @@ namespace Artilect.Vulkan.Binder {
 		private Func<TypeDefinition[]> DefineClrHandleStructInternal(ClangStructInfo structInfo, int? bits = null) {
 			if (structInfo.Size > 0)
 				throw new NotImplementedException();
+			var structName = structInfo.Name;
+
+			if (TypeRedirects.TryGetValue(structName, out var rename)) {
+				structName = rename;
+			}
 			// handle type
-			var handleDef = Module.DefineType(structInfo.Name,
+			var handleDef = Module.DefineType(structName,
 				PublicSealedStructTypeAttributes);
 			//handleDef.SetCustomAttribute(StructLayoutSequentialAttributeInfo);
 			var handleInterface = IHandleGtd.MakeGenericInstanceType(handleDef);
@@ -70,6 +75,11 @@ namespace Artilect.Vulkan.Binder {
 			}
 
 			var structName = structInfo32.Name;
+			
+			if (TypeRedirects.TryGetValue(structName, out var rename)) {
+				structName = rename;
+			}
+
 			var interfaceDef = Module.DefineType("I" + structName,
 				PublicInterfaceTypeAttributes);
 
@@ -121,9 +131,9 @@ namespace Artilect.Vulkan.Binder {
 
 			TypeDefinition[] BuildInterfacePropsAndStructFields() {
 				foreach (var fieldParam in fieldParams32)
-					fieldParam.RequireCompleteTypeReferences("32");
+					fieldParam.RequireCompleteTypeReferences(TypeRedirects, "32");
 				foreach (var fieldParam in fieldParams64)
-					fieldParam.RequireCompleteTypeReferences("64");
+					fieldParam.RequireCompleteTypeReferences(TypeRedirects, "64");
 
 				interfacePropNames.ConsumeLinkedList(propName => {
 					BuildInterfaceByRefAccessor(interfaceDef, propName, _splitPointerDefs,
@@ -349,7 +359,11 @@ namespace Artilect.Vulkan.Binder {
 			if (structInfo.Size == 0) {
 				return DefineClrHandleStructInternal(structInfo);
 			}
-			TypeDefinition structDef = Module.DefineType(structInfo.Name,
+			var structName = structInfo.Name;
+			if (TypeRedirects.TryGetValue(structName, out var rename)) {
+				structName = rename;
+			}
+			TypeDefinition structDef = Module.DefineType(structName,
 				PublicSealedStructTypeAttributes, null,
 				(int) structInfo.Alignment,
 				(int) structInfo.Size);
@@ -358,7 +372,7 @@ namespace Artilect.Vulkan.Binder {
 				.Select(f => ResolveField(f.Type, f.Name, (int) f.Offset)));
 			return () => {
 				foreach (var fieldParam in fieldParams)
-					fieldParam.RequireCompleteTypeReferences(true);
+					fieldParam.RequireCompleteTypeReferences(TypeRedirects,true);
 				fieldParams.ConsumeLinkedList(fieldParam => {
 					var fieldName = fieldParam.Name;
 

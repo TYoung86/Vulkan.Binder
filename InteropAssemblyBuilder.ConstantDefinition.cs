@@ -8,9 +8,15 @@ namespace Artilect.Vulkan.Binder {
 			var underlyingTypeInfo = ResolveParameter(enumInfo.UnderlyingType);
 			var underlyingType = underlyingTypeInfo.Type;
 
-			var enumTypeDef = Module.GetType(enumInfo.Name);
+			var name = enumInfo.Name;
+			
+			if (TypeRedirects.TryGetValue(name, out var renamed)) {
+				name = renamed;
+			}
+
+			var enumTypeDef = Module.GetType(name);
 			if (enumTypeDef == null)
-				Module.DefineEnum(enumInfo.Name, TypeAttributes.Public, underlyingType);
+				Module.DefineEnum(name, TypeAttributes.Public, underlyingType);
 			else
 				enumTypeDef.ChangeUnderlyingType(underlyingType);
 			//enumTypeDef.SetCustomAttribute(FlagsAttributeInfo);

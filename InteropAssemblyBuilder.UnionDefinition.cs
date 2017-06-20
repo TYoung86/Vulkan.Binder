@@ -11,7 +11,11 @@ namespace Artilect.Vulkan.Binder {
 			if (unionInfo.Size == 0) {
 				throw new NotImplementedException();
 			}
-			TypeDefinition unionDef = Module.DefineType(unionInfo.Name,
+			var unionName = unionInfo.Name;
+			if (TypeRedirects.TryGetValue(unionName, out var rename)) {
+				unionName = rename;
+			}
+			TypeDefinition unionDef = Module.DefineType(unionName,
 				PublicSealedUnionTypeAttributes, null,
 				(int) unionInfo.Alignment,
 				(int) unionInfo.Size);
@@ -20,7 +24,7 @@ namespace Artilect.Vulkan.Binder {
 
 			return () => {
 				foreach (var fieldParam in fieldParams)
-					fieldParam.RequireCompleteTypeReferences(true);
+					fieldParam.RequireCompleteTypeReferences(TypeRedirects,true);
 
 				fieldParams.ConsumeLinkedList(fieldParam => {
 					var fieldName = fieldParam.Name;

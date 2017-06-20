@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -17,7 +19,7 @@ namespace Artilect.Vulkan.Binder {
 		IComparable<IncompleteTypeReference>,
 		IEquatable<TypeReference>,
 		IComparable<TypeReference> {
-		public static void Require(ref TypeReference type, bool tryInterface, params string[] suffixes) {
+		public static void Require(ref TypeReference type, IDictionary<string,string> typeRedirs, bool tryInterface, params string[] suffixes) {
 			var isPtr = type.IsPointer;
 			if (type == null)
 				throw new InvalidProgramException("Null was passed to require.");
@@ -27,8 +29,8 @@ namespace Artilect.Vulkan.Binder {
 			if (!(interiorType is IncompleteTypeReference incompleteType)) return;
 
 			var resolvedType = interiorType;
-			while (resolvedType != null && resolvedType is IncompleteTypeReference) {
-				resolvedType = incompleteType.ForceResolveType(tryInterface, suffixes);
+			while (resolvedType is IncompleteTypeReference) {
+				resolvedType = incompleteType.ForceResolveType(typeRedirs, tryInterface, suffixes);
 			}
 
 			if (resolvedType == null)
@@ -44,14 +46,14 @@ namespace Artilect.Vulkan.Binder {
 			type = resolvedType;
 		}
 
-		public static TypeReference Require(TypeReference type, bool tryInterface, params string[] suffixes) {
-			Require(ref type, tryInterface, suffixes);
+		public static TypeReference Require(TypeReference type, IDictionary<string,string> typeRedirs, bool tryInterface, params string[] suffixes) {
+			Require(ref type, typeRedirs, tryInterface, suffixes);
 			return type;
 		}
 
-		public static void Require(bool tryInterface, string[] suffixes, params TypeReference[] types) {
+		public static void Require(IDictionary<string,string> typeRedirs, bool tryInterface, string[] suffixes, params TypeReference[] types) {
 			for (var i = 0 ; i < types.Length ; ++i)
-				types[i] = Require(types[i], tryInterface, suffixes);
+				types[i] = Require(types[i], typeRedirs, tryInterface, suffixes);
 		}
 
 		public bool CanResolveNow { get; set; }
@@ -134,6 +136,14 @@ namespace Artilect.Vulkan.Binder {
 			CanResolveNow = false;
 			IndirectType = indirType;
 			Type = type;
+		}
+
+		public TypeReference ForceResolveType(IDictionary<string,string> typeRedirs, bool tryInterface, params string[] suffixes) {
+			if (typeRedirs.TryGetValue(LookupName, out var renamed)) {
+				LookupName = renamed;
+			}
+
+			return ForceResolveType(tryInterface, suffixes);
 		}
 
 		public TypeReference ForceResolveType(bool tryInterface, params string[] suffixes) {
