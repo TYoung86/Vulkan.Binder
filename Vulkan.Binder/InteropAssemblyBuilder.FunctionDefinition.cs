@@ -16,11 +16,19 @@ namespace Vulkan.Binder {
 
 		private Func<TypeDefinition[]> DefineClrType(ClangFunctionInfoBase funcInfo) {
 			var funcName = funcInfo.Name;
+
 			if (TypeRedirects.TryGetValue(funcName, out var rename)) {
 				funcName = rename;
 			}
+			
+			var funcRef = Module.GetType(funcName, true);
+			var funcDef = funcRef.ResolveDefinition();
 
-			var funcDef = Module.DefineType(funcName,
+			if ( funcDef != null ) {
+				return null;
+			}
+
+			funcDef = Module.DefineType(funcName,
 				DelegateTypeAttributes,
 				typeof(MulticastDelegate) );
 

@@ -165,7 +165,12 @@ namespace Vulkan.Binder {
 			foreach (var handle in xml.HandleTypes.Keys) {
 				typeRedirs.Add(handle+"_T",handle);
 			}
-
+			
+			foreach (var funcName in xml.Commands.Keys) {
+				if ( funcName.StartsWith("PFN_"))
+					throw new NotImplementedException();
+				typeRedirs.Add("PFN_"+funcName,funcName);
+			}
 			
 			asmBuilder.KnownTypes = knownTypes.ToImmutable();
 			asmBuilder.TypeRedirects = typeRedirs.ToImmutable();

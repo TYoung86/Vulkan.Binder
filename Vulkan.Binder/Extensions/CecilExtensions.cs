@@ -268,10 +268,10 @@ namespace Vulkan.Binder.Extensions {
 		private const BindingFlags AnyAccessInstanceOrStaticBindingFlags
 			= BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance;
 
-		public static MethodReference GetMethod(this TypeDefinition typeDef, string methodName, BindingFlags bf) {
+		public static MethodReference GetMethod(this TypeDefinition typeDef, string methodName, BindingFlags bf = AnyAccessInstanceOrStaticBindingFlags) {
 			if ((AnyAccessInstanceOrStaticBindingFlags & bf) == AnyAccessInstanceOrStaticBindingFlags)
-				return typeDef.Methods.Single(md => md.Name == methodName);
-			return typeDef.Methods.Single
+				return typeDef.Methods.SingleOrDefault(md => md.Name == methodName);
+			return typeDef.Methods.SingleOrDefault
 			(md => md.Name == methodName
 					&& (
 						bf.HasFlag(BindingFlags.Public) && md.IsPublic
