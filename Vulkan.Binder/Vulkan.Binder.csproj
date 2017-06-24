@@ -7,6 +7,10 @@
 	<ApplicationIcon />
 	<OutputTypeEx>exe</OutputTypeEx>
 	<StartupObject />
+	<Version>1.3.0</Version>
+	<Company>Artilect</Company>
+	<Authors>Tyler Young</Authors>
+	<Description>A project to generate hardy and efficient .NET bindings and integrated documentation directly from Vulkan C headers and documentation. Uses ClangSharp to build and manage AST. Generates an IL assembly that contains both 32-bit and 64-bit structures and agnostic interfaces. Incorporates Vulkan Docs and XML from official github repo.</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
