@@ -9,7 +9,12 @@ namespace Vulkan.Binder {
 
 			if (name == null)
 				throw new NotImplementedException("Handling of unnamed functions are not implemented.");
-
+			
+			/*
+			if (TypeRedirects.TryGetValue(name, out var renamed)) {
+				name = renamed;
+			}
+			*/
 
 			var funcType = clang.getCursorType(cursor);
 
