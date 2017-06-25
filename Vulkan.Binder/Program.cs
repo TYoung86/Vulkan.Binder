@@ -192,7 +192,7 @@ namespace Vulkan.Binder {
 			// create automatic runtime linker bound to module initializer
 			var moduleType = asmBuilder.Module.GetType("<Module>");
 			var staticLinkType = asmBuilder.Module.DefineType("Vulkan", TypeAttributes.Abstract | TypeAttributes.Sealed);
-			var staticLinkInit = moduleType.DefineConstructor(MethodAttributes.Static | MethodAttributes.Assembly);
+			var staticLinkInit = staticLinkType.DefineConstructor(MethodAttributes.Static | MethodAttributes.Assembly);
 			staticLinkInit.GenerateIL(il => {
 				// 
 				il.Emit(OpCodes.Ret);
