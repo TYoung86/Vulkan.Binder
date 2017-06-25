@@ -110,10 +110,19 @@ namespace Vulkan.Binder {
 			if (moduleParams == null)
 				moduleParams = DefaultModuleParameters;
 			
+			var loadedAsms = AppDomain.CurrentDomain.GetAssemblies();
 			var asmResolver = new DefaultAssemblyResolver();
+
+			// ReSharper disable once UnusedVariable
+			var forceUnsafeToLoad = Unsafe.AreSame(ref loadedAsms, ref loadedAsms);
+
 			asmResolver.ResolveFailure += (sender, reference) => {
 				if (reference.Name == BaseInteropAsmName)
 					return Assembly;
+				foreach (var loadedAsm in loadedAsms) {
+					if (reference.FullName == loadedAsm.FullName)
+						return AssemblyDefinition.ReadAssembly(new Uri(loadedAsm.CodeBase).LocalPath);
+				}
 				throw new NotImplementedException();
 			};
 			var mdResolver = new MetadataResolver(asmResolver);
