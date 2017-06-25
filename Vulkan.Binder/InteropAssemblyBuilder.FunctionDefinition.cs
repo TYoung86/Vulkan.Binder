@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Mono.Cecil;
 using Vulkan.Binder.Extensions;
 
@@ -31,6 +32,7 @@ namespace Vulkan.Binder {
 			funcDef = Module.DefineType(funcName,
 				DelegateTypeAttributes,
 				typeof(MulticastDelegate) );
+			funcDef.SetCustomAttribute(() => new CompilerGeneratedAttribute());
 
 			var retParam = ResolveParameter(funcInfo.ReturnType);
 			if (!CallingConventionMap.TryGetValue(funcInfo.CallConvention, out var callConv))

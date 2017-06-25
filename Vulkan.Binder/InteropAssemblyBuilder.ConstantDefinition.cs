@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using Mono.Cecil;
 using Vulkan.Binder.Extensions;
 
@@ -15,8 +16,10 @@ namespace Vulkan.Binder {
 			}
 
 			var enumTypeDef = Module.GetType(name);
-			if (enumTypeDef == null)
-				Module.DefineEnum(name, TypeAttributes.Public, underlyingType);
+			if (enumTypeDef == null) {
+				enumTypeDef = Module.DefineEnum(name, TypeAttributes.Public, underlyingType);
+				enumTypeDef.SetCustomAttribute(() => new CompilerGeneratedAttribute());
+			}
 			else
 				enumTypeDef.ChangeUnderlyingType(underlyingType);
 			//enumTypeDef.SetCustomAttribute(FlagsAttributeInfo);

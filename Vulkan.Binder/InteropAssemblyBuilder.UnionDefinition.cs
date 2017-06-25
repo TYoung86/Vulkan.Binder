@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Mono.Cecil;
 using Vulkan.Binder.Extensions;
 
@@ -18,6 +19,7 @@ namespace Vulkan.Binder {
 				PublicSealedUnionTypeAttributes, null,
 				(int) unionInfo.Alignment,
 				(int) unionInfo.Size);
+			unionDef.SetCustomAttribute(() => new CompilerGeneratedAttribute());
 			//unionDef.SetCustomAttribute(StructLayoutExplicitAttributeInfo);
 			var fieldParams = new LinkedList<ParameterInfo>(unionInfo.Fields.Select(f => ResolveField(f.Type, f.Name, (int) f.Offset)));
 

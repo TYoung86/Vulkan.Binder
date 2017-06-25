@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using Mono.Cecil.Rocks;
@@ -33,6 +34,7 @@ namespace Vulkan.Binder {
 			// handle type
 			var handleDef = Module.DefineType(structName,
 				PublicSealedStructTypeAttributes);
+			handleDef.SetCustomAttribute(() => new CompilerGeneratedAttribute());
 			//handleDef.SetCustomAttribute(StructLayoutSequentialAttributeInfo);
 			var handleInterface = IHandleGtd.MakeGenericInstanceType(handleDef);
 			handleDef.AddInterfaceImplementation(handleInterface);
@@ -80,11 +82,13 @@ namespace Vulkan.Binder {
 
 			var interfaceDef = Module.DefineType("I" + structName,
 				PublicInterfaceTypeAttributes);
+			interfaceDef.SetCustomAttribute(() => new CompilerGeneratedAttribute());
 
 			var structDef32 = Module.DefineType(structName + "32",
 				PublicSealedStructTypeAttributes, null,
 				(int) structInfo32.Alignment,
 				(int) structInfo32.Size);
+			structDef32.SetCustomAttribute(() => new CompilerGeneratedAttribute());
 			/*
 			structDef32.SetCustomAttribute(AttributeInfo.Create(
 				() => new StructLayoutAttribute(LayoutKind.Sequential) {
@@ -96,6 +100,7 @@ namespace Vulkan.Binder {
 				PublicSealedStructTypeAttributes, null,
 				(int) structInfo64.Alignment,
 				(int) structInfo64.Size);
+			structDef64.SetCustomAttribute(() => new CompilerGeneratedAttribute());
 			/*
 			structDef64.SetCustomAttribute(AttributeInfo.Create(
 				() => new StructLayoutAttribute(LayoutKind.Sequential) {
@@ -365,6 +370,7 @@ namespace Vulkan.Binder {
 				PublicSealedStructTypeAttributes, null,
 				(int) structInfo.Alignment,
 				(int) structInfo.Size);
+			structDef.SetCustomAttribute(() => new CompilerGeneratedAttribute());
 
 			var fieldParams = new LinkedList<ParameterInfo>(structInfo.Fields
 				.Select(f => ResolveField(f.Type, f.Name, (int) f.Offset)));
