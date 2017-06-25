@@ -22,7 +22,7 @@ namespace Vulkan.Binder.Extensions {
 				? new TypeDefinition(null, name, typeAttrs, baseType.Import(module))
 				: new TypeDefinition(null, name, typeAttrs);
 			if (packing >= 0)
-				td.PackingSize = (short)packing;
+				td.PackingSize = (short) packing;
 			if (packing >= 0)
 				td.ClassSize = size;
 			if ((typeAttrs & StructTypeAttributeMask) != 0) {
@@ -109,6 +109,7 @@ namespace Vulkan.Binder.Extensions {
 		public static IEnumerable<TypeReference> GetInterfaces(this TypeDefinition typeDef) {
 			return typeDef.Interfaces.Select(ii => ii.InterfaceType);
 		}
+
 		public static IEnumerable<TypeReference> GetInterfaces(this TypeReference typeRef) {
 			return typeRef.ResolveDefinition().GetInterfaces();
 		}
@@ -130,7 +131,15 @@ namespace Vulkan.Binder.Extensions {
 
 		public static MethodDefinition DefineConstructor(this TypeDefinition typeDef, MethodAttributes methodAttrs, params Type[] paramTypes) {
 			var module = typeDef.Module;
+			methodAttrs |= MethodAttributes.HideBySig
+							| MethodAttributes.RTSpecialName
+							| MethodAttributes.SpecialName;
+			methodAttrs &= ~ MethodAttributes.NewSlot;
 			var isStatic = methodAttrs.HasFlag(MethodAttributes.Static);
+			if (isStatic) {
+				methodAttrs &= ~ MethodAttributes.Public;
+				methodAttrs |= MethodAttributes.Private;
+			}
 			var methodDef = new MethodDefinition(isStatic ? ".cctor" : ".ctor", methodAttrs,
 				typeof(void).Import(module));
 			var pds = paramTypes.Import(module)
@@ -150,7 +159,7 @@ namespace Vulkan.Binder.Extensions {
 		}
 
 		public static MethodDefinition DefineMethod(this TypeDefinition typeDef, string name, MethodAttributes methodAttrs, TypeReference retType, params TypeReference[] paramTypes) {
-			return DefineMethod(typeDef, name, methodAttrs, retType, (IEnumerable<TypeReference>)paramTypes);
+			return DefineMethod(typeDef, name, methodAttrs, retType, (IEnumerable<TypeReference>) paramTypes);
 		}
 
 		public static MethodDefinition DefineMethod(this TypeDefinition typeDef, string name, MethodAttributes methodAttrs, TypeReference retType, IEnumerable<TypeReference> paramTypes) {
@@ -179,7 +188,7 @@ namespace Vulkan.Binder.Extensions {
 			=> CreateParametersDefinitions(paramTypes.Import(module).ToArray());
 
 		private static IEnumerable<ParameterDefinition> CreateParametersDefinitions(params TypeReference[] paramTypes)
-			=> CreateParametersDefinitions((IEnumerable<TypeReference>)paramTypes);
+			=> CreateParametersDefinitions((IEnumerable<TypeReference>) paramTypes);
 
 		private static IEnumerable<ParameterDefinition> CreateParametersDefinitions(IEnumerable<TypeReference> paramTypes)
 			=> paramTypes?.Select(typeRef => new ParameterDefinition(typeRef));
@@ -214,10 +223,10 @@ namespace Vulkan.Binder.Extensions {
 		}
 
 		public static ParameterDefinition DefineParameter(this MethodDefinition methodDef, int position, System.Reflection.ParameterAttributes paramAttrs, string name)
-			=> DefineParameter(methodDef, position, (ParameterAttributes)paramAttrs, name);
+			=> DefineParameter(methodDef, position, (ParameterAttributes) paramAttrs, name);
 
 		public static void SetCustomAttribute(this ParameterDefinition paramDef, AttributeInfo attrInfo)
-			=> paramDef.CustomAttributes.Add(attrInfo.GetCecilCustomAttribute(((MethodDefinition)paramDef.Method).Module));
+			=> paramDef.CustomAttributes.Add(attrInfo.GetCecilCustomAttribute(((MethodDefinition) paramDef.Method).Module));
 
 		public static TypeDefinition CreateType(this TypeDefinition td) => td;
 
@@ -308,6 +317,7 @@ namespace Vulkan.Binder.Extensions {
 			} while (t.HasElementType);
 			return t;
 		}
+
 		public delegate void TypeRefIndirectionTransform(ref TypeReference t);
 
 		public static void TypeRefMakePointer(ref TypeReference t) => t = t.MakePointerType();
@@ -412,7 +422,8 @@ namespace Vulkan.Binder.Extensions {
 				case "System.IntPtr":
 				case "System.UIntPtr":
 					return pointerSize == -1
-						? IntPtr.Size : pointerSize;
+						? IntPtr.Size
+						: pointerSize;
 				default:
 					throw new NotImplementedException();
 			}
@@ -440,8 +451,8 @@ namespace Vulkan.Binder.Extensions {
 			=> type.IsPointer || type.IsByReference
 				? IntPtr.Size
 				: type.IsPrimitive
-				? GetSizeOfPrimitive(type)
-				: type.ResolveDefinition().ClassSize;
+					? GetSizeOfPrimitive(type)
+					: type.ResolveDefinition().ClassSize;
 
 		public static int SizeOf(this TypeDefinition type)
 			=> type.ClassSize;
@@ -545,7 +556,7 @@ namespace Vulkan.Binder.Extensions {
 		}
 
 		public static bool IsAssignableFrom(this TypeReference typeRef, TypeReference otherRef) {
-			for (;;) {
+			for (; ;) {
 				if (otherRef == null)
 					return false;
 
@@ -660,7 +671,7 @@ namespace Vulkan.Binder.Extensions {
 
 		public static TypeReference FindInteriorType(this TypeReference exterior, ref LinkedList<TypeReferenceTransform> transform, bool directVoids = false) {
 			var type = exterior;
-			for (;;) {
+			for (; ;) {
 				if (type.IsPointer) {
 					if (directVoids || type != typeof(void).Import(exterior.Module)) {
 						transform.AddFirst(MakePointerType);
