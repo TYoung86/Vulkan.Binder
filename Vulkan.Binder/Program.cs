@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -7,9 +8,11 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.XPath;
 using HtmlAgilityPack;
 using HtmlAgilityPack.CssSelectors.NetCore;
 using Mono.Cecil;
@@ -19,6 +22,8 @@ using Vulkan.Binder.Extensions;
 namespace Vulkan.Binder {
 	public static class Program {
 		public const string VkManBasePath = "https://www.khronos.org/registry/vulkan/specs/1.0/man/html/";
+		public static readonly Uri VkManBasePathUri = new Uri(VkManBasePath);
+		public static readonly string LocalVulkanHtmlManPages = Environment.GetEnvironmentVariable("VULKAN_HTMLMANPAGES");
 
 		public static class Cdn {
 			private const string CdnBasePath = "https://cdn.rawgit.com/";
@@ -283,11 +288,17 @@ namespace Vulkan.Binder {
 			Console.WriteLine("Fetching doc for: {0}", name);
 			Stream stream;
 			try {
-				stream = await HttpClient.GetStreamAsync
-					(VkManBasePath + name + ".html").ConfigureAwait(false);
+				if (LocalVulkanHtmlManPages != null)
+					stream = File.OpenRead(Path.Combine(LocalVulkanHtmlManPages, name + ".html"));
+				else
+					stream = await HttpClient.GetStreamAsync
+						(VkManBasePath + name + ".html").ConfigureAwait(false);
+			}
+			catch (FileNotFoundException ex) {
+				Console.WriteLine("No doc for: {0}", name);
+				return;
 			}
 			catch (HttpRequestException ex) {
-				// 404 or such
 				Console.WriteLine("No doc for: {0}", name);
 				return;
 			}
@@ -303,48 +314,190 @@ namespace Vulkan.Binder {
 					throw new NotImplementedException();
 
 				typeDesc.Add(new XElement("summary",
-					new XText(nameParagraphParts[1])));
+					new XText(nameParagraphParts[1].Trim())));
 			}
 
 			// remarks
-			XElement remarksElem = new XElement("remarks");
+			var remarksElem = new XElement("remarks");
 			var descSection = hdoc.QuerySelector("#_description + .sectionbody");
 			if (descSection != null) {
-				await WriteHtmlNodeToXmlElementAsync(descSection, remarksElem).ConfigureAwait(false);
+				WriteHtmlNodeToXmlElement(descSection, remarksElem);
 			}
 
 			// c spec, copy into remarks
 			var specSection = hdoc.QuerySelector("#content #_c_specification + .sectionbody");
 			if (specSection != null)
-				await WriteHtmlNodeToXmlElementAsync(specSection, remarksElem).ConfigureAwait(false);
+				WriteHtmlNodeToXmlElement(specSection, remarksElem);
 
-			if ( remarksElem.DescendantNodes().Any() )
+			if ( remarksElem.Nodes().Any() )
 				typeDesc.Add(remarksElem);
 
 			// see alsos
-			var seeAlsos = hdoc.QuerySelectorAll("#_seealso + .sectionbody a");
-			foreach (var seeAlso in seeAlsos)
-				typeDesc.Add(new XElement("seealso", new XAttribute("cref", $"T:{seeAlso}")));
+			var seeAlsos = hdoc.QuerySelectorAll("#_see_also + .sectionbody a");
+			foreach (var seeAlso in seeAlsos) {
+				string cref = null;
+				var href = seeAlso.GetAttributeValue("href",null);
+				if (href == null)
+					continue;
+				if (href.StartsWith("#")) {
+					continue;
+				}
+				if (href.StartsWith(".")) {
+					cref = $"!:{new Uri(VkManBasePathUri, href).AbsoluteUri}";
+				}
+				else if (href.StartsWith("http://")||href.StartsWith("https://")) {
+					cref = $"!:{new Uri(VkManBasePathUri, href).AbsoluteUri}";
+				}
+				else if (href.StartsWith("/")) {
+					throw new NotImplementedException();
+				}
+				else if (href.EndsWith(".html")) {
+					cref = $"T:{href.Substring(0, href.Length-5)}";
+				}
+				if ( cref == null )
+					throw new NotImplementedException();
+				typeDesc.Add(new XElement("seealso", new XAttribute("cref", cref)));
+			}
 		}
-		private static async Task WriteHtmlNodeToXmlElementAsync(HtmlNode hn, XElement xe) {
+		private static void WriteHtmlNodeToXmlElement(HtmlNode hn, XElement xe) {
 			try {
+				byte[] content;
 				using (var ms = new MemoryStream()) {
-					var sw = new StreamWriter(ms);
-					await sw.WriteAsync("<div>").ConfigureAwait(false);
-					hn.WriteContentTo(sw);
-					await sw.WriteAsync("</div>").ConfigureAwait(false);
-					await sw.FlushAsync().ConfigureAwait(false);
-					ms.Seek(0, SeekOrigin.Begin);
+					using (var sw = new StreamWriter(ms)) {
+						sw.Write("<htmlfrag>");
+						hn.WriteContentTo(sw);
+						sw.Write("</htmlfrag>");
+						sw.Flush();
+						content = ms.ToArray();
+					}
+				}
+				using (var sr = new StreamReader(new MemoryStream(content, false))) {
+					var htmlfrag = XElement.Load(sr);
 
-					var sr = new StreamReader(ms);
-					xe.Add(XElement.Load(sr));
-					sw.Dispose();
+					var attrsToRemove = (IEnumerable)htmlfrag.XPathEvaluate("//@class|//@id|//@style");
+					// ReSharper disable once ConditionIsAlwaysTrueOrFalse
+					if (attrsToRemove != null)
+						foreach (var attr in attrsToRemove.OfType<XAttribute>())
+							attr.Remove();
+
+					// inline code elements become c elements
+					ForEachByXPath(htmlfrag, "//code[not(ancestor::pre)]", elem => elem.Name = "c");
+
+					ForEachByXPath(htmlfrag, "//div[/p]", elem => elem.Name = "para");
+					
+					ForEachByXPath(htmlfrag, "//ul", elem => {
+						elem.Name = "list";
+						elem.SetAttributeValue("type","bullet");
+					});
+
+					ForEachByXPath(htmlfrag, "//ol", elem => {
+						elem.Name = "list";
+						elem.SetAttributeValue("type","number");
+					});
+
+					ForEachByXPath(htmlfrag, "//li", elem => {
+						elem.Name = "description";
+						elem.ReplaceWith(new XElement("item", elem));
+					});
+
+					// code elements inside pre elements are stripped
+					ForEachByXPath(htmlfrag, "//pre/code", RemoveKeepingDescendants);
+
+					// pre elements are converted into code elements
+					ForEachByXPath(htmlfrag, "//pre", elem => elem.Name = "code");
+
+					// anchors are converted to see elements or replaced with full uri 
+					ForEachByXPath(htmlfrag, "//a", anchor => {
+						var hrefAttr = anchor.Attribute("href");
+						if (hrefAttr == null) {
+							// likely a target anchor with id removed
+							anchor.Remove();
+							return;
+						}
+						var href = hrefAttr.Value;
+						if (href.StartsWith(".")) {
+							// translate relative uris
+							var newHref = new Uri(VkManBasePathUri, href).AbsoluteUri;
+							if (newHref.StartsWith("."))
+								throw new NotImplementedException();
+							hrefAttr.Value = newHref;
+							return;
+						}
+						if (href.StartsWith("#")) {
+							// translate relative uris
+							RemoveKeepingDescendants(anchor);
+							return;
+						}
+						if (href.StartsWith("http://") || href.StartsWith("https://")) {
+							// passthrough absolute uris
+							return;
+						}
+						if (href.StartsWith("/")) {
+							throw new NotImplementedException();
+						}
+						if (!href.EndsWith(".html")) {
+							throw new NotImplementedException();
+						}
+						var cref = href.Substring(0, href.Length - 5);
+						anchor.Name = "see";
+						anchor.RemoveAttributes();
+						if (anchor.Value == cref)
+							anchor.RemoveNodes();
+						anchor.SetAttributeValue("cref", cref);
+					});
+
+					StripByXPath(htmlfrag, "//div|//p|//span|//em|//strong");
+
+					xe.Add(htmlfrag.Nodes().Cast<object>().ToArray());
 				}
 			}
 			catch (XmlException ex) {
 				// ?!
 			}
 	
+		}
+
+		private static readonly XNode SpaceTextNode = new XText(" ");
+		private static readonly IEnumerable<XNode> SpaceTextNodeCombiner = new[] {SpaceTextNode};
+
+		private static void StripByXPath(XNode xe, string xpath) {
+			ForEachByXPath(xe, xpath, RemoveKeepingDescendants);
+		}
+
+		private static void ForEachByXPath(XNode xe, string xpath, Action<XElement> action) {
+			var elems = xe.XPathSelectElements(xpath)
+				.OrderByDescending(elem => elem.Ancestors().Count())
+				.ToArray();
+			int i = 0;
+			do {
+				foreach (var elem in elems)
+					action(elem);
+				++i;
+				elems = xe.XPathSelectElements(xpath)
+					.OrderByDescending(elem => elem.Ancestors().Count())
+					.ToArray();
+			} while (elems.Any() && i < 5);
+		}
+			
+
+		private static void RemoveKeepingDescendants(XElement elem) {
+			elem.RemoveAttributes();
+			for(;;) {
+				if (elem.Parent == null)
+					break;
+				try {
+					var descendants = SpaceTextNodeCombiner.Concat(elem.Nodes()).Concat(SpaceTextNodeCombiner);
+					if (descendants.Any())
+						elem.ReplaceWith(descendants);
+					else
+						elem.Remove();
+				}
+				catch (InvalidOperationException ex) {
+					// ?!
+					continue;
+				}
+				break;
+			}
 		}
 	}
 }
