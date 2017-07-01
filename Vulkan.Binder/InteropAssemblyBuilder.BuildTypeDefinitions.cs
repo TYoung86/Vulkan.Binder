@@ -8,22 +8,28 @@ namespace Vulkan.Binder {
 			var definitionFuncs = DefinitionFuncs;
 
 			var definitionFuncCount = definitionFuncs.Count;
+			var totalDefinitionFuncCount = definitionFuncCount;
+			var successfulDefinitionCount = 0;
 
-			var retryDefinitionFuncs = new ConcurrentBag<Func<TypeDefinition[]>>();
+			var retryDefinitionFuncs = new ConcurrentStack<Func<TypeDefinition[]>>();
 
-			var exceptions = new ConcurrentBag<Exception>();
+			var exceptions = new ConcurrentQueue<Exception>();
 
 			do {
-				while (definitionFuncs.TryTake(out var definitionFunc)) {
+				while (definitionFuncs.TryPop(out var definitionFunc)) {
+					if (definitionFunc == null)
+						continue;
 					try {
 						definitionFunc();
+						ReportProgress("Building type definitions",
+							successfulDefinitionCount++, totalDefinitionFuncCount);
 					}
 					catch (InvalidProgramException) {
 						throw;
 					}
 					catch (Exception ex) {
-						exceptions.Add(ex);
-						retryDefinitionFuncs.Add(definitionFunc);
+						exceptions.Enqueue(ex);
+						retryDefinitionFuncs.Push(definitionFunc);
 					}
 				}
 
@@ -34,13 +40,15 @@ namespace Vulkan.Binder {
 				if (definitionFuncCount == retryDefinitionFuncCount)
 					throw new AggregateException(exceptions);
 
-				exceptions = new ConcurrentBag<Exception>();
+				exceptions = new ConcurrentQueue<Exception>();
 				definitionFuncCount = retryDefinitionFuncCount;
 
 				var temp = definitionFuncs;
 				definitionFuncs = retryDefinitionFuncs;
 				retryDefinitionFuncs = temp;
 			} while (definitionFuncCount > 0);
+			ReportProgress("Building type definitions",
+				successfulDefinitionCount, totalDefinitionFuncCount);
 
 			//Delegates.CreateType();
 		}

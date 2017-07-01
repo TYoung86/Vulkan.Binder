@@ -24,11 +24,11 @@ namespace Vulkan.Binder {
 			}
 		}
 
-		private CXTranslationUnit? ParseHeader(string header, out CXUnsavedFile unsaved, int bits) {
+		private CXTranslationUnit? ParseHeader(string header, out CXUnsavedFile[] unsaved, int bits) {
 			var args = new[] {
 				"-x", "c-header", $"-m{bits}"
 			};
-
+			unsaved = new CXUnsavedFile[0];
 			var error = clang.parseTranslationUnit2(
 				bits == 32
 					? ClangIndex32
@@ -37,7 +37,7 @@ namespace Vulkan.Binder {
 						: throw new NotImplementedException(),
 				header,
 				args, args.Length,
-				out unsaved, 0,
+				unsaved, 0,
 				0, out CXTranslationUnit unit);
 
 			var success = error == CXErrorCode.CXError_Success;

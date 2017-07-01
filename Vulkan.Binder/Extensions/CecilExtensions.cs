@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -15,18 +16,20 @@ using TypeAttributes = Mono.Cecil.TypeAttributes;
 
 namespace Vulkan.Binder.Extensions {
 	public static class CecilExtensions {
-		private static readonly TypeAttributes StructTypeAttributeMask = TypeAttributes.ExplicitLayout | TypeAttributes.SequentialLayout;
+		private const TypeAttributes StructTypeAttributeMask
+			= TypeAttributes.ExplicitLayout
+			| TypeAttributes.SequentialLayout;
 
-		public static TypeDefinition DefineType(this ModuleDefinition module, string name, TypeAttributes typeAttrs, Type baseType = null, int packing = -1, int size = -1) {
+		public static TypeDefinition DefineType(this ModuleDefinition module, string name, TypeAttributes typeAttrs, TypeReference baseType = null, int packing = -1, int size = -1) {
 			var td = baseType != null
-				? new TypeDefinition(null, name, typeAttrs, baseType.Import(module))
+				? new TypeDefinition(null, name, typeAttrs, baseType)
 				: new TypeDefinition(null, name, typeAttrs);
 			if (packing >= 0)
 				td.PackingSize = (short) packing;
 			if (packing >= 0)
 				td.ClassSize = size;
 			if ((typeAttrs & StructTypeAttributeMask) != 0) {
-				td.BaseType = typeof(ValueType).Import(module);
+				td.BaseType = module.TypeSystem.UIntPtr.Resolve().BaseType;
 				td.Attributes |= TypeAttributes.Serializable;
 			}
 			td.Scope = module;
@@ -34,19 +37,19 @@ namespace Vulkan.Binder.Extensions {
 			return td;
 		}
 
-		public static TypeDefinition DefineEnum(this ModuleDefinition module, string name, TypeAttributes typeAttrs, TypeReference underlyingType = null) {
+		public static TypeDefinition DefineEnum(this ModuleDefinition module, string name, TypeAttributes typeAttrs, TypeReference underlyingType) {
 			var td = new TypeDefinition(null, name,
 				typeAttrs
 				| TypeAttributes.Sealed
 				| TypeAttributes.Serializable,
 				typeof(Enum).Import(module));
 			if (underlyingType == null) {
-				underlyingType = typeof(int).Import(module);
+				underlyingType = module.TypeSystem.Int32;
 			}
 			var enumField = new FieldDefinition("value__",
 				FieldAttributes.Public
 				| FieldAttributes.SpecialName
-				| FieldAttributes.RTSpecialName, underlyingType);
+				| FieldAttributes.RTSpecialName, underlyingType.Import(module));
 			td.Fields.Add(enumField);
 			td.Scope = module;
 			module.Types.Add(td);
@@ -57,7 +60,7 @@ namespace Vulkan.Binder.Extensions {
 			if (!td.IsEnum)
 				throw new NotImplementedException();
 			var valueField = td.Fields.First(fd => !fd.IsStatic && fd.Name == "value__");
-			valueField.FieldType = underlyingType;
+			valueField.FieldType = underlyingType.Import(td.Module);
 			if (td.Fields.Any(fd => fd.IsLiteral))
 				throw new NotImplementedException();
 			/*
@@ -67,6 +70,16 @@ namespace Vulkan.Binder.Extensions {
 			*/
 		}
 
+		public static TypeReference Require(this TypeReference tr, bool nothrow = false) {
+			return
+				tr.Resolve() != null
+					? tr
+					: nothrow
+						? (TypeReference) null
+						: throw new TypeLoadException
+							($"Could not resolve type reference to {tr.FullName}.");
+		}
+
 		public static TypeReference GetUnderlyingType(this TypeDefinition td) {
 			if (!td.IsEnum)
 				throw new NotImplementedException();
@@ -74,13 +87,11 @@ namespace Vulkan.Binder.Extensions {
 			return valueField.FieldType;
 		}
 
-		public static TypeDefinition DefineEnum(this ModuleDefinition module, string name, TypeAttributes typeAttrs, Type underlyingType = null) {
-			return DefineEnum(module, name, typeAttrs, underlyingType.Import(module));
-		}
+		public static TypeDefinition DefineEnum(this ModuleDefinition module, string name, TypeAttributes typeAttrs, Type underlyingType)
+			=> DefineEnum(module, name, typeAttrs, underlyingType.Import(module));
 
-		public static TypeDefinition DefineEnum(this ModuleDefinition module, string name, TypeAttributes typeAttrs) {
-			return DefineEnum(module, name, typeAttrs, typeof(int).Import(module));
-		}
+		public static TypeDefinition DefineEnum(this ModuleDefinition module, string name, TypeAttributes typeAttrs)
+			=> DefineEnum(module, name, typeAttrs, module.TypeSystem.Int32.Import(module));
 
 		public static FieldDefinition DefineLiteral(this TypeDefinition typeDef, string name, object value) {
 			var fd = new FieldDefinition(name,
@@ -97,7 +108,7 @@ namespace Vulkan.Binder.Extensions {
 		}
 
 		public static FieldDefinition DefineField(this TypeDefinition typeDef, string name, TypeReference fieldType, FieldAttributes fieldAttrs) {
-			var fd = new FieldDefinition(name, fieldAttrs, fieldType);
+			var fd = new FieldDefinition(name, fieldAttrs, fieldType.Import(typeDef.Module));
 			typeDef.Fields.Add(fd);
 			return fd;
 		}
@@ -106,30 +117,23 @@ namespace Vulkan.Binder.Extensions {
 			fieldDef.CustomAttributes.Add(attrInfo.GetCecilCustomAttribute(module));
 		}
 
-		public static IEnumerable<TypeReference> GetInterfaces(this TypeDefinition typeDef) {
-			return typeDef.Interfaces.Select(ii => ii.InterfaceType);
-		}
+		public static IEnumerable<TypeReference> GetInterfaces(this TypeDefinition typeDef)
+			=> typeDef.Interfaces.Select(ii => ii.InterfaceType);
 
-		public static IEnumerable<TypeReference> GetInterfaces(this TypeReference typeRef) {
-			return typeRef.ResolveDefinition().GetInterfaces();
-		}
+		public static IEnumerable<TypeReference> GetInterfaces(this TypeReference typeRef)
+			=> typeRef.Resolve().GetInterfaces();
 
-		public static TypeDefinition ResolveDefinition(this TypeReference typeRef) {
-			if (typeRef is TypeDefinition typeDef)
-				return typeDef;
-			if (typeRef.IsIndirect())
-				throw new InvalidOperationException();
-			typeDef = typeRef.Resolve();
-			return typeDef;
+		public static IEnumerable<TypeReference> Import(this IEnumerable<TypeReference> types, ModuleDefinition module) {
+			foreach (var type in types)
+				yield return type.Import(module);
 		}
-
 
 		public static IEnumerable<TypeReference> Import(this IEnumerable<Type> types, ModuleDefinition module) {
 			foreach (var type in types)
 				yield return type.Import(module);
 		}
 
-		public static MethodDefinition DefineConstructor(this TypeDefinition typeDef, MethodAttributes methodAttrs, params Type[] paramTypes) {
+		public static MethodDefinition DefineConstructor(this TypeDefinition typeDef, MethodAttributes methodAttrs, params TypeReference[] paramTypes) {
 			var module = typeDef.Module;
 			methodAttrs |= MethodAttributes.HideBySig
 							| MethodAttributes.RTSpecialName
@@ -141,7 +145,7 @@ namespace Vulkan.Binder.Extensions {
 				methodAttrs |= MethodAttributes.Private;
 			}
 			var methodDef = new MethodDefinition(isStatic ? ".cctor" : ".ctor", methodAttrs,
-				typeof(void).Import(module));
+				module.TypeSystem.Void.Import(module));
 			var pds = paramTypes.Import(module)
 				.Select(typeRef => new ParameterDefinition(typeRef));
 			foreach (var pd in pds)
@@ -149,6 +153,7 @@ namespace Vulkan.Binder.Extensions {
 			typeDef.Methods.Add(methodDef);
 			return methodDef;
 		}
+
 
 		public static void SetImplementationFlags(this MethodDefinition methodDef, MethodImplAttributes attrs) {
 			methodDef.ImplAttributes = attrs;
@@ -164,8 +169,8 @@ namespace Vulkan.Binder.Extensions {
 
 		public static MethodDefinition DefineMethod(this TypeDefinition typeDef, string name, MethodAttributes methodAttrs, TypeReference retType, IEnumerable<TypeReference> paramTypes) {
 			//var module = typeDef.Module;
-			var methodDef = new MethodDefinition(name, methodAttrs, retType);
-			var pds = paramTypes
+			var methodDef = new MethodDefinition(name, methodAttrs, retType.Import(typeDef.Module));
+			var pds = paramTypes.Import(typeDef.Module)
 				.Select(typeRef => new ParameterDefinition(typeRef));
 			foreach (var pd in pds)
 				methodDef.Parameters.Add(pd);
@@ -193,16 +198,14 @@ namespace Vulkan.Binder.Extensions {
 		private static IEnumerable<ParameterDefinition> CreateParametersDefinitions(IEnumerable<TypeReference> paramTypes)
 			=> paramTypes?.Select(typeRef => new ParameterDefinition(typeRef));
 
-		public static void SetCustomAttribute<T>(this TypeDefinition typeDef, Expression<Func<T>> expr) {
-			typeDef.SetCustomAttribute(AttributeInfo.Create(expr));
-		}
+		public static void SetCustomAttribute<T>(this TypeDefinition typeDef, Expression<Func<T>> expr)
+			=> typeDef.SetCustomAttribute(AttributeInfo.Create(expr));
 
 		public static void SetCustomAttribute(this TypeDefinition typeDef, AttributeInfo attrInfo)
 			=> typeDef.CustomAttributes.Add(attrInfo.GetCecilCustomAttribute(typeDef.Module));
 
-		public static void SetCustomAttribute<T>(this MethodDefinition methodDef, Expression<Func<T>> expr) {
-			methodDef.SetCustomAttribute(AttributeInfo.Create(expr));
-		}
+		public static void SetCustomAttribute<T>(this MethodDefinition methodDef, Expression<Func<T>> expr)
+			=> methodDef.SetCustomAttribute(AttributeInfo.Create(expr));
 
 		public static void SetCustomAttribute(this MethodDefinition methodDef, AttributeInfo attrInfo)
 			=> methodDef.CustomAttributes.Add(attrInfo.GetCecilCustomAttribute(methodDef.Module));
@@ -228,9 +231,15 @@ namespace Vulkan.Binder.Extensions {
 		public static void SetCustomAttribute(this ParameterDefinition paramDef, AttributeInfo attrInfo)
 			=> paramDef.CustomAttributes.Add(attrInfo.GetCecilCustomAttribute(((MethodDefinition) paramDef.Method).Module));
 
-		public static TypeDefinition CreateType(this TypeDefinition td) => td;
+		public static TypeDefinition CreateType(this TypeDefinition td) {
+			Debug.WriteLine($"Created {td.FullName}");
+			return td;
+		}
 
-		public static bool IsCreated(this TypeDefinition td) => true;
+		public static bool IsCreated(this TypeDefinition td) {
+			Debug.WriteLine($"Checking if {td.FullName} is created");
+			return true;
+		}
 
 		public static GenericInstanceType MakeGenericType(this Type type, params TypeReference[] typeParams) {
 			var module = typeParams.First().Module;
@@ -240,7 +249,7 @@ namespace Vulkan.Binder.Extensions {
 
 		public static PropertyDefinition DefineProperty(this TypeDefinition typeDef, string name, PropertyAttributes propAttrs, TypeReference propType, params TypeReference[] paramTypes) {
 			var module = typeDef.Module;
-			var propDef = new PropertyDefinition(name, propAttrs, module.ImportReference(propType));
+			var propDef = new PropertyDefinition(name, propAttrs, propType.Import(module));
 			var paramDefs = CreateParametersDefinitions(paramTypes);
 			foreach (var paramDef in paramDefs)
 				propDef.Parameters.Add(paramDef);
@@ -250,7 +259,7 @@ namespace Vulkan.Binder.Extensions {
 
 		public static PropertyDefinition DefineProperty(this TypeDefinition typeDef, string name, PropertyAttributes propAttrs, TypeReference propType, params Type[] paramTypes) {
 			var module = typeDef.Module;
-			var propDef = new PropertyDefinition(name, propAttrs, module.ImportReference(propType));
+			var propDef = new PropertyDefinition(name, propAttrs, propType.Import(module));
 			var paramDefs = CreateParametersDefinitions(module, paramTypes);
 			foreach (var paramDef in paramDefs)
 				propDef.Parameters.Add(paramDef);
@@ -318,91 +327,222 @@ namespace Vulkan.Binder.Extensions {
 			return t;
 		}
 
-		public delegate void TypeRefIndirectionTransform(ref TypeReference t);
-
-		public static void TypeRefMakePointer(ref TypeReference t) => t = t.MakePointerType();
-		public static void TypeRefMakeArray(ref TypeReference t) => t = t.MakeArrayType();
-		public static void TypeRefMakeByRef(ref TypeReference t) => t = t.MakeByReferenceType();
-
-		public static IEnumerable<TypeRefIndirectionTransform> ConvertTransforms(this IEnumerable<TypeIndirectionTransform> transforms) {
+		public static IEnumerable<TypeReferenceTransform> ConvertTransforms(this IEnumerable<TypeIndirectionTransform> transforms) {
 			foreach (var transform in transforms) {
 				if (transform == TypeMakePointer)
-					yield return TypeRefMakePointer;
+					yield return MakePointerType;
 				else if (transform == TypeMakeArray)
-					yield return TypeRefMakeArray;
+					yield return MakeArrayType;
 				else if (transform == TypeMakeByRef)
-					yield return TypeRefMakeByRef;
+					yield return MakeByRefType;
 				else
 					throw new NotImplementedException();
 			}
 		}
 
-		public static TypeReference ApplyIndirectionTransforms(this TypeReference typeRef, IEnumerable<TypeRefIndirectionTransform> transforms) {
+		public static TypeReference ApplyTransforms(this TypeReference typeRef, IEnumerable<TypeIndirectionTransform> transforms) {
+			return typeRef?.ApplyTransforms(transforms?.ConvertTransforms());
+		}
+
+		public static TypeReference ApplyTransforms(this TypeReference typeRef, IEnumerable<TypeReferenceTransform> transforms) {
+			if (typeRef == null)
+				return null;
+			if (transforms == null)
+				return typeRef;
 			foreach (var transform in transforms)
 				transform(ref typeRef);
 			return typeRef;
 		}
 
+		public static MethodReference Import(this MethodInfo method, ModuleDefinition module) {
+			var type = method.DeclaringType;
+			var import = type.Import(module);
+			var typeDef = import.Resolve();
+			var match = typeDef.Methods
+				.SingleOrDefault(md => CecilTypeComparer.IsEqual(method, md));
+			if (match == null)
+				throw new NotImplementedException();
+			var methodImport = match.IndirectMethodReference(module, import);
+			var imported = methodImport.ImportInternal(module);
+			return imported;
+		}
+
+		public static MethodReference Import(this MethodReference method, ModuleDefinition module) {
+			var type = method.DeclaringType;
+			var import = type.Import(module);
+			var typeDef = import.Resolve();
+			var match = typeDef.Methods
+				.SingleOrDefault(md => CecilTypeComparer.IsEqual(method, md));
+			if (match == null)
+				throw new NotImplementedException();
+			var methodImport = match.IndirectMethodReference(module, import);
+			var imported = methodImport.ImportInternal(module);
+			return imported;
+		}
+
+		public static MethodReference Import(this ConstructorInfo method, ModuleDefinition module) {
+			var type = method.DeclaringType;
+			var import = type.Import(module);
+			var typeDef = import.Resolve();
+			var match = typeDef.Methods
+				.SingleOrDefault(md => md.IsConstructor && CecilTypeComparer.IsEqual(method, md));
+			if (match == null)
+				throw new NotImplementedException();
+			var methodImport = match.IndirectMethodReference(module, import);
+			var imported = methodImport.ImportInternal(module);
+			return imported;
+		}
+
+		private static MethodReference ImportInternal(this MethodReference method, ModuleDefinition module) {
+			method.ReturnType = method.ReturnType.Import(module);
+			foreach (var param in method.Parameters)
+				param.ParameterType = param.ParameterType.Import(module);
+			for (var i = 0 ; i < method.GenericParameters.Count ; ++i) {
+				var param = method.GenericParameters[i];
+				var paramImport = param.Import(module) as GenericParameter;
+				method.GenericParameters[i] = paramImport
+					?? throw new NotImplementedException();
+			}
+			var imported = module.ImportReference(method);
+			return imported;
+		}
+
+		public static MethodReference IndirectMethodReference(this MethodDefinition methodDef, ModuleDefinition module, TypeReference import) {
+			var mr = new MethodReference(methodDef.Name, module.TypeSystem.Void.Import(module), import) {
+				CallingConvention = methodDef.CallingConvention,
+				ExplicitThis = methodDef.ExplicitThis,
+				HasThis = methodDef.HasThis,
+				//MetadataToken = import.MetadataToken,
+				ReturnType = methodDef.ReturnType,
+				MethodReturnType = methodDef.MethodReturnType,
+				DeclaringType = import
+			};
+			foreach (var p in methodDef.Parameters)
+				mr.Parameters.Add(p);
+			foreach (var p in methodDef.GenericParameters)
+				mr.GenericParameters.Add(p);
+			return mr;
+		}
+
+		public static TypeReference Import(this TypeReference type, ModuleDefinition module) {
+			var interiorType = type.GetInteriorType(out var txfs);
+			interiorType = module.ImportReference(interiorType);
+			foreach (var txf in txfs) {
+				txf(ref interiorType);
+				interiorType = module.ImportReference(interiorType);
+			}
+			return interiorType;
+		}
+
 		public static TypeReference Import(this Type type, ModuleDefinition module) {
 			var interiorType = type.GetInteriorType(out var transforms);
 
-			var td = module.GetType(interiorType.FullName);
-			if (td != null)
-				return td.ApplyIndirectionTransforms(transforms.ConvertTransforms());
+			var tr = ImportInternal(module, interiorType);
 
-			var tr = module.FindInTypeSystem(interiorType);
+			var imported = tr.ApplyTransforms(transforms);
+			return imported;
+		}
+
+		private static TypeReference ImportInternal(ModuleDefinition module, Type type) {
+			var tr = module.FindInTypeSystem(type);
+			if (tr != null) {
+				tr = FindNonPrivateForwarder(module, tr.FullName);
+				return tr.Import(module);
+			}
+
+			if (type.GetTypeInfo().IsPrimitive)
+				throw new NotImplementedException();
+
+			tr = module.GetType(type.FullName);
 			if (tr != null)
-				return tr.ApplyIndirectionTransforms(transforms.ConvertTransforms());
+				return tr;
+
+			if (module.TryGetTypeReference(type.FullName, out tr))
+				return tr;
 
 			foreach (var asmRef in module.AssemblyReferences) {
 				var asm = module.AssemblyResolver.Resolve(asmRef);
-				td = asm.MainModule.GetType(interiorType.FullName);
-
-				if (td != null)
-					return td.ApplyIndirectionTransforms(transforms.ConvertTransforms());
+				if (asm == null)
+					continue;
+				tr = asm.MainModule.GetType(type.FullName);
+				if (tr != null)
+					return tr.Import(module);
 			}
-			return module.ImportReference(interiorType)
-				.ApplyIndirectionTransforms(transforms.ConvertTransforms());
+			var typeInfo = type.GetTypeInfo();
+
+			if (typeInfo.Assembly.FullName.StartsWith("System.Private")) {
+				// try to import a forwarded type reference instead
+				tr = FindNonPrivateForwarder(module, typeInfo.FullName)
+					.Import(module);
+				return tr;
+			}
+
+			throw new NotImplementedException();
 		}
 
-		private static TypeReference FindInTypeSystem(this ModuleDefinition module, Type interiorType)
+		private static TypeReference FindNonPrivateForwarder(ModuleDefinition module, string privateTypeRef) {
+			foreach (var asmName in AssemblyResolver.KnownAssemblies.Keys
+				.Where(k => !k.StartsWith("System.Private") && k != "mscorlib")) {
+				var asmDef = module.AssemblyResolver
+					.Resolve(new AssemblyNameReference(asmName, null));
+
+				foreach (var asmMods in asmDef.Modules) {
+					var match = asmMods.ExportedTypes
+						.FirstOrDefault(t => t.FullName == privateTypeRef);
+					if (match == null) continue;
+
+					var resolved = match.Resolve();
+					if (!match.IsForwarder) {
+						return resolved;
+					}
+
+					var tr = new TypeReference(match.Namespace, match.Name,
+						asmMods, asmMods, resolved.IsValueType);
+					module.ImportReference(tr);
+					{
+						return tr;
+					}
+				}
+			}
+			return null;
+		}
+
+		public static TypeReference FindInTypeSystem(this ModuleDefinition module, Type interiorType)
 			=> interiorType == typeof(void)
-			? module.TypeSystem.Void
-			: interiorType == typeof(bool)
-			? module.TypeSystem.Boolean
-			: interiorType == typeof(byte)
-			? module.TypeSystem.Byte
-			: interiorType == typeof(sbyte)
-			? module.TypeSystem.SByte
-			: interiorType == typeof(char)
-			? module.TypeSystem.Char
-			: interiorType == typeof(short)
-			? module.TypeSystem.Int16
-			: interiorType == typeof(ushort)
-			? module.TypeSystem.UInt16
-			: interiorType == typeof(int)
-			? module.TypeSystem.Int32
-			: interiorType == typeof(uint)
-			? module.TypeSystem.UInt32
-			: interiorType == typeof(long)
-			? module.TypeSystem.Int64
-			: interiorType == typeof(ulong)
-			? module.TypeSystem.UInt64
-			: interiorType == typeof(float)
-			? module.TypeSystem.Single
-			: interiorType == typeof(double)
-			? module.TypeSystem.Double
-			: interiorType == typeof(IntPtr)
-			? module.TypeSystem.IntPtr
-			: interiorType == typeof(UIntPtr)
-			? module.TypeSystem.UIntPtr
-			: interiorType == typeof(string)
-			? module.TypeSystem.String
-			: interiorType == typeof(object)
-			? module.TypeSystem.Object
-			: interiorType == typeof(ValueType)
-			? module.TypeSystem.Byte.Resolve().BaseType
-			: null;
+				? module.TypeSystem.Void
+				: interiorType == typeof(bool)
+					? module.TypeSystem.Boolean
+					: interiorType == typeof(byte)
+						? module.TypeSystem.Byte
+						: interiorType == typeof(sbyte)
+							? module.TypeSystem.SByte
+							: interiorType == typeof(char)
+								? module.TypeSystem.Char
+								: interiorType == typeof(short)
+									? module.TypeSystem.Int16
+									: interiorType == typeof(ushort)
+										? module.TypeSystem.UInt16
+										: interiorType == typeof(int)
+											? module.TypeSystem.Int32
+											: interiorType == typeof(uint)
+												? module.TypeSystem.UInt32
+												: interiorType == typeof(long)
+													? module.TypeSystem.Int64
+													: interiorType == typeof(ulong)
+														? module.TypeSystem.UInt64
+														: interiorType == typeof(float)
+															? module.TypeSystem.Single
+															: interiorType == typeof(double)
+																? module.TypeSystem.Double
+																: interiorType == typeof(IntPtr)
+																	? module.TypeSystem.IntPtr
+																	: interiorType == typeof(UIntPtr)
+																		? module.TypeSystem.UIntPtr
+																		: interiorType == typeof(string)
+																			? module.TypeSystem.String
+																			: interiorType == typeof(object)
+																				? module.TypeSystem.Object
+																				: null;
 
 		private static int GetSizeOfPrimitive(TypeReference typeRef, int pointerSize = -1) {
 			switch (typeRef.FullName) {
@@ -433,10 +573,6 @@ namespace Vulkan.Binder.Extensions {
 			=> Type.GetType(type.FullName, false)
 				?? throw new NotSupportedException();
 
-		public static Type ExpressionOnly(this TypeReference type)
-			=> throw new NotSupportedException("Expressions processing should filter out this call.");
-
-
 		public static bool IsDirect(this TypeReference type)
 			=> !type.IsIndirect();
 
@@ -446,36 +582,91 @@ namespace Vulkan.Binder.Extensions {
 		public static bool IsDirectOrArray(this TypeReference type)
 			=> !(type.IsPointer || type.IsByReference);
 
+		public static bool IsSpecific(this MetadataType mdt) {
+			switch (mdt) {
+				case MetadataType.Boolean:
+				case MetadataType.SByte:
+				case MetadataType.Int16:
+				case MetadataType.Int32:
+				case MetadataType.Int64:
+				case MetadataType.IntPtr:
+				case MetadataType.Byte:
+				case MetadataType.UInt16:
+				case MetadataType.UInt32:
+				case MetadataType.UInt64:
+				case MetadataType.UIntPtr:
+				case MetadataType.Char:
+				case MetadataType.Single:
+				case MetadataType.Double:
+				case MetadataType.Void:
+				case MetadataType.String:
+				case MetadataType.Pointer:
+				case MetadataType.FunctionPointer:
+					return true;
+			}
+			return false;
+		}
 
-		public static int SizeOf(this TypeReference type)
+		// ReSharper disable once CyclomaticComplexity
+		public static bool IsPrimitive(this TypeReference typeRef) {
+			if (typeRef.IsPrimitive)
+				return true;
+			switch (typeRef.MetadataType) {
+				case MetadataType.ValueType: {
+					if (typeRef is TypeDefinition)
+						return false;
+					var typeDef = typeRef.Resolve();
+					return typeDef.IsPrimitive
+							|| typeDef.IsPrimitive();
+				}
+				case MetadataType.Boolean:
+				case MetadataType.SByte:
+				case MetadataType.Int16:
+				case MetadataType.Int32:
+				case MetadataType.Int64:
+				case MetadataType.IntPtr:
+				case MetadataType.Byte:
+				case MetadataType.UInt16:
+				case MetadataType.UInt32:
+				case MetadataType.UInt64:
+				case MetadataType.UIntPtr:
+				case MetadataType.Char:
+				case MetadataType.Single:
+				case MetadataType.Double:
+					return true;
+				case MetadataType.Void:
+				case MetadataType.Array:
+				case MetadataType.ByReference:
+				case MetadataType.FunctionPointer:
+				case MetadataType.Class:
+				case MetadataType.Object:
+				case MetadataType.GenericInstance:
+				case MetadataType.String:
+				case MetadataType.Pointer:
+					return false;
+			}
+			throw new NotImplementedException();
+		}
+
+		public static int SizeOf(this TypeReference type, int pointerSize = -1)
 			=> type.IsPointer || type.IsByReference
 				? IntPtr.Size
-				: type.IsPrimitive
-					? GetSizeOfPrimitive(type)
-					: type.ResolveDefinition().ClassSize;
+				: type.IsPrimitive()
+					? GetSizeOfPrimitive(type, pointerSize)
+					: type.Resolve().ClassSize;
 
-		public static int SizeOf(this TypeDefinition type)
-			=> type.ClassSize;
+		public static void DefineMethodOverride(this TypeDefinition typeDef, MethodDefinition overrider, MethodReference overridden)
+			=> overrider.Overrides.Add(overridden);
 
-		public static int UnsafeSizeOf(this TypeReference type)
-			=> type.SizeOf();
-
-		public static int UnsafeSizeOf(this TypeDefinition type)
-			=> type.SizeOf();
-
-		public static void DefineMethodOverride(this TypeDefinition typeDef, MethodDefinition overrider, MethodReference overridden) {
-			overrider.Overrides.Add(overridden);
-		}
-
-		public static PropertyReference GetProperty(this TypeDefinition typeDef, string propName) {
-			return typeDef.Properties.First(prop => prop.Name == propName);
-		}
+		public static PropertyReference GetProperty(this TypeDefinition typeDef, string propName)
+			=> typeDef.Properties.First(prop => prop.Name == propName);
 
 
 		public static PropertyReference GetProperty(this TypeDefinition typeDef, string propName, BindingFlags bf) {
 			if ((AnyAccessInstanceOrStaticBindingFlags & bf) == AnyAccessInstanceOrStaticBindingFlags)
 				return typeDef.Properties.Single(md => md.Name == propName);
 			return typeDef.Properties.Single
+				// ReSharper disable once CyclomaticComplexity
 			(md => md.Name == propName
 					&& (
 						bf.HasFlag(BindingFlags.Public)
@@ -492,69 +683,91 @@ namespace Vulkan.Binder.Extensions {
 		}
 
 		public static bool Contains(this IEnumerable<TypeReference> typeRefs, TypeReference otherRef) {
-			var orMdt = otherRef.MetadataToken.ToUInt32();
-			var orScope = otherRef.Scope;
-			var orIsValueType = otherRef.IsValueType;
-			var orIsPrimitive = otherRef.IsPrimitive;
-			var orIsPointer = otherRef.IsPointer;
-			var orIsByReference = otherRef.IsByReference;
-			var orIsArray = otherRef.IsArray;
-			var orIsDirect = !(orIsPointer || orIsByReference || orIsArray);
-			var otherGit = otherRef as GenericInstanceType;
-			TypeDefinition otherResolved = null;
+			var innerOtherRef = GetInteriorType(otherRef, out var otherTxfs);
+			var otherDef = innerOtherRef.Resolve();
+
 			foreach (var typeRef in typeRefs) {
-				var trMdt = typeRef.MetadataToken.ToUInt32();
-				if (trMdt == orMdt && typeRef.Scope == orScope && trMdt != 0x01000000)
+				if (typeRef.MetadataType.IsSpecific()
+					&& otherRef.MetadataType.IsSpecific()
+					&& typeRef.MetadataType != otherRef.MetadataType)
+					return false;
+
+				var innerTypeRef = GetInteriorType(typeRef, out var typeTxfs);
+				if (!typeTxfs.SequenceEqual(otherTxfs))
+					continue;
+
+				var typeDef = innerTypeRef.Resolve();
+
+				if (otherDef == null && typeDef == null
+					&& typeRef.FullName == otherRef.FullName)
 					return true;
-				if (trMdt != 0x01000000 && typeRef.Scope == otherRef.Scope)
+
+				if (otherDef == null || typeDef == null)
 					continue;
-				if (typeRef.IsValueType != orIsValueType || typeRef.IsPrimitive != orIsPrimitive)
+
+				if (otherDef == typeDef)
+					return true;
+
+				if (typeDef.Scope.MetadataScopeType != otherDef.Scope.MetadataScopeType)
+					throw new NotImplementedException();
+
+				if (typeDef.MetadataType != otherDef.MetadataType)
 					continue;
-				if (typeRef is GenericInstanceType typeGit && otherGit != null) {
-					if (typeRef.Resolve() == otherGit.Resolve()
-						&& typeGit.GenericParameters.SequenceEqual(otherGit.GenericParameters))
-						return true;
+
+				if (typeDef.MetadataToken.ToUInt32() != otherDef.MetadataToken.ToUInt32())
 					continue;
-				}
-				if (typeRef.IsDirect() && orIsDirect || typeRef.IsArray && orIsArray) {
-					if (otherResolved == null)
-						otherResolved = otherRef.Resolve();
-					if (typeRef.Resolve() == otherResolved)
-						return true;
+
+				if (typeDef.Scope.MetadataToken.ToUInt32() != otherDef.Scope.MetadataToken.ToUInt32())
 					continue;
-				}
-				if (typeRef.IsPointer && orIsPointer
-					|| typeRef.IsByReference && orIsByReference
-					|| typeRef.IsArray && orIsArray) {
-					if (typeRef.DescendElementType().Is(otherRef.DescendElementType()))
-						return true;
-					// continue;
-				}
-				// continue;
+
+				return true;
 			}
+
 			return false;
 		}
 
 		public static bool Is(this TypeReference typeRef, TypeReference otherRef) {
-			var trMdt = typeRef.MetadataToken.ToUInt32();
-			var orMdt = otherRef.MetadataToken.ToUInt32();
-			if (trMdt == orMdt && typeRef.Scope == otherRef.Scope && trMdt != 0x01000000)
+			StackGuard.LimitReentry(64);
+			if (typeRef.MetadataType.IsSpecific()
+				&& otherRef.MetadataType.IsSpecific()
+				&& typeRef.MetadataType != otherRef.MetadataType)
+				return false;
+
+			var innerTypeRef = GetInteriorType(typeRef, out var typeTxfs);
+			var innerOtherRef = GetInteriorType(otherRef, out var otherTxfs);
+
+			if (!typeTxfs.SequenceEqual(otherTxfs))
+				return false;
+
+			var typeDef = innerTypeRef.Resolve();
+			var otherDef = innerOtherRef.Resolve();
+
+			if (typeDef == null && otherDef == null
+				&& typeRef.FullName == otherRef.FullName)
 				return true;
-			if (trMdt != 0x01000000 && typeRef.Scope == otherRef.Scope)
+
+			if (typeDef == null || otherDef == null)
 				return false;
-			if (typeRef.IsValueType != otherRef.IsValueType || typeRef.IsPrimitive != otherRef.IsPrimitive)
+
+			if (otherDef == typeDef)
+				return true;
+
+			if (typeDef.Scope.MetadataScopeType != otherDef.Scope.MetadataScopeType)
+				throw new NotImplementedException();
+
+			if (typeDef.MetadataType != otherDef.MetadataType)
 				return false;
-			if (typeRef is GenericInstanceType typeGit && otherRef is GenericInstanceType otherGit)
-				return typeRef.Resolve() == otherRef.Resolve() && typeRef.GenericParameters.SequenceEqual(otherGit.GenericParameters);
-			if (typeRef.IsDirect() && otherRef.IsDirect() || typeRef.IsArray && otherRef.IsArray)
-				return typeRef.Resolve() == otherRef.Resolve();
-			if (typeRef.IsPointer && otherRef.IsPointer
-				|| typeRef.IsByReference && otherRef.IsByReference
-				|| typeRef.IsArray && otherRef.IsArray)
-				return typeRef.DescendElementType().Is(otherRef.DescendElementType());
-			return false;
+
+			if (typeDef.MetadataToken.ToUInt32() != otherDef.MetadataToken.ToUInt32())
+				return false;
+
+			if (typeDef.Scope.MetadataToken.ToUInt32() != otherDef.Scope.MetadataToken.ToUInt32())
+				return false;
+
+			return true;
 		}
 
+		// ReSharper disable once CyclomaticComplexity
 		public static bool IsAssignableFrom(this TypeReference typeRef, TypeReference otherRef) {
 			for (; ;) {
 				if (otherRef == null)
@@ -572,13 +785,7 @@ namespace Vulkan.Binder.Extensions {
 				if (typeRef.IsByReference != otherRef.IsByReference)
 					return false;
 
-				if (typeRef.IsPointer != otherRef.IsPointer)
-					return false;
-
-				if (typeRef.IsArray != otherRef.IsArray)
-					return false;
-
-				if (typeRef.IsByReference) {
+				if (typeRef.IsByReference && typeRef.IsByReference) {
 					do {
 						typeRef = typeRef.DescendElementType();
 						otherRef = otherRef.DescendElementType();
@@ -586,7 +793,10 @@ namespace Vulkan.Binder.Extensions {
 					continue;
 				}
 
-				if (typeRef.IsPointer) {
+				if (typeRef.IsPointer != otherRef.IsPointer)
+					return false;
+
+				if (typeRef.IsPointer && otherRef.IsPrimitive) {
 					do {
 						typeRef = typeRef.DescendElementType();
 						otherRef = otherRef.DescendElementType();
@@ -594,22 +804,29 @@ namespace Vulkan.Binder.Extensions {
 					continue;
 				}
 
-				if (typeRef.IsArray) {
+				if (typeRef.IsArray != otherRef.IsArray)
+					return false;
+
+				if (typeRef.IsArray && otherRef.IsArray) {
 					do {
 						typeRef = typeRef.DescendElementType();
 						otherRef = otherRef.DescendElementType();
 					} while (typeRef.IsArray && otherRef.IsArray);
 					continue;
 				}
-				var typeDef = typeRef.ResolveDefinition();
+
+				if (typeRef.Is(otherRef))
+					return true;
+
+				var typeDef = typeRef.Resolve();
 				if (typeDef != null) {
-					var otherDef = otherRef.ResolveDefinition();
+					var otherDef = otherRef.Resolve();
 
 					if (typeDef.IsInterface
 						&& otherDef.Interfaces.Contains(typeDef))
 						return true;
 
-					otherRef = otherDef.BaseType?.Resolve();
+					otherRef = otherDef.BaseType;
 					continue;
 				}
 
@@ -619,27 +836,11 @@ namespace Vulkan.Binder.Extensions {
 
 		public delegate void TypeReferenceTransform(ref TypeReference t);
 
-		public static void MakeArrayType(ref TypeReference t) {
-			var s = t.Scope;
-			var m = t.Module;
-			t = t.MakeArrayType();
-			t = m.ImportReference(t);
-		}
+		public static void MakeArrayType(ref TypeReference t) => t = t.MakeArrayType();
 
-		public static void MakeByRefType(ref TypeReference t) {
-			var s = t.Scope;
-			var m = t.Module;
-			t = t.MakeByReferenceType();
-			m.ImportReference(t);
-			t = m.ImportReference(t);
-		}
+		public static void MakeByRefType(ref TypeReference t) => t = t.MakeByReferenceType();
 
-		public static void MakePointerType(ref TypeReference t) {
-			var s = t.Scope;
-			var m = t.Module;
-			t = t.MakePointerType();
-			t = m.ImportReference(t);
-		}
+		public static void MakePointerType(ref TypeReference t) => t = t.MakePointerType();
 
 		public static TypeReference GetTypePointedTo(this ModuleDefinition module, Type exterior, out LinkedList<TypeReferenceTransform> transform, bool directVoids = false)
 			=> GetTypePointedTo(exterior.Import(module), out transform, directVoids);
@@ -648,7 +849,8 @@ namespace Vulkan.Binder.Extensions {
 			var type = exterior;
 			transform = new LinkedList<TypeReferenceTransform>();
 			while (type.IsPointer) {
-				if (directVoids || type != typeof(void).Import(exterior.Module)) {
+				var module = exterior.Module;
+				if (directVoids || !type.Is(module.TypeSystem.Void.Import(module))) {
 					transform.AddFirst(MakePointerType);
 					type = type.DescendElementType();
 				}
@@ -658,23 +860,22 @@ namespace Vulkan.Binder.Extensions {
 			return type;
 		}
 
-		public static TypeReference DescendElementType(this TypeReference typeRef) {
-			if (typeRef is TypeSpecification typeSpec)
-				return typeSpec.ElementType;
-			throw new NotImplementedException();
-		}
+		public static TypeReference DescendElementType(this TypeReference typeRef)
+			=> typeRef is TypeSpecification typeSpec
+				? typeSpec.ElementType
+				: throw new NotImplementedException();
 
 		public static TypeReference GetInteriorType(this TypeReference exterior, out LinkedList<TypeReferenceTransform> transform, bool directVoids = false) {
 			transform = new LinkedList<TypeReferenceTransform>();
 			return FindInteriorType(exterior, ref transform, directVoids);
 		}
 
-		public static TypeReference FindInteriorType(this TypeReference exterior, ref LinkedList<TypeReferenceTransform> transform, bool directVoids = false) {
+		public static TypeReference GetInteriorType(this TypeReference exterior, bool directVoids = false) {
 			var type = exterior;
 			for (; ;) {
 				if (type.IsPointer) {
-					if (directVoids || type != typeof(void).Import(exterior.Module)) {
-						transform.AddFirst(MakePointerType);
+					var module = exterior.Module;
+					if (directVoids || !type.Is(module.TypeSystem.Void.Import(module))) {
 						type = (type as PointerType ?? throw new NotImplementedException()).ElementType;
 					}
 					else {
@@ -683,15 +884,41 @@ namespace Vulkan.Binder.Extensions {
 				}
 				// type.MetadataType == MetadataType.Array
 				else if (type.IsArray) {
-					transform.AddFirst(MakeArrayType);
 					type = (type as ArrayType ?? throw new NotImplementedException()).ElementType;
 				}
 
 				// type.MetadataType == MetadataType.ByReference
 				// type.MetadataType == MetadataType.TypedByReference
 				else if (type.IsByReference) {
-					transform.AddFirst(MakeByRefType);
 					type = (type as ByReferenceType ?? throw new NotImplementedException()).ElementType;
+				}
+				else
+					break;
+			}
+			return type;
+		}
+
+		public static TypeReference FindInteriorType(this TypeReference exterior, ref LinkedList<TypeReferenceTransform> transform, bool directVoids = false) {
+			var type = exterior;
+			for (; ;) {
+				if (type.IsPointer) {
+					var etype = ((PointerType) type).ElementType;
+					if (etype.MetadataType != MetadataType.Void && !directVoids)
+						break;
+					transform.AddFirst(MakePointerType);
+					type = etype;
+				}
+				// type.MetadataType == MetadataType.Array
+				else if (type.IsArray) {
+					transform.AddFirst(MakeArrayType);
+					type = ((ArrayType) type).ElementType;
+				}
+
+				// type.MetadataType == MetadataType.ByReference
+				// type.MetadataType == MetadataType.TypedByReference
+				else if (type.IsByReference) {
+					transform.AddFirst(MakeByRefType);
+					type = ((ByReferenceType) type).ElementType;
 				}
 				else
 					break;

@@ -12,7 +12,7 @@ namespace Vulkan.Binder {
 		private bool IsHandleType(TypeReference t) {
 			TypeReference interfaceType;
 
-			if (t.IsPrimitive || t.IsIndirect()) return false;
+			if (t.IsPrimitive() || t.IsIndirect()) return false;
 
 			try {
 				interfaceType = IHandleGtd.MakeGenericInstanceType(t);
@@ -41,12 +41,12 @@ namespace Vulkan.Binder {
 			if (e.IsPointer) {
 				if (IsTypedHandle(t)) {
 					var gt = (GenericInstanceType) t;
-					return gt.GenericArguments[0] == e.DescendElementType();
+					return gt.GenericArguments[0].Is(e.DescendElementType());
 				}
 			}
 
-			if (!e.IsPrimitive || e.IsIndirect()
-				|| t.IsPrimitive || t.IsIndirect()) return false;
+			if (!e.IsPrimitive() || e.IsIndirect()
+				|| t.IsPrimitive() || t.IsIndirect()) return false;
 
 			try {
 				interfaceType = ITypedHandleGtd.MakeGenericInstanceType(e);

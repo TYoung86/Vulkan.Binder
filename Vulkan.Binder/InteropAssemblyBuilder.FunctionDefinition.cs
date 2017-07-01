@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Interop;
 using Mono.Cecil;
 using Vulkan.Binder.Extensions;
 
@@ -17,13 +19,15 @@ namespace Vulkan.Binder {
 
 		private Func<TypeDefinition[]> DefineClrType(ClangFunctionInfoBase funcInfo) {
 			var funcName = funcInfo.Name;
+			
+			Debug.WriteLine($"Defining function {funcName}");
 
 			if (TypeRedirects.TryGetValue(funcName, out var rename)) {
 				funcName = rename;
 			}
 			
 			var funcRef = Module.GetType(funcName, true);
-			var funcDef = funcRef.ResolveDefinition();
+			var funcDef = funcRef.Resolve();
 
 			if ( funcDef != null ) {
 				return null;
@@ -31,8 +35,8 @@ namespace Vulkan.Binder {
 
 			funcDef = Module.DefineType(funcName,
 				DelegateTypeAttributes,
-				typeof(MulticastDelegate) );
-			funcDef.SetCustomAttribute(() => new CompilerGeneratedAttribute());
+				MulticastDelegateType );
+			funcDef.SetCustomAttribute(() => new BinderGeneratedAttribute());
 
 			var retParam = ResolveParameter(funcInfo.ReturnType);
 			if (!CallingConventionMap.TryGetValue(funcInfo.CallConvention, out var callConv))
@@ -42,18 +46,21 @@ namespace Vulkan.Binder {
 			var argParams = new LinkedList<ParameterInfo>(funcInfo.Parameters.Select(p => ResolveParameter(p.Type, p.Name, (int) p.Index)));
 
 			return () => {
-				retParam.RequireCompleteTypeReferences(TypeRedirects,true);
+			
+				retParam.Complete(TypeRedirects,true);
 
 				var retType = retParam.Type;
 
 				foreach (var argParam in argParams)
-					argParam.RequireCompleteTypeReferences(TypeRedirects,true);
+					argParam.Complete(TypeRedirects,true);
+
+				Debug.WriteLine($"Completed dependencies for function {funcName}");
 
 				var clrArgTypes = argParams.Select(p => p.Type).ToArray();
 
 				try {
 					var ctor = funcDef.DefineConstructor(DelegateConstructorAttributes,
-						typeof(object), typeof(IntPtr));
+						ObjectType, IntPtrType);
 					ctor.SetImplementationFlags(MethodImplAttributes.CodeTypeMask);
 
 					var method = funcDef.DefineMethod("Invoke",
@@ -71,6 +78,8 @@ namespace Vulkan.Binder {
 					return new[] {funcDef.CreateType()};
 				}
 				catch (Exception ex) {
+
+
 					throw new InvalidProgramException("Critical function type definition failure.", ex);
 				}
 			};

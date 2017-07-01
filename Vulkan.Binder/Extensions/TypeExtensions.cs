@@ -24,20 +24,15 @@ namespace Vulkan.Binder.Extensions {
 		public static int SizeOf(this Type type) {
 			if (type.IsPointer)
 				return IntPtr.Size;
-			if (type.IsEnum)
+			var typeInfo = type.GetTypeInfo();
+			if (typeInfo.IsEnum)
 				try {
-					var underlyingType = type.UnderlyingSystemType;
-					if ( !underlyingType.IsEnum )
+					var underlyingType = typeInfo.UnderlyingSystemType;
+					if ( !underlyingType.GetTypeInfo().IsEnum )
 						return underlyingType.SizeOf();
 				}
 				catch { /*...*/ }
-			try {
-				return (type as TypeBuilder)?.Size
-					?? type.MarshalSizeOf();
-			}
-			catch (ArgumentException) {
-				return type.UnsafeSizeOf();
-			}
+			return type.UnsafeSizeOf();
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]

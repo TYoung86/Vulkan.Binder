@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <OutputType>exe</OutputType>
-    <TargetFramework>net47</TargetFramework>
-	<PlatformTarget>x64</PlatformTarget>
+	  <TargetFramework>netcoreapp1.1</TargetFramework>
+	<PlatformTarget>AnyCPU</PlatformTarget>
 	<ApplicationIcon />
 	<OutputTypeEx>exe</OutputTypeEx>
 	<StartupObject />
@@ -23,29 +23,46 @@
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="IncompleteTypeReference.cs" />
+  </ItemGroup>
+
 	<ItemGroup>
-		<PackageReference Include="ClangSharp" Version="3.8.0" />
 		<PackageReference Include="HtmlAgilityPack.CssSelectors.NetCore" Version="1.0.0" />
 		<PackageReference Include="HtmlAgilityPack.NetCore" Version="1.5.0.1" />
 		<PackageReference Include="JetBrains.Annotations" Version="10.4.0" />
 		<PackageReference Include="JetBrains.ExternalAnnotations" Version="10.2.20" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
-		<PackageReference Include="Mono.Cecil" Version="0.10.0-beta6" />
 		<PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />
 		<PackageReference Include="System.Collections.Immutable" Version="1.3.1" />
-		<PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.3.1" />
+		<PackageReference Include="System.ComponentModel.EventBasedAsync" Version="4.3.0" />
+		<PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.4.0" />
+		<PackageReference Include="System.Diagnostics.StackTrace" Version="4.3.0" />
 		<PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
+		<PackageReference Include="System.IO" Version="4.3.0" />
 		<PackageReference Include="System.Net.Http" Version="4.3.2" />
 		<PackageReference Include="System.Numerics.Vectors" Version="4.3.0" />
 		<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.3.0" />
 		<PackageReference Include="System.Runtime.Extensions" Version="4.3.0" />
+		<PackageReference Include="System.Runtime.Handles" Version="4.3.0" />
+		<PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+		<PackageReference Include="System.Threading" Version="4.3.0" />
+		<PackageReference Include="System.Threading.AccessControl" Version="4.3.0" />
+		<PackageReference Include="System.Threading.Overlapped" Version="4.3.0" />
+		<PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
+		<PackageReference Include="System.Threading.Tasks.Extensions" Version="4.3.0" />
+		<PackageReference Include="System.Threading.Thread" Version="4.3.0" />
+		<PackageReference Include="System.Threading.ThreadPool" Version="4.3.0" />
 		<PackageReference Include="System.Xml.ReaderWriter" Version="4.3.0" />
 		<PackageReference Include="System.Xml.XDocument" Version="4.3.0" />
 		<PackageReference Include="System.Xml.XPath.XDocument" Version="4.3.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\ClangSharp\ClangSharp.csproj" />
 	  <ProjectReference Include="..\Interop\Interop.csproj" />
+	  <ProjectReference Include="..\Mono.Cecil\Mono.Cecil.csproj" />
+	  <ProjectReference Include="..\Mono.Cecil\rocks\Mono.Cecil.Rocks.csproj" />
 	</ItemGroup>
 
 </Project>

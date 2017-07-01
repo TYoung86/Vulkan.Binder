@@ -7,11 +7,12 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using Mono.Cecil;
+using Vulkan.Binder.Extensions;
 using CecilCustomAttribute = Mono.Cecil.CustomAttribute;
 using CecilCustomAttributeNamedArgument = Mono.Cecil.CustomAttributeNamedArgument;
 
 namespace Vulkan.Binder {
-	public sealed class AttributeInfo : ICloneable {
+	public sealed class AttributeInfo {
 		public static AttributeInfo Create<TAttribute>(Expression<Func<TAttribute>> funcExpr) {
 			NewExpression newExpr;
 			IDictionary<FieldInfo, object> fields
@@ -92,70 +93,47 @@ namespace Vulkan.Binder {
 		}
 
 		private CecilCustomAttribute CreateCecilCustomAttribute(ModuleDefinition module) {
-			var ctorRef = module.ImportReference(Constructor);
+			var ctorRef = Constructor.Import(module);
 			var cca = new CecilCustomAttribute(ctorRef);
 			foreach (var clrArg in Arguments)
-				cca.ConstructorArguments.Add(CreateCustomAttributeArgument(module, clrArg));
+				cca.ConstructorArguments.Add(CreateCustomAttributeArgument(module,
+					MaybeImport(clrArg, module)));
 
 			for (var i = 0 ; i < PropertiesInitialized.Length ; ++i) {
 				var clrProp = PropertiesInitialized[i];
 				var value = PropertyValues[i];
 				cca.Properties.Add(new CecilCustomAttributeNamedArgument(clrProp.Name,
-					CreateCustomAttributeArgument(module, value)));
+					CreateCustomAttributeArgument(module, MaybeImport(value, module))));
 			}
 
 			for (var i = 0 ; i < FieldsInitialized.Length ; ++i) {
 				var clrField = FieldsInitialized[i];
 				var value = FieldValues[i];
 				cca.Fields.Add(new CecilCustomAttributeNamedArgument(clrField.Name,
-					CreateCustomAttributeArgument(module, value)));
+					CreateCustomAttributeArgument(module, MaybeImport(value, module))));
 			}
 			return cca;
 		}
 
+		private static object MaybeImport(object value, ModuleDefinition module) {
+			if (value is Type type) {
+				value = type.Import(module);
+			}
+			else if (value is MemberInfo) {
+				throw new NotImplementedException();
+			}
+			else {
+				type = value.GetType();
+				var typeInfo = type.GetTypeInfo();
+				if (typeInfo.IsEnum) {
+					return Convert.ChangeType(value, typeInfo.UnderlyingSystemType);
+				}
+			}
+			return value;
+		}
+
 		private static CustomAttributeArgument CreateCustomAttributeArgument(ModuleDefinition module, object value)
-			=> new CustomAttributeArgument(module.ImportReference(value.GetType()), value);
-
-		private CustomAttributeBuilder _cabCache;
-
-		public CustomAttributeBuilder GetCustomAttributeBuilder()
-			=> _cabCache ?? (_cabCache = CreateCustomAttributeBuilder());
-
-		private CustomAttributeBuilder CreateCustomAttributeBuilder() {
-			return new CustomAttributeBuilder(
-				Constructor, Arguments,
-				PropertiesInitialized, PropertyValues,
-				FieldsInitialized, FieldValues
-			);
-		}
-
-		public static implicit operator CustomAttributeBuilder(AttributeInfo info)
-			=> info.GetCustomAttributeBuilder();
-
-		private CustomAttributeData _cadCache;
-
-		public CustomAttributeData GetCustomAttributeData() {
-			return _cadCache ?? (_cadCache = CreateCustomAttributeData());
-		}
-
-		private CustomAttributeData CreateCustomAttributeData() {
-			var p = Constructor.GetParameters();
-			return new CustomCustomAttributeData(Constructor,
-				Arguments.Select((o, i) =>
-						new CustomAttributeTypedArgument(p[i].ParameterType, o))
-					.ToArray(),
-				PropertiesInitialized.Select((pi, i) =>
-						new System.Reflection.CustomAttributeNamedArgument
-							(pi, new CustomAttributeTypedArgument(pi.PropertyType, PropertyValues[i])))
-					.Concat(
-						FieldsInitialized.Select((fi, i) =>
-							new System.Reflection.CustomAttributeNamedArgument
-								(fi, new CustomAttributeTypedArgument(fi.FieldType, FieldValues[i]))))
-					.ToArray());
-		}
-
-		public static implicit operator CustomAttributeData(AttributeInfo info)
-			=> info.GetCustomAttributeData();
+			=> new CustomAttributeArgument(value.GetType().Import(module), value);
 
 		private Func<Attribute> _factory;
 
@@ -190,9 +168,7 @@ namespace Vulkan.Binder {
 
 		public static implicit operator Attribute(AttributeInfo info)
 			=> info.GetAttribute();
-
-		object ICloneable.Clone() => Clone();
-
+		
 		public AttributeInfo Clone()
 			=> new AttributeInfo(
 				Constructor, Arguments,

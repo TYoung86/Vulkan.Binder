@@ -1,5 +1,7 @@
 using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using Interop;
 using Mono.Cecil;
 using Vulkan.Binder.Extensions;
 
@@ -10,7 +12,10 @@ namespace Vulkan.Binder {
 			var underlyingType = underlyingTypeInfo.Type;
 
 			var name = enumInfo.Name;
-			
+
+			Debug.WriteLine($"Defining enumeration {name}");
+
+
 			if (TypeRedirects.TryGetValue(name, out var renamed)) {
 				name = renamed;
 			}
@@ -18,7 +23,7 @@ namespace Vulkan.Binder {
 			var enumTypeDef = Module.GetType(name);
 			if (enumTypeDef == null) {
 				enumTypeDef = Module.DefineEnum(name, TypeAttributes.Public, underlyingType);
-				enumTypeDef.SetCustomAttribute(() => new CompilerGeneratedAttribute());
+				enumTypeDef.SetCustomAttribute(() => new BinderGeneratedAttribute());
 			}
 			else
 				enumTypeDef.ChangeUnderlyingType(underlyingType);

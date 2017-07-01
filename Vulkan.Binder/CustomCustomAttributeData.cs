@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Reflection;
 
 namespace Vulkan.Binder {
+	/*
 	public sealed class CustomCustomAttributeData : CustomAttributeData {
 		public CustomCustomAttributeData(ConstructorInfo constructor, IList<CustomAttributeTypedArgument> constructorArguments, IList<CustomAttributeNamedArgument> namedArguments) {
 			Constructor = constructor;
@@ -15,4 +16,5 @@ namespace Vulkan.Binder {
 
 		public override IList<CustomAttributeNamedArgument> NamedArguments { get; }
 	}
+	*/
 }

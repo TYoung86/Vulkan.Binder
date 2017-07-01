@@ -10,6 +10,7 @@ using System.Runtime.Versioning;
 using ClangSharp;
 using Interop;
 using Mono.Cecil;
+using Mono.Cecil.Rocks;
 using Vulkan.Binder.Extensions;
 //using System.Reflection;
 //using System.Reflection.Emit;
@@ -18,10 +19,10 @@ using TypeAttributes = Mono.Cecil.TypeAttributes;
 
 namespace Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
-		private static ConcurrentBag<Func<TypeDefinition[]>> DefinitionFuncs {
+		private static ConcurrentStack<Func<TypeDefinition[]>> DefinitionFuncs {
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			get;
-		} = new ConcurrentBag<Func<TypeDefinition[]>>();
+		} = new ConcurrentStack<Func<TypeDefinition[]>>();
 
 		private ConcurrentDictionary<string, CXTranslationUnit> Units32 {
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -57,27 +58,29 @@ namespace Vulkan.Binder {
 
 		//public TypeBuilder Delegates { get; }
 
-		public readonly TypeDefinition VoidPointerType;
-		public readonly TypeDefinition ObjectType;
+		public readonly TypeReference VoidPointerType;
+		public readonly TypeReference ObjectType;
+		public readonly TypeReference MulticastDelegateType;
+		public readonly TypeReference BinderGeneratedAttributeType;
 
-		public readonly TypeDefinition IntType;
-		public readonly TypeDefinition UIntType;
-		public readonly TypeDefinition LongType;
-		public readonly TypeDefinition ULongType;
-		public readonly TypeDefinition IntPtrType;
-		public readonly TypeDefinition UIntPtrType;
-		public readonly TypeDefinition ValueTypeType;
+		public readonly TypeReference IntType;
+		public readonly TypeReference UIntType;
+		public readonly TypeReference LongType;
+		public readonly TypeReference ULongType;
+		public readonly TypeReference IntPtrType;
+		public readonly TypeReference UIntPtrType;
+		public readonly TypeReference ValueTypeType;
 
-		public readonly TypeDefinition HandleInt32Gtd;
-		public readonly TypeDefinition HandleUInt32Gtd;
-		public readonly TypeDefinition HandleInt64Gtd;
-		public readonly TypeDefinition HandleUInt64Gtd;
-		public readonly TypeDefinition HandleIntPtrGtd;
-		public readonly TypeDefinition HandleUIntPtrGtd;
-		public readonly TypeDefinition IHandleGtd;
-		public readonly TypeDefinition ITypedHandleGtd;
-		public readonly TypeDefinition ITypedHandleType;
-		public readonly TypeDefinition SplitPointerGtd;
+		public readonly TypeReference HandleInt32Gtd;
+		public readonly TypeReference HandleUInt32Gtd;
+		public readonly TypeReference HandleInt64Gtd;
+		public readonly TypeReference HandleUInt64Gtd;
+		public readonly TypeReference HandleIntPtrGtd;
+		public readonly TypeReference HandleUIntPtrGtd;
+		public readonly TypeReference IHandleGtd;
+		public readonly TypeReference ITypedHandleGtd;
+		public readonly TypeReference ITypedHandleType;
+		public readonly TypeReference SplitPointerGtd;
 
 		private static readonly ModuleParameters DefaultModuleParameters = new ModuleParameters {
 			Architecture = TargetArchitecture.I386,
@@ -86,7 +89,7 @@ namespace Vulkan.Binder {
 		};
 
 		private static readonly string DefaultTargetFramework = ".NETStandard,Version=v1.6";
-		private static readonly SAssembly BaseInteropAssembly = typeof(IHandle<>).Assembly;
+		private static readonly SAssembly BaseInteropAssembly = typeof(IHandle<>).GetTypeInfo().Assembly;
 		private static readonly string BaseInteropAsmName = BaseInteropAssembly.GetName().Name;
 		private static readonly string InteropAsmCodeBase = BaseInteropAssembly.CodeBase;
 		private static readonly string BaseInteropAsmPath = new Uri(InteropAsmCodeBase).LocalPath;
@@ -110,42 +113,39 @@ namespace Vulkan.Binder {
 			if (moduleParams == null)
 				moduleParams = DefaultModuleParameters;
 			
-			var loadedAsms = AppDomain.CurrentDomain.GetAssemblies();
-			var asmResolver = new DefaultAssemblyResolver();
-
 			// ReSharper disable once UnusedVariable
-			var forceUnsafeToLoad = Unsafe.AreSame(ref loadedAsms, ref loadedAsms);
+			var forceUnsafeToLoad = Unsafe.AreSame(ref assemblyName, ref assemblyName);
+			
+			//var loadedAsms = AppDomain.CurrentDomain.GetAssemblies();
+			//var loadedAsms = AssemblyResolver.KnownAssemblies;
 
-			asmResolver.ResolveFailure += (sender, reference) => {
-				if (reference.Name == BaseInteropAsmName)
-					return Assembly;
-				foreach (var loadedAsm in loadedAsms) {
-					if (reference.FullName == loadedAsm.FullName)
-						return AssemblyDefinition.ReadAssembly(new Uri(loadedAsm.CodeBase).LocalPath);
-				}
-				throw new NotImplementedException();
-			};
+			var asmResolver = new AssemblyResolver();
+
 			var mdResolver = new MetadataResolver(asmResolver);
 
-			var shadowAsmFilePath = Path.Combine(Environment.CurrentDirectory, $"{BaseInteropAsmName}.dll");
+			var shadowAsmFilePath = Path.Combine(Directory.GetCurrentDirectory(), $"{BaseInteropAsmName}.dll");
 			File.Copy(BaseInteropAsmPath, shadowAsmFilePath);
+			
 			Assembly = AssemblyDefinition.ReadAssembly(shadowAsmFilePath, new ReaderParameters {
 				InMemory = true,
 				ReadWrite = true,
 				ReadingMode = ReadingMode.Immediate,
 				AssemblyResolver = asmResolver,
-				MetadataResolver = mdResolver,
+				//MetadataResolver = mdResolver,
+				ReadSymbols = false,
+				ApplyWindowsRuntimeProjections = false,
+				//SymbolReaderProvider = null,
+				//MetadataImporterProvider = null,
+				//ReflectionImporterProvider = null,
 			});
 
 			Assembly.Name = assemblyName;
 			Module = Assembly.MainModule;
 			ModuleName = $"{Name.Name}.dll";
 			Module.Name = ModuleName;
-			//asmResolver.AddSearchDirectory(Path.GetDirectoryName(asmPath));
-			//Assembly = AssemblyDefinition.CreateAssembly(Name, Namespace, moduleParams);
 
 			if (EmitBoundsChecks)
-				ArgumentOutOfRangeCtor = Module.ImportReference(ArgumentOutOfRangeCtorInfo);
+				ArgumentOutOfRangeCtor = ArgumentOutOfRangeCtorInfo.Import(Module);
 
 			NonVersionableAttribute = NonVersionableAttributeInfo?
 				.GetCecilCustomAttribute(Module);
@@ -154,15 +154,17 @@ namespace Vulkan.Binder {
 			FlagsAttribute = FlagsAttributeInfo
 				.GetCecilCustomAttribute(Module);
 
-			VoidPointerType = typeof(void*).Import(Module).Resolve();
-			ObjectType = typeof(object).Import(Module).Resolve();
-			IntType = typeof(int).Import(Module).Resolve();
-			UIntType = typeof(uint).Import(Module).Resolve();
-			LongType = typeof(long).Import(Module).Resolve();
-			ULongType = typeof(ulong).Import(Module).Resolve();
-			IntPtrType = typeof(IntPtr).Import(Module).Resolve();
-			UIntPtrType = typeof(UIntPtr).Import(Module).Resolve();
-			ValueTypeType = typeof(ValueType).Import(Module).Resolve();
+			VoidPointerType = Module.TypeSystem.Void.MakePointerType();
+			ObjectType = Module.TypeSystem.Object;
+			IntType = Module.TypeSystem.Int32;
+			UIntType = Module.TypeSystem.UInt32;
+			LongType = Module.TypeSystem.Int64;
+			ULongType = Module.TypeSystem.UInt64;
+			IntPtrType = Module.TypeSystem.IntPtr;
+			UIntPtrType = Module.TypeSystem.UIntPtr;
+			ValueTypeType = UIntPtrType.Resolve().BaseType;
+
+			MulticastDelegateType = typeof(MulticastDelegate).Import(Module);
 
 			//var interopAsm = typeof(IHandle<>).Assembly;
 			//var interopAsmName = interopAsm.GetName();
@@ -172,30 +174,32 @@ namespace Vulkan.Binder {
 			//Module.ModuleReferences.Add(new ModuleReference(interopAsmName.Name));
 
 			
-			ITypedHandleType = typeof(ITypedHandle).Import(Module).Resolve();
-			IHandleGtd = typeof(IHandle<>).Import(Module).Resolve();
-			ITypedHandleGtd = typeof(ITypedHandle<>).Import(Module).Resolve();
-			HandleInt32Gtd = typeof(HandleInt32<>).Import(Module).Resolve();
-			HandleUInt32Gtd = typeof(HandleUInt32<>).Import(Module).Resolve();
-			HandleInt64Gtd = typeof(HandleInt64<>).Import(Module).Resolve();
-			HandleUInt64Gtd = typeof(HandleUInt64<>).Import(Module).Resolve();
-			HandleIntPtrGtd =  typeof(HandleIntPtr<>).Import(Module).Resolve();
-			HandleUIntPtrGtd =  typeof(HandleUIntPtr<>).Import(Module).Resolve();
-			SplitPointerGtd = typeof(SplitPointer<,,>).Import(Module).Resolve();
+			ITypedHandleType = typeof(ITypedHandle).Import(Module);
+			IHandleGtd = typeof(IHandle<>).Import(Module);
+			ITypedHandleGtd = typeof(ITypedHandle<>).Import(Module);
+			HandleInt32Gtd = typeof(HandleInt32<>).Import(Module);
+			HandleUInt32Gtd = typeof(HandleUInt32<>).Import(Module);
+			HandleInt64Gtd = typeof(HandleInt64<>).Import(Module);
+			HandleUInt64Gtd = typeof(HandleUInt64<>).Import(Module);
+			HandleIntPtrGtd =  typeof(HandleIntPtr<>).Import(Module);
+			HandleUIntPtrGtd =  typeof(HandleUIntPtr<>).Import(Module);
+			SplitPointerGtd = typeof(SplitPointer<,,>).Import(Module);
+			BinderGeneratedAttributeType = typeof(BinderGeneratedAttribute).Import(Module);
 
 			IntegrateInteropTypes(Module.Types);
 
 			if (targetFramework == null)
 				targetFramework = DefaultTargetFramework;
 			
-			var targetFrameworkAttr = typeof(TargetFrameworkAttribute).Import(Module).Resolve();
-			var asmInfoVersionAttr = typeof(AssemblyInformationalVersionAttribute).Import(Module).Resolve();
-			var asmFileVersionAttr = typeof(AssemblyFileVersionAttribute).Import(Module).Resolve();
-			var asmDescriptionAttr = typeof(AssemblyDescriptionAttribute).Import(Module).Resolve();
-			var asmProductAttr = typeof(AssemblyProductAttribute).Import(Module).Resolve();
-			var asmTitleAttr = typeof(AssemblyTitleAttribute).Import(Module).Resolve();
-			var stringType = typeof(string).Import(Module).Resolve();
-			var attrActionMapBuilder = ImmutableDictionary.CreateBuilder<TypeDefinition, Action<CustomAttribute>>();
+			var targetFrameworkAttr = typeof(TargetFrameworkAttribute).Import(Module);
+			var asmInfoVersionAttr = typeof(AssemblyInformationalVersionAttribute).Import(Module);
+			var asmFileVersionAttr = typeof(AssemblyFileVersionAttribute).Import(Module);
+			var asmDescriptionAttr = typeof(AssemblyDescriptionAttribute).Import(Module);
+			var asmProductAttr = typeof(AssemblyProductAttribute).Import(Module);
+			var asmTitleAttr = typeof(AssemblyTitleAttribute).Import(Module);
+			var stringType = Module.TypeSystem.String;
+			var attrActionMapBuilder = ImmutableDictionary
+				.CreateBuilder<TypeReference, Action<CustomAttribute>>(CecilTypeComparer.Instance);
 			attrActionMapBuilder.Add(targetFrameworkAttr,
 				ca => ca.ConstructorArguments[0]
 					= new CustomAttributeArgument( stringType, targetFramework ));
@@ -244,7 +248,10 @@ namespace Vulkan.Binder {
 		}
 
 		private void PrepareKnownTypes() {
+			var index = 0;
+			var total = KnownTypes.Count;
 			foreach (var knownType in KnownTypes) {
+				ReportProgress("Preparing known types", index++, total);
 				var name = knownType.Key;
 				if (TypeRedirects.TryGetValue(name, out var renamed)) {
 					name = renamed;
@@ -269,6 +276,7 @@ namespace Vulkan.Binder {
 					}
 				}
 			}
+			ReportProgress("Preparing known types", index, total);
 		}
 
 		public FileInfo Save(string outputPath) {
@@ -276,11 +284,43 @@ namespace Vulkan.Binder {
 			var writerParams = new WriterParameters {
 				// TODO: strong name key
 			};
-			var asmRef = Module.AssemblyReferences
-				.FirstOrDefault(mr => mr.Name.StartsWith(BaseInteropAsmName));
-			if (asmRef != null)
-				Module.AssemblyReferences.Remove(asmRef);
-			//Module.Write(ModuleName, writerParams);
+			// coalesce assembly references
+			var typeRefs = Module.GetTypeReferences().ToArray();
+
+			var anrCollisions = Module.AssemblyReferences.GroupBy(asmRef => asmRef.Name);
+			foreach (var anrCollision in anrCollisions) {
+				var name = anrCollision.Key;
+				var ordered = anrCollision.OrderByDescending(anr => anr.Version).ToArray();
+				var latest = ordered.First();
+				var others = ordered.Skip(1).ToArray();
+				if (others.Length <= 0) continue;
+				foreach (var tr in typeRefs) {
+					if (tr.Scope is AssemblyNameReference anr) {
+						//tr.MetadataToken = new MetadataToken(TokenType.AssemblyRef, 0);
+						tr.MetadataToken = new MetadataToken(TokenType.TypeRef, 0);
+						tr.Scope = latest;
+						ReportProgress($"Retargeting {tr.FullName} from {latest.Name} v{anr.Version} to v{latest.Version}");
+						continue;
+					}
+					/*
+					if (tr.Scope is ModuleDefinition scope) {
+						var asm = scope.Assembly;
+						var asmName = asm.Name;
+						if (asmName.Name != name)
+							continue;
+						var other = others.FirstOrDefault(anr => anr.Version == asmName.Version);
+						if (other == null)
+							continue;
+						// update type ref to point to latest asm
+						throw new NotImplementedException();
+					}
+					*/
+					throw new NotImplementedException();
+				}
+				foreach (var other in others)
+					Module.AssemblyReferences.Remove(other);
+			}
+
 			var fileName = ModuleName;
 			if (File.Exists(fileName))
 				File.Delete(fileName);
@@ -303,6 +343,12 @@ namespace Vulkan.Binder {
 			Bitmask,
 			Struct,
 			Handle
+		}
+
+		public Action<string, int, int> ProgressReportFunc { get; set; } = null;
+
+		private void ReportProgress(string state, int workDone = -1, int workTotal = -1) {
+			ProgressReportFunc?.Invoke(state, workDone, workTotal);
 		}
 	}
 }

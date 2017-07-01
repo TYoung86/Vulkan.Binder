@@ -7,10 +7,10 @@ namespace Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
 		private void IntegrateInteropTypes(IEnumerable<TypeDefinition> tds) {
 			foreach (var td in tds) {
-				td.Scope = Module;
+				//td.Scope = Module;
 				UpdateMethodInliningAttributes(td);
 				foreach (var nt in td.NestedTypes) {
-					nt.Scope = Module;
+					//nt.Scope = Module;
 					UpdateMethodInliningAttributes(nt);
 				}
 			}

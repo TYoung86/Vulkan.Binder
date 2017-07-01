@@ -8,13 +8,13 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using HtmlAgilityPack;
 using HtmlAgilityPack.CssSelectors.NetCore;
+using Interop;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using Vulkan.Binder.Extensions;
@@ -43,13 +43,13 @@ namespace Vulkan.Binder {
 
 		private static Task<KeyValuePair<string, Stream>> CreateHttpFetchTaskAsync(string filePath) {
 			var fileName = Path.GetFileName(filePath);
-			Console.WriteLine("Creating Fetch: {0}", fileName);
+			WriteLine("Creating Fetch: {0}", fileName);
 
 			return Task.Run(async () => new KeyValuePair<string, Stream>(
 				fileName,
 				await Task.Run(async () => {
 					var fetchStream = await HttpClient.GetStreamAsync(filePath).ConfigureAwait(false);
-					Console.WriteLine("Fetching: {0}", fileName);
+					WriteLine("Fetching: {0}", fileName);
 					MemoryStream ms;
 					try {
 						ms = new MemoryStream(new byte[fetchStream.Length], true);
@@ -59,10 +59,36 @@ namespace Vulkan.Binder {
 					}
 					await fetchStream.CopyToAsync(ms).ConfigureAwait(false);
 					ms.Position = 0;
-					Console.WriteLine("Fetched: {0}", fileName);
+					WriteLine("Fetched: {0}", fileName);
 					return ms;
 				}).ConfigureAwait(false)
 			));
+		}
+
+		private static StreamWriter LogWriter
+			= new StreamWriter(new FileStream(
+				$"{typeof(Program).Namespace}.{Process.GetCurrentProcess().Id}.log",
+				FileMode.Append, FileAccess.Write, FileShare.Read, 32768)) {
+				AutoFlush = true, NewLine = "\r\n"
+			};
+		
+		public static void LogWriteLine(string format, params object[] args) {
+			LogWriter.WriteLine(format, args);
+		}
+
+		public static void WriteLine(string format, params object[] args) {
+			var line = string.Format(format, args);
+			LogWriteLine(line);
+			Console.WriteLine(line);
+		}
+		
+		public static void LogWrite(string format, params object[] args) {
+			LogWriter.Write(format, args);
+		}
+		public static void Write(string format, params object[] args) {
+			var line = string.Format(format, args);
+			LogWrite(line);
+			Console.Write(line);
 		}
 
 		public static void Main() {
@@ -70,15 +96,14 @@ namespace Vulkan.Binder {
 		}
 
 		public static readonly HttpClient HttpClient = new HttpClient();
-		private static TypeDefinition _cgaTd;
-		private static TypeDefinition _mcdTd;
 
 		public static async Task MainAsync() {
 			var tempDirName = $"{typeof(Program).Namespace}.{Process.GetCurrentProcess().Id}";
 			var tempPath = Path.Combine(Path.GetTempPath(), tempDirName);
+			if ( Directory.Exists(tempPath) ) Directory.Delete(tempPath, true);
 			var workDirectory = Directory.CreateDirectory(tempPath);
-			var startingDirectory = Environment.CurrentDirectory;
-			Environment.CurrentDirectory = workDirectory.FullName;
+			var startingDirectory = Directory.GetCurrentDirectory();
+			Directory.SetCurrentDirectory(workDirectory.FullName);
 
 			var xmlTask = Task.Run(async () => new VkXmlConsumer(XDocument.Load(
 				await HttpClient.GetStreamAsync(Cdn.VkXml).ConfigureAwait(false))));
@@ -107,12 +132,31 @@ namespace Vulkan.Binder {
 
 
 			var xml = xmlTask.Result;
-
-			Console.WriteLine("Building Vulkan interop assembly.");
+			
+			Console.WriteLine();
+			LogWriteLine("Building Vulkan interop assembly.");
 
 			var vkHeaderVersion = xml.DefineTypes["VK_HEADER_VERSION"].LastNode.ToString().Trim();
 
-			var asmBuilder = new InteropAssemblyBuilder("Vulkan", "1.0." + vkHeaderVersion);
+			_asmBuilder = new InteropAssemblyBuilder("Vulkan", "1.0." + vkHeaderVersion);
+			string lastState = null;
+			_asmBuilder.ProgressReportFunc = (state, done, total) => {
+				if (state != lastState) {
+					Console.WriteLine();
+					LogWriteLine("");
+					LogWrite(state);
+				}
+				if (total <= 0 || done < 0)
+					Console.WriteLine(state);
+				else {
+					var progress = (double) done / total;
+					Console.Write("{0} {1:P} ({2}/{3})\r",
+						state, progress, done, total);
+					LogWrite(".");
+				}
+
+				lastState = state;
+			};
 
 			var knownTypes = ImmutableDictionary.CreateBuilder<string, InteropAssemblyBuilder.KnownType>();
 			var typeRedirs = ImmutableDictionary.CreateBuilder<string, string>();
@@ -185,18 +229,30 @@ namespace Vulkan.Binder {
 			// with last parameter optional="true" and second to last parameter optional="false,true"
 			// create something to handle back-to-back calls for count and alloc array of last parameter type
 
-			asmBuilder.KnownTypes = knownTypes.ToImmutable();
-			asmBuilder.TypeRedirects = typeRedirs.ToImmutable();
-
+			_asmBuilder.KnownTypes = knownTypes.ToImmutable();
+			_asmBuilder.TypeRedirects = typeRedirs.ToImmutable();
+			
 			headersSaved.Wait();
+			
+			Console.WriteLine();
+			WriteLine("Parsing headers.");
+			_asmBuilder.ParseHeader("vulkan.h");
+			
+			Console.WriteLine();
+			WriteLine("Compiling headers.");
 
-			asmBuilder.ParseHeader("vulkan.h");
+			_asmBuilder.Compile();
 
-			asmBuilder.Compile();
+			Console.WriteLine();
+			WriteLine("Adding customizations...");
 
 			// create automatic runtime linker bound to module initializer
-			var moduleType = asmBuilder.Module.GetType("<Module>");
-			var staticLinkType = asmBuilder.Module.DefineType("Vulkan", TypeAttributes.Abstract | TypeAttributes.Sealed);
+			var moduleType = _asmBuilder.Module.GetType("<Module>");
+			var staticLinkType = _asmBuilder.Module.DefineType("Vulkan",
+				TypeAttributes.Abstract
+				| TypeAttributes.Sealed
+				| TypeAttributes.Public
+			);
 			var staticLinkInit = staticLinkType.DefineConstructor(MethodAttributes.Static | MethodAttributes.Assembly);
 			staticLinkInit.GenerateIL(il => {
 				// 
@@ -208,22 +264,23 @@ namespace Vulkan.Binder {
 				il.Emit(OpCodes.Call, staticLinkInit);
 				il.Emit(OpCodes.Ret);
 			});
+			
+			Console.WriteLine();
+			WriteLine("Saving constructed assembly.");
+			var asm = _asmBuilder.Save(startingDirectory);
 
-			var asm = asmBuilder.Save(startingDirectory);
-
-			_cgaTd = typeof(CompilerGeneratedAttribute).Import(asmBuilder.Module).Resolve();
-			_mcdTd = typeof(MulticastDelegate).Import(asmBuilder.Module).Resolve();
-
-			var compilerGeneratedTypes = asmBuilder.Module.Types
+			var compilerGeneratedTypes = _asmBuilder.Module.Types
 				.Select(et => et.Resolve())
-				.Where(et => et.CustomAttributes.Any(ca => ca.AttributeType.Is(_cgaTd)))
+				.Where(et => et.CustomAttributes.Any(ca => ca.AttributeType.Is(_asmBuilder.BinderGeneratedAttributeType)))
 				.ToArray();
-
+			
+			Console.WriteLine();
+			WriteLine($"Generating XML documentation for {compilerGeneratedTypes.Length} members.");
 			var xdoc = new XDocument(
 				new XElement("doc",
 					new XElement("assembly",
 						new XElement("name",
-							new XText(asmBuilder.Name.Name)
+							new XText(_asmBuilder.Name.Name)
 						)
 					),
 					new XElement("members",
@@ -232,28 +289,36 @@ namespace Vulkan.Binder {
 					)
 				)
 			);
+			
+			Console.WriteLine();
+			WriteLine("Saving XML documentation.");
 
-			xdoc.Save(Path.Combine(startingDirectory, "Vulkan.xml"));
+			using (var fs = File.Open(Path.Combine(startingDirectory, "Vulkan.xml"),FileMode.Create))
+				xdoc.Save(fs);
 
 			if (!asm.Exists)
 				throw new NotImplementedException();
+			
+			Console.WriteLine();
+			WriteLine("Provided product artifacts.");
 
-			Console.WriteLine("Provided product artifacts.");
-
-			foreach (var stat in asmBuilder.Statistics)
+			foreach (var stat in _asmBuilder.Statistics)
 				Console.WriteLine($"{stat.Value} {stat.Key}.");
+			
+			Console.WriteLine();
+			WriteLine("Cleaning up temporary artifacts.");
 
-			Console.WriteLine("Cleaning up temporary artifacts.");
-
-			Environment.CurrentDirectory = startingDirectory;
-			workDirectory.Delete(true);
-
-			Console.WriteLine("Done.");
-
-			if (!Environment.UserInteractive) return;
-
-			Console.WriteLine("Press any key to exit.");
-			Console.ReadKey(true);
+			Directory.SetCurrentDirectory(startingDirectory);
+			try {
+				workDirectory.Delete(true);
+			}
+			catch (IOException ex) {
+				Console.WriteLine();
+				WriteLine($"Cleaning up failed: {ex.Message}.");
+			}
+			
+			Console.WriteLine();
+			WriteLine("Done.");
 		}
 		
 		private static async Task<XElement> FetchAndParseHtmlDocAsync(TypeDefinition et) {
@@ -268,7 +333,7 @@ namespace Vulkan.Binder {
 				return typeDesc;
 			}
 			var baseType = et.BaseType;
-			if (baseType.Is(_mcdTd)) {
+			if (baseType.Is(_asmBuilder.MulticastDelegateType)) {
 				// function
 				await FetchAndParseHtmlDocAsync(name, typeDesc).ConfigureAwait(false);
 				return typeDesc;
@@ -285,25 +350,30 @@ namespace Vulkan.Binder {
 		}
 		private static async Task FetchAndParseHtmlDocAsync(string name, XContainer typeDesc) {
 			var hdoc = new HtmlDocument {OptionOutputAsXml = true};
-			Console.WriteLine("Fetching doc for: {0}", name);
+			WriteLine("Fetching doc for: {0}", name);
 			Stream stream;
 			try {
-				if (LocalVulkanHtmlManPages != null)
-					stream = File.OpenRead(Path.Combine(LocalVulkanHtmlManPages, name + ".html"));
-				else
+				if (LocalVulkanHtmlManPages != null) {
+					var localHtmlPath = Path.Combine(LocalVulkanHtmlManPages, name + ".html");
+					stream = File.Exists(localHtmlPath)
+						? File.OpenRead(localHtmlPath)
+						: throw new FileNotFoundException(localHtmlPath);
+				}
+				else {
 					stream = await HttpClient.GetStreamAsync
 						(VkManBasePath + name + ".html").ConfigureAwait(false);
+				}
 			}
-			catch (FileNotFoundException ex) {
-				Console.WriteLine("No doc for: {0}", name);
+			catch (FileNotFoundException) {
+				WriteLine("No local doc for: {0}", name);
 				return;
 			}
-			catch (HttpRequestException ex) {
-				Console.WriteLine("No doc for: {0}", name);
+			catch (HttpRequestException) {
+				WriteLine("No remote doc for: {0}", name);
 				return;
 			}
 			hdoc.Load(stream);
-			Console.WriteLine("Fetched doc for: {0}", name);
+			WriteLine("Fetched doc for: {0}", name);
 
 			// summary
 			var nameParagraph = hdoc.QuerySelector("#header p")?.InnerText;
@@ -399,6 +469,36 @@ namespace Vulkan.Binder {
 						elem.Name = "description";
 						elem.ReplaceWith(new XElement("item", elem));
 					});
+					ForEachByXPath(htmlfrag, "//table/caption", elem => {
+						elem.Name = "para";
+						elem.RemoveAttributes();
+						var table = elem.Parent;
+						if (table == null) {
+							// logically this should never happen
+							throw new NotImplementedException();
+						}
+						elem.Remove();
+						table.AddBeforeSelf(elem);
+						
+					});
+
+					ForEachByXPath(htmlfrag, "//table/thead/th|//table/tbody/tr/td", elem => {
+						elem.Name = "term";
+						elem.RemoveAttributes();
+					});
+					ForEachByXPath(htmlfrag, "//table/tbody/tr", elem => {
+						elem.Name = "item";
+						elem.RemoveAttributes();
+					});
+					ForEachByXPath(htmlfrag, "//table/thead", elem => {
+						elem.Name = "listheader";
+						elem.RemoveAttributes();
+					});
+					ForEachByXPath(htmlfrag, "//table", elem => {
+						elem.Name = "list";
+						elem.RemoveAttributes();
+						elem.SetAttributeValue("type","table");
+					});
 
 					// code elements inside pre elements are stripped
 					ForEachByXPath(htmlfrag, "//pre/code", RemoveKeepingDescendants);
@@ -446,12 +546,12 @@ namespace Vulkan.Binder {
 						anchor.SetAttributeValue("cref", cref);
 					});
 
-					StripByXPath(htmlfrag, "//div|//p|//span|//em|//strong");
+					StripByXPath(htmlfrag, "//div|//p|//span|//em|//strong|//col|//colgroup|tbody");
 
 					xe.Add(htmlfrag.Nodes().Cast<object>().ToArray());
 				}
 			}
-			catch (XmlException ex) {
+			catch (XmlException) {
 				// ?!
 			}
 	
@@ -459,6 +559,7 @@ namespace Vulkan.Binder {
 
 		private static readonly XNode SpaceTextNode = new XText(" ");
 		private static readonly IEnumerable<XNode> SpaceTextNodeCombiner = new[] {SpaceTextNode};
+		private static InteropAssemblyBuilder _asmBuilder;
 
 		private static void StripByXPath(XNode xe, string xpath) {
 			ForEachByXPath(xe, xpath, RemoveKeepingDescendants);
@@ -492,8 +593,9 @@ namespace Vulkan.Binder {
 					else
 						elem.Remove();
 				}
-				catch (InvalidOperationException ex) {
-					// ?!
+				catch (InvalidOperationException) {
+					if (elem.Parent == null)
+						break;
 					continue;
 				}
 				break;

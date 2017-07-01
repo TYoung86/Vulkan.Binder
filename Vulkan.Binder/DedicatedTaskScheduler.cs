@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Loader;
 //using System.Runtime.Loader;
 using System.Threading;
 using System.Threading.Tasks;
@@ -47,8 +48,8 @@ namespace Vulkan.Binder {
 				(_threads[i] = new Thread(WorkerAction) {IsBackground = true}).Start();
 			MaximumConcurrencyLevel = dop;
 
-			//AssemblyLoadContext.Default.Unloading += ctx => Dispose();
-			AppDomain.CurrentDomain.DomainUnload += (s, e) => Dispose();
+			AssemblyLoadContext.Default.Unloading += ctx => Dispose();
+			//AppDomain.CurrentDomain.DomainUnload += (s, e) => Dispose();
 
 			(_watchdog = new Thread(WatchdogAction) {IsBackground = true}).Start();
 		}
@@ -80,6 +81,7 @@ namespace Vulkan.Binder {
 		private void WatchdogAction() {
 			for (; ;) {
 				try {
+					_cts.Token.ThrowIfCancellationRequested();
 					var workerThreads = MaximumConcurrencyLevel;
 					var dop = workerThreads;
 					var lastTaskCount = _priorityTasks.Count;
@@ -123,15 +125,18 @@ namespace Vulkan.Binder {
 						lastTaskCount = newTaskCount;
 					}
 				}
-				catch (ThreadAbortException) {
+				catch (OperationCanceledException) {
 					break;
+				}
+				catch {
+					//continue;
 				}
 			}
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		private void LongRunningWorkerAction() {
-			Thread.BeginThreadAffinity();
+			//Thread.BeginThreadAffinity();
 			_threadIsWorking = true;
 			while (_longRunningTasks.TryDequeue(out var task)) {
 				try {
@@ -143,7 +148,7 @@ namespace Vulkan.Binder {
 				}
 			}
 			_threadIsWorking = false;
-			Thread.EndThreadAffinity();
+			//Thread.EndThreadAffinity();
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -151,12 +156,12 @@ namespace Vulkan.Binder {
 			try {
 				var currentThread = Thread.CurrentThread;
 				while (_priorityTasks.Count > 0) {
-					Thread.BeginThreadAffinity();
+					//Thread.BeginThreadAffinity();
 					currentThread.IsBackground = false;
 					_threadIsWorking = true;
 					Interlocked.Increment(ref _threadsWorking);
 					Task task;
-					
+
 					while (_priorityTasks.TryDequeue(out task))
 						if (!IsDequeued(task))
 							try {
@@ -181,7 +186,7 @@ namespace Vulkan.Binder {
 					Interlocked.Decrement(ref _threadsWorking);
 					_threadIsWorking = false;
 					currentThread.IsBackground = true;
-					Thread.EndThreadAffinity();
+					//Thread.EndThreadAffinity();
 				}
 			}
 			catch {
@@ -211,12 +216,12 @@ namespace Vulkan.Binder {
 				for (; ;) {
 					_workReadyEvent.Wait(_cts.Token);
 					_workReadyEvent.Reset();
-					Thread.BeginThreadAffinity();
+					//Thread.BeginThreadAffinity();
 					currentThread.IsBackground = false;
 					_threadIsWorking = true;
 					Interlocked.Increment(ref _threadsWorking);
 					Task task;
-					
+
 					bool priorityTasksAvailable;
 					do {
 						while (_priorityTasks.TryDequeue(out task))
@@ -244,7 +249,7 @@ namespace Vulkan.Binder {
 					Interlocked.Decrement(ref _threadsWorking);
 					_threadIsWorking = false;
 					currentThread.IsBackground = true;
-					Thread.EndThreadAffinity();
+					//Thread.EndThreadAffinity();
 				}
 			}
 			catch {
@@ -280,7 +285,7 @@ namespace Vulkan.Binder {
 		protected override bool TryDequeue(Task task) {
 			if (!_priorityTasks.Contains(task))
 				return false;
-			
+
 			if (!_backloggedTasks.Contains(task))
 				return false;
 
@@ -304,11 +309,10 @@ namespace Vulkan.Binder {
 		}
 
 		public void Dispose() {
-
 			_cts.Cancel();
 
 			_workReadyEvent.Dispose();
-			
+
 			while (_priorityTasks.TryDequeue(out var _)) {
 				/* clear */
 			}
@@ -319,7 +323,7 @@ namespace Vulkan.Binder {
 			while (_threadsWorking > 0)
 				Thread.Sleep(10);
 
-			_watchdog.Abort();
+			//_watchdog.Abort();
 
 			for (var i = 0 ; i < MaximumConcurrencyLevel ; ++i)
 				_threads[i] = null;
