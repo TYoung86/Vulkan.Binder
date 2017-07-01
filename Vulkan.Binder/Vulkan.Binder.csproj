@@ -7,10 +7,16 @@
 	<ApplicationIcon />
 	<OutputTypeEx>exe</OutputTypeEx>
 	<StartupObject />
-	<Version>1.3.3</Version>
+	<Version>1.5.0</Version>
 	<Company>Artilect</Company>
 	<Authors>Tyler Young</Authors>
-	<Description>A project to generate hardy and efficient .NET bindings and integrated documentation directly from Vulkan C headers and documentation. Uses ClangSharp to build and manage AST. Generates an IL assembly that contains both 32-bit and 64-bit structures and agnostic interfaces. Incorporates Vulkan Docs and XML from official github repo.</Description>
+	<Description>Hardy, efficient (low level), portable .NET Standard 1.6 bindings for Vulkan with integrated documentation. Generated directly from Vulkan C headers and docs. Uses ClangSharp, supports 32-bit, 64-bit, agnostic (AnyCPU) interfaces. Incorporates Vulkan Docs and XML from official github repo.</Description>
+	<RepositoryUrl>https://github.com/TYoung86/Vulkan.Binder.git</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
+	<PackageProjectUrl>https://github.com/TYoung86/Vulkan.Binder</PackageProjectUrl>
+	<PackageTags>Vulkan</PackageTags>
+	<AssemblyVersion>1.5.0.0</AssemblyVersion>
+	<FileVersion>1.5.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
