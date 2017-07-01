@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -88,12 +89,12 @@ namespace Vulkan.Binder {
 			Runtime = TargetRuntime.Net_4_0
 		};
 
-		private static readonly string DefaultTargetFramework = ".NETStandard,Version=v1.6";
+		private const string DefaultTargetFramework = ".NETStandard,Version=v1.6";
 		private static readonly SAssembly BaseInteropAssembly = typeof(IHandle<>).GetTypeInfo().Assembly;
 		private static readonly string BaseInteropAsmName = BaseInteropAssembly.GetName().Name;
 		private static readonly string InteropAsmCodeBase = BaseInteropAssembly.CodeBase;
 		private static readonly string BaseInteropAsmPath = new Uri(InteropAsmCodeBase).LocalPath;
-		
+
 		public ImmutableDictionary<string, KnownType> KnownTypes
 			= ImmutableDictionary<string, KnownType>.Empty;
 
@@ -112,10 +113,10 @@ namespace Vulkan.Binder {
 			Statistics = new ReadOnlyDictionary<string, long>(_statistics);
 			if (moduleParams == null)
 				moduleParams = DefaultModuleParameters;
-			
+
 			// ReSharper disable once UnusedVariable
 			var forceUnsafeToLoad = Unsafe.AreSame(ref assemblyName, ref assemblyName);
-			
+
 			//var loadedAsms = AppDomain.CurrentDomain.GetAssemblies();
 			//var loadedAsms = AssemblyResolver.KnownAssemblies;
 
@@ -125,7 +126,7 @@ namespace Vulkan.Binder {
 
 			var shadowAsmFilePath = Path.Combine(Directory.GetCurrentDirectory(), $"{BaseInteropAsmName}.dll");
 			File.Copy(BaseInteropAsmPath, shadowAsmFilePath);
-			
+
 			Assembly = AssemblyDefinition.ReadAssembly(shadowAsmFilePath, new ReaderParameters {
 				InMemory = true,
 				ReadWrite = true,
@@ -173,7 +174,7 @@ namespace Vulkan.Binder {
 			//Module.AssemblyReferences.Add(new AssemblyNameReference(interopAsmName.Name, interopAsmName.Version));
 			//Module.ModuleReferences.Add(new ModuleReference(interopAsmName.Name));
 
-			
+
 			ITypedHandleType = typeof(ITypedHandle).Import(Module);
 			IHandleGtd = typeof(IHandle<>).Import(Module);
 			ITypedHandleGtd = typeof(ITypedHandle<>).Import(Module);
@@ -181,8 +182,8 @@ namespace Vulkan.Binder {
 			HandleUInt32Gtd = typeof(HandleUInt32<>).Import(Module);
 			HandleInt64Gtd = typeof(HandleInt64<>).Import(Module);
 			HandleUInt64Gtd = typeof(HandleUInt64<>).Import(Module);
-			HandleIntPtrGtd =  typeof(HandleIntPtr<>).Import(Module);
-			HandleUIntPtrGtd =  typeof(HandleUIntPtr<>).Import(Module);
+			HandleIntPtrGtd = typeof(HandleIntPtr<>).Import(Module);
+			HandleUIntPtrGtd = typeof(HandleUIntPtr<>).Import(Module);
 			SplitPointerGtd = typeof(SplitPointer<,,>).Import(Module);
 			BinderGeneratedAttributeType = typeof(BinderGeneratedAttribute).Import(Module);
 
@@ -190,7 +191,7 @@ namespace Vulkan.Binder {
 
 			if (targetFramework == null)
 				targetFramework = DefaultTargetFramework;
-			
+
 			var targetFrameworkAttr = typeof(TargetFrameworkAttribute).Import(Module);
 			var asmInfoVersionAttr = typeof(AssemblyInformationalVersionAttribute).Import(Module);
 			var asmFileVersionAttr = typeof(AssemblyFileVersionAttribute).Import(Module);
@@ -198,53 +199,39 @@ namespace Vulkan.Binder {
 			var asmProductAttr = typeof(AssemblyProductAttribute).Import(Module);
 			var asmTitleAttr = typeof(AssemblyTitleAttribute).Import(Module);
 			var stringType = Module.TypeSystem.String;
-			var attrActionMapBuilder = ImmutableDictionary
-				.CreateBuilder<TypeReference, Action<CustomAttribute>>(CecilTypeComparer.Instance);
-			attrActionMapBuilder.Add(targetFrameworkAttr,
-				ca => ca.ConstructorArguments[0]
-					= new CustomAttributeArgument( stringType, targetFramework ));
-			attrActionMapBuilder.Add(asmInfoVersionAttr,
-				ca => ca.ConstructorArguments[0]
-					= new CustomAttributeArgument( stringType, Name.Version.ToString() ));
-			attrActionMapBuilder.Add(asmFileVersionAttr,
-				ca => ca.ConstructorArguments[0]
-					= new CustomAttributeArgument( stringType, Name.Version.ToString() ));
-			attrActionMapBuilder.Add(asmProductAttr,
-				ca => ca.ConstructorArguments[0]
-					= new CustomAttributeArgument( stringType, Name.Name ));
-			attrActionMapBuilder.Add(asmTitleAttr,
-				ca => ca.ConstructorArguments[0]
-					= new CustomAttributeArgument( stringType, Name.Name ));
-			attrActionMapBuilder.Add(asmDescriptionAttr,
-				ca => ca.ConstructorArguments[0]
-					= new CustomAttributeArgument( stringType, Name.Name ));
 
-			var attrActionMap = attrActionMapBuilder.ToImmutable();
-			var custAttrs = Assembly.CustomAttributes.Select(old => {
-				var @new = new CustomAttribute(old.Constructor);
-				foreach (var arg in old.ConstructorArguments)
-					@new.ConstructorArguments.Add(arg);
-				foreach (var field in old.Fields)
-					@new.Fields.Add(field);
-				foreach (var prop in old.Properties)
-					@new.Fields.Add(prop);
-				if (attrActionMap.TryGetValue(@new.AttributeType.Resolve(), out var act))
-					act(@new);
-				return @new;
-			}).ToArray();
-			while ( Assembly.HasCustomAttributes )
+			var custAttrs = new[] {
+				AttributeInfo.Create
+					(() => new TargetFrameworkAttribute(targetFramework) {FrameworkDisplayName = ""}),
+				AttributeInfo.Create
+					(() => new AssemblyVersionAttribute(Name.Version.ToString())),
+				AttributeInfo.Create
+					(() => new AssemblyInformationalVersionAttribute(Name.Version.ToString())),
+				AttributeInfo.Create
+					(() => new AssemblyFileVersionAttribute(Name.Version.ToString())),
+				AttributeInfo.Create
+					(() => new AssemblyProductAttribute(Name.Name)),
+				AttributeInfo.Create
+					(() => new AssemblyTitleAttribute(Name.Name)),
+				AttributeInfo.Create
+					(() => new AssemblyDescriptionAttribute(Name.Name))
+			}.Select(ca => ca.GetCecilCustomAttribute(Module));
+
+			while (Assembly.HasCustomAttributes)
 				Assembly.CustomAttributes.RemoveAt(0);
 			Assembly.CustomAttributes.Clear();
+			while (Module.HasCustomAttributes)
+				Module.CustomAttributes.RemoveAt(0);
+			Module.CustomAttributes.Clear();
+
 			foreach (var custAttr in custAttrs)
 				Assembly.CustomAttributes.Add(custAttr);
-			
 		}
 
 		public void Compile() {
 			PrepareKnownTypes();
 			ParseUnits();
 			BuildTypeDefinitions();
-			
 		}
 
 		private void PrepareKnownTypes() {
@@ -256,7 +243,7 @@ namespace Vulkan.Binder {
 				if (TypeRedirects.TryGetValue(name, out var renamed)) {
 					name = renamed;
 				}
-				if ( Module.GetType(name) != null )
+				if (Module.GetType(name) != null)
 					throw new NotImplementedException();
 				switch (knownType.Value) {
 					case KnownType.Enum: {
@@ -286,37 +273,59 @@ namespace Vulkan.Binder {
 			};
 			// coalesce assembly references
 			var typeRefs = Module.GetTypeReferences().ToArray();
-
+			var coreLib = (AssemblyNameReference)Module.TypeSystem.CoreLibrary;
 			var anrCollisions = Module.AssemblyReferences.GroupBy(asmRef => asmRef.Name);
 			foreach (var anrCollision in anrCollisions) {
 				var name = anrCollision.Key;
-				var ordered = anrCollision.OrderByDescending(anr => anr.Version).ToArray();
-				var latest = ordered.First();
-				var others = ordered.Skip(1).ToArray();
-				if (others.Length <= 0) continue;
-				foreach (var tr in typeRefs) {
-					if (tr.Scope is AssemblyNameReference anr) {
-						//tr.MetadataToken = new MetadataToken(TokenType.AssemblyRef, 0);
-						tr.MetadataToken = new MetadataToken(TokenType.TypeRef, 0);
-						tr.Scope = latest;
-						ReportProgress($"Retargeting {tr.FullName} from {latest.Name} v{anr.Version} to v{latest.Version}");
-						continue;
-					}
-					/*
-					if (tr.Scope is ModuleDefinition scope) {
-						var asm = scope.Assembly;
-						var asmName = asm.Name;
-						if (asmName.Name != name)
-							continue;
-						var other = others.FirstOrDefault(anr => anr.Version == asmName.Version);
-						if (other == null)
-							continue;
-						// update type ref to point to latest asm
-						throw new NotImplementedException();
-					}
-					*/
-					throw new NotImplementedException();
+				var collided = new SortedSet<AssemblyNameReference>(anrCollision,
+					AssemblyNameReferenceVersionComparer.Instance);
+				if (name == coreLib.Name) {
+					collided.Add(coreLib);
 				}
+				if (!collided.Skip(1).Any())
+					continue;
+				var usedAsm = AssemblyResolver.GetKnownAssembly(name);
+				if (usedAsm == null)
+					throw new NotImplementedException();
+				var preferredVersion = collided.Min(anr => anr.Version);
+				var preferred = collided.First(anr => anr.Version == preferredVersion);
+				
+				foreach (var tr in typeRefs) {
+					if (!(tr.Scope is AssemblyNameReference anr))
+						throw new NotImplementedException();
+					var refScopeName = anr.Name;
+					if (refScopeName != name)
+						continue;
+					foreach (var anrRef in collided) {
+						tr.MetadataToken = new MetadataToken(TokenType.TypeRef, 0);
+						tr.Scope = anrRef;
+						if (tr.Resolve() == null)
+							continue;
+						if ( preferred.Version < anr.Version )
+							preferred = anr;
+						break;
+					}
+				}
+
+				preferredVersion = preferred.Version;
+
+				var others = collided.Where(anr => anr != preferred).ToArray();
+
+				foreach (var tr in typeRefs) {
+					if (!(tr.Scope is AssemblyNameReference anr))
+						throw new NotImplementedException();
+					var refScopeName = anr.Name;
+					if (refScopeName != name)
+						continue;
+					if (anr.Version == preferredVersion)
+						continue;
+					tr.MetadataToken = new MetadataToken(TokenType.TypeRef, 0);
+					tr.Scope = preferred;
+					if (tr.Resolve() == null)
+						throw new NotImplementedException();
+					ReportProgress($"Retargeting {tr.FullName} from {preferred.Name} v{anr.Version} to v{preferred.Version}");
+				}
+
 				foreach (var other in others)
 					Module.AssemblyReferences.Remove(other);
 			}

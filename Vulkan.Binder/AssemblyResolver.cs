@@ -55,9 +55,28 @@ namespace Vulkan.Binder {
 			return Stopwatch.ElapsedMilliseconds;
 		}
 
+		public sealed class AssemblyVersionComparer : IComparer<Assembly> {
+			public static readonly AssemblyVersionComparer Instance
+				= new AssemblyVersionComparer();
+
+			public int Compare(Assembly x, Assembly y) {
+				if (x == null && y == null)
+					return 0;
+				if (x == null) return -1;
+				if (y == null) return 1;
+				if (ReferenceEquals(x, y))
+					return 0;
+				var xVersion = x.GetName().Version;
+				var yVersion = y.GetName().Version;
+				return xVersion == yVersion
+					? 0 : (xVersion < yVersion ? -1 : 1);
+			}
+		}
+
 
 		public sealed class AssemblyComparer : IComparer<Assembly> {
-			public static readonly AssemblyComparer Instance = new AssemblyComparer();
+			public static readonly AssemblyComparer Instance
+				= new AssemblyComparer();
 
 			public int Compare(Assembly x, Assembly y) {
 				if (x == null && y == null) return 0;
@@ -79,7 +98,7 @@ namespace Vulkan.Binder {
 		///		This updates a cache of <see cref="KnownAssemblies" /> when called.
 		/// </summary>
 		/// <returns>A set of loaded assemblies.</returns>
-		public static IImmutableDictionary<string, Assembly> GetLoadedAssemblies() {
+		public static IImmutableDictionary<string, ICollection<Assembly>> GetLoadedAssemblies() {
 			_lastCheckedLoadedAssemblies = CreateTimestamp();
 			var procMods = Process.GetCurrentProcess().Modules.OfType<ProcessModule>();
 
@@ -89,8 +108,9 @@ namespace Vulkan.Binder {
 					=> AssemblyLoadContext.Default.LoadFromAssemblyName(asmName)))
 				.Where(NotNull)
 				.GroupBy(asm => asm.GetName().Name)
-				.Select(g => new KeyValuePair<string, Assembly>
-					(g.Key, g.OrderByDescending(asm => asm.GetName().Version).First()))
+				.Select(g => new KeyValuePair<string, ICollection<Assembly>>
+					(g.Key, new SortedSet<Assembly>(g.OrderBy(asm => asm.GetName().Version),
+						AssemblyVersionComparer.Instance)))
 				.ToImmutableDictionary();
 			return _knownAssemblies;
 		}
@@ -109,13 +129,13 @@ namespace Vulkan.Binder {
 		}
 
 		private static long _lastCheckedLoadedAssemblies;
-		private static IImmutableDictionary<string, Assembly> _knownAssemblies;
+		private static IImmutableDictionary<string, ICollection<Assembly>> _knownAssemblies;
 
 		/// <summary>
 		/// A set of known loaded assemblies.
 		/// Accurate to <see cref="KnownAssembliesTimeout"/> milliseconds.
 		/// </summary>
-		public static IImmutableDictionary<string, Assembly> KnownAssemblies
+		public static IImmutableDictionary<string, ICollection<Assembly>> KnownAssemblies
 			=> CreateTimestamp() - _lastCheckedLoadedAssemblies < KnownAssembliesTimeout
 				? (_knownAssemblies ?? GetLoadedAssemblies())
 				: GetLoadedAssemblies();
@@ -139,13 +159,14 @@ namespace Vulkan.Binder {
 			if (parameters != null && parameters.AssemblyResolver == null)
 				parameters.AssemblyResolver = this;
 
-			var resolved = ResolveInternal(refName, parameters);
+			var resolved = ResolveInternal(refName, reference.Version, parameters);
 
 			return resolved;
 		}
 
-		private AssemblyDefinition ResolveInternal(string refName, ReaderParameters parameters) {
-			if (KnownAssemblies.TryGetValue(refName, out var loadedAsm)) {
+		private AssemblyDefinition ResolveInternal(string refName, Version minVersion, ReaderParameters parameters) {
+			if (KnownAssemblies.TryGetValue(refName, out var loadedAsms)) {
+				var loadedAsm = loadedAsms.First(asm => asm.GetName().Version >= minVersion);
 				var path = new Uri(loadedAsm.CodeBase).LocalPath;
 				if (File.Exists(path))
 					return parameters == null
@@ -153,12 +174,10 @@ namespace Vulkan.Binder {
 						: AssemblyDefinition.ReadAssembly(path, parameters);
 			}
 			try {
-				var freslyLoadedAsm = Assembly.Load(new AssemblyName(refName));
+				var newlyLoadedAsm = Assembly.Load(new AssemblyName(refName));
+				AddNewKnownAssembly(newlyLoadedAsm);
 
-				_knownAssemblies = KnownAssemblies
-					.Add(freslyLoadedAsm.GetName().Name, freslyLoadedAsm);
-
-				var path = new Uri(freslyLoadedAsm.CodeBase).LocalPath;
+				var path = new Uri(newlyLoadedAsm.CodeBase).LocalPath;
 				if (!File.Exists(path))
 					throw new DllNotFoundException($"Could not locate {refName}");
 
@@ -170,5 +189,37 @@ namespace Vulkan.Binder {
 				throw new DllNotFoundException($"Could not resolve {refName}");
 			}
 		}
+
+		private static void AddNewKnownAssembly(Assembly freslyLoadedAsm) {
+			var newlyLoadedAsm = freslyLoadedAsm.GetName().Name;
+			if (KnownAssemblies.TryGetValue(newlyLoadedAsm, out var knownAsms)) {
+				if ( knownAsms.Contains(freslyLoadedAsm) )
+					return;
+				knownAsms.Add(freslyLoadedAsm);
+			}
+			KnownAssemblies.Add(newlyLoadedAsm,
+				new SortedSet<Assembly>(AssemblyVersionComparer.Instance) {
+					freslyLoadedAsm
+				});
+		}
+
+		private static readonly Version MinVersion = new Version(0,0);
+
+		public static Assembly GetKnownAssembly(string name, Version minVersion = null) {
+			if (minVersion == null)
+				minVersion = MinVersion;
+			if (KnownAssemblies.TryGetValue(name, out var loadedAsms)) {
+				return loadedAsms.FirstOrDefault(asm => asm.GetName().Version >= minVersion);
+			}
+			try {
+				var newlyLoadedAsm = Assembly.Load(new AssemblyName(name));
+				AddNewKnownAssembly(newlyLoadedAsm);
+				return newlyLoadedAsm;
+			}
+			catch {
+				return null;
+			}
+		}
+		
 	}
 }

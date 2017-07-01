@@ -123,11 +123,11 @@ namespace Vulkan.Binder {
 				throw new NotImplementedException();
 			}
 			else {
-				type = value.GetType();
-				var typeInfo = type.GetTypeInfo();
-				if (typeInfo.IsEnum) {
-					return Convert.ChangeType(value, typeInfo.UnderlyingSystemType);
-				}
+				//type = value.GetType();
+				//var typeInfo = type.GetTypeInfo();
+				//if (typeInfo.IsEnum) {
+				//	return Convert.ChangeType(value, typeInfo.UnderlyingSystemType);
+				//}
 			}
 			return value;
 		}
