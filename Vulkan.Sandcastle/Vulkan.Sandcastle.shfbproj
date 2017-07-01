@@ -14,12 +14,12 @@
     <Name>Documentation</Name>
     <!-- SHFB properties -->
     <FrameworkVersion>Cross-platform (.NET Core/.NET Standard)</FrameworkVersion>
-    <OutputPath>.\Help\</OutputPath>
+    <OutputPath>..\Documentation\</OutputPath>
     <HtmlHelpName>Documentation</HtmlHelpName>
     <Language>en-US</Language>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\Vulkan.Binder\Vulkan.xml" />
-<DocumentationSource sourceFile="..\Vulkan.Binder\Vulkan.dll" /></DocumentationSources>
+      <DocumentationSource sourceFile="..\Vulkan.Binder\Vulkan.1.0.51.0.dll" />
+<DocumentationSource sourceFile="..\Vulkan.Binder\Vulkan.1.0.51.0.xml" /></DocumentationSources>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>Website</HelpFileFormat>
@@ -27,7 +27,7 @@
     <KeepLogFile>True</KeepLogFile>
     <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
     <CleanIntermediates>True</CleanIntermediates>
-    <HelpFileVersion>1.0.0.0</HelpFileVersion>
+    <HelpFileVersion>1.5.1.0</HelpFileVersion>
     <MaximumGroupParts>2</MaximumGroupParts>
     <NamespaceGrouping>False</NamespaceGrouping>
     <SyntaxFilters>C#</SyntaxFilters>
@@ -37,17 +37,94 @@
     <PresentationStyle>VS2013</PresentationStyle>
     <Preliminary>False</Preliminary>
     <NamingMethod>MemberName</NamingMethod>
-    <HelpTitle>Vulkan Bindings for  .NET Standard</HelpTitle>
+    <HelpTitle>Vulkan Bindings for .NET Standard</HelpTitle>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
-    <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected, PublicCompilerGenerated</VisibleItems>
+    <VisibleItems>InheritedMembers, InheritedFrameworkMembers, ProtectedInternalAsProtected, NoPIATypes</VisibleItems>
     <PlugInConfigurations>
-      <PlugInConfig id="Documented Entities Only" enabled="True" xmlns="">
-        <configuration />
+      <PlugInConfig id="Wildcard Assembly References" enabled="True">
+        <configuration>
+  <references>
+    <reference path="$(UserProfile)\.nuget\packages\" wildcard="*.dll" recurse="true" />
+  </references>
+</configuration>
       </PlugInConfig>
     </PlugInConfigurations>
     <NamespaceSummaries>
-      <NamespaceSummaryItem name="(global)" isDocumented="True" xmlns="">Generated Vulkan bindings are created at the global namespace.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Interop" isDocumented="True" xmlns="">Interop components intended to aid in interaction with native types.</NamespaceSummaryItem></NamespaceSummaries>
+      <NamespaceSummaryItem name="(global)" isDocumented="True">Generated Vulkan bindings are created at the global namespace.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Interop" isDocumented="True">Interop components intended to aid in interaction with native types.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="System.Runtime.CompilerServices" isDocumented="False" /></NamespaceSummaries>
+    <MissingTags>AutoDocumentCtors, AutoDocumentDispose</MissingTags>
+    <WarnOnMissingSourceContext>False</WarnOnMissingSourceContext>
+    <ComponentConfigurations>
+      <ComponentConfig id="Syntax Component" enabled="True">
+        <component id="Syntax Component">
+  <syntax input="/document/reference" output="/document/syntax" renderReferenceLinks="true" />
+  <generators>
+    {@SyntaxFilters}
+</generators>
+  <containerElement name="codeSnippetGroup" addNoExampleTabs="true" includeOnSingleSnippets="false" groupingEnabled="{@CodeSnippetGrouping}" />
+  <configurations>
+    <generator id="C#" />
+    <generator id="Visual Basic">
+      <includeLineContinuation value="false" />
+    </generator>
+    <generator id="Visual Basic Usage">
+      <includeLineContinuation value="false" />
+    </generator>
+    <generator id="Managed C++" />
+    <generator id="F#" />
+    <generator id="J#" />
+    <generator id="JScript" />
+    <generator id="JavaScript" />
+    <generator id="XAML Usage" />
+    <generator id="ASP.NET" />
+    <generator id="X#" />
+  </configurations>
+</component>
+      </ComponentConfig>
+<ComponentConfig id="IntelliSense Component" enabled="True"><component id="IntelliSense Component"><!-- Output options (optional)
+  Attributes:
+    Include namespaces (false by default)
+    Namespaces comments filename ("Namespaces" if not specified or empty)
+    Output folder (current folder if not specified or empty) --><output includeNamespaces="false" namespacesFile="Namespaces" folder="{@OutputFolder}" boundedCapacity="100" /></component></ComponentConfig>
+<ComponentConfig id="Code Block Component" enabled="True"><component id="Code Block Component">
+  <basePath value="{@HtmlEncProjectFolder}" />
+  <outputPaths>{@HelpFormatOutputPaths}</outputPaths>
+  <allowMissingSource value="true" />
+  <removeRegionMarkers value="false" />
+  <colorizer syntaxFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.xml" styleFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.xsl" stylesheet="{@SHFBFolder}PresentationStyles\Colorizer\highlight.css" scriptFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.js" disabled="{@DisableCodeBlockComponent}" language="cpp" tabSize="4" numberLines="true" outlining="false" keepSeeTags="false" defaultTitle="true" />
+</component></ComponentConfig>
+<ComponentConfig id="Comments Index Data (ESENT Cache)" enabled="False"><component id="Comments Index Data (ESENT Cache)">
+  <index name="comments" value="/doc/members/member" key="@name" cache="30" localCacheSize="2500" frameworkCachePath="{@LocalDataFolder}Cache\CommentsIndexCache" projectCachePath="">
+	{@FrameworkCommentList}
+	{@CommentFileList}
+</index>
+  <copy name="comments" source="*" target="/document/comments" />
+</component></ComponentConfig>
+<ComponentConfig id="Reflection Index Data (ESENT Cache)" enabled="False"><component id="Reflection Index Data (ESENT Cache)">
+  <index name="reflection" value="/reflection/apis/api" key="@id" cache="15" localCacheSize="2500" frameworkCachePath="{@LocalDataFolder}Cache\ReflectionIndexCache" projectCachePath="">
+    <data base="{@FrameworkReflectionDataFolder}" recurse="true" files="*.xml" duplicateWarning="false" groupId="ReflectionIndexCache">
+		{@ReferenceLinkNamespaceFiles}
+	</data>
+    <data files="reflection.xml" groupId="Project_Ref_{@UniqueID}" />
+  </index>
+  <copy name="reflection" source="*" target="/document/reference" />
+</component></ComponentConfig>
+<ComponentConfig id="Resolve Reference Links (ESENT Cache)" enabled="False"><component id="Resolve Reference Links (ESENT Cache)">{@HRefFormat}
+<locale value="{@Locale}" /><linkTarget value="{@SdkLinkTarget}" /><helpOutput format="HtmlHelp1"><msdnContentIdCache path="{@LocalDataFolder}Cache\MsdnContentId.cache" cachePath="{@LocalDataFolder}Cache\ESentMsdnContentIdCache" localCacheSize="2500" /><targets base="{@FrameworkReflectionDataFolder}" recurse="true" files="*.xml" type="{@HtmlSdkLinkType}" id="FrameworkTargets" cachePath="{@LocalDataFolder}Cache\ESentFrameworkTargetCache" localCacheSize="2500">
+		{@ReferenceLinkNamespaceFiles}
+	</targets><targets files="reflection.xml" type="Local" id="ProjectTargets" cachePath="" localCacheSize="2500" noReload="true" /></helpOutput><helpOutput format="MSHelpViewer"><msdnContentIdCache path="{@LocalDataFolder}Cache\MsdnContentId.cache" cachePath="{@LocalDataFolder}Cache\ESentMsdnContentIdCache" localCacheSize="2500" /><targets base="{@FrameworkReflectionDataFolder}" recurse="true" files="*.xml" type="{@MSHelpViewerSdkLinkType}" id="FrameworkTargets" cachePath="{@LocalDataFolder}Cache\ESentFrameworkTargetCache" localCacheSize="2500">
+		{@ReferenceLinkNamespaceFiles}
+	</targets><targets files="reflection.xml" type="Id" id="ProjectTargets" cachePath="" localCacheSize="2500" noReload="true" /></helpOutput><helpOutput format="Website"><msdnContentIdCache path="{@LocalDataFolder}Cache\MsdnContentId.cache" cachePath="{@LocalDataFolder}Cache\ESentMsdnContentIdCache" localCacheSize="2500" /><targets base="{@FrameworkReflectionDataFolder}" recurse="true" files="*.xml" type="{@WebsiteSdkLinkType}" id="FrameworkTargets" cachePath="{@LocalDataFolder}Cache\ESentFrameworkTargetCache" localCacheSize="2500">
+		{@ReferenceLinkNamespaceFiles}
+	</targets><targets files="reflection.xml" type="Local" id="ProjectTargets" cachePath="" localCacheSize="2500" noReload="true" /></helpOutput><helpOutput format="OpenXml"><msdnContentIdCache path="{@LocalDataFolder}Cache\MsdnContentId.cache" cachePath="{@LocalDataFolder}Cache\ESentMsdnContentIdCache" localCacheSize="2500" /><targets base="{@FrameworkReflectionDataFolder}" recurse="true" files="*.xml" type="{@WebsiteSdkLinkType}" id="FrameworkTargets" cachePath="{@LocalDataFolder}Cache\ESentFrameworkTargetCache" localCacheSize="2500">
+		{@ReferenceLinkNamespaceFiles}
+	</targets><targets files="reflection.xml" type="Local" id="ProjectTargets" cachePath="" localCacheSize="2500" noReload="true" /></helpOutput><helpOutput format="Markdown"><msdnContentIdCache path="{@LocalDataFolder}Cache\MsdnContentId.cache" cachePath="{@LocalDataFolder}Cache\ESentMsdnContentIdCache" localCacheSize="2500" /><targets base="{@FrameworkReflectionDataFolder}" recurse="true" files="*.xml" type="{@WebsiteSdkLinkType}" id="FrameworkTargets" cachePath="{@LocalDataFolder}Cache\ESentFrameworkTargetCache" localCacheSize="2500">
+		{@ReferenceLinkNamespaceFiles}
+	</targets><targets files="reflection.xml" type="Local" id="ProjectTargets" cachePath="" localCacheSize="2500" noReload="true" /></helpOutput></component></ComponentConfig>
+<ComponentConfig id="API Token Resolution" enabled="True"><component id="API Token Resolution">{@TokenFiles}
+<replace elements="/*//token" item="string(.)" /></component></ComponentConfig></ComponentConfigurations>
+    <WorkingPath>Help\</WorkingPath>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
