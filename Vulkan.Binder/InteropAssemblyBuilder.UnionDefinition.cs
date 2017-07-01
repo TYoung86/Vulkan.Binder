@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Interop;
 using Mono.Cecil;
 using Vulkan.Binder.Extensions;
 
@@ -12,6 +14,7 @@ namespace Vulkan.Binder {
 				throw new NotImplementedException();
 			}
 			var unionName = unionInfo.Name;
+			Debug.WriteLine($"Defining union {unionName}");
 			if (TypeRedirects.TryGetValue(unionName, out var rename)) {
 				unionName = rename;
 			}
@@ -19,19 +22,19 @@ namespace Vulkan.Binder {
 				PublicSealedUnionTypeAttributes, null,
 				(int) unionInfo.Alignment,
 				(int) unionInfo.Size);
-			unionDef.SetCustomAttribute(() => new CompilerGeneratedAttribute());
+			unionDef.SetCustomAttribute(() => new BinderGeneratedAttribute());
 			//unionDef.SetCustomAttribute(StructLayoutExplicitAttributeInfo);
 			var fieldParams = new LinkedList<ParameterInfo>(unionInfo.Fields.Select(f => ResolveField(f.Type, f.Name, (int) f.Offset)));
 
 			return () => {
 				foreach (var fieldParam in fieldParams)
-					fieldParam.RequireCompleteTypeReferences(TypeRedirects,true);
+					fieldParam.Complete(TypeRedirects,true);
+				
+				Debug.WriteLine($"Completed dependencies for union {unionName}");
 
 				fieldParams.ConsumeLinkedList(fieldParam => {
 					var fieldName = fieldParam.Name;
 					var fieldType = fieldParam.Type;
-					if (fieldType is IncompleteTypeReference)
-						throw new InvalidProgramException("Encountered incomplete type in structure field definition.");
 					var fieldDef = unionDef.DefineField(fieldName, fieldType, FieldAttributes.Public);
 					//fieldDef.SetCustomAttribute(AttributeInfo.Create(
 					//	() => new FieldOffsetAttribute(fieldParam.Position)), Module);

@@ -24,7 +24,7 @@ namespace Vulkan.Binder {
 
 		private const TypeAttributes DelegateTypeAttributes
 			= PublicSealedTypeAttributes
-			| TypeAttributes.AutoClass;
+			| TypeAttributes.AnsiClass;
 
 		private const TypeAttributes PublicInterfaceTypeAttributes
 			= TypeAttributes.Public

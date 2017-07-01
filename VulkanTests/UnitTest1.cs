@@ -7,6 +7,7 @@ namespace VulkanTests
     {
         //[Fact]
         public void Test1() {
+	        var a = typeof(vkCreateInstance);
 	        var x = VkCullModeFlags.VK_CULL_MODE_NONE;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -10,8 +11,10 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.XPath;
 using HtmlAgilityPack;
 using HtmlAgilityPack.CssSelectors.NetCore;
+using Interop;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using Vulkan.Binder.Extensions;
@@ -19,6 +22,8 @@ using Vulkan.Binder.Extensions;
 namespace Vulkan.Binder {
 	public static class Program {
 		public const string VkManBasePath = "https://www.khronos.org/registry/vulkan/specs/1.0/man/html/";
+		public static readonly Uri VkManBasePathUri = new Uri(VkManBasePath);
+		public static readonly string LocalVulkanHtmlManPages = Environment.GetEnvironmentVariable("VULKAN_HTMLMANPAGES");
 
 		public static class Cdn {
 			private const string CdnBasePath = "https://cdn.rawgit.com/";
@@ -38,13 +43,13 @@ namespace Vulkan.Binder {
 
 		private static Task<KeyValuePair<string, Stream>> CreateHttpFetchTaskAsync(string filePath) {
 			var fileName = Path.GetFileName(filePath);
-			Console.WriteLine("Creating Fetch: {0}", fileName);
+			WriteLine("Creating Fetch: {0}", fileName);
 
 			return Task.Run(async () => new KeyValuePair<string, Stream>(
 				fileName,
 				await Task.Run(async () => {
 					var fetchStream = await HttpClient.GetStreamAsync(filePath).ConfigureAwait(false);
-					Console.WriteLine("Fetching: {0}", fileName);
+					WriteLine("Fetching: {0}", fileName);
 					MemoryStream ms;
 					try {
 						ms = new MemoryStream(new byte[fetchStream.Length], true);
@@ -54,10 +59,36 @@ namespace Vulkan.Binder {
 					}
 					await fetchStream.CopyToAsync(ms).ConfigureAwait(false);
 					ms.Position = 0;
-					Console.WriteLine("Fetched: {0}", fileName);
+					WriteLine("Fetched: {0}", fileName);
 					return ms;
 				}).ConfigureAwait(false)
 			));
+		}
+
+		private static StreamWriter LogWriter
+			= new StreamWriter(new FileStream(
+				$"{typeof(Program).Namespace}.{Process.GetCurrentProcess().Id}.log",
+				FileMode.Append, FileAccess.Write, FileShare.Read, 32768)) {
+				AutoFlush = true, NewLine = "\r\n"
+			};
+		
+		public static void LogWriteLine(string format, params object[] args) {
+			LogWriter.WriteLine(format, args);
+		}
+
+		public static void WriteLine(string format, params object[] args) {
+			var line = string.Format(format, args);
+			LogWriteLine(line);
+			Console.WriteLine(line);
+		}
+		
+		public static void LogWrite(string format, params object[] args) {
+			LogWriter.Write(format, args);
+		}
+		public static void Write(string format, params object[] args) {
+			var line = string.Format(format, args);
+			LogWrite(line);
+			Console.Write(line);
 		}
 
 		public static void Main() {
@@ -65,15 +96,14 @@ namespace Vulkan.Binder {
 		}
 
 		public static readonly HttpClient HttpClient = new HttpClient();
-		private static TypeDefinition _cgaTd;
-		private static TypeDefinition _mcdTd;
 
 		public static async Task MainAsync() {
 			var tempDirName = $"{typeof(Program).Namespace}.{Process.GetCurrentProcess().Id}";
 			var tempPath = Path.Combine(Path.GetTempPath(), tempDirName);
+			if ( Directory.Exists(tempPath) ) Directory.Delete(tempPath, true);
 			var workDirectory = Directory.CreateDirectory(tempPath);
-			var startingDirectory = Environment.CurrentDirectory;
-			Environment.CurrentDirectory = workDirectory.FullName;
+			var startingDirectory = Directory.GetCurrentDirectory();
+			Directory.SetCurrentDirectory(workDirectory.FullName);
 
 			var xmlTask = Task.Run(async () => new VkXmlConsumer(XDocument.Load(
 				await HttpClient.GetStreamAsync(Cdn.VkXml).ConfigureAwait(false))));
@@ -102,12 +132,31 @@ namespace Vulkan.Binder {
 
 
 			var xml = xmlTask.Result;
-
-			Console.WriteLine("Building Vulkan interop assembly.");
+			
+			Console.WriteLine();
+			LogWriteLine("Building Vulkan interop assembly.");
 
 			var vkHeaderVersion = xml.DefineTypes["VK_HEADER_VERSION"].LastNode.ToString().Trim();
 
-			var asmBuilder = new InteropAssemblyBuilder("Vulkan", "1.0." + vkHeaderVersion);
+			_asmBuilder = new InteropAssemblyBuilder("Vulkan", "1.0." + vkHeaderVersion);
+			string lastState = null;
+			_asmBuilder.ProgressReportFunc = (state, done, total) => {
+				if (state != lastState) {
+					Console.WriteLine();
+					LogWriteLine("");
+					LogWrite(state);
+				}
+				if (total <= 0 || done < 0)
+					Console.WriteLine(state);
+				else {
+					var progress = (double) done / total;
+					Console.Write("{0} {1:P} ({2}/{3})\r",
+						state, progress, done, total);
+					LogWrite(".");
+				}
+
+				lastState = state;
+			};
 
 			var knownTypes = ImmutableDictionary.CreateBuilder<string, InteropAssemblyBuilder.KnownType>();
 			var typeRedirs = ImmutableDictionary.CreateBuilder<string, string>();
@@ -180,18 +229,30 @@ namespace Vulkan.Binder {
 			// with last parameter optional="true" and second to last parameter optional="false,true"
 			// create something to handle back-to-back calls for count and alloc array of last parameter type
 
-			asmBuilder.KnownTypes = knownTypes.ToImmutable();
-			asmBuilder.TypeRedirects = typeRedirs.ToImmutable();
-
+			_asmBuilder.KnownTypes = knownTypes.ToImmutable();
+			_asmBuilder.TypeRedirects = typeRedirs.ToImmutable();
+			
 			headersSaved.Wait();
+			
+			Console.WriteLine();
+			WriteLine("Parsing headers.");
+			_asmBuilder.ParseHeader("vulkan.h");
+			
+			Console.WriteLine();
+			WriteLine("Compiling headers.");
 
-			asmBuilder.ParseHeader("vulkan.h");
+			_asmBuilder.Compile();
 
-			asmBuilder.Compile();
+			Console.WriteLine();
+			WriteLine("Adding customizations...");
 
 			// create automatic runtime linker bound to module initializer
-			var moduleType = asmBuilder.Module.GetType("<Module>");
-			var staticLinkType = asmBuilder.Module.DefineType("Vulkan", TypeAttributes.Abstract | TypeAttributes.Sealed);
+			var moduleType = _asmBuilder.Module.GetType("<Module>");
+			var staticLinkType = _asmBuilder.Module.DefineType("Vulkan",
+				TypeAttributes.Abstract
+				| TypeAttributes.Sealed
+				| TypeAttributes.Public
+			);
 			var staticLinkInit = staticLinkType.DefineConstructor(MethodAttributes.Static | MethodAttributes.Assembly);
 			staticLinkInit.GenerateIL(il => {
 				// 
@@ -203,22 +264,23 @@ namespace Vulkan.Binder {
 				il.Emit(OpCodes.Call, staticLinkInit);
 				il.Emit(OpCodes.Ret);
 			});
+			
+			Console.WriteLine();
+			WriteLine("Saving constructed assembly.");
+			var asm = _asmBuilder.Save(startingDirectory);
 
-			var asm = asmBuilder.Save(startingDirectory);
-
-			_cgaTd = typeof(CompilerGeneratedAttribute).Import(asmBuilder.Module).Resolve();
-			_mcdTd = typeof(MulticastDelegate).Import(asmBuilder.Module).Resolve();
-
-			var compilerGeneratedTypes = asmBuilder.Module.Types
+			var compilerGeneratedTypes = _asmBuilder.Module.Types
 				.Select(et => et.Resolve())
-				.Where(et => et.CustomAttributes.Any(ca => ca.AttributeType.Is(_cgaTd)))
+				.Where(et => et.CustomAttributes.Any(ca => ca.AttributeType.Is(_asmBuilder.BinderGeneratedAttributeType)))
 				.ToArray();
-
+			
+			Console.WriteLine();
+			WriteLine($"Generating XML documentation for {compilerGeneratedTypes.Length} members.");
 			var xdoc = new XDocument(
 				new XElement("doc",
 					new XElement("assembly",
 						new XElement("name",
-							new XText(asmBuilder.Name.Name)
+							new XText(_asmBuilder.Name.Name)
 						)
 					),
 					new XElement("members",
@@ -227,28 +289,36 @@ namespace Vulkan.Binder {
 					)
 				)
 			);
+			
+			Console.WriteLine();
+			WriteLine("Saving XML documentation.");
 
-			xdoc.Save(Path.Combine(startingDirectory, "Vulkan.xml"));
+			using (var fs = File.Open(Path.Combine(startingDirectory, "Vulkan.xml"),FileMode.Create))
+				xdoc.Save(fs);
 
 			if (!asm.Exists)
 				throw new NotImplementedException();
+			
+			Console.WriteLine();
+			WriteLine("Provided product artifacts.");
 
-			Console.WriteLine("Provided product artifacts.");
-
-			foreach (var stat in asmBuilder.Statistics)
+			foreach (var stat in _asmBuilder.Statistics)
 				Console.WriteLine($"{stat.Value} {stat.Key}.");
+			
+			Console.WriteLine();
+			WriteLine("Cleaning up temporary artifacts.");
 
-			Console.WriteLine("Cleaning up temporary artifacts.");
-
-			Environment.CurrentDirectory = startingDirectory;
-			workDirectory.Delete(true);
-
-			Console.WriteLine("Done.");
-
-			if (!Environment.UserInteractive) return;
-
-			Console.WriteLine("Press any key to exit.");
-			Console.ReadKey(true);
+			Directory.SetCurrentDirectory(startingDirectory);
+			try {
+				workDirectory.Delete(true);
+			}
+			catch (IOException ex) {
+				Console.WriteLine();
+				WriteLine($"Cleaning up failed: {ex.Message}.");
+			}
+			
+			Console.WriteLine();
+			WriteLine("Done.");
 		}
 		
 		private static async Task<XElement> FetchAndParseHtmlDocAsync(TypeDefinition et) {
@@ -263,7 +333,7 @@ namespace Vulkan.Binder {
 				return typeDesc;
 			}
 			var baseType = et.BaseType;
-			if (baseType.Is(_mcdTd)) {
+			if (baseType.Is(_asmBuilder.MulticastDelegateType)) {
 				// function
 				await FetchAndParseHtmlDocAsync(name, typeDesc).ConfigureAwait(false);
 				return typeDesc;
@@ -280,19 +350,30 @@ namespace Vulkan.Binder {
 		}
 		private static async Task FetchAndParseHtmlDocAsync(string name, XContainer typeDesc) {
 			var hdoc = new HtmlDocument {OptionOutputAsXml = true};
-			Console.WriteLine("Fetching doc for: {0}", name);
+			WriteLine("Fetching doc for: {0}", name);
 			Stream stream;
 			try {
-				stream = await HttpClient.GetStreamAsync
-					(VkManBasePath + name + ".html").ConfigureAwait(false);
+				if (LocalVulkanHtmlManPages != null) {
+					var localHtmlPath = Path.Combine(LocalVulkanHtmlManPages, name + ".html");
+					stream = File.Exists(localHtmlPath)
+						? File.OpenRead(localHtmlPath)
+						: throw new FileNotFoundException(localHtmlPath);
+				}
+				else {
+					stream = await HttpClient.GetStreamAsync
+						(VkManBasePath + name + ".html").ConfigureAwait(false);
+				}
 			}
-			catch (HttpRequestException ex) {
-				// 404 or such
-				Console.WriteLine("No doc for: {0}", name);
+			catch (FileNotFoundException) {
+				WriteLine("No local doc for: {0}", name);
+				return;
+			}
+			catch (HttpRequestException) {
+				WriteLine("No remote doc for: {0}", name);
 				return;
 			}
 			hdoc.Load(stream);
-			Console.WriteLine("Fetched doc for: {0}", name);
+			WriteLine("Fetched doc for: {0}", name);
 
 			// summary
 			var nameParagraph = hdoc.QuerySelector("#header p")?.InnerText;
@@ -303,48 +384,222 @@ namespace Vulkan.Binder {
 					throw new NotImplementedException();
 
 				typeDesc.Add(new XElement("summary",
-					new XText(nameParagraphParts[1])));
+					new XText(nameParagraphParts[1].Trim())));
 			}
 
 			// remarks
-			XElement remarksElem = new XElement("remarks");
+			var remarksElem = new XElement("remarks");
 			var descSection = hdoc.QuerySelector("#_description + .sectionbody");
 			if (descSection != null) {
-				await WriteHtmlNodeToXmlElementAsync(descSection, remarksElem).ConfigureAwait(false);
+				WriteHtmlNodeToXmlElement(descSection, remarksElem);
 			}
 
 			// c spec, copy into remarks
 			var specSection = hdoc.QuerySelector("#content #_c_specification + .sectionbody");
 			if (specSection != null)
-				await WriteHtmlNodeToXmlElementAsync(specSection, remarksElem).ConfigureAwait(false);
+				WriteHtmlNodeToXmlElement(specSection, remarksElem);
 
-			if ( remarksElem.DescendantNodes().Any() )
+			if ( remarksElem.Nodes().Any() )
 				typeDesc.Add(remarksElem);
 
 			// see alsos
-			var seeAlsos = hdoc.QuerySelectorAll("#_seealso + .sectionbody a");
-			foreach (var seeAlso in seeAlsos)
-				typeDesc.Add(new XElement("seealso", new XAttribute("cref", $"T:{seeAlso}")));
+			var seeAlsos = hdoc.QuerySelectorAll("#_see_also + .sectionbody a");
+			foreach (var seeAlso in seeAlsos) {
+				string cref = null;
+				var href = seeAlso.GetAttributeValue("href",null);
+				if (href == null)
+					continue;
+				if (href.StartsWith("#")) {
+					continue;
+				}
+				if (href.StartsWith(".")) {
+					cref = $"!:{new Uri(VkManBasePathUri, href).AbsoluteUri}";
+				}
+				else if (href.StartsWith("http://")||href.StartsWith("https://")) {
+					cref = $"!:{new Uri(VkManBasePathUri, href).AbsoluteUri}";
+				}
+				else if (href.StartsWith("/")) {
+					throw new NotImplementedException();
+				}
+				else if (href.EndsWith(".html")) {
+					cref = $"T:{href.Substring(0, href.Length-5)}";
+				}
+				if ( cref == null )
+					throw new NotImplementedException();
+				typeDesc.Add(new XElement("seealso", new XAttribute("cref", cref)));
+			}
 		}
-		private static async Task WriteHtmlNodeToXmlElementAsync(HtmlNode hn, XElement xe) {
+		private static void WriteHtmlNodeToXmlElement(HtmlNode hn, XElement xe) {
 			try {
+				byte[] content;
 				using (var ms = new MemoryStream()) {
-					var sw = new StreamWriter(ms);
-					await sw.WriteAsync("<div>").ConfigureAwait(false);
-					hn.WriteContentTo(sw);
-					await sw.WriteAsync("</div>").ConfigureAwait(false);
-					await sw.FlushAsync().ConfigureAwait(false);
-					ms.Seek(0, SeekOrigin.Begin);
+					using (var sw = new StreamWriter(ms)) {
+						sw.Write("<htmlfrag>");
+						hn.WriteContentTo(sw);
+						sw.Write("</htmlfrag>");
+						sw.Flush();
+						content = ms.ToArray();
+					}
+				}
+				using (var sr = new StreamReader(new MemoryStream(content, false))) {
+					var htmlfrag = XElement.Load(sr);
 
-					var sr = new StreamReader(ms);
-					xe.Add(XElement.Load(sr));
-					sw.Dispose();
+					var attrsToRemove = (IEnumerable)htmlfrag.XPathEvaluate("//@class|//@id|//@style");
+					// ReSharper disable once ConditionIsAlwaysTrueOrFalse
+					if (attrsToRemove != null)
+						foreach (var attr in attrsToRemove.OfType<XAttribute>())
+							attr.Remove();
+
+					// inline code elements become c elements
+					ForEachByXPath(htmlfrag, "//code[not(ancestor::pre)]", elem => elem.Name = "c");
+
+					ForEachByXPath(htmlfrag, "//div[/p]", elem => elem.Name = "para");
+					
+					ForEachByXPath(htmlfrag, "//ul", elem => {
+						elem.Name = "list";
+						elem.SetAttributeValue("type","bullet");
+					});
+
+					ForEachByXPath(htmlfrag, "//ol", elem => {
+						elem.Name = "list";
+						elem.SetAttributeValue("type","number");
+					});
+
+					ForEachByXPath(htmlfrag, "//li", elem => {
+						elem.Name = "description";
+						elem.ReplaceWith(new XElement("item", elem));
+					});
+					ForEachByXPath(htmlfrag, "//table/caption", elem => {
+						elem.Name = "para";
+						elem.RemoveAttributes();
+						var table = elem.Parent;
+						if (table == null) {
+							// logically this should never happen
+							throw new NotImplementedException();
+						}
+						elem.Remove();
+						table.AddBeforeSelf(elem);
+						
+					});
+
+					ForEachByXPath(htmlfrag, "//table/thead/th|//table/tbody/tr/td", elem => {
+						elem.Name = "term";
+						elem.RemoveAttributes();
+					});
+					ForEachByXPath(htmlfrag, "//table/tbody/tr", elem => {
+						elem.Name = "item";
+						elem.RemoveAttributes();
+					});
+					ForEachByXPath(htmlfrag, "//table/thead", elem => {
+						elem.Name = "listheader";
+						elem.RemoveAttributes();
+					});
+					ForEachByXPath(htmlfrag, "//table", elem => {
+						elem.Name = "list";
+						elem.RemoveAttributes();
+						elem.SetAttributeValue("type","table");
+					});
+
+					// code elements inside pre elements are stripped
+					ForEachByXPath(htmlfrag, "//pre/code", RemoveKeepingDescendants);
+
+					// pre elements are converted into code elements
+					ForEachByXPath(htmlfrag, "//pre", elem => elem.Name = "code");
+
+					// anchors are converted to see elements or replaced with full uri 
+					ForEachByXPath(htmlfrag, "//a", anchor => {
+						var hrefAttr = anchor.Attribute("href");
+						if (hrefAttr == null) {
+							// likely a target anchor with id removed
+							anchor.Remove();
+							return;
+						}
+						var href = hrefAttr.Value;
+						if (href.StartsWith(".")) {
+							// translate relative uris
+							var newHref = new Uri(VkManBasePathUri, href).AbsoluteUri;
+							if (newHref.StartsWith("."))
+								throw new NotImplementedException();
+							hrefAttr.Value = newHref;
+							return;
+						}
+						if (href.StartsWith("#")) {
+							// translate relative uris
+							RemoveKeepingDescendants(anchor);
+							return;
+						}
+						if (href.StartsWith("http://") || href.StartsWith("https://")) {
+							// passthrough absolute uris
+							return;
+						}
+						if (href.StartsWith("/")) {
+							throw new NotImplementedException();
+						}
+						if (!href.EndsWith(".html")) {
+							throw new NotImplementedException();
+						}
+						var cref = href.Substring(0, href.Length - 5);
+						anchor.Name = "see";
+						anchor.RemoveAttributes();
+						if (anchor.Value == cref)
+							anchor.RemoveNodes();
+						anchor.SetAttributeValue("cref", cref);
+					});
+
+					StripByXPath(htmlfrag, "//div|//p|//span|//em|//strong|//col|//colgroup|tbody");
+
+					xe.Add(htmlfrag.Nodes().Cast<object>().ToArray());
 				}
 			}
-			catch (XmlException ex) {
+			catch (XmlException) {
 				// ?!
 			}
 	
+		}
+
+		private static readonly XNode SpaceTextNode = new XText(" ");
+		private static readonly IEnumerable<XNode> SpaceTextNodeCombiner = new[] {SpaceTextNode};
+		private static InteropAssemblyBuilder _asmBuilder;
+
+		private static void StripByXPath(XNode xe, string xpath) {
+			ForEachByXPath(xe, xpath, RemoveKeepingDescendants);
+		}
+
+		private static void ForEachByXPath(XNode xe, string xpath, Action<XElement> action) {
+			var elems = xe.XPathSelectElements(xpath)
+				.OrderByDescending(elem => elem.Ancestors().Count())
+				.ToArray();
+			int i = 0;
+			do {
+				foreach (var elem in elems)
+					action(elem);
+				++i;
+				elems = xe.XPathSelectElements(xpath)
+					.OrderByDescending(elem => elem.Ancestors().Count())
+					.ToArray();
+			} while (elems.Any() && i < 5);
+		}
+			
+
+		private static void RemoveKeepingDescendants(XElement elem) {
+			elem.RemoveAttributes();
+			for(;;) {
+				if (elem.Parent == null)
+					break;
+				try {
+					var descendants = SpaceTextNodeCombiner.Concat(elem.Nodes()).Concat(SpaceTextNodeCombiner);
+					if (descendants.Any())
+						elem.ReplaceWith(descendants);
+					else
+						elem.Remove();
+				}
+				catch (InvalidOperationException) {
+					if (elem.Parent == null)
+						break;
+					continue;
+				}
+				break;
+			}
 		}
 	}
 }

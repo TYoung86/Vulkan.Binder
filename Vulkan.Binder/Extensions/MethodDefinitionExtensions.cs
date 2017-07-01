@@ -3,7 +3,7 @@ using Mono.Cecil;
 using Mono.Cecil.Cil;
 
 namespace Vulkan.Binder.Extensions {
-	public static class MethodDefinitionEstensions {
+	public static class MethodDefinitionExtensions {
 		
 		public static void GenerateIL(this MethodDefinition methodDef, Action<ILProcessor> emitter)
 			=> emitter(methodDef.Body.GetILProcessor());

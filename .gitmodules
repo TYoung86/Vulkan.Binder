@@ -1,0 +1,6 @@
+[submodule "ClangSharp"]
+	path = ClangSharp
+	url = git@github.com:Microsoft/ClangSharp.git
+[submodule "Mono.Cecil"]
+	path = Mono.Cecil
+	url = git@github.com:jbevain/cecil.git

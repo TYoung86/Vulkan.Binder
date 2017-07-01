@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using Interop;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using Mono.Cecil.Rocks;
@@ -10,6 +13,9 @@ using Vulkan.Binder.Extensions;
 using SConstructorInfo = System.Reflection.ConstructorInfo;
 using TypeReferenceTransform = Vulkan.Binder.Extensions.CecilExtensions.TypeReferenceTransform;
 using BindingFlags = System.Reflection.BindingFlags;
+using FieldAttributes = Mono.Cecil.FieldAttributes;
+using MethodAttributes = Mono.Cecil.MethodAttributes;
+using ParameterAttributes = Mono.Cecil.ParameterAttributes;
 
 namespace Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
@@ -34,7 +40,7 @@ namespace Vulkan.Binder {
 			// handle type
 			var handleDef = Module.DefineType(structName,
 				PublicSealedStructTypeAttributes);
-			handleDef.SetCustomAttribute(() => new CompilerGeneratedAttribute());
+			handleDef.SetCustomAttribute(() => new BinderGeneratedAttribute());
 			//handleDef.SetCustomAttribute(StructLayoutSequentialAttributeInfo);
 			var handleInterface = IHandleGtd.MakeGenericInstanceType(handleDef);
 			handleDef.AddInterfaceImplementation(handleInterface);
@@ -59,7 +65,7 @@ namespace Vulkan.Binder {
 			= new ConcurrentDictionary<string, GenericInstanceType>();
 
 		private static readonly SConstructorInfo ArgumentOutOfRangeCtorInfo
-			= typeof(ArgumentOutOfRangeException).GetConstructor(Type.EmptyTypes);
+			= typeof(ArgumentOutOfRangeException).GetTypeInfo().GetConstructor(Type.EmptyTypes);
 
 
 		public readonly MethodReference ArgumentOutOfRangeCtor;
@@ -75,6 +81,8 @@ namespace Vulkan.Binder {
 			}
 
 			var structName = structInfo32.Name;
+
+			Debug.WriteLine($"Defining interface and structure {structName}");
 			
 			if (TypeRedirects.TryGetValue(structName, out var rename)) {
 				structName = rename;
@@ -82,13 +90,13 @@ namespace Vulkan.Binder {
 
 			var interfaceDef = Module.DefineType("I" + structName,
 				PublicInterfaceTypeAttributes);
-			interfaceDef.SetCustomAttribute(() => new CompilerGeneratedAttribute());
+			interfaceDef.SetCustomAttribute(() => new BinderGeneratedAttribute());
 
 			var structDef32 = Module.DefineType(structName + "32",
 				PublicSealedStructTypeAttributes, null,
 				(int) structInfo32.Alignment,
 				(int) structInfo32.Size);
-			structDef32.SetCustomAttribute(() => new CompilerGeneratedAttribute());
+			structDef32.SetCustomAttribute(() => new BinderGeneratedAttribute());
 			/*
 			structDef32.SetCustomAttribute(AttributeInfo.Create(
 				() => new StructLayoutAttribute(LayoutKind.Sequential) {
@@ -100,7 +108,7 @@ namespace Vulkan.Binder {
 				PublicSealedStructTypeAttributes, null,
 				(int) structInfo64.Alignment,
 				(int) structInfo64.Size);
-			structDef64.SetCustomAttribute(() => new CompilerGeneratedAttribute());
+			structDef64.SetCustomAttribute(() => new BinderGeneratedAttribute());
 			/*
 			structDef64.SetCustomAttribute(AttributeInfo.Create(
 				() => new StructLayoutAttribute(LayoutKind.Sequential) {
@@ -134,9 +142,11 @@ namespace Vulkan.Binder {
 
 			TypeDefinition[] BuildInterfacePropsAndStructFields() {
 				foreach (var fieldParam in fieldParams32)
-					fieldParam.RequireCompleteTypeReferences(TypeRedirects, "32");
+					fieldParam.Complete(TypeRedirects, "32");
 				foreach (var fieldParam in fieldParams64)
-					fieldParam.RequireCompleteTypeReferences(TypeRedirects, "64");
+					fieldParam.Complete(TypeRedirects, "64");
+
+				Debug.WriteLine($"Completed dependencies for interface and structure {structName}");
 
 				interfacePropNames.ConsumeLinkedList(propName => {
 					BuildInterfaceByRefAccessor(interfaceDef, propName, _splitPointerDefs,
@@ -163,9 +173,6 @@ namespace Vulkan.Binder {
 
 					var fieldName = fieldParam.Name;
 					var fieldType = fieldParam.Type;
-
-					if (fieldType is IncompleteTypeReference)
-						throw new InvalidProgramException("Encountered incomplete type in structure field definition.");
 
 					var isArray = fieldType.IsArray;
 
@@ -197,7 +204,7 @@ namespace Vulkan.Binder {
 
 						if (fieldRefType.Is(intfMethodType)
 							|| fieldType.IsPointer && intfMethodElemType.IsPointer
-							|| IsIntPtrOrUIntPtr(intfMethodElemType) && fieldType.UnsafeSizeOf() == ptrSizeForType
+							|| IsIntPtrOrUIntPtr(intfMethodElemType) && fieldType.SizeOf(ptrSizeForType) == ptrSizeForType
 							|| IsTypedHandle(intfMethodElemType, fieldType)
 							|| fieldInteriorType.Is(intfMethodInteriorType) && fieldTransforms.SequenceEqual(methodRetTransforms.Skip(1))) {
 							//var fixedBufAttrInfo = fieldParam.AttributeInfos.First(ai => ai.Type == FixedBufferAttributeType);
@@ -259,14 +266,16 @@ namespace Vulkan.Binder {
 					catch {
 						propType = interfacePropDefs[fieldName].PropertyType;
 					}
-					var propInteriorType = propType.GetInteriorType(out var propTransforms);
+					var propInteriorType = propType.GetInteriorType(out var propTransforms).Resolve();
+					if ( propInteriorType == null )
+						throw new NotImplementedException();
 
 
 					var propElemType = propType.DescendElementType();
 
 					if (fieldRefType.Is(propType)
 						|| fieldType.IsPointer && propElemType.IsPointer
-						|| IsIntPtrOrUIntPtr(propElemType) && fieldType.UnsafeSizeOf() == ptrSizeForType
+						|| IsIntPtrOrUIntPtr(propElemType) && fieldType.SizeOf(ptrSizeForType) == ptrSizeForType
 						|| IsTypedHandle(propElemType, fieldType)
 						|| fieldInteriorType.Is(propInteriorType) && fieldTransforms.SequenceEqual(propTransforms.Skip(1))) {
 						/*
@@ -281,7 +290,7 @@ namespace Vulkan.Binder {
 						structGetter.GenerateIL(il => {
 							il.Emit(OpCodes.Ldarg_0); // this
 							il.Emit(OpCodes.Ldflda, fieldDef);
-							if (propType.Resolve().IsInterface) {
+							if (propInteriorType.IsInterface) {
 								il.Emit(OpCodes.Box, fieldType);
 							}
 							il.Emit(OpCodes.Ret);
@@ -363,6 +372,7 @@ namespace Vulkan.Binder {
 				return DefineClrHandleStructInternal(structInfo);
 			}
 			var structName = structInfo.Name;
+			Debug.WriteLine($"Defining simple structure {structName}");
 			if (TypeRedirects.TryGetValue(structName, out var rename)) {
 				structName = rename;
 			}
@@ -370,19 +380,18 @@ namespace Vulkan.Binder {
 				PublicSealedStructTypeAttributes, null,
 				(int) structInfo.Alignment,
 				(int) structInfo.Size);
-			structDef.SetCustomAttribute(() => new CompilerGeneratedAttribute());
+			structDef.SetCustomAttribute(() => new BinderGeneratedAttribute());
 
 			var fieldParams = new LinkedList<ParameterInfo>(structInfo.Fields
 				.Select(f => ResolveField(f.Type, f.Name, (int) f.Offset)));
 			return () => {
 				foreach (var fieldParam in fieldParams)
-					fieldParam.RequireCompleteTypeReferences(TypeRedirects,true);
+					fieldParam.Complete(TypeRedirects,true);
+				Debug.WriteLine($"Completed dependencies for simple structure {structName}");
 				fieldParams.ConsumeLinkedList(fieldParam => {
 					var fieldName = fieldParam.Name;
 
 					var fieldType = fieldParam.Type;
-					if (fieldType is IncompleteTypeReference)
-						throw new InvalidProgramException("Encountered incomplete type in structure field definition.");
 
 					var fieldDef = structDef.DefineField(fieldName, fieldType, FieldAttributes.Public);
 				});

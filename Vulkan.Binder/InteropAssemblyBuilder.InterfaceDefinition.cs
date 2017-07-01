@@ -87,9 +87,6 @@ namespace Vulkan.Binder {
 
 			interfacePropDef = null;
 			interfaceMethodDef = null;
-			
-			LinkedList<CecilExtensions.TypeReferenceTransform> transforms32;
-			LinkedList<CecilExtensions.TypeReferenceTransform> transforms64;
 
 			if (fieldType32.Is(IntType) && fieldType64.Is(LongType)) {
 				// IntPtr
@@ -121,8 +118,8 @@ namespace Vulkan.Binder {
 			}
 			
 
-			var fieldElemType32 = fieldType32.GetTypePointedTo(out transforms32);
-			var fieldElemType64 = fieldType64.GetTypePointedTo(out transforms64);
+			var fieldElemType32 = fieldType32.GetTypePointedTo(out LinkedList<CecilExtensions.TypeReferenceTransform> transforms32);
+			var fieldElemType64 = fieldType64.GetTypePointedTo(out LinkedList<CecilExtensions.TypeReferenceTransform> transforms64);
 
 			var pointerDepth32 = transforms32.Count;
 			var pointerDepth64 = transforms64.Count;
@@ -326,8 +323,9 @@ namespace Vulkan.Binder {
 				// common interface, boxing reference
 				var commonInterface = commonInterfaces.First();
 				splitPointerDefs.TryGetValue(commonInterface.FullName, out var splitPointerDef);
+				var splitPtrTypeGti = SplitPointerGtd.MakeGenericInstanceType(commonInterface, interiorType32, interiorType64);
 				var propType = splitPointerDef
-					?? module.ImportReference( SplitPointerGtd.MakeGenericInstanceType(commonInterface, interiorType32, interiorType64) );
+					?? splitPtrTypeGti.Import(module);
 				foreach (var transform in transforms32.Skip(1))
 					transform(ref propType);
 				var propRefType = propType.MakeByReferenceType();

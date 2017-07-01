@@ -71,7 +71,6 @@ namespace Vulkan.Binder {
 				}
 			}
 			IncrementStatistic("typedefs");
-			Console.WriteLine(cursor.ToString());
 			throw new NotImplementedException();
 		}
 	}

@@ -4,10 +4,12 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Reflection;
 using ClangSharp;
 using Mono.Cecil;
 using Mono.Cecil.Rocks;
 using Vulkan.Binder.Extensions;
+using ParameterAttributes = Mono.Cecil.ParameterAttributes;
 
 namespace Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
@@ -74,7 +76,6 @@ namespace Vulkan.Binder {
 			get;
 		} = new Dictionary<CXCallingConv, CallingConvention> {
 			{CXCallingConv.CXCallingConv_C, CallingConvention.Cdecl},
-			{CXCallingConv.CXCallingConv_X86FastCall, CallingConvention.FastCall},
 			{CXCallingConv.CXCallingConv_X86StdCall, CallingConvention.StdCall},
 			{CXCallingConv.CXCallingConv_X86ThisCall, CallingConvention.ThisCall}
 		}.ToImmutableDictionary();
