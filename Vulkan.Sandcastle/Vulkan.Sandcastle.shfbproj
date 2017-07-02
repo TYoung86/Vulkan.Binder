@@ -125,6 +125,19 @@
 <ComponentConfig id="API Token Resolution" enabled="True"><component id="API Token Resolution">{@TokenFiles}
 <replace elements="/*//token" item="string(.)" /></component></ComponentConfig></ComponentConfigurations>
     <WorkingPath>Help\</WorkingPath>
+    <TransformComponentArguments>
+      <Argument Key="logoFile" Value="" xmlns="" />
+      <Argument Key="logoHeight" Value="" xmlns="" />
+      <Argument Key="logoWidth" Value="" xmlns="" />
+      <Argument Key="logoAltText" Value="" xmlns="" />
+      <Argument Key="logoPlacement" Value="left" xmlns="" />
+      <Argument Key="logoAlignment" Value="left" xmlns="" />
+      <Argument Key="maxVersionParts" Value="3" xmlns="" />
+      <Argument Key="defaultLanguage" Value="cs" xmlns="" />
+      <Argument Key="includeEnumValues" Value="true" xmlns="" />
+      <Argument Key="baseSourceCodeUrl" Value="https://github.com/TYoung86/Vulkan.Binder" xmlns="" />
+      <Argument Key="requestExampleUrl" Value="https://github.com/TYoung86/Vulkan.Binder/issues/new" xmlns="" />
+    </TransformComponentArguments>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->

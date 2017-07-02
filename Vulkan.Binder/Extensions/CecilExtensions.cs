@@ -417,11 +417,19 @@ namespace Vulkan.Binder.Extensions {
 				MethodReturnType = methodDef.MethodReturnType,
 				DeclaringType = import
 			};
-			foreach (var p in methodDef.Parameters)
-				mr.Parameters.Add(p);
+			foreach (var p in methodDef.Parameters) {
+				var pr = p.Import(methodDef, module);
+				mr.Parameters.Add(pr.Resolve());
+			}
 			foreach (var p in methodDef.GenericParameters)
 				mr.GenericParameters.Add(p);
 			return mr;
+		}
+
+		public static ParameterReference Import(this ParameterDefinition p, MethodReference mr, ModuleDefinition module) {
+			return new ParameterReference(p.Name, p.Index, p.ParameterType.Import(module), mr) {
+				MetadataToken = p.MetadataToken
+			};
 		}
 
 		public static TypeReference Import(this TypeReference type, ModuleDefinition module) {
@@ -481,30 +489,73 @@ namespace Vulkan.Binder.Extensions {
 		}
 
 		private static TypeReference FindNonPrivateForwarder(ModuleDefinition module, string privateTypeRef) {
+			var typeNestings = privateTypeRef.Split('+','/');
+			var baseTypeRef = typeNestings[0];
+			TypeReference tr = null;
+			TypeDefinition td = null;
 			foreach (var asmName in AssemblyResolver.KnownAssemblies.Keys
 				.Where(k => !k.StartsWith("System.Private") && k != "mscorlib")) {
 				var asmDef = module.AssemblyResolver
 					.Resolve(new AssemblyNameReference(asmName, null));
 
-				foreach (var asmMods in asmDef.Modules) {
-					var match = asmMods.ExportedTypes
-						.FirstOrDefault(t => t.FullName == privateTypeRef);
-					if (match == null) continue;
+				foreach (var asmMod in asmDef.Modules) {
+					var match = asmMod.ExportedTypes
+						.FirstOrDefault(t => t.FullName == baseTypeRef);
 
-					var resolved = match.Resolve();
+					if (match == null)
+						continue;
+
+					td = match.Resolve();
 					if (!match.IsForwarder) {
-						return resolved;
+						tr = td;
+						break;
 					}
 
-					var tr = new TypeReference(match.Namespace, match.Name,
-						asmMods, asmMods, resolved.IsValueType);
-					module.ImportReference(tr);
-					{
-						return tr;
-					}
+					tr = CreateTypeReference(td, asmMod);
+					break;
 				}
+				if (tr != null)
+					break;
 			}
-			return null;
+			if (tr == null)
+				return null;
+
+			if (typeNestings.Length == 1)
+				return tr;
+			
+			if ( td == null || td.FullName != tr.FullName)
+				td = tr.Resolve();
+			td = typeNestings.Skip(1).Aggregate(td,
+				(current, typeNesting) => current?.NestedTypes
+					.FirstOrDefault(nt => nt.Name == typeNesting));
+			if (td == null)
+				return null;
+			tr = CreateTypeReference(td, tr.Module);
+			return tr;
+		}
+
+		
+		public static TypeReference CreateTypeReference(TypeReference type, ModuleDefinition module)
+		{
+
+			if (!type.IsNested) {
+				return new TypeReference(
+					type.Namespace,
+					type.Name,
+					module,
+					type.Scope,
+					type.IsValueType);
+			}
+			
+			return new TypeReference (
+				"",
+				type.Name,
+				module,
+				type.Scope,
+				type.IsValueType) {
+				DeclaringType = CreateTypeReference(type.DeclaringType, module)
+			};
+
 		}
 
 		public static TypeReference FindInTypeSystem(this ModuleDefinition module, Type interiorType)
@@ -569,9 +620,14 @@ namespace Vulkan.Binder.Extensions {
 			}
 		}
 
-		public static Type GetRuntimeType(this TypeReference type)
-			=> Type.GetType(type.FullName, false)
-				?? throw new NotSupportedException();
+		public static Type GetRuntimeType(this TypeReference type) {
+			var t = Type.GetType(type.FullName, false);
+			if ( t == null )
+				t = Type.GetType(type.FullName.Replace('/','+'), false);
+			if ( t == null )
+				throw new NotImplementedException(type.FullName);
+			return t;
+		}
 
 		public static bool IsDirect(this TypeReference type)
 			=> !type.IsIndirect();

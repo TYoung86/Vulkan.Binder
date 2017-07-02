@@ -95,22 +95,22 @@ namespace Vulkan.Binder {
 		private CecilCustomAttribute CreateCecilCustomAttribute(ModuleDefinition module) {
 			var ctorRef = Constructor.Import(module);
 			var cca = new CecilCustomAttribute(ctorRef);
-			foreach (var clrArg in Arguments)
-				cca.ConstructorArguments.Add(CreateCustomAttributeArgument(module,
-					MaybeImport(clrArg, module)));
+			foreach (var value in Arguments)
+				cca.ConstructorArguments.Add(CreateCecilTypedArgument(
+					module, value));
 
 			for (var i = 0 ; i < PropertiesInitialized.Length ; ++i) {
 				var clrProp = PropertiesInitialized[i];
 				var value = PropertyValues[i];
-				cca.Properties.Add(new CecilCustomAttributeNamedArgument(clrProp.Name,
-					CreateCustomAttributeArgument(module, MaybeImport(value, module))));
+				cca.Properties.Add(CreateCecilNamedArgument(
+					clrProp.Name, module, value));
 			}
 
 			for (var i = 0 ; i < FieldsInitialized.Length ; ++i) {
 				var clrField = FieldsInitialized[i];
 				var value = FieldValues[i];
-				cca.Fields.Add(new CecilCustomAttributeNamedArgument(clrField.Name,
-					CreateCustomAttributeArgument(module, MaybeImport(value, module))));
+				cca.Fields.Add(CreateCecilNamedArgument(
+					clrField.Name, module, value));
 			}
 			return cca;
 		}
@@ -122,18 +122,14 @@ namespace Vulkan.Binder {
 			else if (value is MemberInfo) {
 				throw new NotImplementedException();
 			}
-			else {
-				//type = value.GetType();
-				//var typeInfo = type.GetTypeInfo();
-				//if (typeInfo.IsEnum) {
-				//	return Convert.ChangeType(value, typeInfo.UnderlyingSystemType);
-				//}
-			}
 			return value;
 		}
 
-		private static CustomAttributeArgument CreateCustomAttributeArgument(ModuleDefinition module, object value)
-			=> new CustomAttributeArgument(value.GetType().Import(module), value);
+		private static CustomAttributeArgument CreateCecilTypedArgument(ModuleDefinition module, object value)
+			=> new CustomAttributeArgument(value.GetType().Import(module), MaybeImport(value, module));
+
+		private static CecilCustomAttributeNamedArgument CreateCecilNamedArgument(string name, ModuleDefinition module, object value)
+			=> new CecilCustomAttributeNamedArgument(name, CreateCecilTypedArgument(module, value));
 
 		private Func<Attribute> _factory;
 
@@ -151,9 +147,11 @@ namespace Vulkan.Binder {
 						)
 					),
 					PropertiesInitialized.Select((pi, i) =>
-							(MemberBinding) Expression.Bind(pi, Expression.Constant(PropertyValues[i], pi.PropertyType)))
+							(MemberBinding) Expression.Bind(pi,
+								Expression.Constant(PropertyValues[i], pi.PropertyType)))
 						.Concat(FieldsInitialized.Select((pi, i) =>
-							(MemberBinding) Expression.Bind(pi, Expression.Constant(FieldValues[i], pi.FieldType))))
+							(MemberBinding) Expression.Bind(pi,
+								Expression.Constant(FieldValues[i], pi.FieldType))))
 						.ToArray())).Compile();
 		}
 
@@ -168,7 +166,7 @@ namespace Vulkan.Binder {
 
 		public static implicit operator Attribute(AttributeInfo info)
 			=> info.GetAttribute();
-		
+
 		public AttributeInfo Clone()
 			=> new AttributeInfo(
 				Constructor, Arguments,

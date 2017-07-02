@@ -3,11 +3,13 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.Versioning;
+using System.Security;
 using ClangSharp;
 using Interop;
 using Mono.Cecil;
@@ -122,7 +124,7 @@ namespace Vulkan.Binder {
 
 			var asmResolver = new AssemblyResolver();
 
-			var mdResolver = new MetadataResolver(asmResolver);
+			//var mdResolver = new MetadataResolver(asmResolver);
 
 			var shadowAsmFilePath = Path.Combine(Directory.GetCurrentDirectory(), $"{BaseInteropAsmName}.dll");
 			File.Copy(BaseInteropAsmPath, shadowAsmFilePath);
@@ -202,19 +204,27 @@ namespace Vulkan.Binder {
 
 			var custAttrs = new[] {
 				AttributeInfo.Create
+					(() => new CompilationRelaxationsAttribute(8)),
+				AttributeInfo.Create
+					(() => new RuntimeCompatibilityAttribute {WrapNonExceptionThrows = true}),
+				AttributeInfo.Create
+					(() => new DebuggableAttribute(DebuggableAttribute.DebuggingModes.None)),
+				AttributeInfo.Create
 					(() => new TargetFrameworkAttribute(targetFramework) {FrameworkDisplayName = ""}),
 				AttributeInfo.Create
-					(() => new AssemblyVersionAttribute(Name.Version.ToString())),
+					(() => new AssemblyCompanyAttribute("")),
 				AttributeInfo.Create
-					(() => new AssemblyInformationalVersionAttribute(Name.Version.ToString())),
+					(() => new AssemblyConfigurationAttribute("Release")),
+				AttributeInfo.Create
+					(() => new AssemblyDescriptionAttribute($"Generated {Name.Name} Library")),
 				AttributeInfo.Create
 					(() => new AssemblyFileVersionAttribute(Name.Version.ToString())),
+				AttributeInfo.Create
+					(() => new AssemblyInformationalVersionAttribute(Name.Version.ToString())),
 				AttributeInfo.Create
 					(() => new AssemblyProductAttribute(Name.Name)),
 				AttributeInfo.Create
 					(() => new AssemblyTitleAttribute(Name.Name)),
-				AttributeInfo.Create
-					(() => new AssemblyDescriptionAttribute(Name.Name))
 			}.Select(ca => ca.GetCecilCustomAttribute(Module));
 
 			while (Assembly.HasCustomAttributes)
@@ -226,6 +236,17 @@ namespace Vulkan.Binder {
 
 			foreach (var custAttr in custAttrs)
 				Assembly.CustomAttributes.Add(custAttr);
+
+			/*
+			Assembly.SecurityDeclarations.Add(new SecurityDeclaration(SecurityAction.RequestMinimum) {
+				SecurityAttributes = {
+					// ...
+				}
+			});
+			Module.CustomAttributes.Add(
+				AttributeInfo.Create(() => new UnverifiableCodeAttribute())
+				.GetCecilCustomAttribute(Module));
+			*/
 		}
 
 		public void Compile() {
@@ -273,7 +294,7 @@ namespace Vulkan.Binder {
 			};
 			// coalesce assembly references
 			var typeRefs = Module.GetTypeReferences().ToArray();
-			var coreLib = (AssemblyNameReference)Module.TypeSystem.CoreLibrary;
+			var coreLib = (AssemblyNameReference) Module.TypeSystem.CoreLibrary;
 			var anrCollisions = Module.AssemblyReferences.GroupBy(asmRef => asmRef.Name);
 			foreach (var anrCollision in anrCollisions) {
 				var name = anrCollision.Key;
@@ -289,7 +310,7 @@ namespace Vulkan.Binder {
 					throw new NotImplementedException();
 				var preferredVersion = collided.Min(anr => anr.Version);
 				var preferred = collided.First(anr => anr.Version == preferredVersion);
-				
+
 				foreach (var tr in typeRefs) {
 					if (!(tr.Scope is AssemblyNameReference anr))
 						throw new NotImplementedException();
@@ -301,7 +322,7 @@ namespace Vulkan.Binder {
 						tr.Scope = anrRef;
 						if (tr.Resolve() == null)
 							continue;
-						if ( preferred.Version < anr.Version )
+						if (preferred.Version < anr.Version)
 							preferred = anr;
 						break;
 					}
