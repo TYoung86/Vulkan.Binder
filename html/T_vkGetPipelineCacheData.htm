@@ -26,7 +26,7 @@ The results of pipeline compiles, however,  may  depend on the vendor ID,
 device ID, driver version, and other details of the device.
 To enable applications to detect when previously retrieved data is
 incompatible with the device, the initial bytes written to <span class="code">pData</span> must 
-be a header consisting of the following members:  <p>Table 1. Layout for pipeline cache header version <span class="code">VK_PIPELINE_CACHE_HEADER_VERSION_ONE</span></p><div class="tableSection"><table><tr><th><th>Offset</th><th>Size</th><th>Meaning</th></th></tr><tr><td> 0 </td><td> 4 </td><td> length in bytes of the entire pipeline cache header
+be a header consisting of the following members:  <p>Table 1. Layout for pipeline cache header version <span class="code">VK_PIPELINE_CACHE_HEADER_VERSION_ONE</span></p><div class="tableSection"><table><tr><th>OffsetSizeMeaning</th></tr><tr><td> 0 </td><td> 4 </td><td> length in bytes of the entire pipeline cache header
                              written as a stream of bytes, with the least
                              significant byte first </td></tr><tr><td> 4 </td><td> 4 </td><td> a <a href="T_VkPipelineCacheHeaderVersion.htm">VkPipelineCacheHeaderVersion</a> value
                              written as a stream of bytes, with the least
