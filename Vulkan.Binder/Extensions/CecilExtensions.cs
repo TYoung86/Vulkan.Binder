@@ -727,7 +727,8 @@ namespace Vulkan.Binder.Extensions {
 		}
 
 		public static bool Is(this TypeReference typeRef, TypeReference otherRef) {
-			StackGuard.LimitReentry(64);
+			StackGuard.DebugLimitEntry(64);
+
 			if (typeRef.MetadataType.IsSpecific()
 				&& otherRef.MetadataType.IsSpecific()
 				&& typeRef.MetadataType != otherRef.MetadataType)

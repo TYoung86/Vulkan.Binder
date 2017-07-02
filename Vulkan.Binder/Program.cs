@@ -501,7 +501,7 @@ namespace Vulkan.Binder {
 						table.AddBeforeSelf(elem);
 					});
 
-					ForEachByXPath(htmlfrag, "//table/thead/th|//table/tbody/tr/td", elem => {
+					ForEachByXPath(htmlfrag, "//table/thead/tr/th|//table/tbody/tr/td", elem => {
 						elem.Name = "term";
 						elem.RemoveAttributes();
 					});
@@ -616,7 +616,7 @@ namespace Vulkan.Binder {
 					var elems = xe.XPathSelectElements(xpath)
 						.OrderByDescending(elem => elem.Ancestors().Count())
 						.ToArray();
-					int i = 0;
+					var i = 0;
 					do {
 						foreach (var elem in elems)
 							action(elem);
