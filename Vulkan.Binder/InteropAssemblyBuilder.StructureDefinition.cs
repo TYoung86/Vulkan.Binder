@@ -85,10 +85,10 @@ namespace Vulkan.Binder {
 			var structName = structInfo32.Name;
 
 			Debug.WriteLine($"Defining interface and structure {structName}");
-			
-			if (TypeRedirects.TryGetValue(structName, out var rename)) {
+
+			if (TypeRedirects.TryGetValue(structName, out var rename))
 				structName = rename;
-			}
+
 			var interfaceName = "I" + structName;
 			if (Module.GetType(interfaceName)?.Resolve() != null)
 				return null;

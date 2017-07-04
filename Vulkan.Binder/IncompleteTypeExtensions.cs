@@ -14,7 +14,8 @@ namespace Vulkan.Binder
 			    typeNs = typeNs + '.';
 
 		    var rtr = module.GetType(typeNs + typeName, true);
-		    rtr.Scope = module;
+			// todo: remove?
+		    //rtr.Scope = module;
 		    return rtr;
 	    }
 

@@ -165,7 +165,7 @@ namespace Vulkan.Binder {
 			ULongType = Module.TypeSystem.UInt64;
 			IntPtrType = Module.TypeSystem.IntPtr;
 			UIntPtrType = Module.TypeSystem.UIntPtr;
-			ValueTypeType = UIntPtrType.Resolve().BaseType;
+			ValueTypeType = Module.TypeSystem.ValueType;
 
 			MulticastDelegateType = typeof(MulticastDelegate).Import(Module);
 
