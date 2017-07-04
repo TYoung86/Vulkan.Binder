@@ -32,13 +32,18 @@ namespace Vulkan.Binder.Extensions {
 				td.PackingSize = (short) packing;
 			if (packing >= 0)
 				td.ClassSize = size;
-			if ((typeAttrs & ValueTypeAttributeMask) != 0) {
-				td.BaseType = module.TypeSystem.UIntPtr.Resolve().BaseType;
-				if ((typeAttrs & StructTypeAttributeMask) != 0)
-					td.Attributes |= TypeAttributes.Serializable;
+			if (baseType == null) {
+				if ((typeAttrs & ValueTypeAttributeMask) != 0) {
+					td.BaseType = module.TypeSystem.UIntPtr.Resolve().BaseType.Import(module);
+					if ((typeAttrs & StructTypeAttributeMask) != 0)
+						td.Attributes |= TypeAttributes.Serializable;
+				}
+				if (td.BaseType == null) {
+					td.BaseType = module.TypeSystem.Object.Import(module);
+				}
 			}
-			if (td.BaseType == null) {
-				td.BaseType = module.TypeSystem.Object;
+			else {
+				td.BaseType = baseType.Import(module);
 			}
 			td.Scope = module;
 			module.Types.Add(td);
@@ -52,7 +57,7 @@ namespace Vulkan.Binder.Extensions {
 				| TypeAttributes.Serializable,
 				typeof(Enum).Import(module));
 			if (underlyingType == null) {
-				underlyingType = module.TypeSystem.Int32;
+				underlyingType = module.TypeSystem.Int32.Import(module);
 			}
 			var enumField = new FieldDefinition("value__",
 				FieldAttributes.Public
