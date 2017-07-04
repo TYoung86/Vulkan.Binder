@@ -18,6 +18,41 @@
     <HelpKINode Title="VkSamplerCreateInfo64.addressModeW Field" Url="html/F_VkSamplerCreateInfo64_addressModeW.htm" />
   </HelpKINode>
   <HelpKINode Title="addressModeW property" Url="html/P_IVkSamplerCreateInfo_addressModeW.htm" />
+  <HelpKINode Title="advancedBlendAllOperations field">
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.advancedBlendAllOperations Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32_advancedBlendAllOperations.htm" />
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.advancedBlendAllOperations Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64_advancedBlendAllOperations.htm" />
+  </HelpKINode>
+  <HelpKINode Title="advancedBlendAllOperations property" Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT_advancedBlendAllOperations.htm" />
+  <HelpKINode Title="advancedBlendCoherentOperations field">
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32.advancedBlendCoherentOperations Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32_advancedBlendCoherentOperations.htm" />
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64.advancedBlendCoherentOperations Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64_advancedBlendCoherentOperations.htm" />
+  </HelpKINode>
+  <HelpKINode Title="advancedBlendCoherentOperations property" Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT_advancedBlendCoherentOperations.htm" />
+  <HelpKINode Title="advancedBlendCorrelatedOverlap field">
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.advancedBlendCorrelatedOverlap Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32_advancedBlendCorrelatedOverlap.htm" />
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.advancedBlendCorrelatedOverlap Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64_advancedBlendCorrelatedOverlap.htm" />
+  </HelpKINode>
+  <HelpKINode Title="advancedBlendCorrelatedOverlap property" Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT_advancedBlendCorrelatedOverlap.htm" />
+  <HelpKINode Title="advancedBlendIndependentBlend field">
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.advancedBlendIndependentBlend Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32_advancedBlendIndependentBlend.htm" />
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.advancedBlendIndependentBlend Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64_advancedBlendIndependentBlend.htm" />
+  </HelpKINode>
+  <HelpKINode Title="advancedBlendIndependentBlend property" Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT_advancedBlendIndependentBlend.htm" />
+  <HelpKINode Title="advancedBlendMaxColorAttachments field">
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.advancedBlendMaxColorAttachments Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32_advancedBlendMaxColorAttachments.htm" />
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.advancedBlendMaxColorAttachments Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64_advancedBlendMaxColorAttachments.htm" />
+  </HelpKINode>
+  <HelpKINode Title="advancedBlendMaxColorAttachments property" Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT_advancedBlendMaxColorAttachments.htm" />
+  <HelpKINode Title="advancedBlendNonPremultipliedDstColor field">
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.advancedBlendNonPremultipliedDstColor Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32_advancedBlendNonPremultipliedDstColor.htm" />
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.advancedBlendNonPremultipliedDstColor Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64_advancedBlendNonPremultipliedDstColor.htm" />
+  </HelpKINode>
+  <HelpKINode Title="advancedBlendNonPremultipliedDstColor property" Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT_advancedBlendNonPremultipliedDstColor.htm" />
+  <HelpKINode Title="advancedBlendNonPremultipliedSrcColor field">
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.advancedBlendNonPremultipliedSrcColor Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32_advancedBlendNonPremultipliedSrcColor.htm" />
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.advancedBlendNonPremultipliedSrcColor Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64_advancedBlendNonPremultipliedSrcColor.htm" />
+  </HelpKINode>
+  <HelpKINode Title="advancedBlendNonPremultipliedSrcColor property" Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT_advancedBlendNonPremultipliedSrcColor.htm" />
   <HelpKINode Title="alignment field" Url="html/F_VkMemoryRequirements_alignment.htm" />
   <HelpKINode Title="allocationSize field">
     <HelpKINode Title="VkMemoryAllocateInfo32.allocationSize Field" Url="html/F_VkMemoryAllocateInfo32_allocationSize.htm" />
@@ -159,6 +194,11 @@
     <HelpKINode Title="VkPipelineColorBlendStateCreateInfo64.blendConstants Method " Url="html/M_VkPipelineColorBlendStateCreateInfo64_blendConstants.htm" />
   </HelpKINode>
   <HelpKINode Title="blendEnable field" Url="html/F_VkPipelineColorBlendAttachmentState_blendEnable.htm" />
+  <HelpKINode Title="blendOverlap field">
+    <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT32.blendOverlap Field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT32_blendOverlap.htm" />
+    <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT64.blendOverlap Field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT64_blendOverlap.htm" />
+  </HelpKINode>
+  <HelpKINode Title="blendOverlap property" Url="html/P_IVkPipelineColorBlendAdvancedStateCreateInfoEXT_blendOverlap.htm" />
   <HelpKINode Title="borderColor field">
     <HelpKINode Title="VkSamplerCreateInfo32.borderColor Field" Url="html/F_VkSamplerCreateInfo32_borderColor.htm" />
     <HelpKINode Title="VkSamplerCreateInfo64.borderColor Field" Url="html/F_VkSamplerCreateInfo64_borderColor.htm" />
@@ -329,6 +369,31 @@
     <HelpKINode Title="VkRenderPassMultiviewCreateInfoKHX64.correlationMaskCount Field" Url="html/F_VkRenderPassMultiviewCreateInfoKHX64_correlationMaskCount.htm" />
   </HelpKINode>
   <HelpKINode Title="correlationMaskCount property" Url="html/P_IVkRenderPassMultiviewCreateInfoKHX_correlationMaskCount.htm" />
+  <HelpKINode Title="coverageModulationMode field">
+    <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV32.coverageModulationMode Field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV32_coverageModulationMode.htm" />
+    <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV64.coverageModulationMode Field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV64_coverageModulationMode.htm" />
+  </HelpKINode>
+  <HelpKINode Title="coverageModulationMode property" Url="html/P_IVkPipelineCoverageModulationStateCreateInfoNV_coverageModulationMode.htm" />
+  <HelpKINode Title="coverageModulationTableCount field">
+    <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV32.coverageModulationTableCount Field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV32_coverageModulationTableCount.htm" />
+    <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV64.coverageModulationTableCount Field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV64_coverageModulationTableCount.htm" />
+  </HelpKINode>
+  <HelpKINode Title="coverageModulationTableCount property" Url="html/P_IVkPipelineCoverageModulationStateCreateInfoNV_coverageModulationTableCount.htm" />
+  <HelpKINode Title="coverageModulationTableEnable field">
+    <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV32.coverageModulationTableEnable Field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV32_coverageModulationTableEnable.htm" />
+    <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV64.coverageModulationTableEnable Field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV64_coverageModulationTableEnable.htm" />
+  </HelpKINode>
+  <HelpKINode Title="coverageModulationTableEnable property" Url="html/P_IVkPipelineCoverageModulationStateCreateInfoNV_coverageModulationTableEnable.htm" />
+  <HelpKINode Title="coverageToColorEnable field">
+    <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV32.coverageToColorEnable Field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV32_coverageToColorEnable.htm" />
+    <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV64.coverageToColorEnable Field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV64_coverageToColorEnable.htm" />
+  </HelpKINode>
+  <HelpKINode Title="coverageToColorEnable property" Url="html/P_IVkPipelineCoverageToColorStateCreateInfoNV_coverageToColorEnable.htm" />
+  <HelpKINode Title="coverageToColorLocation field">
+    <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV32.coverageToColorLocation Field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV32_coverageToColorLocation.htm" />
+    <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV64.coverageToColorLocation Field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV64_coverageToColorLocation.htm" />
+  </HelpKINode>
+  <HelpKINode Title="coverageToColorLocation property" Url="html/P_IVkPipelineCoverageToColorStateCreateInfoNV_coverageToColorLocation.htm" />
   <HelpKINode Title="cullMode field">
     <HelpKINode Title="VkPipelineRasterizationStateCreateInfo32.cullMode Field" Url="html/F_VkPipelineRasterizationStateCreateInfo32_cullMode.htm" />
     <HelpKINode Title="VkPipelineRasterizationStateCreateInfo64.cullMode Field" Url="html/F_VkPipelineRasterizationStateCreateInfo64_cullMode.htm" />
@@ -667,6 +732,11 @@
     <HelpKINode Title="VkImageResolve.dstOffset Field" Url="html/F_VkImageResolve_dstOffset.htm" />
   </HelpKINode>
   <HelpKINode Title="dstOffsets field" Url="html/F_VkImageBlit_dstOffsets.htm" />
+  <HelpKINode Title="dstPremultiplied field">
+    <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT32.dstPremultiplied Field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT32_dstPremultiplied.htm" />
+    <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT64.dstPremultiplied Field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT64_dstPremultiplied.htm" />
+  </HelpKINode>
+  <HelpKINode Title="dstPremultiplied property" Url="html/P_IVkPipelineColorBlendAdvancedStateCreateInfoEXT_dstPremultiplied.htm" />
   <HelpKINode Title="dstQueueFamilyIndex field">
     <HelpKINode Title="VkBufferMemoryBarrier32.dstQueueFamilyIndex Field" Url="html/F_VkBufferMemoryBarrier32_dstQueueFamilyIndex.htm" />
     <HelpKINode Title="VkBufferMemoryBarrier64.dstQueueFamilyIndex Field" Url="html/F_VkBufferMemoryBarrier64_dstQueueFamilyIndex.htm" />
@@ -807,6 +877,16 @@
   </HelpKINode>
   <HelpKINode Title="fence property" Url="html/P_IVkAcquireNextImageInfoKHX_fence.htm" />
   <HelpKINode Title="fillModeNonSolid field" Url="html/F_VkPhysicalDeviceFeatures_fillModeNonSolid.htm" />
+  <HelpKINode Title="filterMinmaxImageComponentMapping field">
+    <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32.filterMinmaxImageComponentMapping Field" Url="html/F_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32_filterMinmaxImageComponentMapping.htm" />
+    <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64.filterMinmaxImageComponentMapping Field" Url="html/F_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64_filterMinmaxImageComponentMapping.htm" />
+  </HelpKINode>
+  <HelpKINode Title="filterMinmaxImageComponentMapping property" Url="html/P_IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT_filterMinmaxImageComponentMapping.htm" />
+  <HelpKINode Title="filterMinmaxSingleComponentFormats field">
+    <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32.filterMinmaxSingleComponentFormats Field" Url="html/F_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32_filterMinmaxSingleComponentFormats.htm" />
+    <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64.filterMinmaxSingleComponentFormats Field" Url="html/F_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64_filterMinmaxSingleComponentFormats.htm" />
+  </HelpKINode>
+  <HelpKINode Title="filterMinmaxSingleComponentFormats property" Url="html/P_IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT_filterMinmaxSingleComponentFormats.htm" />
   <HelpKINode Title="finalLayout field" Url="html/F_VkAttachmentDescription_finalLayout.htm" />
   <HelpKINode Title="firstIndex field" Url="html/F_VkDrawIndexedIndirectCommand_firstIndex.htm" />
   <HelpKINode Title="firstInstance field">
@@ -875,6 +955,10 @@
     <HelpKINode Title="VkPipelineCacheCreateInfo64.flags Field" Url="html/F_VkPipelineCacheCreateInfo64_flags.htm" />
     <HelpKINode Title="VkPipelineColorBlendStateCreateInfo32.flags Field" Url="html/F_VkPipelineColorBlendStateCreateInfo32_flags.htm" />
     <HelpKINode Title="VkPipelineColorBlendStateCreateInfo64.flags Field" Url="html/F_VkPipelineColorBlendStateCreateInfo64_flags.htm" />
+    <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV32.flags Field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV32_flags.htm" />
+    <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV64.flags Field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV64_flags.htm" />
+    <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV32.flags Field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV32_flags.htm" />
+    <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV64.flags Field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV64_flags.htm" />
     <HelpKINode Title="VkPipelineDepthStencilStateCreateInfo32.flags Field" Url="html/F_VkPipelineDepthStencilStateCreateInfo32_flags.htm" />
     <HelpKINode Title="VkPipelineDepthStencilStateCreateInfo64.flags Field" Url="html/F_VkPipelineDepthStencilStateCreateInfo64_flags.htm" />
     <HelpKINode Title="VkPipelineDiscardRectangleStateCreateInfoEXT32.flags Field" Url="html/F_VkPipelineDiscardRectangleStateCreateInfoEXT32_flags.htm" />
@@ -944,6 +1028,8 @@
     <HelpKINode Title="IVkPhysicalDeviceImageFormatInfo2KHR.flags Property " Url="html/P_IVkPhysicalDeviceImageFormatInfo2KHR_flags.htm" />
     <HelpKINode Title="IVkPipelineCacheCreateInfo.flags Property " Url="html/P_IVkPipelineCacheCreateInfo_flags.htm" />
     <HelpKINode Title="IVkPipelineColorBlendStateCreateInfo.flags Property " Url="html/P_IVkPipelineColorBlendStateCreateInfo_flags.htm" />
+    <HelpKINode Title="IVkPipelineCoverageModulationStateCreateInfoNV.flags Property " Url="html/P_IVkPipelineCoverageModulationStateCreateInfoNV_flags.htm" />
+    <HelpKINode Title="IVkPipelineCoverageToColorStateCreateInfoNV.flags Property " Url="html/P_IVkPipelineCoverageToColorStateCreateInfoNV_flags.htm" />
     <HelpKINode Title="IVkPipelineDepthStencilStateCreateInfo.flags Property " Url="html/P_IVkPipelineDepthStencilStateCreateInfo_flags.htm" />
     <HelpKINode Title="IVkPipelineDiscardRectangleStateCreateInfoEXT.flags Property " Url="html/P_IVkPipelineDiscardRectangleStateCreateInfoEXT_flags.htm" />
     <HelpKINode Title="IVkPipelineDynamicStateCreateInfo.flags Property " Url="html/P_IVkPipelineDynamicStateCreateInfo_flags.htm" />
@@ -2570,6 +2656,27 @@
   <HelpKINode Title="IVkObjectTableCreateInfoNVX.pObjectEntryTypes property" Url="html/P_IVkObjectTableCreateInfoNVX_pObjectEntryTypes.htm" />
   <HelpKINode Title="IVkObjectTableCreateInfoNVX.pObjectEntryUsageFlags property" Url="html/P_IVkObjectTableCreateInfoNVX_pObjectEntryUsageFlags.htm" />
   <HelpKINode Title="IVkObjectTableCreateInfoNVX.sType property" Url="html/P_IVkObjectTableCreateInfoNVX_sType.htm" />
+  <HelpKINode Title="IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT interface">
+    <HelpKINode Title="IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT Interface" Url="html/T_IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.htm" />
+    <HelpKINode Title="about IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT interface" Url="html/T_IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.advancedBlendCoherentOperations property" Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT_advancedBlendCoherentOperations.htm" />
+  <HelpKINode Title="IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.pNext property" Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT_pNext.htm" />
+  <HelpKINode Title="IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.sType property" Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT_sType.htm" />
+  <HelpKINode Title="IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT interface">
+    <HelpKINode Title="IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT Interface" Url="html/T_IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.htm" />
+    <HelpKINode Title="about IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT interface" Url="html/T_IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.advancedBlendAllOperations property" Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT_advancedBlendAllOperations.htm" />
+  <HelpKINode Title="IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.advancedBlendCorrelatedOverlap property" Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT_advancedBlendCorrelatedOverlap.htm" />
+  <HelpKINode Title="IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.advancedBlendIndependentBlend property" Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT_advancedBlendIndependentBlend.htm" />
+  <HelpKINode Title="IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.advancedBlendMaxColorAttachments property" Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT_advancedBlendMaxColorAttachments.htm" />
+  <HelpKINode Title="IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.advancedBlendNonPremultipliedDstColor property" Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT_advancedBlendNonPremultipliedDstColor.htm" />
+  <HelpKINode Title="IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.advancedBlendNonPremultipliedSrcColor property" Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT_advancedBlendNonPremultipliedSrcColor.htm" />
+  <HelpKINode Title="IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.pNext property" Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT_pNext.htm" />
+  <HelpKINode Title="IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.sType property" Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT_sType.htm" />
   <HelpKINode Title="IVkPhysicalDeviceDiscardRectanglePropertiesEXT interface">
     <HelpKINode Title="IVkPhysicalDeviceDiscardRectanglePropertiesEXT Interface" Url="html/T_IVkPhysicalDeviceDiscardRectanglePropertiesEXT.htm" />
     <HelpKINode Title="about IVkPhysicalDeviceDiscardRectanglePropertiesEXT interface" Url="html/T_IVkPhysicalDeviceDiscardRectanglePropertiesEXT.htm" />
@@ -2825,6 +2932,15 @@
   <HelpKINode Title="IVkPhysicalDevicePushDescriptorPropertiesKHR.maxPushDescriptors property" Url="html/P_IVkPhysicalDevicePushDescriptorPropertiesKHR_maxPushDescriptors.htm" />
   <HelpKINode Title="IVkPhysicalDevicePushDescriptorPropertiesKHR.pNext property" Url="html/P_IVkPhysicalDevicePushDescriptorPropertiesKHR_pNext.htm" />
   <HelpKINode Title="IVkPhysicalDevicePushDescriptorPropertiesKHR.sType property" Url="html/P_IVkPhysicalDevicePushDescriptorPropertiesKHR_sType.htm" />
+  <HelpKINode Title="IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT interface">
+    <HelpKINode Title="IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT Interface" Url="html/T_IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.htm" />
+    <HelpKINode Title="about IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT interface" Url="html/T_IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.filterMinmaxImageComponentMapping property" Url="html/P_IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT_filterMinmaxImageComponentMapping.htm" />
+  <HelpKINode Title="IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.filterMinmaxSingleComponentFormats property" Url="html/P_IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT_filterMinmaxSingleComponentFormats.htm" />
+  <HelpKINode Title="IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.pNext property" Url="html/P_IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT_pNext.htm" />
+  <HelpKINode Title="IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.sType property" Url="html/P_IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT_sType.htm" />
   <HelpKINode Title="IVkPhysicalDeviceSparseImageFormatInfo2KHR interface">
     <HelpKINode Title="IVkPhysicalDeviceSparseImageFormatInfo2KHR Interface" Url="html/T_IVkPhysicalDeviceSparseImageFormatInfo2KHR.htm" />
     <HelpKINode Title="about IVkPhysicalDeviceSparseImageFormatInfo2KHR interface" Url="html/T_IVkPhysicalDeviceSparseImageFormatInfo2KHR.htm" />
@@ -2855,6 +2971,16 @@
   <HelpKINode Title="IVkPipelineCacheCreateInfo.pInitialData property" Url="html/P_IVkPipelineCacheCreateInfo_pInitialData.htm" />
   <HelpKINode Title="IVkPipelineCacheCreateInfo.pNext property" Url="html/P_IVkPipelineCacheCreateInfo_pNext.htm" />
   <HelpKINode Title="IVkPipelineCacheCreateInfo.sType property" Url="html/P_IVkPipelineCacheCreateInfo_sType.htm" />
+  <HelpKINode Title="IVkPipelineColorBlendAdvancedStateCreateInfoEXT interface">
+    <HelpKINode Title="IVkPipelineColorBlendAdvancedStateCreateInfoEXT Interface" Url="html/T_IVkPipelineColorBlendAdvancedStateCreateInfoEXT.htm" />
+    <HelpKINode Title="about IVkPipelineColorBlendAdvancedStateCreateInfoEXT interface" Url="html/T_IVkPipelineColorBlendAdvancedStateCreateInfoEXT.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_IVkPipelineColorBlendAdvancedStateCreateInfoEXT.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IVkPipelineColorBlendAdvancedStateCreateInfoEXT.blendOverlap property" Url="html/P_IVkPipelineColorBlendAdvancedStateCreateInfoEXT_blendOverlap.htm" />
+  <HelpKINode Title="IVkPipelineColorBlendAdvancedStateCreateInfoEXT.dstPremultiplied property" Url="html/P_IVkPipelineColorBlendAdvancedStateCreateInfoEXT_dstPremultiplied.htm" />
+  <HelpKINode Title="IVkPipelineColorBlendAdvancedStateCreateInfoEXT.pNext property" Url="html/P_IVkPipelineColorBlendAdvancedStateCreateInfoEXT_pNext.htm" />
+  <HelpKINode Title="IVkPipelineColorBlendAdvancedStateCreateInfoEXT.srcPremultiplied property" Url="html/P_IVkPipelineColorBlendAdvancedStateCreateInfoEXT_srcPremultiplied.htm" />
+  <HelpKINode Title="IVkPipelineColorBlendAdvancedStateCreateInfoEXT.sType property" Url="html/P_IVkPipelineColorBlendAdvancedStateCreateInfoEXT_sType.htm" />
   <HelpKINode Title="IVkPipelineColorBlendStateCreateInfo interface">
     <HelpKINode Title="IVkPipelineColorBlendStateCreateInfo Interface" Url="html/T_IVkPipelineColorBlendStateCreateInfo.htm" />
     <HelpKINode Title="about IVkPipelineColorBlendStateCreateInfo interface" Url="html/T_IVkPipelineColorBlendStateCreateInfo.htm" />
@@ -2869,6 +2995,28 @@
   <HelpKINode Title="IVkPipelineColorBlendStateCreateInfo.pAttachments property" Url="html/P_IVkPipelineColorBlendStateCreateInfo_pAttachments.htm" />
   <HelpKINode Title="IVkPipelineColorBlendStateCreateInfo.pNext property" Url="html/P_IVkPipelineColorBlendStateCreateInfo_pNext.htm" />
   <HelpKINode Title="IVkPipelineColorBlendStateCreateInfo.sType property" Url="html/P_IVkPipelineColorBlendStateCreateInfo_sType.htm" />
+  <HelpKINode Title="IVkPipelineCoverageModulationStateCreateInfoNV interface">
+    <HelpKINode Title="IVkPipelineCoverageModulationStateCreateInfoNV Interface" Url="html/T_IVkPipelineCoverageModulationStateCreateInfoNV.htm" />
+    <HelpKINode Title="about IVkPipelineCoverageModulationStateCreateInfoNV interface" Url="html/T_IVkPipelineCoverageModulationStateCreateInfoNV.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_IVkPipelineCoverageModulationStateCreateInfoNV.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IVkPipelineCoverageModulationStateCreateInfoNV.coverageModulationMode property" Url="html/P_IVkPipelineCoverageModulationStateCreateInfoNV_coverageModulationMode.htm" />
+  <HelpKINode Title="IVkPipelineCoverageModulationStateCreateInfoNV.coverageModulationTableCount property" Url="html/P_IVkPipelineCoverageModulationStateCreateInfoNV_coverageModulationTableCount.htm" />
+  <HelpKINode Title="IVkPipelineCoverageModulationStateCreateInfoNV.coverageModulationTableEnable property" Url="html/P_IVkPipelineCoverageModulationStateCreateInfoNV_coverageModulationTableEnable.htm" />
+  <HelpKINode Title="IVkPipelineCoverageModulationStateCreateInfoNV.flags property" Url="html/P_IVkPipelineCoverageModulationStateCreateInfoNV_flags.htm" />
+  <HelpKINode Title="IVkPipelineCoverageModulationStateCreateInfoNV.pCoverageModulationTable property" Url="html/P_IVkPipelineCoverageModulationStateCreateInfoNV_pCoverageModulationTable.htm" />
+  <HelpKINode Title="IVkPipelineCoverageModulationStateCreateInfoNV.pNext property" Url="html/P_IVkPipelineCoverageModulationStateCreateInfoNV_pNext.htm" />
+  <HelpKINode Title="IVkPipelineCoverageModulationStateCreateInfoNV.sType property" Url="html/P_IVkPipelineCoverageModulationStateCreateInfoNV_sType.htm" />
+  <HelpKINode Title="IVkPipelineCoverageToColorStateCreateInfoNV interface">
+    <HelpKINode Title="IVkPipelineCoverageToColorStateCreateInfoNV Interface" Url="html/T_IVkPipelineCoverageToColorStateCreateInfoNV.htm" />
+    <HelpKINode Title="about IVkPipelineCoverageToColorStateCreateInfoNV interface" Url="html/T_IVkPipelineCoverageToColorStateCreateInfoNV.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_IVkPipelineCoverageToColorStateCreateInfoNV.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IVkPipelineCoverageToColorStateCreateInfoNV.coverageToColorEnable property" Url="html/P_IVkPipelineCoverageToColorStateCreateInfoNV_coverageToColorEnable.htm" />
+  <HelpKINode Title="IVkPipelineCoverageToColorStateCreateInfoNV.coverageToColorLocation property" Url="html/P_IVkPipelineCoverageToColorStateCreateInfoNV_coverageToColorLocation.htm" />
+  <HelpKINode Title="IVkPipelineCoverageToColorStateCreateInfoNV.flags property" Url="html/P_IVkPipelineCoverageToColorStateCreateInfoNV_flags.htm" />
+  <HelpKINode Title="IVkPipelineCoverageToColorStateCreateInfoNV.pNext property" Url="html/P_IVkPipelineCoverageToColorStateCreateInfoNV_pNext.htm" />
+  <HelpKINode Title="IVkPipelineCoverageToColorStateCreateInfoNV.sType property" Url="html/P_IVkPipelineCoverageToColorStateCreateInfoNV_sType.htm" />
   <HelpKINode Title="IVkPipelineDepthStencilStateCreateInfo interface">
     <HelpKINode Title="IVkPipelineDepthStencilStateCreateInfo Interface" Url="html/T_IVkPipelineDepthStencilStateCreateInfo.htm" />
     <HelpKINode Title="about IVkPipelineDepthStencilStateCreateInfo interface" Url="html/T_IVkPipelineDepthStencilStateCreateInfo.htm" />
@@ -3153,6 +3301,14 @@
   <HelpKINode Title="IVkSamplerCreateInfo.pNext property" Url="html/P_IVkSamplerCreateInfo_pNext.htm" />
   <HelpKINode Title="IVkSamplerCreateInfo.sType property" Url="html/P_IVkSamplerCreateInfo_sType.htm" />
   <HelpKINode Title="IVkSamplerCreateInfo.unnormalizedCoordinates property" Url="html/P_IVkSamplerCreateInfo_unnormalizedCoordinates.htm" />
+  <HelpKINode Title="IVkSamplerReductionModeCreateInfoEXT interface">
+    <HelpKINode Title="IVkSamplerReductionModeCreateInfoEXT Interface" Url="html/T_IVkSamplerReductionModeCreateInfoEXT.htm" />
+    <HelpKINode Title="about IVkSamplerReductionModeCreateInfoEXT interface" Url="html/T_IVkSamplerReductionModeCreateInfoEXT.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_IVkSamplerReductionModeCreateInfoEXT.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IVkSamplerReductionModeCreateInfoEXT.pNext property" Url="html/P_IVkSamplerReductionModeCreateInfoEXT_pNext.htm" />
+  <HelpKINode Title="IVkSamplerReductionModeCreateInfoEXT.reductionMode property" Url="html/P_IVkSamplerReductionModeCreateInfoEXT_reductionMode.htm" />
+  <HelpKINode Title="IVkSamplerReductionModeCreateInfoEXT.sType property" Url="html/P_IVkSamplerReductionModeCreateInfoEXT_sType.htm" />
   <HelpKINode Title="IVkSemaphoreCreateInfo interface">
     <HelpKINode Title="IVkSemaphoreCreateInfo Interface" Url="html/T_IVkSemaphoreCreateInfo.htm" />
     <HelpKINode Title="about IVkSemaphoreCreateInfo interface" Url="html/T_IVkSemaphoreCreateInfo.htm" />
@@ -4313,6 +4469,11 @@
     <HelpKINode Title="VkRenderPassMultiviewCreateInfoKHX64.pCorrelationMasks Field" Url="html/F_VkRenderPassMultiviewCreateInfoKHX64_pCorrelationMasks.htm" />
   </HelpKINode>
   <HelpKINode Title="pCorrelationMasks property" Url="html/P_IVkRenderPassMultiviewCreateInfoKHX_pCorrelationMasks.htm" />
+  <HelpKINode Title="pCoverageModulationTable field">
+    <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV32.pCoverageModulationTable Field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV32_pCoverageModulationTable.htm" />
+    <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV64.pCoverageModulationTable Field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV64_pCoverageModulationTable.htm" />
+  </HelpKINode>
+  <HelpKINode Title="pCoverageModulationTable property" Url="html/P_IVkPipelineCoverageModulationStateCreateInfoNV_pCoverageModulationTable.htm" />
   <HelpKINode Title="pData field">
     <HelpKINode Title="VkSpecializationInfo32.pData Field" Url="html/F_VkSpecializationInfo32_pData.htm" />
     <HelpKINode Title="VkSpecializationInfo64.pData Field" Url="html/F_VkSpecializationInfo64_pData.htm" />
@@ -4789,6 +4950,10 @@
     <HelpKINode Title="VkMemoryFdPropertiesKHX64.pNext Field" Url="html/F_VkMemoryFdPropertiesKHX64_pNext.htm" />
     <HelpKINode Title="VkObjectTableCreateInfoNVX32.pNext Field" Url="html/F_VkObjectTableCreateInfoNVX32_pNext.htm" />
     <HelpKINode Title="VkObjectTableCreateInfoNVX64.pNext Field" Url="html/F_VkObjectTableCreateInfoNVX64_pNext.htm" />
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32.pNext Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32_pNext.htm" />
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64.pNext Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64_pNext.htm" />
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.pNext Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32_pNext.htm" />
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.pNext Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64_pNext.htm" />
     <HelpKINode Title="VkPhysicalDeviceDiscardRectanglePropertiesEXT32.pNext Field" Url="html/F_VkPhysicalDeviceDiscardRectanglePropertiesEXT32_pNext.htm" />
     <HelpKINode Title="VkPhysicalDeviceDiscardRectanglePropertiesEXT64.pNext Field" Url="html/F_VkPhysicalDeviceDiscardRectanglePropertiesEXT64_pNext.htm" />
     <HelpKINode Title="VkPhysicalDeviceExternalBufferInfoKHX32.pNext Field" Url="html/F_VkPhysicalDeviceExternalBufferInfoKHX32_pNext.htm" />
@@ -4817,14 +4982,22 @@
     <HelpKINode Title="VkPhysicalDeviceProperties2KHR64.pNext Field" Url="html/F_VkPhysicalDeviceProperties2KHR64_pNext.htm" />
     <HelpKINode Title="VkPhysicalDevicePushDescriptorPropertiesKHR32.pNext Field" Url="html/F_VkPhysicalDevicePushDescriptorPropertiesKHR32_pNext.htm" />
     <HelpKINode Title="VkPhysicalDevicePushDescriptorPropertiesKHR64.pNext Field" Url="html/F_VkPhysicalDevicePushDescriptorPropertiesKHR64_pNext.htm" />
+    <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32.pNext Field" Url="html/F_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32_pNext.htm" />
+    <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64.pNext Field" Url="html/F_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64_pNext.htm" />
     <HelpKINode Title="VkPhysicalDeviceSparseImageFormatInfo2KHR32.pNext Field" Url="html/F_VkPhysicalDeviceSparseImageFormatInfo2KHR32_pNext.htm" />
     <HelpKINode Title="VkPhysicalDeviceSparseImageFormatInfo2KHR64.pNext Field" Url="html/F_VkPhysicalDeviceSparseImageFormatInfo2KHR64_pNext.htm" />
     <HelpKINode Title="VkPhysicalDeviceSurfaceInfo2KHR32.pNext Field" Url="html/F_VkPhysicalDeviceSurfaceInfo2KHR32_pNext.htm" />
     <HelpKINode Title="VkPhysicalDeviceSurfaceInfo2KHR64.pNext Field" Url="html/F_VkPhysicalDeviceSurfaceInfo2KHR64_pNext.htm" />
     <HelpKINode Title="VkPipelineCacheCreateInfo32.pNext Field" Url="html/F_VkPipelineCacheCreateInfo32_pNext.htm" />
     <HelpKINode Title="VkPipelineCacheCreateInfo64.pNext Field" Url="html/F_VkPipelineCacheCreateInfo64_pNext.htm" />
+    <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT32.pNext Field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT32_pNext.htm" />
+    <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT64.pNext Field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT64_pNext.htm" />
     <HelpKINode Title="VkPipelineColorBlendStateCreateInfo32.pNext Field" Url="html/F_VkPipelineColorBlendStateCreateInfo32_pNext.htm" />
     <HelpKINode Title="VkPipelineColorBlendStateCreateInfo64.pNext Field" Url="html/F_VkPipelineColorBlendStateCreateInfo64_pNext.htm" />
+    <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV32.pNext Field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV32_pNext.htm" />
+    <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV64.pNext Field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV64_pNext.htm" />
+    <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV32.pNext Field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV32_pNext.htm" />
+    <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV64.pNext Field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV64_pNext.htm" />
     <HelpKINode Title="VkPipelineDepthStencilStateCreateInfo32.pNext Field" Url="html/F_VkPipelineDepthStencilStateCreateInfo32_pNext.htm" />
     <HelpKINode Title="VkPipelineDepthStencilStateCreateInfo64.pNext Field" Url="html/F_VkPipelineDepthStencilStateCreateInfo64_pNext.htm" />
     <HelpKINode Title="VkPipelineDiscardRectangleStateCreateInfoEXT32.pNext Field" Url="html/F_VkPipelineDiscardRectangleStateCreateInfoEXT32_pNext.htm" />
@@ -4871,6 +5044,8 @@
     <HelpKINode Title="VkRenderPassMultiviewCreateInfoKHX64.pNext Field" Url="html/F_VkRenderPassMultiviewCreateInfoKHX64_pNext.htm" />
     <HelpKINode Title="VkSamplerCreateInfo32.pNext Field" Url="html/F_VkSamplerCreateInfo32_pNext.htm" />
     <HelpKINode Title="VkSamplerCreateInfo64.pNext Field" Url="html/F_VkSamplerCreateInfo64_pNext.htm" />
+    <HelpKINode Title="VkSamplerReductionModeCreateInfoEXT32.pNext Field" Url="html/F_VkSamplerReductionModeCreateInfoEXT32_pNext.htm" />
+    <HelpKINode Title="VkSamplerReductionModeCreateInfoEXT64.pNext Field" Url="html/F_VkSamplerReductionModeCreateInfoEXT64_pNext.htm" />
     <HelpKINode Title="VkSemaphoreCreateInfo32.pNext Field" Url="html/F_VkSemaphoreCreateInfo32_pNext.htm" />
     <HelpKINode Title="VkSemaphoreCreateInfo64.pNext Field" Url="html/F_VkSemaphoreCreateInfo64_pNext.htm" />
     <HelpKINode Title="VkShaderModuleCreateInfo32.pNext Field" Url="html/F_VkShaderModuleCreateInfo32_pNext.htm" />
@@ -4975,6 +5150,8 @@
     <HelpKINode Title="IVkMemoryBarrier.pNext Property " Url="html/P_IVkMemoryBarrier_pNext.htm" />
     <HelpKINode Title="IVkMemoryFdPropertiesKHX.pNext Property " Url="html/P_IVkMemoryFdPropertiesKHX_pNext.htm" />
     <HelpKINode Title="IVkObjectTableCreateInfoNVX.pNext Property " Url="html/P_IVkObjectTableCreateInfoNVX_pNext.htm" />
+    <HelpKINode Title="IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.pNext Property " Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT_pNext.htm" />
+    <HelpKINode Title="IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.pNext Property " Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT_pNext.htm" />
     <HelpKINode Title="IVkPhysicalDeviceDiscardRectanglePropertiesEXT.pNext Property " Url="html/P_IVkPhysicalDeviceDiscardRectanglePropertiesEXT_pNext.htm" />
     <HelpKINode Title="IVkPhysicalDeviceExternalBufferInfoKHX.pNext Property " Url="html/P_IVkPhysicalDeviceExternalBufferInfoKHX_pNext.htm" />
     <HelpKINode Title="IVkPhysicalDeviceExternalImageFormatInfoKHX.pNext Property " Url="html/P_IVkPhysicalDeviceExternalImageFormatInfoKHX_pNext.htm" />
@@ -4989,10 +5166,14 @@
     <HelpKINode Title="IVkPhysicalDeviceMultiviewPropertiesKHX.pNext Property " Url="html/P_IVkPhysicalDeviceMultiviewPropertiesKHX_pNext.htm" />
     <HelpKINode Title="IVkPhysicalDeviceProperties2KHR.pNext Property " Url="html/P_IVkPhysicalDeviceProperties2KHR_pNext.htm" />
     <HelpKINode Title="IVkPhysicalDevicePushDescriptorPropertiesKHR.pNext Property " Url="html/P_IVkPhysicalDevicePushDescriptorPropertiesKHR_pNext.htm" />
+    <HelpKINode Title="IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.pNext Property " Url="html/P_IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT_pNext.htm" />
     <HelpKINode Title="IVkPhysicalDeviceSparseImageFormatInfo2KHR.pNext Property " Url="html/P_IVkPhysicalDeviceSparseImageFormatInfo2KHR_pNext.htm" />
     <HelpKINode Title="IVkPhysicalDeviceSurfaceInfo2KHR.pNext Property " Url="html/P_IVkPhysicalDeviceSurfaceInfo2KHR_pNext.htm" />
     <HelpKINode Title="IVkPipelineCacheCreateInfo.pNext Property " Url="html/P_IVkPipelineCacheCreateInfo_pNext.htm" />
+    <HelpKINode Title="IVkPipelineColorBlendAdvancedStateCreateInfoEXT.pNext Property " Url="html/P_IVkPipelineColorBlendAdvancedStateCreateInfoEXT_pNext.htm" />
     <HelpKINode Title="IVkPipelineColorBlendStateCreateInfo.pNext Property " Url="html/P_IVkPipelineColorBlendStateCreateInfo_pNext.htm" />
+    <HelpKINode Title="IVkPipelineCoverageModulationStateCreateInfoNV.pNext Property " Url="html/P_IVkPipelineCoverageModulationStateCreateInfoNV_pNext.htm" />
+    <HelpKINode Title="IVkPipelineCoverageToColorStateCreateInfoNV.pNext Property " Url="html/P_IVkPipelineCoverageToColorStateCreateInfoNV_pNext.htm" />
     <HelpKINode Title="IVkPipelineDepthStencilStateCreateInfo.pNext Property " Url="html/P_IVkPipelineDepthStencilStateCreateInfo_pNext.htm" />
     <HelpKINode Title="IVkPipelineDiscardRectangleStateCreateInfoEXT.pNext Property " Url="html/P_IVkPipelineDiscardRectangleStateCreateInfoEXT_pNext.htm" />
     <HelpKINode Title="IVkPipelineDynamicStateCreateInfo.pNext Property " Url="html/P_IVkPipelineDynamicStateCreateInfo_pNext.htm" />
@@ -5016,6 +5197,7 @@
     <HelpKINode Title="IVkRenderPassCreateInfo.pNext Property " Url="html/P_IVkRenderPassCreateInfo_pNext.htm" />
     <HelpKINode Title="IVkRenderPassMultiviewCreateInfoKHX.pNext Property " Url="html/P_IVkRenderPassMultiviewCreateInfoKHX_pNext.htm" />
     <HelpKINode Title="IVkSamplerCreateInfo.pNext Property " Url="html/P_IVkSamplerCreateInfo_pNext.htm" />
+    <HelpKINode Title="IVkSamplerReductionModeCreateInfoEXT.pNext Property " Url="html/P_IVkSamplerReductionModeCreateInfoEXT_pNext.htm" />
     <HelpKINode Title="IVkSemaphoreCreateInfo.pNext Property " Url="html/P_IVkSemaphoreCreateInfo_pNext.htm" />
     <HelpKINode Title="IVkShaderModuleCreateInfo.pNext Property " Url="html/P_IVkShaderModuleCreateInfo_pNext.htm" />
     <HelpKINode Title="IVkSharedPresentSurfaceCapabilitiesKHR.pNext Property " Url="html/P_IVkSharedPresentSurfaceCapabilitiesKHR_pNext.htm" />
@@ -5455,6 +5637,11 @@
     <HelpKINode Title="VkPresentRegionKHR64.rectangleCount Field" Url="html/F_VkPresentRegionKHR64_rectangleCount.htm" />
   </HelpKINode>
   <HelpKINode Title="rectangleCount property" Url="html/P_IVkPresentRegionKHR_rectangleCount.htm" />
+  <HelpKINode Title="reductionMode field">
+    <HelpKINode Title="VkSamplerReductionModeCreateInfoEXT32.reductionMode Field" Url="html/F_VkSamplerReductionModeCreateInfoEXT32_reductionMode.htm" />
+    <HelpKINode Title="VkSamplerReductionModeCreateInfoEXT64.reductionMode Field" Url="html/F_VkSamplerReductionModeCreateInfoEXT64_reductionMode.htm" />
+  </HelpKINode>
+  <HelpKINode Title="reductionMode property" Url="html/P_IVkSamplerReductionModeCreateInfoEXT_reductionMode.htm" />
   <HelpKINode Title="reference field" Url="html/F_VkStencilOpState_reference.htm" />
   <HelpKINode Title="refreshDuration field" Url="html/F_VkRefreshCycleDurationGOOGLE_refreshDuration.htm" />
   <HelpKINode Title="refreshRate field" Url="html/F_VkDisplayModeParametersKHR_refreshRate.htm" />
@@ -5716,6 +5903,11 @@
     <HelpKINode Title="VkImageResolve.srcOffset Field" Url="html/F_VkImageResolve_srcOffset.htm" />
   </HelpKINode>
   <HelpKINode Title="srcOffsets field" Url="html/F_VkImageBlit_srcOffsets.htm" />
+  <HelpKINode Title="srcPremultiplied field">
+    <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT32.srcPremultiplied Field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT32_srcPremultiplied.htm" />
+    <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT64.srcPremultiplied Field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT64_srcPremultiplied.htm" />
+  </HelpKINode>
+  <HelpKINode Title="srcPremultiplied property" Url="html/P_IVkPipelineColorBlendAdvancedStateCreateInfoEXT_srcPremultiplied.htm" />
   <HelpKINode Title="srcQueueFamilyIndex field">
     <HelpKINode Title="VkBufferMemoryBarrier32.srcQueueFamilyIndex Field" Url="html/F_VkBufferMemoryBarrier32_srcQueueFamilyIndex.htm" />
     <HelpKINode Title="VkBufferMemoryBarrier64.srcQueueFamilyIndex Field" Url="html/F_VkBufferMemoryBarrier64_srcQueueFamilyIndex.htm" />
@@ -5948,6 +6140,10 @@
     <HelpKINode Title="VkMemoryFdPropertiesKHX64.sType Field" Url="html/F_VkMemoryFdPropertiesKHX64_sType.htm" />
     <HelpKINode Title="VkObjectTableCreateInfoNVX32.sType Field" Url="html/F_VkObjectTableCreateInfoNVX32_sType.htm" />
     <HelpKINode Title="VkObjectTableCreateInfoNVX64.sType Field" Url="html/F_VkObjectTableCreateInfoNVX64_sType.htm" />
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32.sType Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32_sType.htm" />
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64.sType Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64_sType.htm" />
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.sType Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32_sType.htm" />
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.sType Field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64_sType.htm" />
     <HelpKINode Title="VkPhysicalDeviceDiscardRectanglePropertiesEXT32.sType Field" Url="html/F_VkPhysicalDeviceDiscardRectanglePropertiesEXT32_sType.htm" />
     <HelpKINode Title="VkPhysicalDeviceDiscardRectanglePropertiesEXT64.sType Field" Url="html/F_VkPhysicalDeviceDiscardRectanglePropertiesEXT64_sType.htm" />
     <HelpKINode Title="VkPhysicalDeviceExternalBufferInfoKHX32.sType Field" Url="html/F_VkPhysicalDeviceExternalBufferInfoKHX32_sType.htm" />
@@ -5976,14 +6172,22 @@
     <HelpKINode Title="VkPhysicalDeviceProperties2KHR64.sType Field" Url="html/F_VkPhysicalDeviceProperties2KHR64_sType.htm" />
     <HelpKINode Title="VkPhysicalDevicePushDescriptorPropertiesKHR32.sType Field" Url="html/F_VkPhysicalDevicePushDescriptorPropertiesKHR32_sType.htm" />
     <HelpKINode Title="VkPhysicalDevicePushDescriptorPropertiesKHR64.sType Field" Url="html/F_VkPhysicalDevicePushDescriptorPropertiesKHR64_sType.htm" />
+    <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32.sType Field" Url="html/F_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32_sType.htm" />
+    <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64.sType Field" Url="html/F_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64_sType.htm" />
     <HelpKINode Title="VkPhysicalDeviceSparseImageFormatInfo2KHR32.sType Field" Url="html/F_VkPhysicalDeviceSparseImageFormatInfo2KHR32_sType.htm" />
     <HelpKINode Title="VkPhysicalDeviceSparseImageFormatInfo2KHR64.sType Field" Url="html/F_VkPhysicalDeviceSparseImageFormatInfo2KHR64_sType.htm" />
     <HelpKINode Title="VkPhysicalDeviceSurfaceInfo2KHR32.sType Field" Url="html/F_VkPhysicalDeviceSurfaceInfo2KHR32_sType.htm" />
     <HelpKINode Title="VkPhysicalDeviceSurfaceInfo2KHR64.sType Field" Url="html/F_VkPhysicalDeviceSurfaceInfo2KHR64_sType.htm" />
     <HelpKINode Title="VkPipelineCacheCreateInfo32.sType Field" Url="html/F_VkPipelineCacheCreateInfo32_sType.htm" />
     <HelpKINode Title="VkPipelineCacheCreateInfo64.sType Field" Url="html/F_VkPipelineCacheCreateInfo64_sType.htm" />
+    <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT32.sType Field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT32_sType.htm" />
+    <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT64.sType Field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT64_sType.htm" />
     <HelpKINode Title="VkPipelineColorBlendStateCreateInfo32.sType Field" Url="html/F_VkPipelineColorBlendStateCreateInfo32_sType.htm" />
     <HelpKINode Title="VkPipelineColorBlendStateCreateInfo64.sType Field" Url="html/F_VkPipelineColorBlendStateCreateInfo64_sType.htm" />
+    <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV32.sType Field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV32_sType.htm" />
+    <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV64.sType Field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV64_sType.htm" />
+    <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV32.sType Field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV32_sType.htm" />
+    <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV64.sType Field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV64_sType.htm" />
     <HelpKINode Title="VkPipelineDepthStencilStateCreateInfo32.sType Field" Url="html/F_VkPipelineDepthStencilStateCreateInfo32_sType.htm" />
     <HelpKINode Title="VkPipelineDepthStencilStateCreateInfo64.sType Field" Url="html/F_VkPipelineDepthStencilStateCreateInfo64_sType.htm" />
     <HelpKINode Title="VkPipelineDiscardRectangleStateCreateInfoEXT32.sType Field" Url="html/F_VkPipelineDiscardRectangleStateCreateInfoEXT32_sType.htm" />
@@ -6030,6 +6234,8 @@
     <HelpKINode Title="VkRenderPassMultiviewCreateInfoKHX64.sType Field" Url="html/F_VkRenderPassMultiviewCreateInfoKHX64_sType.htm" />
     <HelpKINode Title="VkSamplerCreateInfo32.sType Field" Url="html/F_VkSamplerCreateInfo32_sType.htm" />
     <HelpKINode Title="VkSamplerCreateInfo64.sType Field" Url="html/F_VkSamplerCreateInfo64_sType.htm" />
+    <HelpKINode Title="VkSamplerReductionModeCreateInfoEXT32.sType Field" Url="html/F_VkSamplerReductionModeCreateInfoEXT32_sType.htm" />
+    <HelpKINode Title="VkSamplerReductionModeCreateInfoEXT64.sType Field" Url="html/F_VkSamplerReductionModeCreateInfoEXT64_sType.htm" />
     <HelpKINode Title="VkSemaphoreCreateInfo32.sType Field" Url="html/F_VkSemaphoreCreateInfo32_sType.htm" />
     <HelpKINode Title="VkSemaphoreCreateInfo64.sType Field" Url="html/F_VkSemaphoreCreateInfo64_sType.htm" />
     <HelpKINode Title="VkShaderModuleCreateInfo32.sType Field" Url="html/F_VkShaderModuleCreateInfo32_sType.htm" />
@@ -6134,6 +6340,8 @@
     <HelpKINode Title="IVkMemoryBarrier.sType Property " Url="html/P_IVkMemoryBarrier_sType.htm" />
     <HelpKINode Title="IVkMemoryFdPropertiesKHX.sType Property " Url="html/P_IVkMemoryFdPropertiesKHX_sType.htm" />
     <HelpKINode Title="IVkObjectTableCreateInfoNVX.sType Property " Url="html/P_IVkObjectTableCreateInfoNVX_sType.htm" />
+    <HelpKINode Title="IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.sType Property " Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT_sType.htm" />
+    <HelpKINode Title="IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.sType Property " Url="html/P_IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT_sType.htm" />
     <HelpKINode Title="IVkPhysicalDeviceDiscardRectanglePropertiesEXT.sType Property " Url="html/P_IVkPhysicalDeviceDiscardRectanglePropertiesEXT_sType.htm" />
     <HelpKINode Title="IVkPhysicalDeviceExternalBufferInfoKHX.sType Property " Url="html/P_IVkPhysicalDeviceExternalBufferInfoKHX_sType.htm" />
     <HelpKINode Title="IVkPhysicalDeviceExternalImageFormatInfoKHX.sType Property " Url="html/P_IVkPhysicalDeviceExternalImageFormatInfoKHX_sType.htm" />
@@ -6148,10 +6356,14 @@
     <HelpKINode Title="IVkPhysicalDeviceMultiviewPropertiesKHX.sType Property " Url="html/P_IVkPhysicalDeviceMultiviewPropertiesKHX_sType.htm" />
     <HelpKINode Title="IVkPhysicalDeviceProperties2KHR.sType Property " Url="html/P_IVkPhysicalDeviceProperties2KHR_sType.htm" />
     <HelpKINode Title="IVkPhysicalDevicePushDescriptorPropertiesKHR.sType Property " Url="html/P_IVkPhysicalDevicePushDescriptorPropertiesKHR_sType.htm" />
+    <HelpKINode Title="IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.sType Property " Url="html/P_IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT_sType.htm" />
     <HelpKINode Title="IVkPhysicalDeviceSparseImageFormatInfo2KHR.sType Property " Url="html/P_IVkPhysicalDeviceSparseImageFormatInfo2KHR_sType.htm" />
     <HelpKINode Title="IVkPhysicalDeviceSurfaceInfo2KHR.sType Property " Url="html/P_IVkPhysicalDeviceSurfaceInfo2KHR_sType.htm" />
     <HelpKINode Title="IVkPipelineCacheCreateInfo.sType Property " Url="html/P_IVkPipelineCacheCreateInfo_sType.htm" />
+    <HelpKINode Title="IVkPipelineColorBlendAdvancedStateCreateInfoEXT.sType Property " Url="html/P_IVkPipelineColorBlendAdvancedStateCreateInfoEXT_sType.htm" />
     <HelpKINode Title="IVkPipelineColorBlendStateCreateInfo.sType Property " Url="html/P_IVkPipelineColorBlendStateCreateInfo_sType.htm" />
+    <HelpKINode Title="IVkPipelineCoverageModulationStateCreateInfoNV.sType Property " Url="html/P_IVkPipelineCoverageModulationStateCreateInfoNV_sType.htm" />
+    <HelpKINode Title="IVkPipelineCoverageToColorStateCreateInfoNV.sType Property " Url="html/P_IVkPipelineCoverageToColorStateCreateInfoNV_sType.htm" />
     <HelpKINode Title="IVkPipelineDepthStencilStateCreateInfo.sType Property " Url="html/P_IVkPipelineDepthStencilStateCreateInfo_sType.htm" />
     <HelpKINode Title="IVkPipelineDiscardRectangleStateCreateInfoEXT.sType Property " Url="html/P_IVkPipelineDiscardRectangleStateCreateInfoEXT_sType.htm" />
     <HelpKINode Title="IVkPipelineDynamicStateCreateInfo.sType Property " Url="html/P_IVkPipelineDynamicStateCreateInfo_sType.htm" />
@@ -6175,6 +6387,7 @@
     <HelpKINode Title="IVkRenderPassCreateInfo.sType Property " Url="html/P_IVkRenderPassCreateInfo_sType.htm" />
     <HelpKINode Title="IVkRenderPassMultiviewCreateInfoKHX.sType Property " Url="html/P_IVkRenderPassMultiviewCreateInfoKHX_sType.htm" />
     <HelpKINode Title="IVkSamplerCreateInfo.sType Property " Url="html/P_IVkSamplerCreateInfo_sType.htm" />
+    <HelpKINode Title="IVkSamplerReductionModeCreateInfoEXT.sType Property " Url="html/P_IVkSamplerReductionModeCreateInfoEXT_sType.htm" />
     <HelpKINode Title="IVkSemaphoreCreateInfo.sType Property " Url="html/P_IVkSemaphoreCreateInfo_sType.htm" />
     <HelpKINode Title="IVkShaderModuleCreateInfo.sType Property " Url="html/P_IVkShaderModuleCreateInfo_sType.htm" />
     <HelpKINode Title="IVkSharedPresentSurfaceCapabilitiesKHR.sType Property " Url="html/P_IVkSharedPresentSurfaceCapabilitiesKHR_sType.htm" />
@@ -6468,6 +6681,7 @@
     <HelpKINode Title="VkAttachmentStoreOp.value__ Field" Url="html/F_VkAttachmentStoreOp_value__.htm" />
     <HelpKINode Title="VkBlendFactor.value__ Field" Url="html/F_VkBlendFactor_value__.htm" />
     <HelpKINode Title="VkBlendOp.value__ Field" Url="html/F_VkBlendOp_value__.htm" />
+    <HelpKINode Title="VkBlendOverlapEXT.value__ Field" Url="html/F_VkBlendOverlapEXT_value__.htm" />
     <HelpKINode Title="VkBorderColor.value__ Field" Url="html/F_VkBorderColor_value__.htm" />
     <HelpKINode Title="VkBufferCreateFlags.value__ Field" Url="html/F_VkBufferCreateFlags_value__.htm" />
     <HelpKINode Title="VkBufferUsageFlags.value__ Field" Url="html/F_VkBufferUsageFlags_value__.htm" />
@@ -6483,6 +6697,7 @@
     <HelpKINode Title="VkCompareOp.value__ Field" Url="html/F_VkCompareOp_value__.htm" />
     <HelpKINode Title="VkComponentSwizzle.value__ Field" Url="html/F_VkComponentSwizzle_value__.htm" />
     <HelpKINode Title="VkCompositeAlphaFlagsKHR.value__ Field" Url="html/F_VkCompositeAlphaFlagsKHR_value__.htm" />
+    <HelpKINode Title="VkCoverageModulationModeNV.value__ Field" Url="html/F_VkCoverageModulationModeNV_value__.htm" />
     <HelpKINode Title="VkCullModeFlags.value__ Field" Url="html/F_VkCullModeFlags_value__.htm" />
     <HelpKINode Title="VkDebugReportFlagsEXT.value__ Field" Url="html/F_VkDebugReportFlagsEXT_value__.htm" />
     <HelpKINode Title="VkDebugReportObjectTypeEXT.value__ Field" Url="html/F_VkDebugReportObjectTypeEXT_value__.htm" />
@@ -6547,6 +6762,8 @@
     <HelpKINode Title="VkPipelineCacheCreateFlags.value__ Field" Url="html/F_VkPipelineCacheCreateFlags_value__.htm" />
     <HelpKINode Title="VkPipelineCacheHeaderVersion.value__ Field" Url="html/F_VkPipelineCacheHeaderVersion_value__.htm" />
     <HelpKINode Title="VkPipelineColorBlendStateCreateFlags.value__ Field" Url="html/F_VkPipelineColorBlendStateCreateFlags_value__.htm" />
+    <HelpKINode Title="VkPipelineCoverageModulationStateCreateFlagsNV.value__ Field" Url="html/F_VkPipelineCoverageModulationStateCreateFlagsNV_value__.htm" />
+    <HelpKINode Title="VkPipelineCoverageToColorStateCreateFlagsNV.value__ Field" Url="html/F_VkPipelineCoverageToColorStateCreateFlagsNV_value__.htm" />
     <HelpKINode Title="VkPipelineCreateFlags.value__ Field" Url="html/F_VkPipelineCreateFlags_value__.htm" />
     <HelpKINode Title="VkPipelineDepthStencilStateCreateFlags.value__ Field" Url="html/F_VkPipelineDepthStencilStateCreateFlags_value__.htm" />
     <HelpKINode Title="VkPipelineDiscardRectangleStateCreateFlagsEXT.value__ Field" Url="html/F_VkPipelineDiscardRectangleStateCreateFlagsEXT_value__.htm" />
@@ -6577,6 +6794,7 @@
     <HelpKINode Title="VkSamplerAddressMode.value__ Field" Url="html/F_VkSamplerAddressMode_value__.htm" />
     <HelpKINode Title="VkSamplerCreateFlags.value__ Field" Url="html/F_VkSamplerCreateFlags_value__.htm" />
     <HelpKINode Title="VkSamplerMipmapMode.value__ Field" Url="html/F_VkSamplerMipmapMode_value__.htm" />
+    <HelpKINode Title="VkSamplerReductionModeEXT.value__ Field" Url="html/F_VkSamplerReductionModeEXT_value__.htm" />
     <HelpKINode Title="VkSemaphoreCreateFlags.value__ Field" Url="html/F_VkSemaphoreCreateFlags_value__.htm" />
     <HelpKINode Title="VkShaderModuleCreateFlags.value__ Field" Url="html/F_VkShaderModuleCreateFlags_value__.htm" />
     <HelpKINode Title="VkShaderStageFlags.value__ Field" Url="html/F_VkShaderStageFlags_value__.htm" />
@@ -6661,6 +6879,7 @@
   </HelpKINode>
   <HelpKINode Title="VkAccessFlags.value__ field" Url="html/F_VkAccessFlags_value__.htm" />
   <HelpKINode Title="VkAccessFlags.VK_ACCESS_COLOR_ATTACHMENT_READ_BIT field" Url="html/F_VkAccessFlags_VK_ACCESS_COLOR_ATTACHMENT_READ_BIT.htm" />
+  <HelpKINode Title="VkAccessFlags.VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT field" Url="html/F_VkAccessFlags_VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT.htm" />
   <HelpKINode Title="VkAccessFlags.VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT field" Url="html/F_VkAccessFlags_VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT.htm" />
   <HelpKINode Title="VkAccessFlags.VK_ACCESS_COMMAND_PROCESS_READ_BIT_NVX field" Url="html/F_VkAccessFlags_VK_ACCESS_COMMAND_PROCESS_READ_BIT_NVX.htm" />
   <HelpKINode Title="VkAccessFlags.VK_ACCESS_COMMAND_PROCESS_WRITE_BIT_NVX field" Url="html/F_VkAccessFlags_VK_ACCESS_COMMAND_PROCESS_WRITE_BIT_NVX.htm" />
@@ -7047,13 +7266,72 @@
   <HelpKINode Title="VkBlendOp.value__ field" Url="html/F_VkBlendOp_value__.htm" />
   <HelpKINode Title="VkBlendOp.VK_BLEND_OP_ADD field" Url="html/F_VkBlendOp_VK_BLEND_OP_ADD.htm" />
   <HelpKINode Title="VkBlendOp.VK_BLEND_OP_BEGIN_RANGE field" Url="html/F_VkBlendOp_VK_BLEND_OP_BEGIN_RANGE.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_BLUE_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_BLUE_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_COLORBURN_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_COLORBURN_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_COLORDODGE_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_COLORDODGE_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_CONTRAST_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_CONTRAST_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_DARKEN_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_DARKEN_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_DIFFERENCE_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_DIFFERENCE_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_DST_ATOP_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_DST_ATOP_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_DST_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_DST_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_DST_IN_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_DST_IN_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_DST_OUT_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_DST_OUT_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_DST_OVER_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_DST_OVER_EXT.htm" />
   <HelpKINode Title="VkBlendOp.VK_BLEND_OP_END_RANGE field" Url="html/F_VkBlendOp_VK_BLEND_OP_END_RANGE.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_EXCLUSION_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_EXCLUSION_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_GREEN_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_GREEN_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_HARDLIGHT_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_HARDLIGHT_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_HARDMIX_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_HARDMIX_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_HSL_COLOR_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_HSL_COLOR_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_HSL_HUE_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_HSL_HUE_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_HSL_LUMINOSITY_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_HSL_LUMINOSITY_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_HSL_SATURATION_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_HSL_SATURATION_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_INVERT_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_INVERT_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_INVERT_OVG_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_INVERT_OVG_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_INVERT_RGB_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_INVERT_RGB_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_LIGHTEN_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_LIGHTEN_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_LINEARBURN_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_LINEARBURN_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_LINEARDODGE_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_LINEARDODGE_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_LINEARLIGHT_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_LINEARLIGHT_EXT.htm" />
   <HelpKINode Title="VkBlendOp.VK_BLEND_OP_MAX field" Url="html/F_VkBlendOp_VK_BLEND_OP_MAX.htm" />
   <HelpKINode Title="VkBlendOp.VK_BLEND_OP_MAX_ENUM field" Url="html/F_VkBlendOp_VK_BLEND_OP_MAX_ENUM.htm" />
   <HelpKINode Title="VkBlendOp.VK_BLEND_OP_MIN field" Url="html/F_VkBlendOp_VK_BLEND_OP_MIN.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_MINUS_CLAMPED_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_MINUS_CLAMPED_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_MINUS_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_MINUS_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_MULTIPLY_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_MULTIPLY_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_OVERLAY_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_OVERLAY_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_PINLIGHT_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_PINLIGHT_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_PLUS_CLAMPED_ALPHA_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_PLUS_CLAMPED_ALPHA_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_PLUS_CLAMPED_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_PLUS_CLAMPED_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_PLUS_DARKER_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_PLUS_DARKER_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_PLUS_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_PLUS_EXT.htm" />
   <HelpKINode Title="VkBlendOp.VK_BLEND_OP_RANGE_SIZE field" Url="html/F_VkBlendOp_VK_BLEND_OP_RANGE_SIZE.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_RED_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_RED_EXT.htm" />
   <HelpKINode Title="VkBlendOp.VK_BLEND_OP_REVERSE_SUBTRACT field" Url="html/F_VkBlendOp_VK_BLEND_OP_REVERSE_SUBTRACT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_SCREEN_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_SCREEN_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_SOFTLIGHT_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_SOFTLIGHT_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_SRC_ATOP_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_SRC_ATOP_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_SRC_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_SRC_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_SRC_IN_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_SRC_IN_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_SRC_OUT_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_SRC_OUT_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_SRC_OVER_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_SRC_OVER_EXT.htm" />
   <HelpKINode Title="VkBlendOp.VK_BLEND_OP_SUBTRACT field" Url="html/F_VkBlendOp_VK_BLEND_OP_SUBTRACT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_VIVIDLIGHT_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_VIVIDLIGHT_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_XOR_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_XOR_EXT.htm" />
+  <HelpKINode Title="VkBlendOp.VK_BLEND_OP_ZERO_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_ZERO_EXT.htm" />
+  <HelpKINode Title="VkBlendOverlapEXT class">
+    <HelpKINode Title="VkBlendOverlapEXT Class" Url="html/T_VkBlendOverlapEXT.htm" />
+    <HelpKINode Title="about VkBlendOverlapEXT class" Url="html/T_VkBlendOverlapEXT.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_VkBlendOverlapEXT.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VkBlendOverlapEXT.value__ field" Url="html/F_VkBlendOverlapEXT_value__.htm" />
+  <HelpKINode Title="VkBlendOverlapEXT.VK_BLEND_OVERLAP_BEGIN_RANGE_EXT field" Url="html/F_VkBlendOverlapEXT_VK_BLEND_OVERLAP_BEGIN_RANGE_EXT.htm" />
+  <HelpKINode Title="VkBlendOverlapEXT.VK_BLEND_OVERLAP_CONJOINT_EXT field" Url="html/F_VkBlendOverlapEXT_VK_BLEND_OVERLAP_CONJOINT_EXT.htm" />
+  <HelpKINode Title="VkBlendOverlapEXT.VK_BLEND_OVERLAP_DISJOINT_EXT field" Url="html/F_VkBlendOverlapEXT_VK_BLEND_OVERLAP_DISJOINT_EXT.htm" />
+  <HelpKINode Title="VkBlendOverlapEXT.VK_BLEND_OVERLAP_END_RANGE_EXT field" Url="html/F_VkBlendOverlapEXT_VK_BLEND_OVERLAP_END_RANGE_EXT.htm" />
+  <HelpKINode Title="VkBlendOverlapEXT.VK_BLEND_OVERLAP_MAX_ENUM_EXT field" Url="html/F_VkBlendOverlapEXT_VK_BLEND_OVERLAP_MAX_ENUM_EXT.htm" />
+  <HelpKINode Title="VkBlendOverlapEXT.VK_BLEND_OVERLAP_RANGE_SIZE_EXT field" Url="html/F_VkBlendOverlapEXT_VK_BLEND_OVERLAP_RANGE_SIZE_EXT.htm" />
+  <HelpKINode Title="VkBlendOverlapEXT.VK_BLEND_OVERLAP_UNCORRELATED_EXT field" Url="html/F_VkBlendOverlapEXT_VK_BLEND_OVERLAP_UNCORRELATED_EXT.htm" />
   <HelpKINode Title="VkBorderColor class">
     <HelpKINode Title="VkBorderColor Class" Url="html/T_VkBorderColor.htm" />
     <HelpKINode Title="about VkBorderColor class" Url="html/T_VkBorderColor.htm" />
@@ -8078,6 +8356,20 @@
   <HelpKINode Title="VkCopyDescriptorSet64.srcBinding field" Url="html/F_VkCopyDescriptorSet64_srcBinding.htm" />
   <HelpKINode Title="VkCopyDescriptorSet64.srcSet field" Url="html/F_VkCopyDescriptorSet64_srcSet.htm" />
   <HelpKINode Title="VkCopyDescriptorSet64.sType field" Url="html/F_VkCopyDescriptorSet64_sType.htm" />
+  <HelpKINode Title="VkCoverageModulationModeNV class">
+    <HelpKINode Title="VkCoverageModulationModeNV Class" Url="html/T_VkCoverageModulationModeNV.htm" />
+    <HelpKINode Title="about VkCoverageModulationModeNV class" Url="html/T_VkCoverageModulationModeNV.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_VkCoverageModulationModeNV.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VkCoverageModulationModeNV.value__ field" Url="html/F_VkCoverageModulationModeNV_value__.htm" />
+  <HelpKINode Title="VkCoverageModulationModeNV.VK_COVERAGE_MODULATION_MODE_ALPHA_NV field" Url="html/F_VkCoverageModulationModeNV_VK_COVERAGE_MODULATION_MODE_ALPHA_NV.htm" />
+  <HelpKINode Title="VkCoverageModulationModeNV.VK_COVERAGE_MODULATION_MODE_BEGIN_RANGE_NV field" Url="html/F_VkCoverageModulationModeNV_VK_COVERAGE_MODULATION_MODE_BEGIN_RANGE_NV.htm" />
+  <HelpKINode Title="VkCoverageModulationModeNV.VK_COVERAGE_MODULATION_MODE_END_RANGE_NV field" Url="html/F_VkCoverageModulationModeNV_VK_COVERAGE_MODULATION_MODE_END_RANGE_NV.htm" />
+  <HelpKINode Title="VkCoverageModulationModeNV.VK_COVERAGE_MODULATION_MODE_MAX_ENUM_NV field" Url="html/F_VkCoverageModulationModeNV_VK_COVERAGE_MODULATION_MODE_MAX_ENUM_NV.htm" />
+  <HelpKINode Title="VkCoverageModulationModeNV.VK_COVERAGE_MODULATION_MODE_NONE_NV field" Url="html/F_VkCoverageModulationModeNV_VK_COVERAGE_MODULATION_MODE_NONE_NV.htm" />
+  <HelpKINode Title="VkCoverageModulationModeNV.VK_COVERAGE_MODULATION_MODE_RANGE_SIZE_NV field" Url="html/F_VkCoverageModulationModeNV_VK_COVERAGE_MODULATION_MODE_RANGE_SIZE_NV.htm" />
+  <HelpKINode Title="VkCoverageModulationModeNV.VK_COVERAGE_MODULATION_MODE_RGBA_NV field" Url="html/F_VkCoverageModulationModeNV_VK_COVERAGE_MODULATION_MODE_RGBA_NV.htm" />
+  <HelpKINode Title="VkCoverageModulationModeNV.VK_COVERAGE_MODULATION_MODE_RGB_NV field" Url="html/F_VkCoverageModulationModeNV_VK_COVERAGE_MODULATION_MODE_RGB_NV.htm" />
   <HelpKINode Title="vkCreateBuffer class">
     <HelpKINode Title="vkCreateBuffer Class" Url="html/T_vkCreateBuffer.htm" />
     <HelpKINode Title="about vkCreateBuffer class" Url="html/T_vkCreateBuffer.htm" />
@@ -10306,6 +10598,7 @@
   <HelpKINode Title="VkFormatFeatureFlags.VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT field" Url="html/F_VkFormatFeatureFlags_VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT.htm" />
   <HelpKINode Title="VkFormatFeatureFlags.VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG field" Url="html/F_VkFormatFeatureFlags_VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG.htm" />
   <HelpKINode Title="VkFormatFeatureFlags.VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT field" Url="html/F_VkFormatFeatureFlags_VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT.htm" />
+  <HelpKINode Title="VkFormatFeatureFlags.VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT field" Url="html/F_VkFormatFeatureFlags_VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT.htm" />
   <HelpKINode Title="VkFormatFeatureFlags.VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT field" Url="html/F_VkFormatFeatureFlags_VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT.htm" />
   <HelpKINode Title="VkFormatFeatureFlags.VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT field" Url="html/F_VkFormatFeatureFlags_VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT.htm" />
   <HelpKINode Title="VkFormatFeatureFlags.VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT field" Url="html/F_VkFormatFeatureFlags_VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT.htm" />
@@ -11911,6 +12204,52 @@
     <HelpKINode Title="methods" Url="html/Methods_T_VkPhysicalDevice.htm" />
   </HelpKINode>
   <HelpKINode Title="VkPhysicalDevice.Cast method" Url="html/M_VkPhysicalDevice_Cast.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32 class">
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32 Class" Url="html/T_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32.htm" />
+    <HelpKINode Title="about VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32 class" Url="html/T_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32.advancedBlendCoherentOperations field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32_advancedBlendCoherentOperations.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32.pNext field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32_pNext.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32.sType field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32_sType.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64 class">
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64 Class" Url="html/T_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64.htm" />
+    <HelpKINode Title="about VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64 class" Url="html/T_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64.advancedBlendCoherentOperations field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64_advancedBlendCoherentOperations.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64.pNext field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64_pNext.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64.sType field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64_sType.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32 class">
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32 Class" Url="html/T_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.htm" />
+    <HelpKINode Title="about VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32 class" Url="html/T_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.advancedBlendAllOperations field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32_advancedBlendAllOperations.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.advancedBlendCorrelatedOverlap field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32_advancedBlendCorrelatedOverlap.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.advancedBlendIndependentBlend field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32_advancedBlendIndependentBlend.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.advancedBlendMaxColorAttachments field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32_advancedBlendMaxColorAttachments.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.advancedBlendNonPremultipliedDstColor field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32_advancedBlendNonPremultipliedDstColor.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.advancedBlendNonPremultipliedSrcColor field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32_advancedBlendNonPremultipliedSrcColor.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.pNext field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32_pNext.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.sType field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32_sType.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64 class">
+    <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64 Class" Url="html/T_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.htm" />
+    <HelpKINode Title="about VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64 class" Url="html/T_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.advancedBlendAllOperations field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64_advancedBlendAllOperations.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.advancedBlendCorrelatedOverlap field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64_advancedBlendCorrelatedOverlap.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.advancedBlendIndependentBlend field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64_advancedBlendIndependentBlend.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.advancedBlendMaxColorAttachments field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64_advancedBlendMaxColorAttachments.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.advancedBlendNonPremultipliedDstColor field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64_advancedBlendNonPremultipliedDstColor.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.advancedBlendNonPremultipliedSrcColor field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64_advancedBlendNonPremultipliedSrcColor.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.pNext field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64_pNext.htm" />
+  <HelpKINode Title="VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.sType field" Url="html/F_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64_sType.htm" />
   <HelpKINode Title="VkPhysicalDeviceDiscardRectanglePropertiesEXT32 class">
     <HelpKINode Title="VkPhysicalDeviceDiscardRectanglePropertiesEXT32 Class" Url="html/T_VkPhysicalDeviceDiscardRectanglePropertiesEXT32.htm" />
     <HelpKINode Title="about VkPhysicalDeviceDiscardRectanglePropertiesEXT32 class" Url="html/T_VkPhysicalDeviceDiscardRectanglePropertiesEXT32.htm" />
@@ -12516,6 +12855,26 @@
   <HelpKINode Title="VkPhysicalDevicePushDescriptorPropertiesKHR64.maxPushDescriptors field" Url="html/F_VkPhysicalDevicePushDescriptorPropertiesKHR64_maxPushDescriptors.htm" />
   <HelpKINode Title="VkPhysicalDevicePushDescriptorPropertiesKHR64.pNext field" Url="html/F_VkPhysicalDevicePushDescriptorPropertiesKHR64_pNext.htm" />
   <HelpKINode Title="VkPhysicalDevicePushDescriptorPropertiesKHR64.sType field" Url="html/F_VkPhysicalDevicePushDescriptorPropertiesKHR64_sType.htm" />
+  <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32 class">
+    <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32 Class" Url="html/T_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32.htm" />
+    <HelpKINode Title="about VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32 class" Url="html/T_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32.filterMinmaxImageComponentMapping field" Url="html/F_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32_filterMinmaxImageComponentMapping.htm" />
+  <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32.filterMinmaxSingleComponentFormats field" Url="html/F_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32_filterMinmaxSingleComponentFormats.htm" />
+  <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32.pNext field" Url="html/F_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32_pNext.htm" />
+  <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32.sType field" Url="html/F_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32_sType.htm" />
+  <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64 class">
+    <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64 Class" Url="html/T_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64.htm" />
+    <HelpKINode Title="about VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64 class" Url="html/T_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64.filterMinmaxImageComponentMapping field" Url="html/F_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64_filterMinmaxImageComponentMapping.htm" />
+  <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64.filterMinmaxSingleComponentFormats field" Url="html/F_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64_filterMinmaxSingleComponentFormats.htm" />
+  <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64.pNext field" Url="html/F_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64_pNext.htm" />
+  <HelpKINode Title="VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64.sType field" Url="html/F_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64_sType.htm" />
   <HelpKINode Title="VkPhysicalDeviceSparseImageFormatInfo2KHR32 class">
     <HelpKINode Title="VkPhysicalDeviceSparseImageFormatInfo2KHR32 Class" Url="html/T_VkPhysicalDeviceSparseImageFormatInfo2KHR32.htm" />
     <HelpKINode Title="about VkPhysicalDeviceSparseImageFormatInfo2KHR32 class" Url="html/T_VkPhysicalDeviceSparseImageFormatInfo2KHR32.htm" />
@@ -12649,6 +13008,28 @@
   <HelpKINode Title="VkPipelineCacheHeaderVersion.VK_PIPELINE_CACHE_HEADER_VERSION_MAX_ENUM field" Url="html/F_VkPipelineCacheHeaderVersion_VK_PIPELINE_CACHE_HEADER_VERSION_MAX_ENUM.htm" />
   <HelpKINode Title="VkPipelineCacheHeaderVersion.VK_PIPELINE_CACHE_HEADER_VERSION_ONE field" Url="html/F_VkPipelineCacheHeaderVersion_VK_PIPELINE_CACHE_HEADER_VERSION_ONE.htm" />
   <HelpKINode Title="VkPipelineCacheHeaderVersion.VK_PIPELINE_CACHE_HEADER_VERSION_RANGE_SIZE field" Url="html/F_VkPipelineCacheHeaderVersion_VK_PIPELINE_CACHE_HEADER_VERSION_RANGE_SIZE.htm" />
+  <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT32 class">
+    <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT32 Class" Url="html/T_VkPipelineColorBlendAdvancedStateCreateInfoEXT32.htm" />
+    <HelpKINode Title="about VkPipelineColorBlendAdvancedStateCreateInfoEXT32 class" Url="html/T_VkPipelineColorBlendAdvancedStateCreateInfoEXT32.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_VkPipelineColorBlendAdvancedStateCreateInfoEXT32.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_VkPipelineColorBlendAdvancedStateCreateInfoEXT32.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT32.blendOverlap field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT32_blendOverlap.htm" />
+  <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT32.dstPremultiplied field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT32_dstPremultiplied.htm" />
+  <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT32.pNext field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT32_pNext.htm" />
+  <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT32.srcPremultiplied field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT32_srcPremultiplied.htm" />
+  <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT32.sType field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT32_sType.htm" />
+  <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT64 class">
+    <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT64 Class" Url="html/T_VkPipelineColorBlendAdvancedStateCreateInfoEXT64.htm" />
+    <HelpKINode Title="about VkPipelineColorBlendAdvancedStateCreateInfoEXT64 class" Url="html/T_VkPipelineColorBlendAdvancedStateCreateInfoEXT64.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_VkPipelineColorBlendAdvancedStateCreateInfoEXT64.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_VkPipelineColorBlendAdvancedStateCreateInfoEXT64.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT64.blendOverlap field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT64_blendOverlap.htm" />
+  <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT64.dstPremultiplied field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT64_dstPremultiplied.htm" />
+  <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT64.pNext field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT64_pNext.htm" />
+  <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT64.srcPremultiplied field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT64_srcPremultiplied.htm" />
+  <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT64.sType field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT64_sType.htm" />
   <HelpKINode Title="VkPipelineColorBlendAttachmentState class">
     <HelpKINode Title="VkPipelineColorBlendAttachmentState Class" Url="html/T_VkPipelineColorBlendAttachmentState.htm" />
     <HelpKINode Title="about VkPipelineColorBlendAttachmentState class" Url="html/T_VkPipelineColorBlendAttachmentState.htm" />
@@ -12697,6 +13078,66 @@
   <HelpKINode Title="VkPipelineColorBlendStateCreateInfo64.pAttachments field" Url="html/F_VkPipelineColorBlendStateCreateInfo64_pAttachments.htm" />
   <HelpKINode Title="VkPipelineColorBlendStateCreateInfo64.pNext field" Url="html/F_VkPipelineColorBlendStateCreateInfo64_pNext.htm" />
   <HelpKINode Title="VkPipelineColorBlendStateCreateInfo64.sType field" Url="html/F_VkPipelineColorBlendStateCreateInfo64_sType.htm" />
+  <HelpKINode Title="VkPipelineCoverageModulationStateCreateFlagsNV class">
+    <HelpKINode Title="VkPipelineCoverageModulationStateCreateFlagsNV Class" Url="html/T_VkPipelineCoverageModulationStateCreateFlagsNV.htm" />
+    <HelpKINode Title="about VkPipelineCoverageModulationStateCreateFlagsNV class" Url="html/T_VkPipelineCoverageModulationStateCreateFlagsNV.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_VkPipelineCoverageModulationStateCreateFlagsNV.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VkPipelineCoverageModulationStateCreateFlagsNV.value__ field" Url="html/F_VkPipelineCoverageModulationStateCreateFlagsNV_value__.htm" />
+  <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV32 class">
+    <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV32 Class" Url="html/T_VkPipelineCoverageModulationStateCreateInfoNV32.htm" />
+    <HelpKINode Title="about VkPipelineCoverageModulationStateCreateInfoNV32 class" Url="html/T_VkPipelineCoverageModulationStateCreateInfoNV32.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_VkPipelineCoverageModulationStateCreateInfoNV32.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_VkPipelineCoverageModulationStateCreateInfoNV32.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV32.coverageModulationMode field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV32_coverageModulationMode.htm" />
+  <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV32.coverageModulationTableCount field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV32_coverageModulationTableCount.htm" />
+  <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV32.coverageModulationTableEnable field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV32_coverageModulationTableEnable.htm" />
+  <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV32.flags field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV32_flags.htm" />
+  <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV32.pCoverageModulationTable field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV32_pCoverageModulationTable.htm" />
+  <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV32.pNext field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV32_pNext.htm" />
+  <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV32.sType field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV32_sType.htm" />
+  <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV64 class">
+    <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV64 Class" Url="html/T_VkPipelineCoverageModulationStateCreateInfoNV64.htm" />
+    <HelpKINode Title="about VkPipelineCoverageModulationStateCreateInfoNV64 class" Url="html/T_VkPipelineCoverageModulationStateCreateInfoNV64.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_VkPipelineCoverageModulationStateCreateInfoNV64.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_VkPipelineCoverageModulationStateCreateInfoNV64.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV64.coverageModulationMode field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV64_coverageModulationMode.htm" />
+  <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV64.coverageModulationTableCount field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV64_coverageModulationTableCount.htm" />
+  <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV64.coverageModulationTableEnable field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV64_coverageModulationTableEnable.htm" />
+  <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV64.flags field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV64_flags.htm" />
+  <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV64.pCoverageModulationTable field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV64_pCoverageModulationTable.htm" />
+  <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV64.pNext field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV64_pNext.htm" />
+  <HelpKINode Title="VkPipelineCoverageModulationStateCreateInfoNV64.sType field" Url="html/F_VkPipelineCoverageModulationStateCreateInfoNV64_sType.htm" />
+  <HelpKINode Title="VkPipelineCoverageToColorStateCreateFlagsNV class">
+    <HelpKINode Title="VkPipelineCoverageToColorStateCreateFlagsNV Class" Url="html/T_VkPipelineCoverageToColorStateCreateFlagsNV.htm" />
+    <HelpKINode Title="about VkPipelineCoverageToColorStateCreateFlagsNV class" Url="html/T_VkPipelineCoverageToColorStateCreateFlagsNV.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_VkPipelineCoverageToColorStateCreateFlagsNV.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VkPipelineCoverageToColorStateCreateFlagsNV.value__ field" Url="html/F_VkPipelineCoverageToColorStateCreateFlagsNV_value__.htm" />
+  <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV32 class">
+    <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV32 Class" Url="html/T_VkPipelineCoverageToColorStateCreateInfoNV32.htm" />
+    <HelpKINode Title="about VkPipelineCoverageToColorStateCreateInfoNV32 class" Url="html/T_VkPipelineCoverageToColorStateCreateInfoNV32.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_VkPipelineCoverageToColorStateCreateInfoNV32.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_VkPipelineCoverageToColorStateCreateInfoNV32.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV32.coverageToColorEnable field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV32_coverageToColorEnable.htm" />
+  <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV32.coverageToColorLocation field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV32_coverageToColorLocation.htm" />
+  <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV32.flags field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV32_flags.htm" />
+  <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV32.pNext field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV32_pNext.htm" />
+  <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV32.sType field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV32_sType.htm" />
+  <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV64 class">
+    <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV64 Class" Url="html/T_VkPipelineCoverageToColorStateCreateInfoNV64.htm" />
+    <HelpKINode Title="about VkPipelineCoverageToColorStateCreateInfoNV64 class" Url="html/T_VkPipelineCoverageToColorStateCreateInfoNV64.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_VkPipelineCoverageToColorStateCreateInfoNV64.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_VkPipelineCoverageToColorStateCreateInfoNV64.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV64.coverageToColorEnable field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV64_coverageToColorEnable.htm" />
+  <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV64.coverageToColorLocation field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV64_coverageToColorLocation.htm" />
+  <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV64.flags field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV64_flags.htm" />
+  <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV64.pNext field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV64_pNext.htm" />
+  <HelpKINode Title="VkPipelineCoverageToColorStateCreateInfoNV64.sType field" Url="html/F_VkPipelineCoverageToColorStateCreateInfoNV64_sType.htm" />
   <HelpKINode Title="VkPipelineCreateFlags class">
     <HelpKINode Title="VkPipelineCreateFlags Class" Url="html/T_VkPipelineCreateFlags.htm" />
     <HelpKINode Title="about VkPipelineCreateFlags class" Url="html/T_VkPipelineCreateFlags.htm" />
@@ -13179,6 +13620,7 @@
   <HelpKINode Title="VkPolygonMode.VK_POLYGON_MODE_BEGIN_RANGE field" Url="html/F_VkPolygonMode_VK_POLYGON_MODE_BEGIN_RANGE.htm" />
   <HelpKINode Title="VkPolygonMode.VK_POLYGON_MODE_END_RANGE field" Url="html/F_VkPolygonMode_VK_POLYGON_MODE_END_RANGE.htm" />
   <HelpKINode Title="VkPolygonMode.VK_POLYGON_MODE_FILL field" Url="html/F_VkPolygonMode_VK_POLYGON_MODE_FILL.htm" />
+  <HelpKINode Title="VkPolygonMode.VK_POLYGON_MODE_FILL_RECTANGLE_NV field" Url="html/F_VkPolygonMode_VK_POLYGON_MODE_FILL_RECTANGLE_NV.htm" />
   <HelpKINode Title="VkPolygonMode.VK_POLYGON_MODE_LINE field" Url="html/F_VkPolygonMode_VK_POLYGON_MODE_LINE.htm" />
   <HelpKINode Title="VkPolygonMode.VK_POLYGON_MODE_MAX_ENUM field" Url="html/F_VkPolygonMode_VK_POLYGON_MODE_MAX_ENUM.htm" />
   <HelpKINode Title="VkPolygonMode.VK_POLYGON_MODE_POINT field" Url="html/F_VkPolygonMode_VK_POLYGON_MODE_POINT.htm" />
@@ -13826,6 +14268,37 @@
   <HelpKINode Title="VkSamplerMipmapMode.VK_SAMPLER_MIPMAP_MODE_MAX_ENUM field" Url="html/F_VkSamplerMipmapMode_VK_SAMPLER_MIPMAP_MODE_MAX_ENUM.htm" />
   <HelpKINode Title="VkSamplerMipmapMode.VK_SAMPLER_MIPMAP_MODE_NEAREST field" Url="html/F_VkSamplerMipmapMode_VK_SAMPLER_MIPMAP_MODE_NEAREST.htm" />
   <HelpKINode Title="VkSamplerMipmapMode.VK_SAMPLER_MIPMAP_MODE_RANGE_SIZE field" Url="html/F_VkSamplerMipmapMode_VK_SAMPLER_MIPMAP_MODE_RANGE_SIZE.htm" />
+  <HelpKINode Title="VkSamplerReductionModeCreateInfoEXT32 class">
+    <HelpKINode Title="VkSamplerReductionModeCreateInfoEXT32 Class" Url="html/T_VkSamplerReductionModeCreateInfoEXT32.htm" />
+    <HelpKINode Title="about VkSamplerReductionModeCreateInfoEXT32 class" Url="html/T_VkSamplerReductionModeCreateInfoEXT32.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_VkSamplerReductionModeCreateInfoEXT32.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_VkSamplerReductionModeCreateInfoEXT32.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VkSamplerReductionModeCreateInfoEXT32.pNext field" Url="html/F_VkSamplerReductionModeCreateInfoEXT32_pNext.htm" />
+  <HelpKINode Title="VkSamplerReductionModeCreateInfoEXT32.reductionMode field" Url="html/F_VkSamplerReductionModeCreateInfoEXT32_reductionMode.htm" />
+  <HelpKINode Title="VkSamplerReductionModeCreateInfoEXT32.sType field" Url="html/F_VkSamplerReductionModeCreateInfoEXT32_sType.htm" />
+  <HelpKINode Title="VkSamplerReductionModeCreateInfoEXT64 class">
+    <HelpKINode Title="VkSamplerReductionModeCreateInfoEXT64 Class" Url="html/T_VkSamplerReductionModeCreateInfoEXT64.htm" />
+    <HelpKINode Title="about VkSamplerReductionModeCreateInfoEXT64 class" Url="html/T_VkSamplerReductionModeCreateInfoEXT64.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_VkSamplerReductionModeCreateInfoEXT64.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_VkSamplerReductionModeCreateInfoEXT64.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VkSamplerReductionModeCreateInfoEXT64.pNext field" Url="html/F_VkSamplerReductionModeCreateInfoEXT64_pNext.htm" />
+  <HelpKINode Title="VkSamplerReductionModeCreateInfoEXT64.reductionMode field" Url="html/F_VkSamplerReductionModeCreateInfoEXT64_reductionMode.htm" />
+  <HelpKINode Title="VkSamplerReductionModeCreateInfoEXT64.sType field" Url="html/F_VkSamplerReductionModeCreateInfoEXT64_sType.htm" />
+  <HelpKINode Title="VkSamplerReductionModeEXT class">
+    <HelpKINode Title="VkSamplerReductionModeEXT Class" Url="html/T_VkSamplerReductionModeEXT.htm" />
+    <HelpKINode Title="about VkSamplerReductionModeEXT class" Url="html/T_VkSamplerReductionModeEXT.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_VkSamplerReductionModeEXT.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VkSamplerReductionModeEXT.value__ field" Url="html/F_VkSamplerReductionModeEXT_value__.htm" />
+  <HelpKINode Title="VkSamplerReductionModeEXT.VK_SAMPLER_REDUCTION_MODE_BEGIN_RANGE_EXT field" Url="html/F_VkSamplerReductionModeEXT_VK_SAMPLER_REDUCTION_MODE_BEGIN_RANGE_EXT.htm" />
+  <HelpKINode Title="VkSamplerReductionModeEXT.VK_SAMPLER_REDUCTION_MODE_END_RANGE_EXT field" Url="html/F_VkSamplerReductionModeEXT_VK_SAMPLER_REDUCTION_MODE_END_RANGE_EXT.htm" />
+  <HelpKINode Title="VkSamplerReductionModeEXT.VK_SAMPLER_REDUCTION_MODE_MAX_ENUM_EXT field" Url="html/F_VkSamplerReductionModeEXT_VK_SAMPLER_REDUCTION_MODE_MAX_ENUM_EXT.htm" />
+  <HelpKINode Title="VkSamplerReductionModeEXT.VK_SAMPLER_REDUCTION_MODE_MAX_EXT field" Url="html/F_VkSamplerReductionModeEXT_VK_SAMPLER_REDUCTION_MODE_MAX_EXT.htm" />
+  <HelpKINode Title="VkSamplerReductionModeEXT.VK_SAMPLER_REDUCTION_MODE_MIN_EXT field" Url="html/F_VkSamplerReductionModeEXT_VK_SAMPLER_REDUCTION_MODE_MIN_EXT.htm" />
+  <HelpKINode Title="VkSamplerReductionModeEXT.VK_SAMPLER_REDUCTION_MODE_RANGE_SIZE_EXT field" Url="html/F_VkSamplerReductionModeEXT_VK_SAMPLER_REDUCTION_MODE_RANGE_SIZE_EXT.htm" />
+  <HelpKINode Title="VkSamplerReductionModeEXT.VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT field" Url="html/F_VkSamplerReductionModeEXT_VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT.htm" />
   <HelpKINode Title="VkSemaphore class">
     <HelpKINode Title="VkSemaphore Class" Url="html/T_VkSemaphore.htm" />
     <HelpKINode Title="about VkSemaphore class" Url="html/T_VkSemaphore.htm" />
@@ -14262,6 +14735,8 @@
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHX field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHX.htm" />
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_MIR_SURFACE_CREATE_INFO_KHR field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_MIR_SURFACE_CREATE_INFO_KHR.htm" />
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_OBJECT_TABLE_CREATE_INFO_NVX field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_OBJECT_TABLE_CREATE_INFO_NVX.htm" />
+  <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT.htm" />
+  <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT.htm" />
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT.htm" />
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO_KHX field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO_KHX.htm" />
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO_KHX field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO_KHX.htm" />
@@ -14276,10 +14751,14 @@
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHX field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHX.htm" />
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR.htm" />
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR.htm" />
+  <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT.htm" />
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2_KHR field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2_KHR.htm" />
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR.htm" />
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO.htm" />
+  <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT.htm" />
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO.htm" />
+  <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV.htm" />
+  <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV.htm" />
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO.htm" />
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT.htm" />
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO.htm" />
@@ -14304,6 +14783,7 @@
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO.htm" />
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO_KHX field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO_KHX.htm" />
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO.htm" />
+  <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT.htm" />
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO.htm" />
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO.htm" />
   <HelpKINode Title="VkStructureType.VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR.htm" />
@@ -14902,6 +15382,7 @@
   <HelpKINode Title="VkXYColorEXT.x field" Url="html/F_VkXYColorEXT_x.htm" />
   <HelpKINode Title="VkXYColorEXT.y field" Url="html/F_VkXYColorEXT_y.htm" />
   <HelpKINode Title="VK_ACCESS_COLOR_ATTACHMENT_READ_BIT field" Url="html/F_VkAccessFlags_VK_ACCESS_COLOR_ATTACHMENT_READ_BIT.htm" />
+  <HelpKINode Title="VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT field" Url="html/F_VkAccessFlags_VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT.htm" />
   <HelpKINode Title="VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT field" Url="html/F_VkAccessFlags_VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT.htm" />
   <HelpKINode Title="VK_ACCESS_COMMAND_PROCESS_READ_BIT_NVX field" Url="html/F_VkAccessFlags_VK_ACCESS_COMMAND_PROCESS_READ_BIT_NVX.htm" />
   <HelpKINode Title="VK_ACCESS_COMMAND_PROCESS_WRITE_BIT_NVX field" Url="html/F_VkAccessFlags_VK_ACCESS_COMMAND_PROCESS_WRITE_BIT_NVX.htm" />
@@ -14961,13 +15442,66 @@
   <HelpKINode Title="VK_BLEND_FACTOR_ZERO field" Url="html/F_VkBlendFactor_VK_BLEND_FACTOR_ZERO.htm" />
   <HelpKINode Title="VK_BLEND_OP_ADD field" Url="html/F_VkBlendOp_VK_BLEND_OP_ADD.htm" />
   <HelpKINode Title="VK_BLEND_OP_BEGIN_RANGE field" Url="html/F_VkBlendOp_VK_BLEND_OP_BEGIN_RANGE.htm" />
+  <HelpKINode Title="VK_BLEND_OP_BLUE_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_BLUE_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_COLORBURN_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_COLORBURN_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_COLORDODGE_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_COLORDODGE_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_CONTRAST_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_CONTRAST_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_DARKEN_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_DARKEN_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_DIFFERENCE_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_DIFFERENCE_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_DST_ATOP_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_DST_ATOP_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_DST_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_DST_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_DST_IN_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_DST_IN_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_DST_OUT_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_DST_OUT_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_DST_OVER_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_DST_OVER_EXT.htm" />
   <HelpKINode Title="VK_BLEND_OP_END_RANGE field" Url="html/F_VkBlendOp_VK_BLEND_OP_END_RANGE.htm" />
+  <HelpKINode Title="VK_BLEND_OP_EXCLUSION_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_EXCLUSION_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_GREEN_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_GREEN_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_HARDLIGHT_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_HARDLIGHT_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_HARDMIX_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_HARDMIX_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_HSL_COLOR_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_HSL_COLOR_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_HSL_HUE_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_HSL_HUE_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_HSL_LUMINOSITY_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_HSL_LUMINOSITY_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_HSL_SATURATION_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_HSL_SATURATION_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_INVERT_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_INVERT_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_INVERT_OVG_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_INVERT_OVG_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_INVERT_RGB_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_INVERT_RGB_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_LIGHTEN_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_LIGHTEN_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_LINEARBURN_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_LINEARBURN_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_LINEARDODGE_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_LINEARDODGE_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_LINEARLIGHT_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_LINEARLIGHT_EXT.htm" />
   <HelpKINode Title="VK_BLEND_OP_MAX field" Url="html/F_VkBlendOp_VK_BLEND_OP_MAX.htm" />
   <HelpKINode Title="VK_BLEND_OP_MAX_ENUM field" Url="html/F_VkBlendOp_VK_BLEND_OP_MAX_ENUM.htm" />
   <HelpKINode Title="VK_BLEND_OP_MIN field" Url="html/F_VkBlendOp_VK_BLEND_OP_MIN.htm" />
+  <HelpKINode Title="VK_BLEND_OP_MINUS_CLAMPED_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_MINUS_CLAMPED_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_MINUS_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_MINUS_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_MULTIPLY_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_MULTIPLY_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_OVERLAY_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_OVERLAY_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_PINLIGHT_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_PINLIGHT_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_PLUS_CLAMPED_ALPHA_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_PLUS_CLAMPED_ALPHA_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_PLUS_CLAMPED_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_PLUS_CLAMPED_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_PLUS_DARKER_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_PLUS_DARKER_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_PLUS_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_PLUS_EXT.htm" />
   <HelpKINode Title="VK_BLEND_OP_RANGE_SIZE field" Url="html/F_VkBlendOp_VK_BLEND_OP_RANGE_SIZE.htm" />
+  <HelpKINode Title="VK_BLEND_OP_RED_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_RED_EXT.htm" />
   <HelpKINode Title="VK_BLEND_OP_REVERSE_SUBTRACT field" Url="html/F_VkBlendOp_VK_BLEND_OP_REVERSE_SUBTRACT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_SCREEN_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_SCREEN_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_SOFTLIGHT_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_SOFTLIGHT_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_SRC_ATOP_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_SRC_ATOP_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_SRC_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_SRC_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_SRC_IN_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_SRC_IN_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_SRC_OUT_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_SRC_OUT_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_SRC_OVER_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_SRC_OVER_EXT.htm" />
   <HelpKINode Title="VK_BLEND_OP_SUBTRACT field" Url="html/F_VkBlendOp_VK_BLEND_OP_SUBTRACT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_VIVIDLIGHT_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_VIVIDLIGHT_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_XOR_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_XOR_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OP_ZERO_EXT field" Url="html/F_VkBlendOp_VK_BLEND_OP_ZERO_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OVERLAP_BEGIN_RANGE_EXT field" Url="html/F_VkBlendOverlapEXT_VK_BLEND_OVERLAP_BEGIN_RANGE_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OVERLAP_CONJOINT_EXT field" Url="html/F_VkBlendOverlapEXT_VK_BLEND_OVERLAP_CONJOINT_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OVERLAP_DISJOINT_EXT field" Url="html/F_VkBlendOverlapEXT_VK_BLEND_OVERLAP_DISJOINT_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OVERLAP_END_RANGE_EXT field" Url="html/F_VkBlendOverlapEXT_VK_BLEND_OVERLAP_END_RANGE_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OVERLAP_MAX_ENUM_EXT field" Url="html/F_VkBlendOverlapEXT_VK_BLEND_OVERLAP_MAX_ENUM_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OVERLAP_RANGE_SIZE_EXT field" Url="html/F_VkBlendOverlapEXT_VK_BLEND_OVERLAP_RANGE_SIZE_EXT.htm" />
+  <HelpKINode Title="VK_BLEND_OVERLAP_UNCORRELATED_EXT field" Url="html/F_VkBlendOverlapEXT_VK_BLEND_OVERLAP_UNCORRELATED_EXT.htm" />
   <HelpKINode Title="VK_BORDER_COLOR_BEGIN_RANGE field" Url="html/F_VkBorderColor_VK_BORDER_COLOR_BEGIN_RANGE.htm" />
   <HelpKINode Title="VK_BORDER_COLOR_END_RANGE field" Url="html/F_VkBorderColor_VK_BORDER_COLOR_END_RANGE.htm" />
   <HelpKINode Title="VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK field" Url="html/F_VkBorderColor_VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK.htm" />
@@ -15060,6 +15594,14 @@
   <HelpKINode Title="VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR field" Url="html/F_VkCompositeAlphaFlagsKHR_VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR.htm" />
   <HelpKINode Title="VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR field" Url="html/F_VkCompositeAlphaFlagsKHR_VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR.htm" />
   <HelpKINode Title="VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR field" Url="html/F_VkCompositeAlphaFlagsKHR_VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR.htm" />
+  <HelpKINode Title="VK_COVERAGE_MODULATION_MODE_ALPHA_NV field" Url="html/F_VkCoverageModulationModeNV_VK_COVERAGE_MODULATION_MODE_ALPHA_NV.htm" />
+  <HelpKINode Title="VK_COVERAGE_MODULATION_MODE_BEGIN_RANGE_NV field" Url="html/F_VkCoverageModulationModeNV_VK_COVERAGE_MODULATION_MODE_BEGIN_RANGE_NV.htm" />
+  <HelpKINode Title="VK_COVERAGE_MODULATION_MODE_END_RANGE_NV field" Url="html/F_VkCoverageModulationModeNV_VK_COVERAGE_MODULATION_MODE_END_RANGE_NV.htm" />
+  <HelpKINode Title="VK_COVERAGE_MODULATION_MODE_MAX_ENUM_NV field" Url="html/F_VkCoverageModulationModeNV_VK_COVERAGE_MODULATION_MODE_MAX_ENUM_NV.htm" />
+  <HelpKINode Title="VK_COVERAGE_MODULATION_MODE_NONE_NV field" Url="html/F_VkCoverageModulationModeNV_VK_COVERAGE_MODULATION_MODE_NONE_NV.htm" />
+  <HelpKINode Title="VK_COVERAGE_MODULATION_MODE_RANGE_SIZE_NV field" Url="html/F_VkCoverageModulationModeNV_VK_COVERAGE_MODULATION_MODE_RANGE_SIZE_NV.htm" />
+  <HelpKINode Title="VK_COVERAGE_MODULATION_MODE_RGBA_NV field" Url="html/F_VkCoverageModulationModeNV_VK_COVERAGE_MODULATION_MODE_RGBA_NV.htm" />
+  <HelpKINode Title="VK_COVERAGE_MODULATION_MODE_RGB_NV field" Url="html/F_VkCoverageModulationModeNV_VK_COVERAGE_MODULATION_MODE_RGB_NV.htm" />
   <HelpKINode Title="VK_CULL_MODE_BACK_BIT field" Url="html/F_VkCullModeFlags_VK_CULL_MODE_BACK_BIT.htm" />
   <HelpKINode Title="VK_CULL_MODE_FLAG_BITS_MAX_ENUM field" Url="html/F_VkCullModeFlags_VK_CULL_MODE_FLAG_BITS_MAX_ENUM.htm" />
   <HelpKINode Title="VK_CULL_MODE_FRONT_AND_BACK field" Url="html/F_VkCullModeFlags_VK_CULL_MODE_FRONT_AND_BACK.htm" />
@@ -15356,6 +15898,7 @@
   <HelpKINode Title="VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT field" Url="html/F_VkFormatFeatureFlags_VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT.htm" />
   <HelpKINode Title="VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG field" Url="html/F_VkFormatFeatureFlags_VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG.htm" />
   <HelpKINode Title="VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT field" Url="html/F_VkFormatFeatureFlags_VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT.htm" />
+  <HelpKINode Title="VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT field" Url="html/F_VkFormatFeatureFlags_VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT.htm" />
   <HelpKINode Title="VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT field" Url="html/F_VkFormatFeatureFlags_VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT.htm" />
   <HelpKINode Title="VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT field" Url="html/F_VkFormatFeatureFlags_VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT.htm" />
   <HelpKINode Title="VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT field" Url="html/F_VkFormatFeatureFlags_VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT.htm" />
@@ -15692,6 +16235,7 @@
   <HelpKINode Title="VK_POLYGON_MODE_BEGIN_RANGE field" Url="html/F_VkPolygonMode_VK_POLYGON_MODE_BEGIN_RANGE.htm" />
   <HelpKINode Title="VK_POLYGON_MODE_END_RANGE field" Url="html/F_VkPolygonMode_VK_POLYGON_MODE_END_RANGE.htm" />
   <HelpKINode Title="VK_POLYGON_MODE_FILL field" Url="html/F_VkPolygonMode_VK_POLYGON_MODE_FILL.htm" />
+  <HelpKINode Title="VK_POLYGON_MODE_FILL_RECTANGLE_NV field" Url="html/F_VkPolygonMode_VK_POLYGON_MODE_FILL_RECTANGLE_NV.htm" />
   <HelpKINode Title="VK_POLYGON_MODE_LINE field" Url="html/F_VkPolygonMode_VK_POLYGON_MODE_LINE.htm" />
   <HelpKINode Title="VK_POLYGON_MODE_MAX_ENUM field" Url="html/F_VkPolygonMode_VK_POLYGON_MODE_MAX_ENUM.htm" />
   <HelpKINode Title="VK_POLYGON_MODE_POINT field" Url="html/F_VkPolygonMode_VK_POLYGON_MODE_POINT.htm" />
@@ -15777,6 +16321,13 @@
   <HelpKINode Title="VK_SAMPLER_MIPMAP_MODE_MAX_ENUM field" Url="html/F_VkSamplerMipmapMode_VK_SAMPLER_MIPMAP_MODE_MAX_ENUM.htm" />
   <HelpKINode Title="VK_SAMPLER_MIPMAP_MODE_NEAREST field" Url="html/F_VkSamplerMipmapMode_VK_SAMPLER_MIPMAP_MODE_NEAREST.htm" />
   <HelpKINode Title="VK_SAMPLER_MIPMAP_MODE_RANGE_SIZE field" Url="html/F_VkSamplerMipmapMode_VK_SAMPLER_MIPMAP_MODE_RANGE_SIZE.htm" />
+  <HelpKINode Title="VK_SAMPLER_REDUCTION_MODE_BEGIN_RANGE_EXT field" Url="html/F_VkSamplerReductionModeEXT_VK_SAMPLER_REDUCTION_MODE_BEGIN_RANGE_EXT.htm" />
+  <HelpKINode Title="VK_SAMPLER_REDUCTION_MODE_END_RANGE_EXT field" Url="html/F_VkSamplerReductionModeEXT_VK_SAMPLER_REDUCTION_MODE_END_RANGE_EXT.htm" />
+  <HelpKINode Title="VK_SAMPLER_REDUCTION_MODE_MAX_ENUM_EXT field" Url="html/F_VkSamplerReductionModeEXT_VK_SAMPLER_REDUCTION_MODE_MAX_ENUM_EXT.htm" />
+  <HelpKINode Title="VK_SAMPLER_REDUCTION_MODE_MAX_EXT field" Url="html/F_VkSamplerReductionModeEXT_VK_SAMPLER_REDUCTION_MODE_MAX_EXT.htm" />
+  <HelpKINode Title="VK_SAMPLER_REDUCTION_MODE_MIN_EXT field" Url="html/F_VkSamplerReductionModeEXT_VK_SAMPLER_REDUCTION_MODE_MIN_EXT.htm" />
+  <HelpKINode Title="VK_SAMPLER_REDUCTION_MODE_RANGE_SIZE_EXT field" Url="html/F_VkSamplerReductionModeEXT_VK_SAMPLER_REDUCTION_MODE_RANGE_SIZE_EXT.htm" />
+  <HelpKINode Title="VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT field" Url="html/F_VkSamplerReductionModeEXT_VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT.htm" />
   <HelpKINode Title="VK_SAMPLE_COUNT_16_BIT field" Url="html/F_VkSampleCountFlags_VK_SAMPLE_COUNT_16_BIT.htm" />
   <HelpKINode Title="VK_SAMPLE_COUNT_1_BIT field" Url="html/F_VkSampleCountFlags_VK_SAMPLE_COUNT_1_BIT.htm" />
   <HelpKINode Title="VK_SAMPLE_COUNT_2_BIT field" Url="html/F_VkSampleCountFlags_VK_SAMPLE_COUNT_2_BIT.htm" />
@@ -15915,6 +16466,8 @@
   <HelpKINode Title="VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHX field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHX.htm" />
   <HelpKINode Title="VK_STRUCTURE_TYPE_MIR_SURFACE_CREATE_INFO_KHR field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_MIR_SURFACE_CREATE_INFO_KHR.htm" />
   <HelpKINode Title="VK_STRUCTURE_TYPE_OBJECT_TABLE_CREATE_INFO_NVX field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_OBJECT_TABLE_CREATE_INFO_NVX.htm" />
+  <HelpKINode Title="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT.htm" />
+  <HelpKINode Title="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT.htm" />
   <HelpKINode Title="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT.htm" />
   <HelpKINode Title="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO_KHX field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO_KHX.htm" />
   <HelpKINode Title="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO_KHX field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO_KHX.htm" />
@@ -15929,10 +16482,14 @@
   <HelpKINode Title="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHX field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHX.htm" />
   <HelpKINode Title="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR.htm" />
   <HelpKINode Title="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR.htm" />
+  <HelpKINode Title="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT.htm" />
   <HelpKINode Title="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2_KHR field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2_KHR.htm" />
   <HelpKINode Title="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR.htm" />
   <HelpKINode Title="VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO.htm" />
+  <HelpKINode Title="VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT.htm" />
   <HelpKINode Title="VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO.htm" />
+  <HelpKINode Title="VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV.htm" />
+  <HelpKINode Title="VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV.htm" />
   <HelpKINode Title="VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO.htm" />
   <HelpKINode Title="VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT.htm" />
   <HelpKINode Title="VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO.htm" />
@@ -15957,6 +16514,7 @@
   <HelpKINode Title="VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO.htm" />
   <HelpKINode Title="VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO_KHX field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO_KHX.htm" />
   <HelpKINode Title="VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO.htm" />
+  <HelpKINode Title="VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT.htm" />
   <HelpKINode Title="VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO.htm" />
   <HelpKINode Title="VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO.htm" />
   <HelpKINode Title="VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR field" Url="html/F_VkStructureType_VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR.htm" />

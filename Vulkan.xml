@@ -606,6 +606,19 @@
     <member name="P:IVkObjectTableCreateInfoNVX.pObjectEntryTypes"></member>
     <member name="P:IVkObjectTableCreateInfoNVX.pObjectEntryUsageFlags"></member>
     <member name="P:IVkObjectTableCreateInfoNVX.sType"></member>
+    <member name="T:IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT"></member>
+    <member name="P:IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.advancedBlendCoherentOperations"></member>
+    <member name="P:IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.pNext"></member>
+    <member name="P:IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.sType"></member>
+    <member name="T:IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT"></member>
+    <member name="P:IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.advancedBlendAllOperations"></member>
+    <member name="P:IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.advancedBlendCorrelatedOverlap"></member>
+    <member name="P:IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.advancedBlendIndependentBlend"></member>
+    <member name="P:IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.advancedBlendMaxColorAttachments"></member>
+    <member name="P:IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.advancedBlendNonPremultipliedDstColor"></member>
+    <member name="P:IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.advancedBlendNonPremultipliedSrcColor"></member>
+    <member name="P:IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.pNext"></member>
+    <member name="P:IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.sType"></member>
     <member name="T:IVkPhysicalDeviceDiscardRectanglePropertiesEXT"></member>
     <member name="P:IVkPhysicalDeviceDiscardRectanglePropertiesEXT.maxDiscardRectangles"></member>
     <member name="P:IVkPhysicalDeviceDiscardRectanglePropertiesEXT.pNext"></member>
@@ -797,6 +810,11 @@
     <member name="P:IVkPhysicalDevicePushDescriptorPropertiesKHR.maxPushDescriptors"></member>
     <member name="P:IVkPhysicalDevicePushDescriptorPropertiesKHR.pNext"></member>
     <member name="P:IVkPhysicalDevicePushDescriptorPropertiesKHR.sType"></member>
+    <member name="T:IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT"></member>
+    <member name="P:IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.filterMinmaxImageComponentMapping"></member>
+    <member name="P:IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.filterMinmaxSingleComponentFormats"></member>
+    <member name="P:IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.pNext"></member>
+    <member name="P:IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.sType"></member>
     <member name="T:IVkPhysicalDeviceSparseImageFormatInfo2KHR"></member>
     <member name="P:IVkPhysicalDeviceSparseImageFormatInfo2KHR.format"></member>
     <member name="P:IVkPhysicalDeviceSparseImageFormatInfo2KHR.pNext"></member>
@@ -817,6 +835,12 @@
     <member name="P:IVkPipelineCacheCreateInfo.pInitialData"></member>
     <member name="P:IVkPipelineCacheCreateInfo.pNext"></member>
     <member name="P:IVkPipelineCacheCreateInfo.sType"></member>
+    <member name="T:IVkPipelineColorBlendAdvancedStateCreateInfoEXT"></member>
+    <member name="P:IVkPipelineColorBlendAdvancedStateCreateInfoEXT.blendOverlap"></member>
+    <member name="P:IVkPipelineColorBlendAdvancedStateCreateInfoEXT.dstPremultiplied"></member>
+    <member name="P:IVkPipelineColorBlendAdvancedStateCreateInfoEXT.pNext"></member>
+    <member name="P:IVkPipelineColorBlendAdvancedStateCreateInfoEXT.srcPremultiplied"></member>
+    <member name="P:IVkPipelineColorBlendAdvancedStateCreateInfoEXT.sType"></member>
     <member name="T:IVkPipelineColorBlendStateCreateInfo">
       <summary>Structure specifying parameters of a newly created pipeline color blend state</summary>
     </member>
@@ -828,6 +852,20 @@
     <member name="P:IVkPipelineColorBlendStateCreateInfo.pAttachments"></member>
     <member name="P:IVkPipelineColorBlendStateCreateInfo.pNext"></member>
     <member name="P:IVkPipelineColorBlendStateCreateInfo.sType"></member>
+    <member name="T:IVkPipelineCoverageModulationStateCreateInfoNV"></member>
+    <member name="P:IVkPipelineCoverageModulationStateCreateInfoNV.coverageModulationMode"></member>
+    <member name="P:IVkPipelineCoverageModulationStateCreateInfoNV.coverageModulationTableCount"></member>
+    <member name="P:IVkPipelineCoverageModulationStateCreateInfoNV.coverageModulationTableEnable"></member>
+    <member name="P:IVkPipelineCoverageModulationStateCreateInfoNV.flags"></member>
+    <member name="P:IVkPipelineCoverageModulationStateCreateInfoNV.pCoverageModulationTable"></member>
+    <member name="P:IVkPipelineCoverageModulationStateCreateInfoNV.pNext"></member>
+    <member name="P:IVkPipelineCoverageModulationStateCreateInfoNV.sType"></member>
+    <member name="T:IVkPipelineCoverageToColorStateCreateInfoNV"></member>
+    <member name="P:IVkPipelineCoverageToColorStateCreateInfoNV.coverageToColorEnable"></member>
+    <member name="P:IVkPipelineCoverageToColorStateCreateInfoNV.coverageToColorLocation"></member>
+    <member name="P:IVkPipelineCoverageToColorStateCreateInfoNV.flags"></member>
+    <member name="P:IVkPipelineCoverageToColorStateCreateInfoNV.pNext"></member>
+    <member name="P:IVkPipelineCoverageToColorStateCreateInfoNV.sType"></member>
     <member name="T:IVkPipelineDepthStencilStateCreateInfo">
       <summary>Structure specifying parameters of a newly created pipeline depth stencil state</summary>
     </member>
@@ -1044,6 +1082,10 @@
     <member name="P:IVkSamplerCreateInfo.pNext"></member>
     <member name="P:IVkSamplerCreateInfo.sType"></member>
     <member name="P:IVkSamplerCreateInfo.unnormalizedCoordinates"></member>
+    <member name="T:IVkSamplerReductionModeCreateInfoEXT"></member>
+    <member name="P:IVkSamplerReductionModeCreateInfoEXT.pNext"></member>
+    <member name="P:IVkSamplerReductionModeCreateInfoEXT.reductionMode"></member>
+    <member name="P:IVkSamplerReductionModeCreateInfoEXT.sType"></member>
     <member name="T:IVkSemaphoreCreateInfo">
       <summary>Structure specifying parameters of a newly created semaphore</summary>
     </member>
@@ -1281,6 +1323,7 @@
     <member name="T:VkAccessFlags"></member>
     <member name="F:VkAccessFlags.value__"></member>
     <member name="F:VkAccessFlags.VK_ACCESS_COLOR_ATTACHMENT_READ_BIT"></member>
+    <member name="F:VkAccessFlags.VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT"></member>
     <member name="F:VkAccessFlags.VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT"></member>
     <member name="F:VkAccessFlags.VK_ACCESS_COMMAND_PROCESS_READ_BIT_NVX"></member>
     <member name="F:VkAccessFlags.VK_ACCESS_COMMAND_PROCESS_WRITE_BIT_NVX"></member>
@@ -1311,7 +1354,9 @@
       </summary>
     </member>
     <member name="M:vkAcquireNextImage2KHX.Invoke(VkDevice*,IVkAcquireNextImageInfoKHX*,System.UInt32*)"></member>
-    <member name="T:VkAcquireNextImageInfoKHX32"></member>
+    <member name="T:VkAcquireNextImageInfoKHX32">
+      <summary>See: <see cref="T:IVkAcquireNextImageInfoKHX" /></summary>
+    </member>
     <member name="F:VkAcquireNextImageInfoKHX32.deviceMask"></member>
     <member name="F:VkAcquireNextImageInfoKHX32.fence"></member>
     <member name="F:VkAcquireNextImageInfoKHX32.pNext"></member>
@@ -1319,7 +1364,9 @@
     <member name="F:VkAcquireNextImageInfoKHX32.sType"></member>
     <member name="F:VkAcquireNextImageInfoKHX32.swapchain"></member>
     <member name="F:VkAcquireNextImageInfoKHX32.timeout"></member>
-    <member name="T:VkAcquireNextImageInfoKHX64"></member>
+    <member name="T:VkAcquireNextImageInfoKHX64">
+      <summary>See: <see cref="T:IVkAcquireNextImageInfoKHX" /></summary>
+    </member>
     <member name="F:VkAcquireNextImageInfoKHX64.deviceMask"></member>
     <member name="F:VkAcquireNextImageInfoKHX64.fence"></member>
     <member name="F:VkAcquireNextImageInfoKHX64.pNext"></member>
@@ -1378,7 +1425,7 @@
     </member>
     <member name="M:vkAllocateMemory.Invoke(VkDevice*,IVkMemoryAllocateInfo*,IVkAllocationCallbacks*,VkDeviceMemory**)"></member>
     <member name="T:VkAllocationCallbacks32">
-      <summary>Structure containing callback function pointers for memory allocation</summary>
+      <summary>See: <see cref="T:IVkAllocationCallbacks" /></summary>
     </member>
     <member name="F:VkAllocationCallbacks32.pfnAllocation"></member>
     <member name="F:VkAllocationCallbacks32.pfnFree"></member>
@@ -1387,7 +1434,7 @@
     <member name="F:VkAllocationCallbacks32.pfnReallocation"></member>
     <member name="F:VkAllocationCallbacks32.pUserData"></member>
     <member name="T:VkAllocationCallbacks64">
-      <summary>Structure containing callback function pointers for memory allocation</summary>
+      <summary>See: <see cref="T:IVkAllocationCallbacks" /></summary>
     </member>
     <member name="F:VkAllocationCallbacks64.pfnAllocation"></member>
     <member name="F:VkAllocationCallbacks64.pfnFree"></member>
@@ -1398,7 +1445,7 @@
     <member name="T:VkAndroidSurfaceCreateFlagsKHR"></member>
     <member name="F:VkAndroidSurfaceCreateFlagsKHR.value__"></member>
     <member name="T:VkApplicationInfo32">
-      <summary>Structure specifying application info</summary>
+      <summary>See: <see cref="T:IVkApplicationInfo" /></summary>
     </member>
     <member name="F:VkApplicationInfo32.apiVersion"></member>
     <member name="F:VkApplicationInfo32.applicationVersion"></member>
@@ -1408,7 +1455,7 @@
     <member name="F:VkApplicationInfo32.pNext"></member>
     <member name="F:VkApplicationInfo32.sType"></member>
     <member name="T:VkApplicationInfo64">
-      <summary>Structure specifying application info</summary>
+      <summary>See: <see cref="T:IVkApplicationInfo" /></summary>
     </member>
     <member name="F:VkApplicationInfo64.apiVersion"></member>
     <member name="F:VkApplicationInfo64.applicationVersion"></member>
@@ -1492,7 +1539,9 @@
       </summary>
     </member>
     <member name="M:vkBindBufferMemory2KHX.Invoke(VkDevice*,System.UInt32,IVkBindBufferMemoryInfoKHX*)"></member>
-    <member name="T:VkBindBufferMemoryInfoKHX32"></member>
+    <member name="T:VkBindBufferMemoryInfoKHX32">
+      <summary>See: <see cref="T:IVkBindBufferMemoryInfoKHX" /></summary>
+    </member>
     <member name="F:VkBindBufferMemoryInfoKHX32.buffer"></member>
     <member name="F:VkBindBufferMemoryInfoKHX32.deviceIndexCount"></member>
     <member name="F:VkBindBufferMemoryInfoKHX32.memory"></member>
@@ -1500,7 +1549,9 @@
     <member name="F:VkBindBufferMemoryInfoKHX32.pDeviceIndices"></member>
     <member name="F:VkBindBufferMemoryInfoKHX32.pNext"></member>
     <member name="F:VkBindBufferMemoryInfoKHX32.sType"></member>
-    <member name="T:VkBindBufferMemoryInfoKHX64"></member>
+    <member name="T:VkBindBufferMemoryInfoKHX64">
+      <summary>See: <see cref="T:IVkBindBufferMemoryInfoKHX" /></summary>
+    </member>
     <member name="F:VkBindBufferMemoryInfoKHX64.buffer"></member>
     <member name="F:VkBindBufferMemoryInfoKHX64.deviceIndexCount"></member>
     <member name="F:VkBindBufferMemoryInfoKHX64.memory"></member>
@@ -1532,7 +1583,9 @@
       </summary>
     </member>
     <member name="M:vkBindImageMemory2KHX.Invoke(VkDevice*,System.UInt32,IVkBindImageMemoryInfoKHX*)"></member>
-    <member name="T:VkBindImageMemoryInfoKHX32"></member>
+    <member name="T:VkBindImageMemoryInfoKHX32">
+      <summary>See: <see cref="T:IVkBindImageMemoryInfoKHX" /></summary>
+    </member>
     <member name="F:VkBindImageMemoryInfoKHX32.deviceIndexCount"></member>
     <member name="F:VkBindImageMemoryInfoKHX32.image"></member>
     <member name="F:VkBindImageMemoryInfoKHX32.memory"></member>
@@ -1542,7 +1595,9 @@
     <member name="F:VkBindImageMemoryInfoKHX32.pSFRRects"></member>
     <member name="F:VkBindImageMemoryInfoKHX32.SFRRectCount"></member>
     <member name="F:VkBindImageMemoryInfoKHX32.sType"></member>
-    <member name="T:VkBindImageMemoryInfoKHX64"></member>
+    <member name="T:VkBindImageMemoryInfoKHX64">
+      <summary>See: <see cref="T:IVkBindImageMemoryInfoKHX" /></summary>
+    </member>
     <member name="F:VkBindImageMemoryInfoKHX64.deviceIndexCount"></member>
     <member name="F:VkBindImageMemoryInfoKHX64.image"></member>
     <member name="F:VkBindImageMemoryInfoKHX64.memory"></member>
@@ -1552,18 +1607,22 @@
     <member name="F:VkBindImageMemoryInfoKHX64.pSFRRects"></member>
     <member name="F:VkBindImageMemoryInfoKHX64.SFRRectCount"></member>
     <member name="F:VkBindImageMemoryInfoKHX64.sType"></member>
-    <member name="T:VkBindImageMemorySwapchainInfoKHX32"></member>
+    <member name="T:VkBindImageMemorySwapchainInfoKHX32">
+      <summary>See: <see cref="T:IVkBindImageMemorySwapchainInfoKHX" /></summary>
+    </member>
     <member name="F:VkBindImageMemorySwapchainInfoKHX32.imageIndex"></member>
     <member name="F:VkBindImageMemorySwapchainInfoKHX32.pNext"></member>
     <member name="F:VkBindImageMemorySwapchainInfoKHX32.sType"></member>
     <member name="F:VkBindImageMemorySwapchainInfoKHX32.swapchain"></member>
-    <member name="T:VkBindImageMemorySwapchainInfoKHX64"></member>
+    <member name="T:VkBindImageMemorySwapchainInfoKHX64">
+      <summary>See: <see cref="T:IVkBindImageMemorySwapchainInfoKHX" /></summary>
+    </member>
     <member name="F:VkBindImageMemorySwapchainInfoKHX64.imageIndex"></member>
     <member name="F:VkBindImageMemorySwapchainInfoKHX64.pNext"></member>
     <member name="F:VkBindImageMemorySwapchainInfoKHX64.sType"></member>
     <member name="F:VkBindImageMemorySwapchainInfoKHX64.swapchain"></member>
     <member name="T:VkBindSparseInfo32">
-      <summary>Structure specifying a sparse binding operation</summary>
+      <summary>See: <see cref="T:IVkBindSparseInfo" /></summary>
     </member>
     <member name="F:VkBindSparseInfo32.bufferBindCount"></member>
     <member name="F:VkBindSparseInfo32.imageBindCount"></member>
@@ -1578,7 +1637,7 @@
     <member name="F:VkBindSparseInfo32.sType"></member>
     <member name="F:VkBindSparseInfo32.waitSemaphoreCount"></member>
     <member name="T:VkBindSparseInfo64">
-      <summary>Structure specifying a sparse binding operation</summary>
+      <summary>See: <see cref="T:IVkBindSparseInfo" /></summary>
     </member>
     <member name="F:VkBindSparseInfo64.bufferBindCount"></member>
     <member name="F:VkBindSparseInfo64.imageBindCount"></member>
@@ -1621,13 +1680,68 @@
     <member name="F:VkBlendOp.value__"></member>
     <member name="F:VkBlendOp.VK_BLEND_OP_ADD"></member>
     <member name="F:VkBlendOp.VK_BLEND_OP_BEGIN_RANGE"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_BLUE_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_COLORBURN_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_COLORDODGE_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_CONTRAST_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_DARKEN_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_DIFFERENCE_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_DST_ATOP_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_DST_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_DST_IN_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_DST_OUT_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_DST_OVER_EXT"></member>
     <member name="F:VkBlendOp.VK_BLEND_OP_END_RANGE"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_EXCLUSION_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_GREEN_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_HARDLIGHT_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_HARDMIX_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_HSL_COLOR_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_HSL_HUE_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_HSL_LUMINOSITY_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_HSL_SATURATION_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_INVERT_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_INVERT_OVG_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_INVERT_RGB_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_LIGHTEN_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_LINEARBURN_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_LINEARDODGE_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_LINEARLIGHT_EXT"></member>
     <member name="F:VkBlendOp.VK_BLEND_OP_MAX"></member>
     <member name="F:VkBlendOp.VK_BLEND_OP_MAX_ENUM"></member>
     <member name="F:VkBlendOp.VK_BLEND_OP_MIN"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_MINUS_CLAMPED_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_MINUS_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_MULTIPLY_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_OVERLAY_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_PINLIGHT_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_PLUS_CLAMPED_ALPHA_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_PLUS_CLAMPED_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_PLUS_DARKER_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_PLUS_EXT"></member>
     <member name="F:VkBlendOp.VK_BLEND_OP_RANGE_SIZE"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_RED_EXT"></member>
     <member name="F:VkBlendOp.VK_BLEND_OP_REVERSE_SUBTRACT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_SCREEN_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_SOFTLIGHT_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_SRC_ATOP_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_SRC_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_SRC_IN_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_SRC_OUT_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_SRC_OVER_EXT"></member>
     <member name="F:VkBlendOp.VK_BLEND_OP_SUBTRACT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_VIVIDLIGHT_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_XOR_EXT"></member>
+    <member name="F:VkBlendOp.VK_BLEND_OP_ZERO_EXT"></member>
+    <member name="T:VkBlendOverlapEXT"></member>
+    <member name="F:VkBlendOverlapEXT.value__"></member>
+    <member name="F:VkBlendOverlapEXT.VK_BLEND_OVERLAP_BEGIN_RANGE_EXT"></member>
+    <member name="F:VkBlendOverlapEXT.VK_BLEND_OVERLAP_CONJOINT_EXT"></member>
+    <member name="F:VkBlendOverlapEXT.VK_BLEND_OVERLAP_DISJOINT_EXT"></member>
+    <member name="F:VkBlendOverlapEXT.VK_BLEND_OVERLAP_END_RANGE_EXT"></member>
+    <member name="F:VkBlendOverlapEXT.VK_BLEND_OVERLAP_MAX_ENUM_EXT"></member>
+    <member name="F:VkBlendOverlapEXT.VK_BLEND_OVERLAP_RANGE_SIZE_EXT"></member>
+    <member name="F:VkBlendOverlapEXT.VK_BLEND_OVERLAP_UNCORRELATED_EXT"></member>
     <member name="T:VkBorderColor"></member>
     <member name="F:VkBorderColor.value__"></member>
     <member name="F:VkBorderColor.VK_BORDER_COLOR_BEGIN_RANGE"></member>
@@ -1657,7 +1771,7 @@
     <member name="F:VkBufferCreateFlags.VK_BUFFER_CREATE_SPARSE_BINDING_BIT"></member>
     <member name="F:VkBufferCreateFlags.VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT"></member>
     <member name="T:VkBufferCreateInfo32">
-      <summary>Structure specifying the parameters of a newly created buffer object</summary>
+      <summary>See: <see cref="T:IVkBufferCreateInfo" /></summary>
     </member>
     <member name="F:VkBufferCreateInfo32.flags"></member>
     <member name="F:VkBufferCreateInfo32.pNext"></member>
@@ -1668,7 +1782,7 @@
     <member name="F:VkBufferCreateInfo32.sType"></member>
     <member name="F:VkBufferCreateInfo32.usage"></member>
     <member name="T:VkBufferCreateInfo64">
-      <summary>Structure specifying the parameters of a newly created buffer object</summary>
+      <summary>See: <see cref="T:IVkBufferCreateInfo" /></summary>
     </member>
     <member name="F:VkBufferCreateInfo64.flags"></member>
     <member name="F:VkBufferCreateInfo64.pNext"></member>
@@ -1688,7 +1802,7 @@
     <member name="F:VkBufferImageCopy.imageOffset"></member>
     <member name="F:VkBufferImageCopy.imageSubresource"></member>
     <member name="T:VkBufferMemoryBarrier32">
-      <summary>Structure specifying a buffer memory barrier</summary>
+      <summary>See: <see cref="T:IVkBufferMemoryBarrier" /></summary>
     </member>
     <member name="F:VkBufferMemoryBarrier32.buffer"></member>
     <member name="F:VkBufferMemoryBarrier32.dstAccessMask"></member>
@@ -1700,7 +1814,7 @@
     <member name="F:VkBufferMemoryBarrier32.srcQueueFamilyIndex"></member>
     <member name="F:VkBufferMemoryBarrier32.sType"></member>
     <member name="T:VkBufferMemoryBarrier64">
-      <summary>Structure specifying a buffer memory barrier</summary>
+      <summary>See: <see cref="T:IVkBufferMemoryBarrier" /></summary>
     </member>
     <member name="F:VkBufferMemoryBarrier64.buffer"></member>
     <member name="F:VkBufferMemoryBarrier64.dstAccessMask"></member>
@@ -1730,7 +1844,7 @@
     <member name="T:VkBufferViewCreateFlags"></member>
     <member name="F:VkBufferViewCreateFlags.value__"></member>
     <member name="T:VkBufferViewCreateInfo32">
-      <summary>Structure specifying parameters of a newly created buffer view</summary>
+      <summary>See: <see cref="T:IVkBufferViewCreateInfo" /></summary>
     </member>
     <member name="F:VkBufferViewCreateInfo32.buffer"></member>
     <member name="F:VkBufferViewCreateInfo32.flags"></member>
@@ -1740,7 +1854,7 @@
     <member name="F:VkBufferViewCreateInfo32.range"></member>
     <member name="F:VkBufferViewCreateInfo32.sType"></member>
     <member name="T:VkBufferViewCreateInfo64">
-      <summary>Structure specifying parameters of a newly created buffer view</summary>
+      <summary>See: <see cref="T:IVkBufferViewCreateInfo" /></summary>
     </member>
     <member name="F:VkBufferViewCreateInfo64.buffer"></member>
     <member name="F:VkBufferViewCreateInfo64.flags"></member>
@@ -2194,7 +2308,9 @@
       </summary>
     </member>
     <member name="M:vkCmdPipelineBarrier.Invoke(VkCommandBuffer*,VkPipelineStageFlags,VkPipelineStageFlags,VkDependencyFlags,System.UInt32,IVkMemoryBarrier*,System.UInt32,IVkBufferMemoryBarrier*,System.UInt32,IVkImageMemoryBarrier*)"></member>
-    <member name="T:VkCmdProcessCommandsInfoNVX32"></member>
+    <member name="T:VkCmdProcessCommandsInfoNVX32">
+      <summary>See: <see cref="T:IVkCmdProcessCommandsInfoNVX" /></summary>
+    </member>
     <member name="F:VkCmdProcessCommandsInfoNVX32.indirectCommandsLayout"></member>
     <member name="F:VkCmdProcessCommandsInfoNVX32.indirectCommandsTokenCount"></member>
     <member name="F:VkCmdProcessCommandsInfoNVX32.maxSequencesCount"></member>
@@ -2207,7 +2323,9 @@
     <member name="F:VkCmdProcessCommandsInfoNVX32.sequencesIndexOffset"></member>
     <member name="F:VkCmdProcessCommandsInfoNVX32.sType"></member>
     <member name="F:VkCmdProcessCommandsInfoNVX32.targetCommandBuffer"></member>
-    <member name="T:VkCmdProcessCommandsInfoNVX64"></member>
+    <member name="T:VkCmdProcessCommandsInfoNVX64">
+      <summary>See: <see cref="T:IVkCmdProcessCommandsInfoNVX" /></summary>
+    </member>
     <member name="F:VkCmdProcessCommandsInfoNVX64.indirectCommandsLayout"></member>
     <member name="F:VkCmdProcessCommandsInfoNVX64.indirectCommandsTokenCount"></member>
     <member name="F:VkCmdProcessCommandsInfoNVX64.maxSequencesCount"></member>
@@ -2266,13 +2384,17 @@
       </summary>
     </member>
     <member name="M:vkCmdPushDescriptorSetWithTemplateKHR.Invoke(VkCommandBuffer*,VkDescriptorUpdateTemplateKHR*,VkPipelineLayout*,System.UInt32,System.Void*)"></member>
-    <member name="T:VkCmdReserveSpaceForCommandsInfoNVX32"></member>
+    <member name="T:VkCmdReserveSpaceForCommandsInfoNVX32">
+      <summary>See: <see cref="T:IVkCmdReserveSpaceForCommandsInfoNVX" /></summary>
+    </member>
     <member name="F:VkCmdReserveSpaceForCommandsInfoNVX32.indirectCommandsLayout"></member>
     <member name="F:VkCmdReserveSpaceForCommandsInfoNVX32.maxSequencesCount"></member>
     <member name="F:VkCmdReserveSpaceForCommandsInfoNVX32.objectTable"></member>
     <member name="F:VkCmdReserveSpaceForCommandsInfoNVX32.pNext"></member>
     <member name="F:VkCmdReserveSpaceForCommandsInfoNVX32.sType"></member>
-    <member name="T:VkCmdReserveSpaceForCommandsInfoNVX64"></member>
+    <member name="T:VkCmdReserveSpaceForCommandsInfoNVX64">
+      <summary>See: <see cref="T:IVkCmdReserveSpaceForCommandsInfoNVX" /></summary>
+    </member>
     <member name="F:VkCmdReserveSpaceForCommandsInfoNVX64.indirectCommandsLayout"></member>
     <member name="F:VkCmdReserveSpaceForCommandsInfoNVX64.maxSequencesCount"></member>
     <member name="F:VkCmdReserveSpaceForCommandsInfoNVX64.objectTable"></member>
@@ -2562,7 +2684,7 @@
     </member>
     <member name="M:VkCommandBuffer.Cast(System.Void*)"></member>
     <member name="T:VkCommandBufferAllocateInfo32">
-      <summary>Structure specifying the allocation parameters for command buffer object</summary>
+      <summary>See: <see cref="T:IVkCommandBufferAllocateInfo" /></summary>
     </member>
     <member name="F:VkCommandBufferAllocateInfo32.commandBufferCount"></member>
     <member name="F:VkCommandBufferAllocateInfo32.commandPool"></member>
@@ -2570,7 +2692,7 @@
     <member name="F:VkCommandBufferAllocateInfo32.pNext"></member>
     <member name="F:VkCommandBufferAllocateInfo32.sType"></member>
     <member name="T:VkCommandBufferAllocateInfo64">
-      <summary>Structure specifying the allocation parameters for command buffer object</summary>
+      <summary>See: <see cref="T:IVkCommandBufferAllocateInfo" /></summary>
     </member>
     <member name="F:VkCommandBufferAllocateInfo64.commandBufferCount"></member>
     <member name="F:VkCommandBufferAllocateInfo64.commandPool"></member>
@@ -2578,21 +2700,21 @@
     <member name="F:VkCommandBufferAllocateInfo64.pNext"></member>
     <member name="F:VkCommandBufferAllocateInfo64.sType"></member>
     <member name="T:VkCommandBufferBeginInfo32">
-      <summary>Structure specifying a command buffer begin operation</summary>
+      <summary>See: <see cref="T:IVkCommandBufferBeginInfo" /></summary>
     </member>
     <member name="F:VkCommandBufferBeginInfo32.flags"></member>
     <member name="F:VkCommandBufferBeginInfo32.pInheritanceInfo"></member>
     <member name="F:VkCommandBufferBeginInfo32.pNext"></member>
     <member name="F:VkCommandBufferBeginInfo32.sType"></member>
     <member name="T:VkCommandBufferBeginInfo64">
-      <summary>Structure specifying a command buffer begin operation</summary>
+      <summary>See: <see cref="T:IVkCommandBufferBeginInfo" /></summary>
     </member>
     <member name="F:VkCommandBufferBeginInfo64.flags"></member>
     <member name="F:VkCommandBufferBeginInfo64.pInheritanceInfo"></member>
     <member name="F:VkCommandBufferBeginInfo64.pNext"></member>
     <member name="F:VkCommandBufferBeginInfo64.sType"></member>
     <member name="T:VkCommandBufferInheritanceInfo32">
-      <summary>Structure specifying command buffer inheritance info</summary>
+      <summary>See: <see cref="T:IVkCommandBufferInheritanceInfo" /></summary>
     </member>
     <member name="F:VkCommandBufferInheritanceInfo32.framebuffer"></member>
     <member name="F:VkCommandBufferInheritanceInfo32.occlusionQueryEnable"></member>
@@ -2603,7 +2725,7 @@
     <member name="F:VkCommandBufferInheritanceInfo32.sType"></member>
     <member name="F:VkCommandBufferInheritanceInfo32.subpass"></member>
     <member name="T:VkCommandBufferInheritanceInfo64">
-      <summary>Structure specifying command buffer inheritance info</summary>
+      <summary>See: <see cref="T:IVkCommandBufferInheritanceInfo" /></summary>
     </member>
     <member name="F:VkCommandBufferInheritanceInfo64.framebuffer"></member>
     <member name="F:VkCommandBufferInheritanceInfo64.occlusionQueryEnable"></member>
@@ -2641,14 +2763,14 @@
     <member name="F:VkCommandPoolCreateFlags.VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT"></member>
     <member name="F:VkCommandPoolCreateFlags.VK_COMMAND_POOL_CREATE_TRANSIENT_BIT"></member>
     <member name="T:VkCommandPoolCreateInfo32">
-      <summary>Structure specifying parameters of a newly created command pool</summary>
+      <summary>See: <see cref="T:IVkCommandPoolCreateInfo" /></summary>
     </member>
     <member name="F:VkCommandPoolCreateInfo32.flags"></member>
     <member name="F:VkCommandPoolCreateInfo32.pNext"></member>
     <member name="F:VkCommandPoolCreateInfo32.queueFamilyIndex"></member>
     <member name="F:VkCommandPoolCreateInfo32.sType"></member>
     <member name="T:VkCommandPoolCreateInfo64">
-      <summary>Structure specifying parameters of a newly created command pool</summary>
+      <summary>See: <see cref="T:IVkCommandPoolCreateInfo" /></summary>
     </member>
     <member name="F:VkCommandPoolCreateInfo64.flags"></member>
     <member name="F:VkCommandPoolCreateInfo64.pNext"></member>
@@ -2702,7 +2824,7 @@
     <member name="F:VkCompositeAlphaFlagsKHR.VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR"></member>
     <member name="F:VkCompositeAlphaFlagsKHR.VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR"></member>
     <member name="T:VkComputePipelineCreateInfo32">
-      <summary>Structure specifying parameters of a newly created compute pipeline</summary>
+      <summary>See: <see cref="T:IVkComputePipelineCreateInfo" /></summary>
     </member>
     <member name="F:VkComputePipelineCreateInfo32.basePipelineHandle"></member>
     <member name="F:VkComputePipelineCreateInfo32.basePipelineIndex"></member>
@@ -2712,7 +2834,7 @@
     <member name="F:VkComputePipelineCreateInfo32.stage"></member>
     <member name="F:VkComputePipelineCreateInfo32.sType"></member>
     <member name="T:VkComputePipelineCreateInfo64">
-      <summary>Structure specifying parameters of a newly created compute pipeline</summary>
+      <summary>See: <see cref="T:IVkComputePipelineCreateInfo" /></summary>
     </member>
     <member name="F:VkComputePipelineCreateInfo64.basePipelineHandle"></member>
     <member name="F:VkComputePipelineCreateInfo64.basePipelineIndex"></member>
@@ -2722,7 +2844,7 @@
     <member name="F:VkComputePipelineCreateInfo64.stage"></member>
     <member name="F:VkComputePipelineCreateInfo64.sType"></member>
     <member name="T:VkCopyDescriptorSet32">
-      <summary>Structure specifying a copy descriptor set operation</summary>
+      <summary>See: <see cref="T:IVkCopyDescriptorSet" /></summary>
     </member>
     <member name="F:VkCopyDescriptorSet32.descriptorCount"></member>
     <member name="F:VkCopyDescriptorSet32.dstArrayElement"></member>
@@ -2734,7 +2856,7 @@
     <member name="F:VkCopyDescriptorSet32.srcSet"></member>
     <member name="F:VkCopyDescriptorSet32.sType"></member>
     <member name="T:VkCopyDescriptorSet64">
-      <summary>Structure specifying a copy descriptor set operation</summary>
+      <summary>See: <see cref="T:IVkCopyDescriptorSet" /></summary>
     </member>
     <member name="F:VkCopyDescriptorSet64.descriptorCount"></member>
     <member name="F:VkCopyDescriptorSet64.dstArrayElement"></member>
@@ -2745,6 +2867,16 @@
     <member name="F:VkCopyDescriptorSet64.srcBinding"></member>
     <member name="F:VkCopyDescriptorSet64.srcSet"></member>
     <member name="F:VkCopyDescriptorSet64.sType"></member>
+    <member name="T:VkCoverageModulationModeNV"></member>
+    <member name="F:VkCoverageModulationModeNV.value__"></member>
+    <member name="F:VkCoverageModulationModeNV.VK_COVERAGE_MODULATION_MODE_ALPHA_NV"></member>
+    <member name="F:VkCoverageModulationModeNV.VK_COVERAGE_MODULATION_MODE_BEGIN_RANGE_NV"></member>
+    <member name="F:VkCoverageModulationModeNV.VK_COVERAGE_MODULATION_MODE_END_RANGE_NV"></member>
+    <member name="F:VkCoverageModulationModeNV.VK_COVERAGE_MODULATION_MODE_MAX_ENUM_NV"></member>
+    <member name="F:VkCoverageModulationModeNV.VK_COVERAGE_MODULATION_MODE_NONE_NV"></member>
+    <member name="F:VkCoverageModulationModeNV.VK_COVERAGE_MODULATION_MODE_RANGE_SIZE_NV"></member>
+    <member name="F:VkCoverageModulationModeNV.VK_COVERAGE_MODULATION_MODE_RGB_NV"></member>
+    <member name="F:VkCoverageModulationModeNV.VK_COVERAGE_MODULATION_MODE_RGBA_NV"></member>
     <member name="T:vkCreateBuffer">
       <summary>Create a new buffer object</summary>
     </member>
@@ -3113,29 +3245,39 @@
     <member name="F:VkCullModeFlags.VK_CULL_MODE_FRONT_AND_BACK"></member>
     <member name="F:VkCullModeFlags.VK_CULL_MODE_FRONT_BIT"></member>
     <member name="F:VkCullModeFlags.VK_CULL_MODE_NONE"></member>
-    <member name="T:VkDebugMarkerMarkerInfoEXT32"></member>
+    <member name="T:VkDebugMarkerMarkerInfoEXT32">
+      <summary>See: <see cref="T:IVkDebugMarkerMarkerInfoEXT" /></summary>
+    </member>
     <member name="M:VkDebugMarkerMarkerInfoEXT32.color(System.Int32)"></member>
     <member name="F:VkDebugMarkerMarkerInfoEXT32.pMarkerName"></member>
     <member name="F:VkDebugMarkerMarkerInfoEXT32.pNext"></member>
     <member name="F:VkDebugMarkerMarkerInfoEXT32.sType"></member>
-    <member name="T:VkDebugMarkerMarkerInfoEXT64"></member>
+    <member name="T:VkDebugMarkerMarkerInfoEXT64">
+      <summary>See: <see cref="T:IVkDebugMarkerMarkerInfoEXT" /></summary>
+    </member>
     <member name="M:VkDebugMarkerMarkerInfoEXT64.color(System.Int32)"></member>
     <member name="F:VkDebugMarkerMarkerInfoEXT64.pMarkerName"></member>
     <member name="F:VkDebugMarkerMarkerInfoEXT64.pNext"></member>
     <member name="F:VkDebugMarkerMarkerInfoEXT64.sType"></member>
-    <member name="T:VkDebugMarkerObjectNameInfoEXT32"></member>
+    <member name="T:VkDebugMarkerObjectNameInfoEXT32">
+      <summary>See: <see cref="T:IVkDebugMarkerObjectNameInfoEXT" /></summary>
+    </member>
     <member name="F:VkDebugMarkerObjectNameInfoEXT32.object"></member>
     <member name="F:VkDebugMarkerObjectNameInfoEXT32.objectType"></member>
     <member name="F:VkDebugMarkerObjectNameInfoEXT32.pNext"></member>
     <member name="F:VkDebugMarkerObjectNameInfoEXT32.pObjectName"></member>
     <member name="F:VkDebugMarkerObjectNameInfoEXT32.sType"></member>
-    <member name="T:VkDebugMarkerObjectNameInfoEXT64"></member>
+    <member name="T:VkDebugMarkerObjectNameInfoEXT64">
+      <summary>See: <see cref="T:IVkDebugMarkerObjectNameInfoEXT" /></summary>
+    </member>
     <member name="F:VkDebugMarkerObjectNameInfoEXT64.object"></member>
     <member name="F:VkDebugMarkerObjectNameInfoEXT64.objectType"></member>
     <member name="F:VkDebugMarkerObjectNameInfoEXT64.pNext"></member>
     <member name="F:VkDebugMarkerObjectNameInfoEXT64.pObjectName"></member>
     <member name="F:VkDebugMarkerObjectNameInfoEXT64.sType"></member>
-    <member name="T:VkDebugMarkerObjectTagInfoEXT32"></member>
+    <member name="T:VkDebugMarkerObjectTagInfoEXT32">
+      <summary>See: <see cref="T:IVkDebugMarkerObjectTagInfoEXT" /></summary>
+    </member>
     <member name="F:VkDebugMarkerObjectTagInfoEXT32.object"></member>
     <member name="F:VkDebugMarkerObjectTagInfoEXT32.objectType"></member>
     <member name="F:VkDebugMarkerObjectTagInfoEXT32.pNext"></member>
@@ -3143,7 +3285,9 @@
     <member name="F:VkDebugMarkerObjectTagInfoEXT32.sType"></member>
     <member name="F:VkDebugMarkerObjectTagInfoEXT32.tagName"></member>
     <member name="F:VkDebugMarkerObjectTagInfoEXT32.tagSize"></member>
-    <member name="T:VkDebugMarkerObjectTagInfoEXT64"></member>
+    <member name="T:VkDebugMarkerObjectTagInfoEXT64">
+      <summary>See: <see cref="T:IVkDebugMarkerObjectTagInfoEXT" /></summary>
+    </member>
     <member name="F:VkDebugMarkerObjectTagInfoEXT64.object"></member>
     <member name="F:VkDebugMarkerObjectTagInfoEXT64.objectType"></member>
     <member name="F:VkDebugMarkerObjectTagInfoEXT64.pNext"></member>
@@ -3173,13 +3317,17 @@
       </summary>
     </member>
     <member name="M:vkDebugMarkerSetObjectTagEXT.Invoke(VkDevice*,IVkDebugMarkerObjectTagInfoEXT*)"></member>
-    <member name="T:VkDebugReportCallbackCreateInfoEXT32"></member>
+    <member name="T:VkDebugReportCallbackCreateInfoEXT32">
+      <summary>See: <see cref="T:IVkDebugReportCallbackCreateInfoEXT" /></summary>
+    </member>
     <member name="F:VkDebugReportCallbackCreateInfoEXT32.flags"></member>
     <member name="F:VkDebugReportCallbackCreateInfoEXT32.pfnCallback"></member>
     <member name="F:VkDebugReportCallbackCreateInfoEXT32.pNext"></member>
     <member name="F:VkDebugReportCallbackCreateInfoEXT32.pUserData"></member>
     <member name="F:VkDebugReportCallbackCreateInfoEXT32.sType"></member>
-    <member name="T:VkDebugReportCallbackCreateInfoEXT64"></member>
+    <member name="T:VkDebugReportCallbackCreateInfoEXT64">
+      <summary>See: <see cref="T:IVkDebugReportCallbackCreateInfoEXT" /></summary>
+    </member>
     <member name="F:VkDebugReportCallbackCreateInfoEXT64.flags"></member>
     <member name="F:VkDebugReportCallbackCreateInfoEXT64.pfnCallback"></member>
     <member name="F:VkDebugReportCallbackCreateInfoEXT64.pNext"></member>
@@ -3246,28 +3394,40 @@
     <member name="F:VkDebugReportObjectTypeEXT.VK_DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT"></member>
     <member name="F:VkDebugReportObjectTypeEXT.VK_DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT"></member>
     <member name="F:VkDebugReportObjectTypeEXT.VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT"></member>
-    <member name="T:VkDedicatedAllocationBufferCreateInfoNV32"></member>
+    <member name="T:VkDedicatedAllocationBufferCreateInfoNV32">
+      <summary>See: <see cref="T:IVkDedicatedAllocationBufferCreateInfoNV" /></summary>
+    </member>
     <member name="F:VkDedicatedAllocationBufferCreateInfoNV32.dedicatedAllocation"></member>
     <member name="F:VkDedicatedAllocationBufferCreateInfoNV32.pNext"></member>
     <member name="F:VkDedicatedAllocationBufferCreateInfoNV32.sType"></member>
-    <member name="T:VkDedicatedAllocationBufferCreateInfoNV64"></member>
+    <member name="T:VkDedicatedAllocationBufferCreateInfoNV64">
+      <summary>See: <see cref="T:IVkDedicatedAllocationBufferCreateInfoNV" /></summary>
+    </member>
     <member name="F:VkDedicatedAllocationBufferCreateInfoNV64.dedicatedAllocation"></member>
     <member name="F:VkDedicatedAllocationBufferCreateInfoNV64.pNext"></member>
     <member name="F:VkDedicatedAllocationBufferCreateInfoNV64.sType"></member>
-    <member name="T:VkDedicatedAllocationImageCreateInfoNV32"></member>
+    <member name="T:VkDedicatedAllocationImageCreateInfoNV32">
+      <summary>See: <see cref="T:IVkDedicatedAllocationImageCreateInfoNV" /></summary>
+    </member>
     <member name="F:VkDedicatedAllocationImageCreateInfoNV32.dedicatedAllocation"></member>
     <member name="F:VkDedicatedAllocationImageCreateInfoNV32.pNext"></member>
     <member name="F:VkDedicatedAllocationImageCreateInfoNV32.sType"></member>
-    <member name="T:VkDedicatedAllocationImageCreateInfoNV64"></member>
+    <member name="T:VkDedicatedAllocationImageCreateInfoNV64">
+      <summary>See: <see cref="T:IVkDedicatedAllocationImageCreateInfoNV" /></summary>
+    </member>
     <member name="F:VkDedicatedAllocationImageCreateInfoNV64.dedicatedAllocation"></member>
     <member name="F:VkDedicatedAllocationImageCreateInfoNV64.pNext"></member>
     <member name="F:VkDedicatedAllocationImageCreateInfoNV64.sType"></member>
-    <member name="T:VkDedicatedAllocationMemoryAllocateInfoNV32"></member>
+    <member name="T:VkDedicatedAllocationMemoryAllocateInfoNV32">
+      <summary>See: <see cref="T:IVkDedicatedAllocationMemoryAllocateInfoNV" /></summary>
+    </member>
     <member name="F:VkDedicatedAllocationMemoryAllocateInfoNV32.buffer"></member>
     <member name="F:VkDedicatedAllocationMemoryAllocateInfoNV32.image"></member>
     <member name="F:VkDedicatedAllocationMemoryAllocateInfoNV32.pNext"></member>
     <member name="F:VkDedicatedAllocationMemoryAllocateInfoNV32.sType"></member>
-    <member name="T:VkDedicatedAllocationMemoryAllocateInfoNV64"></member>
+    <member name="T:VkDedicatedAllocationMemoryAllocateInfoNV64">
+      <summary>See: <see cref="T:IVkDedicatedAllocationMemoryAllocateInfoNV" /></summary>
+    </member>
     <member name="F:VkDedicatedAllocationMemoryAllocateInfoNV64.buffer"></member>
     <member name="F:VkDedicatedAllocationMemoryAllocateInfoNV64.image"></member>
     <member name="F:VkDedicatedAllocationMemoryAllocateInfoNV64.pNext"></member>
@@ -3299,7 +3459,7 @@
     <member name="F:VkDescriptorPoolCreateFlags.VK_DESCRIPTOR_POOL_CREATE_FLAG_BITS_MAX_ENUM"></member>
     <member name="F:VkDescriptorPoolCreateFlags.VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT"></member>
     <member name="T:VkDescriptorPoolCreateInfo32">
-      <summary>Structure specifying parameters of a newly created descriptor pool</summary>
+      <summary>See: <see cref="T:IVkDescriptorPoolCreateInfo" /></summary>
     </member>
     <member name="F:VkDescriptorPoolCreateInfo32.flags"></member>
     <member name="F:VkDescriptorPoolCreateInfo32.maxSets"></member>
@@ -3308,7 +3468,7 @@
     <member name="F:VkDescriptorPoolCreateInfo32.pPoolSizes"></member>
     <member name="F:VkDescriptorPoolCreateInfo32.sType"></member>
     <member name="T:VkDescriptorPoolCreateInfo64">
-      <summary>Structure specifying parameters of a newly created descriptor pool</summary>
+      <summary>See: <see cref="T:IVkDescriptorPoolCreateInfo" /></summary>
     </member>
     <member name="F:VkDescriptorPoolCreateInfo64.flags"></member>
     <member name="F:VkDescriptorPoolCreateInfo64.maxSets"></member>
@@ -3328,7 +3488,7 @@
     </member>
     <member name="M:VkDescriptorSet.Cast(System.UInt64)"></member>
     <member name="T:VkDescriptorSetAllocateInfo32">
-      <summary>Structure specifying the allocation parameters for descriptor sets</summary>
+      <summary>See: <see cref="T:IVkDescriptorSetAllocateInfo" /></summary>
     </member>
     <member name="F:VkDescriptorSetAllocateInfo32.descriptorPool"></member>
     <member name="F:VkDescriptorSetAllocateInfo32.descriptorSetCount"></member>
@@ -3336,7 +3496,7 @@
     <member name="F:VkDescriptorSetAllocateInfo32.pSetLayouts"></member>
     <member name="F:VkDescriptorSetAllocateInfo32.sType"></member>
     <member name="T:VkDescriptorSetAllocateInfo64">
-      <summary>Structure specifying the allocation parameters for descriptor sets</summary>
+      <summary>See: <see cref="T:IVkDescriptorSetAllocateInfo" /></summary>
     </member>
     <member name="F:VkDescriptorSetAllocateInfo64.descriptorPool"></member>
     <member name="F:VkDescriptorSetAllocateInfo64.descriptorSetCount"></member>
@@ -3348,7 +3508,7 @@
     </member>
     <member name="M:VkDescriptorSetLayout.Cast(System.UInt64)"></member>
     <member name="T:VkDescriptorSetLayoutBinding32">
-      <summary>Structure specifying a descriptor set layout binding</summary>
+      <summary>See: <see cref="T:IVkDescriptorSetLayoutBinding" /></summary>
     </member>
     <member name="F:VkDescriptorSetLayoutBinding32.binding"></member>
     <member name="F:VkDescriptorSetLayoutBinding32.descriptorCount"></member>
@@ -3356,7 +3516,7 @@
     <member name="F:VkDescriptorSetLayoutBinding32.pImmutableSamplers"></member>
     <member name="F:VkDescriptorSetLayoutBinding32.stageFlags"></member>
     <member name="T:VkDescriptorSetLayoutBinding64">
-      <summary>Structure specifying a descriptor set layout binding</summary>
+      <summary>See: <see cref="T:IVkDescriptorSetLayoutBinding" /></summary>
     </member>
     <member name="F:VkDescriptorSetLayoutBinding64.binding"></member>
     <member name="F:VkDescriptorSetLayoutBinding64.descriptorCount"></member>
@@ -3368,7 +3528,7 @@
     <member name="F:VkDescriptorSetLayoutCreateFlags.VK_DESCRIPTOR_SET_LAYOUT_CREATE_FLAG_BITS_MAX_ENUM"></member>
     <member name="F:VkDescriptorSetLayoutCreateFlags.VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR"></member>
     <member name="T:VkDescriptorSetLayoutCreateInfo32">
-      <summary>Structure specifying parameters of a newly created descriptor set layout</summary>
+      <summary>See: <see cref="T:IVkDescriptorSetLayoutCreateInfo" /></summary>
     </member>
     <member name="F:VkDescriptorSetLayoutCreateInfo32.bindingCount"></member>
     <member name="F:VkDescriptorSetLayoutCreateInfo32.flags"></member>
@@ -3376,7 +3536,7 @@
     <member name="F:VkDescriptorSetLayoutCreateInfo32.pNext"></member>
     <member name="F:VkDescriptorSetLayoutCreateInfo32.sType"></member>
     <member name="T:VkDescriptorSetLayoutCreateInfo64">
-      <summary>Structure specifying parameters of a newly created descriptor set layout</summary>
+      <summary>See: <see cref="T:IVkDescriptorSetLayoutCreateInfo" /></summary>
     </member>
     <member name="F:VkDescriptorSetLayoutCreateInfo64.bindingCount"></member>
     <member name="F:VkDescriptorSetLayoutCreateInfo64.flags"></member>
@@ -3402,7 +3562,9 @@
     <member name="F:VkDescriptorType.VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER"></member>
     <member name="T:VkDescriptorUpdateTemplateCreateFlagsKHR"></member>
     <member name="F:VkDescriptorUpdateTemplateCreateFlagsKHR.value__"></member>
-    <member name="T:VkDescriptorUpdateTemplateCreateInfoKHR32"></member>
+    <member name="T:VkDescriptorUpdateTemplateCreateInfoKHR32">
+      <summary>See: <see cref="T:IVkDescriptorUpdateTemplateCreateInfoKHR" /></summary>
+    </member>
     <member name="F:VkDescriptorUpdateTemplateCreateInfoKHR32.descriptorSetLayout"></member>
     <member name="F:VkDescriptorUpdateTemplateCreateInfoKHR32.descriptorUpdateEntryCount"></member>
     <member name="F:VkDescriptorUpdateTemplateCreateInfoKHR32.flags"></member>
@@ -3413,7 +3575,9 @@
     <member name="F:VkDescriptorUpdateTemplateCreateInfoKHR32.set"></member>
     <member name="F:VkDescriptorUpdateTemplateCreateInfoKHR32.sType"></member>
     <member name="F:VkDescriptorUpdateTemplateCreateInfoKHR32.templateType"></member>
-    <member name="T:VkDescriptorUpdateTemplateCreateInfoKHR64"></member>
+    <member name="T:VkDescriptorUpdateTemplateCreateInfoKHR64">
+      <summary>See: <see cref="T:IVkDescriptorUpdateTemplateCreateInfoKHR" /></summary>
+    </member>
     <member name="F:VkDescriptorUpdateTemplateCreateInfoKHR64.descriptorSetLayout"></member>
     <member name="F:VkDescriptorUpdateTemplateCreateInfoKHR64.descriptorUpdateEntryCount"></member>
     <member name="F:VkDescriptorUpdateTemplateCreateInfoKHR64.flags"></member>
@@ -3424,14 +3588,18 @@
     <member name="F:VkDescriptorUpdateTemplateCreateInfoKHR64.set"></member>
     <member name="F:VkDescriptorUpdateTemplateCreateInfoKHR64.sType"></member>
     <member name="F:VkDescriptorUpdateTemplateCreateInfoKHR64.templateType"></member>
-    <member name="T:VkDescriptorUpdateTemplateEntryKHR32"></member>
+    <member name="T:VkDescriptorUpdateTemplateEntryKHR32">
+      <summary>See: <see cref="T:IVkDescriptorUpdateTemplateEntryKHR" /></summary>
+    </member>
     <member name="F:VkDescriptorUpdateTemplateEntryKHR32.descriptorCount"></member>
     <member name="F:VkDescriptorUpdateTemplateEntryKHR32.descriptorType"></member>
     <member name="F:VkDescriptorUpdateTemplateEntryKHR32.dstArrayElement"></member>
     <member name="F:VkDescriptorUpdateTemplateEntryKHR32.dstBinding"></member>
     <member name="F:VkDescriptorUpdateTemplateEntryKHR32.offset"></member>
     <member name="F:VkDescriptorUpdateTemplateEntryKHR32.stride"></member>
-    <member name="T:VkDescriptorUpdateTemplateEntryKHR64"></member>
+    <member name="T:VkDescriptorUpdateTemplateEntryKHR64">
+      <summary>See: <see cref="T:IVkDescriptorUpdateTemplateEntryKHR" /></summary>
+    </member>
     <member name="F:VkDescriptorUpdateTemplateEntryKHR64.descriptorCount"></member>
     <member name="F:VkDescriptorUpdateTemplateEntryKHR64.descriptorType"></member>
     <member name="F:VkDescriptorUpdateTemplateEntryKHR64.dstArrayElement"></member>
@@ -3781,7 +3949,7 @@
     <member name="T:VkDeviceCreateFlags"></member>
     <member name="F:VkDeviceCreateFlags.value__"></member>
     <member name="T:VkDeviceCreateInfo32">
-      <summary>Structure specifying parameters of a newly created device</summary>
+      <summary>See: <see cref="T:IVkDeviceCreateInfo" /></summary>
     </member>
     <member name="F:VkDeviceCreateInfo32.enabledExtensionCount"></member>
     <member name="F:VkDeviceCreateInfo32.enabledLayerCount"></member>
@@ -3794,7 +3962,7 @@
     <member name="F:VkDeviceCreateInfo32.queueCreateInfoCount"></member>
     <member name="F:VkDeviceCreateInfo32.sType"></member>
     <member name="T:VkDeviceCreateInfo64">
-      <summary>Structure specifying parameters of a newly created device</summary>
+      <summary>See: <see cref="T:IVkDeviceCreateInfo" /></summary>
     </member>
     <member name="F:VkDeviceCreateInfo64.enabledExtensionCount"></member>
     <member name="F:VkDeviceCreateInfo64.enabledLayerCount"></member>
@@ -3806,11 +3974,15 @@
     <member name="F:VkDeviceCreateInfo64.pQueueCreateInfos"></member>
     <member name="F:VkDeviceCreateInfo64.queueCreateInfoCount"></member>
     <member name="F:VkDeviceCreateInfo64.sType"></member>
-    <member name="T:VkDeviceEventInfoEXT32"></member>
+    <member name="T:VkDeviceEventInfoEXT32">
+      <summary>See: <see cref="T:IVkDeviceEventInfoEXT" /></summary>
+    </member>
     <member name="F:VkDeviceEventInfoEXT32.deviceEvent"></member>
     <member name="F:VkDeviceEventInfoEXT32.pNext"></member>
     <member name="F:VkDeviceEventInfoEXT32.sType"></member>
-    <member name="T:VkDeviceEventInfoEXT64"></member>
+    <member name="T:VkDeviceEventInfoEXT64">
+      <summary>See: <see cref="T:IVkDeviceEventInfoEXT" /></summary>
+    </member>
     <member name="F:VkDeviceEventInfoEXT64.deviceEvent"></member>
     <member name="F:VkDeviceEventInfoEXT64.pNext"></member>
     <member name="F:VkDeviceEventInfoEXT64.sType"></member>
@@ -3821,15 +3993,21 @@
     <member name="F:VkDeviceEventTypeEXT.VK_DEVICE_EVENT_TYPE_END_RANGE_EXT"></member>
     <member name="F:VkDeviceEventTypeEXT.VK_DEVICE_EVENT_TYPE_MAX_ENUM_EXT"></member>
     <member name="F:VkDeviceEventTypeEXT.VK_DEVICE_EVENT_TYPE_RANGE_SIZE_EXT"></member>
-    <member name="T:VkDeviceGeneratedCommandsFeaturesNVX32"></member>
+    <member name="T:VkDeviceGeneratedCommandsFeaturesNVX32">
+      <summary>See: <see cref="T:IVkDeviceGeneratedCommandsFeaturesNVX" /></summary>
+    </member>
     <member name="F:VkDeviceGeneratedCommandsFeaturesNVX32.computeBindingPointSupport"></member>
     <member name="F:VkDeviceGeneratedCommandsFeaturesNVX32.pNext"></member>
     <member name="F:VkDeviceGeneratedCommandsFeaturesNVX32.sType"></member>
-    <member name="T:VkDeviceGeneratedCommandsFeaturesNVX64"></member>
+    <member name="T:VkDeviceGeneratedCommandsFeaturesNVX64">
+      <summary>See: <see cref="T:IVkDeviceGeneratedCommandsFeaturesNVX" /></summary>
+    </member>
     <member name="F:VkDeviceGeneratedCommandsFeaturesNVX64.computeBindingPointSupport"></member>
     <member name="F:VkDeviceGeneratedCommandsFeaturesNVX64.pNext"></member>
     <member name="F:VkDeviceGeneratedCommandsFeaturesNVX64.sType"></member>
-    <member name="T:VkDeviceGeneratedCommandsLimitsNVX32"></member>
+    <member name="T:VkDeviceGeneratedCommandsLimitsNVX32">
+      <summary>See: <see cref="T:IVkDeviceGeneratedCommandsLimitsNVX" /></summary>
+    </member>
     <member name="F:VkDeviceGeneratedCommandsLimitsNVX32.maxIndirectCommandsLayoutTokenCount"></member>
     <member name="F:VkDeviceGeneratedCommandsLimitsNVX32.maxObjectEntryCounts"></member>
     <member name="F:VkDeviceGeneratedCommandsLimitsNVX32.minCommandsTokenBufferOffsetAlignment"></member>
@@ -3837,7 +4015,9 @@
     <member name="F:VkDeviceGeneratedCommandsLimitsNVX32.minSequenceIndexBufferOffsetAlignment"></member>
     <member name="F:VkDeviceGeneratedCommandsLimitsNVX32.pNext"></member>
     <member name="F:VkDeviceGeneratedCommandsLimitsNVX32.sType"></member>
-    <member name="T:VkDeviceGeneratedCommandsLimitsNVX64"></member>
+    <member name="T:VkDeviceGeneratedCommandsLimitsNVX64">
+      <summary>See: <see cref="T:IVkDeviceGeneratedCommandsLimitsNVX" /></summary>
+    </member>
     <member name="F:VkDeviceGeneratedCommandsLimitsNVX64.maxIndirectCommandsLayoutTokenCount"></member>
     <member name="F:VkDeviceGeneratedCommandsLimitsNVX64.maxObjectEntryCounts"></member>
     <member name="F:VkDeviceGeneratedCommandsLimitsNVX64.minCommandsTokenBufferOffsetAlignment"></member>
@@ -3845,51 +4025,71 @@
     <member name="F:VkDeviceGeneratedCommandsLimitsNVX64.minSequenceIndexBufferOffsetAlignment"></member>
     <member name="F:VkDeviceGeneratedCommandsLimitsNVX64.pNext"></member>
     <member name="F:VkDeviceGeneratedCommandsLimitsNVX64.sType"></member>
-    <member name="T:VkDeviceGroupBindSparseInfoKHX32"></member>
+    <member name="T:VkDeviceGroupBindSparseInfoKHX32">
+      <summary>See: <see cref="T:IVkDeviceGroupBindSparseInfoKHX" /></summary>
+    </member>
     <member name="F:VkDeviceGroupBindSparseInfoKHX32.memoryDeviceIndex"></member>
     <member name="F:VkDeviceGroupBindSparseInfoKHX32.pNext"></member>
     <member name="F:VkDeviceGroupBindSparseInfoKHX32.resourceDeviceIndex"></member>
     <member name="F:VkDeviceGroupBindSparseInfoKHX32.sType"></member>
-    <member name="T:VkDeviceGroupBindSparseInfoKHX64"></member>
+    <member name="T:VkDeviceGroupBindSparseInfoKHX64">
+      <summary>See: <see cref="T:IVkDeviceGroupBindSparseInfoKHX" /></summary>
+    </member>
     <member name="F:VkDeviceGroupBindSparseInfoKHX64.memoryDeviceIndex"></member>
     <member name="F:VkDeviceGroupBindSparseInfoKHX64.pNext"></member>
     <member name="F:VkDeviceGroupBindSparseInfoKHX64.resourceDeviceIndex"></member>
     <member name="F:VkDeviceGroupBindSparseInfoKHX64.sType"></member>
-    <member name="T:VkDeviceGroupCommandBufferBeginInfoKHX32"></member>
+    <member name="T:VkDeviceGroupCommandBufferBeginInfoKHX32">
+      <summary>See: <see cref="T:IVkDeviceGroupCommandBufferBeginInfoKHX" /></summary>
+    </member>
     <member name="F:VkDeviceGroupCommandBufferBeginInfoKHX32.deviceMask"></member>
     <member name="F:VkDeviceGroupCommandBufferBeginInfoKHX32.pNext"></member>
     <member name="F:VkDeviceGroupCommandBufferBeginInfoKHX32.sType"></member>
-    <member name="T:VkDeviceGroupCommandBufferBeginInfoKHX64"></member>
+    <member name="T:VkDeviceGroupCommandBufferBeginInfoKHX64">
+      <summary>See: <see cref="T:IVkDeviceGroupCommandBufferBeginInfoKHX" /></summary>
+    </member>
     <member name="F:VkDeviceGroupCommandBufferBeginInfoKHX64.deviceMask"></member>
     <member name="F:VkDeviceGroupCommandBufferBeginInfoKHX64.pNext"></member>
     <member name="F:VkDeviceGroupCommandBufferBeginInfoKHX64.sType"></member>
-    <member name="T:VkDeviceGroupDeviceCreateInfoKHX32"></member>
+    <member name="T:VkDeviceGroupDeviceCreateInfoKHX32">
+      <summary>See: <see cref="T:IVkDeviceGroupDeviceCreateInfoKHX" /></summary>
+    </member>
     <member name="F:VkDeviceGroupDeviceCreateInfoKHX32.physicalDeviceCount"></member>
     <member name="F:VkDeviceGroupDeviceCreateInfoKHX32.pNext"></member>
     <member name="F:VkDeviceGroupDeviceCreateInfoKHX32.pPhysicalDevices"></member>
     <member name="F:VkDeviceGroupDeviceCreateInfoKHX32.sType"></member>
-    <member name="T:VkDeviceGroupDeviceCreateInfoKHX64"></member>
+    <member name="T:VkDeviceGroupDeviceCreateInfoKHX64">
+      <summary>See: <see cref="T:IVkDeviceGroupDeviceCreateInfoKHX" /></summary>
+    </member>
     <member name="F:VkDeviceGroupDeviceCreateInfoKHX64.physicalDeviceCount"></member>
     <member name="F:VkDeviceGroupDeviceCreateInfoKHX64.pNext"></member>
     <member name="F:VkDeviceGroupDeviceCreateInfoKHX64.pPhysicalDevices"></member>
     <member name="F:VkDeviceGroupDeviceCreateInfoKHX64.sType"></member>
-    <member name="T:VkDeviceGroupPresentCapabilitiesKHX32"></member>
+    <member name="T:VkDeviceGroupPresentCapabilitiesKHX32">
+      <summary>See: <see cref="T:IVkDeviceGroupPresentCapabilitiesKHX" /></summary>
+    </member>
     <member name="F:VkDeviceGroupPresentCapabilitiesKHX32.modes"></member>
     <member name="F:VkDeviceGroupPresentCapabilitiesKHX32.pNext"></member>
     <member name="M:VkDeviceGroupPresentCapabilitiesKHX32.presentMask(System.Int32)"></member>
     <member name="F:VkDeviceGroupPresentCapabilitiesKHX32.sType"></member>
-    <member name="T:VkDeviceGroupPresentCapabilitiesKHX64"></member>
+    <member name="T:VkDeviceGroupPresentCapabilitiesKHX64">
+      <summary>See: <see cref="T:IVkDeviceGroupPresentCapabilitiesKHX" /></summary>
+    </member>
     <member name="F:VkDeviceGroupPresentCapabilitiesKHX64.modes"></member>
     <member name="F:VkDeviceGroupPresentCapabilitiesKHX64.pNext"></member>
     <member name="M:VkDeviceGroupPresentCapabilitiesKHX64.presentMask(System.Int32)"></member>
     <member name="F:VkDeviceGroupPresentCapabilitiesKHX64.sType"></member>
-    <member name="T:VkDeviceGroupPresentInfoKHX32"></member>
+    <member name="T:VkDeviceGroupPresentInfoKHX32">
+      <summary>See: <see cref="T:IVkDeviceGroupPresentInfoKHX" /></summary>
+    </member>
     <member name="F:VkDeviceGroupPresentInfoKHX32.mode"></member>
     <member name="F:VkDeviceGroupPresentInfoKHX32.pDeviceMasks"></member>
     <member name="F:VkDeviceGroupPresentInfoKHX32.pNext"></member>
     <member name="F:VkDeviceGroupPresentInfoKHX32.sType"></member>
     <member name="F:VkDeviceGroupPresentInfoKHX32.swapchainCount"></member>
-    <member name="T:VkDeviceGroupPresentInfoKHX64"></member>
+    <member name="T:VkDeviceGroupPresentInfoKHX64">
+      <summary>See: <see cref="T:IVkDeviceGroupPresentInfoKHX" /></summary>
+    </member>
     <member name="F:VkDeviceGroupPresentInfoKHX64.mode"></member>
     <member name="F:VkDeviceGroupPresentInfoKHX64.pDeviceMasks"></member>
     <member name="F:VkDeviceGroupPresentInfoKHX64.pNext"></member>
@@ -3902,19 +4102,25 @@
     <member name="F:VkDeviceGroupPresentModeFlagsKHX.VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHX"></member>
     <member name="F:VkDeviceGroupPresentModeFlagsKHX.VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHX"></member>
     <member name="F:VkDeviceGroupPresentModeFlagsKHX.VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHX"></member>
-    <member name="T:VkDeviceGroupRenderPassBeginInfoKHX32"></member>
+    <member name="T:VkDeviceGroupRenderPassBeginInfoKHX32">
+      <summary>See: <see cref="T:IVkDeviceGroupRenderPassBeginInfoKHX" /></summary>
+    </member>
     <member name="F:VkDeviceGroupRenderPassBeginInfoKHX32.deviceMask"></member>
     <member name="F:VkDeviceGroupRenderPassBeginInfoKHX32.deviceRenderAreaCount"></member>
     <member name="F:VkDeviceGroupRenderPassBeginInfoKHX32.pDeviceRenderAreas"></member>
     <member name="F:VkDeviceGroupRenderPassBeginInfoKHX32.pNext"></member>
     <member name="F:VkDeviceGroupRenderPassBeginInfoKHX32.sType"></member>
-    <member name="T:VkDeviceGroupRenderPassBeginInfoKHX64"></member>
+    <member name="T:VkDeviceGroupRenderPassBeginInfoKHX64">
+      <summary>See: <see cref="T:IVkDeviceGroupRenderPassBeginInfoKHX" /></summary>
+    </member>
     <member name="F:VkDeviceGroupRenderPassBeginInfoKHX64.deviceMask"></member>
     <member name="F:VkDeviceGroupRenderPassBeginInfoKHX64.deviceRenderAreaCount"></member>
     <member name="F:VkDeviceGroupRenderPassBeginInfoKHX64.pDeviceRenderAreas"></member>
     <member name="F:VkDeviceGroupRenderPassBeginInfoKHX64.pNext"></member>
     <member name="F:VkDeviceGroupRenderPassBeginInfoKHX64.sType"></member>
-    <member name="T:VkDeviceGroupSubmitInfoKHX32"></member>
+    <member name="T:VkDeviceGroupSubmitInfoKHX32">
+      <summary>See: <see cref="T:IVkDeviceGroupSubmitInfoKHX" /></summary>
+    </member>
     <member name="F:VkDeviceGroupSubmitInfoKHX32.commandBufferCount"></member>
     <member name="F:VkDeviceGroupSubmitInfoKHX32.pCommandBufferDeviceMasks"></member>
     <member name="F:VkDeviceGroupSubmitInfoKHX32.pNext"></member>
@@ -3923,7 +4129,9 @@
     <member name="F:VkDeviceGroupSubmitInfoKHX32.signalSemaphoreCount"></member>
     <member name="F:VkDeviceGroupSubmitInfoKHX32.sType"></member>
     <member name="F:VkDeviceGroupSubmitInfoKHX32.waitSemaphoreCount"></member>
-    <member name="T:VkDeviceGroupSubmitInfoKHX64"></member>
+    <member name="T:VkDeviceGroupSubmitInfoKHX64">
+      <summary>See: <see cref="T:IVkDeviceGroupSubmitInfoKHX" /></summary>
+    </member>
     <member name="F:VkDeviceGroupSubmitInfoKHX64.commandBufferCount"></member>
     <member name="F:VkDeviceGroupSubmitInfoKHX64.pCommandBufferDeviceMasks"></member>
     <member name="F:VkDeviceGroupSubmitInfoKHX64.pNext"></member>
@@ -3932,11 +4140,15 @@
     <member name="F:VkDeviceGroupSubmitInfoKHX64.signalSemaphoreCount"></member>
     <member name="F:VkDeviceGroupSubmitInfoKHX64.sType"></member>
     <member name="F:VkDeviceGroupSubmitInfoKHX64.waitSemaphoreCount"></member>
-    <member name="T:VkDeviceGroupSwapchainCreateInfoKHX32"></member>
+    <member name="T:VkDeviceGroupSwapchainCreateInfoKHX32">
+      <summary>See: <see cref="T:IVkDeviceGroupSwapchainCreateInfoKHX" /></summary>
+    </member>
     <member name="F:VkDeviceGroupSwapchainCreateInfoKHX32.modes"></member>
     <member name="F:VkDeviceGroupSwapchainCreateInfoKHX32.pNext"></member>
     <member name="F:VkDeviceGroupSwapchainCreateInfoKHX32.sType"></member>
-    <member name="T:VkDeviceGroupSwapchainCreateInfoKHX64"></member>
+    <member name="T:VkDeviceGroupSwapchainCreateInfoKHX64">
+      <summary>See: <see cref="T:IVkDeviceGroupSwapchainCreateInfoKHX" /></summary>
+    </member>
     <member name="F:VkDeviceGroupSwapchainCreateInfoKHX64.modes"></member>
     <member name="F:VkDeviceGroupSwapchainCreateInfoKHX64.pNext"></member>
     <member name="F:VkDeviceGroupSwapchainCreateInfoKHX64.sType"></member>
@@ -3947,7 +4159,7 @@
     <member name="T:VkDeviceQueueCreateFlags"></member>
     <member name="F:VkDeviceQueueCreateFlags.value__"></member>
     <member name="T:VkDeviceQueueCreateInfo32">
-      <summary>Structure specifying parameters of a newly created device queue</summary>
+      <summary>See: <see cref="T:IVkDeviceQueueCreateInfo" /></summary>
     </member>
     <member name="F:VkDeviceQueueCreateInfo32.flags"></member>
     <member name="F:VkDeviceQueueCreateInfo32.pNext"></member>
@@ -3956,7 +4168,7 @@
     <member name="F:VkDeviceQueueCreateInfo32.queueFamilyIndex"></member>
     <member name="F:VkDeviceQueueCreateInfo32.sType"></member>
     <member name="T:VkDeviceQueueCreateInfo64">
-      <summary>Structure specifying parameters of a newly created device queue</summary>
+      <summary>See: <see cref="T:IVkDeviceQueueCreateInfo" /></summary>
     </member>
     <member name="F:VkDeviceQueueCreateInfo64.flags"></member>
     <member name="F:VkDeviceQueueCreateInfo64.pNext"></member>
@@ -3991,11 +4203,15 @@
     <member name="F:VkDispatchIndirectCommand.x"></member>
     <member name="F:VkDispatchIndirectCommand.y"></member>
     <member name="F:VkDispatchIndirectCommand.z"></member>
-    <member name="T:VkDisplayEventInfoEXT32"></member>
+    <member name="T:VkDisplayEventInfoEXT32">
+      <summary>See: <see cref="T:IVkDisplayEventInfoEXT" /></summary>
+    </member>
     <member name="F:VkDisplayEventInfoEXT32.displayEvent"></member>
     <member name="F:VkDisplayEventInfoEXT32.pNext"></member>
     <member name="F:VkDisplayEventInfoEXT32.sType"></member>
-    <member name="T:VkDisplayEventInfoEXT64"></member>
+    <member name="T:VkDisplayEventInfoEXT64">
+      <summary>See: <see cref="T:IVkDisplayEventInfoEXT" /></summary>
+    </member>
     <member name="F:VkDisplayEventInfoEXT64.displayEvent"></member>
     <member name="F:VkDisplayEventInfoEXT64.pNext"></member>
     <member name="F:VkDisplayEventInfoEXT64.sType"></member>
@@ -4010,12 +4226,16 @@
     <member name="M:VkDisplayKHR.Cast(System.UInt64)"></member>
     <member name="T:VkDisplayModeCreateFlagsKHR"></member>
     <member name="F:VkDisplayModeCreateFlagsKHR.value__"></member>
-    <member name="T:VkDisplayModeCreateInfoKHR32"></member>
+    <member name="T:VkDisplayModeCreateInfoKHR32">
+      <summary>See: <see cref="T:IVkDisplayModeCreateInfoKHR" /></summary>
+    </member>
     <member name="F:VkDisplayModeCreateInfoKHR32.flags"></member>
     <member name="F:VkDisplayModeCreateInfoKHR32.parameters"></member>
     <member name="F:VkDisplayModeCreateInfoKHR32.pNext"></member>
     <member name="F:VkDisplayModeCreateInfoKHR32.sType"></member>
-    <member name="T:VkDisplayModeCreateInfoKHR64"></member>
+    <member name="T:VkDisplayModeCreateInfoKHR64">
+      <summary>See: <see cref="T:IVkDisplayModeCreateInfoKHR" /></summary>
+    </member>
     <member name="F:VkDisplayModeCreateInfoKHR64.flags"></member>
     <member name="F:VkDisplayModeCreateInfoKHR64.parameters"></member>
     <member name="F:VkDisplayModeCreateInfoKHR64.pNext"></member>
@@ -4059,11 +4279,15 @@
       </summary>
     </member>
     <member name="M:vkDisplayPowerControlEXT.Invoke(VkDevice*,VkDisplayKHR*,IVkDisplayPowerInfoEXT*)"></member>
-    <member name="T:VkDisplayPowerInfoEXT32"></member>
+    <member name="T:VkDisplayPowerInfoEXT32">
+      <summary>See: <see cref="T:IVkDisplayPowerInfoEXT" /></summary>
+    </member>
     <member name="F:VkDisplayPowerInfoEXT32.pNext"></member>
     <member name="F:VkDisplayPowerInfoEXT32.powerState"></member>
     <member name="F:VkDisplayPowerInfoEXT32.sType"></member>
-    <member name="T:VkDisplayPowerInfoEXT64"></member>
+    <member name="T:VkDisplayPowerInfoEXT64">
+      <summary>See: <see cref="T:IVkDisplayPowerInfoEXT" /></summary>
+    </member>
     <member name="F:VkDisplayPowerInfoEXT64.pNext"></member>
     <member name="F:VkDisplayPowerInfoEXT64.powerState"></member>
     <member name="F:VkDisplayPowerInfoEXT64.sType"></member>
@@ -4076,19 +4300,25 @@
     <member name="F:VkDisplayPowerStateEXT.VK_DISPLAY_POWER_STATE_ON_EXT"></member>
     <member name="F:VkDisplayPowerStateEXT.VK_DISPLAY_POWER_STATE_RANGE_SIZE_EXT"></member>
     <member name="F:VkDisplayPowerStateEXT.VK_DISPLAY_POWER_STATE_SUSPEND_EXT"></member>
-    <member name="T:VkDisplayPresentInfoKHR32"></member>
+    <member name="T:VkDisplayPresentInfoKHR32">
+      <summary>See: <see cref="T:IVkDisplayPresentInfoKHR" /></summary>
+    </member>
     <member name="F:VkDisplayPresentInfoKHR32.dstRect"></member>
     <member name="F:VkDisplayPresentInfoKHR32.persistent"></member>
     <member name="F:VkDisplayPresentInfoKHR32.pNext"></member>
     <member name="F:VkDisplayPresentInfoKHR32.srcRect"></member>
     <member name="F:VkDisplayPresentInfoKHR32.sType"></member>
-    <member name="T:VkDisplayPresentInfoKHR64"></member>
+    <member name="T:VkDisplayPresentInfoKHR64">
+      <summary>See: <see cref="T:IVkDisplayPresentInfoKHR" /></summary>
+    </member>
     <member name="F:VkDisplayPresentInfoKHR64.dstRect"></member>
     <member name="F:VkDisplayPresentInfoKHR64.persistent"></member>
     <member name="F:VkDisplayPresentInfoKHR64.pNext"></member>
     <member name="F:VkDisplayPresentInfoKHR64.srcRect"></member>
     <member name="F:VkDisplayPresentInfoKHR64.sType"></member>
-    <member name="T:VkDisplayPropertiesKHR32"></member>
+    <member name="T:VkDisplayPropertiesKHR32">
+      <summary>See: <see cref="T:IVkDisplayPropertiesKHR" /></summary>
+    </member>
     <member name="F:VkDisplayPropertiesKHR32.display"></member>
     <member name="F:VkDisplayPropertiesKHR32.displayName"></member>
     <member name="F:VkDisplayPropertiesKHR32.persistentContent"></member>
@@ -4096,7 +4326,9 @@
     <member name="F:VkDisplayPropertiesKHR32.physicalResolution"></member>
     <member name="F:VkDisplayPropertiesKHR32.planeReorderPossible"></member>
     <member name="F:VkDisplayPropertiesKHR32.supportedTransforms"></member>
-    <member name="T:VkDisplayPropertiesKHR64"></member>
+    <member name="T:VkDisplayPropertiesKHR64">
+      <summary>See: <see cref="T:IVkDisplayPropertiesKHR" /></summary>
+    </member>
     <member name="F:VkDisplayPropertiesKHR64.display"></member>
     <member name="F:VkDisplayPropertiesKHR64.displayName"></member>
     <member name="F:VkDisplayPropertiesKHR64.persistentContent"></member>
@@ -4106,7 +4338,9 @@
     <member name="F:VkDisplayPropertiesKHR64.supportedTransforms"></member>
     <member name="T:VkDisplaySurfaceCreateFlagsKHR"></member>
     <member name="F:VkDisplaySurfaceCreateFlagsKHR.value__"></member>
-    <member name="T:VkDisplaySurfaceCreateInfoKHR32"></member>
+    <member name="T:VkDisplaySurfaceCreateInfoKHR32">
+      <summary>See: <see cref="T:IVkDisplaySurfaceCreateInfoKHR" /></summary>
+    </member>
     <member name="F:VkDisplaySurfaceCreateInfoKHR32.alphaMode"></member>
     <member name="F:VkDisplaySurfaceCreateInfoKHR32.displayMode"></member>
     <member name="F:VkDisplaySurfaceCreateInfoKHR32.flags"></member>
@@ -4117,7 +4351,9 @@
     <member name="F:VkDisplaySurfaceCreateInfoKHR32.pNext"></member>
     <member name="F:VkDisplaySurfaceCreateInfoKHR32.sType"></member>
     <member name="F:VkDisplaySurfaceCreateInfoKHR32.transform"></member>
-    <member name="T:VkDisplaySurfaceCreateInfoKHR64"></member>
+    <member name="T:VkDisplaySurfaceCreateInfoKHR64">
+      <summary>See: <see cref="T:IVkDisplaySurfaceCreateInfoKHR" /></summary>
+    </member>
     <member name="F:VkDisplaySurfaceCreateInfoKHR64.alphaMode"></member>
     <member name="F:VkDisplaySurfaceCreateInfoKHR64.displayMode"></member>
     <member name="F:VkDisplaySurfaceCreateInfoKHR64.flags"></member>
@@ -4256,38 +4492,50 @@
     <member name="T:VkEventCreateFlags"></member>
     <member name="F:VkEventCreateFlags.value__"></member>
     <member name="T:VkEventCreateInfo32">
-      <summary>Structure specifying parameters of a newly created event</summary>
+      <summary>See: <see cref="T:IVkEventCreateInfo" /></summary>
     </member>
     <member name="F:VkEventCreateInfo32.flags"></member>
     <member name="F:VkEventCreateInfo32.pNext"></member>
     <member name="F:VkEventCreateInfo32.sType"></member>
     <member name="T:VkEventCreateInfo64">
-      <summary>Structure specifying parameters of a newly created event</summary>
+      <summary>See: <see cref="T:IVkEventCreateInfo" /></summary>
     </member>
     <member name="F:VkEventCreateInfo64.flags"></member>
     <member name="F:VkEventCreateInfo64.pNext"></member>
     <member name="F:VkEventCreateInfo64.sType"></member>
-    <member name="T:VkExportMemoryAllocateInfoKHX32"></member>
+    <member name="T:VkExportMemoryAllocateInfoKHX32">
+      <summary>See: <see cref="T:IVkExportMemoryAllocateInfoKHX" /></summary>
+    </member>
     <member name="F:VkExportMemoryAllocateInfoKHX32.handleTypes"></member>
     <member name="F:VkExportMemoryAllocateInfoKHX32.pNext"></member>
     <member name="F:VkExportMemoryAllocateInfoKHX32.sType"></member>
-    <member name="T:VkExportMemoryAllocateInfoKHX64"></member>
+    <member name="T:VkExportMemoryAllocateInfoKHX64">
+      <summary>See: <see cref="T:IVkExportMemoryAllocateInfoKHX" /></summary>
+    </member>
     <member name="F:VkExportMemoryAllocateInfoKHX64.handleTypes"></member>
     <member name="F:VkExportMemoryAllocateInfoKHX64.pNext"></member>
     <member name="F:VkExportMemoryAllocateInfoKHX64.sType"></member>
-    <member name="T:VkExportMemoryAllocateInfoNV32"></member>
+    <member name="T:VkExportMemoryAllocateInfoNV32">
+      <summary>See: <see cref="T:IVkExportMemoryAllocateInfoNV" /></summary>
+    </member>
     <member name="F:VkExportMemoryAllocateInfoNV32.handleTypes"></member>
     <member name="F:VkExportMemoryAllocateInfoNV32.pNext"></member>
     <member name="F:VkExportMemoryAllocateInfoNV32.sType"></member>
-    <member name="T:VkExportMemoryAllocateInfoNV64"></member>
+    <member name="T:VkExportMemoryAllocateInfoNV64">
+      <summary>See: <see cref="T:IVkExportMemoryAllocateInfoNV" /></summary>
+    </member>
     <member name="F:VkExportMemoryAllocateInfoNV64.handleTypes"></member>
     <member name="F:VkExportMemoryAllocateInfoNV64.pNext"></member>
     <member name="F:VkExportMemoryAllocateInfoNV64.sType"></member>
-    <member name="T:VkExportSemaphoreCreateInfoKHX32"></member>
+    <member name="T:VkExportSemaphoreCreateInfoKHX32">
+      <summary>See: <see cref="T:IVkExportSemaphoreCreateInfoKHX" /></summary>
+    </member>
     <member name="F:VkExportSemaphoreCreateInfoKHX32.handleTypes"></member>
     <member name="F:VkExportSemaphoreCreateInfoKHX32.pNext"></member>
     <member name="F:VkExportSemaphoreCreateInfoKHX32.sType"></member>
-    <member name="T:VkExportSemaphoreCreateInfoKHX64"></member>
+    <member name="T:VkExportSemaphoreCreateInfoKHX64">
+      <summary>See: <see cref="T:IVkExportSemaphoreCreateInfoKHX" /></summary>
+    </member>
     <member name="F:VkExportSemaphoreCreateInfoKHX64.handleTypes"></member>
     <member name="F:VkExportSemaphoreCreateInfoKHX64.pNext"></member>
     <member name="F:VkExportSemaphoreCreateInfoKHX64.sType"></member>
@@ -4307,19 +4555,27 @@
     <member name="F:VkExtent3D.depth"></member>
     <member name="F:VkExtent3D.height"></member>
     <member name="F:VkExtent3D.width"></member>
-    <member name="T:VkExternalBufferPropertiesKHX32"></member>
+    <member name="T:VkExternalBufferPropertiesKHX32">
+      <summary>See: <see cref="T:IVkExternalBufferPropertiesKHX" /></summary>
+    </member>
     <member name="F:VkExternalBufferPropertiesKHX32.externalMemoryProperties"></member>
     <member name="F:VkExternalBufferPropertiesKHX32.pNext"></member>
     <member name="F:VkExternalBufferPropertiesKHX32.sType"></member>
-    <member name="T:VkExternalBufferPropertiesKHX64"></member>
+    <member name="T:VkExternalBufferPropertiesKHX64">
+      <summary>See: <see cref="T:IVkExternalBufferPropertiesKHX" /></summary>
+    </member>
     <member name="F:VkExternalBufferPropertiesKHX64.externalMemoryProperties"></member>
     <member name="F:VkExternalBufferPropertiesKHX64.pNext"></member>
     <member name="F:VkExternalBufferPropertiesKHX64.sType"></member>
-    <member name="T:VkExternalImageFormatPropertiesKHX32"></member>
+    <member name="T:VkExternalImageFormatPropertiesKHX32">
+      <summary>See: <see cref="T:IVkExternalImageFormatPropertiesKHX" /></summary>
+    </member>
     <member name="F:VkExternalImageFormatPropertiesKHX32.externalMemoryProperties"></member>
     <member name="F:VkExternalImageFormatPropertiesKHX32.pNext"></member>
     <member name="F:VkExternalImageFormatPropertiesKHX32.sType"></member>
-    <member name="T:VkExternalImageFormatPropertiesKHX64"></member>
+    <member name="T:VkExternalImageFormatPropertiesKHX64">
+      <summary>See: <see cref="T:IVkExternalImageFormatPropertiesKHX" /></summary>
+    </member>
     <member name="F:VkExternalImageFormatPropertiesKHX64.externalMemoryProperties"></member>
     <member name="F:VkExternalImageFormatPropertiesKHX64.pNext"></member>
     <member name="F:VkExternalImageFormatPropertiesKHX64.sType"></member>
@@ -4328,11 +4584,15 @@
     <member name="F:VkExternalImageFormatPropertiesNV.exportFromImportedHandleTypes"></member>
     <member name="F:VkExternalImageFormatPropertiesNV.externalMemoryFeatures"></member>
     <member name="F:VkExternalImageFormatPropertiesNV.imageFormatProperties"></member>
-    <member name="T:VkExternalMemoryBufferCreateInfoKHX32"></member>
+    <member name="T:VkExternalMemoryBufferCreateInfoKHX32">
+      <summary>See: <see cref="T:IVkExternalMemoryBufferCreateInfoKHX" /></summary>
+    </member>
     <member name="F:VkExternalMemoryBufferCreateInfoKHX32.handleTypes"></member>
     <member name="F:VkExternalMemoryBufferCreateInfoKHX32.pNext"></member>
     <member name="F:VkExternalMemoryBufferCreateInfoKHX32.sType"></member>
-    <member name="T:VkExternalMemoryBufferCreateInfoKHX64"></member>
+    <member name="T:VkExternalMemoryBufferCreateInfoKHX64">
+      <summary>See: <see cref="T:IVkExternalMemoryBufferCreateInfoKHX" /></summary>
+    </member>
     <member name="F:VkExternalMemoryBufferCreateInfoKHX64.handleTypes"></member>
     <member name="F:VkExternalMemoryBufferCreateInfoKHX64.pNext"></member>
     <member name="F:VkExternalMemoryBufferCreateInfoKHX64.sType"></member>
@@ -4365,19 +4625,27 @@
     <member name="F:VkExternalMemoryHandleTypeFlagsNV.VK_EXTERNAL_MEMORY_HANDLE_TYPE_FLAG_BITS_MAX_ENUM_NV"></member>
     <member name="F:VkExternalMemoryHandleTypeFlagsNV.VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV"></member>
     <member name="F:VkExternalMemoryHandleTypeFlagsNV.VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV"></member>
-    <member name="T:VkExternalMemoryImageCreateInfoKHX32"></member>
+    <member name="T:VkExternalMemoryImageCreateInfoKHX32">
+      <summary>See: <see cref="T:IVkExternalMemoryImageCreateInfoKHX" /></summary>
+    </member>
     <member name="F:VkExternalMemoryImageCreateInfoKHX32.handleTypes"></member>
     <member name="F:VkExternalMemoryImageCreateInfoKHX32.pNext"></member>
     <member name="F:VkExternalMemoryImageCreateInfoKHX32.sType"></member>
-    <member name="T:VkExternalMemoryImageCreateInfoKHX64"></member>
+    <member name="T:VkExternalMemoryImageCreateInfoKHX64">
+      <summary>See: <see cref="T:IVkExternalMemoryImageCreateInfoKHX" /></summary>
+    </member>
     <member name="F:VkExternalMemoryImageCreateInfoKHX64.handleTypes"></member>
     <member name="F:VkExternalMemoryImageCreateInfoKHX64.pNext"></member>
     <member name="F:VkExternalMemoryImageCreateInfoKHX64.sType"></member>
-    <member name="T:VkExternalMemoryImageCreateInfoNV32"></member>
+    <member name="T:VkExternalMemoryImageCreateInfoNV32">
+      <summary>See: <see cref="T:IVkExternalMemoryImageCreateInfoNV" /></summary>
+    </member>
     <member name="F:VkExternalMemoryImageCreateInfoNV32.handleTypes"></member>
     <member name="F:VkExternalMemoryImageCreateInfoNV32.pNext"></member>
     <member name="F:VkExternalMemoryImageCreateInfoNV32.sType"></member>
-    <member name="T:VkExternalMemoryImageCreateInfoNV64"></member>
+    <member name="T:VkExternalMemoryImageCreateInfoNV64">
+      <summary>See: <see cref="T:IVkExternalMemoryImageCreateInfoNV" /></summary>
+    </member>
     <member name="F:VkExternalMemoryImageCreateInfoNV64.handleTypes"></member>
     <member name="F:VkExternalMemoryImageCreateInfoNV64.pNext"></member>
     <member name="F:VkExternalMemoryImageCreateInfoNV64.sType"></member>
@@ -4398,13 +4666,17 @@
     <member name="F:VkExternalSemaphoreHandleTypeFlagsKHX.VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHX"></member>
     <member name="F:VkExternalSemaphoreHandleTypeFlagsKHX.VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHX"></member>
     <member name="F:VkExternalSemaphoreHandleTypeFlagsKHX.VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHX"></member>
-    <member name="T:VkExternalSemaphorePropertiesKHX32"></member>
+    <member name="T:VkExternalSemaphorePropertiesKHX32">
+      <summary>See: <see cref="T:IVkExternalSemaphorePropertiesKHX" /></summary>
+    </member>
     <member name="F:VkExternalSemaphorePropertiesKHX32.compatibleHandleTypes"></member>
     <member name="F:VkExternalSemaphorePropertiesKHX32.exportFromImportedHandleTypes"></member>
     <member name="F:VkExternalSemaphorePropertiesKHX32.externalSemaphoreFeatures"></member>
     <member name="F:VkExternalSemaphorePropertiesKHX32.pNext"></member>
     <member name="F:VkExternalSemaphorePropertiesKHX32.sType"></member>
-    <member name="T:VkExternalSemaphorePropertiesKHX64"></member>
+    <member name="T:VkExternalSemaphorePropertiesKHX64">
+      <summary>See: <see cref="T:IVkExternalSemaphorePropertiesKHX" /></summary>
+    </member>
     <member name="F:VkExternalSemaphorePropertiesKHX64.compatibleHandleTypes"></member>
     <member name="F:VkExternalSemaphorePropertiesKHX64.exportFromImportedHandleTypes"></member>
     <member name="F:VkExternalSemaphorePropertiesKHX64.externalSemaphoreFeatures"></member>
@@ -4419,13 +4691,13 @@
     <member name="F:VkFenceCreateFlags.VK_FENCE_CREATE_FLAG_BITS_MAX_ENUM"></member>
     <member name="F:VkFenceCreateFlags.VK_FENCE_CREATE_SIGNALED_BIT"></member>
     <member name="T:VkFenceCreateInfo32">
-      <summary>Structure specifying parameters of a newly created fence</summary>
+      <summary>See: <see cref="T:IVkFenceCreateInfo" /></summary>
     </member>
     <member name="F:VkFenceCreateInfo32.flags"></member>
     <member name="F:VkFenceCreateInfo32.pNext"></member>
     <member name="F:VkFenceCreateInfo32.sType"></member>
     <member name="T:VkFenceCreateInfo64">
-      <summary>Structure specifying parameters of a newly created fence</summary>
+      <summary>See: <see cref="T:IVkFenceCreateInfo" /></summary>
     </member>
     <member name="F:VkFenceCreateInfo64.flags"></member>
     <member name="F:VkFenceCreateInfo64.pNext"></member>
@@ -4662,6 +4934,7 @@
     <member name="F:VkFormatFeatureFlags.VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT"></member>
     <member name="F:VkFormatFeatureFlags.VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG"></member>
     <member name="F:VkFormatFeatureFlags.VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT"></member>
+    <member name="F:VkFormatFeatureFlags.VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT"></member>
     <member name="F:VkFormatFeatureFlags.VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT"></member>
     <member name="F:VkFormatFeatureFlags.VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT"></member>
     <member name="F:VkFormatFeatureFlags.VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT"></member>
@@ -4676,11 +4949,15 @@
     <member name="F:VkFormatProperties.bufferFeatures"></member>
     <member name="F:VkFormatProperties.linearTilingFeatures"></member>
     <member name="F:VkFormatProperties.optimalTilingFeatures"></member>
-    <member name="T:VkFormatProperties2KHR32"></member>
+    <member name="T:VkFormatProperties2KHR32">
+      <summary>See: <see cref="T:IVkFormatProperties2KHR" /></summary>
+    </member>
     <member name="F:VkFormatProperties2KHR32.formatProperties"></member>
     <member name="F:VkFormatProperties2KHR32.pNext"></member>
     <member name="F:VkFormatProperties2KHR32.sType"></member>
-    <member name="T:VkFormatProperties2KHR64"></member>
+    <member name="T:VkFormatProperties2KHR64">
+      <summary>See: <see cref="T:IVkFormatProperties2KHR" /></summary>
+    </member>
     <member name="F:VkFormatProperties2KHR64.formatProperties"></member>
     <member name="F:VkFormatProperties2KHR64.pNext"></member>
     <member name="F:VkFormatProperties2KHR64.sType"></member>
@@ -4691,7 +4968,7 @@
     <member name="T:VkFramebufferCreateFlags"></member>
     <member name="F:VkFramebufferCreateFlags.value__"></member>
     <member name="T:VkFramebufferCreateInfo32">
-      <summary>Structure specifying parameters of a newly created framebuffer</summary>
+      <summary>See: <see cref="T:IVkFramebufferCreateInfo" /></summary>
     </member>
     <member name="F:VkFramebufferCreateInfo32.attachmentCount"></member>
     <member name="F:VkFramebufferCreateInfo32.flags"></member>
@@ -4703,7 +4980,7 @@
     <member name="F:VkFramebufferCreateInfo32.sType"></member>
     <member name="F:VkFramebufferCreateInfo32.width"></member>
     <member name="T:VkFramebufferCreateInfo64">
-      <summary>Structure specifying parameters of a newly created framebuffer</summary>
+      <summary>See: <see cref="T:IVkFramebufferCreateInfo" /></summary>
     </member>
     <member name="F:VkFramebufferCreateInfo64.attachmentCount"></member>
     <member name="F:VkFramebufferCreateInfo64.flags"></member>
@@ -5407,7 +5684,7 @@
     </member>
     <member name="M:vkGetSwapchainStatusKHR.Invoke(VkDevice*,VkSwapchainKHR*)"></member>
     <member name="T:VkGraphicsPipelineCreateInfo32">
-      <summary>Structure specifying parameters of a newly created graphics pipeline</summary>
+      <summary>See: <see cref="T:IVkGraphicsPipelineCreateInfo" /></summary>
     </member>
     <member name="F:VkGraphicsPipelineCreateInfo32.basePipelineHandle"></member>
     <member name="F:VkGraphicsPipelineCreateInfo32.basePipelineIndex"></member>
@@ -5429,7 +5706,7 @@
     <member name="F:VkGraphicsPipelineCreateInfo32.sType"></member>
     <member name="F:VkGraphicsPipelineCreateInfo32.subpass"></member>
     <member name="T:VkGraphicsPipelineCreateInfo64">
-      <summary>Structure specifying parameters of a newly created graphics pipeline</summary>
+      <summary>See: <see cref="T:IVkGraphicsPipelineCreateInfo" /></summary>
     </member>
     <member name="F:VkGraphicsPipelineCreateInfo64.basePipelineHandle"></member>
     <member name="F:VkGraphicsPipelineCreateInfo64.basePipelineIndex"></member>
@@ -5450,7 +5727,9 @@
     <member name="F:VkGraphicsPipelineCreateInfo64.stageCount"></member>
     <member name="F:VkGraphicsPipelineCreateInfo64.sType"></member>
     <member name="F:VkGraphicsPipelineCreateInfo64.subpass"></member>
-    <member name="T:VkHdrMetadataEXT32"></member>
+    <member name="T:VkHdrMetadataEXT32">
+      <summary>See: <see cref="T:IVkHdrMetadataEXT" /></summary>
+    </member>
     <member name="F:VkHdrMetadataEXT32.displayPrimaryBlue"></member>
     <member name="F:VkHdrMetadataEXT32.displayPrimaryGreen"></member>
     <member name="F:VkHdrMetadataEXT32.displayPrimaryRed"></member>
@@ -5461,7 +5740,9 @@
     <member name="F:VkHdrMetadataEXT32.pNext"></member>
     <member name="F:VkHdrMetadataEXT32.sType"></member>
     <member name="F:VkHdrMetadataEXT32.whitePoint"></member>
-    <member name="T:VkHdrMetadataEXT64"></member>
+    <member name="T:VkHdrMetadataEXT64">
+      <summary>See: <see cref="T:IVkHdrMetadataEXT" /></summary>
+    </member>
     <member name="F:VkHdrMetadataEXT64.displayPrimaryBlue"></member>
     <member name="F:VkHdrMetadataEXT64.displayPrimaryGreen"></member>
     <member name="F:VkHdrMetadataEXT64.displayPrimaryRed"></member>
@@ -5509,7 +5790,7 @@
     <member name="F:VkImageCreateFlags.VK_IMAGE_CREATE_SPARSE_BINDING_BIT"></member>
     <member name="F:VkImageCreateFlags.VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT"></member>
     <member name="T:VkImageCreateInfo32">
-      <summary>Structure specifying the parameters of a newly created image object</summary>
+      <summary>See: <see cref="T:IVkImageCreateInfo" /></summary>
     </member>
     <member name="F:VkImageCreateInfo32.arrayLayers"></member>
     <member name="F:VkImageCreateInfo32.extent"></member>
@@ -5527,7 +5808,7 @@
     <member name="F:VkImageCreateInfo32.tiling"></member>
     <member name="F:VkImageCreateInfo32.usage"></member>
     <member name="T:VkImageCreateInfo64">
-      <summary>Structure specifying the parameters of a newly created image object</summary>
+      <summary>See: <see cref="T:IVkImageCreateInfo" /></summary>
     </member>
     <member name="F:VkImageCreateInfo64.arrayLayers"></member>
     <member name="F:VkImageCreateInfo64.extent"></member>
@@ -5552,11 +5833,15 @@
     <member name="F:VkImageFormatProperties.maxMipLevels"></member>
     <member name="F:VkImageFormatProperties.maxResourceSize"></member>
     <member name="F:VkImageFormatProperties.sampleCounts"></member>
-    <member name="T:VkImageFormatProperties2KHR32"></member>
+    <member name="T:VkImageFormatProperties2KHR32">
+      <summary>See: <see cref="T:IVkImageFormatProperties2KHR" /></summary>
+    </member>
     <member name="F:VkImageFormatProperties2KHR32.imageFormatProperties"></member>
     <member name="F:VkImageFormatProperties2KHR32.pNext"></member>
     <member name="F:VkImageFormatProperties2KHR32.sType"></member>
-    <member name="T:VkImageFormatProperties2KHR64"></member>
+    <member name="T:VkImageFormatProperties2KHR64">
+      <summary>See: <see cref="T:IVkImageFormatProperties2KHR" /></summary>
+    </member>
     <member name="F:VkImageFormatProperties2KHR64.imageFormatProperties"></member>
     <member name="F:VkImageFormatProperties2KHR64.pNext"></member>
     <member name="F:VkImageFormatProperties2KHR64.sType"></member>
@@ -5578,7 +5863,7 @@
     <member name="F:VkImageLayout.VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL"></member>
     <member name="F:VkImageLayout.VK_IMAGE_LAYOUT_UNDEFINED"></member>
     <member name="T:VkImageMemoryBarrier32">
-      <summary>Structure specifying the parameters of an image memory barrier</summary>
+      <summary>See: <see cref="T:IVkImageMemoryBarrier" /></summary>
     </member>
     <member name="F:VkImageMemoryBarrier32.dstAccessMask"></member>
     <member name="F:VkImageMemoryBarrier32.dstQueueFamilyIndex"></member>
@@ -5591,7 +5876,7 @@
     <member name="F:VkImageMemoryBarrier32.sType"></member>
     <member name="F:VkImageMemoryBarrier32.subresourceRange"></member>
     <member name="T:VkImageMemoryBarrier64">
-      <summary>Structure specifying the parameters of an image memory barrier</summary>
+      <summary>See: <see cref="T:IVkImageMemoryBarrier" /></summary>
     </member>
     <member name="F:VkImageMemoryBarrier64.dstAccessMask"></member>
     <member name="F:VkImageMemoryBarrier64.dstQueueFamilyIndex"></member>
@@ -5632,11 +5917,15 @@
     <member name="F:VkImageSubresourceRange.baseMipLevel"></member>
     <member name="F:VkImageSubresourceRange.layerCount"></member>
     <member name="F:VkImageSubresourceRange.levelCount"></member>
-    <member name="T:VkImageSwapchainCreateInfoKHX32"></member>
+    <member name="T:VkImageSwapchainCreateInfoKHX32">
+      <summary>See: <see cref="T:IVkImageSwapchainCreateInfoKHX" /></summary>
+    </member>
     <member name="F:VkImageSwapchainCreateInfoKHX32.pNext"></member>
     <member name="F:VkImageSwapchainCreateInfoKHX32.sType"></member>
     <member name="F:VkImageSwapchainCreateInfoKHX32.swapchain"></member>
-    <member name="T:VkImageSwapchainCreateInfoKHX64"></member>
+    <member name="T:VkImageSwapchainCreateInfoKHX64">
+      <summary>See: <see cref="T:IVkImageSwapchainCreateInfoKHX" /></summary>
+    </member>
     <member name="F:VkImageSwapchainCreateInfoKHX64.pNext"></member>
     <member name="F:VkImageSwapchainCreateInfoKHX64.sType"></member>
     <member name="F:VkImageSwapchainCreateInfoKHX64.swapchain"></member>
@@ -5675,7 +5964,7 @@
     <member name="T:VkImageViewCreateFlags"></member>
     <member name="F:VkImageViewCreateFlags.value__"></member>
     <member name="T:VkImageViewCreateInfo32">
-      <summary>Structure specifying parameters of a newly created image view</summary>
+      <summary>See: <see cref="T:IVkImageViewCreateInfo" /></summary>
     </member>
     <member name="F:VkImageViewCreateInfo32.components"></member>
     <member name="F:VkImageViewCreateInfo32.flags"></member>
@@ -5686,7 +5975,7 @@
     <member name="F:VkImageViewCreateInfo32.subresourceRange"></member>
     <member name="F:VkImageViewCreateInfo32.viewType"></member>
     <member name="T:VkImageViewCreateInfo64">
-      <summary>Structure specifying parameters of a newly created image view</summary>
+      <summary>See: <see cref="T:IVkImageViewCreateInfo" /></summary>
     </member>
     <member name="F:VkImageViewCreateInfo64.components"></member>
     <member name="F:VkImageViewCreateInfo64.flags"></member>
@@ -5709,23 +5998,31 @@
     <member name="F:VkImageViewType.VK_IMAGE_VIEW_TYPE_END_RANGE"></member>
     <member name="F:VkImageViewType.VK_IMAGE_VIEW_TYPE_MAX_ENUM"></member>
     <member name="F:VkImageViewType.VK_IMAGE_VIEW_TYPE_RANGE_SIZE"></member>
-    <member name="T:VkImportMemoryFdInfoKHX32"></member>
+    <member name="T:VkImportMemoryFdInfoKHX32">
+      <summary>See: <see cref="T:IVkImportMemoryFdInfoKHX" /></summary>
+    </member>
     <member name="F:VkImportMemoryFdInfoKHX32.fd"></member>
     <member name="F:VkImportMemoryFdInfoKHX32.handleType"></member>
     <member name="F:VkImportMemoryFdInfoKHX32.pNext"></member>
     <member name="F:VkImportMemoryFdInfoKHX32.sType"></member>
-    <member name="T:VkImportMemoryFdInfoKHX64"></member>
+    <member name="T:VkImportMemoryFdInfoKHX64">
+      <summary>See: <see cref="T:IVkImportMemoryFdInfoKHX" /></summary>
+    </member>
     <member name="F:VkImportMemoryFdInfoKHX64.fd"></member>
     <member name="F:VkImportMemoryFdInfoKHX64.handleType"></member>
     <member name="F:VkImportMemoryFdInfoKHX64.pNext"></member>
     <member name="F:VkImportMemoryFdInfoKHX64.sType"></member>
-    <member name="T:VkImportSemaphoreFdInfoKHX32"></member>
+    <member name="T:VkImportSemaphoreFdInfoKHX32">
+      <summary>See: <see cref="T:IVkImportSemaphoreFdInfoKHX" /></summary>
+    </member>
     <member name="F:VkImportSemaphoreFdInfoKHX32.fd"></member>
     <member name="F:VkImportSemaphoreFdInfoKHX32.handleType"></member>
     <member name="F:VkImportSemaphoreFdInfoKHX32.pNext"></member>
     <member name="F:VkImportSemaphoreFdInfoKHX32.semaphore"></member>
     <member name="F:VkImportSemaphoreFdInfoKHX32.sType"></member>
-    <member name="T:VkImportSemaphoreFdInfoKHX64"></member>
+    <member name="T:VkImportSemaphoreFdInfoKHX64">
+      <summary>See: <see cref="T:IVkImportSemaphoreFdInfoKHX" /></summary>
+    </member>
     <member name="F:VkImportSemaphoreFdInfoKHX64.fd"></member>
     <member name="F:VkImportSemaphoreFdInfoKHX64.handleType"></member>
     <member name="F:VkImportSemaphoreFdInfoKHX64.pNext"></member>
@@ -5750,14 +6047,18 @@
     <member name="F:VkIndexType.VK_INDEX_TYPE_RANGE_SIZE"></member>
     <member name="F:VkIndexType.VK_INDEX_TYPE_UINT16"></member>
     <member name="F:VkIndexType.VK_INDEX_TYPE_UINT32"></member>
-    <member name="T:VkIndirectCommandsLayoutCreateInfoNVX32"></member>
+    <member name="T:VkIndirectCommandsLayoutCreateInfoNVX32">
+      <summary>See: <see cref="T:IVkIndirectCommandsLayoutCreateInfoNVX" /></summary>
+    </member>
     <member name="F:VkIndirectCommandsLayoutCreateInfoNVX32.flags"></member>
     <member name="F:VkIndirectCommandsLayoutCreateInfoNVX32.pipelineBindPoint"></member>
     <member name="F:VkIndirectCommandsLayoutCreateInfoNVX32.pNext"></member>
     <member name="F:VkIndirectCommandsLayoutCreateInfoNVX32.pTokens"></member>
     <member name="F:VkIndirectCommandsLayoutCreateInfoNVX32.sType"></member>
     <member name="F:VkIndirectCommandsLayoutCreateInfoNVX32.tokenCount"></member>
-    <member name="T:VkIndirectCommandsLayoutCreateInfoNVX64"></member>
+    <member name="T:VkIndirectCommandsLayoutCreateInfoNVX64">
+      <summary>See: <see cref="T:IVkIndirectCommandsLayoutCreateInfoNVX" /></summary>
+    </member>
     <member name="F:VkIndirectCommandsLayoutCreateInfoNVX64.flags"></member>
     <member name="F:VkIndirectCommandsLayoutCreateInfoNVX64.pipelineBindPoint"></member>
     <member name="F:VkIndirectCommandsLayoutCreateInfoNVX64.pNext"></member>
@@ -5803,7 +6104,7 @@
     <member name="T:VkInstanceCreateFlags"></member>
     <member name="F:VkInstanceCreateFlags.value__"></member>
     <member name="T:VkInstanceCreateInfo32">
-      <summary>Structure specifying parameters of a newly created instance</summary>
+      <summary>See: <see cref="T:IVkInstanceCreateInfo" /></summary>
     </member>
     <member name="F:VkInstanceCreateInfo32.enabledExtensionCount"></member>
     <member name="F:VkInstanceCreateInfo32.enabledLayerCount"></member>
@@ -5814,7 +6115,7 @@
     <member name="F:VkInstanceCreateInfo32.ppEnabledLayerNames"></member>
     <member name="F:VkInstanceCreateInfo32.sType"></member>
     <member name="T:VkInstanceCreateInfo64">
-      <summary>Structure specifying parameters of a newly created instance</summary>
+      <summary>See: <see cref="T:IVkInstanceCreateInfo" /></summary>
     </member>
     <member name="F:VkInstanceCreateInfo64.enabledExtensionCount"></member>
     <member name="F:VkInstanceCreateInfo64.enabledLayerCount"></member>
@@ -5891,7 +6192,7 @@
     </member>
     <member name="M:vkMapMemory.Invoke(VkDevice*,VkDeviceMemory*,System.UInt64,System.UInt64,VkMemoryMapFlags,System.Void**)"></member>
     <member name="T:VkMappedMemoryRange32">
-      <summary>Structure specifying a mapped memory range</summary>
+      <summary>See: <see cref="T:IVkMappedMemoryRange" /></summary>
     </member>
     <member name="F:VkMappedMemoryRange32.memory"></member>
     <member name="F:VkMappedMemoryRange32.offset"></member>
@@ -5899,19 +6200,23 @@
     <member name="F:VkMappedMemoryRange32.size"></member>
     <member name="F:VkMappedMemoryRange32.sType"></member>
     <member name="T:VkMappedMemoryRange64">
-      <summary>Structure specifying a mapped memory range</summary>
+      <summary>See: <see cref="T:IVkMappedMemoryRange" /></summary>
     </member>
     <member name="F:VkMappedMemoryRange64.memory"></member>
     <member name="F:VkMappedMemoryRange64.offset"></member>
     <member name="F:VkMappedMemoryRange64.pNext"></member>
     <member name="F:VkMappedMemoryRange64.size"></member>
     <member name="F:VkMappedMemoryRange64.sType"></member>
-    <member name="T:VkMemoryAllocateFlagsInfoKHX32"></member>
+    <member name="T:VkMemoryAllocateFlagsInfoKHX32">
+      <summary>See: <see cref="T:IVkMemoryAllocateFlagsInfoKHX" /></summary>
+    </member>
     <member name="F:VkMemoryAllocateFlagsInfoKHX32.deviceMask"></member>
     <member name="F:VkMemoryAllocateFlagsInfoKHX32.flags"></member>
     <member name="F:VkMemoryAllocateFlagsInfoKHX32.pNext"></member>
     <member name="F:VkMemoryAllocateFlagsInfoKHX32.sType"></member>
-    <member name="T:VkMemoryAllocateFlagsInfoKHX64"></member>
+    <member name="T:VkMemoryAllocateFlagsInfoKHX64">
+      <summary>See: <see cref="T:IVkMemoryAllocateFlagsInfoKHX" /></summary>
+    </member>
     <member name="F:VkMemoryAllocateFlagsInfoKHX64.deviceMask"></member>
     <member name="F:VkMemoryAllocateFlagsInfoKHX64.flags"></member>
     <member name="F:VkMemoryAllocateFlagsInfoKHX64.pNext"></member>
@@ -5921,38 +6226,42 @@
     <member name="F:VkMemoryAllocateFlagsKHX.VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHX"></member>
     <member name="F:VkMemoryAllocateFlagsKHX.VK_MEMORY_ALLOCATE_FLAG_BITS_MAX_ENUM_KHX"></member>
     <member name="T:VkMemoryAllocateInfo32">
-      <summary>Structure containing parameters of a memory allocation</summary>
+      <summary>See: <see cref="T:IVkMemoryAllocateInfo" /></summary>
     </member>
     <member name="F:VkMemoryAllocateInfo32.allocationSize"></member>
     <member name="F:VkMemoryAllocateInfo32.memoryTypeIndex"></member>
     <member name="F:VkMemoryAllocateInfo32.pNext"></member>
     <member name="F:VkMemoryAllocateInfo32.sType"></member>
     <member name="T:VkMemoryAllocateInfo64">
-      <summary>Structure containing parameters of a memory allocation</summary>
+      <summary>See: <see cref="T:IVkMemoryAllocateInfo" /></summary>
     </member>
     <member name="F:VkMemoryAllocateInfo64.allocationSize"></member>
     <member name="F:VkMemoryAllocateInfo64.memoryTypeIndex"></member>
     <member name="F:VkMemoryAllocateInfo64.pNext"></member>
     <member name="F:VkMemoryAllocateInfo64.sType"></member>
     <member name="T:VkMemoryBarrier32">
-      <summary>Structure specifying a global memory barrier</summary>
+      <summary>See: <see cref="T:IVkMemoryBarrier" /></summary>
     </member>
     <member name="F:VkMemoryBarrier32.dstAccessMask"></member>
     <member name="F:VkMemoryBarrier32.pNext"></member>
     <member name="F:VkMemoryBarrier32.srcAccessMask"></member>
     <member name="F:VkMemoryBarrier32.sType"></member>
     <member name="T:VkMemoryBarrier64">
-      <summary>Structure specifying a global memory barrier</summary>
+      <summary>See: <see cref="T:IVkMemoryBarrier" /></summary>
     </member>
     <member name="F:VkMemoryBarrier64.dstAccessMask"></member>
     <member name="F:VkMemoryBarrier64.pNext"></member>
     <member name="F:VkMemoryBarrier64.srcAccessMask"></member>
     <member name="F:VkMemoryBarrier64.sType"></member>
-    <member name="T:VkMemoryFdPropertiesKHX32"></member>
+    <member name="T:VkMemoryFdPropertiesKHX32">
+      <summary>See: <see cref="T:IVkMemoryFdPropertiesKHX" /></summary>
+    </member>
     <member name="F:VkMemoryFdPropertiesKHX32.memoryTypeBits"></member>
     <member name="F:VkMemoryFdPropertiesKHX32.pNext"></member>
     <member name="F:VkMemoryFdPropertiesKHX32.sType"></member>
-    <member name="T:VkMemoryFdPropertiesKHX64"></member>
+    <member name="T:VkMemoryFdPropertiesKHX64">
+      <summary>See: <see cref="T:IVkMemoryFdPropertiesKHX" /></summary>
+    </member>
     <member name="F:VkMemoryFdPropertiesKHX64.memoryTypeBits"></member>
     <member name="F:VkMemoryFdPropertiesKHX64.pNext"></member>
     <member name="F:VkMemoryFdPropertiesKHX64.sType"></member>
@@ -6018,7 +6327,9 @@
     <member name="F:VkObjectEntryUsageFlagsNVX.VK_OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX"></member>
     <member name="F:VkObjectEntryUsageFlagsNVX.VK_OBJECT_ENTRY_USAGE_FLAG_BITS_MAX_ENUM_NVX"></member>
     <member name="F:VkObjectEntryUsageFlagsNVX.VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX"></member>
-    <member name="T:VkObjectTableCreateInfoNVX32"></member>
+    <member name="T:VkObjectTableCreateInfoNVX32">
+      <summary>See: <see cref="T:IVkObjectTableCreateInfoNVX" /></summary>
+    </member>
     <member name="F:VkObjectTableCreateInfoNVX32.maxPipelineLayouts"></member>
     <member name="F:VkObjectTableCreateInfoNVX32.maxSampledImagesPerDescriptor"></member>
     <member name="F:VkObjectTableCreateInfoNVX32.maxStorageBuffersPerDescriptor"></member>
@@ -6030,7 +6341,9 @@
     <member name="F:VkObjectTableCreateInfoNVX32.pObjectEntryTypes"></member>
     <member name="F:VkObjectTableCreateInfoNVX32.pObjectEntryUsageFlags"></member>
     <member name="F:VkObjectTableCreateInfoNVX32.sType"></member>
-    <member name="T:VkObjectTableCreateInfoNVX64"></member>
+    <member name="T:VkObjectTableCreateInfoNVX64">
+      <summary>See: <see cref="T:IVkObjectTableCreateInfoNVX" /></summary>
+    </member>
     <member name="F:VkObjectTableCreateInfoNVX64.maxPipelineLayouts"></member>
     <member name="F:VkObjectTableCreateInfoNVX64.maxSampledImagesPerDescriptor"></member>
     <member name="F:VkObjectTableCreateInfoNVX64.maxStorageBuffersPerDescriptor"></member>
@@ -6138,39 +6451,89 @@
       <summary>Opaque handle to a physical device object</summary>
     </member>
     <member name="M:VkPhysicalDevice.Cast(System.Void*)"></member>
-    <member name="T:VkPhysicalDeviceDiscardRectanglePropertiesEXT32"></member>
+    <member name="T:VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32">
+      <summary>See: <see cref="T:IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT" /></summary>
+    </member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32.advancedBlendCoherentOperations"></member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32.pNext"></member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT32.sType"></member>
+    <member name="T:VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64">
+      <summary>See: <see cref="T:IVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT" /></summary>
+    </member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64.advancedBlendCoherentOperations"></member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64.pNext"></member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT64.sType"></member>
+    <member name="T:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32">
+      <summary>See: <see cref="T:IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT" /></summary>
+    </member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.advancedBlendAllOperations"></member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.advancedBlendCorrelatedOverlap"></member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.advancedBlendIndependentBlend"></member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.advancedBlendMaxColorAttachments"></member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.advancedBlendNonPremultipliedDstColor"></member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.advancedBlendNonPremultipliedSrcColor"></member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.pNext"></member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT32.sType"></member>
+    <member name="T:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64">
+      <summary>See: <see cref="T:IVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT" /></summary>
+    </member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.advancedBlendAllOperations"></member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.advancedBlendCorrelatedOverlap"></member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.advancedBlendIndependentBlend"></member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.advancedBlendMaxColorAttachments"></member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.advancedBlendNonPremultipliedDstColor"></member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.advancedBlendNonPremultipliedSrcColor"></member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.pNext"></member>
+    <member name="F:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT64.sType"></member>
+    <member name="T:VkPhysicalDeviceDiscardRectanglePropertiesEXT32">
+      <summary>See: <see cref="T:IVkPhysicalDeviceDiscardRectanglePropertiesEXT" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceDiscardRectanglePropertiesEXT32.maxDiscardRectangles"></member>
     <member name="F:VkPhysicalDeviceDiscardRectanglePropertiesEXT32.pNext"></member>
     <member name="F:VkPhysicalDeviceDiscardRectanglePropertiesEXT32.sType"></member>
-    <member name="T:VkPhysicalDeviceDiscardRectanglePropertiesEXT64"></member>
+    <member name="T:VkPhysicalDeviceDiscardRectanglePropertiesEXT64">
+      <summary>See: <see cref="T:IVkPhysicalDeviceDiscardRectanglePropertiesEXT" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceDiscardRectanglePropertiesEXT64.maxDiscardRectangles"></member>
     <member name="F:VkPhysicalDeviceDiscardRectanglePropertiesEXT64.pNext"></member>
     <member name="F:VkPhysicalDeviceDiscardRectanglePropertiesEXT64.sType"></member>
-    <member name="T:VkPhysicalDeviceExternalBufferInfoKHX32"></member>
+    <member name="T:VkPhysicalDeviceExternalBufferInfoKHX32">
+      <summary>See: <see cref="T:IVkPhysicalDeviceExternalBufferInfoKHX" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceExternalBufferInfoKHX32.flags"></member>
     <member name="F:VkPhysicalDeviceExternalBufferInfoKHX32.handleType"></member>
     <member name="F:VkPhysicalDeviceExternalBufferInfoKHX32.pNext"></member>
     <member name="F:VkPhysicalDeviceExternalBufferInfoKHX32.sType"></member>
     <member name="F:VkPhysicalDeviceExternalBufferInfoKHX32.usage"></member>
-    <member name="T:VkPhysicalDeviceExternalBufferInfoKHX64"></member>
+    <member name="T:VkPhysicalDeviceExternalBufferInfoKHX64">
+      <summary>See: <see cref="T:IVkPhysicalDeviceExternalBufferInfoKHX" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceExternalBufferInfoKHX64.flags"></member>
     <member name="F:VkPhysicalDeviceExternalBufferInfoKHX64.handleType"></member>
     <member name="F:VkPhysicalDeviceExternalBufferInfoKHX64.pNext"></member>
     <member name="F:VkPhysicalDeviceExternalBufferInfoKHX64.sType"></member>
     <member name="F:VkPhysicalDeviceExternalBufferInfoKHX64.usage"></member>
-    <member name="T:VkPhysicalDeviceExternalImageFormatInfoKHX32"></member>
+    <member name="T:VkPhysicalDeviceExternalImageFormatInfoKHX32">
+      <summary>See: <see cref="T:IVkPhysicalDeviceExternalImageFormatInfoKHX" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceExternalImageFormatInfoKHX32.handleType"></member>
     <member name="F:VkPhysicalDeviceExternalImageFormatInfoKHX32.pNext"></member>
     <member name="F:VkPhysicalDeviceExternalImageFormatInfoKHX32.sType"></member>
-    <member name="T:VkPhysicalDeviceExternalImageFormatInfoKHX64"></member>
+    <member name="T:VkPhysicalDeviceExternalImageFormatInfoKHX64">
+      <summary>See: <see cref="T:IVkPhysicalDeviceExternalImageFormatInfoKHX" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceExternalImageFormatInfoKHX64.handleType"></member>
     <member name="F:VkPhysicalDeviceExternalImageFormatInfoKHX64.pNext"></member>
     <member name="F:VkPhysicalDeviceExternalImageFormatInfoKHX64.sType"></member>
-    <member name="T:VkPhysicalDeviceExternalSemaphoreInfoKHX32"></member>
+    <member name="T:VkPhysicalDeviceExternalSemaphoreInfoKHX32">
+      <summary>See: <see cref="T:IVkPhysicalDeviceExternalSemaphoreInfoKHX" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceExternalSemaphoreInfoKHX32.handleType"></member>
     <member name="F:VkPhysicalDeviceExternalSemaphoreInfoKHX32.pNext"></member>
     <member name="F:VkPhysicalDeviceExternalSemaphoreInfoKHX32.sType"></member>
-    <member name="T:VkPhysicalDeviceExternalSemaphoreInfoKHX64"></member>
+    <member name="T:VkPhysicalDeviceExternalSemaphoreInfoKHX64">
+      <summary>See: <see cref="T:IVkPhysicalDeviceExternalSemaphoreInfoKHX" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceExternalSemaphoreInfoKHX64.handleType"></member>
     <member name="F:VkPhysicalDeviceExternalSemaphoreInfoKHX64.pNext"></member>
     <member name="F:VkPhysicalDeviceExternalSemaphoreInfoKHX64.sType"></member>
@@ -6232,41 +6595,55 @@
     <member name="F:VkPhysicalDeviceFeatures.variableMultisampleRate"></member>
     <member name="F:VkPhysicalDeviceFeatures.vertexPipelineStoresAndAtomics"></member>
     <member name="F:VkPhysicalDeviceFeatures.wideLines"></member>
-    <member name="T:VkPhysicalDeviceFeatures2KHR32"></member>
+    <member name="T:VkPhysicalDeviceFeatures2KHR32">
+      <summary>See: <see cref="T:IVkPhysicalDeviceFeatures2KHR" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceFeatures2KHR32.features"></member>
     <member name="F:VkPhysicalDeviceFeatures2KHR32.pNext"></member>
     <member name="F:VkPhysicalDeviceFeatures2KHR32.sType"></member>
-    <member name="T:VkPhysicalDeviceFeatures2KHR64"></member>
+    <member name="T:VkPhysicalDeviceFeatures2KHR64">
+      <summary>See: <see cref="T:IVkPhysicalDeviceFeatures2KHR" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceFeatures2KHR64.features"></member>
     <member name="F:VkPhysicalDeviceFeatures2KHR64.pNext"></member>
     <member name="F:VkPhysicalDeviceFeatures2KHR64.sType"></member>
-    <member name="T:VkPhysicalDeviceGroupPropertiesKHX32"></member>
+    <member name="T:VkPhysicalDeviceGroupPropertiesKHX32">
+      <summary>See: <see cref="T:IVkPhysicalDeviceGroupPropertiesKHX" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceGroupPropertiesKHX32.physicalDeviceCount"></member>
     <member name="M:VkPhysicalDeviceGroupPropertiesKHX32.physicalDevices(System.Int32)"></member>
     <member name="F:VkPhysicalDeviceGroupPropertiesKHX32.pNext"></member>
     <member name="F:VkPhysicalDeviceGroupPropertiesKHX32.sType"></member>
     <member name="F:VkPhysicalDeviceGroupPropertiesKHX32.subsetAllocation"></member>
-    <member name="T:VkPhysicalDeviceGroupPropertiesKHX64"></member>
+    <member name="T:VkPhysicalDeviceGroupPropertiesKHX64">
+      <summary>See: <see cref="T:IVkPhysicalDeviceGroupPropertiesKHX" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceGroupPropertiesKHX64.physicalDeviceCount"></member>
     <member name="M:VkPhysicalDeviceGroupPropertiesKHX64.physicalDevices(System.Int32)"></member>
     <member name="F:VkPhysicalDeviceGroupPropertiesKHX64.pNext"></member>
     <member name="F:VkPhysicalDeviceGroupPropertiesKHX64.sType"></member>
     <member name="F:VkPhysicalDeviceGroupPropertiesKHX64.subsetAllocation"></member>
-    <member name="T:VkPhysicalDeviceIDPropertiesKHX32"></member>
+    <member name="T:VkPhysicalDeviceIDPropertiesKHX32">
+      <summary>See: <see cref="T:IVkPhysicalDeviceIDPropertiesKHX" /></summary>
+    </member>
     <member name="M:VkPhysicalDeviceIDPropertiesKHX32.deviceLUID(System.Int32)"></member>
     <member name="F:VkPhysicalDeviceIDPropertiesKHX32.deviceLUIDValid"></member>
     <member name="M:VkPhysicalDeviceIDPropertiesKHX32.deviceUUID(System.Int32)"></member>
     <member name="M:VkPhysicalDeviceIDPropertiesKHX32.driverUUID(System.Int32)"></member>
     <member name="F:VkPhysicalDeviceIDPropertiesKHX32.pNext"></member>
     <member name="F:VkPhysicalDeviceIDPropertiesKHX32.sType"></member>
-    <member name="T:VkPhysicalDeviceIDPropertiesKHX64"></member>
+    <member name="T:VkPhysicalDeviceIDPropertiesKHX64">
+      <summary>See: <see cref="T:IVkPhysicalDeviceIDPropertiesKHX" /></summary>
+    </member>
     <member name="M:VkPhysicalDeviceIDPropertiesKHX64.deviceLUID(System.Int32)"></member>
     <member name="F:VkPhysicalDeviceIDPropertiesKHX64.deviceLUIDValid"></member>
     <member name="M:VkPhysicalDeviceIDPropertiesKHX64.deviceUUID(System.Int32)"></member>
     <member name="M:VkPhysicalDeviceIDPropertiesKHX64.driverUUID(System.Int32)"></member>
     <member name="F:VkPhysicalDeviceIDPropertiesKHX64.pNext"></member>
     <member name="F:VkPhysicalDeviceIDPropertiesKHX64.sType"></member>
-    <member name="T:VkPhysicalDeviceImageFormatInfo2KHR32"></member>
+    <member name="T:VkPhysicalDeviceImageFormatInfo2KHR32">
+      <summary>See: <see cref="T:IVkPhysicalDeviceImageFormatInfo2KHR" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceImageFormatInfo2KHR32.flags"></member>
     <member name="F:VkPhysicalDeviceImageFormatInfo2KHR32.format"></member>
     <member name="F:VkPhysicalDeviceImageFormatInfo2KHR32.pNext"></member>
@@ -6274,7 +6651,9 @@
     <member name="F:VkPhysicalDeviceImageFormatInfo2KHR32.tiling"></member>
     <member name="F:VkPhysicalDeviceImageFormatInfo2KHR32.type"></member>
     <member name="F:VkPhysicalDeviceImageFormatInfo2KHR32.usage"></member>
-    <member name="T:VkPhysicalDeviceImageFormatInfo2KHR64"></member>
+    <member name="T:VkPhysicalDeviceImageFormatInfo2KHR64">
+      <summary>See: <see cref="T:IVkPhysicalDeviceImageFormatInfo2KHR" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceImageFormatInfo2KHR64.flags"></member>
     <member name="F:VkPhysicalDeviceImageFormatInfo2KHR64.format"></member>
     <member name="F:VkPhysicalDeviceImageFormatInfo2KHR64.pNext"></member>
@@ -6283,7 +6662,7 @@
     <member name="F:VkPhysicalDeviceImageFormatInfo2KHR64.type"></member>
     <member name="F:VkPhysicalDeviceImageFormatInfo2KHR64.usage"></member>
     <member name="T:VkPhysicalDeviceLimits32">
-      <summary>Structure reporting implementation-dependent physical device limits</summary>
+      <summary>See: <see cref="T:IVkPhysicalDeviceLimits" /></summary>
     </member>
     <member name="F:VkPhysicalDeviceLimits32.bufferImageGranularity"></member>
     <member name="F:VkPhysicalDeviceLimits32.discreteQueuePriorities"></member>
@@ -6392,7 +6771,7 @@
     <member name="M:VkPhysicalDeviceLimits32.viewportBoundsRange(System.Int32)"></member>
     <member name="F:VkPhysicalDeviceLimits32.viewportSubPixelBits"></member>
     <member name="T:VkPhysicalDeviceLimits64">
-      <summary>Structure reporting implementation-dependent physical device limits</summary>
+      <summary>See: <see cref="T:IVkPhysicalDeviceLimits" /></summary>
     </member>
     <member name="F:VkPhysicalDeviceLimits64.bufferImageGranularity"></member>
     <member name="F:VkPhysicalDeviceLimits64.discreteQueuePriorities"></member>
@@ -6507,54 +6886,74 @@
     <member name="F:VkPhysicalDeviceMemoryProperties.memoryHeaps"></member>
     <member name="F:VkPhysicalDeviceMemoryProperties.memoryTypeCount"></member>
     <member name="F:VkPhysicalDeviceMemoryProperties.memoryTypes"></member>
-    <member name="T:VkPhysicalDeviceMemoryProperties2KHR32"></member>
+    <member name="T:VkPhysicalDeviceMemoryProperties2KHR32">
+      <summary>See: <see cref="T:IVkPhysicalDeviceMemoryProperties2KHR" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceMemoryProperties2KHR32.memoryProperties"></member>
     <member name="F:VkPhysicalDeviceMemoryProperties2KHR32.pNext"></member>
     <member name="F:VkPhysicalDeviceMemoryProperties2KHR32.sType"></member>
-    <member name="T:VkPhysicalDeviceMemoryProperties2KHR64"></member>
+    <member name="T:VkPhysicalDeviceMemoryProperties2KHR64">
+      <summary>See: <see cref="T:IVkPhysicalDeviceMemoryProperties2KHR" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceMemoryProperties2KHR64.memoryProperties"></member>
     <member name="F:VkPhysicalDeviceMemoryProperties2KHR64.pNext"></member>
     <member name="F:VkPhysicalDeviceMemoryProperties2KHR64.sType"></member>
-    <member name="T:VkPhysicalDeviceMultiviewFeaturesKHX32"></member>
+    <member name="T:VkPhysicalDeviceMultiviewFeaturesKHX32">
+      <summary>See: <see cref="T:IVkPhysicalDeviceMultiviewFeaturesKHX" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceMultiviewFeaturesKHX32.multiview"></member>
     <member name="F:VkPhysicalDeviceMultiviewFeaturesKHX32.multiviewGeometryShader"></member>
     <member name="F:VkPhysicalDeviceMultiviewFeaturesKHX32.multiviewTessellationShader"></member>
     <member name="F:VkPhysicalDeviceMultiviewFeaturesKHX32.pNext"></member>
     <member name="F:VkPhysicalDeviceMultiviewFeaturesKHX32.sType"></member>
-    <member name="T:VkPhysicalDeviceMultiviewFeaturesKHX64"></member>
+    <member name="T:VkPhysicalDeviceMultiviewFeaturesKHX64">
+      <summary>See: <see cref="T:IVkPhysicalDeviceMultiviewFeaturesKHX" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceMultiviewFeaturesKHX64.multiview"></member>
     <member name="F:VkPhysicalDeviceMultiviewFeaturesKHX64.multiviewGeometryShader"></member>
     <member name="F:VkPhysicalDeviceMultiviewFeaturesKHX64.multiviewTessellationShader"></member>
     <member name="F:VkPhysicalDeviceMultiviewFeaturesKHX64.pNext"></member>
     <member name="F:VkPhysicalDeviceMultiviewFeaturesKHX64.sType"></member>
-    <member name="T:VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX32"></member>
+    <member name="T:VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX32">
+      <summary>See: <see cref="T:IVkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX32.perViewPositionAllComponents"></member>
     <member name="F:VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX32.pNext"></member>
     <member name="F:VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX32.sType"></member>
-    <member name="T:VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX64"></member>
+    <member name="T:VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX64">
+      <summary>See: <see cref="T:IVkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX64.perViewPositionAllComponents"></member>
     <member name="F:VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX64.pNext"></member>
     <member name="F:VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX64.sType"></member>
-    <member name="T:VkPhysicalDeviceMultiviewPropertiesKHX32"></member>
+    <member name="T:VkPhysicalDeviceMultiviewPropertiesKHX32">
+      <summary>See: <see cref="T:IVkPhysicalDeviceMultiviewPropertiesKHX" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceMultiviewPropertiesKHX32.maxMultiviewInstanceIndex"></member>
     <member name="F:VkPhysicalDeviceMultiviewPropertiesKHX32.maxMultiviewViewCount"></member>
     <member name="F:VkPhysicalDeviceMultiviewPropertiesKHX32.pNext"></member>
     <member name="F:VkPhysicalDeviceMultiviewPropertiesKHX32.sType"></member>
-    <member name="T:VkPhysicalDeviceMultiviewPropertiesKHX64"></member>
+    <member name="T:VkPhysicalDeviceMultiviewPropertiesKHX64">
+      <summary>See: <see cref="T:IVkPhysicalDeviceMultiviewPropertiesKHX" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceMultiviewPropertiesKHX64.maxMultiviewInstanceIndex"></member>
     <member name="F:VkPhysicalDeviceMultiviewPropertiesKHX64.maxMultiviewViewCount"></member>
     <member name="F:VkPhysicalDeviceMultiviewPropertiesKHX64.pNext"></member>
     <member name="F:VkPhysicalDeviceMultiviewPropertiesKHX64.sType"></member>
-    <member name="T:VkPhysicalDeviceProperties2KHR32"></member>
+    <member name="T:VkPhysicalDeviceProperties2KHR32">
+      <summary>See: <see cref="T:IVkPhysicalDeviceProperties2KHR" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceProperties2KHR32.pNext"></member>
     <member name="F:VkPhysicalDeviceProperties2KHR32.properties"></member>
     <member name="F:VkPhysicalDeviceProperties2KHR32.sType"></member>
-    <member name="T:VkPhysicalDeviceProperties2KHR64"></member>
+    <member name="T:VkPhysicalDeviceProperties2KHR64">
+      <summary>See: <see cref="T:IVkPhysicalDeviceProperties2KHR" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceProperties2KHR64.pNext"></member>
     <member name="F:VkPhysicalDeviceProperties2KHR64.properties"></member>
     <member name="F:VkPhysicalDeviceProperties2KHR64.sType"></member>
     <member name="T:VkPhysicalDeviceProperties32">
-      <summary>Structure specifying physical device properties</summary>
+      <summary>See: <see cref="T:IVkPhysicalDeviceProperties" /></summary>
     </member>
     <member name="F:VkPhysicalDeviceProperties32.apiVersion"></member>
     <member name="F:VkPhysicalDeviceProperties32.deviceID"></member>
@@ -6566,7 +6965,7 @@
     <member name="F:VkPhysicalDeviceProperties32.sparseProperties"></member>
     <member name="F:VkPhysicalDeviceProperties32.vendorID"></member>
     <member name="T:VkPhysicalDeviceProperties64">
-      <summary>Structure specifying physical device properties</summary>
+      <summary>See: <see cref="T:IVkPhysicalDeviceProperties" /></summary>
     </member>
     <member name="F:VkPhysicalDeviceProperties64.apiVersion"></member>
     <member name="F:VkPhysicalDeviceProperties64.deviceID"></member>
@@ -6577,15 +6976,35 @@
     <member name="M:VkPhysicalDeviceProperties64.pipelineCacheUUID(System.Int32)"></member>
     <member name="F:VkPhysicalDeviceProperties64.sparseProperties"></member>
     <member name="F:VkPhysicalDeviceProperties64.vendorID"></member>
-    <member name="T:VkPhysicalDevicePushDescriptorPropertiesKHR32"></member>
+    <member name="T:VkPhysicalDevicePushDescriptorPropertiesKHR32">
+      <summary>See: <see cref="T:IVkPhysicalDevicePushDescriptorPropertiesKHR" /></summary>
+    </member>
     <member name="F:VkPhysicalDevicePushDescriptorPropertiesKHR32.maxPushDescriptors"></member>
     <member name="F:VkPhysicalDevicePushDescriptorPropertiesKHR32.pNext"></member>
     <member name="F:VkPhysicalDevicePushDescriptorPropertiesKHR32.sType"></member>
-    <member name="T:VkPhysicalDevicePushDescriptorPropertiesKHR64"></member>
+    <member name="T:VkPhysicalDevicePushDescriptorPropertiesKHR64">
+      <summary>See: <see cref="T:IVkPhysicalDevicePushDescriptorPropertiesKHR" /></summary>
+    </member>
     <member name="F:VkPhysicalDevicePushDescriptorPropertiesKHR64.maxPushDescriptors"></member>
     <member name="F:VkPhysicalDevicePushDescriptorPropertiesKHR64.pNext"></member>
     <member name="F:VkPhysicalDevicePushDescriptorPropertiesKHR64.sType"></member>
-    <member name="T:VkPhysicalDeviceSparseImageFormatInfo2KHR32"></member>
+    <member name="T:VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32">
+      <summary>See: <see cref="T:IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT" /></summary>
+    </member>
+    <member name="F:VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32.filterMinmaxImageComponentMapping"></member>
+    <member name="F:VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32.filterMinmaxSingleComponentFormats"></member>
+    <member name="F:VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32.pNext"></member>
+    <member name="F:VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT32.sType"></member>
+    <member name="T:VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64">
+      <summary>See: <see cref="T:IVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT" /></summary>
+    </member>
+    <member name="F:VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64.filterMinmaxImageComponentMapping"></member>
+    <member name="F:VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64.filterMinmaxSingleComponentFormats"></member>
+    <member name="F:VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64.pNext"></member>
+    <member name="F:VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT64.sType"></member>
+    <member name="T:VkPhysicalDeviceSparseImageFormatInfo2KHR32">
+      <summary>See: <see cref="T:IVkPhysicalDeviceSparseImageFormatInfo2KHR" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceSparseImageFormatInfo2KHR32.format"></member>
     <member name="F:VkPhysicalDeviceSparseImageFormatInfo2KHR32.pNext"></member>
     <member name="F:VkPhysicalDeviceSparseImageFormatInfo2KHR32.samples"></member>
@@ -6593,7 +7012,9 @@
     <member name="F:VkPhysicalDeviceSparseImageFormatInfo2KHR32.tiling"></member>
     <member name="F:VkPhysicalDeviceSparseImageFormatInfo2KHR32.type"></member>
     <member name="F:VkPhysicalDeviceSparseImageFormatInfo2KHR32.usage"></member>
-    <member name="T:VkPhysicalDeviceSparseImageFormatInfo2KHR64"></member>
+    <member name="T:VkPhysicalDeviceSparseImageFormatInfo2KHR64">
+      <summary>See: <see cref="T:IVkPhysicalDeviceSparseImageFormatInfo2KHR" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceSparseImageFormatInfo2KHR64.format"></member>
     <member name="F:VkPhysicalDeviceSparseImageFormatInfo2KHR64.pNext"></member>
     <member name="F:VkPhysicalDeviceSparseImageFormatInfo2KHR64.samples"></member>
@@ -6609,11 +7030,15 @@
     <member name="F:VkPhysicalDeviceSparseProperties.residencyStandard2DBlockShape"></member>
     <member name="F:VkPhysicalDeviceSparseProperties.residencyStandard2DMultisampleBlockShape"></member>
     <member name="F:VkPhysicalDeviceSparseProperties.residencyStandard3DBlockShape"></member>
-    <member name="T:VkPhysicalDeviceSurfaceInfo2KHR32"></member>
+    <member name="T:VkPhysicalDeviceSurfaceInfo2KHR32">
+      <summary>See: <see cref="T:IVkPhysicalDeviceSurfaceInfo2KHR" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceSurfaceInfo2KHR32.pNext"></member>
     <member name="F:VkPhysicalDeviceSurfaceInfo2KHR32.sType"></member>
     <member name="F:VkPhysicalDeviceSurfaceInfo2KHR32.surface"></member>
-    <member name="T:VkPhysicalDeviceSurfaceInfo2KHR64"></member>
+    <member name="T:VkPhysicalDeviceSurfaceInfo2KHR64">
+      <summary>See: <see cref="T:IVkPhysicalDeviceSurfaceInfo2KHR" /></summary>
+    </member>
     <member name="F:VkPhysicalDeviceSurfaceInfo2KHR64.pNext"></member>
     <member name="F:VkPhysicalDeviceSurfaceInfo2KHR64.sType"></member>
     <member name="F:VkPhysicalDeviceSurfaceInfo2KHR64.surface"></member>
@@ -6647,7 +7072,7 @@
     <member name="T:VkPipelineCacheCreateFlags"></member>
     <member name="F:VkPipelineCacheCreateFlags.value__"></member>
     <member name="T:VkPipelineCacheCreateInfo32">
-      <summary>Structure specifying parameters of a newly created pipeline cache</summary>
+      <summary>See: <see cref="T:IVkPipelineCacheCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineCacheCreateInfo32.flags"></member>
     <member name="F:VkPipelineCacheCreateInfo32.initialDataSize"></member>
@@ -6655,7 +7080,7 @@
     <member name="F:VkPipelineCacheCreateInfo32.pNext"></member>
     <member name="F:VkPipelineCacheCreateInfo32.sType"></member>
     <member name="T:VkPipelineCacheCreateInfo64">
-      <summary>Structure specifying parameters of a newly created pipeline cache</summary>
+      <summary>See: <see cref="T:IVkPipelineCacheCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineCacheCreateInfo64.flags"></member>
     <member name="F:VkPipelineCacheCreateInfo64.initialDataSize"></member>
@@ -6669,6 +7094,22 @@
     <member name="F:VkPipelineCacheHeaderVersion.VK_PIPELINE_CACHE_HEADER_VERSION_MAX_ENUM"></member>
     <member name="F:VkPipelineCacheHeaderVersion.VK_PIPELINE_CACHE_HEADER_VERSION_ONE"></member>
     <member name="F:VkPipelineCacheHeaderVersion.VK_PIPELINE_CACHE_HEADER_VERSION_RANGE_SIZE"></member>
+    <member name="T:VkPipelineColorBlendAdvancedStateCreateInfoEXT32">
+      <summary>See: <see cref="T:IVkPipelineColorBlendAdvancedStateCreateInfoEXT" /></summary>
+    </member>
+    <member name="F:VkPipelineColorBlendAdvancedStateCreateInfoEXT32.blendOverlap"></member>
+    <member name="F:VkPipelineColorBlendAdvancedStateCreateInfoEXT32.dstPremultiplied"></member>
+    <member name="F:VkPipelineColorBlendAdvancedStateCreateInfoEXT32.pNext"></member>
+    <member name="F:VkPipelineColorBlendAdvancedStateCreateInfoEXT32.srcPremultiplied"></member>
+    <member name="F:VkPipelineColorBlendAdvancedStateCreateInfoEXT32.sType"></member>
+    <member name="T:VkPipelineColorBlendAdvancedStateCreateInfoEXT64">
+      <summary>See: <see cref="T:IVkPipelineColorBlendAdvancedStateCreateInfoEXT" /></summary>
+    </member>
+    <member name="F:VkPipelineColorBlendAdvancedStateCreateInfoEXT64.blendOverlap"></member>
+    <member name="F:VkPipelineColorBlendAdvancedStateCreateInfoEXT64.dstPremultiplied"></member>
+    <member name="F:VkPipelineColorBlendAdvancedStateCreateInfoEXT64.pNext"></member>
+    <member name="F:VkPipelineColorBlendAdvancedStateCreateInfoEXT64.srcPremultiplied"></member>
+    <member name="F:VkPipelineColorBlendAdvancedStateCreateInfoEXT64.sType"></member>
     <member name="T:VkPipelineColorBlendAttachmentState">
       <summary>Structure specifying a pipeline color blend attachment state</summary>
     </member>
@@ -6683,7 +7124,7 @@
     <member name="T:VkPipelineColorBlendStateCreateFlags"></member>
     <member name="F:VkPipelineColorBlendStateCreateFlags.value__"></member>
     <member name="T:VkPipelineColorBlendStateCreateInfo32">
-      <summary>Structure specifying parameters of a newly created pipeline color blend state</summary>
+      <summary>See: <see cref="T:IVkPipelineColorBlendStateCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineColorBlendStateCreateInfo32.attachmentCount"></member>
     <member name="M:VkPipelineColorBlendStateCreateInfo32.blendConstants(System.Int32)"></member>
@@ -6694,7 +7135,7 @@
     <member name="F:VkPipelineColorBlendStateCreateInfo32.pNext"></member>
     <member name="F:VkPipelineColorBlendStateCreateInfo32.sType"></member>
     <member name="T:VkPipelineColorBlendStateCreateInfo64">
-      <summary>Structure specifying parameters of a newly created pipeline color blend state</summary>
+      <summary>See: <see cref="T:IVkPipelineColorBlendStateCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineColorBlendStateCreateInfo64.attachmentCount"></member>
     <member name="M:VkPipelineColorBlendStateCreateInfo64.blendConstants(System.Int32)"></member>
@@ -6704,6 +7145,46 @@
     <member name="F:VkPipelineColorBlendStateCreateInfo64.pAttachments"></member>
     <member name="F:VkPipelineColorBlendStateCreateInfo64.pNext"></member>
     <member name="F:VkPipelineColorBlendStateCreateInfo64.sType"></member>
+    <member name="T:VkPipelineCoverageModulationStateCreateFlagsNV"></member>
+    <member name="F:VkPipelineCoverageModulationStateCreateFlagsNV.value__"></member>
+    <member name="T:VkPipelineCoverageModulationStateCreateInfoNV32">
+      <summary>See: <see cref="T:IVkPipelineCoverageModulationStateCreateInfoNV" /></summary>
+    </member>
+    <member name="F:VkPipelineCoverageModulationStateCreateInfoNV32.coverageModulationMode"></member>
+    <member name="F:VkPipelineCoverageModulationStateCreateInfoNV32.coverageModulationTableCount"></member>
+    <member name="F:VkPipelineCoverageModulationStateCreateInfoNV32.coverageModulationTableEnable"></member>
+    <member name="F:VkPipelineCoverageModulationStateCreateInfoNV32.flags"></member>
+    <member name="F:VkPipelineCoverageModulationStateCreateInfoNV32.pCoverageModulationTable"></member>
+    <member name="F:VkPipelineCoverageModulationStateCreateInfoNV32.pNext"></member>
+    <member name="F:VkPipelineCoverageModulationStateCreateInfoNV32.sType"></member>
+    <member name="T:VkPipelineCoverageModulationStateCreateInfoNV64">
+      <summary>See: <see cref="T:IVkPipelineCoverageModulationStateCreateInfoNV" /></summary>
+    </member>
+    <member name="F:VkPipelineCoverageModulationStateCreateInfoNV64.coverageModulationMode"></member>
+    <member name="F:VkPipelineCoverageModulationStateCreateInfoNV64.coverageModulationTableCount"></member>
+    <member name="F:VkPipelineCoverageModulationStateCreateInfoNV64.coverageModulationTableEnable"></member>
+    <member name="F:VkPipelineCoverageModulationStateCreateInfoNV64.flags"></member>
+    <member name="F:VkPipelineCoverageModulationStateCreateInfoNV64.pCoverageModulationTable"></member>
+    <member name="F:VkPipelineCoverageModulationStateCreateInfoNV64.pNext"></member>
+    <member name="F:VkPipelineCoverageModulationStateCreateInfoNV64.sType"></member>
+    <member name="T:VkPipelineCoverageToColorStateCreateFlagsNV"></member>
+    <member name="F:VkPipelineCoverageToColorStateCreateFlagsNV.value__"></member>
+    <member name="T:VkPipelineCoverageToColorStateCreateInfoNV32">
+      <summary>See: <see cref="T:IVkPipelineCoverageToColorStateCreateInfoNV" /></summary>
+    </member>
+    <member name="F:VkPipelineCoverageToColorStateCreateInfoNV32.coverageToColorEnable"></member>
+    <member name="F:VkPipelineCoverageToColorStateCreateInfoNV32.coverageToColorLocation"></member>
+    <member name="F:VkPipelineCoverageToColorStateCreateInfoNV32.flags"></member>
+    <member name="F:VkPipelineCoverageToColorStateCreateInfoNV32.pNext"></member>
+    <member name="F:VkPipelineCoverageToColorStateCreateInfoNV32.sType"></member>
+    <member name="T:VkPipelineCoverageToColorStateCreateInfoNV64">
+      <summary>See: <see cref="T:IVkPipelineCoverageToColorStateCreateInfoNV" /></summary>
+    </member>
+    <member name="F:VkPipelineCoverageToColorStateCreateInfoNV64.coverageToColorEnable"></member>
+    <member name="F:VkPipelineCoverageToColorStateCreateInfoNV64.coverageToColorLocation"></member>
+    <member name="F:VkPipelineCoverageToColorStateCreateInfoNV64.flags"></member>
+    <member name="F:VkPipelineCoverageToColorStateCreateInfoNV64.pNext"></member>
+    <member name="F:VkPipelineCoverageToColorStateCreateInfoNV64.sType"></member>
     <member name="T:VkPipelineCreateFlags"></member>
     <member name="F:VkPipelineCreateFlags.value__"></member>
     <member name="F:VkPipelineCreateFlags.VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT"></member>
@@ -6715,7 +7196,7 @@
     <member name="T:VkPipelineDepthStencilStateCreateFlags"></member>
     <member name="F:VkPipelineDepthStencilStateCreateFlags.value__"></member>
     <member name="T:VkPipelineDepthStencilStateCreateInfo32">
-      <summary>Structure specifying parameters of a newly created pipeline depth stencil state</summary>
+      <summary>See: <see cref="T:IVkPipelineDepthStencilStateCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineDepthStencilStateCreateInfo32.back"></member>
     <member name="F:VkPipelineDepthStencilStateCreateInfo32.depthBoundsTestEnable"></member>
@@ -6730,7 +7211,7 @@
     <member name="F:VkPipelineDepthStencilStateCreateInfo32.stencilTestEnable"></member>
     <member name="F:VkPipelineDepthStencilStateCreateInfo32.sType"></member>
     <member name="T:VkPipelineDepthStencilStateCreateInfo64">
-      <summary>Structure specifying parameters of a newly created pipeline depth stencil state</summary>
+      <summary>See: <see cref="T:IVkPipelineDepthStencilStateCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineDepthStencilStateCreateInfo64.back"></member>
     <member name="F:VkPipelineDepthStencilStateCreateInfo64.depthBoundsTestEnable"></member>
@@ -6746,14 +7227,18 @@
     <member name="F:VkPipelineDepthStencilStateCreateInfo64.sType"></member>
     <member name="T:VkPipelineDiscardRectangleStateCreateFlagsEXT"></member>
     <member name="F:VkPipelineDiscardRectangleStateCreateFlagsEXT.value__"></member>
-    <member name="T:VkPipelineDiscardRectangleStateCreateInfoEXT32"></member>
+    <member name="T:VkPipelineDiscardRectangleStateCreateInfoEXT32">
+      <summary>See: <see cref="T:IVkPipelineDiscardRectangleStateCreateInfoEXT" /></summary>
+    </member>
     <member name="F:VkPipelineDiscardRectangleStateCreateInfoEXT32.discardRectangleCount"></member>
     <member name="F:VkPipelineDiscardRectangleStateCreateInfoEXT32.discardRectangleMode"></member>
     <member name="F:VkPipelineDiscardRectangleStateCreateInfoEXT32.flags"></member>
     <member name="F:VkPipelineDiscardRectangleStateCreateInfoEXT32.pDiscardRectangles"></member>
     <member name="F:VkPipelineDiscardRectangleStateCreateInfoEXT32.pNext"></member>
     <member name="F:VkPipelineDiscardRectangleStateCreateInfoEXT32.sType"></member>
-    <member name="T:VkPipelineDiscardRectangleStateCreateInfoEXT64"></member>
+    <member name="T:VkPipelineDiscardRectangleStateCreateInfoEXT64">
+      <summary>See: <see cref="T:IVkPipelineDiscardRectangleStateCreateInfoEXT" /></summary>
+    </member>
     <member name="F:VkPipelineDiscardRectangleStateCreateInfoEXT64.discardRectangleCount"></member>
     <member name="F:VkPipelineDiscardRectangleStateCreateInfoEXT64.discardRectangleMode"></member>
     <member name="F:VkPipelineDiscardRectangleStateCreateInfoEXT64.flags"></member>
@@ -6763,7 +7248,7 @@
     <member name="T:VkPipelineDynamicStateCreateFlags"></member>
     <member name="F:VkPipelineDynamicStateCreateFlags.value__"></member>
     <member name="T:VkPipelineDynamicStateCreateInfo32">
-      <summary>Structure specifying parameters of a newly created pipeline dynamic state</summary>
+      <summary>See: <see cref="T:IVkPipelineDynamicStateCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineDynamicStateCreateInfo32.dynamicStateCount"></member>
     <member name="F:VkPipelineDynamicStateCreateInfo32.flags"></member>
@@ -6771,7 +7256,7 @@
     <member name="F:VkPipelineDynamicStateCreateInfo32.pNext"></member>
     <member name="F:VkPipelineDynamicStateCreateInfo32.sType"></member>
     <member name="T:VkPipelineDynamicStateCreateInfo64">
-      <summary>Structure specifying parameters of a newly created pipeline dynamic state</summary>
+      <summary>See: <see cref="T:IVkPipelineDynamicStateCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineDynamicStateCreateInfo64.dynamicStateCount"></member>
     <member name="F:VkPipelineDynamicStateCreateInfo64.flags"></member>
@@ -6781,7 +7266,7 @@
     <member name="T:VkPipelineInputAssemblyStateCreateFlags"></member>
     <member name="F:VkPipelineInputAssemblyStateCreateFlags.value__"></member>
     <member name="T:VkPipelineInputAssemblyStateCreateInfo32">
-      <summary>Structure specifying parameters of a newly created pipeline input assembly state</summary>
+      <summary>See: <see cref="T:IVkPipelineInputAssemblyStateCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineInputAssemblyStateCreateInfo32.flags"></member>
     <member name="F:VkPipelineInputAssemblyStateCreateInfo32.pNext"></member>
@@ -6789,7 +7274,7 @@
     <member name="F:VkPipelineInputAssemblyStateCreateInfo32.sType"></member>
     <member name="F:VkPipelineInputAssemblyStateCreateInfo32.topology"></member>
     <member name="T:VkPipelineInputAssemblyStateCreateInfo64">
-      <summary>Structure specifying parameters of a newly created pipeline input assembly state</summary>
+      <summary>See: <see cref="T:IVkPipelineInputAssemblyStateCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineInputAssemblyStateCreateInfo64.flags"></member>
     <member name="F:VkPipelineInputAssemblyStateCreateInfo64.pNext"></member>
@@ -6803,7 +7288,7 @@
     <member name="T:VkPipelineLayoutCreateFlags"></member>
     <member name="F:VkPipelineLayoutCreateFlags.value__"></member>
     <member name="T:VkPipelineLayoutCreateInfo32">
-      <summary>Structure specifying the parameters of a newly created pipeline layout object</summary>
+      <summary>See: <see cref="T:IVkPipelineLayoutCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineLayoutCreateInfo32.flags"></member>
     <member name="F:VkPipelineLayoutCreateInfo32.pNext"></member>
@@ -6813,7 +7298,7 @@
     <member name="F:VkPipelineLayoutCreateInfo32.setLayoutCount"></member>
     <member name="F:VkPipelineLayoutCreateInfo32.sType"></member>
     <member name="T:VkPipelineLayoutCreateInfo64">
-      <summary>Structure specifying the parameters of a newly created pipeline layout object</summary>
+      <summary>See: <see cref="T:IVkPipelineLayoutCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineLayoutCreateInfo64.flags"></member>
     <member name="F:VkPipelineLayoutCreateInfo64.pNext"></member>
@@ -6825,7 +7310,7 @@
     <member name="T:VkPipelineMultisampleStateCreateFlags"></member>
     <member name="F:VkPipelineMultisampleStateCreateFlags.value__"></member>
     <member name="T:VkPipelineMultisampleStateCreateInfo32">
-      <summary>Structure specifying parameters of a newly created pipeline multisample state</summary>
+      <summary>See: <see cref="T:IVkPipelineMultisampleStateCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineMultisampleStateCreateInfo32.alphaToCoverageEnable"></member>
     <member name="F:VkPipelineMultisampleStateCreateInfo32.alphaToOneEnable"></member>
@@ -6837,7 +7322,7 @@
     <member name="F:VkPipelineMultisampleStateCreateInfo32.sampleShadingEnable"></member>
     <member name="F:VkPipelineMultisampleStateCreateInfo32.sType"></member>
     <member name="T:VkPipelineMultisampleStateCreateInfo64">
-      <summary>Structure specifying parameters of a newly created pipeline multisample state</summary>
+      <summary>See: <see cref="T:IVkPipelineMultisampleStateCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineMultisampleStateCreateInfo64.alphaToCoverageEnable"></member>
     <member name="F:VkPipelineMultisampleStateCreateInfo64.alphaToOneEnable"></member>
@@ -6851,7 +7336,7 @@
     <member name="T:VkPipelineRasterizationStateCreateFlags"></member>
     <member name="F:VkPipelineRasterizationStateCreateFlags.value__"></member>
     <member name="T:VkPipelineRasterizationStateCreateInfo32">
-      <summary>Structure specifying parameters of a newly created pipeline rasterization state</summary>
+      <summary>See: <see cref="T:IVkPipelineRasterizationStateCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineRasterizationStateCreateInfo32.cullMode"></member>
     <member name="F:VkPipelineRasterizationStateCreateInfo32.depthBiasClamp"></member>
@@ -6867,7 +7352,7 @@
     <member name="F:VkPipelineRasterizationStateCreateInfo32.rasterizerDiscardEnable"></member>
     <member name="F:VkPipelineRasterizationStateCreateInfo32.sType"></member>
     <member name="T:VkPipelineRasterizationStateCreateInfo64">
-      <summary>Structure specifying parameters of a newly created pipeline rasterization state</summary>
+      <summary>See: <see cref="T:IVkPipelineRasterizationStateCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineRasterizationStateCreateInfo64.cullMode"></member>
     <member name="F:VkPipelineRasterizationStateCreateInfo64.depthBiasClamp"></member>
@@ -6882,18 +7367,22 @@
     <member name="F:VkPipelineRasterizationStateCreateInfo64.polygonMode"></member>
     <member name="F:VkPipelineRasterizationStateCreateInfo64.rasterizerDiscardEnable"></member>
     <member name="F:VkPipelineRasterizationStateCreateInfo64.sType"></member>
-    <member name="T:VkPipelineRasterizationStateRasterizationOrderAMD32"></member>
+    <member name="T:VkPipelineRasterizationStateRasterizationOrderAMD32">
+      <summary>See: <see cref="T:IVkPipelineRasterizationStateRasterizationOrderAMD" /></summary>
+    </member>
     <member name="F:VkPipelineRasterizationStateRasterizationOrderAMD32.pNext"></member>
     <member name="F:VkPipelineRasterizationStateRasterizationOrderAMD32.rasterizationOrder"></member>
     <member name="F:VkPipelineRasterizationStateRasterizationOrderAMD32.sType"></member>
-    <member name="T:VkPipelineRasterizationStateRasterizationOrderAMD64"></member>
+    <member name="T:VkPipelineRasterizationStateRasterizationOrderAMD64">
+      <summary>See: <see cref="T:IVkPipelineRasterizationStateRasterizationOrderAMD" /></summary>
+    </member>
     <member name="F:VkPipelineRasterizationStateRasterizationOrderAMD64.pNext"></member>
     <member name="F:VkPipelineRasterizationStateRasterizationOrderAMD64.rasterizationOrder"></member>
     <member name="F:VkPipelineRasterizationStateRasterizationOrderAMD64.sType"></member>
     <member name="T:VkPipelineShaderStageCreateFlags"></member>
     <member name="F:VkPipelineShaderStageCreateFlags.value__"></member>
     <member name="T:VkPipelineShaderStageCreateInfo32">
-      <summary>Structure specifying parameters of a newly created pipeline shader stage</summary>
+      <summary>See: <see cref="T:IVkPipelineShaderStageCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineShaderStageCreateInfo32.flags"></member>
     <member name="F:VkPipelineShaderStageCreateInfo32.module"></member>
@@ -6903,7 +7392,7 @@
     <member name="F:VkPipelineShaderStageCreateInfo32.stage"></member>
     <member name="F:VkPipelineShaderStageCreateInfo32.sType"></member>
     <member name="T:VkPipelineShaderStageCreateInfo64">
-      <summary>Structure specifying parameters of a newly created pipeline shader stage</summary>
+      <summary>See: <see cref="T:IVkPipelineShaderStageCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineShaderStageCreateInfo64.flags"></member>
     <member name="F:VkPipelineShaderStageCreateInfo64.module"></member>
@@ -6936,14 +7425,14 @@
     <member name="T:VkPipelineTessellationStateCreateFlags"></member>
     <member name="F:VkPipelineTessellationStateCreateFlags.value__"></member>
     <member name="T:VkPipelineTessellationStateCreateInfo32">
-      <summary>Structure specifying parameters of a newly created pipeline tessellation state</summary>
+      <summary>See: <see cref="T:IVkPipelineTessellationStateCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineTessellationStateCreateInfo32.flags"></member>
     <member name="F:VkPipelineTessellationStateCreateInfo32.patchControlPoints"></member>
     <member name="F:VkPipelineTessellationStateCreateInfo32.pNext"></member>
     <member name="F:VkPipelineTessellationStateCreateInfo32.sType"></member>
     <member name="T:VkPipelineTessellationStateCreateInfo64">
-      <summary>Structure specifying parameters of a newly created pipeline tessellation state</summary>
+      <summary>See: <see cref="T:IVkPipelineTessellationStateCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineTessellationStateCreateInfo64.flags"></member>
     <member name="F:VkPipelineTessellationStateCreateInfo64.patchControlPoints"></member>
@@ -6952,7 +7441,7 @@
     <member name="T:VkPipelineVertexInputStateCreateFlags"></member>
     <member name="F:VkPipelineVertexInputStateCreateFlags.value__"></member>
     <member name="T:VkPipelineVertexInputStateCreateInfo32">
-      <summary>Structure specifying parameters of a newly created pipeline vertex input state</summary>
+      <summary>See: <see cref="T:IVkPipelineVertexInputStateCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineVertexInputStateCreateInfo32.flags"></member>
     <member name="F:VkPipelineVertexInputStateCreateInfo32.pNext"></member>
@@ -6962,7 +7451,7 @@
     <member name="F:VkPipelineVertexInputStateCreateInfo32.vertexAttributeDescriptionCount"></member>
     <member name="F:VkPipelineVertexInputStateCreateInfo32.vertexBindingDescriptionCount"></member>
     <member name="T:VkPipelineVertexInputStateCreateInfo64">
-      <summary>Structure specifying parameters of a newly created pipeline vertex input state</summary>
+      <summary>See: <see cref="T:IVkPipelineVertexInputStateCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineVertexInputStateCreateInfo64.flags"></member>
     <member name="F:VkPipelineVertexInputStateCreateInfo64.pNext"></member>
@@ -6974,7 +7463,7 @@
     <member name="T:VkPipelineViewportStateCreateFlags"></member>
     <member name="F:VkPipelineViewportStateCreateFlags.value__"></member>
     <member name="T:VkPipelineViewportStateCreateInfo32">
-      <summary>Structure specifying parameters of a newly created pipeline viewport state</summary>
+      <summary>See: <see cref="T:IVkPipelineViewportStateCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineViewportStateCreateInfo32.flags"></member>
     <member name="F:VkPipelineViewportStateCreateInfo32.pNext"></member>
@@ -6984,7 +7473,7 @@
     <member name="F:VkPipelineViewportStateCreateInfo32.sType"></member>
     <member name="F:VkPipelineViewportStateCreateInfo32.viewportCount"></member>
     <member name="T:VkPipelineViewportStateCreateInfo64">
-      <summary>Structure specifying parameters of a newly created pipeline viewport state</summary>
+      <summary>See: <see cref="T:IVkPipelineViewportStateCreateInfo" /></summary>
     </member>
     <member name="F:VkPipelineViewportStateCreateInfo64.flags"></member>
     <member name="F:VkPipelineViewportStateCreateInfo64.pNext"></member>
@@ -6995,25 +7484,33 @@
     <member name="F:VkPipelineViewportStateCreateInfo64.viewportCount"></member>
     <member name="T:VkPipelineViewportSwizzleStateCreateFlagsNV"></member>
     <member name="F:VkPipelineViewportSwizzleStateCreateFlagsNV.value__"></member>
-    <member name="T:VkPipelineViewportSwizzleStateCreateInfoNV32"></member>
+    <member name="T:VkPipelineViewportSwizzleStateCreateInfoNV32">
+      <summary>See: <see cref="T:IVkPipelineViewportSwizzleStateCreateInfoNV" /></summary>
+    </member>
     <member name="F:VkPipelineViewportSwizzleStateCreateInfoNV32.flags"></member>
     <member name="F:VkPipelineViewportSwizzleStateCreateInfoNV32.pNext"></member>
     <member name="F:VkPipelineViewportSwizzleStateCreateInfoNV32.pViewportSwizzles"></member>
     <member name="F:VkPipelineViewportSwizzleStateCreateInfoNV32.sType"></member>
     <member name="F:VkPipelineViewportSwizzleStateCreateInfoNV32.viewportCount"></member>
-    <member name="T:VkPipelineViewportSwizzleStateCreateInfoNV64"></member>
+    <member name="T:VkPipelineViewportSwizzleStateCreateInfoNV64">
+      <summary>See: <see cref="T:IVkPipelineViewportSwizzleStateCreateInfoNV" /></summary>
+    </member>
     <member name="F:VkPipelineViewportSwizzleStateCreateInfoNV64.flags"></member>
     <member name="F:VkPipelineViewportSwizzleStateCreateInfoNV64.pNext"></member>
     <member name="F:VkPipelineViewportSwizzleStateCreateInfoNV64.pViewportSwizzles"></member>
     <member name="F:VkPipelineViewportSwizzleStateCreateInfoNV64.sType"></member>
     <member name="F:VkPipelineViewportSwizzleStateCreateInfoNV64.viewportCount"></member>
-    <member name="T:VkPipelineViewportWScalingStateCreateInfoNV32"></member>
+    <member name="T:VkPipelineViewportWScalingStateCreateInfoNV32">
+      <summary>See: <see cref="T:IVkPipelineViewportWScalingStateCreateInfoNV" /></summary>
+    </member>
     <member name="F:VkPipelineViewportWScalingStateCreateInfoNV32.pNext"></member>
     <member name="F:VkPipelineViewportWScalingStateCreateInfoNV32.pViewportWScalings"></member>
     <member name="F:VkPipelineViewportWScalingStateCreateInfoNV32.sType"></member>
     <member name="F:VkPipelineViewportWScalingStateCreateInfoNV32.viewportCount"></member>
     <member name="F:VkPipelineViewportWScalingStateCreateInfoNV32.viewportWScalingEnable"></member>
-    <member name="T:VkPipelineViewportWScalingStateCreateInfoNV64"></member>
+    <member name="T:VkPipelineViewportWScalingStateCreateInfoNV64">
+      <summary>See: <see cref="T:IVkPipelineViewportWScalingStateCreateInfoNV" /></summary>
+    </member>
     <member name="F:VkPipelineViewportWScalingStateCreateInfoNV64.pNext"></member>
     <member name="F:VkPipelineViewportWScalingStateCreateInfoNV64.pViewportWScalings"></member>
     <member name="F:VkPipelineViewportWScalingStateCreateInfoNV64.sType"></member>
@@ -7024,11 +7521,14 @@
     <member name="F:VkPolygonMode.VK_POLYGON_MODE_BEGIN_RANGE"></member>
     <member name="F:VkPolygonMode.VK_POLYGON_MODE_END_RANGE"></member>
     <member name="F:VkPolygonMode.VK_POLYGON_MODE_FILL"></member>
+    <member name="F:VkPolygonMode.VK_POLYGON_MODE_FILL_RECTANGLE_NV"></member>
     <member name="F:VkPolygonMode.VK_POLYGON_MODE_LINE"></member>
     <member name="F:VkPolygonMode.VK_POLYGON_MODE_MAX_ENUM"></member>
     <member name="F:VkPolygonMode.VK_POLYGON_MODE_POINT"></member>
     <member name="F:VkPolygonMode.VK_POLYGON_MODE_RANGE_SIZE"></member>
-    <member name="T:VkPresentInfoKHR32"></member>
+    <member name="T:VkPresentInfoKHR32">
+      <summary>See: <see cref="T:IVkPresentInfoKHR" /></summary>
+    </member>
     <member name="F:VkPresentInfoKHR32.pImageIndices"></member>
     <member name="F:VkPresentInfoKHR32.pNext"></member>
     <member name="F:VkPresentInfoKHR32.pResults"></member>
@@ -7037,7 +7537,9 @@
     <member name="F:VkPresentInfoKHR32.sType"></member>
     <member name="F:VkPresentInfoKHR32.swapchainCount"></member>
     <member name="F:VkPresentInfoKHR32.waitSemaphoreCount"></member>
-    <member name="T:VkPresentInfoKHR64"></member>
+    <member name="T:VkPresentInfoKHR64">
+      <summary>See: <see cref="T:IVkPresentInfoKHR" /></summary>
+    </member>
     <member name="F:VkPresentInfoKHR64.pImageIndices"></member>
     <member name="F:VkPresentInfoKHR64.pNext"></member>
     <member name="F:VkPresentInfoKHR64.pResults"></member>
@@ -7058,18 +7560,26 @@
     <member name="F:VkPresentModeKHR.VK_PRESENT_MODE_RANGE_SIZE_KHR"></member>
     <member name="F:VkPresentModeKHR.VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR"></member>
     <member name="F:VkPresentModeKHR.VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR"></member>
-    <member name="T:VkPresentRegionKHR32"></member>
+    <member name="T:VkPresentRegionKHR32">
+      <summary>See: <see cref="T:IVkPresentRegionKHR" /></summary>
+    </member>
     <member name="F:VkPresentRegionKHR32.pRectangles"></member>
     <member name="F:VkPresentRegionKHR32.rectangleCount"></member>
-    <member name="T:VkPresentRegionKHR64"></member>
+    <member name="T:VkPresentRegionKHR64">
+      <summary>See: <see cref="T:IVkPresentRegionKHR" /></summary>
+    </member>
     <member name="F:VkPresentRegionKHR64.pRectangles"></member>
     <member name="F:VkPresentRegionKHR64.rectangleCount"></member>
-    <member name="T:VkPresentRegionsKHR32"></member>
+    <member name="T:VkPresentRegionsKHR32">
+      <summary>See: <see cref="T:IVkPresentRegionsKHR" /></summary>
+    </member>
     <member name="F:VkPresentRegionsKHR32.pNext"></member>
     <member name="F:VkPresentRegionsKHR32.pRegions"></member>
     <member name="F:VkPresentRegionsKHR32.sType"></member>
     <member name="F:VkPresentRegionsKHR32.swapchainCount"></member>
-    <member name="T:VkPresentRegionsKHR64"></member>
+    <member name="T:VkPresentRegionsKHR64">
+      <summary>See: <see cref="T:IVkPresentRegionsKHR" /></summary>
+    </member>
     <member name="F:VkPresentRegionsKHR64.pNext"></member>
     <member name="F:VkPresentRegionsKHR64.pRegions"></member>
     <member name="F:VkPresentRegionsKHR64.sType"></member>
@@ -7077,12 +7587,16 @@
     <member name="T:VkPresentTimeGOOGLE"></member>
     <member name="F:VkPresentTimeGOOGLE.desiredPresentTime"></member>
     <member name="F:VkPresentTimeGOOGLE.presentID"></member>
-    <member name="T:VkPresentTimesInfoGOOGLE32"></member>
+    <member name="T:VkPresentTimesInfoGOOGLE32">
+      <summary>See: <see cref="T:IVkPresentTimesInfoGOOGLE" /></summary>
+    </member>
     <member name="F:VkPresentTimesInfoGOOGLE32.pNext"></member>
     <member name="F:VkPresentTimesInfoGOOGLE32.pTimes"></member>
     <member name="F:VkPresentTimesInfoGOOGLE32.sType"></member>
     <member name="F:VkPresentTimesInfoGOOGLE32.swapchainCount"></member>
-    <member name="T:VkPresentTimesInfoGOOGLE64"></member>
+    <member name="T:VkPresentTimesInfoGOOGLE64">
+      <summary>See: <see cref="T:IVkPresentTimesInfoGOOGLE" /></summary>
+    </member>
     <member name="F:VkPresentTimesInfoGOOGLE64.pNext"></member>
     <member name="F:VkPresentTimesInfoGOOGLE64.pTimes"></member>
     <member name="F:VkPresentTimesInfoGOOGLE64.sType"></member>
@@ -7135,7 +7649,7 @@
     <member name="T:VkQueryPoolCreateFlags"></member>
     <member name="F:VkQueryPoolCreateFlags.value__"></member>
     <member name="T:VkQueryPoolCreateInfo32">
-      <summary>Structure specifying parameters of a newly created query pool</summary>
+      <summary>See: <see cref="T:IVkQueryPoolCreateInfo" /></summary>
     </member>
     <member name="F:VkQueryPoolCreateInfo32.flags"></member>
     <member name="F:VkQueryPoolCreateInfo32.pipelineStatistics"></member>
@@ -7144,7 +7658,7 @@
     <member name="F:VkQueryPoolCreateInfo32.queryType"></member>
     <member name="F:VkQueryPoolCreateInfo32.sType"></member>
     <member name="T:VkQueryPoolCreateInfo64">
-      <summary>Structure specifying parameters of a newly created query pool</summary>
+      <summary>See: <see cref="T:IVkQueryPoolCreateInfo" /></summary>
     </member>
     <member name="F:VkQueryPoolCreateInfo64.flags"></member>
     <member name="F:VkQueryPoolCreateInfo64.pipelineStatistics"></member>
@@ -7192,11 +7706,15 @@
     <member name="F:VkQueueFamilyProperties.queueCount"></member>
     <member name="F:VkQueueFamilyProperties.queueFlags"></member>
     <member name="F:VkQueueFamilyProperties.timestampValidBits"></member>
-    <member name="T:VkQueueFamilyProperties2KHR32"></member>
+    <member name="T:VkQueueFamilyProperties2KHR32">
+      <summary>See: <see cref="T:IVkQueueFamilyProperties2KHR" /></summary>
+    </member>
     <member name="F:VkQueueFamilyProperties2KHR32.pNext"></member>
     <member name="F:VkQueueFamilyProperties2KHR32.queueFamilyProperties"></member>
     <member name="F:VkQueueFamilyProperties2KHR32.sType"></member>
-    <member name="T:VkQueueFamilyProperties2KHR64"></member>
+    <member name="T:VkQueueFamilyProperties2KHR64">
+      <summary>See: <see cref="T:IVkQueueFamilyProperties2KHR" /></summary>
+    </member>
     <member name="F:VkQueueFamilyProperties2KHR64.pNext"></member>
     <member name="F:VkQueueFamilyProperties2KHR64.queueFamilyProperties"></member>
     <member name="F:VkQueueFamilyProperties2KHR64.sType"></member>
@@ -7312,7 +7830,7 @@
     </member>
     <member name="M:VkRenderPass.Cast(System.UInt64)"></member>
     <member name="T:VkRenderPassBeginInfo32">
-      <summary>Structure specifying render pass begin info</summary>
+      <summary>See: <see cref="T:IVkRenderPassBeginInfo" /></summary>
     </member>
     <member name="F:VkRenderPassBeginInfo32.clearValueCount"></member>
     <member name="F:VkRenderPassBeginInfo32.framebuffer"></member>
@@ -7322,7 +7840,7 @@
     <member name="F:VkRenderPassBeginInfo32.renderPass"></member>
     <member name="F:VkRenderPassBeginInfo32.sType"></member>
     <member name="T:VkRenderPassBeginInfo64">
-      <summary>Structure specifying render pass begin info</summary>
+      <summary>See: <see cref="T:IVkRenderPassBeginInfo" /></summary>
     </member>
     <member name="F:VkRenderPassBeginInfo64.clearValueCount"></member>
     <member name="F:VkRenderPassBeginInfo64.framebuffer"></member>
@@ -7334,7 +7852,7 @@
     <member name="T:VkRenderPassCreateFlags"></member>
     <member name="F:VkRenderPassCreateFlags.value__"></member>
     <member name="T:VkRenderPassCreateInfo32">
-      <summary>Structure specifying parameters of a newly created render pass</summary>
+      <summary>See: <see cref="T:IVkRenderPassCreateInfo" /></summary>
     </member>
     <member name="F:VkRenderPassCreateInfo32.attachmentCount"></member>
     <member name="F:VkRenderPassCreateInfo32.dependencyCount"></member>
@@ -7346,7 +7864,7 @@
     <member name="F:VkRenderPassCreateInfo32.sType"></member>
     <member name="F:VkRenderPassCreateInfo32.subpassCount"></member>
     <member name="T:VkRenderPassCreateInfo64">
-      <summary>Structure specifying parameters of a newly created render pass</summary>
+      <summary>See: <see cref="T:IVkRenderPassCreateInfo" /></summary>
     </member>
     <member name="F:VkRenderPassCreateInfo64.attachmentCount"></member>
     <member name="F:VkRenderPassCreateInfo64.dependencyCount"></member>
@@ -7357,7 +7875,9 @@
     <member name="F:VkRenderPassCreateInfo64.pSubpasses"></member>
     <member name="F:VkRenderPassCreateInfo64.sType"></member>
     <member name="F:VkRenderPassCreateInfo64.subpassCount"></member>
-    <member name="T:VkRenderPassMultiviewCreateInfoKHX32"></member>
+    <member name="T:VkRenderPassMultiviewCreateInfoKHX32">
+      <summary>See: <see cref="T:IVkRenderPassMultiviewCreateInfoKHX" /></summary>
+    </member>
     <member name="F:VkRenderPassMultiviewCreateInfoKHX32.correlationMaskCount"></member>
     <member name="F:VkRenderPassMultiviewCreateInfoKHX32.dependencyCount"></member>
     <member name="F:VkRenderPassMultiviewCreateInfoKHX32.pCorrelationMasks"></member>
@@ -7366,7 +7886,9 @@
     <member name="F:VkRenderPassMultiviewCreateInfoKHX32.pViewOffsets"></member>
     <member name="F:VkRenderPassMultiviewCreateInfoKHX32.sType"></member>
     <member name="F:VkRenderPassMultiviewCreateInfoKHX32.subpassCount"></member>
-    <member name="T:VkRenderPassMultiviewCreateInfoKHX64"></member>
+    <member name="T:VkRenderPassMultiviewCreateInfoKHX64">
+      <summary>See: <see cref="T:IVkRenderPassMultiviewCreateInfoKHX" /></summary>
+    </member>
     <member name="F:VkRenderPassMultiviewCreateInfoKHX64.correlationMaskCount"></member>
     <member name="F:VkRenderPassMultiviewCreateInfoKHX64.dependencyCount"></member>
     <member name="F:VkRenderPassMultiviewCreateInfoKHX64.pCorrelationMasks"></member>
@@ -7501,7 +8023,7 @@
     <member name="T:VkSamplerCreateFlags"></member>
     <member name="F:VkSamplerCreateFlags.value__"></member>
     <member name="T:VkSamplerCreateInfo32">
-      <summary>Structure specifying parameters of a newly created sampler</summary>
+      <summary>See: <see cref="T:IVkSamplerCreateInfo" /></summary>
     </member>
     <member name="F:VkSamplerCreateInfo32.addressModeU"></member>
     <member name="F:VkSamplerCreateInfo32.addressModeV"></member>
@@ -7522,7 +8044,7 @@
     <member name="F:VkSamplerCreateInfo32.sType"></member>
     <member name="F:VkSamplerCreateInfo32.unnormalizedCoordinates"></member>
     <member name="T:VkSamplerCreateInfo64">
-      <summary>Structure specifying parameters of a newly created sampler</summary>
+      <summary>See: <see cref="T:IVkSamplerCreateInfo" /></summary>
     </member>
     <member name="F:VkSamplerCreateInfo64.addressModeU"></member>
     <member name="F:VkSamplerCreateInfo64.addressModeV"></member>
@@ -7550,6 +8072,27 @@
     <member name="F:VkSamplerMipmapMode.VK_SAMPLER_MIPMAP_MODE_MAX_ENUM"></member>
     <member name="F:VkSamplerMipmapMode.VK_SAMPLER_MIPMAP_MODE_NEAREST"></member>
     <member name="F:VkSamplerMipmapMode.VK_SAMPLER_MIPMAP_MODE_RANGE_SIZE"></member>
+    <member name="T:VkSamplerReductionModeCreateInfoEXT32">
+      <summary>See: <see cref="T:IVkSamplerReductionModeCreateInfoEXT" /></summary>
+    </member>
+    <member name="F:VkSamplerReductionModeCreateInfoEXT32.pNext"></member>
+    <member name="F:VkSamplerReductionModeCreateInfoEXT32.reductionMode"></member>
+    <member name="F:VkSamplerReductionModeCreateInfoEXT32.sType"></member>
+    <member name="T:VkSamplerReductionModeCreateInfoEXT64">
+      <summary>See: <see cref="T:IVkSamplerReductionModeCreateInfoEXT" /></summary>
+    </member>
+    <member name="F:VkSamplerReductionModeCreateInfoEXT64.pNext"></member>
+    <member name="F:VkSamplerReductionModeCreateInfoEXT64.reductionMode"></member>
+    <member name="F:VkSamplerReductionModeCreateInfoEXT64.sType"></member>
+    <member name="T:VkSamplerReductionModeEXT"></member>
+    <member name="F:VkSamplerReductionModeEXT.value__"></member>
+    <member name="F:VkSamplerReductionModeEXT.VK_SAMPLER_REDUCTION_MODE_BEGIN_RANGE_EXT"></member>
+    <member name="F:VkSamplerReductionModeEXT.VK_SAMPLER_REDUCTION_MODE_END_RANGE_EXT"></member>
+    <member name="F:VkSamplerReductionModeEXT.VK_SAMPLER_REDUCTION_MODE_MAX_ENUM_EXT"></member>
+    <member name="F:VkSamplerReductionModeEXT.VK_SAMPLER_REDUCTION_MODE_MAX_EXT"></member>
+    <member name="F:VkSamplerReductionModeEXT.VK_SAMPLER_REDUCTION_MODE_MIN_EXT"></member>
+    <member name="F:VkSamplerReductionModeEXT.VK_SAMPLER_REDUCTION_MODE_RANGE_SIZE_EXT"></member>
+    <member name="F:VkSamplerReductionModeEXT.VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT"></member>
     <member name="T:VkSemaphore">
       <summary>Opaque handle to a semaphore object</summary>
     </member>
@@ -7557,13 +8100,13 @@
     <member name="T:VkSemaphoreCreateFlags"></member>
     <member name="F:VkSemaphoreCreateFlags.value__"></member>
     <member name="T:VkSemaphoreCreateInfo32">
-      <summary>Structure specifying parameters of a newly created semaphore</summary>
+      <summary>See: <see cref="T:IVkSemaphoreCreateInfo" /></summary>
     </member>
     <member name="F:VkSemaphoreCreateInfo32.flags"></member>
     <member name="F:VkSemaphoreCreateInfo32.pNext"></member>
     <member name="F:VkSemaphoreCreateInfo32.sType"></member>
     <member name="T:VkSemaphoreCreateInfo64">
-      <summary>Structure specifying parameters of a newly created semaphore</summary>
+      <summary>See: <see cref="T:IVkSemaphoreCreateInfo" /></summary>
     </member>
     <member name="F:VkSemaphoreCreateInfo64.flags"></member>
     <member name="F:VkSemaphoreCreateInfo64.pNext"></member>
@@ -7599,7 +8142,7 @@
     <member name="T:VkShaderModuleCreateFlags"></member>
     <member name="F:VkShaderModuleCreateFlags.value__"></member>
     <member name="T:VkShaderModuleCreateInfo32">
-      <summary>Structure specifying parameters of a newly created shader module</summary>
+      <summary>See: <see cref="T:IVkShaderModuleCreateInfo" /></summary>
     </member>
     <member name="F:VkShaderModuleCreateInfo32.codeSize"></member>
     <member name="F:VkShaderModuleCreateInfo32.flags"></member>
@@ -7607,7 +8150,7 @@
     <member name="F:VkShaderModuleCreateInfo32.pNext"></member>
     <member name="F:VkShaderModuleCreateInfo32.sType"></member>
     <member name="T:VkShaderModuleCreateInfo64">
-      <summary>Structure specifying parameters of a newly created shader module</summary>
+      <summary>See: <see cref="T:IVkShaderModuleCreateInfo" /></summary>
     </member>
     <member name="F:VkShaderModuleCreateInfo64.codeSize"></member>
     <member name="F:VkShaderModuleCreateInfo64.flags"></member>
@@ -7625,11 +8168,15 @@
     <member name="F:VkShaderStageFlags.VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT"></member>
     <member name="F:VkShaderStageFlags.VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT"></member>
     <member name="F:VkShaderStageFlags.VK_SHADER_STAGE_VERTEX_BIT"></member>
-    <member name="T:VkSharedPresentSurfaceCapabilitiesKHR32"></member>
+    <member name="T:VkSharedPresentSurfaceCapabilitiesKHR32">
+      <summary>See: <see cref="T:IVkSharedPresentSurfaceCapabilitiesKHR" /></summary>
+    </member>
     <member name="F:VkSharedPresentSurfaceCapabilitiesKHR32.pNext"></member>
     <member name="F:VkSharedPresentSurfaceCapabilitiesKHR32.sharedPresentSupportedUsageFlags"></member>
     <member name="F:VkSharedPresentSurfaceCapabilitiesKHR32.sType"></member>
-    <member name="T:VkSharedPresentSurfaceCapabilitiesKHR64"></member>
+    <member name="T:VkSharedPresentSurfaceCapabilitiesKHR64">
+      <summary>See: <see cref="T:IVkSharedPresentSurfaceCapabilitiesKHR" /></summary>
+    </member>
     <member name="F:VkSharedPresentSurfaceCapabilitiesKHR64.pNext"></member>
     <member name="F:VkSharedPresentSurfaceCapabilitiesKHR64.sharedPresentSupportedUsageFlags"></member>
     <member name="F:VkSharedPresentSurfaceCapabilitiesKHR64.sType"></member>
@@ -7642,13 +8189,13 @@
     <member name="F:VkSharingMode.VK_SHARING_MODE_MAX_ENUM"></member>
     <member name="F:VkSharingMode.VK_SHARING_MODE_RANGE_SIZE"></member>
     <member name="T:VkSparseBufferMemoryBindInfo32">
-      <summary>Structure specifying a sparse buffer memory bind operation</summary>
+      <summary>See: <see cref="T:IVkSparseBufferMemoryBindInfo" /></summary>
     </member>
     <member name="F:VkSparseBufferMemoryBindInfo32.bindCount"></member>
     <member name="F:VkSparseBufferMemoryBindInfo32.buffer"></member>
     <member name="F:VkSparseBufferMemoryBindInfo32.pBinds"></member>
     <member name="T:VkSparseBufferMemoryBindInfo64">
-      <summary>Structure specifying a sparse buffer memory bind operation</summary>
+      <summary>See: <see cref="T:IVkSparseBufferMemoryBindInfo" /></summary>
     </member>
     <member name="F:VkSparseBufferMemoryBindInfo64.bindCount"></member>
     <member name="F:VkSparseBufferMemoryBindInfo64.buffer"></member>
@@ -7665,11 +8212,15 @@
     <member name="F:VkSparseImageFormatProperties.aspectMask"></member>
     <member name="F:VkSparseImageFormatProperties.flags"></member>
     <member name="F:VkSparseImageFormatProperties.imageGranularity"></member>
-    <member name="T:VkSparseImageFormatProperties2KHR32"></member>
+    <member name="T:VkSparseImageFormatProperties2KHR32">
+      <summary>See: <see cref="T:IVkSparseImageFormatProperties2KHR" /></summary>
+    </member>
     <member name="F:VkSparseImageFormatProperties2KHR32.pNext"></member>
     <member name="F:VkSparseImageFormatProperties2KHR32.properties"></member>
     <member name="F:VkSparseImageFormatProperties2KHR32.sType"></member>
-    <member name="T:VkSparseImageFormatProperties2KHR64"></member>
+    <member name="T:VkSparseImageFormatProperties2KHR64">
+      <summary>See: <see cref="T:IVkSparseImageFormatProperties2KHR" /></summary>
+    </member>
     <member name="F:VkSparseImageFormatProperties2KHR64.pNext"></member>
     <member name="F:VkSparseImageFormatProperties2KHR64.properties"></member>
     <member name="F:VkSparseImageFormatProperties2KHR64.sType"></member>
@@ -7683,13 +8234,13 @@
     <member name="F:VkSparseImageMemoryBind.offset"></member>
     <member name="F:VkSparseImageMemoryBind.subresource"></member>
     <member name="T:VkSparseImageMemoryBindInfo32">
-      <summary>Structure specifying sparse image memory bind info</summary>
+      <summary>See: <see cref="T:IVkSparseImageMemoryBindInfo" /></summary>
     </member>
     <member name="F:VkSparseImageMemoryBindInfo32.bindCount"></member>
     <member name="F:VkSparseImageMemoryBindInfo32.image"></member>
     <member name="F:VkSparseImageMemoryBindInfo32.pBinds"></member>
     <member name="T:VkSparseImageMemoryBindInfo64">
-      <summary>Structure specifying sparse image memory bind info</summary>
+      <summary>See: <see cref="T:IVkSparseImageMemoryBindInfo" /></summary>
     </member>
     <member name="F:VkSparseImageMemoryBindInfo64.bindCount"></member>
     <member name="F:VkSparseImageMemoryBindInfo64.image"></member>
@@ -7703,13 +8254,13 @@
     <member name="F:VkSparseImageMemoryRequirements.imageMipTailSize"></member>
     <member name="F:VkSparseImageMemoryRequirements.imageMipTailStride"></member>
     <member name="T:VkSparseImageOpaqueMemoryBindInfo32">
-      <summary>Structure specifying sparse image opaque memory bind info</summary>
+      <summary>See: <see cref="T:IVkSparseImageOpaqueMemoryBindInfo" /></summary>
     </member>
     <member name="F:VkSparseImageOpaqueMemoryBindInfo32.bindCount"></member>
     <member name="F:VkSparseImageOpaqueMemoryBindInfo32.image"></member>
     <member name="F:VkSparseImageOpaqueMemoryBindInfo32.pBinds"></member>
     <member name="T:VkSparseImageOpaqueMemoryBindInfo64">
-      <summary>Structure specifying sparse image opaque memory bind info</summary>
+      <summary>See: <see cref="T:IVkSparseImageOpaqueMemoryBindInfo" /></summary>
     </member>
     <member name="F:VkSparseImageOpaqueMemoryBindInfo64.bindCount"></member>
     <member name="F:VkSparseImageOpaqueMemoryBindInfo64.image"></member>
@@ -7727,27 +8278,27 @@
     <member name="F:VkSparseMemoryBindFlags.VK_SPARSE_MEMORY_BIND_FLAG_BITS_MAX_ENUM"></member>
     <member name="F:VkSparseMemoryBindFlags.VK_SPARSE_MEMORY_BIND_METADATA_BIT"></member>
     <member name="T:VkSpecializationInfo32">
-      <summary>Structure specifying specialization info</summary>
+      <summary>See: <see cref="T:IVkSpecializationInfo" /></summary>
     </member>
     <member name="F:VkSpecializationInfo32.dataSize"></member>
     <member name="F:VkSpecializationInfo32.mapEntryCount"></member>
     <member name="F:VkSpecializationInfo32.pData"></member>
     <member name="F:VkSpecializationInfo32.pMapEntries"></member>
     <member name="T:VkSpecializationInfo64">
-      <summary>Structure specifying specialization info</summary>
+      <summary>See: <see cref="T:IVkSpecializationInfo" /></summary>
     </member>
     <member name="F:VkSpecializationInfo64.dataSize"></member>
     <member name="F:VkSpecializationInfo64.mapEntryCount"></member>
     <member name="F:VkSpecializationInfo64.pData"></member>
     <member name="F:VkSpecializationInfo64.pMapEntries"></member>
     <member name="T:VkSpecializationMapEntry32">
-      <summary>Structure specifying a specialization map entry</summary>
+      <summary>See: <see cref="T:IVkSpecializationMapEntry" /></summary>
     </member>
     <member name="F:VkSpecializationMapEntry32.constantID"></member>
     <member name="F:VkSpecializationMapEntry32.offset"></member>
     <member name="F:VkSpecializationMapEntry32.size"></member>
     <member name="T:VkSpecializationMapEntry64">
-      <summary>Structure specifying a specialization map entry</summary>
+      <summary>See: <see cref="T:IVkSpecializationMapEntry" /></summary>
     </member>
     <member name="F:VkSpecializationMapEntry64.constantID"></member>
     <member name="F:VkSpecializationMapEntry64.offset"></member>
@@ -7877,6 +8428,8 @@
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHX"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_MIR_SURFACE_CREATE_INFO_KHR"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_OBJECT_TABLE_CREATE_INFO_NVX"></member>
+    <member name="F:VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT"></member>
+    <member name="F:VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO_KHX"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO_KHX"></member>
@@ -7891,10 +8444,14 @@
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHX"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR"></member>
+    <member name="F:VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2_KHR"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO"></member>
+    <member name="F:VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO"></member>
+    <member name="F:VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV"></member>
+    <member name="F:VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO"></member>
@@ -7919,6 +8476,7 @@
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO_KHX"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO"></member>
+    <member name="F:VkStructureType.VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR"></member>
@@ -7940,7 +8498,7 @@
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR"></member>
     <member name="F:VkStructureType.VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR"></member>
     <member name="T:VkSubmitInfo32">
-      <summary>Structure specifying a queue submit operation</summary>
+      <summary>See: <see cref="T:IVkSubmitInfo" /></summary>
     </member>
     <member name="F:VkSubmitInfo32.commandBufferCount"></member>
     <member name="F:VkSubmitInfo32.pCommandBuffers"></member>
@@ -7952,7 +8510,7 @@
     <member name="F:VkSubmitInfo32.sType"></member>
     <member name="F:VkSubmitInfo32.waitSemaphoreCount"></member>
     <member name="T:VkSubmitInfo64">
-      <summary>Structure specifying a queue submit operation</summary>
+      <summary>See: <see cref="T:IVkSubmitInfo" /></summary>
     </member>
     <member name="F:VkSubmitInfo64.commandBufferCount"></member>
     <member name="F:VkSubmitInfo64.pCommandBuffers"></member>
@@ -7982,7 +8540,7 @@
     <member name="F:VkSubpassDependency.srcStageMask"></member>
     <member name="F:VkSubpassDependency.srcSubpass"></member>
     <member name="T:VkSubpassDescription32">
-      <summary>Structure specifying a subpass description</summary>
+      <summary>See: <see cref="T:IVkSubpassDescription" /></summary>
     </member>
     <member name="F:VkSubpassDescription32.colorAttachmentCount"></member>
     <member name="F:VkSubpassDescription32.flags"></member>
@@ -7995,7 +8553,7 @@
     <member name="F:VkSubpassDescription32.preserveAttachmentCount"></member>
     <member name="F:VkSubpassDescription32.pResolveAttachments"></member>
     <member name="T:VkSubpassDescription64">
-      <summary>Structure specifying a subpass description</summary>
+      <summary>See: <see cref="T:IVkSubpassDescription" /></summary>
     </member>
     <member name="F:VkSubpassDescription64.colorAttachmentCount"></member>
     <member name="F:VkSubpassDescription64.flags"></member>
@@ -8020,7 +8578,9 @@
     <member name="F:VkSubresourceLayout.offset"></member>
     <member name="F:VkSubresourceLayout.rowPitch"></member>
     <member name="F:VkSubresourceLayout.size"></member>
-    <member name="T:VkSurfaceCapabilities2EXT32"></member>
+    <member name="T:VkSurfaceCapabilities2EXT32">
+      <summary>See: <see cref="T:IVkSurfaceCapabilities2EXT" /></summary>
+    </member>
     <member name="F:VkSurfaceCapabilities2EXT32.currentExtent"></member>
     <member name="F:VkSurfaceCapabilities2EXT32.currentTransform"></member>
     <member name="F:VkSurfaceCapabilities2EXT32.maxImageArrayLayers"></member>
@@ -8034,7 +8594,9 @@
     <member name="F:VkSurfaceCapabilities2EXT32.supportedSurfaceCounters"></member>
     <member name="F:VkSurfaceCapabilities2EXT32.supportedTransforms"></member>
     <member name="F:VkSurfaceCapabilities2EXT32.supportedUsageFlags"></member>
-    <member name="T:VkSurfaceCapabilities2EXT64"></member>
+    <member name="T:VkSurfaceCapabilities2EXT64">
+      <summary>See: <see cref="T:IVkSurfaceCapabilities2EXT" /></summary>
+    </member>
     <member name="F:VkSurfaceCapabilities2EXT64.currentExtent"></member>
     <member name="F:VkSurfaceCapabilities2EXT64.currentTransform"></member>
     <member name="F:VkSurfaceCapabilities2EXT64.maxImageArrayLayers"></member>
@@ -8048,11 +8610,15 @@
     <member name="F:VkSurfaceCapabilities2EXT64.supportedSurfaceCounters"></member>
     <member name="F:VkSurfaceCapabilities2EXT64.supportedTransforms"></member>
     <member name="F:VkSurfaceCapabilities2EXT64.supportedUsageFlags"></member>
-    <member name="T:VkSurfaceCapabilities2KHR32"></member>
+    <member name="T:VkSurfaceCapabilities2KHR32">
+      <summary>See: <see cref="T:IVkSurfaceCapabilities2KHR" /></summary>
+    </member>
     <member name="F:VkSurfaceCapabilities2KHR32.pNext"></member>
     <member name="F:VkSurfaceCapabilities2KHR32.sType"></member>
     <member name="F:VkSurfaceCapabilities2KHR32.surfaceCapabilities"></member>
-    <member name="T:VkSurfaceCapabilities2KHR64"></member>
+    <member name="T:VkSurfaceCapabilities2KHR64">
+      <summary>See: <see cref="T:IVkSurfaceCapabilities2KHR" /></summary>
+    </member>
     <member name="F:VkSurfaceCapabilities2KHR64.pNext"></member>
     <member name="F:VkSurfaceCapabilities2KHR64.sType"></member>
     <member name="F:VkSurfaceCapabilities2KHR64.surfaceCapabilities"></member>
@@ -8071,11 +8637,15 @@
     <member name="F:VkSurfaceCounterFlagsEXT.value__"></member>
     <member name="F:VkSurfaceCounterFlagsEXT.VK_SURFACE_COUNTER_FLAG_BITS_MAX_ENUM_EXT"></member>
     <member name="F:VkSurfaceCounterFlagsEXT.VK_SURFACE_COUNTER_VBLANK_EXT"></member>
-    <member name="T:VkSurfaceFormat2KHR32"></member>
+    <member name="T:VkSurfaceFormat2KHR32">
+      <summary>See: <see cref="T:IVkSurfaceFormat2KHR" /></summary>
+    </member>
     <member name="F:VkSurfaceFormat2KHR32.pNext"></member>
     <member name="F:VkSurfaceFormat2KHR32.sType"></member>
     <member name="F:VkSurfaceFormat2KHR32.surfaceFormat"></member>
-    <member name="T:VkSurfaceFormat2KHR64"></member>
+    <member name="T:VkSurfaceFormat2KHR64">
+      <summary>See: <see cref="T:IVkSurfaceFormat2KHR" /></summary>
+    </member>
     <member name="F:VkSurfaceFormat2KHR64.pNext"></member>
     <member name="F:VkSurfaceFormat2KHR64.sType"></member>
     <member name="F:VkSurfaceFormat2KHR64.surfaceFormat"></member>
@@ -8096,11 +8666,15 @@
     <member name="F:VkSurfaceTransformFlagsKHR.VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR"></member>
     <member name="F:VkSurfaceTransformFlagsKHR.VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR"></member>
     <member name="F:VkSurfaceTransformFlagsKHR.VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR"></member>
-    <member name="T:VkSwapchainCounterCreateInfoEXT32"></member>
+    <member name="T:VkSwapchainCounterCreateInfoEXT32">
+      <summary>See: <see cref="T:IVkSwapchainCounterCreateInfoEXT" /></summary>
+    </member>
     <member name="F:VkSwapchainCounterCreateInfoEXT32.pNext"></member>
     <member name="F:VkSwapchainCounterCreateInfoEXT32.sType"></member>
     <member name="F:VkSwapchainCounterCreateInfoEXT32.surfaceCounters"></member>
-    <member name="T:VkSwapchainCounterCreateInfoEXT64"></member>
+    <member name="T:VkSwapchainCounterCreateInfoEXT64">
+      <summary>See: <see cref="T:IVkSwapchainCounterCreateInfoEXT" /></summary>
+    </member>
     <member name="F:VkSwapchainCounterCreateInfoEXT64.pNext"></member>
     <member name="F:VkSwapchainCounterCreateInfoEXT64.sType"></member>
     <member name="F:VkSwapchainCounterCreateInfoEXT64.surfaceCounters"></member>
@@ -8108,7 +8682,9 @@
     <member name="F:VkSwapchainCreateFlagsKHR.value__"></member>
     <member name="F:VkSwapchainCreateFlagsKHR.VK_SWAPCHAIN_CREATE_BIND_SFR_BIT_KHX"></member>
     <member name="F:VkSwapchainCreateFlagsKHR.VK_SWAPCHAIN_CREATE_FLAG_BITS_MAX_ENUM_KHR"></member>
-    <member name="T:VkSwapchainCreateInfoKHR32"></member>
+    <member name="T:VkSwapchainCreateInfoKHR32">
+      <summary>See: <see cref="T:IVkSwapchainCreateInfoKHR" /></summary>
+    </member>
     <member name="F:VkSwapchainCreateInfoKHR32.clipped"></member>
     <member name="F:VkSwapchainCreateInfoKHR32.compositeAlpha"></member>
     <member name="F:VkSwapchainCreateInfoKHR32.flags"></member>
@@ -8127,7 +8703,9 @@
     <member name="F:VkSwapchainCreateInfoKHR32.queueFamilyIndexCount"></member>
     <member name="F:VkSwapchainCreateInfoKHR32.sType"></member>
     <member name="F:VkSwapchainCreateInfoKHR32.surface"></member>
-    <member name="T:VkSwapchainCreateInfoKHR64"></member>
+    <member name="T:VkSwapchainCreateInfoKHR64">
+      <summary>See: <see cref="T:IVkSwapchainCreateInfoKHR" /></summary>
+    </member>
     <member name="F:VkSwapchainCreateInfoKHR64.clipped"></member>
     <member name="F:VkSwapchainCreateInfoKHR64.compositeAlpha"></member>
     <member name="F:VkSwapchainCreateInfoKHR64.flags"></member>
@@ -8159,11 +8737,15 @@
     <member name="F:VkSystemAllocationScope.VK_SYSTEM_ALLOCATION_SCOPE_MAX_ENUM"></member>
     <member name="F:VkSystemAllocationScope.VK_SYSTEM_ALLOCATION_SCOPE_OBJECT"></member>
     <member name="F:VkSystemAllocationScope.VK_SYSTEM_ALLOCATION_SCOPE_RANGE_SIZE"></member>
-    <member name="T:VkTextureLODGatherFormatPropertiesAMD32"></member>
+    <member name="T:VkTextureLODGatherFormatPropertiesAMD32">
+      <summary>See: <see cref="T:IVkTextureLODGatherFormatPropertiesAMD" /></summary>
+    </member>
     <member name="F:VkTextureLODGatherFormatPropertiesAMD32.pNext"></member>
     <member name="F:VkTextureLODGatherFormatPropertiesAMD32.sType"></member>
     <member name="F:VkTextureLODGatherFormatPropertiesAMD32.supportsTextureGatherLODBiasAMD"></member>
-    <member name="T:VkTextureLODGatherFormatPropertiesAMD64"></member>
+    <member name="T:VkTextureLODGatherFormatPropertiesAMD64">
+      <summary>See: <see cref="T:IVkTextureLODGatherFormatPropertiesAMD" /></summary>
+    </member>
     <member name="F:VkTextureLODGatherFormatPropertiesAMD64.pNext"></member>
     <member name="F:VkTextureLODGatherFormatPropertiesAMD64.sType"></member>
     <member name="F:VkTextureLODGatherFormatPropertiesAMD64.supportsTextureGatherLODBiasAMD"></member>
@@ -8234,12 +8816,16 @@
     <member name="F:VkValidationCheckEXT.VK_VALIDATION_CHECK_MAX_ENUM_EXT"></member>
     <member name="F:VkValidationCheckEXT.VK_VALIDATION_CHECK_RANGE_SIZE_EXT"></member>
     <member name="F:VkValidationCheckEXT.VK_VALIDATION_CHECK_SHADERS_EXT"></member>
-    <member name="T:VkValidationFlagsEXT32"></member>
+    <member name="T:VkValidationFlagsEXT32">
+      <summary>See: <see cref="T:IVkValidationFlagsEXT" /></summary>
+    </member>
     <member name="F:VkValidationFlagsEXT32.disabledValidationCheckCount"></member>
     <member name="F:VkValidationFlagsEXT32.pDisabledValidationChecks"></member>
     <member name="F:VkValidationFlagsEXT32.pNext"></member>
     <member name="F:VkValidationFlagsEXT32.sType"></member>
-    <member name="T:VkValidationFlagsEXT64"></member>
+    <member name="T:VkValidationFlagsEXT64">
+      <summary>See: <see cref="T:IVkValidationFlagsEXT" /></summary>
+    </member>
     <member name="F:VkValidationFlagsEXT64.disabledValidationCheckCount"></member>
     <member name="F:VkValidationFlagsEXT64.pDisabledValidationChecks"></member>
     <member name="F:VkValidationFlagsEXT64.pNext"></member>
@@ -8316,7 +8902,7 @@
     <member name="T:VkWin32SurfaceCreateFlagsKHR"></member>
     <member name="F:VkWin32SurfaceCreateFlagsKHR.value__"></member>
     <member name="T:VkWriteDescriptorSet32">
-      <summary>Structure specifying the parameters of a descriptor set write operation</summary>
+      <summary>See: <see cref="T:IVkWriteDescriptorSet" /></summary>
     </member>
     <member name="F:VkWriteDescriptorSet32.descriptorCount"></member>
     <member name="F:VkWriteDescriptorSet32.descriptorType"></member>
@@ -8329,7 +8915,7 @@
     <member name="F:VkWriteDescriptorSet32.pTexelBufferView"></member>
     <member name="F:VkWriteDescriptorSet32.sType"></member>
     <member name="T:VkWriteDescriptorSet64">
-      <summary>Structure specifying the parameters of a descriptor set write operation</summary>
+      <summary>See: <see cref="T:IVkWriteDescriptorSet" /></summary>
     </member>
     <member name="F:VkWriteDescriptorSet64.descriptorCount"></member>
     <member name="F:VkWriteDescriptorSet64.descriptorType"></member>
