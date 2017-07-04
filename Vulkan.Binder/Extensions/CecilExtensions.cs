@@ -32,15 +32,20 @@ namespace Vulkan.Binder.Extensions {
 				td.PackingSize = (short) packing;
 			if (packing >= 0)
 				td.ClassSize = size;
-			if ((typeAttrs & ValueTypeAttributeMask) != 0) {
-				td.BaseType = module.TypeSystem.UIntPtr.Resolve().BaseType;
-				if ((typeAttrs & StructTypeAttributeMask) != 0)
-					td.Attributes |= TypeAttributes.Serializable;
+			if (baseType == null) {
+				if ((typeAttrs & ValueTypeAttributeMask) != 0) {
+					td.BaseType = module.TypeSystem.ValueType.Import(module);
+					if ((typeAttrs & StructTypeAttributeMask) != 0)
+						td.Attributes |= TypeAttributes.Serializable | TypeAttributes.BeforeFieldInit;
+				}
+				if (td.BaseType == null) {
+					td.BaseType = module.TypeSystem.Object.Import(module);
+				}
 			}
-			if (td.BaseType == null) {
-				td.BaseType = module.TypeSystem.Object;
+			else {
+				td.BaseType = baseType.Import(module);
 			}
-			td.Scope = module;
+			//td.Scope = module;
 			module.Types.Add(td);
 			return td;
 		}
@@ -52,14 +57,14 @@ namespace Vulkan.Binder.Extensions {
 				| TypeAttributes.Serializable,
 				typeof(Enum).Import(module));
 			if (underlyingType == null) {
-				underlyingType = module.TypeSystem.Int32;
+				underlyingType = module.TypeSystem.Int32.Import(module);
 			}
 			var enumField = new FieldDefinition("value__",
 				FieldAttributes.Public
 				| FieldAttributes.SpecialName
 				| FieldAttributes.RTSpecialName, underlyingType.Import(module));
 			td.Fields.Add(enumField);
-			td.Scope = module;
+			//td.Scope = module;
 			module.Types.Add(td);
 			return td;
 		}
@@ -116,6 +121,8 @@ namespace Vulkan.Binder.Extensions {
 		}
 
 		public static FieldDefinition DefineField(this TypeDefinition typeDef, string name, TypeReference fieldType, FieldAttributes fieldAttrs) {
+			if ( ((fieldType as ByReferenceType)?.ElementType as ByReferenceType) != null )
+				throw new NotImplementedException();
 			var fd = new FieldDefinition(name, fieldAttrs, fieldType.Import(typeDef.Module));
 			typeDef.Fields.Add(fd);
 			return fd;
@@ -256,6 +263,8 @@ namespace Vulkan.Binder.Extensions {
 		}
 
 		public static PropertyDefinition DefineProperty(this TypeDefinition typeDef, string name, PropertyAttributes propAttrs, TypeReference propType, params TypeReference[] paramTypes) {
+			if ( ((propType as ByReferenceType)?.ElementType as ByReferenceType) != null )
+				throw new NotImplementedException();
 			var module = typeDef.Module;
 			var propDef = new PropertyDefinition(name, propAttrs, propType.Import(module));
 			var paramDefs = CreateParametersDefinitions(paramTypes);
@@ -266,6 +275,8 @@ namespace Vulkan.Binder.Extensions {
 		}
 
 		public static PropertyDefinition DefineProperty(this TypeDefinition typeDef, string name, PropertyAttributes propAttrs, TypeReference propType, params Type[] paramTypes) {
+			if ( ((propType as ByReferenceType)?.ElementType as ByReferenceType) != null )
+				throw new NotImplementedException();
 			var module = typeDef.Module;
 			var propDef = new PropertyDefinition(name, propAttrs, propType.Import(module));
 			var paramDefs = CreateParametersDefinitions(module, paramTypes);
@@ -442,7 +453,7 @@ namespace Vulkan.Binder.Extensions {
 
 		public static TypeReference Import(this TypeReference type, ModuleDefinition module) {
 			var interiorType = type.GetInteriorType(out var txfs);
-			interiorType = module.ImportReference(interiorType);
+			interiorType = ImportInternal(module, interiorType);
 			foreach (var txf in txfs) {
 				txf(ref interiorType);
 				interiorType = module.ImportReference(interiorType);
@@ -459,11 +470,47 @@ namespace Vulkan.Binder.Extensions {
 			return imported;
 		}
 
-		private static TypeReference ImportInternal(ModuleDefinition module, Type type) {
-			var tr = module.FindInTypeSystem(type);
+		private static TypeReference ImportInternal(ModuleDefinition module, TypeReference type) {
+			TypeReference tr;
+			if (module.TryGetTypeReference(type.FullName, out tr))
+				return tr;
+
+			tr = module.FindInTypeSystem(type.FullName);
 			if (tr != null) {
-				tr = FindNonPrivateForwarder(module, tr.FullName);
-				return tr.Import(module);
+				//tr = FindNonPrivateForwarder(module, tr.FullName);
+				return tr; //.Import(module);
+			}
+
+			if (type.IsPrimitive)
+				throw new NotImplementedException();
+
+			tr = module.GetType(type.FullName);
+			if (tr != null)
+				return tr;
+
+			foreach (var asmRef in module.AssemblyReferences) {
+				var asm = module.AssemblyResolver.Resolve(asmRef);
+				if (asm == null)
+					continue;
+				tr = asm.MainModule.GetType(type.FullName);
+				if (tr != null)
+					return module.ImportReference(tr);
+			}
+
+			tr = module.ImportReference(type);
+			return tr;
+		}
+
+
+		private static TypeReference ImportInternal(ModuleDefinition module, Type type) {
+			TypeReference tr;
+			if (module.TryGetTypeReference(type.FullName, out tr))
+				return tr;
+
+			tr = module.FindInTypeSystem(type);
+			if (tr != null) {
+				//tr = FindNonPrivateForwarder(module, tr.FullName);
+				return tr; //.Import(module);
 			}
 
 			if (type.GetTypeInfo().IsPrimitive)
@@ -471,9 +518,6 @@ namespace Vulkan.Binder.Extensions {
 
 			tr = module.GetType(type.FullName);
 			if (tr != null)
-				return tr;
-
-			if (module.TryGetTypeReference(type.FullName, out tr))
 				return tr;
 
 			foreach (var asmRef in module.AssemblyReferences) {
@@ -601,7 +645,49 @@ namespace Vulkan.Binder.Extensions {
 																			? module.TypeSystem.String
 																			: interiorType == typeof(object)
 																				? module.TypeSystem.Object
-																				: null;
+																				: interiorType == typeof(ValueType)
+																					? module.TypeSystem.ValueType
+																					: null;
+		
+
+		public static TypeReference FindInTypeSystem(this ModuleDefinition module, string typeName)
+			=> typeName == typeof(void).FullName
+				? module.TypeSystem.Void
+				: typeName == typeof(bool).FullName
+					? module.TypeSystem.Boolean
+					: typeName == typeof(byte).FullName
+						? module.TypeSystem.Byte
+						: typeName == typeof(sbyte).FullName
+							? module.TypeSystem.SByte
+							: typeName == typeof(char).FullName
+								? module.TypeSystem.Char
+								: typeName == typeof(short).FullName
+									? module.TypeSystem.Int16
+									: typeName == typeof(ushort).FullName
+										? module.TypeSystem.UInt16
+										: typeName == typeof(int).FullName
+											? module.TypeSystem.Int32
+											: typeName == typeof(uint).FullName
+												? module.TypeSystem.UInt32
+												: typeName == typeof(long).FullName
+													? module.TypeSystem.Int64
+													: typeName == typeof(ulong).FullName
+														? module.TypeSystem.UInt64
+														: typeName == typeof(float).FullName
+															? module.TypeSystem.Single
+															: typeName == typeof(double).FullName
+																? module.TypeSystem.Double
+																: typeName == typeof(IntPtr).FullName
+																	? module.TypeSystem.IntPtr
+																	: typeName == typeof(UIntPtr).FullName
+																		? module.TypeSystem.UIntPtr
+																		: typeName == typeof(string).FullName
+																			? module.TypeSystem.String
+																			: typeName == typeof(object).FullName
+																				? module.TypeSystem.Object
+																				: typeName == typeof(ValueType).FullName
+																					? module.TypeSystem.ValueType
+																					: null;
 
 		private static int GetSizeOfPrimitive(TypeReference typeRef, int pointerSize = -1) {
 			switch (typeRef.FullName) {
