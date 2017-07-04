@@ -45,26 +45,20 @@ namespace Vulkan.Binder {
 			public const string VkXml = VulkanDocs + "/src/spec/vk.xml";
 		}
 
-		private static Task<KeyValuePair<string, Stream>> CreateHttpFetchTaskAsync(string filePath) {
+		private static Task<KeyValuePair<string, Stream>> HttpFetchAsync(string filePath) {
 			var fileName = Path.GetFileName(filePath);
 			WriteLine("Creating Fetch: {0}", fileName);
 
 			return Task.Run(async () => new KeyValuePair<string, Stream>(
 				fileName,
 				await Task.Run(async () => {
-					var fetchStream = await HttpClient.GetStreamAsync(filePath).ConfigureAwait(false);
 					WriteLine("Fetching: {0}", fileName);
-					MemoryStream ms;
-					try {
-						ms = new MemoryStream(new byte[fetchStream.Length], true);
-					}
-					catch (NotSupportedException) {
-						ms = new MemoryStream();
-					}
-					await fetchStream.CopyToAsync(ms).ConfigureAwait(false);
-					ms.Position = 0;
-					WriteLine("Fetched: {0}", fileName);
-					return ms;
+					var response = await HttpClient.GetAsync(filePath,
+						HttpCompletionOption.ResponseHeadersRead)
+						.ConfigureAwait(false);
+					var content = response.Content;
+					var stream = await content.ReadAsStreamAsync().ConfigureAwait(false);
+					return stream;
 				}).ConfigureAwait(false)
 			));
 		}
@@ -122,16 +116,17 @@ namespace Vulkan.Binder {
 						Cdn.StdDefMaxAlignT,
 						Cdn.VkPlatform,
 						Cdn.Vulcan
-					}.Select(CreateHttpFetchTaskAsync)).ConfigureAwait(false))
+					}.Select(HttpFetchAsync)).ConfigureAwait(false))
 					.ToImmutableDictionary();
 				return streams.Select(kvp => {
 					var stream = kvp.Value;
 					var fileStream = File.Create(Path.Combine(workDirectory.FullName, kvp.Key));
 					return stream.CopyToAsync(fileStream)
-						.ContinueWith(x => fileStream.FlushAsync())
 						.ContinueWith(x => {
+							fileStream.Flush();
 							fileStream.Dispose();
 							stream.Dispose();
+							WriteLine("Fetched: {0}", kvp.Key);
 						});
 				});
 			}).ConfigureAwait(false));
@@ -351,7 +346,9 @@ namespace Vulkan.Binder {
 			if (@interface != null && !@interface.InterfaceType.IsGenericInstance) {
 				var crefAttr = new XAttribute("cref",
 					$"T:{@interface.InterfaceType.FullName}");
-				typeDesc.Add(new XElement("inheritdoc", crefAttr));
+				//typeDesc.Add(new XElement("inheritdoc", crefAttr));
+				typeDesc.Add(new XElement("summary",
+					new XText("See: "), new XElement("see", crefAttr)));
 				typeDesc.Add(new XElement("seealso", crefAttr));
 				return typeDesc;
 			}
@@ -486,6 +483,7 @@ namespace Vulkan.Binder {
 						elem.Name = "description";
 						elem.ReplaceWith(new XElement("item", elem));
 					});
+
 					ForEachByXPath(htmlfrag, "//table/caption", elem => {
 						Thread.Sleep(0);
 						if (elem.Parent == null)
@@ -501,23 +499,29 @@ namespace Vulkan.Binder {
 						table.AddBeforeSelf(elem);
 					});
 
-					ForEachByXPath(htmlfrag, "//table/thead/th|//table/tbody/tr/td", elem => {
+					ForEachByXPath(htmlfrag, "//table/tbody/tr/td|//table/thead/tr/th", elem => {
 						elem.Name = "term";
 						elem.RemoveAttributes();
 					});
+
 					ForEachByXPath(htmlfrag, "//table/tbody/tr", elem => {
 						elem.Name = "item";
 						elem.RemoveAttributes();
 					});
+
 					ForEachByXPath(htmlfrag, "//table/thead", elem => {
 						elem.Name = "listheader";
 						elem.RemoveAttributes();
 					});
+
 					ForEachByXPath(htmlfrag, "//table", elem => {
 						elem.Name = "list";
 						elem.RemoveAttributes();
 						elem.SetAttributeValue("type", "table");
 					});
+					
+					ForEachByXPath(htmlfrag, "//table/thead/tr", RemoveKeepingDescendants);
+					ForEachByXPath(htmlfrag, "//table/tbody", RemoveKeepingDescendants);
 
 					// code elements inside pre elements are stripped
 					ForEachByXPath(htmlfrag, "//pre/code", RemoveKeepingDescendants);
@@ -616,7 +620,7 @@ namespace Vulkan.Binder {
 					var elems = xe.XPathSelectElements(xpath)
 						.OrderByDescending(elem => elem.Ancestors().Count())
 						.ToArray();
-					int i = 0;
+					var i = 0;
 					do {
 						foreach (var elem in elems)
 							action(elem);
@@ -624,7 +628,7 @@ namespace Vulkan.Binder {
 						elems = xe.XPathSelectElements(xpath)
 							.OrderByDescending(elem => elem.Ancestors().Count())
 							.ToArray();
-					} while (elems.Any() && i < 5);
+					} while (elems.Any() && i < 8);
 					return;
 				}
 				catch {
@@ -651,7 +655,8 @@ namespace Vulkan.Binder {
 						if (!elem.Parent.Elements().Contains(elem))
 							break;
 						var cts = new CancellationTokenSource(5000);
-						Task.Run(() => elem.ReplaceWith(children), cts.Token).Wait(cts.Token);
+						Task.Run(() => elem.ReplaceWith(children), cts.Token)
+							.Wait(cts.Token);
 					}
 					else
 						elem.Remove();
