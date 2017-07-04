@@ -32,13 +32,11 @@ If <span class="code">dstImage</span> is non-sparse then it  must  be bound comp
 contiguously to a single <span class="code">VkDeviceMemory</span> object </li><li><span class="code">dstImage</span> must  have a sample count equal to
 <span class="code">VK_SAMPLE_COUNT_1_BIT</span></li><li><span class="code">srcImageLayout</span> must  specify the layout of the image subresources
 of <span class="code">srcImage</span> specified in <span class="code">pRegions</span> at the time this command
-is executed on a <span class="code">VkDevice</span></li><li><span class="code">srcImageLayout</span> must  be
-<span class="code">VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL</span> or
-<span class="code">VK_IMAGE_LAYOUT_GENERAL</span></li><li><span class="code">dstImageLayout</span> must  specify the layout of the image subresources
+is executed on a <span class="code">VkDevice</span></li><li><span class="code">srcImageLayout</span> must  be <span class="code">VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL</span>
+or <span class="code">VK_IMAGE_LAYOUT_GENERAL</span></li><li><span class="code">dstImageLayout</span> must  specify the layout of the image subresources
 of <span class="code">dstImage</span> specified in <span class="code">pRegions</span> at the time this command
-is executed on a <span class="code">VkDevice</span></li><li><span class="code">dstImageLayout</span> must  be
-<span class="code">VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</span> or
-<span class="code">VK_IMAGE_LAYOUT_GENERAL</span></li><li> 
+is executed on a <span class="code">VkDevice</span></li><li><span class="code">dstImageLayout</span> must  be <span class="code">VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</span>
+or <span class="code">VK_IMAGE_LAYOUT_GENERAL</span></li><li> 
 If <span class="code">dstImage</span> was created with <span class="code">tiling</span> equal to
 <span class="code">VK_IMAGE_TILING_LINEAR</span>, <span class="code">dstImage</span> must  have been created
 with a <span class="code">format</span> that supports being a color attachment, as specified

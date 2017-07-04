@@ -61,8 +61,8 @@ A valid graphics pipeline  must  be bound to the current command buffer
 with <span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span></li><li> 
 If the <span class="code">VkPipeline</span> object currently bound to
 <span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span> requires any dynamic state, that
-state  must  have been set on the current command buffer </li><li>  (<span class="code">indexSize</span> * (<span class="code">firstIndex</span> + <span class="code">indexCount</span>)
-+ <span class="code">offset</span>)  must  be less than or equal to the size of the
+state  must  have been set on the current command buffer </li><li>  (<span class="code">indexSize</span> * (<span class="code">firstIndex</span> +  <span class="code">indexCount</span>)
++  <span class="code">offset</span>)  must  be less than or equal to the size of the
 currently bound index buffer, with indexSize being based on the type
 specified by <span class="code">indexType</span>, where the index buffer, <span class="code">indexType</span>,
 and <span class="code">offset</span> are specified via <span class="code">vkCmdBindIndexBuffer</span></li><li> 

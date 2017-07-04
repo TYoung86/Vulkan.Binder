@@ -32,8 +32,8 @@ If <span class="code">sharingMode</span> is <span class="code">VK_SHARING_MODE_C
 If <span class="code">sharingMode</span> is <span class="code">VK_SHARING_MODE_CONCURRENT</span>, each element
 of <span class="code">pQueueFamilyIndices</span> must  be unique and  must  be less than
 <span class="code">pQueueFamilyPropertyCount</span> returned by
-<a href="T_vkGetPhysicalDeviceQueueFamilyProperties.htm">vkGetPhysicalDeviceQueueFamilyProperties</a>
-for the <span class="code">physicalDevice</span> that was used to create <span class="code">device</span></li><li><span class="code">format</span> must  not be <span class="code">VK_FORMAT_UNDEFINED</span></li><li><span class="code">extent</span>::<span class="code">width</span> must  be greater than <span class="code">0</span>. </li><li><span class="code">extent</span>::<span class="code">height</span> must  be greater than <span class="code">0</span>. </li><li><span class="code">extent</span>::<span class="code">depth</span> must  be greater than <span class="code">0</span>. </li><li><span class="code">mipLevels</span> must  be greater than <span class="code">0</span></li><li><span class="code">arrayLayers</span> must  be greater than <span class="code">0</span></li><li> 
+<a href="T_vkGetPhysicalDeviceQueueFamilyProperties.htm">vkGetPhysicalDeviceQueueFamilyProperties</a> for the
+<span class="code">physicalDevice</span> that was used to create <span class="code">device</span></li><li><span class="code">format</span> must  not be <span class="code">VK_FORMAT_UNDEFINED</span></li><li><span class="code">extent</span>::<span class="code">width</span> must  be greater than <span class="code">0</span>. </li><li><span class="code">extent</span>::<span class="code">height</span> must  be greater than <span class="code">0</span>. </li><li><span class="code">extent</span>::<span class="code">depth</span> must  be greater than <span class="code">0</span>. </li><li><span class="code">mipLevels</span> must  be greater than <span class="code">0</span></li><li><span class="code">arrayLayers</span> must  be greater than <span class="code">0</span></li><li> 
 If <span class="code">flags</span> contains <span class="code">VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT</span>,
 <span class="code">imageType</span> must  be <span class="code">VK_IMAGE_TYPE_2D</span></li><li> 
 If <span class="code">imageType</span> is <span class="code">VK_IMAGE_TYPE_1D</span>, <span class="code">extent.width</span> must 
@@ -75,7 +75,7 @@ and <span class="code">extent.depth</span> must  be <span class="code">1</span><
 If <span class="code">imageType</span> is <span class="code">VK_IMAGE_TYPE_2D</span>, <span class="code">extent.depth</span> must 
 be <span class="code">1</span></li><li><span class="code">mipLevels</span> must  be less than or equal to
  ⌊log<sub>2</sub>(max(<span class="code">extent.width</span>, <span class="code">extent.height</span>,
-<span class="code">extent.depth</span>))⌋ + 1 . </li><li> 
+<span class="code">extent.depth</span>))⌋ +  1 . </li><li> 
 If any of <span class="code">extent.width</span>, <span class="code">extent.height</span>, or <span class="code">extent.depth</span>
 are greater than the equivalently named members of
 <span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxImageDimension3D</span>, <span class="code">mipLevels</span> must  be less than or equal to

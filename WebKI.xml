@@ -199,6 +199,48 @@
     <HelpKINode Title="VkPipelineColorBlendAdvancedStateCreateInfoEXT64.blendOverlap Field" Url="html/F_VkPipelineColorBlendAdvancedStateCreateInfoEXT64_blendOverlap.htm" />
   </HelpKINode>
   <HelpKINode Title="blendOverlap property" Url="html/P_IVkPipelineColorBlendAdvancedStateCreateInfoEXT_blendOverlap.htm" />
+  <HelpKINode Title="Bool16 class">
+    <HelpKINode Title="Bool16 Class" Url="html/T_Interop_Bool16.htm" />
+    <HelpKINode Title="about Bool16 class" Url="html/T_Interop_Bool16.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_Interop_Bool16__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Interop_Bool16.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Interop_Bool16.htm" />
+    <HelpKINode Title="type conversions" Url="html/Operators_T_Interop_Bool16.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Bool16 to Boolean conversion" Url="html/M_Interop_Bool16_op_Implicit.htm" />
+  <HelpKINode Title="Bool16.Bool16 constructor" Url="html/Overload_Interop_Bool16__ctor.htm" />
+  <HelpKINode Title="Bool16.Equals method" Url="html/Overload_Interop_Bool16_Equals.htm" />
+  <HelpKINode Title="Bool16.GetHashCode method" Url="html/M_Interop_Bool16_GetHashCode.htm" />
+  <HelpKINode Title="Bool16.Value property" Url="html/P_Interop_Bool16_Value.htm" />
+  <HelpKINode Title="Bool32 class">
+    <HelpKINode Title="Bool32 Class" Url="html/T_Interop_Bool32.htm" />
+    <HelpKINode Title="about Bool32 class" Url="html/T_Interop_Bool32.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_Interop_Bool32__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Interop_Bool32.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Interop_Bool32.htm" />
+    <HelpKINode Title="type conversions" Url="html/Operators_T_Interop_Bool32.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Bool32 to Boolean conversion" Url="html/M_Interop_Bool32_op_Implicit.htm" />
+  <HelpKINode Title="Bool32.Bool32 constructor" Url="html/Overload_Interop_Bool32__ctor.htm" />
+  <HelpKINode Title="Bool32.Equals method" Url="html/Overload_Interop_Bool32_Equals.htm" />
+  <HelpKINode Title="Bool32.GetHashCode method" Url="html/M_Interop_Bool32_GetHashCode.htm" />
+  <HelpKINode Title="Bool32.Value property" Url="html/P_Interop_Bool32_Value.htm" />
+  <HelpKINode Title="Bool64 class">
+    <HelpKINode Title="Bool64 Class" Url="html/T_Interop_Bool64.htm" />
+    <HelpKINode Title="about Bool64 class" Url="html/T_Interop_Bool64.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_Interop_Bool64__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Interop_Bool64.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Interop_Bool64.htm" />
+    <HelpKINode Title="type conversions" Url="html/Operators_T_Interop_Bool64.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Bool64 to Boolean conversion" Url="html/M_Interop_Bool64_op_Implicit.htm" />
+  <HelpKINode Title="Bool64.Bool64 constructor" Url="html/Overload_Interop_Bool64__ctor.htm" />
+  <HelpKINode Title="Bool64.Equals method" Url="html/Overload_Interop_Bool64_Equals.htm" />
+  <HelpKINode Title="Bool64.GetHashCode method" Url="html/M_Interop_Bool64_GetHashCode.htm" />
+  <HelpKINode Title="Bool64.Value property" Url="html/P_Interop_Bool64_Value.htm" />
+  <HelpKINode Title="Boolean to Bool16 conversion" Url="html/M_Interop_Bool16_op_Implicit_1.htm" />
+  <HelpKINode Title="Boolean to Bool32 conversion" Url="html/M_Interop_Bool32_op_Implicit_1.htm" />
+  <HelpKINode Title="Boolean to Bool64 conversion" Url="html/M_Interop_Bool64_op_Implicit_1.htm" />
   <HelpKINode Title="borderColor field">
     <HelpKINode Title="VkSamplerCreateInfo32.borderColor Field" Url="html/F_VkSamplerCreateInfo32_borderColor.htm" />
     <HelpKINode Title="VkSamplerCreateInfo64.borderColor Field" Url="html/F_VkSamplerCreateInfo64_borderColor.htm" />
@@ -811,6 +853,9 @@
     <HelpKINode Title="HandleUIntPtr(T).Equality Operator " Url="html/M_Interop_HandleUIntPtr_1_op_Equality.htm" />
   </HelpKINode>
   <HelpKINode Title="Equals method">
+    <HelpKINode Title="Bool16.Equals Method " Url="html/Overload_Interop_Bool16_Equals.htm" />
+    <HelpKINode Title="Bool32.Equals Method " Url="html/Overload_Interop_Bool32_Equals.htm" />
+    <HelpKINode Title="Bool64.Equals Method " Url="html/Overload_Interop_Bool64_Equals.htm" />
     <HelpKINode Title="HandleInt32(T).Equals Method " Url="html/Overload_Interop_HandleInt32_1_Equals.htm" />
     <HelpKINode Title="HandleInt64(T).Equals Method " Url="html/Overload_Interop_HandleInt64_1_Equals.htm" />
     <HelpKINode Title="HandleIntPtr(T).Equals Method " Url="html/Overload_Interop_HandleIntPtr_1_Equals.htm" />
@@ -1124,6 +1169,9 @@
   <HelpKINode Title="g field" Url="html/F_VkComponentMapping_g.htm" />
   <HelpKINode Title="geometryShader field" Url="html/F_VkPhysicalDeviceFeatures_geometryShader.htm" />
   <HelpKINode Title="GetHashCode method">
+    <HelpKINode Title="Bool16.GetHashCode Method " Url="html/M_Interop_Bool16_GetHashCode.htm" />
+    <HelpKINode Title="Bool32.GetHashCode Method " Url="html/M_Interop_Bool32_GetHashCode.htm" />
+    <HelpKINode Title="Bool64.GetHashCode Method " Url="html/M_Interop_Bool64_GetHashCode.htm" />
     <HelpKINode Title="HandleInt32(T).GetHashCode Method " Url="html/M_Interop_HandleInt32_1_GetHashCode.htm" />
     <HelpKINode Title="HandleInt64(T).GetHashCode Method " Url="html/M_Interop_HandleInt64_1_GetHashCode.htm" />
     <HelpKINode Title="HandleIntPtr(T).GetHashCode Method " Url="html/M_Interop_HandleIntPtr_1_GetHashCode.htm" />
@@ -1524,6 +1572,9 @@
   <HelpKINode Title="Int64 to HandleInt64&lt;T&gt; conversion" Url="html/M_Interop_HandleInt64_1_op_Implicit_1.htm" />
   <HelpKINode Title="Interop namespace" Url="html/N_Interop.htm" />
   <HelpKINode Title="Interop.BinderGeneratedAttribute class" Url="html/T_Interop_BinderGeneratedAttribute.htm" />
+  <HelpKINode Title="Interop.Bool16 class" Url="html/T_Interop_Bool16.htm" />
+  <HelpKINode Title="Interop.Bool32 class" Url="html/T_Interop_Bool32.htm" />
+  <HelpKINode Title="Interop.Bool64 class" Url="html/T_Interop_Bool64.htm" />
   <HelpKINode Title="Interop.HandleInt32(Of T) class" Url="html/T_Interop_HandleInt32_1.htm" />
   <HelpKINode Title="Interop.HandleInt32&lt;T&gt; class" Url="html/T_Interop_HandleInt32_1.htm" />
   <HelpKINode Title="Interop.HandleInt64(Of T) class" Url="html/T_Interop_HandleInt64_1.htm" />
@@ -6670,6 +6721,9 @@
     <HelpKINode Title="HandleUIntPtr(T).Value Field" Url="html/F_Interop_HandleUIntPtr_1_Value.htm" />
   </HelpKINode>
   <HelpKINode Title="Value property">
+    <HelpKINode Title="Bool16.Value Property " Url="html/P_Interop_Bool16_Value.htm" />
+    <HelpKINode Title="Bool32.Value Property " Url="html/P_Interop_Bool32_Value.htm" />
+    <HelpKINode Title="Bool64.Value Property " Url="html/P_Interop_Bool64_Value.htm" />
     <HelpKINode Title="ITypedHandle(T).Value Property " Url="html/P_Interop_ITypedHandle_1_Value.htm" />
     <HelpKINode Title="ITypedHandle.Value Property " Url="html/P_Interop_ITypedHandle_Value.htm" />
   </HelpKINode>

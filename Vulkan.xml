@@ -8945,6 +8945,87 @@
         </markup>
       </summary>
     </member>
+    <member name="T:Interop.Bool16"></member>
+    <member name="M:Interop.Bool16.#ctor(System.Boolean)">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Interop.Bool16</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Interop.Bool16.#ctor(System.UInt32)">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Interop.Bool16</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Interop.Bool16.Equals(Interop.Bool16)"></member>
+    <member name="M:Interop.Bool16.Equals(Interop.Bool32)"></member>
+    <member name="M:Interop.Bool16.Equals(Interop.Bool64)"></member>
+    <member name="M:Interop.Bool16.Equals(System.Boolean)"></member>
+    <member name="M:Interop.Bool16.GetHashCode"></member>
+    <member name="M:Interop.Bool16.op_Implicit(Interop.Bool16)~System.Boolean"></member>
+    <member name="M:Interop.Bool16.op_Implicit(System.Boolean)~Interop.Bool16"></member>
+    <member name="P:Interop.Bool16.Value"></member>
+    <member name="T:Interop.Bool32"></member>
+    <member name="M:Interop.Bool32.#ctor(System.Boolean)">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Interop.Bool32</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Interop.Bool32.#ctor(System.UInt32)">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Interop.Bool32</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Interop.Bool32.Equals(Interop.Bool16)"></member>
+    <member name="M:Interop.Bool32.Equals(Interop.Bool32)"></member>
+    <member name="M:Interop.Bool32.Equals(Interop.Bool64)"></member>
+    <member name="M:Interop.Bool32.Equals(System.Boolean)"></member>
+    <member name="M:Interop.Bool32.GetHashCode"></member>
+    <member name="M:Interop.Bool32.op_Implicit(Interop.Bool32)~System.Boolean"></member>
+    <member name="M:Interop.Bool32.op_Implicit(System.Boolean)~Interop.Bool32"></member>
+    <member name="P:Interop.Bool32.Value"></member>
+    <member name="T:Interop.Bool64"></member>
+    <member name="M:Interop.Bool64.#ctor(System.Boolean)">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Interop.Bool64</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Interop.Bool64.#ctor(System.UInt32)">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Interop.Bool64</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Interop.Bool64.Equals(Interop.Bool16)"></member>
+    <member name="M:Interop.Bool64.Equals(Interop.Bool32)"></member>
+    <member name="M:Interop.Bool64.Equals(Interop.Bool64)"></member>
+    <member name="M:Interop.Bool64.Equals(System.Boolean)"></member>
+    <member name="M:Interop.Bool64.GetHashCode"></member>
+    <member name="M:Interop.Bool64.op_Implicit(Interop.Bool64)~System.Boolean"></member>
+    <member name="M:Interop.Bool64.op_Implicit(System.Boolean)~Interop.Bool64"></member>
+    <member name="P:Interop.Bool64.Value"></member>
     <member name="T:Interop.HandleInt32`1"></member>
     <member name="M:Interop.HandleInt32`1.#ctor(System.Int32)">
       <summary>

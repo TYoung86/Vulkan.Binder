@@ -19,7 +19,8 @@ As with other queries, the query  must  be reset using
 <a href="T_vkCmdResetQueryPool.htm">vkCmdResetQueryPool</a> before requesting the timestamp value be written
 to it.    While <span class="code">vkCmdWriteTimestamp</span> can  be called inside or outside of a render
 pass instance, <a href="T_vkCmdCopyQueryPoolResults.htm">vkCmdCopyQueryPoolResults</a> must  only be called outside
-of a render pass instance.     Valid Usage  <ul><li> 
+of a render pass instance.     Valid Usage  <ul><li><span class="code">queryPool</span> must  have been created with a <span class="code">queryType</span> of
+<span class="code">VK_QUERY_TYPE_TIMESTAMP</span></li><li> 
 The query identified by <span class="code">queryPool</span> and <span class="code">query</span> must  be
  unavailable  </li><li> 
 The command pool&amp;#8217;s queue family  must  support a non-zero

@@ -62,11 +62,11 @@ with <span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span></li><li>
 If the <span class="code">VkPipeline</span> object currently bound to
 <span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span> requires any dynamic state, that
 state  must  have been set on the current command buffer </li><li> 
-If <span class="code">drawCount</span> is equal to <span class="code">1</span>,  (<span class="code">offset</span><br />
+If <span class="code">drawCount</span> is equal to <span class="code">1</span>,  (<span class="code">offset</span> + 
 sizeof(<span class="code">VkDrawIndexedIndirectCommand</span>))  must  be less than or equal
 to the size of <span class="code">buffer</span></li><li> 
 If <span class="code">drawCount</span> is greater than <span class="code">1</span>,  (<span class="code">stride</span> ×
-(<span class="code">drawCount</span> - 1) + <span class="code">offset</span><br />
+(<span class="code">drawCount</span> - 1) +  <span class="code">offset</span> + 
 sizeof(<span class="code">VkDrawIndexedIndirectCommand</span>))  must  be less than or equal
 to the size of <span class="code">buffer</span></li><li><span class="code">drawCount</span> must  be less than or equal to
 <span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxDrawIndirectCount</span></li><li> 
