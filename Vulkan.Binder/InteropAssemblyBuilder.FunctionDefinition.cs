@@ -29,9 +29,8 @@ namespace Vulkan.Binder {
 			var funcRef = Module.GetType(funcName, true);
 			var funcDef = funcRef.Resolve();
 
-			if ( funcDef != null ) {
+			if (funcDef != null)
 				return null;
-			}
 
 			funcDef = Module.DefineType(funcName,
 				DelegateTypeAttributes,

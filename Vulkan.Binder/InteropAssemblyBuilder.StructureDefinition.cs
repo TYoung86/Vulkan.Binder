@@ -37,6 +37,8 @@ namespace Vulkan.Binder {
 			if (TypeRedirects.TryGetValue(structName, out var rename)) {
 				structName = rename;
 			}
+			if (Module.GetType(structName)?.Resolve() != null)
+				return null;
 			// handle type
 			var handleDef = Module.DefineType(structName,
 				PublicSealedStructTypeAttributes);
@@ -87,8 +89,11 @@ namespace Vulkan.Binder {
 			if (TypeRedirects.TryGetValue(structName, out var rename)) {
 				structName = rename;
 			}
+			var interfaceName = "I" + structName;
+			if (Module.GetType(interfaceName)?.Resolve() != null)
+				return null;
 
-			var interfaceDef = Module.DefineType("I" + structName,
+			var interfaceDef = Module.DefineType(interfaceName,
 				PublicInterfaceTypeAttributes);
 			interfaceDef.SetCustomAttribute(() => new BinderGeneratedAttribute());
 
@@ -376,6 +381,8 @@ namespace Vulkan.Binder {
 			if (TypeRedirects.TryGetValue(structName, out var rename)) {
 				structName = rename;
 			}
+			if (Module.GetType(structName)?.Resolve() != null)
+				return null;
 			TypeDefinition structDef = Module.DefineType(structName,
 				PublicSealedStructTypeAttributes, null,
 				(int) structInfo.Alignment,

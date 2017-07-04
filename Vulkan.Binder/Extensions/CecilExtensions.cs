@@ -20,6 +20,10 @@ namespace Vulkan.Binder.Extensions {
 			= TypeAttributes.ExplicitLayout
 			| TypeAttributes.SequentialLayout;
 
+		private const TypeAttributes ValueTypeAttributeMask
+			= StructTypeAttributeMask
+			| TypeAttributes.Interface;
+
 		public static TypeDefinition DefineType(this ModuleDefinition module, string name, TypeAttributes typeAttrs, TypeReference baseType = null, int packing = -1, int size = -1) {
 			var td = baseType != null
 				? new TypeDefinition(null, name, typeAttrs, baseType)
@@ -28,9 +32,13 @@ namespace Vulkan.Binder.Extensions {
 				td.PackingSize = (short) packing;
 			if (packing >= 0)
 				td.ClassSize = size;
-			if ((typeAttrs & StructTypeAttributeMask) != 0) {
+			if ((typeAttrs & ValueTypeAttributeMask) != 0) {
 				td.BaseType = module.TypeSystem.UIntPtr.Resolve().BaseType;
-				td.Attributes |= TypeAttributes.Serializable;
+				if ((typeAttrs & StructTypeAttributeMask) != 0)
+					td.Attributes |= TypeAttributes.Serializable;
+			}
+			if (td.BaseType == null) {
+				td.BaseType = module.TypeSystem.Object;
 			}
 			td.Scope = module;
 			module.Types.Add(td);

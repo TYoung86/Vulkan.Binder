@@ -18,6 +18,8 @@ namespace Vulkan.Binder {
 			if (TypeRedirects.TryGetValue(unionName, out var rename)) {
 				unionName = rename;
 			}
+			if (Module.GetType(unionName)?.Resolve() != null)
+				return null;
 			TypeDefinition unionDef = Module.DefineType(unionName,
 				PublicSealedUnionTypeAttributes, null,
 				(int) unionInfo.Alignment,
