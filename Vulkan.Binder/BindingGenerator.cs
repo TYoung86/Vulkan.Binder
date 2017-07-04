@@ -24,7 +24,7 @@ using MethodAttributes = Mono.Cecil.MethodAttributes;
 using TypeAttributes = Mono.Cecil.TypeAttributes;
 
 namespace Vulkan.Binder {
-	public static class Program {
+	public static class BindingGenerator {
 		public const string VkManBasePath = "https://www.khronos.org/registry/vulkan/specs/1.0/man/html/";
 		public static readonly Uri VkManBasePathUri = new Uri(VkManBasePath);
 		public static readonly string LocalVulkanHtmlManPages = Environment.GetEnvironmentVariable("VULKAN_HTMLMANPAGES");
@@ -65,7 +65,7 @@ namespace Vulkan.Binder {
 
 		private static StreamWriter LogWriter
 			= new StreamWriter(new FileStream(
-				$"{typeof(Program).Namespace}.{Process.GetCurrentProcess().Id}.log",
+				$"{typeof(BindingGenerator).Namespace}.{Process.GetCurrentProcess().Id}.log",
 				FileMode.Append, FileAccess.Write, FileShare.Read, 32768)) {
 				AutoFlush = true,
 				NewLine = "\r\n"
@@ -91,14 +91,14 @@ namespace Vulkan.Binder {
 			Console.Write(line);
 		}
 
-		public static void Main() {
-			TaskManager.RunSync(MainAsync);
+		public static void Run() {
+			TaskManager.RunSync(RunAsync);
 		}
 
 		public static readonly HttpClient HttpClient = new HttpClient();
 
-		public static async Task MainAsync() {
-			var tempDirName = $"{typeof(Program).Namespace}.{Process.GetCurrentProcess().Id}";
+		public static async Task RunAsync() {
+			var tempDirName = $"{typeof(BindingGenerator).Namespace}.{Process.GetCurrentProcess().Id}";
 			var tempPath = Path.Combine(Path.GetTempPath(), tempDirName);
 			if (Directory.Exists(tempPath)) Directory.Delete(tempPath, true);
 			var workDirectory = Directory.CreateDirectory(tempPath);
@@ -161,6 +161,8 @@ namespace Vulkan.Binder {
 
 			var knownTypes = ImmutableDictionary.CreateBuilder<string, InteropAssemblyBuilder.KnownType>();
 			var typeRedirs = ImmutableDictionary.CreateBuilder<string, string>();
+
+			typeRedirs.Add("VkBool32", "Interop.Bool32");
 
 			foreach (var enumType in xml.EnumTypes) {
 				knownTypes.Add(enumType.Key, InteropAssemblyBuilder.KnownType.Enum);

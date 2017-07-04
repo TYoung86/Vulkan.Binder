@@ -12,7 +12,7 @@ using Vulkan.Binder.Extensions;
 using static System.Math;
 
 namespace Vulkan.Binder {
-	internal sealed class DedicatedTaskScheduler : TaskScheduler, IDisposable {
+	internal sealed class MeticulousTaskScheduler : TaskScheduler, IDisposable {
 		[ThreadStatic] private static bool _threadIsWorking;
 
 		private readonly CancellationTokenSource _cts
@@ -41,7 +41,7 @@ namespace Vulkan.Binder {
 		private readonly ManualResetEventSlim _workReadyEvent
 			= new ManualResetEventSlim(false);
 
-		public DedicatedTaskScheduler(int dop) {
+		public MeticulousTaskScheduler(int dop) {
 			dop = Min(Max(1, dop), Environment.ProcessorCount);
 			_threads = new Thread[dop];
 			for (var i = 0 ; i < dop ; ++i)
@@ -54,7 +54,7 @@ namespace Vulkan.Binder {
 			(_watchdog = new Thread(WatchdogAction) {IsBackground = true}).Start();
 		}
 
-		public DedicatedTaskScheduler()
+		public MeticulousTaskScheduler()
 			: this(Environment.ProcessorCount - 1) {
 		}
 
@@ -81,15 +81,20 @@ namespace Vulkan.Binder {
 		private void WatchdogAction() {
 			for (; ;) {
 				try {
-					_cts.Token.ThrowIfCancellationRequested();
+					try {
+						_cts.Token.ThrowIfCancellationRequested();
+					}
+					catch (OperationCanceledException) {
+						break;
+					}
 					var workerThreads = MaximumConcurrencyLevel;
-					var dop = workerThreads;
 					var lastTaskCount = _priorityTasks.Count;
 					var reliefThreads = new LinkedList<Thread>();
 					var waitedCount = 0;
 					for (; ;) {
+						_cts.Token.ThrowIfCancellationRequested();
 						Thread.Sleep(5);
-						dop = workerThreads;
+						var dop = workerThreads;
 						var waitCount = 0;
 						for (var i = 0 ; i < workerThreads ; ++i) {
 							if (_threads[i].ThreadState == ThreadState.WaitSleepJoin)
@@ -214,7 +219,12 @@ namespace Vulkan.Binder {
 			try {
 				var currentThread = Thread.CurrentThread;
 				for (; ;) {
-					_workReadyEvent.Wait(_cts.Token);
+					try {
+						_workReadyEvent.Wait(_cts.Token);
+					}
+					catch (OperationCanceledException) {
+						break;
+					}
 					_workReadyEvent.Reset();
 					//Thread.BeginThreadAffinity();
 					currentThread.IsBackground = false;
@@ -324,9 +334,11 @@ namespace Vulkan.Binder {
 				Thread.Sleep(10);
 
 			//_watchdog.Abort();
-
-			for (var i = 0 ; i < MaximumConcurrencyLevel ; ++i)
+			_watchdog.Join();
+			for (var i = 0 ; i < MaximumConcurrencyLevel ; ++i) {
+				_threads[i].Join();
 				_threads[i] = null;
+			}
 		}
 	}
 }

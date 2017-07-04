@@ -18,8 +18,8 @@
     <HtmlHelpName>Documentation</HtmlHelpName>
     <Language>en-US</Language>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\Vulkan.Binder\Vulkan.1.0.51.0.dll" />
-<DocumentationSource sourceFile="..\Vulkan.Binder\Vulkan.1.0.51.0.xml" /></DocumentationSources>
+      <DocumentationSource sourceFile="..\Vulkan.Binder\Vulkan.dll" />
+<DocumentationSource sourceFile="..\Vulkan.Binder\Vulkan.xml" /></DocumentationSources>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>Website</HelpFileFormat>

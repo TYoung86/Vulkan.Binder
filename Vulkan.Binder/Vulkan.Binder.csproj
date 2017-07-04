@@ -9,7 +9,7 @@
 	<ApplicationIcon />
 	<OutputTypeEx>exe</OutputTypeEx>
 	<StartupObject />
-	<Version>1.5.2</Version>
+	<Version>1.5.3</Version>
 	<Company>Artilect</Company>
 	<Authors>Tyler Young</Authors>
 	<Description>Hardy, efficient (low level), portable .NET Standard 1.6 bindings for Vulkan with integrated documentation. Generated directly from Vulkan C headers and docs. Uses ClangSharp, supports 32-bit, 64-bit, agnostic (AnyCPU) interfaces. Incorporates Vulkan Docs and XML from official github repo.</Description>
@@ -17,8 +17,8 @@
 	<RepositoryType>git</RepositoryType>
 	<PackageProjectUrl>https://github.com/TYoung86/Vulkan.Binder</PackageProjectUrl>
 	<PackageTags>Vulkan</PackageTags>
-	<AssemblyVersion>1.5.2.0</AssemblyVersion>
-	<FileVersion>1.5.2.0</FileVersion>
+	<AssemblyVersion>1.5.3.0</AssemblyVersion>
+	<FileVersion>1.5.3.0</FileVersion>
   </PropertyGroup>
 
 

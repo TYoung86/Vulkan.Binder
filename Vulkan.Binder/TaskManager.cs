@@ -9,7 +9,7 @@ namespace Vulkan.Binder {
 	[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 	public static class TaskManager {
 		public static readonly TaskScheduler TaskScheduler
-			= new DedicatedTaskScheduler();
+			= new MeticulousTaskScheduler();
 
 		public static readonly TaskFactory TaskFactory
 			= new TaskFactory(TaskScheduler);
