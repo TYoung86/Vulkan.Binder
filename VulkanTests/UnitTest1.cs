@@ -17,9 +17,9 @@ namespace VulkanTests
 	    public unsafe void CallVkGetInstanceProcAddr() {
 			
 		    var vkCreateInstanceStr = Marshal.StringToHGlobalAnsi("vkCreateInstance");
-		    var result = Vulkan.vkGetInstanceProcAddr((VkInstance *)(UIntPtr)0, (sbyte*)vkCreateInstanceStr );
+		    var result = Vulkan.vkGetInstanceProcAddr((VkInstance *)(IntPtr)0, (sbyte*)vkCreateInstanceStr );
 			Marshal.FreeHGlobal(vkCreateInstanceStr);
-			Assert.NotNull(result);
+			Assert.NotStrictEqual(default(IntPtr), result.Value);
 	    }
 
     }

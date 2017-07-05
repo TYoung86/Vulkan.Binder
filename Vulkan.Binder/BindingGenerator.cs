@@ -21,6 +21,7 @@ using HtmlAgilityPack.CssSelectors.NetCore;
 using Interop;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
+using Mono.Cecil.Rocks;
 using Vulkan.Binder.Extensions;
 using FieldAttributes = Mono.Cecil.FieldAttributes;
 using MethodAttributes = Mono.Cecil.MethodAttributes;
@@ -275,6 +276,7 @@ namespace Vulkan.Binder {
 			var vkGetInstanceProcAddrMethod = staticLinkType.DefineMethod("vkGetInstanceProcAddr",
 				MethodAttributes.Public | MethodAttributes.Static
 				| MethodAttributes.HideBySig | MethodAttributes.PInvokeImpl,
+				//_asmBuilder.Module.TypeSystem.UIntPtr,
 				vkGetInstanceProcAddrRetType,
 				vkGetInstanceProcAddrParams
 			);

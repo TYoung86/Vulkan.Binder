@@ -5,10 +5,12 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Interop;
 using Mono.Cecil;
+using Mono.Cecil.Rocks;
 using Vulkan.Binder.Extensions;
 
 namespace Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
+
 		private Func<TypeDefinition[]> DefineClrType(ClangFunctionInfoBase funcInfo32, ClangFunctionInfoBase funcInfo64) {
 			if (funcInfo32 == funcInfo64) {
 				return DefineClrType(funcInfo64);
@@ -37,6 +39,22 @@ namespace Vulkan.Binder {
 				MulticastDelegateType );
 			funcDef.SetCustomAttribute(() => new BinderGeneratedAttribute());
 
+			var umfpDef = new TypeDefinition("", "UnmanagedPointer",
+				TypeAttributes.Sealed
+				| TypeAttributes.SequentialLayout
+				| TypeAttributes.NestedPublic,
+				Module.TypeSystem.ValueType) {
+				DeclaringType = funcDef
+			};
+
+			funcDef.NestedTypes.Add(umfpDef);
+
+			umfpDef.DefineField("Value", Module.TypeSystem.IntPtr,
+				FieldAttributes.Public
+				| FieldAttributes.InitOnly);
+
+			// todo: add implicit conversion ops using Marshal
+
 			var retParam = ResolveParameter(funcInfo.ReturnType);
 			/* todo: figure out why the attribute is jacked up
 			if (!CallingConventionMap.TryGetValue(funcInfo.CallConvention, out var callConv))
@@ -57,7 +75,27 @@ namespace Vulkan.Binder {
 
 				Debug.WriteLine($"Completed dependencies for function {funcName}");
 
-				var clrArgTypes = argParams.Select(p => p.Type).ToArray();
+				var argTypes = argParams.Select(p => p.Type).ToArray();
+				
+				
+				var retTypeDef = retType.Resolve();
+				if (retTypeDef.BaseType != null && retTypeDef.BaseType.Is(MulticastDelegateType)) {
+					// todo: marshalas umfp marshaller
+					var ufpSpecTypeRef = retTypeDef.NestedTypes.Single();
+					retType = ufpSpecTypeRef;
+				}
+
+				for (var i = 0 ; i < argTypes.Length ; i++) {
+					var argType = argTypes[i];
+					var argTypeDef = argType.Resolve();
+					if (argTypeDef.BaseType == null) continue;
+					if (!argTypeDef.BaseType.Is(MulticastDelegateType))
+						continue;
+					// todo: marshalas umfp marshaller
+					var ufpSpecTypeRef = retTypeDef.NestedTypes.Single();
+					argTypes[i] = ufpSpecTypeRef;
+				}
+
 
 				try {
 					var ctor = funcDef.DefineConstructor(DelegateConstructorAttributes,
@@ -66,7 +104,7 @@ namespace Vulkan.Binder {
 
 					var method = funcDef.DefineMethod("Invoke",
 						DelegateInvokeMethodAttributes,
-						retType, clrArgTypes);
+						retType, argTypes);
 
 					method.SetImplementationFlags(MethodImplAttributes.CodeTypeMask);
 					// todo: figure out why the attribute is jacked up
