@@ -25,14 +25,15 @@ namespace Vulkan.Binder {
 				var attrs = md.CustomAttributes;
 
 				if (NonVersionableAttribute != null) {
-					var nv = NonVersionableAttribute.AttributeType;
-					if (!attrs.Select(ca => ca.AttributeType).Contains(nv))
-						attrs.Add(NonVersionableAttribute);
+					var nv = NonVersionableAttribute;
+					if (!attrs.Select(ca => ca.AttributeType).Contains(nv.AttributeType))
+						attrs.Add(nv);
 				}
 
-				var mi = MethodImplAggressiveInliningAttribute.AttributeType;
-				if (!attrs.Select(ca => ca.AttributeType).Contains(mi))
-					attrs.Add(MethodImplAggressiveInliningAttribute);
+				var miai = GetMethodImplAggressiveInliningAttribute();
+				if (miai != null )
+					if (!attrs.Select(ca => ca.AttributeType).Contains(miai.AttributeType))
+						attrs.Add(miai);
 			}
 		}
 	}

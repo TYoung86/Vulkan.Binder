@@ -143,8 +143,6 @@ namespace Vulkan.Binder {
 
 			NonVersionableAttribute = NonVersionableAttributeInfo?
 				.GetCecilCustomAttribute(Module);
-			MethodImplAggressiveInliningAttribute = MethodImplAggressiveInliningAttributeInfo
-				.GetCecilCustomAttribute(Module);
 			FlagsAttribute = FlagsAttributeInfo
 				.GetCecilCustomAttribute(Module);
 

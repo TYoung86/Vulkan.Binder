@@ -259,24 +259,14 @@ namespace Vulkan.Binder {
 				| TypeAttributes.Sealed
 				| TypeAttributes.Public
 			);
+			/*
 			var staticLinkCtor = staticLinkType
 				.DefineConstructor(MethodAttributes.Static | MethodAttributes.Assembly);
 			staticLinkCtor.GenerateIL(il => {
 				// todo: implement static ctor
 				il.Emit(OpCodes.Ret);
 			});
-			var staticLinkInit = staticLinkType
-				.DefineMethod("<>Init",
-					MethodAttributes.SpecialName
-					| MethodAttributes.RTSpecialName
-					| MethodAttributes.HideBySig
-					| MethodAttributes.Static
-					| MethodAttributes.Assembly,
-				_asmBuilder.Module.TypeSystem.Void, new TypeReference[0]);
-			staticLinkInit.GenerateIL(il => {
-				// todo: implement static ctor
-				il.Emit(OpCodes.Ret);
-			});
+			*/
 			
 			var vkGetInstanceProcAddrDlgt = _asmBuilder.Module.GetType("vkGetInstanceProcAddr");
 			var vkGetInstanceProcAddrRetType = vkGetInstanceProcAddrDlgt.GetMethod("Invoke").ReturnType;
@@ -651,6 +641,7 @@ namespace Vulkan.Binder {
 		private static readonly IEnumerable<XNode> EmptyCombiner = new XNode[0];
 		private static InteropAssemblyBuilder _asmBuilder;
 		private static ImmutableArray<TypeDefinition> _enumDefs;
+		private static readonly XNodeEqualityComparer XNodeEqualityComparer = new XNodeEqualityComparer();
 
 		private static void StripByXPath(XNode xe, string xpath) {
 			ForEachByXPath(xe, xpath, RemoveKeepingDescendants);
@@ -662,15 +653,27 @@ namespace Vulkan.Binder {
 					var elems = xe.XPathSelectElements(xpath)
 						.OrderByDescending(elem => elem.Ancestors().Count())
 						.ToArray();
-					var i = 0;
+					const int recursionLimit = 64;
+					var recursion = 0;
+					var nodeHashes = elems.Select(elem =>
+						XNodeEqualityComparer.GetHashCode(elem))
+						.ToArray();
+
+					bool unchanged;
 					do {
 						foreach (var elem in elems)
 							action(elem);
-						++i;
+						++recursion;
 						elems = xe.XPathSelectElements(xpath)
 							.OrderByDescending(elem => elem.Ancestors().Count())
 							.ToArray();
-					} while (elems.Any() && i < 8);
+						
+						var newNodeHashes = elems.Select(elem =>
+							XNodeEqualityComparer.GetHashCode(elem))
+							.ToArray();
+						unchanged = nodeHashes.SequenceEqual(newNodeHashes);
+						nodeHashes = newNodeHashes;
+					} while (elems.Any() && unchanged && recursion < recursionLimit);
 					return;
 				}
 				catch {
@@ -693,22 +696,34 @@ namespace Vulkan.Binder {
 						case "p":
 						case "div":
 						case "thead":
-						case "tbody":
+						case "tbody": {
 							combiningPrefix = combiningSuffix = NewLineTextNodeCombiner;
-							break;
-						default:
-							combiningPrefix = combiningSuffix = SpaceTextNodeCombiner;
 							if (elem.PreviousNode is XText prevText) {
 								var prevTextValue = prevText.Value;
-								if ( prevTextValue.EndsWith(" ") )
+								if (prevTextValue.EndsWith("\n"))
 									combiningPrefix = EmptyCombiner;
 							}
 							if (elem.NextNode is XText nextText) {
 								var nextTextValue = nextText.Value;
-								if ( nextTextValue.StartsWith(" ") )
+								if (nextTextValue.StartsWith("\n"))
 									combiningSuffix = EmptyCombiner;
 							}
 							break;
+						}
+						default: {
+							combiningPrefix = combiningSuffix = SpaceTextNodeCombiner;
+							if (elem.PreviousNode is XText prevText) {
+								var prevTextValue = prevText.Value;
+								if (prevTextValue.EndsWith(" "))
+									combiningPrefix = EmptyCombiner;
+							}
+							if (elem.NextNode is XText nextText) {
+								var nextTextValue = nextText.Value;
+								if (nextTextValue.StartsWith(" "))
+									combiningSuffix = EmptyCombiner;
+							}
+							break;
+						}
 					}
 					var children = combiningPrefix
 						.Concat(elem.Nodes())

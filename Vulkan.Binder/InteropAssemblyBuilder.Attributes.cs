@@ -3,6 +3,8 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Mono.Cecil;
+using Mono.Cecil.Rocks;
+using Vulkan.Binder.Extensions;
 //using System.Reflection;
 //using System.Reflection.Emit;
 using MethodAttributes = Mono.Cecil.MethodAttributes;
@@ -76,10 +78,6 @@ namespace Vulkan.Binder {
 			? new AttributeInfo( NonVersionableAttributeCtorInfo )
 			: null;
 
-		private readonly CustomAttribute MethodImplAggressiveInliningAttribute;
-
-		private static readonly AttributeInfo MethodImplAggressiveInliningAttributeInfo
-			= AttributeInfo.Create(() => new MethodImplAttribute(MethodImplOptions.AggressiveInlining));
 
 		//private static readonly AttributeInfo StructLayoutSequentialAttributeInfo
 		//	= AttributeInfo.Create(() => new StructLayoutAttribute(LayoutKind.Sequential));
@@ -95,7 +93,35 @@ namespace Vulkan.Binder {
 		private void SetMethodInliningAttributes(MethodDefinition method) {
 			if ( NonVersionableAttributeInfo != null )
 				method.CustomAttributes.Add(NonVersionableAttribute);
-			method.CustomAttributes.Add(MethodImplAggressiveInliningAttribute);
+			var aggressiveInlining = GetMethodImplAggressiveInliningAttribute();
+			if ( aggressiveInlining != null )
+				method.CustomAttributes.Add(aggressiveInlining);
+		}
+
+		private CustomAttribute _methodImplAggressiveInliningAttribute;
+
+		private CustomAttribute GetMethodImplAggressiveInliningAttribute() {
+			return null;
+			/* todo: figure out what's wrong
+			if (_methodImplAggressiveInliningAttribute != null)
+				return _methodImplAggressiveInliningAttribute;
+			
+			var methodImplOptionsTypeRef = typeof(MethodImplOptions).Import(Module);
+			var methodImplAttributeTypeRef = typeof(MethodImplAttribute).Import(Module);
+			var methodImplAttributeTypeDef = methodImplAttributeTypeRef.Resolve();
+			var methodImplAttributeCtor = methodImplAttributeTypeDef.GetConstructors()
+				.Single(ctor => ctor.Parameters.SingleOrDefault()?.ParameterType
+									.Is(methodImplOptionsTypeRef) ?? false ).Import(Module);
+
+
+			return _methodImplAggressiveInliningAttribute
+				= new CustomAttribute(methodImplAttributeCtor) {
+				ConstructorArguments = {
+					new CustomAttributeArgument(methodImplAttributeTypeRef,
+						MethodImplOptions.AggressiveInlining)
+				}
+			};
+			*/
 		}
 	}
 }
