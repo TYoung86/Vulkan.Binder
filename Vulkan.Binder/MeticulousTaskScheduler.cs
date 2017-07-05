@@ -92,7 +92,12 @@ namespace Vulkan.Binder {
 					var reliefThreads = new LinkedList<Thread>();
 					var waitedCount = 0;
 					for (; ;) {
-						_cts.Token.ThrowIfCancellationRequested();
+						try {
+							_cts.Token.ThrowIfCancellationRequested();
+						}
+						catch (OperationCanceledException) {
+							break;
+						}
 						Thread.Sleep(5);
 						var dop = workerThreads;
 						var waitCount = 0;

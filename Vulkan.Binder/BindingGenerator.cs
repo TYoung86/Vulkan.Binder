@@ -9,6 +9,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Runtime.Loader;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
@@ -20,6 +22,7 @@ using Interop;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using Vulkan.Binder.Extensions;
+using FieldAttributes = Mono.Cecil.FieldAttributes;
 using MethodAttributes = Mono.Cecil.MethodAttributes;
 using TypeAttributes = Mono.Cecil.TypeAttributes;
 
@@ -256,15 +259,49 @@ namespace Vulkan.Binder {
 				| TypeAttributes.Sealed
 				| TypeAttributes.Public
 			);
-			var staticLinkInit = staticLinkType.DefineConstructor(MethodAttributes.Static | MethodAttributes.Assembly);
-			staticLinkInit.GenerateIL(il => {
-				// 
+			var staticLinkCtor = staticLinkType
+				.DefineConstructor(MethodAttributes.Static | MethodAttributes.Assembly);
+			staticLinkCtor.GenerateIL(il => {
+				// todo: implement static ctor
 				il.Emit(OpCodes.Ret);
 			});
+			var staticLinkInit = staticLinkType
+				.DefineMethod("<>Init",
+					MethodAttributes.SpecialName
+					| MethodAttributes.RTSpecialName
+					| MethodAttributes.HideBySig
+					| MethodAttributes.Static
+					| MethodAttributes.Assembly,
+				_asmBuilder.Module.TypeSystem.Void, new TypeReference[0]);
+			staticLinkInit.GenerateIL(il => {
+				// todo: implement static ctor
+				il.Emit(OpCodes.Ret);
+			});
+			
+			var vkGetInstanceProcAddrDlgt = _asmBuilder.Module.GetType("vkGetInstanceProcAddr");
+			var vkGetInstanceProcAddrRetType = vkGetInstanceProcAddrDlgt.GetMethod("Invoke").ReturnType;
+			var vkGetInstanceProcAddrParams = vkGetInstanceProcAddrDlgt.GetMethod("Invoke").Parameters;
+
+			var vkGetInstanceProcAddrMethod = staticLinkType.DefineMethod("vkGetInstanceProcAddr",
+				MethodAttributes.Public | MethodAttributes.Static
+				| MethodAttributes.HideBySig | MethodAttributes.PInvokeImpl,
+				vkGetInstanceProcAddrRetType,
+				vkGetInstanceProcAddrParams
+			);
+
+			// TODO: generate dllmap config setter or something
+			//vkGetInstanceProcAddrMethod.SetCustomAttribute(() => new DllImportAttribute("vulkan-1")
+			//	{ BestFitMapping = false, CharSet = CharSet.Ansi });
+			var nativeVulkanModuleRef = new ModuleReference("vulkan-1");
+			_asmBuilder.Module.ModuleReferences.Add(nativeVulkanModuleRef);
+			vkGetInstanceProcAddrMethod.PInvokeInfo = new PInvokeInfo(
+				PInvokeAttributes.CharSetAnsi | PInvokeAttributes.NoMangle
+				| PInvokeAttributes.CallConvStdCall,
+				"vkGetInstanceProcAddr", nativeVulkanModuleRef);
 
 			var moduleInit = moduleType.DefineConstructor(MethodAttributes.Static | MethodAttributes.Assembly);
 			moduleInit.GenerateIL(il => {
-				il.Emit(OpCodes.Call, staticLinkInit);
+				//il.Emit(OpCodes.Call, staticLinkInit);
 				il.Emit(OpCodes.Ret);
 			});
 
@@ -606,9 +643,12 @@ namespace Vulkan.Binder {
 			}
 			return cref ?? "!:" + refName;
 		}
-
+		
 		private static readonly XNode SpaceTextNode = new XText(" ");
 		private static readonly IEnumerable<XNode> SpaceTextNodeCombiner = new[] {SpaceTextNode};
+		private static readonly XNode NewLineTextNode = new XText("\n");
+		private static readonly IEnumerable<XNode> NewLineTextNodeCombiner = new[] {NewLineTextNode};
+		private static readonly IEnumerable<XNode> EmptyCombiner = new XNode[0];
 		private static InteropAssemblyBuilder _asmBuilder;
 		private static ImmutableArray<TypeDefinition> _enumDefs;
 
@@ -646,9 +686,33 @@ namespace Vulkan.Binder {
 				if (elem.Parent == null)
 					break;
 				try {
-					var children = SpaceTextNodeCombiner
+					IEnumerable<XNode> combiningPrefix;
+					IEnumerable<XNode> combiningSuffix;
+
+					switch (elem.Name.LocalName) {
+						case "p":
+						case "div":
+						case "thead":
+						case "tbody":
+							combiningPrefix = combiningSuffix = NewLineTextNodeCombiner;
+							break;
+						default:
+							combiningPrefix = combiningSuffix = SpaceTextNodeCombiner;
+							if (elem.PreviousNode is XText prevText) {
+								var prevTextValue = prevText.Value;
+								if ( prevTextValue.EndsWith(" ") )
+									combiningPrefix = EmptyCombiner;
+							}
+							if (elem.NextNode is XText nextText) {
+								var nextTextValue = nextText.Value;
+								if ( nextTextValue.StartsWith(" ") )
+									combiningSuffix = EmptyCombiner;
+							}
+							break;
+					}
+					var children = combiningPrefix
 						.Concat(elem.Nodes())
-						.Concat(SpaceTextNodeCombiner);
+						.Concat(combiningSuffix);
 					if (children.Any()) {
 						// threading syncs
 						Thread.Sleep(1);

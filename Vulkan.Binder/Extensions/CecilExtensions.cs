@@ -20,30 +20,35 @@ namespace Vulkan.Binder.Extensions {
 			= TypeAttributes.ExplicitLayout
 			| TypeAttributes.SequentialLayout;
 
-		private const TypeAttributes ValueTypeAttributeMask
-			= StructTypeAttributeMask
-			| TypeAttributes.Interface;
-
 		public static TypeDefinition DefineType(this ModuleDefinition module, string name, TypeAttributes typeAttrs, TypeReference baseType = null, int packing = -1, int size = -1) {
 			var td = baseType != null
 				? new TypeDefinition(null, name, typeAttrs, baseType)
 				: new TypeDefinition(null, name, typeAttrs);
-			if (packing >= 0)
+			if (packing > 0)
 				td.PackingSize = (short) packing;
-			if (packing >= 0)
+			if (packing > 0)
 				td.ClassSize = size;
 			if (baseType == null) {
-				if ((typeAttrs & ValueTypeAttributeMask) != 0) {
-					td.BaseType = module.TypeSystem.ValueType.Import(module);
-					if ((typeAttrs & StructTypeAttributeMask) != 0)
-						td.Attributes |= TypeAttributes.Serializable | TypeAttributes.BeforeFieldInit;
+				if ((typeAttrs & StructTypeAttributeMask) != 0) {
+					if ( packing <= 0 )
+						td.PackingSize = 1;
+					if ( size <= 0 )
+						td.ClassSize = 1;
+					td.BaseType = module.TypeSystem.ValueType;
+					td.Attributes |= TypeAttributes.Serializable | TypeAttributes.BeforeFieldInit;
 				}
 				if (td.BaseType == null) {
-					td.BaseType = module.TypeSystem.Object.Import(module);
+					if ((typeAttrs & TypeAttributes.Interface) != 0)
+						td.BaseType = null;
+					else
+						td.BaseType = module.TypeSystem.Object;
 				}
 			}
 			else {
-				td.BaseType = baseType.Import(module);
+				if ((typeAttrs & TypeAttributes.Interface) != 0)
+					td.BaseType = module.TypeSystem.Object;
+				else
+					td.BaseType = baseType.Import(module);
 			}
 			//td.Scope = module;
 			module.Types.Add(td);
@@ -55,9 +60,9 @@ namespace Vulkan.Binder.Extensions {
 				typeAttrs
 				| TypeAttributes.Sealed
 				| TypeAttributes.Serializable,
-				typeof(Enum).Import(module));
+				module.TypeSystem.Enum);
 			if (underlyingType == null) {
-				underlyingType = module.TypeSystem.Int32.Import(module);
+				underlyingType = module.TypeSystem.Int32;
 			}
 			var enumField = new FieldDefinition("value__",
 				FieldAttributes.Public
@@ -104,7 +109,7 @@ namespace Vulkan.Binder.Extensions {
 			=> DefineEnum(module, name, typeAttrs, underlyingType.Import(module));
 
 		public static TypeDefinition DefineEnum(this ModuleDefinition module, string name, TypeAttributes typeAttrs)
-			=> DefineEnum(module, name, typeAttrs, module.TypeSystem.Int32.Import(module));
+			=> DefineEnum(module, name, typeAttrs, module.TypeSystem.Int32);
 
 		public static FieldDefinition DefineLiteral(this TypeDefinition typeDef, string name, object value) {
 			var fd = new FieldDefinition(name,
@@ -160,7 +165,7 @@ namespace Vulkan.Binder.Extensions {
 				methodAttrs |= MethodAttributes.Private;
 			}
 			var methodDef = new MethodDefinition(isStatic ? ".cctor" : ".ctor", methodAttrs,
-				module.TypeSystem.Void.Import(module));
+				module.TypeSystem.Void);
 			var pds = paramTypes.Import(module)
 				.Select(typeRef => new ParameterDefinition(typeRef));
 			foreach (var pd in pds)
@@ -187,6 +192,19 @@ namespace Vulkan.Binder.Extensions {
 			var methodDef = new MethodDefinition(name, methodAttrs, retType.Import(typeDef.Module));
 			var pds = paramTypes.Import(typeDef.Module)
 				.Select(typeRef => new ParameterDefinition(typeRef));
+			foreach (var pd in pds)
+				methodDef.Parameters.Add(pd);
+			typeDef.Methods.Add(methodDef);
+			return methodDef;
+		}
+
+		public static MethodDefinition DefineMethod(this TypeDefinition typeDef, string name, MethodAttributes methodAttrs, TypeReference retType, IEnumerable<ParameterDefinition> paramDefs) {
+			//var module = typeDef.Module;
+			var methodDef = new MethodDefinition(name, methodAttrs, retType.Import(typeDef.Module));
+			var pds = paramDefs
+				.Select(pd => new ParameterDefinition(
+					pd.Name, pd.Attributes,
+					pd.ParameterType.Import(typeDef.Module)));
 			foreach (var pd in pds)
 				methodDef.Parameters.Add(pd);
 			typeDef.Methods.Add(methodDef);
@@ -427,7 +445,7 @@ namespace Vulkan.Binder.Extensions {
 		}
 
 		public static MethodReference IndirectMethodReference(this MethodDefinition methodDef, ModuleDefinition module, TypeReference import) {
-			var mr = new MethodReference(methodDef.Name, module.TypeSystem.Void.Import(module), import) {
+			var mr = new MethodReference(methodDef.Name, module.TypeSystem.Void, import) {
 				CallingConvention = methodDef.CallingConvention,
 				ExplicitThis = methodDef.ExplicitThis,
 				HasThis = methodDef.HasThis,
@@ -563,7 +581,11 @@ namespace Vulkan.Binder.Extensions {
 						break;
 					}
 
-					tr = CreateTypeReference(td, asmMod);
+					var scope = asmMod.Assembly.Name.Name == module.TypeSystem.CoreLibrary.Name
+						? module.TypeSystem.CoreLibrary
+						: asmMod;
+
+					tr = CreateTypeReference(td, asmMod, scope);
 					break;
 				}
 				if (tr != null)
@@ -587,7 +609,7 @@ namespace Vulkan.Binder.Extensions {
 		}
 
 		
-		public static TypeReference CreateTypeReference(TypeReference type, ModuleDefinition module)
+		public static TypeReference CreateTypeReference(TypeReference type, ModuleDefinition module, IMetadataScope scope = null)
 		{
 
 			if (!type.IsNested) {
@@ -595,7 +617,7 @@ namespace Vulkan.Binder.Extensions {
 					type.Namespace,
 					type.Name,
 					module,
-					type.Scope,
+					scope ?? module,
 					type.IsValueType);
 			}
 			
@@ -603,7 +625,7 @@ namespace Vulkan.Binder.Extensions {
 				"",
 				type.Name,
 				module,
-				type.Scope,
+				scope ?? module,
 				type.IsValueType) {
 				DeclaringType = CreateTypeReference(type.DeclaringType, module)
 			};
@@ -647,7 +669,9 @@ namespace Vulkan.Binder.Extensions {
 																				? module.TypeSystem.Object
 																				: interiorType == typeof(ValueType)
 																					? module.TypeSystem.ValueType
-																					: null;
+																					: interiorType == typeof(Enum)
+																						? module.TypeSystem.Enum
+																						: null;
 		
 
 		public static TypeReference FindInTypeSystem(this ModuleDefinition module, string typeName)
@@ -687,7 +711,9 @@ namespace Vulkan.Binder.Extensions {
 																				? module.TypeSystem.Object
 																				: typeName == typeof(ValueType).FullName
 																					? module.TypeSystem.ValueType
-																					: null;
+																					: typeName == typeof(Enum).FullName
+																						? module.TypeSystem.Enum
+																						: null;
 
 		private static int GetSizeOfPrimitive(TypeReference typeRef, int pointerSize = -1) {
 			switch (typeRef.FullName) {
@@ -1001,7 +1027,7 @@ namespace Vulkan.Binder.Extensions {
 			transform = new LinkedList<TypeReferenceTransform>();
 			while (type.IsPointer) {
 				var module = exterior.Module;
-				if (directVoids || !type.Is(module.TypeSystem.Void.Import(module))) {
+				if (directVoids || !type.Is(module.TypeSystem.Void)) {
 					transform.AddFirst(MakePointerType);
 					type = type.DescendElementType();
 				}
@@ -1026,7 +1052,7 @@ namespace Vulkan.Binder.Extensions {
 			for (; ;) {
 				if (type.IsPointer) {
 					var module = exterior.Module;
-					if (directVoids || !type.Is(module.TypeSystem.Void.Import(module))) {
+					if (directVoids || !type.Is(module.TypeSystem.Void)) {
 						type = (type as PointerType ?? throw new NotImplementedException()).ElementType;
 					}
 					else {

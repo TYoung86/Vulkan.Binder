@@ -32,7 +32,7 @@ namespace Vulkan.Binder {
 
 			var getter = interfaceDef.DefineMethod(propName,
 				InterfaceMethodAttributes,
-				propElemType, IntType);
+				propElemType, Module.TypeSystem.Int32);
 			getter.DefineParameter(1, ParameterAttributes.In, "index");
 			SetMethodInliningAttributes(getter);
 
@@ -88,18 +88,22 @@ namespace Vulkan.Binder {
 			interfacePropDef = null;
 			interfaceMethodDef = null;
 
-			if (fieldType32.Is(IntType) && fieldType64.Is(LongType)) {
+			var intType = Module.TypeSystem.Int32;
+			var longType = Module.TypeSystem.Int64;
+			if (fieldType32.Is(intType) && fieldType64.Is(longType)) {
 				// IntPtr
-				var propType = IntPtrType;
+				var propType = Module.TypeSystem.IntPtr;
 				var propRefType = propType.MakeByReferenceType();
 
 				interfacePropDef =
 					DefineInterfaceGetProperty(interfaceDef, propRefType, propName);
 				return;
 			}
-			if (fieldType32.Is(UIntType) && fieldType64.Is(ULongType)) {
+			var uIntType = Module.TypeSystem.UInt32;
+			var uLongType = Module.TypeSystem.UInt64;
+			if (fieldType32.Is(uIntType) && fieldType64.Is(uLongType)) {
 				// UIntPtr
-				var propType = UIntPtrType;
+				var propType = Module.TypeSystem.UIntPtr;
 				var propRefType = propType.MakeByReferenceType();
 
 				interfacePropDef =
@@ -127,7 +131,7 @@ namespace Vulkan.Binder {
 			if ( Math.Abs(pointerDepth32 - pointerDepth64) > 1 )
 				throw new NotSupportedException();
 
-			if (fieldType32.IsPointer && fieldType64.Is(IntType)) {
+			if (fieldType32.IsPointer && fieldType64.Is(intType)) {
 				// 32-bit handle
 				var handleType = HandleInt32Gtd.MakeGenericInstanceType(fieldElemType32);
 				
@@ -138,7 +142,7 @@ namespace Vulkan.Binder {
 					DefineInterfaceGetHandleProperty(interfaceDef, handleType, propName);
 				return;
 			}
-			if (fieldType32.IsPointer && fieldType64.Is(UIntType)) {
+			if (fieldType32.IsPointer && fieldType64.Is(uIntType)) {
 				// 32-bit handle
 				var handleType = HandleUInt32Gtd.MakeGenericInstanceType(fieldElemType32);
 				
@@ -149,7 +153,7 @@ namespace Vulkan.Binder {
 					DefineInterfaceGetHandleProperty(interfaceDef, handleType, propName);
 				return;
 			}
-			if (fieldType32.Is(LongType) && fieldType64.IsPointer) {
+			if (fieldType32.Is(longType) && fieldType64.IsPointer) {
 				// 64-bit handle
 				var handleType = HandleInt64Gtd.MakeGenericInstanceType(fieldElemType64);
 				
@@ -160,7 +164,7 @@ namespace Vulkan.Binder {
 					DefineInterfaceGetHandleProperty(interfaceDef, handleType, propName);
 				return;
 			}
-			if (fieldType32.Is(ULongType) && fieldType64.IsPointer) {
+			if (fieldType32.Is(uLongType) && fieldType64.IsPointer) {
 				// 64-bit handle
 				var handleType = HandleUInt64Gtd.MakeGenericInstanceType(fieldElemType64);
 				
@@ -172,7 +176,7 @@ namespace Vulkan.Binder {
 				return;
 			}
 
-			if (fieldElemType64.Is(IntType) && IsHandleType(fieldElemType32)) {
+			if (fieldElemType64.Is(intType) && IsHandleType(fieldElemType32)) {
 				// 32-bit handle
 				TypeReference handleType = HandleInt32Gtd.MakeGenericInstanceType(fieldElemType32);
 
@@ -192,7 +196,7 @@ namespace Vulkan.Binder {
 					DefineInterfaceGetHandleProperty(interfaceDef, handleType, propName, transforms32.Skip(1));
 				return;
 			}
-			if (fieldElemType64.Is(UIntType) && IsHandleType(fieldElemType32)) {
+			if (fieldElemType64.Is(uIntType) && IsHandleType(fieldElemType32)) {
 				// 32-bit handle
 				TypeReference handleType = HandleUInt32Gtd.MakeGenericInstanceType(fieldElemType32);
 
@@ -212,7 +216,7 @@ namespace Vulkan.Binder {
 					DefineInterfaceGetHandleProperty(interfaceDef, handleType, propName, transforms32.Skip(1));
 				return;
 			}
-			if (fieldElemType32.Is(LongType) && IsHandleType(fieldElemType64)) {
+			if (fieldElemType32.Is(longType) && IsHandleType(fieldElemType64)) {
 				// 64-bit handle
 				TypeReference handleType = HandleInt64Gtd.MakeGenericInstanceType(fieldElemType64);
 
@@ -232,7 +236,7 @@ namespace Vulkan.Binder {
 					DefineInterfaceGetHandleProperty(interfaceDef, handleType, propName, transforms64.Skip(1));
 				return;
 			}
-			if (fieldElemType32.Is(ULongType) && IsHandleType(fieldElemType64)) {
+			if (fieldElemType32.Is(uLongType) && IsHandleType(fieldElemType64)) {
 				// 64-bit handle
 				TypeReference handleType = HandleUInt64Gtd.MakeGenericInstanceType(fieldElemType64);
 

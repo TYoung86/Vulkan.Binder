@@ -59,7 +59,7 @@ namespace Vulkan.Binder {
 
 				try {
 					var ctor = funcDef.DefineConstructor(DelegateConstructorAttributes,
-						ObjectType, IntPtrType);
+						Module.TypeSystem.Object, Module.TypeSystem.IntPtr);
 					ctor.SetImplementationFlags(MethodImplAttributes.CodeTypeMask);
 
 					var method = funcDef.DefineMethod("Invoke",

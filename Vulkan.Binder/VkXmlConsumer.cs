@@ -24,8 +24,10 @@ namespace Vulkan.Binder {
 	    public readonly IDictionary<string, XElement> Commands = new ConcurrentDictionary<string, XElement>();
 	    public readonly IDictionary<string, XElement> InstanceExtensions = new ConcurrentDictionary<string, XElement>();
 	    public readonly IDictionary<string, XElement> DeviceExtensions = new ConcurrentDictionary<string, XElement>();
+	    public readonly IDictionary<string, XElement> Features = new ConcurrentDictionary<string, XElement>();
 	    public readonly IDictionary<string, Dictionary<string, string>> Enums = new ConcurrentDictionary<string, Dictionary<string, string>>();
 	    public readonly IDictionary<string, Dictionary<string, int>> Bitmasks = new ConcurrentDictionary<string, Dictionary<string, int>>();
+
 
         public VkXmlConsumer(XDocument document) {
             var registryElem = document.Root
@@ -91,6 +93,19 @@ namespace Vulkan.Binder {
 		        var name = commandElem.Element("proto")?.Element("name")?.Value
 							?? commandElem.Attribute("name")?.Value;
 		        Commands.Add(name, commandElem);
+	        });
+
+	        var featureElem = registryElem.Element("feature")
+								?? throw new ArgumentException("Document contains no 'feature' element.", nameof(document));
+
+	        var featureReqireElems = featureElem.Elements("require");
+
+
+	        Parallel.ForEach(featureReqireElems, requireElem => {
+		        var name = requireElem.Element("name")?.Value
+					?? requireElem.Attribute("comment")?.Value;
+				if ( name != null )
+					Features.Add(name, requireElem);
 	        });
 
             var extensionsElem = registryElem.Element("extensions")

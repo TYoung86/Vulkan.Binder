@@ -223,7 +223,7 @@ namespace Vulkan.Binder {
 				var elementType = clang.getArrayElementType(type);
 				var resolvedParameter = ResolveParameter(elementType, name);
 				var clrElementType = resolvedParameter.Type;
-				if (clrElementType.IsPointer) clrElementType = IntPtrType;
+				if (clrElementType.IsPointer) clrElementType = Module.TypeSystem.IntPtr;
 				var arrayType = resolvedParameter.Type.MakeArrayType();
 
 				if (!PrimitiveUnmanagedTypeMap.TryGetValue(clrElementType.GetRuntimeType(), out var unmanagedType)) {
