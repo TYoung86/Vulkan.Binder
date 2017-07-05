@@ -38,10 +38,12 @@ namespace Vulkan.Binder {
 			funcDef.SetCustomAttribute(() => new BinderGeneratedAttribute());
 
 			var retParam = ResolveParameter(funcInfo.ReturnType);
+			/* todo: figure out why the attribute is jacked up
 			if (!CallingConventionMap.TryGetValue(funcInfo.CallConvention, out var callConv))
 				throw new NotImplementedException();
 			if (!ClrCallingConventionAttributeMap.TryGetValue(callConv, out var callConvAttr))
 				throw new NotImplementedException();
+			*/
 			var argParams = new LinkedList<ParameterInfo>(funcInfo.Parameters.Select(p => ResolveParameter(p.Type, p.Name, (int) p.Index)));
 
 			return () => {
@@ -67,7 +69,8 @@ namespace Vulkan.Binder {
 						retType, clrArgTypes);
 
 					method.SetImplementationFlags(MethodImplAttributes.CodeTypeMask);
-					method.SetCustomAttribute(callConvAttr);
+					// todo: figure out why the attribute is jacked up
+					//method.SetCustomAttribute(callConvAttr);
 
 
 					argParams.ConsumeLinkedList((argParam, i) => {
