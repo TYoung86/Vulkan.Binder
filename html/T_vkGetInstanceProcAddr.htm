@@ -9,19 +9,81 @@
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetInstanceProcAddr_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection"><span class="code">vkGetInstanceProcAddr</span> itself is obtained in a platform- and loader-
 specific manner.
 Typically, the loader library will export this command as a function symbol,
-so applications  can  link against the loader library, or load it dynamically
+so applications can link against the loader library, or load it dynamically
 and look up the symbol using platform-specific APIs.
 Loaders are encouraged to export function symbols for all other core Vulkan
 commands as well; if this is done, then applications that use only the core
-Vulkan commands have no need to use <span class="code">vkGetInstanceProcAddr</span>.    The table below defines the various use cases for
+Vulkan commands have no need to use <span class="code">vkGetInstanceProcAddr</span>.
+
+
+The table below defines the various use cases for
 <span class="code">vkGetInstanceProcAddr</span> and expected return value ("fp" is function
-pointer) for each case.    The returned function pointer is of type <a href="T_PFN_vkVoidFunction.htm">PFN_vkVoidFunction</a>, and must
-be cast to the type of the command being queried.  <p>Table 1. vkGetInstanceProcAddr behavior</p><div class="tableSection"><table><tr><th><span class="code">instance</span><span class="code">pName</span>return value</th></tr><tr><td> * </td><td><span class="code">NULL</span></td><td> undefined </td></tr><tr><td> invalid instance </td><td> * </td><td> undefined </td></tr><tr><td><span class="code">NULL</span></td><td><a href="T_vkEnumerateInstanceExtensionProperties.htm">vkEnumerateInstanceExtensionProperties</a></td><td> fp </td></tr><tr><td><span class="code">NULL</span></td><td><a href="T_vkEnumerateInstanceLayerProperties.htm">vkEnumerateInstanceLayerProperties</a></td><td> fp </td></tr><tr><td><span class="code">NULL</span></td><td><a href="T_vkCreateInstance.htm">vkCreateInstance</a></td><td> fp </td></tr><tr><td><span class="code">NULL</span></td><td> * (any <span class="code">pName</span> not covered above) </td><td><span class="code">NULL</span></td></tr><tr><td> instance </td><td> core Vulkan command </td><td> fp<sup>1</sup></td></tr><tr><td> instance </td><td> enabled instance extension commands for <span class="code">instance</span></td><td> fp<sup>1</sup></td></tr><tr><td> instance </td><td> available device extension<sup>2</sup> commands for <span class="code">instance</span></td><td> fp<sup>1</sup></td></tr><tr><td> instance </td><td> * (any <span class="code">pName</span> not covered above) </td><td><span class="code">NULL</span></td></tr></table></div><dl><dt>1</dt><dd> The returned function pointer  must  only be called with a dispatchable
+pointer) for each case.
+
+
+The returned function pointer is of type <a href="T_PFN_vkVoidFunction.htm">PFN_vkVoidFunction</a>, and must
+be cast to the type of the command being queried.
+
+<p>Table 1. vkGetInstanceProcAddr behavior</p><div class="tableSection"><table><tr><th><span class="code">instance</span><span class="code">pName</span>return value</th></tr><tr><td>
+*
+</td><td><span class="code">NULL</span></td><td>
+undefined
+</td></tr><tr><td>
+invalid instance
+</td><td>
+*
+</td><td>
+undefined
+</td></tr><tr><td><span class="code">NULL</span></td><td><a href="T_vkEnumerateInstanceExtensionProperties.htm">vkEnumerateInstanceExtensionProperties</a></td><td>
+fp
+</td></tr><tr><td><span class="code">NULL</span></td><td><a href="T_vkEnumerateInstanceLayerProperties.htm">vkEnumerateInstanceLayerProperties</a></td><td>
+fp
+</td></tr><tr><td><span class="code">NULL</span></td><td><a href="T_vkCreateInstance.htm">vkCreateInstance</a></td><td>
+fp
+</td></tr><tr><td><span class="code">NULL</span></td><td>
+* (any <span class="code">pName</span> not covered above)
+</td><td><span class="code">NULL</span></td></tr><tr><td>
+instance
+</td><td>
+core Vulkan command
+</td><td>
+fp<sup>1</sup></td></tr><tr><td>
+instance
+</td><td>
+enabled instance extension commands for <span class="code">instance</span></td><td>
+fp<sup>1</sup></td></tr><tr><td>
+instance
+</td><td>
+available device extension<sup>2</sup> commands for <span class="code">instance</span></td><td>
+fp<sup>1</sup></td></tr><tr><td>
+instance
+</td><td>
+* (any <span class="code">pName</span> not covered above)
+</td><td><span class="code">NULL</span></td></tr></table></div><dl><dt>1</dt><dd>
+The returned function pointer must only be called with a dispatchable
 object (the first parameter) that is <span class="code">instance</span> or a child of
 <span class="code">instance</span>.
 e.g. <span class="code">VkInstance</span>, <span class="code">VkPhysicalDevice</span>, <span class="code">VkDevice</span>,
-<span class="code">VkQueue</span>, or <span class="code">VkCommandBuffer</span>. </dd><dt>2</dt><dd> An &amp;#8220;available extension&amp;#8221; is an extension function supported by any of
-the loader, driver or layer. </dd></dl>    Valid Usage (Implicit)  <ul><li>  If <span class="code">instance</span> is not <span class="code">NULL</span>, <span class="code">instance</span> must  be a valid <span class="code">VkInstance</span> handle </li><li><span class="code">pName</span> must  be a null-terminated UTF-8 string </li></ul>     Vulkan commands are not necessarily exposed statically on a platform.
-Function pointers for all Vulkan commands  can  be obtained with the command:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>PFN_vkVoidFunction vkGetInstanceProcAddr(
+<span class="code">VkQueue</span>, or <span class="code">VkCommandBuffer</span>.
+</dd><dt>2</dt><dd>
+An &amp;#8220;available extension&amp;#8221; is an extension function supported by any of
+the loader, driver or layer.
+</dd></dl>
+
+
+Valid Usage (Implicit)
+<ul><li>
+ If <span class="code">instance</span> is not <span class="code">NULL</span>, <span class="code">instance</span> must be a valid <span class="code">VkInstance</span> handle
+</li><li><span class="code">pName</span> must be a null-terminated UTF-8 string
+</li></ul>
+
+
+
+
+Vulkan commands are not necessarily exposed statically on a platform.
+Function pointers for all Vulkan commands can be obtained with the command:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>PFN_vkVoidFunction vkGetInstanceProcAddr(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkInstance                                  instance,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">const</span> <span class="highlight-keyword">char</span>*                                 pName);</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EAACBA");</script></div><div class="collapsibleAreaRegion" id="seeAlsoSection"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID6RB')" onkeypress="SectionExpandCollapse_CheckKey('ID6RB', event)" tabindex="0"><img id="ID6RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />See Also</span></div><div id="ID6RBSection" class="collapsibleSection"><h4 class="subHeading">Reference</h4><div class="seeAlsoStyle"><a href="N_.htm">(Default Namespace) Namespace</a></div><div class="seeAlsoStyle"><a href="T_PFN_vkVoidFunction.htm">(Default Namespace)<span id="LST2DFB5E81_2"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST2DFB5E81_2?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>PFN_vkVoidFunction</a></div><div class="seeAlsoStyle"><a href="T_VkInstance.htm">(Default Namespace)<span id="LST2DFB5E81_3"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST2DFB5E81_3?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>VkInstance</a></div></div></div></div><div id="pageFooter" class="pageFooter"> </div></body></html>

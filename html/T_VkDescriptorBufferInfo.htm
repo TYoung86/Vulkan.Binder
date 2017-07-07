@@ -5,14 +5,38 @@
    Vulkan (in Vulkan.dll) Version: 1.0.53<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID2RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID1EACA_tab1" class="codeSnippetContainerTabSingle">C#</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EACA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EACA');return false;" title="Copy">Copy</a></div></div><div id="ID1EACA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">[<a href="http://msdn2.microsoft.com/en-us/library/bcfsa90a" target="_blank">SerializableAttribute</a>]
 <span class="keyword">public</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="identifier">VkDescriptorBufferInfo</span> : <a href="http://msdn2.microsoft.com/en-us/library/aey3s293" target="_blank">ValueType</a></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EACA");</script></div><p>The <span class="selflink">VkDescriptorBufferInfo</span> type exposes the following members.</p><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Fields</span></div><div id="ID3RBSection" class="collapsibleSection"><table class="members" id="fieldList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkDescriptorBufferInfo_buffer.htm">buffer</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkDescriptorBufferInfo_offset.htm">offset</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkDescriptorBufferInfo_range.htm">range</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection"><div class="tableSection"><table /></div>   For <span class="code">VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC</span> and
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkDescriptorBufferInfo_buffer.htm">buffer</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkDescriptorBufferInfo_offset.htm">offset</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkDescriptorBufferInfo_range.htm">range</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection"><div class="tableSection"><table /></div>
+
+For <span class="code">VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC</span> and
 <span class="code">VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC</span> descriptor types,
 <span class="code">offset</span> is the base offset from which the dynamic offset is applied and
-<span class="code">range</span> is the static size used for all dynamic offsets.     Valid Usage  <ul><li><span class="code">offset</span> must  be less than the size of <span class="code">buffer</span></li><li> 
-If <span class="code">range</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, <span class="code">range</span> must  be
-greater than <span class="code">0</span></li><li> 
-If <span class="code">range</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, <span class="code">range</span> must  be
-less than or equal to the size of <span class="code">buffer</span> minus <span class="code">offset</span></li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">buffer</span> must  be a valid <span class="code">VkBuffer</span> handle </li></ul>     The <span class="code">VkDescriptorBufferInfo</span> structure is defined as:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkDescriptorBufferInfo {
+<span class="code">range</span> is the static size used for all dynamic offsets.
+
+
+
+Valid Usage
+<ul><li><span class="code">offset</span> must be less than the size of <span class="code">buffer</span></li><li>
+
+If <span class="code">range</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, <span class="code">range</span> must be
+greater than <span class="code">0</span></li><li>
+
+If <span class="code">range</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, <span class="code">range</span> must be
+less than or equal to the size of <span class="code">buffer</span> minus <span class="code">offset</span></li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">buffer</span> must be a valid <span class="code">VkBuffer</span> handle
+</li></ul>
+
+
+
+
+The <span class="code">VkDescriptorBufferInfo</span> structure is defined as:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkDescriptorBufferInfo {
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkBuffer        buffer;
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkDeviceSize    offset;
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkDeviceSize    range;

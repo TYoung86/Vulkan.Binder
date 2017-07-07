@@ -16,11 +16,42 @@ After verifying and enabling the instance layers and extensions the
 <span class="code">VkInstance</span> object is created and returned to the application.
 If a requested extension is only supported by a layer, both the layer and
 the extension need to be specified at <span class="code">vkCreateInstance</span> time for the
-creation to succeed.     Valid Usage  <ul><li> 
+creation to succeed.
+
+
+
+Valid Usage
+<ul><li>
+
 All <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#extended-functionality-extensions-dependencies">required
 extensions</a> for each extension in the
-<a href="T_IVkInstanceCreateInfo.htm">IVkInstanceCreateInfo</a>::<span class="code">ppEnabledExtensionNames</span> list  must 
-also be present in that list. </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">pCreateInfo</span> must  be a pointer to a valid <span class="code">VkInstanceCreateInfo</span> structure </li><li>  If <span class="code">pAllocator</span> is not <span class="code">NULL</span>, <span class="code">pAllocator</span> must  be a pointer to a valid <span class="code">VkAllocationCallbacks</span> structure </li><li><span class="code">pInstance</span> must  be a pointer to a <span class="code">VkInstance</span> handle </li></ul>      Return Codes  <dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_INITIALIZATION_FAILED</span></li><li><span class="code">VK_ERROR_LAYER_NOT_PRESENT</span></li><li><span class="code">VK_ERROR_EXTENSION_NOT_PRESENT</span></li><li><span class="code">VK_ERROR_INCOMPATIBLE_DRIVER</span></li></ul></dd></dl>     To create an instance object, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkCreateInstance(
+<a href="T_IVkInstanceCreateInfo.htm">IVkInstanceCreateInfo</a>::<span class="code">ppEnabledExtensionNames</span> list must 
+also be present in that list.
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">pCreateInfo</span> must be a pointer to a valid <span class="code">VkInstanceCreateInfo</span> structure
+</li><li>
+ If <span class="code">pAllocator</span> is not <span class="code">NULL</span>, <span class="code">pAllocator</span> must be a pointer to a valid <span class="code">VkAllocationCallbacks</span> structure
+</li><li><span class="code">pInstance</span> must be a pointer to a <span class="code">VkInstance</span> handle
+</li></ul>
+
+
+
+
+Return Codes
+<dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_INITIALIZATION_FAILED</span></li><li><span class="code">VK_ERROR_LAYER_NOT_PRESENT</span></li><li><span class="code">VK_ERROR_EXTENSION_NOT_PRESENT</span></li><li><span class="code">VK_ERROR_INCOMPATIBLE_DRIVER</span></li></ul></dd></dl>
+
+
+
+
+To create an instance object, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkCreateInstance(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">const</span> VkInstanceCreateInfo*                 pCreateInfo,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">const</span> VkAllocationCallbacks*                pAllocator,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkInstance*                                 pInstance);</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EAADBA");</script></div><div class="collapsibleAreaRegion" id="seeAlsoSection"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID6RB')" onkeypress="SectionExpandCollapse_CheckKey('ID6RB', event)" tabindex="0"><img id="ID6RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />See Also</span></div><div id="ID6RBSection" class="collapsibleSection"><h4 class="subHeading">Reference</h4><div class="seeAlsoStyle"><a href="N_.htm">(Default Namespace) Namespace</a></div><div class="seeAlsoStyle"><a href="T_IVkAllocationCallbacks.htm">(Default Namespace)<span id="LSTC536EE0C_2"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTC536EE0C_2?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>IVkAllocationCallbacks</a></div><div class="seeAlsoStyle"><a href="T_VkInstance.htm">(Default Namespace)<span id="LSTC536EE0C_3"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTC536EE0C_3?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>VkInstance</a></div><div class="seeAlsoStyle"><a href="T_IVkInstanceCreateInfo.htm">(Default Namespace)<span id="LSTC536EE0C_4"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTC536EE0C_4?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>IVkInstanceCreateInfo</a></div></div></div></div><div id="pageFooter" class="pageFooter"> </div></body></html>

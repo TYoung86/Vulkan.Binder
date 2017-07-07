@@ -6,23 +6,70 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkUpdateDescriptorSets__ctor.htm">vkUpdateDescriptorSets</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkUpdateDescriptorSets</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkUpdateDescriptorSets_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  The operations described by <span class="code">pDescriptorWrites</span> are performed first,
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkUpdateDescriptorSets_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+The operations described by <span class="code">pDescriptorWrites</span> are performed first,
 followed by the operations described by <span class="code">pDescriptorCopies</span>.
 Within each array, the operations are performed in the order they appear in
-the array.    Each element in the <span class="code">pDescriptorWrites</span> array describes an operation
+the array.
+
+
+Each element in the <span class="code">pDescriptorWrites</span> array describes an operation
 updating the descriptor set using descriptors for resources specified in the
-structure.    Each element in the <span class="code">pDescriptorCopies</span> array is a
+structure.
+
+
+Each element in the <span class="code">pDescriptorCopies</span> array is a
 <a href="T_IVkCopyDescriptorSet.htm">IVkCopyDescriptorSet</a> structure describing an operation copying
-descriptors between sets.    If the <span class="code">dstSet</span> member of any given element of <span class="code">pDescriptorWrites</span>
+descriptors between sets.
+
+
+If the <span class="code">dstSet</span> member of any given element of <span class="code">pDescriptorWrites</span>
 or <span class="code">pDescriptorCopies</span> is bound, accessed, or modified by any command
 that was recorded to a command buffer which is currently in the
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#commandbuffers-lifecycle">recording or executable state</a>, that command
-buffer becomes <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#commandbuffers-lifecycle">invalid</a>.     Valid Usage  <ul><li> 
+buffer becomes <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#commandbuffers-lifecycle">invalid</a>.
+
+
+
+Valid Usage
+<ul><li>
+
 The <span class="code">dstSet</span> member of any given element of <span class="code">pDescriptorWrites</span>
-or <span class="code">pDescriptorCopies</span> must  not be used by any command that was
-recorded to a command buffer which is in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#commandbuffers-lifecycle">pending state</a>. </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">device</span> must  be a valid <span class="code">VkDevice</span> handle </li><li>  If <span class="code">descriptorWriteCount</span> is not <span class="code">0</span>, <span class="code">pDescriptorWrites</span> must  be a pointer to an array of <span class="code">descriptorWriteCount</span> valid <span class="code">VkWriteDescriptorSet</span> structures </li><li>  If <span class="code">descriptorCopyCount</span> is not <span class="code">0</span>, <span class="code">pDescriptorCopies</span> must  be a pointer to an array of <span class="code">descriptorCopyCount</span> valid <span class="code">VkCopyDescriptorSet</span> structures </li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">pDescriptorWrites</span>[].dstSet  must  be externally synchronized </li><li> Host access to <span class="code">pDescriptorCopies</span>[].dstSet  must  be externally synchronized </li></ul>     Once allocated, descriptor sets  can  be updated with a combination of write
+or <span class="code">pDescriptorCopies</span> must not be used by any command that was
+recorded to a command buffer which is in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#commandbuffers-lifecycle">pending state</a>.
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">device</span> must be a valid <span class="code">VkDevice</span> handle
+</li><li>
+ If <span class="code">descriptorWriteCount</span> is not <span class="code">0</span>, <span class="code">pDescriptorWrites</span> must be a pointer to an array of <span class="code">descriptorWriteCount</span> valid <span class="code">VkWriteDescriptorSet</span> structures
+</li><li>
+ If <span class="code">descriptorCopyCount</span> is not <span class="code">0</span>, <span class="code">pDescriptorCopies</span> must be a pointer to an array of <span class="code">descriptorCopyCount</span> valid <span class="code">VkCopyDescriptorSet</span> structures
+</li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">pDescriptorWrites</span>[].dstSet must be externally synchronized
+</li><li>
+Host access to <span class="code">pDescriptorCopies</span>[].dstSet must be externally synchronized
+</li></ul>
+
+
+
+
+Once allocated, descriptor sets can be updated with a combination of write
 and copy operations.
-To update descriptor sets, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkUpdateDescriptorSets(
+To update descriptor sets, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkUpdateDescriptorSets(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDevice                                    device,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   uint32_t                                    descriptorWriteCount,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">const</span> VkWriteDescriptorSet*                 pDescriptorWrites,

@@ -9,16 +9,28 @@
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdCopyQueryPoolResults_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection"><span class="code">vkCmdCopyQueryPoolResults</span> is guaranteed to see the effect of previous
 uses of <span class="code">vkCmdResetQueryPool</span> in the same queue, without any additional
 synchronization.
-Thus, the results will always reflect the most recent use of the query.    <span class="code">flags</span> has the same possible values described above for the <span class="code">flags</span>
+Thus, the results will always reflect the most recent use of the query.
+
+
+<span class="code">flags</span> has the same possible values described above for the <span class="code">flags</span>
 parameter of <a href="T_vkGetQueryPoolResults.htm">vkGetQueryPoolResults</a>, but the different style of
 execution causes some subtle behavioral differences.
 Because <span class="code">vkCmdCopyQueryPoolResults</span> executes in order with respect to
 other query commands, there is less ambiguity about which use of a query is
-being requested.    If no bits are set in <span class="code">flags</span>, results for all requested queries in the
+being requested.
+
+
+If no bits are set in <span class="code">flags</span>, results for all requested queries in the
 available state are written as 32-bit unsigned integer values, and nothing
-is written for queries in the unavailable state.    If <span class="code">VK_QUERY_RESULT_64_BIT</span> is set, the results are written as an array
+is written for queries in the unavailable state.
+
+
+If <span class="code">VK_QUERY_RESULT_64_BIT</span> is set, the results are written as an array
 of 64-bit unsigned integer values as described for
-<a href="T_vkGetQueryPoolResults.htm">vkGetQueryPoolResults</a>.    If <span class="code">VK_QUERY_RESULT_WAIT_BIT</span> is set, the implementation will wait for
+<a href="T_vkGetQueryPoolResults.htm">vkGetQueryPoolResults</a>.
+
+
+If <span class="code">VK_QUERY_RESULT_WAIT_BIT</span> is set, the implementation will wait for
 each query&amp;#8217;s status to be in the available state before retrieving the
 numerical results for that query.
 This is guaranteed to reflect the most recent use of the query on the same
@@ -26,37 +38,108 @@ queue, assuming that the query is not being simultaneously used by other
 queues.
 If the query does not become available in a finite amount of time (e.g. due
 to not issuing a query since the last reset), a <span class="code">VK_ERROR_DEVICE_LOST</span>
-error  may  occur.    Similarly, if <span class="code">VK_QUERY_RESULT_WITH_AVAILABILITY_BIT</span> is set and
+error may occur.
+
+
+Similarly, if <span class="code">VK_QUERY_RESULT_WITH_AVAILABILITY_BIT</span> is set and
 <span class="code">VK_QUERY_RESULT_WAIT_BIT</span> is not set, the availability is guaranteed to
 reflect the most recent use of the query on the same queue, assuming that
 the query is not being simultaneously used by other queues.
-As with <span class="code">vkGetQueryPoolResults</span>, implementations  must  guarantee that if
+As with <span class="code">vkGetQueryPoolResults</span>, implementations must guarantee that if
 they return a non-zero availability value, then the numerical results are
-valid.    If <span class="code">VK_QUERY_RESULT_PARTIAL_BIT</span> is set, <span class="code">VK_QUERY_RESULT_WAIT_BIT</span>
+valid.
+
+
+If <span class="code">VK_QUERY_RESULT_PARTIAL_BIT</span> is set, <span class="code">VK_QUERY_RESULT_WAIT_BIT</span>
 is not set, and the query&amp;#8217;s status is unavailable, an intermediate result
-value between zero and the final result value is written for that query.    <span class="code">VK_QUERY_RESULT_PARTIAL_BIT</span> must  not be used if the pool&amp;#8217;s
-<span class="code">queryType</span> is <span class="code">VK_QUERY_TYPE_TIMESTAMP</span>.    <span class="code">vkCmdCopyQueryPoolResults</span> is considered to be a transfer operation,
-and its writes to buffer memory  must  be synchronized using
+value between zero and the final result value is written for that query.
+
+
+<span class="code">VK_QUERY_RESULT_PARTIAL_BIT</span> must not be used if the pool&amp;#8217;s
+<span class="code">queryType</span> is <span class="code">VK_QUERY_TYPE_TIMESTAMP</span>.
+
+
+<span class="code">vkCmdCopyQueryPoolResults</span> is considered to be a transfer operation,
+and its writes to buffer memory must be synchronized using
 <span class="code">VK_PIPELINE_STAGE_TRANSFER_BIT</span> and <span class="code">VK_ACCESS_TRANSFER_WRITE_BIT</span>
-before using the results.     Valid Usage  <ul><li><span class="code">dstOffset</span> must  be less than the size of <span class="code">dstBuffer</span></li><li><span class="code">firstQuery</span> must  be less than the number of queries in
-<span class="code">queryPool</span></li><li> 
-The sum of <span class="code">firstQuery</span> and <span class="code">queryCount</span> must  be less than or
-equal to the number of queries in <span class="code">queryPool</span></li><li> 
+before using the results.
+
+
+
+Valid Usage
+<ul><li><span class="code">dstOffset</span> must be less than the size of <span class="code">dstBuffer</span></li><li><span class="code">firstQuery</span> must be less than the number of queries in
+<span class="code">queryPool</span></li><li>
+
+The sum of <span class="code">firstQuery</span> and <span class="code">queryCount</span> must be less than or
+equal to the number of queries in <span class="code">queryPool</span></li><li>
+
 If <span class="code">VK_QUERY_RESULT_64_BIT</span> is not set in <span class="code">flags</span> then
-<span class="code">dstOffset</span> and <span class="code">stride</span> must  be multiples of <span class="code">4</span></li><li> 
+<span class="code">dstOffset</span> and <span class="code">stride</span> must be multiples of <span class="code">4</span></li><li>
+
 If <span class="code">VK_QUERY_RESULT_64_BIT</span> is set in <span class="code">flags</span> then
-<span class="code">dstOffset</span> and <span class="code">stride</span> must  be multiples of <span class="code">8</span></li><li><span class="code">dstBuffer</span> must  have enough storage, from <span class="code">dstOffset</span>, to
+<span class="code">dstOffset</span> and <span class="code">stride</span> must be multiples of <span class="code">8</span></li><li><span class="code">dstBuffer</span> must have enough storage, from <span class="code">dstOffset</span>, to
 contain the result of each query, as described
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#queries-operation-memorylayout">here</a></li><li><span class="code">dstBuffer</span> must  have been created with
-<span class="code">VK_BUFFER_USAGE_TRANSFER_DST_BIT</span> usage flag </li><li> 
-If <span class="code">dstBuffer</span> is non-sparse then it  must  be bound completely and
-contiguously to a single <span class="code">VkDeviceMemory</span> object </li><li> 
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#queries-operation-memorylayout">here</a></li><li><span class="code">dstBuffer</span> must have been created with
+<span class="code">VK_BUFFER_USAGE_TRANSFER_DST_BIT</span> usage flag
+</li><li>
+
+If <span class="code">dstBuffer</span> is non-sparse then it must be bound completely and
+contiguously to a single <span class="code">VkDeviceMemory</span> object
+</li><li>
+
 If the <span class="code">queryType</span> used to create <span class="code">queryPool</span> was
-<span class="code">VK_QUERY_TYPE_TIMESTAMP</span>, <span class="code">flags</span> must  not contain
-<span class="code">VK_QUERY_RESULT_PARTIAL_BIT</span></li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">commandBuffer</span> must  be a valid <span class="code">VkCommandBuffer</span> handle </li><li><span class="code">queryPool</span> must  be a valid <span class="code">VkQueryPool</span> handle </li><li><span class="code">dstBuffer</span> must  be a valid <span class="code">VkBuffer</span> handle </li><li><span class="code">flags</span> must  be a valid combination of <a href="T_VkQueryResultFlags.htm">VkQueryResultFlags</a> values </li><li><span class="code">commandBuffer</span> must  be in the  recording state  </li><li>  The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  support graphics, or compute operations </li><li>  This command  must  only be called outside of a render pass instance </li><li>  Each of <span class="code">commandBuffer</span>, <span class="code">dstBuffer</span>, and <span class="code">queryPool</span> must  have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">commandBuffer</span> must  be externally synchronized </li><li> Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  be externally synchronized </li></ul>      Command Properties <div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td> Primary<br />
-Secondary </td><td> Outside </td><td> Graphics<br />
-compute </td><td> Transfer </td></tr></table></div>    To copy query statuses and numerical results directly to buffer memory,
-call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdCopyQueryPoolResults(
+<span class="code">VK_QUERY_TYPE_TIMESTAMP</span>, <span class="code">flags</span> must not contain
+<span class="code">VK_QUERY_RESULT_PARTIAL_BIT</span></li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">commandBuffer</span> must be a valid <span class="code">VkCommandBuffer</span> handle
+</li><li><span class="code">queryPool</span> must be a valid <span class="code">VkQueryPool</span> handle
+</li><li><span class="code">dstBuffer</span> must be a valid <span class="code">VkBuffer</span> handle
+</li><li><span class="code">flags</span> must be a valid combination of <a href="T_VkQueryResultFlags.htm">VkQueryResultFlags</a> values
+</li><li><span class="code">commandBuffer</span> must be in the recording state 
+</li><li>
+ The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must support graphics, or compute operations
+</li><li>
+ This command must only be called outside of a render pass instance
+</li><li>
+ Each of <span class="code">commandBuffer</span>, <span class="code">dstBuffer</span>, and <span class="code">queryPool</span> must have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">commandBuffer</span> must be externally synchronized
+</li><li>
+Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must be externally synchronized
+</li></ul>
+
+
+
+
+Command Properties
+<div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td>
+Primary<br />
+Secondary
+</td><td>
+Outside
+</td><td>
+Graphics<br />
+compute
+</td><td>
+Transfer
+</td></tr></table></div>
+
+
+
+To copy query statuses and numerical results directly to buffer memory,
+call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdCopyQueryPoolResults(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkCommandBuffer                             commandBuffer,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkQueryPool                                 queryPool,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   uint32_t                                    firstQuery,

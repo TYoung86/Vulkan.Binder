@@ -5,26 +5,57 @@
    Vulkan (in Vulkan.dll) Version: 1.0.53<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID2RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID1EACA_tab1" class="codeSnippetContainerTabSingle">C#</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EACA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EACA');return false;" title="Copy">Copy</a></div></div><div id="ID1EACA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">[<a href="http://msdn2.microsoft.com/en-us/library/bcfsa90a" target="_blank">SerializableAttribute</a>]
 <span class="keyword">public</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="identifier">VkSparseImageMemoryBind</span> : <a href="http://msdn2.microsoft.com/en-us/library/aey3s293" target="_blank">ValueType</a></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EACA");</script></div><p>The <span class="selflink">VkSparseImageMemoryBind</span> type exposes the following members.</p><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Fields</span></div><div id="ID3RBSection" class="collapsibleSection"><table class="members" id="fieldList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseImageMemoryBind_extent.htm">extent</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseImageMemoryBind_flags.htm">flags</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseImageMemoryBind_memory.htm">memory</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseImageMemoryBind_memoryOffset.htm">memoryOffset</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseImageMemoryBind_offset.htm">offset</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseImageMemoryBind_subresource.htm">subresource</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection">   Valid Usage  <ul><li> 
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseImageMemoryBind_extent.htm">extent</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseImageMemoryBind_flags.htm">flags</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseImageMemoryBind_memory.htm">memory</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseImageMemoryBind_memoryOffset.htm">memoryOffset</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseImageMemoryBind_offset.htm">offset</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseImageMemoryBind_subresource.htm">subresource</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection">
+
+
+Valid Usage
+<ul><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-sparseResidencyAliased">sparse aliased
 residency</a> feature is not enabled, and if any other resources are bound
-to ranges of <span class="code">memory</span>, the range of <span class="code">memory</span> being bound  must 
-not overlap with those bound ranges </li><li><span class="code">memory</span> and <span class="code">memoryOffset</span> must  match the memory requirements
+to ranges of <span class="code">memory</span>, the range of <span class="code">memory</span> being bound must 
+not overlap with those bound ranges
+</li><li><span class="code">memory</span> and <span class="code">memoryOffset</span> must match the memory requirements
 of the calling command&amp;#8217;s <span class="code">image</span>, as described in section
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#resources-association">../../html/vkspec.html#resources-association</a></li><li><span class="code">subresource</span> must  be a valid image subresource for <span class="code">image</span>
-(see <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#resources-image-views">../../html/vkspec.html#resources-image-views</a>) </li><li><span class="code">offset.x</span> must  be a multiple of the sparse image block width
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#resources-association">../../html/vkspec.html#resources-association</a></li><li><span class="code">subresource</span> must be a valid image subresource for <span class="code">image</span>
+(see <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#resources-image-views">../../html/vkspec.html#resources-image-views</a>)
+</li><li><span class="code">offset.x</span> must be a multiple of the sparse image block width
 (<span class="code">VkSparseImageFormatProperties</span>::<span class="code">imageGranularity.width</span>) of
-the image </li><li><span class="code">extent.width</span> must  either be a multiple of the sparse image block
-width of the image, or else  (<span class="code">extent.width</span> + 
-<span class="code">offset.x</span>)  must  equal the width of the image subresource </li><li><span class="code">offset.y</span> must  be a multiple of the sparse image block height
+the image
+</li><li><span class="code">extent.width</span> must either be a multiple of the sparse image block
+width of the image, or else (<span class="code">extent.width</span> + 
+<span class="code">offset.x</span>) must equal the width of the image subresource
+</li><li><span class="code">offset.y</span> must be a multiple of the sparse image block height
 (<span class="code">VkSparseImageFormatProperties</span>::<span class="code">imageGranularity.height</span>) of
-the image </li><li><span class="code">extent.height</span> must  either be a multiple of the sparse image block
-height of the image, or else  (<span class="code">extent.height</span> + 
-<span class="code">offset.y</span>)  must  equal the height of the image subresource </li><li><span class="code">offset.z</span> must  be a multiple of the sparse image block depth
+the image
+</li><li><span class="code">extent.height</span> must either be a multiple of the sparse image block
+height of the image, or else (<span class="code">extent.height</span> + 
+<span class="code">offset.y</span>) must equal the height of the image subresource
+</li><li><span class="code">offset.z</span> must be a multiple of the sparse image block depth
 (<span class="code">VkSparseImageFormatProperties</span>::<span class="code">imageGranularity.depth</span>) of
-the image </li><li><span class="code">extent.depth</span> must  either be a multiple of the sparse image block
-depth of the image, or else  (<span class="code">extent.depth</span> + 
-<span class="code">offset.z</span>)  must  equal the depth of the image subresource </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">subresource</span> must  be a valid <span class="code">VkImageSubresource</span> structure </li><li>  If <span class="code">memory</span> is not <span class="nolink">[!:VK_NULL_HANDLE]</span>, <span class="code">memory</span> must  be a valid <span class="code">VkDeviceMemory</span> handle </li><li><span class="code">flags</span> must  be a valid combination of <a href="T_VkSparseMemoryBindFlags.htm">VkSparseMemoryBindFlags</a> values </li></ul>     The <span class="code">VkSparseImageMemoryBind</span> structure is defined as:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAGBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAGBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAGBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkSparseImageMemoryBind {
+the image
+</li><li><span class="code">extent.depth</span> must either be a multiple of the sparse image block
+depth of the image, or else (<span class="code">extent.depth</span> + 
+<span class="code">offset.z</span>) must equal the depth of the image subresource
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">subresource</span> must be a valid <span class="code">VkImageSubresource</span> structure
+</li><li>
+ If <span class="code">memory</span> is not <span class="nolink">[!:VK_NULL_HANDLE]</span>, <span class="code">memory</span> must be a valid <span class="code">VkDeviceMemory</span> handle
+</li><li><span class="code">flags</span> must be a valid combination of <a href="T_VkSparseMemoryBindFlags.htm">VkSparseMemoryBindFlags</a> values
+</li></ul>
+
+
+
+
+The <span class="code">VkSparseImageMemoryBind</span> structure is defined as:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAGBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAGBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAGBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkSparseImageMemoryBind {
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkImageSubresource         subresource;
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkOffset3D                 offset;
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkExtent3D                 extent;

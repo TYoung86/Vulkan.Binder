@@ -6,18 +6,34 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_PFN_vkAllocationFunction__ctor.htm">PFN_vkAllocationFunction</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">PFN_vkAllocationFunction</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_PFN_vkAllocationFunction_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  If <span class="code">pfnAllocation</span> is unable to allocate the requested memory, it  must 
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_PFN_vkAllocationFunction_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+If <span class="code">pfnAllocation</span> is unable to allocate the requested memory, it must 
 return <span class="code">NULL</span>.
-If the allocation was successful, it  must  return a valid pointer to memory
+If the allocation was successful, it must return a valid pointer to memory
 allocation containing at least <span class="code">size</span> bytes, and with the pointer value
-being a multiple of <span class="code">alignment</span>.   <div class="tableSection"><table /></div>   If <span class="code">pfnAllocation</span> returns <span class="code">NULL</span>, and if the implementation is unable
+being a multiple of <span class="code">alignment</span>.
+
+<div class="tableSection"><table /></div>
+
+If <span class="code">pfnAllocation</span> returns <span class="code">NULL</span>, and if the implementation is unable
 to continue correct processing of the current command without the requested
-allocation, it  must  treat this as a run-time error, and generate
+allocation, it must treat this as a run-time error, and generate
 <span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span> at the appropriate time for the command in
-which the condition was detected, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#fundamentals-errorcodes">Return Codes</a>.    If the implementation is able to continue correct processing of the current
-command without the requested allocation, then it  may  do so, and  must  not
+which the condition was detected, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#fundamentals-errorcodes">Return Codes</a>.
+
+
+If the implementation is able to continue correct processing of the current
+command without the requested allocation, then it may do so, and must not
 generate <span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span> as a result of this failed
-allocation.    The type of <span class="code">pfnAllocation</span> is:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAABBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAABBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAABBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">typedef</span> <span class="highlight-keyword">void</span>* (VKAPI_PTR *PFN_vkAllocationFunction)(
+allocation.
+
+
+
+The type of <span class="code">pfnAllocation</span> is:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAABBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAABBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAABBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">typedef</span> <span class="highlight-keyword">void</span>* (VKAPI_PTR *PFN_vkAllocationFunction)(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">void</span>*                                       pUserData,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   size_t                                      size,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   size_t                                      alignment,

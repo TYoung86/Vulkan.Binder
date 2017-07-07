@@ -6,20 +6,54 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkWaitForFences__ctor.htm">vkWaitForFences</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkWaitForFences</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkWaitForFences_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  If the condition is satisfied when <span class="code">vkWaitForFences</span> is called, then
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkWaitForFences_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+If the condition is satisfied when <span class="code">vkWaitForFences</span> is called, then
 <span class="code">vkWaitForFences</span> returns immediately.
 If the condition is not satisfied at the time <span class="code">vkWaitForFences</span> is
 called, then <span class="code">vkWaitForFences</span> will block and wait up to <span class="code">timeout</span>
-nanoseconds for the condition to become satisfied.    If <span class="code">timeout</span> is zero, then <span class="code">vkWaitForFences</span> does not wait, but
+nanoseconds for the condition to become satisfied.
+
+
+If <span class="code">timeout</span> is zero, then <span class="code">vkWaitForFences</span> does not wait, but
 simply returns the current state of the fences.
 <span class="code">VK_TIMEOUT</span> will be returned in this case if the condition is not
-satisfied, even though no actual wait was performed.    If the specified timeout period expires before the condition is satisfied,
+satisfied, even though no actual wait was performed.
+
+
+If the specified timeout period expires before the condition is satisfied,
 <span class="code">vkWaitForFences</span> returns <span class="code">VK_TIMEOUT</span>.
 If the condition is satisfied before <span class="code">timeout</span> nanoseconds has expired,
-<span class="code">vkWaitForFences</span> returns <span class="code">VK_SUCCESS</span>.    If device loss occurs (see <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#devsandqueues-lost-device">Lost Device</a>) before
-the timeout has expired, <span class="code">vkWaitForFences</span> must  return in finite time
-with either <span class="code">VK_SUCCESS</span> or <span class="code">VK_DEVICE_LOST</span>.   <div class="tableSection"><table /></div>    Valid Usage (Implicit)  <ul><li><span class="code">device</span> must  be a valid <span class="code">VkDevice</span> handle </li><li><span class="code">pFences</span> must  be a pointer to an array of <span class="code">fenceCount</span> valid <span class="code">VkFence</span> handles </li><li><span class="code">fenceCount</span> must  be greater than <span class="code">0</span></li><li>  Each element of <span class="code">pFences</span> must  have been created, allocated, or retrieved from <span class="code">device</span></li></ul>      Return Codes  <dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li><li><span class="code">VK_TIMEOUT</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_DEVICE_LOST</span></li></ul></dd></dl>     To wait for one or more fences to enter the signaled state on the host,
-call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkWaitForFences(
+<span class="code">vkWaitForFences</span> returns <span class="code">VK_SUCCESS</span>.
+
+
+If device loss occurs (see <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#devsandqueues-lost-device">Lost Device</a>) before
+the timeout has expired, <span class="code">vkWaitForFences</span> must return in finite time
+with either <span class="code">VK_SUCCESS</span> or <span class="code">VK_DEVICE_LOST</span>.
+
+<div class="tableSection"><table /></div>
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">device</span> must be a valid <span class="code">VkDevice</span> handle
+</li><li><span class="code">pFences</span> must be a pointer to an array of <span class="code">fenceCount</span> valid <span class="code">VkFence</span> handles
+</li><li><span class="code">fenceCount</span> must be greater than <span class="code">0</span></li><li>
+ Each element of <span class="code">pFences</span> must have been created, allocated, or retrieved from <span class="code">device</span></li></ul>
+
+
+
+
+Return Codes
+<dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li><li><span class="code">VK_TIMEOUT</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_DEVICE_LOST</span></li></ul></dd></dl>
+
+
+
+
+To wait for one or more fences to enter the signaled state on the host,
+call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkWaitForFences(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDevice                                    device,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   uint32_t                                    fenceCount,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">const</span> VkFence*                              pFences,

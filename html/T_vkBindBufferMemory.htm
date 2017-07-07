@@ -6,30 +6,71 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkBindBufferMemory__ctor.htm">vkBindBufferMemory</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkBindBufferMemory</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkBindBufferMemory_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">   Valid Usage  <ul><li><span class="code">buffer</span> must  not already be backed by a memory object </li><li><span class="code">buffer</span> must  not have been created with any sparse memory binding
-flags </li><li><span class="code">memoryOffset</span> must  be less than the size of <span class="code">memory</span></li><li> 
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkBindBufferMemory_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+
+Valid Usage
+<ul><li><span class="code">buffer</span> must not already be backed by a memory object
+</li><li><span class="code">buffer</span> must not have been created with any sparse memory binding
+flags
+</li><li><span class="code">memoryOffset</span> must be less than the size of <span class="code">memory</span></li><li>
+
 If <span class="code">buffer</span> was created with the
 <span class="code">VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT</span> or
 <span class="code">VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT</span>, <span class="code">memoryOffset</span> must 
 be a multiple of
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">minTexelBufferOffsetAlignment</span></li><li> 
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">minTexelBufferOffsetAlignment</span></li><li>
+
 If <span class="code">buffer</span> was created with the
-<span class="code">VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT</span>, <span class="code">memoryOffset</span> must  be a
+<span class="code">VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT</span>, <span class="code">memoryOffset</span> must be a
 multiple of
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">minUniformBufferOffsetAlignment</span></li><li> 
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">minUniformBufferOffsetAlignment</span></li><li>
+
 If <span class="code">buffer</span> was created with the
-<span class="code">VK_BUFFER_USAGE_STORAGE_BUFFER_BIT</span>, <span class="code">memoryOffset</span> must  be a
+<span class="code">VK_BUFFER_USAGE_STORAGE_BUFFER_BIT</span>, <span class="code">memoryOffset</span> must be a
 multiple of
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">minStorageBufferOffsetAlignment</span></li><li><span class="code">memory</span> must  have been allocated using one of the memory types
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">minStorageBufferOffsetAlignment</span></li><li><span class="code">memory</span> must have been allocated using one of the memory types
 allowed in the <span class="code">memoryTypeBits</span> member of the
 <span class="code">VkMemoryRequirements</span> structure returned from a call to
-<span class="code">vkGetBufferMemoryRequirements</span> with <span class="code">buffer</span></li><li><span class="code">memoryOffset</span> must  be an integer multiple of the <span class="code">alignment</span>
+<span class="code">vkGetBufferMemoryRequirements</span> with <span class="code">buffer</span></li><li><span class="code">memoryOffset</span> must be an integer multiple of the <span class="code">alignment</span>
 member of the <span class="code">VkMemoryRequirements</span> structure returned from a call
-to <span class="code">vkGetBufferMemoryRequirements</span> with <span class="code">buffer</span></li><li> 
+to <span class="code">vkGetBufferMemoryRequirements</span> with <span class="code">buffer</span></li><li>
+
 The <span class="code">size</span> member of the <span class="code">VkMemoryRequirements</span> structure
 returned from a call to <span class="code">vkGetBufferMemoryRequirements</span> with
-<span class="code">buffer</span> must  be less than or equal to the size of <span class="code">memory</span>
-minus <span class="code">memoryOffset</span></li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">device</span> must  be a valid <span class="code">VkDevice</span> handle </li><li><span class="code">buffer</span> must  be a valid <span class="code">VkBuffer</span> handle </li><li><span class="code">memory</span> must  be a valid <span class="code">VkDeviceMemory</span> handle </li><li><span class="code">buffer</span> must  have been created, allocated, or retrieved from <span class="code">device</span></li><li><span class="code">memory</span> must  have been created, allocated, or retrieved from <span class="code">device</span></li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">buffer</span> must  be externally synchronized </li></ul>      Return Codes  <dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li></ul></dd></dl>     To attach memory to a buffer object, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkBindBufferMemory(
+<span class="code">buffer</span> must be less than or equal to the size of <span class="code">memory</span>
+minus <span class="code">memoryOffset</span></li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">device</span> must be a valid <span class="code">VkDevice</span> handle
+</li><li><span class="code">buffer</span> must be a valid <span class="code">VkBuffer</span> handle
+</li><li><span class="code">memory</span> must be a valid <span class="code">VkDeviceMemory</span> handle
+</li><li><span class="code">buffer</span> must have been created, allocated, or retrieved from <span class="code">device</span></li><li><span class="code">memory</span> must have been created, allocated, or retrieved from <span class="code">device</span></li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">buffer</span> must be externally synchronized
+</li></ul>
+
+
+
+
+Return Codes
+<dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li></ul></dd></dl>
+
+
+
+
+To attach memory to a buffer object, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkBindBufferMemory(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDevice                                    device,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkBuffer                                    buffer,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDeviceMemory                              memory,

@@ -6,19 +6,58 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCreateGraphicsPipelines__ctor.htm">vkCreateGraphicsPipelines</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkCreateGraphicsPipelines</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCreateGraphicsPipelines_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  The <a href="T_IVkGraphicsPipelineCreateInfo.htm">IVkGraphicsPipelineCreateInfo</a> structure includes an array of shader
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCreateGraphicsPipelines_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+The <a href="T_IVkGraphicsPipelineCreateInfo.htm">IVkGraphicsPipelineCreateInfo</a> structure includes an array of shader
 create info structures containing all the desired active shader stages, as
 well as creation info to define all relevant fixed-function stages, and a
-pipeline layout.     Valid Usage  <ul><li> 
+pipeline layout.
+
+
+
+Valid Usage
+<ul><li>
+
 If the <span class="code">flags</span> member of any given element of <span class="code">pCreateInfos</span>
 contains the <span class="code">VK_PIPELINE_CREATE_DERIVATIVE_BIT</span> flag, and the
 <span class="code">basePipelineIndex</span> member of that same element is not <span class="code">-1</span>,
-<span class="code">basePipelineIndex</span> must  be less than the index into
-<span class="code">pCreateInfos</span> that corresponds to that element </li><li> 
+<span class="code">basePipelineIndex</span> must be less than the index into
+<span class="code">pCreateInfos</span> that corresponds to that element
+</li><li>
+
 If the <span class="code">flags</span> member of any given element of <span class="code">pCreateInfos</span>
 contains the <span class="code">VK_PIPELINE_CREATE_DERIVATIVE_BIT</span> flag, the base
-pipeline  must  have been created with the
-<span class="code">VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT</span> flag set </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">device</span> must  be a valid <span class="code">VkDevice</span> handle </li><li>  If <span class="code">pipelineCache</span> is not <span class="nolink">[!:VK_NULL_HANDLE]</span>, <span class="code">pipelineCache</span> must  be a valid <span class="code">VkPipelineCache</span> handle </li><li><span class="code">pCreateInfos</span> must  be a pointer to an array of <span class="code">createInfoCount</span> valid <span class="code">VkGraphicsPipelineCreateInfo</span> structures </li><li>  If <span class="code">pAllocator</span> is not <span class="code">NULL</span>, <span class="code">pAllocator</span> must  be a pointer to a valid <span class="code">VkAllocationCallbacks</span> structure </li><li><span class="code">pPipelines</span> must  be a pointer to an array of <span class="code">createInfoCount</span><span class="code">VkPipeline</span> handles </li><li><span class="code">createInfoCount</span> must  be greater than <span class="code">0</span></li><li>  If <span class="code">pipelineCache</span> is a valid handle, it  must  have been created, allocated, or retrieved from <span class="code">device</span></li></ul>      Return Codes  <dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li></ul></dd></dl>     To create graphics pipelines, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAFBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAFBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAFBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkCreateGraphicsPipelines(
+pipeline must have been created with the
+<span class="code">VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT</span> flag set
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">device</span> must be a valid <span class="code">VkDevice</span> handle
+</li><li>
+ If <span class="code">pipelineCache</span> is not <span class="nolink">[!:VK_NULL_HANDLE]</span>, <span class="code">pipelineCache</span> must be a valid <span class="code">VkPipelineCache</span> handle
+</li><li><span class="code">pCreateInfos</span> must be a pointer to an array of <span class="code">createInfoCount</span> valid <span class="code">VkGraphicsPipelineCreateInfo</span> structures
+</li><li>
+ If <span class="code">pAllocator</span> is not <span class="code">NULL</span>, <span class="code">pAllocator</span> must be a pointer to a valid <span class="code">VkAllocationCallbacks</span> structure
+</li><li><span class="code">pPipelines</span> must be a pointer to an array of <span class="code">createInfoCount</span><span class="code">VkPipeline</span> handles
+</li><li><span class="code">createInfoCount</span> must be greater than <span class="code">0</span></li><li>
+ If <span class="code">pipelineCache</span> is a valid handle, it must have been created, allocated, or retrieved from <span class="code">device</span></li></ul>
+
+
+
+
+Return Codes
+<dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li></ul></dd></dl>
+
+
+
+
+To create graphics pipelines, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAFBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAFBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAFBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkCreateGraphicsPipelines(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDevice                                    device,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkPipelineCache                             pipelineCache,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   uint32_t                                    createInfoCount,

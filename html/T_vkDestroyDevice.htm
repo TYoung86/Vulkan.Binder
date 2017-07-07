@@ -6,17 +6,55 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkDestroyDevice__ctor.htm">vkDestroyDevice</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkDestroyDevice</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkDestroyDevice_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  To ensure that no work is active on the device, <a href="T_vkDeviceWaitIdle.htm">vkDeviceWaitIdle</a> can 
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkDestroyDevice_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+To ensure that no work is active on the device, <a href="T_vkDeviceWaitIdle.htm">vkDeviceWaitIdle</a> can 
 be used to gate the destruction of the device.
 Prior to destroying a device, an application is responsible for
 destroying/freeing any Vulkan objects that were created using that device as
 the first parameter of the corresponding <span class="code">vkCreate*</span> or
-<span class="code">vkAllocate*</span> command.   <div class="tableSection"><table /></div>    Valid Usage  <ul><li> 
-All child objects created on <span class="code">device</span> must  have been destroyed
-prior to destroying <span class="code">device</span></li><li> 
+<span class="code">vkAllocate*</span> command.
+
+<div class="tableSection"><table /></div>
+
+
+Valid Usage
+<ul><li>
+
+All child objects created on <span class="code">device</span> must have been destroyed
+prior to destroying <span class="code">device</span></li><li>
+
 If <span class="code">VkAllocationCallbacks</span> were provided when <span class="code">device</span> was
-created, a compatible set of callbacks  must  be provided here </li><li> 
+created, a compatible set of callbacks must be provided here
+</li><li>
+
 If no <span class="code">VkAllocationCallbacks</span> were provided when <span class="code">device</span> was
-created, <span class="code">pAllocator</span> must  be <span class="code">NULL</span></li></ul>      Valid Usage (Implicit)  <ul><li>  If <span class="code">device</span> is not <span class="code">NULL</span>, <span class="code">device</span> must  be a valid <span class="code">VkDevice</span> handle </li><li>  If <span class="code">pAllocator</span> is not <span class="code">NULL</span>, <span class="code">pAllocator</span> must  be a pointer to a valid <span class="code">VkAllocationCallbacks</span> structure </li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">device</span> must  be externally synchronized </li></ul>     To destroy a device, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkDestroyDevice(
+created, <span class="code">pAllocator</span> must be <span class="code">NULL</span></li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li>
+ If <span class="code">device</span> is not <span class="code">NULL</span>, <span class="code">device</span> must be a valid <span class="code">VkDevice</span> handle
+</li><li>
+ If <span class="code">pAllocator</span> is not <span class="code">NULL</span>, <span class="code">pAllocator</span> must be a pointer to a valid <span class="code">VkAllocationCallbacks</span> structure
+</li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">device</span> must be externally synchronized
+</li></ul>
+
+
+
+
+To destroy a device, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkDestroyDevice(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDevice                                    device,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">const</span> VkAllocationCallbacks*                pAllocator);</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EAACBA");</script></div><div class="collapsibleAreaRegion" id="seeAlsoSection"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID6RB')" onkeypress="SectionExpandCollapse_CheckKey('ID6RB', event)" tabindex="0"><img id="ID6RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />See Also</span></div><div id="ID6RBSection" class="collapsibleSection"><h4 class="subHeading">Reference</h4><div class="seeAlsoStyle"><a href="N_.htm">(Default Namespace) Namespace</a></div><div class="seeAlsoStyle"><a href="T_IVkAllocationCallbacks.htm">(Default Namespace)<span id="LSTB994E9F9_2"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTB994E9F9_2?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>IVkAllocationCallbacks</a></div><div class="seeAlsoStyle"><a href="T_VkDevice.htm">(Default Namespace)<span id="LSTB994E9F9_3"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTB994E9F9_3?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>VkDevice</a></div></div></div></div><div id="pageFooter" class="pageFooter"> </div></body></html>

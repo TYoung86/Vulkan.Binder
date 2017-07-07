@@ -6,36 +6,97 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdSetScissor__ctor.htm">vkCmdSetScissor</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkCmdSetScissor</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdSetScissor_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  The scissor rectangles taken from element  i  of <span class="code">pScissors</span> replace
-the current state for the scissor index  <span class="code">firstScissor</span> +  i ,
-for  i  in  [0, <span class="code">scissorCount</span>) .    Each scissor rectangle is described by a <a href="T_VkRect2D.htm">VkRect2D</a> structure, with the
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdSetScissor_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+The scissor rectangles taken from element i of <span class="code">pScissors</span> replace
+the current state for the scissor index <span class="code">firstScissor</span> +  i ,
+for i in [0, <span class="code">scissorCount</span>) .
+
+
+Each scissor rectangle is described by a <a href="T_VkRect2D.htm">VkRect2D</a> structure, with the
 <span class="code">offset.x</span> and <span class="code">offset.y</span> values determining the upper left corner
 of the scissor rectangle, and the <span class="code">extent.width</span> and <span class="code">extent.height</span>
-values determining the size in pixels.     Valid Usage  <ul><li> 
-The currently bound graphics pipeline  must  have been created with the
-<span class="code">VK_DYNAMIC_STATE_SCISSOR</span> dynamic state enabled </li><li><span class="code">firstScissor</span> must  be less than
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxViewports</span></li><li> 
-The sum of <span class="code">firstScissor</span> and <span class="code">scissorCount</span> must  be between
-<span class="code">1</span> and <span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxViewports</span>, inclusive </li><li> 
+values determining the size in pixels.
+
+
+
+Valid Usage
+<ul><li>
+
+The currently bound graphics pipeline must have been created with the
+<span class="code">VK_DYNAMIC_STATE_SCISSOR</span> dynamic state enabled
+</li><li><span class="code">firstScissor</span> must be less than
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxViewports</span></li><li>
+
+The sum of <span class="code">firstScissor</span> and <span class="code">scissorCount</span> must be between
+<span class="code">1</span> and <span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxViewports</span>, inclusive
+</li><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-multiViewport">multiple viewports</a> feature is
-not enabled, <span class="code">firstScissor</span> must  be <span class="code">0</span></li><li> 
+not enabled, <span class="code">firstScissor</span> must be <span class="code">0</span></li><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-multiViewport">multiple viewports</a> feature is
-not enabled, <span class="code">scissorCount</span> must  be <span class="code">1</span></li><li> 
-The <span class="code">x</span> and <span class="code">y</span> members of <span class="code">offset</span> must  be greater than or
-equal to <span class="code">0</span></li><li> 
-Evaluation of  (<span class="code">offset.x</span> +  <span class="code">extent.width</span>)  must  not
-cause a signed integer addition overflow </li><li> 
-Evaluation of  (<span class="code">offset.y</span> +  <span class="code">extent.height</span>)  must 
-not cause a signed integer addition overflow </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">commandBuffer</span> must  be a valid <span class="code">VkCommandBuffer</span> handle </li><li><span class="code">pScissors</span> must  be a pointer to an array of <span class="code">scissorCount</span><span class="code">VkRect2D</span> structures </li><li><span class="code">commandBuffer</span> must  be in the  recording state  </li><li>  The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  support graphics operations </li><li><span class="code">scissorCount</span> must  be greater than <span class="code">0</span></li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">commandBuffer</span> must  be externally synchronized </li><li> Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  be externally synchronized </li></ul>      Command Properties <div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td> Primary<br />
-Secondary </td><td> Both </td><td> Graphics </td><td /></tr></table></div>    The scissor test determines if a fragment&amp;#8217;s framebuffer coordinates
- (x<sub>f</sub>,y<sub>f</sub>)  lie within the scissor rectangle corresponding to the
+not enabled, <span class="code">scissorCount</span> must be <span class="code">1</span></li><li>
+
+The <span class="code">x</span> and <span class="code">y</span> members of <span class="code">offset</span> must be greater than or
+equal to <span class="code">0</span></li><li>
+
+Evaluation of (<span class="code">offset.x</span> +  <span class="code">extent.width</span>) must not
+cause a signed integer addition overflow
+</li><li>
+
+Evaluation of (<span class="code">offset.y</span> +  <span class="code">extent.height</span>) must 
+not cause a signed integer addition overflow
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">commandBuffer</span> must be a valid <span class="code">VkCommandBuffer</span> handle
+</li><li><span class="code">pScissors</span> must be a pointer to an array of <span class="code">scissorCount</span><span class="code">VkRect2D</span> structures
+</li><li><span class="code">commandBuffer</span> must be in the recording state 
+</li><li>
+ The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must support graphics operations
+</li><li><span class="code">scissorCount</span> must be greater than <span class="code">0</span></li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">commandBuffer</span> must be externally synchronized
+</li><li>
+Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must be externally synchronized
+</li></ul>
+
+
+
+
+Command Properties
+<div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td>
+Primary<br />
+Secondary
+</td><td>
+Both
+</td><td>
+Graphics
+</td><td /></tr></table></div>
+
+
+
+The scissor test determines if a fragment&amp;#8217;s framebuffer coordinates
+ (x<sub>f</sub>,y<sub>f</sub>) lie within the scissor rectangle corresponding to the
 viewport index (see <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#vertexpostproc-viewport">Controlling the Viewport</a>)
 used by the primitive that generated the fragment.
 If the pipeline state object is created without
 <span class="code">VK_DYNAMIC_STATE_SCISSOR</span> enabled then the scissor rectangles are set
 by the <a href="T_IVkPipelineViewportStateCreateInfo.htm">IVkPipelineViewportStateCreateInfo</a> state of the pipeline state
 object.
-Otherwise, to dynamically set the scissor rectangles call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdSetScissor(
+Otherwise, to dynamically set the scissor rectangles call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdSetScissor(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkCommandBuffer                             commandBuffer,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   uint32_t                                    firstScissor,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   uint32_t                                    scissorCount,

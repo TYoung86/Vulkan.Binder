@@ -4,63 +4,103 @@
     <strong>Assembly:</strong>
    Vulkan (in Vulkan.dll) Version: 1.0.53<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID1RB')" onkeypress="SectionExpandCollapse_CheckKey('ID1RB', event)" tabindex="0"><img id="ID1RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID1RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID0EACA_tab1" class="codeSnippetContainerTabSingle">C#</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EACA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EACA');return false;" title="Copy">Copy</a></div></div><div id="ID0EACA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="identifier">IVkPipelineShaderStageCreateInfo</span></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID0EACA");</script></div><p>The <span class="selflink">IVkPipelineShaderStageCreateInfo</span> type exposes the following members.</p><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Properties</span></div><div id="ID2RBSection" class="collapsibleSection"><table class="members" id="propertyList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineShaderStageCreateInfo_flags.htm">flags</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineShaderStageCreateInfo_module.htm">module</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineShaderStageCreateInfo_pName.htm">pName</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineShaderStageCreateInfo_pNext.htm">pNext</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineShaderStageCreateInfo_pSpecializationInfo.htm">pSpecializationInfo</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineShaderStageCreateInfo_stage.htm">stage</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineShaderStageCreateInfo_sType.htm">sType</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID3RBSection" class="collapsibleSection">   Valid Usage  <ul><li> 
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineShaderStageCreateInfo_flags.htm">flags</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineShaderStageCreateInfo_module.htm">module</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineShaderStageCreateInfo_pName.htm">pName</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineShaderStageCreateInfo_pNext.htm">pNext</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineShaderStageCreateInfo_pSpecializationInfo.htm">pSpecializationInfo</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineShaderStageCreateInfo_stage.htm">stage</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineShaderStageCreateInfo_sType.htm">sType</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID3RBSection" class="collapsibleSection">
+
+
+Valid Usage
+<ul><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-geometryShader">geometry shaders</a> feature is
-not enabled, <span class="code">stage</span> must  not be <span class="code">VK_SHADER_STAGE_GEOMETRY_BIT</span></li><li> 
+not enabled, <span class="code">stage</span> must not be <span class="code">VK_SHADER_STAGE_GEOMETRY_BIT</span></li><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-tessellationShader">tessellation shaders</a>
-feature is not enabled, <span class="code">stage</span> must  not be
+feature is not enabled, <span class="code">stage</span> must not be
 <span class="code">VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT</span> or
-<span class="code">VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT</span></li><li><span class="code">stage</span> must  not be <span class="code">VK_SHADER_STAGE_ALL_GRAPHICS</span>, or
-<span class="code">VK_SHADER_STAGE_ALL</span></li><li><span class="code">pName</span> must  be the name of an <span class="code">OpEntryPoint</span> in <span class="code">module</span>
-with an execution model that matches <span class="code">stage</span></li><li> 
+<span class="code">VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT</span></li><li><span class="code">stage</span> must not be <span class="code">VK_SHADER_STAGE_ALL_GRAPHICS</span>, or
+<span class="code">VK_SHADER_STAGE_ALL</span></li><li><span class="code">pName</span> must be the name of an <span class="code">OpEntryPoint</span> in <span class="code">module</span>
+with an execution model that matches <span class="code">stage</span></li><li>
+
 If the identified entry point includes any variable in its interface
 that is declared with the <span class="code">ClipDistance</span><span class="code">BuiltIn</span> decoration,
-that variable  must  not have an array size greater than
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxClipDistances</span></li><li> 
+that variable must not have an array size greater than
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxClipDistances</span></li><li>
+
 If the identified entry point includes any variable in its interface
 that is declared with the <span class="code">CullDistance</span><span class="code">BuiltIn</span> decoration,
-that variable  must  not have an array size greater than
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxCullDistances</span></li><li> 
+that variable must not have an array size greater than
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxCullDistances</span></li><li>
+
 If the identified entry point includes any variables in its interface
-that are declared with the <span class="code">ClipDistance</span> or <span class="code">CullDistance</span><span class="code">BuiltIn</span> decoration, those variables  must  not have array sizes
+that are declared with the <span class="code">ClipDistance</span> or <span class="code">CullDistance</span><span class="code">BuiltIn</span> decoration, those variables must not have array sizes
 which sum to more than
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxCombinedClipAndCullDistances</span></li><li> 
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxCombinedClipAndCullDistances</span></li><li>
+
 If the identified entry point includes any variable in its interface
 that is declared with the <span class="code">SampleMask</span><span class="code">BuiltIn</span> decoration, that
-variable  must  not have an array size greater than
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxSampleMaskWords</span></li><li> 
+variable must not have an array size greater than
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxSampleMaskWords</span></li><li>
+
 If <span class="code">stage</span> is <span class="code">VK_SHADER_STAGE_VERTEX_BIT</span>, the identified entry
-point  must  not include any input variable in its interface that is
-decorated with <span class="code">CullDistance</span></li><li> 
+point must not include any input variable in its interface that is
+decorated with <span class="code">CullDistance</span></li><li>
+
 If <span class="code">stage</span> is <span class="code">VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT</span> or
 <span class="code">VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT</span>, and the identified
 entry point has an <span class="code">OpExecutionMode</span> instruction that specifies a
-patch size with <span class="code">OutputVertices</span>, the patch size  must  be greater
+patch size with <span class="code">OutputVertices</span>, the patch size must be greater
 than <span class="code">0</span> and less than or equal to
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxTessellationPatchSize</span></li><li> 
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxTessellationPatchSize</span></li><li>
+
 If <span class="code">stage</span> is <span class="code">VK_SHADER_STAGE_GEOMETRY_BIT</span>, the identified
-entry point  must  have an <span class="code">OpExecutionMode</span> instruction that
+entry point must have an <span class="code">OpExecutionMode</span> instruction that
 specifies a maximum output vertex count that is greater than <span class="code">0</span> and
 less than or equal to
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxGeometryOutputVertices</span></li><li> 
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxGeometryOutputVertices</span></li><li>
+
 If <span class="code">stage</span> is <span class="code">VK_SHADER_STAGE_GEOMETRY_BIT</span>, the identified
-entry point  must  have an <span class="code">OpExecutionMode</span> instruction that
+entry point must have an <span class="code">OpExecutionMode</span> instruction that
 specifies an invocation count that is greater than <span class="code">0</span> and less than or
 equal to
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxGeometryShaderInvocations</span></li><li> 
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxGeometryShaderInvocations</span></li><li>
+
 If <span class="code">stage</span> is <span class="code">VK_SHADER_STAGE_GEOMETRY_BIT</span>, and the identified
-entry point writes to <span class="code">Layer</span> for any primitive, it  must  write the
-same value to <span class="code">Layer</span> for all vertices of a given primitive </li><li> 
+entry point writes to <span class="code">Layer</span> for any primitive, it must write the
+same value to <span class="code">Layer</span> for all vertices of a given primitive
+</li><li>
+
 If <span class="code">stage</span> is <span class="code">VK_SHADER_STAGE_GEOMETRY_BIT</span>, and the identified
-entry point writes to <span class="code">ViewportIndex</span> for any primitive, it  must 
+entry point writes to <span class="code">ViewportIndex</span> for any primitive, it must 
 write the same value to <span class="code">ViewportIndex</span> for all vertices of a given
-primitive </li><li> 
+primitive
+</li><li>
+
 If <span class="code">stage</span> is <span class="code">VK_SHADER_STAGE_FRAGMENT_BIT</span>, the identified
-entry point  must  not include any output variables in its interface
-decorated with <span class="code">CullDistance</span></li><li> 
+entry point must not include any output variables in its interface
+decorated with <span class="code">CullDistance</span></li><li>
+
 If <span class="code">stage</span> is <span class="code">VK_SHADER_STAGE_FRAGMENT_BIT</span>, and the identified
-entry point writes to <span class="code">FragDepth</span> in any execution path, it  must 
-write to <span class="code">FragDepth</span> in all execution paths </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">sType</span> must  be <span class="code">VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO</span></li><li><span class="code">pNext</span> must  be <span class="code">NULL</span></li><li><span class="code">flags</span> must  be <span class="code">0</span></li><li><span class="code">stage</span> must  be a valid <a href="T_VkShaderStageFlags.htm">VkShaderStageFlags</a> value </li><li><span class="code">module</span> must  be a valid <span class="code">VkShaderModule</span> handle </li><li><span class="code">pName</span> must  be a null-terminated UTF-8 string </li><li>  If <span class="code">pSpecializationInfo</span> is not <span class="code">NULL</span>, <span class="code">pSpecializationInfo</span> must  be a pointer to a valid <span class="code">VkSpecializationInfo</span> structure </li></ul>     The <span class="code">VkPipelineShaderStageCreateInfo</span> structure is defined as:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAHBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAHBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAHBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkPipelineShaderStageCreateInfo {
+entry point writes to <span class="code">FragDepth</span> in any execution path, it must 
+write to <span class="code">FragDepth</span> in all execution paths
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">sType</span> must be <span class="code">VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO</span></li><li><span class="code">pNext</span> must be <span class="code">NULL</span></li><li><span class="code">flags</span> must be <span class="code">0</span></li><li><span class="code">stage</span> must be a valid <a href="T_VkShaderStageFlags.htm">VkShaderStageFlags</a> value
+</li><li><span class="code">module</span> must be a valid <span class="code">VkShaderModule</span> handle
+</li><li><span class="code">pName</span> must be a null-terminated UTF-8 string
+</li><li>
+ If <span class="code">pSpecializationInfo</span> is not <span class="code">NULL</span>, <span class="code">pSpecializationInfo</span> must be a pointer to a valid <span class="code">VkSpecializationInfo</span> structure
+</li></ul>
+
+
+
+
+The <span class="code">VkPipelineShaderStageCreateInfo</span> structure is defined as:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAHBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAHBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAHBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkPipelineShaderStageCreateInfo {
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkStructureType                     sType;
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    <span class="highlight-keyword">const</span> <span class="highlight-keyword">void</span>*                         pNext;
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkPipelineShaderStageCreateFlags    flags;

@@ -6,20 +6,54 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetPhysicalDeviceImageFormatProperties__ctor.htm">vkGetPhysicalDeviceImageFormatProperties</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkGetPhysicalDeviceImageFormatProperties</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetPhysicalDeviceImageFormatProperties_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  The <span class="code">format</span>, <span class="code">type</span>, <span class="code">tiling</span>, <span class="code">usage</span>, and <span class="code">flags</span>
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetPhysicalDeviceImageFormatProperties_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+The <span class="code">format</span>, <span class="code">type</span>, <span class="code">tiling</span>, <span class="code">usage</span>, and <span class="code">flags</span>
 parameters correspond to parameters that would be consumed by
-<a href="T_vkCreateImage.htm">vkCreateImage</a> (as members of <span class="code">VkImageCreateInfo</span>).    If <span class="code">format</span> is not a supported image format, or if the combination of
+<a href="T_vkCreateImage.htm">vkCreateImage</a> (as members of <span class="code">VkImageCreateInfo</span>).
+
+
+If <span class="code">format</span> is not a supported image format, or if the combination of
 <span class="code">format</span>, <span class="code">type</span>, <span class="code">tiling</span>, <span class="code">usage</span>, and <span class="code">flags</span> is not
 supported for images, then <span class="code">vkGetPhysicalDeviceImageFormatProperties</span>
-returns <span class="code">VK_ERROR_FORMAT_NOT_SUPPORTED</span>.    The limitations on an image format that are reported by
+returns <span class="code">VK_ERROR_FORMAT_NOT_SUPPORTED</span>.
+
+
+The limitations on an image format that are reported by
 <span class="code">vkGetPhysicalDeviceImageFormatProperties</span> have the following property:
 if <span class="code">usage1</span> and <span class="code">usage2</span> of type <a href="T_VkImageUsageFlags.htm">VkImageUsageFlags</a> are such that
 the bits set in <span class="code">usage1</span> are a subset of the bits set in <span class="code">usage2</span>, and
 <span class="code">flags1</span> and <span class="code">flags2</span> of type <a href="T_VkImageCreateFlags.htm">VkImageCreateFlags</a> are such that
 the bits set in <span class="code">flags1</span> are a subset of the bits set in <span class="code">flags2</span>,
-then the limitations for <span class="code">usage1</span> and <span class="code">flags1</span> must  be no more strict
+then the limitations for <span class="code">usage1</span> and <span class="code">flags1</span> must be no more strict
 than the limitations for <span class="code">usage2</span> and <span class="code">flags2</span>, for all values of
-<span class="code">format</span>, <span class="code">type</span>, and <span class="code">tiling</span>.     Valid Usage (Implicit)  <ul><li><span class="code">physicalDevice</span> must  be a valid <span class="code">VkPhysicalDevice</span> handle </li><li><span class="code">format</span> must  be a valid <a href="T_VkFormat.htm">VkFormat</a> value </li><li><span class="code">type</span> must  be a valid <a href="T_VkImageType.htm">VkImageType</a> value </li><li><span class="code">tiling</span> must  be a valid <a href="T_VkImageTiling.htm">VkImageTiling</a> value </li><li><span class="code">usage</span> must  be a valid combination of <a href="T_VkImageUsageFlags.htm">VkImageUsageFlags</a> values </li><li><span class="code">usage</span> must  not be <span class="code">0</span></li><li><span class="code">flags</span> must  be a valid combination of <a href="T_VkImageCreateFlags.htm">VkImageCreateFlags</a> values </li><li><span class="code">pImageFormatProperties</span> must  be a pointer to a <span class="code">VkImageFormatProperties</span> structure </li></ul>      Return Codes  <dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_FORMAT_NOT_SUPPORTED</span></li></ul></dd></dl>     To query additional capabilities specific to image types, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAHBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAHBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAHBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkGetPhysicalDeviceImageFormatProperties(
+<span class="code">format</span>, <span class="code">type</span>, and <span class="code">tiling</span>.
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">physicalDevice</span> must be a valid <span class="code">VkPhysicalDevice</span> handle
+</li><li><span class="code">format</span> must be a valid <a href="T_VkFormat.htm">VkFormat</a> value
+</li><li><span class="code">type</span> must be a valid <a href="T_VkImageType.htm">VkImageType</a> value
+</li><li><span class="code">tiling</span> must be a valid <a href="T_VkImageTiling.htm">VkImageTiling</a> value
+</li><li><span class="code">usage</span> must be a valid combination of <a href="T_VkImageUsageFlags.htm">VkImageUsageFlags</a> values
+</li><li><span class="code">usage</span> must not be <span class="code">0</span></li><li><span class="code">flags</span> must be a valid combination of <a href="T_VkImageCreateFlags.htm">VkImageCreateFlags</a> values
+</li><li><span class="code">pImageFormatProperties</span> must be a pointer to a <span class="code">VkImageFormatProperties</span> structure
+</li></ul>
+
+
+
+
+Return Codes
+<dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_FORMAT_NOT_SUPPORTED</span></li></ul></dd></dl>
+
+
+
+
+To query additional capabilities specific to image types, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAHBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAHBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAHBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkGetPhysicalDeviceImageFormatProperties(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkPhysicalDevice                            physicalDevice,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkFormat                                    format,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkImageType                                 type,

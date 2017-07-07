@@ -10,23 +10,80 @@
 commands have completed executing as far as the specified pipeline stage,
 and writes the timestamp value to memory.
 When the timestamp value is written, the availability status of the query is
-set to available.   <div class="tableSection"><table /></div><a href="T_vkCmdCopyQueryPoolResults.htm">vkCmdCopyQueryPoolResults</a> can  then be called to copy the timestamp
+set to available.
+
+<div class="tableSection"><table /></div><a href="T_vkCmdCopyQueryPoolResults.htm">vkCmdCopyQueryPoolResults</a> can then be called to copy the timestamp
 value from the query pool into buffer memory, with ordering and
 synchronization behavior equivalent to how other queries operate.
-Timestamp values  can  also be retrieved from the query pool using
+Timestamp values can also be retrieved from the query pool using
 <a href="T_vkGetQueryPoolResults.htm">vkGetQueryPoolResults</a>.
-As with other queries, the query  must  be reset using
+As with other queries, the query must be reset using
 <a href="T_vkCmdResetQueryPool.htm">vkCmdResetQueryPool</a> before requesting the timestamp value be written
-to it.    While <span class="code">vkCmdWriteTimestamp</span> can  be called inside or outside of a render
-pass instance, <a href="T_vkCmdCopyQueryPoolResults.htm">vkCmdCopyQueryPoolResults</a> must  only be called outside
-of a render pass instance.     Valid Usage  <ul><li><span class="code">queryPool</span> must  have been created with a <span class="code">queryType</span> of
-<span class="code">VK_QUERY_TYPE_TIMESTAMP</span></li><li> 
-The query identified by <span class="code">queryPool</span> and <span class="code">query</span> must  be
- unavailable  </li><li> 
-The command pool&amp;#8217;s queue family  must  support a non-zero
-<span class="code">timestampValidBits</span></li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">commandBuffer</span> must  be a valid <span class="code">VkCommandBuffer</span> handle </li><li><span class="code">pipelineStage</span> must  be a valid <a href="T_VkPipelineStageFlags.htm">VkPipelineStageFlags</a> value </li><li><span class="code">queryPool</span> must  be a valid <span class="code">VkQueryPool</span> handle </li><li><span class="code">commandBuffer</span> must  be in the  recording state  </li><li>  The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  support graphics, or compute operations </li><li>  Both of <span class="code">commandBuffer</span>, and <span class="code">queryPool</span> must  have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">commandBuffer</span> must  be externally synchronized </li><li> Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  be externally synchronized </li></ul>      Command Properties <div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td> Primary<br />
-Secondary </td><td> Both </td><td> Graphics<br />
-compute </td><td> Transfer </td></tr></table></div>    To request a timestamp, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdWriteTimestamp(
+to it.
+
+
+While <span class="code">vkCmdWriteTimestamp</span> can be called inside or outside of a render
+pass instance, <a href="T_vkCmdCopyQueryPoolResults.htm">vkCmdCopyQueryPoolResults</a> must only be called outside
+of a render pass instance.
+
+
+
+Valid Usage
+<ul><li><span class="code">queryPool</span> must have been created with a <span class="code">queryType</span> of
+<span class="code">VK_QUERY_TYPE_TIMESTAMP</span></li><li>
+
+The query identified by <span class="code">queryPool</span> and <span class="code">query</span> must be
+ unavailable 
+</li><li>
+
+The command pool&amp;#8217;s queue family must support a non-zero
+<span class="code">timestampValidBits</span></li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">commandBuffer</span> must be a valid <span class="code">VkCommandBuffer</span> handle
+</li><li><span class="code">pipelineStage</span> must be a valid <a href="T_VkPipelineStageFlags.htm">VkPipelineStageFlags</a> value
+</li><li><span class="code">queryPool</span> must be a valid <span class="code">VkQueryPool</span> handle
+</li><li><span class="code">commandBuffer</span> must be in the recording state 
+</li><li>
+ The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must support graphics, or compute operations
+</li><li>
+ Both of <span class="code">commandBuffer</span>, and <span class="code">queryPool</span> must have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">commandBuffer</span> must be externally synchronized
+</li><li>
+Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must be externally synchronized
+</li></ul>
+
+
+
+
+Command Properties
+<div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td>
+Primary<br />
+Secondary
+</td><td>
+Both
+</td><td>
+Graphics<br />
+compute
+</td><td>
+Transfer
+</td></tr></table></div>
+
+
+
+To request a timestamp, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdWriteTimestamp(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkCommandBuffer                             commandBuffer,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkPipelineStageFlagBits                     pipelineStage,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkQueryPool                                 queryPool,

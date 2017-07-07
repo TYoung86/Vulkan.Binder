@@ -12,54 +12,128 @@
 rendering commands (either compute or graphics, according to the
 <span class="code">pipelineBindPoint</span>).
 Any bindings that were previously applied via these sets are no longer
-valid.    Once bound, a descriptor set affects rendering of subsequent graphics or
+valid.
+
+
+Once bound, a descriptor set affects rendering of subsequent graphics or
 compute commands in the command buffer until a different set is bound to the
 same set number, or else until the set is disturbed as described in
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#descriptorsets-compatibility">Pipeline Layout Compatibility</a>.    A compatible descriptor set  must  be bound for all set numbers that any
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#descriptorsets-compatibility">Pipeline Layout Compatibility</a>.
+
+
+A compatible descriptor set must be bound for all set numbers that any
 shaders in a pipeline access, at the time that a draw or dispatch command is
 recorded to execute using that pipeline.
 However, if none of the shaders in a pipeline statically use any bindings
 with a particular set number, then no descriptor set need be bound for that
 set number, even if the pipeline layout includes a non-trivial descriptor
-set layout for that set number.    If any of the sets being bound include dynamic uniform or storage buffers,
+set layout for that set number.
+
+
+If any of the sets being bound include dynamic uniform or storage buffers,
 then <span class="code">pDynamicOffsets</span> includes one element for each array element in
 each dynamic descriptor type binding in each set.
 Values are taken from <span class="code">pDynamicOffsets</span> in an order such that all
 entries for set N come before set N+1; within a set, entries are ordered by
 the binding numbers in the descriptor set layouts; and within a binding
 array, elements are in order.
-<span class="code">dynamicOffsetCount</span> must  equal the total number of dynamic descriptors
-in the sets being bound.    The effective offset used for dynamic uniform and storage buffer bindings is
+<span class="code">dynamicOffsetCount</span> must equal the total number of dynamic descriptors
+in the sets being bound.
+
+
+The effective offset used for dynamic uniform and storage buffer bindings is
 the sum of the relative offset taken from <span class="code">pDynamicOffsets</span>, and the
 base address of the buffer plus base offset in the descriptor set.
 The length of the dynamic uniform and storage buffer bindings is the buffer
-range as specified in the descriptor set.    Each of the <span class="code">pDescriptorSets</span> must  be compatible with the pipeline
+range as specified in the descriptor set.
+
+
+Each of the <span class="code">pDescriptorSets</span> must be compatible with the pipeline
 layout specified by <span class="code">layout</span>.
-The layout used to program the bindings  must  also be compatible with the
+The layout used to program the bindings must also be compatible with the
 pipeline used in subsequent graphics or compute commands, as defined in the
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#descriptorsets-compatibility">Pipeline Layout Compatibility</a> section.    The descriptor set contents bound by a call to <span class="code">vkCmdBindDescriptorSets</span> may  be consumed during host execution of the command, or during shader
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#descriptorsets-compatibility">Pipeline Layout Compatibility</a> section.
+
+
+The descriptor set contents bound by a call to <span class="code">vkCmdBindDescriptorSets</span> may be consumed during host execution of the command, or during shader
 execution of the resulting draws, or any time in between.
-Thus, the contents  must  not be altered (overwritten by an update command,
+Thus, the contents must not be altered (overwritten by an update command,
 or freed) between when the command is recorded and when the command
 completes executing on the queue.
 The contents of <span class="code">pDynamicOffsets</span> are consumed immediately during
 execution of <span class="code">vkCmdBindDescriptorSets</span>.
 Once all pending uses have completed, it is legal to update and reuse a
-descriptor set.     Valid Usage  <ul><li> 
-Any given element of <span class="code">pDescriptorSets</span> must  have been allocated
+descriptor set.
+
+
+
+Valid Usage
+<ul><li>
+
+Any given element of <span class="code">pDescriptorSets</span> must have been allocated
 with a <span class="code">VkDescriptorSetLayout</span> that matches (is the same as, or
-identically defined as) the <span class="code">VkDescriptorSetLayout</span> at set  n  in
-<span class="code">layout</span>, where  n  is the sum of <span class="code">firstSet</span> and the index into
-<span class="code">pDescriptorSets</span></li><li><span class="code">dynamicOffsetCount</span> must  be equal to the total number of dynamic
-descriptors in <span class="code">pDescriptorSets</span></li><li> 
-The sum of <span class="code">firstSet</span> and <span class="code">descriptorSetCount</span> must  be less
+identically defined as) the <span class="code">VkDescriptorSetLayout</span> at set n in
+<span class="code">layout</span>, where n is the sum of <span class="code">firstSet</span> and the index into
+<span class="code">pDescriptorSets</span></li><li><span class="code">dynamicOffsetCount</span> must be equal to the total number of dynamic
+descriptors in <span class="code">pDescriptorSets</span></li><li>
+
+The sum of <span class="code">firstSet</span> and <span class="code">descriptorSetCount</span> must be less
 than or equal to <span class="code">VkPipelineLayoutCreateInfo</span>::<span class="code">setLayoutCount</span>
-provided when <span class="code">layout</span> was created </li><li><span class="code">pipelineBindPoint</span> must  be supported by the <span class="code">commandBuffer</span>&amp;#8217;s
-parent <span class="code">VkCommandPool</span>&amp;#8217;s queue family </li><li> 
-Any given element of <span class="code">pDynamicOffsets</span> must  satisfy the required
-alignment for the corresponding descriptor binding&amp;#8217;s descriptor type </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">commandBuffer</span> must  be a valid <span class="code">VkCommandBuffer</span> handle </li><li><span class="code">pipelineBindPoint</span> must  be a valid <a href="T_VkPipelineBindPoint.htm">VkPipelineBindPoint</a> value </li><li><span class="code">layout</span> must  be a valid <span class="code">VkPipelineLayout</span> handle </li><li><span class="code">pDescriptorSets</span> must  be a pointer to an array of <span class="code">descriptorSetCount</span> valid <span class="code">VkDescriptorSet</span> handles </li><li>  If <span class="code">dynamicOffsetCount</span> is not <span class="code">0</span>, <span class="code">pDynamicOffsets</span> must  be a pointer to an array of <span class="code">dynamicOffsetCount</span><span class="code">uint32_t</span> values </li><li><span class="code">commandBuffer</span> must  be in the  recording state  </li><li>  The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  support graphics, or compute operations </li><li><span class="code">descriptorSetCount</span> must  be greater than <span class="code">0</span></li><li>  Each of <span class="code">commandBuffer</span>, <span class="code">layout</span>, and the elements of <span class="code">pDescriptorSets</span> must  have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">commandBuffer</span> must  be externally synchronized </li><li> Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  be externally synchronized </li></ul>      Command Properties <div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td> Primary<br />
-Secondary </td><td> Both </td><td> Graphics<br />
-compute </td><td /></tr></table></div>    To bind one or more descriptor sets to a command buffer, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdBindDescriptorSets(
+provided when <span class="code">layout</span> was created
+</li><li><span class="code">pipelineBindPoint</span> must be supported by the <span class="code">commandBuffer</span>&amp;#8217;s
+parent <span class="code">VkCommandPool</span>&amp;#8217;s queue family
+</li><li>
+
+Any given element of <span class="code">pDynamicOffsets</span> must satisfy the required
+alignment for the corresponding descriptor binding&amp;#8217;s descriptor type
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">commandBuffer</span> must be a valid <span class="code">VkCommandBuffer</span> handle
+</li><li><span class="code">pipelineBindPoint</span> must be a valid <a href="T_VkPipelineBindPoint.htm">VkPipelineBindPoint</a> value
+</li><li><span class="code">layout</span> must be a valid <span class="code">VkPipelineLayout</span> handle
+</li><li><span class="code">pDescriptorSets</span> must be a pointer to an array of <span class="code">descriptorSetCount</span> valid <span class="code">VkDescriptorSet</span> handles
+</li><li>
+ If <span class="code">dynamicOffsetCount</span> is not <span class="code">0</span>, <span class="code">pDynamicOffsets</span> must be a pointer to an array of <span class="code">dynamicOffsetCount</span><span class="code">uint32_t</span> values
+</li><li><span class="code">commandBuffer</span> must be in the recording state 
+</li><li>
+ The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must support graphics, or compute operations
+</li><li><span class="code">descriptorSetCount</span> must be greater than <span class="code">0</span></li><li>
+ Each of <span class="code">commandBuffer</span>, <span class="code">layout</span>, and the elements of <span class="code">pDescriptorSets</span> must have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">commandBuffer</span> must be externally synchronized
+</li><li>
+Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must be externally synchronized
+</li></ul>
+
+
+
+
+Command Properties
+<div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td>
+Primary<br />
+Secondary
+</td><td>
+Both
+</td><td>
+Graphics<br />
+compute
+</td><td /></tr></table></div>
+
+
+
+To bind one or more descriptor sets to a command buffer, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdBindDescriptorSets(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkCommandBuffer                             commandBuffer,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkPipelineBindPoint                         pipelineBindPoint,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkPipelineLayout                            layout,

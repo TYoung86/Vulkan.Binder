@@ -6,26 +6,81 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdBindVertexBuffers__ctor.htm">vkCmdBindVertexBuffers</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkCmdBindVertexBuffers</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdBindVertexBuffers_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  The values taken from elements  i  of <span class="code">pBuffers</span> and <span class="code">pOffsets</span>
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdBindVertexBuffers_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+The values taken from elements i of <span class="code">pBuffers</span> and <span class="code">pOffsets</span>
 replace the current state for the vertex input binding
- <span class="code">firstBinding</span> +  i , for  i  in  [0,
+ <span class="code">firstBinding</span> +  i , for i in [0,
 <span class="code">bindingCount</span>) .
 The vertex input binding is updated to start at the offset indicated by
 <span class="code">pOffsets</span>[i] from the start of the buffer <span class="code">pBuffers</span>[i].
 All vertex input attributes that use each of these bindings will use these
 updated addresses in their address calculations for subsequent draw
-commands.     Valid Usage  <ul><li><span class="code">firstBinding</span> must  be less than
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxVertexInputBindings</span></li><li> 
-The sum of <span class="code">firstBinding</span> and <span class="code">bindingCount</span> must  be less than
-or equal to <span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxVertexInputBindings</span></li><li> 
-All elements of <span class="code">pOffsets</span> must  be less than the size of the
-corresponding element in <span class="code">pBuffers</span></li><li> 
-All elements of <span class="code">pBuffers</span> must  have been created with the
-<span class="code">VK_BUFFER_USAGE_VERTEX_BUFFER_BIT</span> flag </li><li> 
-Each element of <span class="code">pBuffers</span> that is non-sparse  must  be bound
-completely and contiguously to a single <span class="code">VkDeviceMemory</span> object </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">commandBuffer</span> must  be a valid <span class="code">VkCommandBuffer</span> handle </li><li><span class="code">pBuffers</span> must  be a pointer to an array of <span class="code">bindingCount</span> valid <span class="code">VkBuffer</span> handles </li><li><span class="code">pOffsets</span> must  be a pointer to an array of <span class="code">bindingCount</span><span class="code">VkDeviceSize</span> values </li><li><span class="code">commandBuffer</span> must  be in the  recording state  </li><li>  The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  support graphics operations </li><li><span class="code">bindingCount</span> must  be greater than <span class="code">0</span></li><li>  Both of <span class="code">commandBuffer</span>, and the elements of <span class="code">pBuffers</span> must  have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">commandBuffer</span> must  be externally synchronized </li><li> Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  be externally synchronized </li></ul>      Command Properties <div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td> Primary<br />
-Secondary </td><td> Both </td><td> Graphics </td><td /></tr></table></div>    To bind vertex buffers to a command buffer for use in subsequent draw
-commands, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdBindVertexBuffers(
+commands.
+
+
+
+Valid Usage
+<ul><li><span class="code">firstBinding</span> must be less than
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxVertexInputBindings</span></li><li>
+
+The sum of <span class="code">firstBinding</span> and <span class="code">bindingCount</span> must be less than
+or equal to <span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxVertexInputBindings</span></li><li>
+
+All elements of <span class="code">pOffsets</span> must be less than the size of the
+corresponding element in <span class="code">pBuffers</span></li><li>
+
+All elements of <span class="code">pBuffers</span> must have been created with the
+<span class="code">VK_BUFFER_USAGE_VERTEX_BUFFER_BIT</span> flag
+</li><li>
+
+Each element of <span class="code">pBuffers</span> that is non-sparse must be bound
+completely and contiguously to a single <span class="code">VkDeviceMemory</span> object
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">commandBuffer</span> must be a valid <span class="code">VkCommandBuffer</span> handle
+</li><li><span class="code">pBuffers</span> must be a pointer to an array of <span class="code">bindingCount</span> valid <span class="code">VkBuffer</span> handles
+</li><li><span class="code">pOffsets</span> must be a pointer to an array of <span class="code">bindingCount</span><span class="code">VkDeviceSize</span> values
+</li><li><span class="code">commandBuffer</span> must be in the recording state 
+</li><li>
+ The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must support graphics operations
+</li><li><span class="code">bindingCount</span> must be greater than <span class="code">0</span></li><li>
+ Both of <span class="code">commandBuffer</span>, and the elements of <span class="code">pBuffers</span> must have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">commandBuffer</span> must be externally synchronized
+</li><li>
+Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must be externally synchronized
+</li></ul>
+
+
+
+
+Command Properties
+<div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td>
+Primary<br />
+Secondary
+</td><td>
+Both
+</td><td>
+Graphics
+</td><td /></tr></table></div>
+
+
+
+To bind vertex buffers to a command buffer for use in subsequent draw
+commands, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdBindVertexBuffers(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkCommandBuffer                             commandBuffer,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   uint32_t                                    firstBinding,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   uint32_t                                    bindingCount,

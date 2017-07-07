@@ -6,21 +6,77 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdClearAttachments__ctor.htm">vkCmdClearAttachments</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkCmdClearAttachments</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdClearAttachments_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection"><span class="code">vkCmdClearAttachments</span> can  clear multiple regions of each attachment
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdClearAttachments_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection"><span class="code">vkCmdClearAttachments</span> can clear multiple regions of each attachment
 used in the current subpass of a render pass instance.
-This command  must  be called only inside a render pass instance, and
+This command must be called only inside a render pass instance, and
 implicitly selects the images to clear based on the current framebuffer
-attachments and the command parameters.     Valid Usage  <ul><li> 
+attachments and the command parameters.
+
+
+
+Valid Usage
+<ul><li>
+
 If the <span class="code">aspectMask</span> member of any given element of
 <span class="code">pAttachments</span> contains <span class="code">VK_IMAGE_ASPECT_COLOR_BIT</span>, the
-<span class="code">colorAttachment</span> member of those elements  must  refer to a valid
-color attachment in the current subpass </li><li> 
-The rectangular region specified by a given element of <span class="code">pRects</span> must  be contained within the render area of the current render pass
-instance </li><li> 
-The layers specified by a given element of <span class="code">pRects</span> must  be
-contained within every attachment that <span class="code">pAttachments</span> refers to </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">commandBuffer</span> must  be a valid <span class="code">VkCommandBuffer</span> handle </li><li><span class="code">pAttachments</span> must  be a pointer to an array of <span class="code">attachmentCount</span> valid <span class="code">VkClearAttachment</span> structures </li><li><span class="code">pRects</span> must  be a pointer to an array of <span class="code">rectCount</span><span class="code">VkClearRect</span> structures </li><li><span class="code">commandBuffer</span> must  be in the  recording state  </li><li>  The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  support graphics operations </li><li>  This command  must  only be called inside of a render pass instance </li><li><span class="code">attachmentCount</span> must  be greater than <span class="code">0</span></li><li><span class="code">rectCount</span> must  be greater than <span class="code">0</span></li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">commandBuffer</span> must  be externally synchronized </li><li> Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  be externally synchronized </li></ul>      Command Properties <div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td> Primary<br />
-Secondary </td><td> Inside </td><td> Graphics </td><td> Graphics </td></tr></table></div>    To clear one or more regions of color and depth/stencil attachments inside a
-render pass instance, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdClearAttachments(
+<span class="code">colorAttachment</span> member of those elements must refer to a valid
+color attachment in the current subpass
+</li><li>
+
+The rectangular region specified by a given element of <span class="code">pRects</span> must be contained within the render area of the current render pass
+instance
+</li><li>
+
+The layers specified by a given element of <span class="code">pRects</span> must be
+contained within every attachment that <span class="code">pAttachments</span> refers to
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">commandBuffer</span> must be a valid <span class="code">VkCommandBuffer</span> handle
+</li><li><span class="code">pAttachments</span> must be a pointer to an array of <span class="code">attachmentCount</span> valid <span class="code">VkClearAttachment</span> structures
+</li><li><span class="code">pRects</span> must be a pointer to an array of <span class="code">rectCount</span><span class="code">VkClearRect</span> structures
+</li><li><span class="code">commandBuffer</span> must be in the recording state 
+</li><li>
+ The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must support graphics operations
+</li><li>
+ This command must only be called inside of a render pass instance
+</li><li><span class="code">attachmentCount</span> must be greater than <span class="code">0</span></li><li><span class="code">rectCount</span> must be greater than <span class="code">0</span></li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">commandBuffer</span> must be externally synchronized
+</li><li>
+Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must be externally synchronized
+</li></ul>
+
+
+
+
+Command Properties
+<div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td>
+Primary<br />
+Secondary
+</td><td>
+Inside
+</td><td>
+Graphics
+</td><td>
+Graphics
+</td></tr></table></div>
+
+
+
+To clear one or more regions of color and depth/stencil attachments inside a
+render pass instance, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdClearAttachments(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkCommandBuffer                             commandBuffer,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   uint32_t                                    attachmentCount,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">const</span> VkClearAttachment*                    pAttachments,

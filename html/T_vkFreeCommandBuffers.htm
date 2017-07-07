@@ -6,12 +6,47 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkFreeCommandBuffers__ctor.htm">vkFreeCommandBuffers</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkFreeCommandBuffers</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkFreeCommandBuffers_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  Any primary command buffer that is in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#commandbuffers-lifecycle">recording or executable state</a> and has any element of <span class="code">pCommandBuffers</span>
-recorded into it, becomes <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#commandbuffers-lifecycle">invalid</a>.     Valid Usage  <ul><li> 
-All elements of <span class="code">pCommandBuffers</span> must  not be in the
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#commandbuffers-lifecycle">pending state</a></li><li><span class="code">pCommandBuffers</span> must  be a pointer to an array of
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkFreeCommandBuffers_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+Any primary command buffer that is in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#commandbuffers-lifecycle">recording or executable state</a> and has any element of <span class="code">pCommandBuffers</span>
+recorded into it, becomes <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#commandbuffers-lifecycle">invalid</a>.
+
+
+
+Valid Usage
+<ul><li>
+
+All elements of <span class="code">pCommandBuffers</span> must not be in the
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#commandbuffers-lifecycle">pending state</a></li><li><span class="code">pCommandBuffers</span> must be a pointer to an array of
 <span class="code">commandBufferCount</span><span class="code">VkCommandBuffer</span> handles, each element of
-which  must  either be a valid handle or <span class="code">NULL</span></li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">device</span> must  be a valid <span class="code">VkDevice</span> handle </li><li><span class="code">commandPool</span> must  be a valid <span class="code">VkCommandPool</span> handle </li><li><span class="code">commandBufferCount</span> must  be greater than <span class="code">0</span></li><li><span class="code">commandPool</span> must  have been created, allocated, or retrieved from <span class="code">device</span></li><li>  Each element of <span class="code">pCommandBuffers</span> that is a valid handle  must  have been created, allocated, or retrieved from <span class="code">commandPool</span></li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">commandPool</span> must  be externally synchronized </li><li> Host access to each member of <span class="code">pCommandBuffers</span> must  be externally synchronized </li></ul>     To free command buffers, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkFreeCommandBuffers(
+which must either be a valid handle or <span class="code">NULL</span></li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">device</span> must be a valid <span class="code">VkDevice</span> handle
+</li><li><span class="code">commandPool</span> must be a valid <span class="code">VkCommandPool</span> handle
+</li><li><span class="code">commandBufferCount</span> must be greater than <span class="code">0</span></li><li><span class="code">commandPool</span> must have been created, allocated, or retrieved from <span class="code">device</span></li><li>
+ Each element of <span class="code">pCommandBuffers</span> that is a valid handle must have been created, allocated, or retrieved from <span class="code">commandPool</span></li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">commandPool</span> must be externally synchronized
+</li><li>
+Host access to each member of <span class="code">pCommandBuffers</span> must be externally synchronized
+</li></ul>
+
+
+
+
+To free command buffers, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkFreeCommandBuffers(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDevice                                    device,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkCommandPool                               commandPool,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   uint32_t                                    commandBufferCount,

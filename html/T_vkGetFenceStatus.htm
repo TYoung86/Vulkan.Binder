@@ -6,12 +6,48 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetFenceStatus__ctor.htm">vkGetFenceStatus</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkGetFenceStatus</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetFenceStatus_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  Upon success, <span class="code">vkGetFenceStatus</span> returns the status of the fence object,
-with the following return codes:  <p>Table 1. Fence Object Status Codes</p><div class="tableSection"><table><tr><th>StatusMeaning</th></tr><tr><td><span class="code">VK_SUCCESS</span></td><td> The fence specified by <span class="code">fence</span> is signaled. </td></tr><tr><td><span class="code">VK_NOT_READY</span></td><td> The fence specified by <span class="code">fence</span> is unsignaled. </td></tr><tr><td><span class="code">VK_DEVICE_LOST</span></td><td> The device has been lost.  See <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#devsandqueues-lost-device">Lost Device</a>. </td></tr></table></div>  If a <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#devsandqueues-submission">queue submission</a> command is pending
-execution, then the value returned by this command  may  immediately be out
-of date.    If the device has been lost (see <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#devsandqueues-lost-device">Lost Device</a>),
-<span class="code">vkGetFenceStatus</span> may  return any of the above status codes.
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetFenceStatus_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+Upon success, <span class="code">vkGetFenceStatus</span> returns the status of the fence object,
+with the following return codes:
+
+<p>Table 1. Fence Object Status Codes</p><div class="tableSection"><table><tr><th>StatusMeaning</th></tr><tr><td><span class="code">VK_SUCCESS</span></td><td>
+The fence specified by <span class="code">fence</span> is signaled.
+</td></tr><tr><td><span class="code">VK_NOT_READY</span></td><td>
+The fence specified by <span class="code">fence</span> is unsignaled.
+</td></tr><tr><td><span class="code">VK_DEVICE_LOST</span></td><td>
+The device has been lost.  See <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#devsandqueues-lost-device">Lost Device</a>.
+</td></tr></table></div>
+
+If a <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#devsandqueues-submission">queue submission</a> command is pending
+execution, then the value returned by this command may immediately be out
+of date.
+
+
+If the device has been lost (see <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#devsandqueues-lost-device">Lost Device</a>),
+<span class="code">vkGetFenceStatus</span> may return any of the above status codes.
 If the device has been lost and <span class="code">vkGetFenceStatus</span> is called repeatedly,
-it will eventually return either <span class="code">VK_SUCCESS</span> or <span class="code">VK_DEVICE_LOST</span>.     Valid Usage (Implicit)  <ul><li><span class="code">device</span> must  be a valid <span class="code">VkDevice</span> handle </li><li><span class="code">fence</span> must  be a valid <span class="code">VkFence</span> handle </li><li><span class="code">fence</span> must  have been created, allocated, or retrieved from <span class="code">device</span></li></ul>      Return Codes  <dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li><li><span class="code">VK_NOT_READY</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_DEVICE_LOST</span></li></ul></dd></dl>     To query the status of a fence from the host, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkGetFenceStatus(
+it will eventually return either <span class="code">VK_SUCCESS</span> or <span class="code">VK_DEVICE_LOST</span>.
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">device</span> must be a valid <span class="code">VkDevice</span> handle
+</li><li><span class="code">fence</span> must be a valid <span class="code">VkFence</span> handle
+</li><li><span class="code">fence</span> must have been created, allocated, or retrieved from <span class="code">device</span></li></ul>
+
+
+
+
+Return Codes
+<dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li><li><span class="code">VK_NOT_READY</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_DEVICE_LOST</span></li></ul></dd></dl>
+
+
+
+
+To query the status of a fence from the host, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkGetFenceStatus(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDevice                                    device,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkFence                                     fence);</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EAACBA");</script></div><div class="collapsibleAreaRegion" id="seeAlsoSection"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID6RB')" onkeypress="SectionExpandCollapse_CheckKey('ID6RB', event)" tabindex="0"><img id="ID6RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />See Also</span></div><div id="ID6RBSection" class="collapsibleSection"><h4 class="subHeading">Reference</h4><div class="seeAlsoStyle"><a href="N_.htm">(Default Namespace) Namespace</a></div><div class="seeAlsoStyle"><a href="T_VkDevice.htm">(Default Namespace)<span id="LST54D5940_2"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST54D5940_2?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>VkDevice</a></div><div class="seeAlsoStyle"><a href="T_VkFence.htm">(Default Namespace)<span id="LST54D5940_3"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST54D5940_3?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>VkFence</a></div></div></div></div><div id="pageFooter" class="pageFooter"> </div></body></html>

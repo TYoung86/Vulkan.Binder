@@ -6,18 +6,78 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdClearColorImage__ctor.htm">vkCmdClearColorImage</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkCmdClearColorImage</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdClearColorImage_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  Each specified range in <span class="code">pRanges</span> is cleared to the value specified by
-<span class="code">pColor</span>.     Valid Usage  <ul><li><span class="code">image</span> must  have been created with
-<span class="code">VK_IMAGE_USAGE_TRANSFER_DST_BIT</span> usage flag </li><li> 
-If <span class="code">image</span> is non-sparse then it  must  be bound completely and
-contiguously to a single <span class="code">VkDeviceMemory</span> object </li><li><span class="code">imageLayout</span> must  specify the layout of the image subresource
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdClearColorImage_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+Each specified range in <span class="code">pRanges</span> is cleared to the value specified by
+<span class="code">pColor</span>.
+
+
+
+Valid Usage
+<ul><li><span class="code">image</span> must have been created with
+<span class="code">VK_IMAGE_USAGE_TRANSFER_DST_BIT</span> usage flag
+</li><li>
+
+If <span class="code">image</span> is non-sparse then it must be bound completely and
+contiguously to a single <span class="code">VkDeviceMemory</span> object
+</li><li><span class="code">imageLayout</span> must specify the layout of the image subresource
 ranges of <span class="code">image</span> specified in <span class="code">pRanges</span> at the time this
-command is executed on a <span class="code">VkDevice</span></li><li><span class="code">imageLayout</span> must  be <span class="code">VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</span> or
-<span class="code">VK_IMAGE_LAYOUT_GENERAL</span></li><li> 
-The image range of any given element of <span class="code">pRanges</span> must  be an image
-subresource range that is contained within <span class="code">image</span></li><li><span class="code">image</span> must  not have a compressed or depth/stencil format </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">commandBuffer</span> must  be a valid <span class="code">VkCommandBuffer</span> handle </li><li><span class="code">image</span> must  be a valid <span class="code">VkImage</span> handle </li><li><span class="code">imageLayout</span> must  be a valid <a href="T_VkImageLayout.htm">VkImageLayout</a> value </li><li><span class="code">pColor</span> must  be a pointer to a valid <span class="code">VkClearColorValue</span> union </li><li><span class="code">pRanges</span> must  be a pointer to an array of <span class="code">rangeCount</span> valid <span class="code">VkImageSubresourceRange</span> structures </li><li><span class="code">commandBuffer</span> must  be in the  recording state  </li><li>  The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  support graphics, or compute operations </li><li>  This command  must  only be called outside of a render pass instance </li><li><span class="code">rangeCount</span> must  be greater than <span class="code">0</span></li><li>  Both of <span class="code">commandBuffer</span>, and <span class="code">image</span> must  have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">commandBuffer</span> must  be externally synchronized </li><li> Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  be externally synchronized </li></ul>      Command Properties <div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td> Primary<br />
-Secondary </td><td> Outside </td><td> Graphics<br />
-compute </td><td> Transfer </td></tr></table></div>    To clear one or more subranges of a color image, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAFBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAFBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAFBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdClearColorImage(
+command is executed on a <span class="code">VkDevice</span></li><li><span class="code">imageLayout</span> must be <span class="code">VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</span> or
+<span class="code">VK_IMAGE_LAYOUT_GENERAL</span></li><li>
+
+The image range of any given element of <span class="code">pRanges</span> must be an image
+subresource range that is contained within <span class="code">image</span></li><li><span class="code">image</span> must not have a compressed or depth/stencil format
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">commandBuffer</span> must be a valid <span class="code">VkCommandBuffer</span> handle
+</li><li><span class="code">image</span> must be a valid <span class="code">VkImage</span> handle
+</li><li><span class="code">imageLayout</span> must be a valid <a href="T_VkImageLayout.htm">VkImageLayout</a> value
+</li><li><span class="code">pColor</span> must be a pointer to a valid <span class="code">VkClearColorValue</span> union
+</li><li><span class="code">pRanges</span> must be a pointer to an array of <span class="code">rangeCount</span> valid <span class="code">VkImageSubresourceRange</span> structures
+</li><li><span class="code">commandBuffer</span> must be in the recording state 
+</li><li>
+ The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must support graphics, or compute operations
+</li><li>
+ This command must only be called outside of a render pass instance
+</li><li><span class="code">rangeCount</span> must be greater than <span class="code">0</span></li><li>
+ Both of <span class="code">commandBuffer</span>, and <span class="code">image</span> must have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">commandBuffer</span> must be externally synchronized
+</li><li>
+Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must be externally synchronized
+</li></ul>
+
+
+
+
+Command Properties
+<div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td>
+Primary<br />
+Secondary
+</td><td>
+Outside
+</td><td>
+Graphics<br />
+compute
+</td><td>
+Transfer
+</td></tr></table></div>
+
+
+
+To clear one or more subranges of a color image, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAFBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAFBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAFBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdClearColorImage(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkCommandBuffer                             commandBuffer,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkImage                                     image,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkImageLayout                               imageLayout,

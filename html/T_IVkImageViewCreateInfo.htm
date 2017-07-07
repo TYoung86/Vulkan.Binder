@@ -4,107 +4,187 @@
     <strong>Assembly:</strong>
    Vulkan (in Vulkan.dll) Version: 1.0.53<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID1RB')" onkeypress="SectionExpandCollapse_CheckKey('ID1RB', event)" tabindex="0"><img id="ID1RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID1RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID0EACA_tab1" class="codeSnippetContainerTabSingle">C#</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EACA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EACA');return false;" title="Copy">Copy</a></div></div><div id="ID0EACA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="identifier">IVkImageViewCreateInfo</span></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID0EACA");</script></div><p>The <span class="selflink">IVkImageViewCreateInfo</span> type exposes the following members.</p><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Properties</span></div><div id="ID2RBSection" class="collapsibleSection"><table class="members" id="propertyList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkImageViewCreateInfo_components.htm">components</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkImageViewCreateInfo_flags.htm">flags</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkImageViewCreateInfo_format.htm">format</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkImageViewCreateInfo_image.htm">image</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkImageViewCreateInfo_pNext.htm">pNext</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkImageViewCreateInfo_sType.htm">sType</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkImageViewCreateInfo_subresourceRange.htm">subresourceRange</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkImageViewCreateInfo_viewType.htm">viewType</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID3RBSection" class="collapsibleSection">  If <span class="code">image</span> was created with the <span class="code">VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</span>
-flag, <span class="code">format</span> can  be different from the image&amp;#8217;s format, but if they
-are not equal they  must  be  compatible .
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkImageViewCreateInfo_components.htm">components</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkImageViewCreateInfo_flags.htm">flags</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkImageViewCreateInfo_format.htm">format</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkImageViewCreateInfo_image.htm">image</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkImageViewCreateInfo_pNext.htm">pNext</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkImageViewCreateInfo_sType.htm">sType</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkImageViewCreateInfo_subresourceRange.htm">subresourceRange</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkImageViewCreateInfo_viewType.htm">viewType</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID3RBSection" class="collapsibleSection">
+
+If <span class="code">image</span> was created with the <span class="code">VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</span>
+flag, <span class="code">format</span> can be different from the image&amp;#8217;s format, but if they
+are not equal they must be compatible .
 Image format compatibility is defined in the
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-formats-compatibility-classes">Format Compatibility Classes</a>
 section.
 Views of compatible formats will have the same mapping between texel
 coordinates and memory locations irrespective of the <span class="code">format</span>, with only
-the interpretation of the bit pattern changing.  <p>Table 1. Image and image view parameter compatibility requirements</p><div class="tableSection"><table><tr><th>Dim, Arrayed, MSImage parametersView parameters</th></tr><tr><td /><td><span class="code">imageType</span> = ci.<span class="code">imageType</span><br /><span class="code">width</span> = ci.<span class="code">extent.width</span><br /><span class="code">height</span> = ci.<span class="code">extent.height</span><br /><span class="code">depth</span> = ci.<span class="code">extent.depth</span><br /><span class="code">arrayLayers</span> = ci.<span class="code">arrayLayers</span><br /><span class="code">samples</span> = ci.<span class="code">samples</span><br /><span class="code">flags</span> = ci.<span class="code">flags</span><br />
-    where ci is the <a href="T_IVkImageCreateInfo.htm">IVkImageCreateInfo</a> used to create <span class="code">image</span>. </td><td><span class="code">baseArrayLayer</span> and <span class="code">layerCount</span>
-    are members of the <span class="code">subresourceRange</span> member. </td></tr><tr><td> 1D, 0, 0 </td><td><span class="code">imageType</span> = <span class="code">VK_IMAGE_TYPE_1D</span><br /><span class="code">width</span> ≥ 1<br /><span class="code">height</span> = 1<br /><span class="code">depth</span> = 1<br /><span class="code">arrayLayers</span> ≥ 1<br /><span class="code">samples</span> = 1 </td><td><span class="code">viewType</span> = <span class="code">VK_IMAGE_VIEW_TYPE_1D</span><br /><span class="code">baseArrayLayer</span> ≥ 0<br /><span class="code">layerCount</span> = 1 </td></tr><tr><td> 1D, 1, 0 </td><td><span class="code">imageType</span> = <span class="code">VK_IMAGE_TYPE_1D</span><br /><span class="code">width</span> ≥ 1<br /><span class="code">height</span> = 1<br /><span class="code">depth</span> = 1<br /><span class="code">arrayLayers</span> ≥ 1<br /><span class="code">samples</span> = 1 </td><td><span class="code">viewType</span> = <span class="code">VK_IMAGE_VIEW_TYPE_1D_ARRAY</span><br /><span class="code">baseArrayLayer</span> ≥ 0<br /><span class="code">layerCount</span> ≥ 1 </td></tr><tr><td> 2D, 0, 0 </td><td><span class="code">imageType</span> = <span class="code">VK_IMAGE_TYPE_2D</span><br /><span class="code">width</span> ≥ 1<br /><span class="code">height</span> ≥ 1<br /><span class="code">depth</span> = 1<br /><span class="code">arrayLayers</span> ≥ 1<br /><span class="code">samples</span> = 1 </td><td><span class="code">viewType</span> = <span class="code">VK_IMAGE_VIEW_TYPE_2D</span><br /><span class="code">baseArrayLayer</span> ≥ 0<br /><span class="code">layerCount</span> = 1 </td></tr><tr><td> 2D, 1, 0 </td><td><span class="code">imageType</span> = <span class="code">VK_IMAGE_TYPE_2D</span><br /><span class="code">width</span> ≥ 1<br /><span class="code">height</span> ≥ 1<br /><span class="code">depth</span> = 1<br /><span class="code">arrayLayers</span> ≥ 1<br /><span class="code">samples</span> = 1 </td><td><span class="code">viewType</span> = <span class="code">VK_IMAGE_VIEW_TYPE_2D_ARRAY</span><br /><span class="code">baseArrayLayer</span> ≥ 0<br /><span class="code">layerCount</span> ≥ 1 </td></tr><tr><td> 2D, 0, 1 </td><td><span class="code">imageType</span> = <span class="code">VK_IMAGE_TYPE_2D</span><br /><span class="code">width</span> ≥ 1<br /><span class="code">height</span> ≥ 1<br /><span class="code">depth</span> = 1<br /><span class="code">arrayLayers</span> ≥ 1<br /><span class="code">samples</span> &gt; 1 </td><td><span class="code">viewType</span> = <span class="code">VK_IMAGE_VIEW_TYPE_2D</span><br /><span class="code">baseArrayLayer</span> ≥ 0<br /><span class="code">layerCount</span> = 1 </td></tr><tr><td> 2D, 1, 1 </td><td><span class="code">imageType</span> = <span class="code">VK_IMAGE_TYPE_2D</span><br /><span class="code">width</span> ≥ 1<br /><span class="code">height</span> ≥ 1<br /><span class="code">depth</span> = 1<br /><span class="code">arrayLayers</span> ≥ 1<br /><span class="code">samples</span> &gt; 1 </td><td><span class="code">viewType</span> = <span class="code">VK_IMAGE_VIEW_TYPE_2D_ARRAY</span><br /><span class="code">baseArrayLayer</span> ≥ 0<br /><span class="code">layerCount</span> ≥ 1 </td></tr><tr><td> CUBE, 0, 0 </td><td><span class="code">imageType</span> = <span class="code">VK_IMAGE_TYPE_2D</span><br /><span class="code">width</span> ≥ 1<br /><span class="code">height</span> = <span class="code">width</span><br /><span class="code">depth</span> = 1<br /><span class="code">arrayLayers</span> ≥ 6<br /><span class="code">samples</span> = 1<br /><span class="code">flags</span> includes <span class="code">VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT</span></td><td><span class="code">viewType</span> = <span class="code">VK_IMAGE_VIEW_TYPE_CUBE</span><br /><span class="code">baseArrayLayer</span> ≥ 0<br /><span class="code">layerCount</span> = 6 </td></tr><tr><td> CUBE, 1, 0 </td><td><span class="code">imageType</span> = <span class="code">VK_IMAGE_TYPE_2D</span><br /><span class="code">width</span> ≥ 1<br /><span class="code">height</span> = width<br /><span class="code">depth</span> = 1<br /> N  ≥ 1<br /><span class="code">arrayLayers</span> ≥ 6 ×  N <br /><span class="code">samples</span> = 1<br /><span class="code">flags</span> includes <span class="code">VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT</span></td><td><span class="code">viewType</span> = <span class="code">VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</span><br /><span class="code">baseArrayLayer</span> ≥ 0<br /><span class="code">layerCount</span> = 6 ×  N ,  N  ≥ 1 </td></tr><tr><td> 3D, 0, 0 </td><td><span class="code">imageType</span> = <span class="code">VK_IMAGE_TYPE_3D</span><br /><span class="code">width</span> ≥ 1<br /><span class="code">height</span> ≥ 1<br /><span class="code">depth</span> ≥ 1<br /><span class="code">arrayLayers</span> = 1<br /><span class="code">samples</span> = 1 </td><td><span class="code">viewType</span> = <span class="code">VK_IMAGE_VIEW_TYPE_3D</span><br /><span class="code">baseArrayLayer</span> = 0<br /><span class="code">layerCount</span> = 1 </td></tr></table></div>   Valid Usage  <ul><li> 
+the interpretation of the bit pattern changing.
+
+<p>Table 1. Image and image view parameter compatibility requirements</p><div class="tableSection"><table><tr><th>Dim, Arrayed, MSImage parametersView parameters</th></tr><tr><td /><td><span class="code">imageType</span> = ci.<span class="code">imageType</span><br /><span class="code">width</span> = ci.<span class="code">extent.width</span><br /><span class="code">height</span> = ci.<span class="code">extent.height</span><br /><span class="code">depth</span> = ci.<span class="code">extent.depth</span><br /><span class="code">arrayLayers</span> = ci.<span class="code">arrayLayers</span><br /><span class="code">samples</span> = ci.<span class="code">samples</span><br /><span class="code">flags</span> = ci.<span class="code">flags</span><br />
+    where ci is the <a href="T_IVkImageCreateInfo.htm">IVkImageCreateInfo</a> used to create <span class="code">image</span>.
+</td><td><span class="code">baseArrayLayer</span> and <span class="code">layerCount</span>
+    are members of the <span class="code">subresourceRange</span> member.
+</td></tr><tr><td>
+1D, 0, 0
+</td><td><span class="code">imageType</span> = <span class="code">VK_IMAGE_TYPE_1D</span><br /><span class="code">width</span> ≥ 1<br /><span class="code">height</span> = 1<br /><span class="code">depth</span> = 1<br /><span class="code">arrayLayers</span> ≥ 1<br /><span class="code">samples</span> = 1
+</td><td><span class="code">viewType</span> = <span class="code">VK_IMAGE_VIEW_TYPE_1D</span><br /><span class="code">baseArrayLayer</span> ≥ 0<br /><span class="code">layerCount</span> = 1
+</td></tr><tr><td>
+1D, 1, 0
+</td><td><span class="code">imageType</span> = <span class="code">VK_IMAGE_TYPE_1D</span><br /><span class="code">width</span> ≥ 1<br /><span class="code">height</span> = 1<br /><span class="code">depth</span> = 1<br /><span class="code">arrayLayers</span> ≥ 1<br /><span class="code">samples</span> = 1
+</td><td><span class="code">viewType</span> = <span class="code">VK_IMAGE_VIEW_TYPE_1D_ARRAY</span><br /><span class="code">baseArrayLayer</span> ≥ 0<br /><span class="code">layerCount</span> ≥ 1
+</td></tr><tr><td>
+2D, 0, 0
+</td><td><span class="code">imageType</span> = <span class="code">VK_IMAGE_TYPE_2D</span><br /><span class="code">width</span> ≥ 1<br /><span class="code">height</span> ≥ 1<br /><span class="code">depth</span> = 1<br /><span class="code">arrayLayers</span> ≥ 1<br /><span class="code">samples</span> = 1
+</td><td><span class="code">viewType</span> = <span class="code">VK_IMAGE_VIEW_TYPE_2D</span><br /><span class="code">baseArrayLayer</span> ≥ 0<br /><span class="code">layerCount</span> = 1
+</td></tr><tr><td>
+2D, 1, 0
+</td><td><span class="code">imageType</span> = <span class="code">VK_IMAGE_TYPE_2D</span><br /><span class="code">width</span> ≥ 1<br /><span class="code">height</span> ≥ 1<br /><span class="code">depth</span> = 1<br /><span class="code">arrayLayers</span> ≥ 1<br /><span class="code">samples</span> = 1
+</td><td><span class="code">viewType</span> = <span class="code">VK_IMAGE_VIEW_TYPE_2D_ARRAY</span><br /><span class="code">baseArrayLayer</span> ≥ 0<br /><span class="code">layerCount</span> ≥ 1
+</td></tr><tr><td>
+2D, 0, 1
+</td><td><span class="code">imageType</span> = <span class="code">VK_IMAGE_TYPE_2D</span><br /><span class="code">width</span> ≥ 1<br /><span class="code">height</span> ≥ 1<br /><span class="code">depth</span> = 1<br /><span class="code">arrayLayers</span> ≥ 1<br /><span class="code">samples</span> &gt; 1
+</td><td><span class="code">viewType</span> = <span class="code">VK_IMAGE_VIEW_TYPE_2D</span><br /><span class="code">baseArrayLayer</span> ≥ 0<br /><span class="code">layerCount</span> = 1
+</td></tr><tr><td>
+2D, 1, 1
+</td><td><span class="code">imageType</span> = <span class="code">VK_IMAGE_TYPE_2D</span><br /><span class="code">width</span> ≥ 1<br /><span class="code">height</span> ≥ 1<br /><span class="code">depth</span> = 1<br /><span class="code">arrayLayers</span> ≥ 1<br /><span class="code">samples</span> &gt; 1
+</td><td><span class="code">viewType</span> = <span class="code">VK_IMAGE_VIEW_TYPE_2D_ARRAY</span><br /><span class="code">baseArrayLayer</span> ≥ 0<br /><span class="code">layerCount</span> ≥ 1
+</td></tr><tr><td>
+CUBE, 0, 0
+</td><td><span class="code">imageType</span> = <span class="code">VK_IMAGE_TYPE_2D</span><br /><span class="code">width</span> ≥ 1<br /><span class="code">height</span> = <span class="code">width</span><br /><span class="code">depth</span> = 1<br /><span class="code">arrayLayers</span> ≥ 6<br /><span class="code">samples</span> = 1<br /><span class="code">flags</span> includes <span class="code">VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT</span></td><td><span class="code">viewType</span> = <span class="code">VK_IMAGE_VIEW_TYPE_CUBE</span><br /><span class="code">baseArrayLayer</span> ≥ 0<br /><span class="code">layerCount</span> = 6
+</td></tr><tr><td>
+CUBE, 1, 0
+</td><td><span class="code">imageType</span> = <span class="code">VK_IMAGE_TYPE_2D</span><br /><span class="code">width</span> ≥ 1<br /><span class="code">height</span> = width<br /><span class="code">depth</span> = 1<br /> N ≥ 1<br /><span class="code">arrayLayers</span> ≥ 6 × N <br /><span class="code">samples</span> = 1<br /><span class="code">flags</span> includes <span class="code">VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT</span></td><td><span class="code">viewType</span> = <span class="code">VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</span><br /><span class="code">baseArrayLayer</span> ≥ 0<br /><span class="code">layerCount</span> = 6 × N , N ≥ 1
+</td></tr><tr><td>
+3D, 0, 0
+</td><td><span class="code">imageType</span> = <span class="code">VK_IMAGE_TYPE_3D</span><br /><span class="code">width</span> ≥ 1<br /><span class="code">height</span> ≥ 1<br /><span class="code">depth</span> ≥ 1<br /><span class="code">arrayLayers</span> = 1<br /><span class="code">samples</span> = 1
+</td><td><span class="code">viewType</span> = <span class="code">VK_IMAGE_VIEW_TYPE_3D</span><br /><span class="code">baseArrayLayer</span> = 0<br /><span class="code">layerCount</span> = 1
+</td></tr></table></div>
+
+
+Valid Usage
+<ul><li>
+
 If <span class="code">image</span> was not created with
-<span class="code">VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT</span> then <span class="code">viewType</span> must  not
-be <span class="code">VK_IMAGE_VIEW_TYPE_CUBE</span> or <span class="code">VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</span></li><li> 
+<span class="code">VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT</span> then <span class="code">viewType</span> must not
+be <span class="code">VK_IMAGE_VIEW_TYPE_CUBE</span> or <span class="code">VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</span></li><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-imageCubeArray">image cubemap arrays</a> feature
-is not enabled, <span class="code">viewType</span> must  not be
-<span class="code">VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</span></li><li> 
+is not enabled, <span class="code">viewType</span> must not be
+<span class="code">VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</span></li><li>
+
 If <span class="code">image</span> was created with <span class="code">VK_IMAGE_TILING_LINEAR</span>,
-<span class="code">format</span> must  be format that has at least one supported feature bit
+<span class="code">format</span> must be format that has at least one supported feature bit
 present in the value of
 <span class="code">VkFormatProperties</span>::<span class="code">linearTilingFeatures</span> returned by
 <span class="code">vkGetPhysicalDeviceFormatProperties</span> with the same value of
-<span class="code">format</span></li><li><span class="code">image</span> must  have been created with a <span class="code">usage</span> value containing
+<span class="code">format</span></li><li><span class="code">image</span> must have been created with a <span class="code">usage</span> value containing
 at least one of <span class="code">VK_IMAGE_USAGE_SAMPLED_BIT</span>,
 <span class="code">VK_IMAGE_USAGE_STORAGE_BIT</span>,
 <span class="code">VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</span>,
 <span class="code">VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</span>, or
-<span class="code">VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT</span></li><li> 
+<span class="code">VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT</span></li><li>
+
 If <span class="code">image</span> was created with <span class="code">VK_IMAGE_TILING_LINEAR</span> and
-<span class="code">usage</span> contains <span class="code">VK_IMAGE_USAGE_SAMPLED_BIT</span>, <span class="code">format</span> must  be supported for sampled images, as specified by the
+<span class="code">usage</span> contains <span class="code">VK_IMAGE_USAGE_SAMPLED_BIT</span>, <span class="code">format</span> must be supported for sampled images, as specified by the
 <span class="code">VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT</span> flag in
 <span class="code">VkFormatProperties</span>::<span class="code">linearTilingFeatures</span> returned by
 <span class="code">vkGetPhysicalDeviceFormatProperties</span> with the same value of
-<span class="code">format</span></li><li> 
+<span class="code">format</span></li><li>
+
 If <span class="code">image</span> was created with <span class="code">VK_IMAGE_TILING_LINEAR</span> and
-<span class="code">usage</span> contains <span class="code">VK_IMAGE_USAGE_STORAGE_BIT</span>, <span class="code">format</span> must  be supported for storage images, as specified by the
+<span class="code">usage</span> contains <span class="code">VK_IMAGE_USAGE_STORAGE_BIT</span>, <span class="code">format</span> must be supported for storage images, as specified by the
 <span class="code">VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT</span> flag in
 <span class="code">VkFormatProperties</span>::<span class="code">linearTilingFeatures</span> returned by
 <span class="code">vkGetPhysicalDeviceFormatProperties</span> with the same value of
-<span class="code">format</span></li><li> 
+<span class="code">format</span></li><li>
+
 If <span class="code">image</span> was created with <span class="code">VK_IMAGE_TILING_LINEAR</span> and
 <span class="code">usage</span> contains <span class="code">VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</span>,
-<span class="code">format</span> must  be supported for color attachments, as specified by
+<span class="code">format</span> must be supported for color attachments, as specified by
 the <span class="code">VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT</span> flag in
 <span class="code">VkFormatProperties</span>::<span class="code">linearTilingFeatures</span> returned by
 <span class="code">vkGetPhysicalDeviceFormatProperties</span> with the same value of
-<span class="code">format</span></li><li> 
+<span class="code">format</span></li><li>
+
 If <span class="code">image</span> was created with <span class="code">VK_IMAGE_TILING_LINEAR</span> and
 <span class="code">usage</span> containing
-<span class="code">VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</span>, <span class="code">format</span> must  be
+<span class="code">VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</span>, <span class="code">format</span> must be
 supported for depth/stencil attachments, as specified by the
 <span class="code">VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</span> flag in
 <span class="code">VkFormatProperties</span>::<span class="code">linearTilingFeatures</span> returned by
 <span class="code">vkGetPhysicalDeviceFormatProperties</span> with the same value of
-<span class="code">format</span></li><li> 
+<span class="code">format</span></li><li>
+
 If <span class="code">image</span> was created with <span class="code">VK_IMAGE_TILING_OPTIMAL</span>,
-<span class="code">format</span> must  be format that has at least one supported feature bit
+<span class="code">format</span> must be format that has at least one supported feature bit
 present in the value of
 <span class="code">VkFormatProperties</span>::<span class="code">optimalTilingFeatures</span> returned by
 <span class="code">vkGetPhysicalDeviceFormatProperties</span> with the same value of
-<span class="code">format</span></li><li> 
+<span class="code">format</span></li><li>
+
 If <span class="code">image</span> was created with <span class="code">VK_IMAGE_TILING_OPTIMAL</span> and
-<span class="code">usage</span> contains <span class="code">VK_IMAGE_USAGE_SAMPLED_BIT</span>, <span class="code">format</span> must  be supported for sampled images, as specified by the
+<span class="code">usage</span> contains <span class="code">VK_IMAGE_USAGE_SAMPLED_BIT</span>, <span class="code">format</span> must be supported for sampled images, as specified by the
 <span class="code">VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT</span> flag in
 <span class="code">VkFormatProperties</span>::<span class="code">optimalTilingFeatures</span> returned by
 <span class="code">vkGetPhysicalDeviceFormatProperties</span> with the same value of
-<span class="code">format</span></li><li> 
+<span class="code">format</span></li><li>
+
 If <span class="code">image</span> was created with <span class="code">VK_IMAGE_TILING_OPTIMAL</span> and
-<span class="code">usage</span> contains <span class="code">VK_IMAGE_USAGE_STORAGE_BIT</span>, <span class="code">format</span> must  be supported for storage images, as specified by the
+<span class="code">usage</span> contains <span class="code">VK_IMAGE_USAGE_STORAGE_BIT</span>, <span class="code">format</span> must be supported for storage images, as specified by the
 <span class="code">VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT</span> flag in
 <span class="code">VkFormatProperties</span>::<span class="code">optimalTilingFeatures</span> returned by
 <span class="code">vkGetPhysicalDeviceFormatProperties</span> with the same value of
-<span class="code">format</span></li><li> 
+<span class="code">format</span></li><li>
+
 If <span class="code">image</span> was created with <span class="code">VK_IMAGE_TILING_OPTIMAL</span> and
 <span class="code">usage</span> contains <span class="code">VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</span>,
-<span class="code">format</span> must  be supported for color attachments, as specified by
+<span class="code">format</span> must be supported for color attachments, as specified by
 the <span class="code">VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT</span> flag in
 <span class="code">VkFormatProperties</span>::<span class="code">optimalTilingFeatures</span> returned by
 <span class="code">vkGetPhysicalDeviceFormatProperties</span> with the same value of
-<span class="code">format</span></li><li> 
+<span class="code">format</span></li><li>
+
 If <span class="code">image</span> was created with <span class="code">VK_IMAGE_TILING_OPTIMAL</span> and
 <span class="code">usage</span> containing
-<span class="code">VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</span>, <span class="code">format</span> must  be
+<span class="code">VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</span>, <span class="code">format</span> must be
 supported for depth/stencil attachments, as specified by the
 <span class="code">VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</span> flag in
 <span class="code">VkFormatProperties</span>::<span class="code">optimalTilingFeatures</span> returned by
 <span class="code">vkGetPhysicalDeviceFormatProperties</span> with the same value of
-<span class="code">format</span></li><li><span class="code">subresourceRange</span> must  be a valid image subresource range for
-<span class="code">image</span> (see <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#resources-image-views">../../html/vkspec.html#resources-image-views</a>) </li><li> 
+<span class="code">format</span></li><li><span class="code">subresourceRange</span> must be a valid image subresource range for
+<span class="code">image</span> (see <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#resources-image-views">../../html/vkspec.html#resources-image-views</a>)
+</li><li>
+
 If <span class="code">image</span> was created with the
-<span class="code">VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</span> flag, <span class="code">format</span> must  be
+<span class="code">VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</span> flag, <span class="code">format</span> must be
 compatible with the <span class="code">format</span> used to create <span class="code">image</span>, as defined
 in <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-formats-compatibility-classes">Format Compatibility
-Classes</a></li><li> 
+Classes</a></li><li>
+
 If <span class="code">image</span> was not created with the
-<span class="code">VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</span> flag, <span class="code">format</span> must  be
-identical to the <span class="code">format</span> used to create <span class="code">image</span></li><li> 
-If <span class="code">image</span> is non-sparse then it  must  be bound completely and
-contiguously to a single <span class="code">VkDeviceMemory</span> object </li><li><span class="code">subresourceRange</span> and <span class="code">viewType</span> must  be compatible with the
+<span class="code">VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</span> flag, <span class="code">format</span> must be
+identical to the <span class="code">format</span> used to create <span class="code">image</span></li><li>
+
+If <span class="code">image</span> is non-sparse then it must be bound completely and
+contiguously to a single <span class="code">VkDeviceMemory</span> object
+</li><li><span class="code">subresourceRange</span> and <span class="code">viewType</span> must be compatible with the
 image, as described in the
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#resources-image-views-compatibility">compatibility table</a></li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">sType</span> must  be <span class="code">VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO</span></li><li><span class="code">pNext</span> must  be <span class="code">NULL</span></li><li><span class="code">flags</span> must  be <span class="code">0</span></li><li><span class="code">image</span> must  be a valid <span class="code">VkImage</span> handle </li><li><span class="code">viewType</span> must  be a valid <a href="T_VkImageViewType.htm">VkImageViewType</a> value </li><li><span class="code">format</span> must  be a valid <a href="T_VkFormat.htm">VkFormat</a> value </li><li><span class="code">components</span> must  be a valid <span class="code">VkComponentMapping</span> structure </li><li><span class="code">subresourceRange</span> must  be a valid <span class="code">VkImageSubresourceRange</span> structure </li></ul>     The <span class="code">VkImageViewCreateInfo</span> structure is defined as:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAIBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAIBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAIBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno"> 1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkImageViewCreateInfo {
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#resources-image-views-compatibility">compatibility table</a></li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">sType</span> must be <span class="code">VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO</span></li><li><span class="code">pNext</span> must be <span class="code">NULL</span></li><li><span class="code">flags</span> must be <span class="code">0</span></li><li><span class="code">image</span> must be a valid <span class="code">VkImage</span> handle
+</li><li><span class="code">viewType</span> must be a valid <a href="T_VkImageViewType.htm">VkImageViewType</a> value
+</li><li><span class="code">format</span> must be a valid <a href="T_VkFormat.htm">VkFormat</a> value
+</li><li><span class="code">components</span> must be a valid <span class="code">VkComponentMapping</span> structure
+</li><li><span class="code">subresourceRange</span> must be a valid <span class="code">VkImageSubresourceRange</span> structure
+</li></ul>
+
+
+
+
+The <span class="code">VkImageViewCreateInfo</span> structure is defined as:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAIBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAIBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAIBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno"> 1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkImageViewCreateInfo {
 <span class="highlight-lineno"> 2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkStructureType            sType;
 <span class="highlight-lineno"> 3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    <span class="highlight-keyword">const</span> <span class="highlight-keyword">void</span>*                pNext;
 <span class="highlight-lineno"> 4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkImageViewCreateFlags     flags;

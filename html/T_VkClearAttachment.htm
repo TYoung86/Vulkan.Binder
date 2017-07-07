@@ -5,16 +5,46 @@
    Vulkan (in Vulkan.dll) Version: 1.0.53<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID2RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID1EACA_tab1" class="codeSnippetContainerTabSingle">C#</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EACA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EACA');return false;" title="Copy">Copy</a></div></div><div id="ID1EACA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">[<a href="http://msdn2.microsoft.com/en-us/library/bcfsa90a" target="_blank">SerializableAttribute</a>]
 <span class="keyword">public</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="identifier">VkClearAttachment</span> : <a href="http://msdn2.microsoft.com/en-us/library/aey3s293" target="_blank">ValueType</a></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EACA");</script></div><p>The <span class="selflink">VkClearAttachment</span> type exposes the following members.</p><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Fields</span></div><div id="ID3RBSection" class="collapsibleSection"><table class="members" id="fieldList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkClearAttachment_aspectMask.htm">aspectMask</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkClearAttachment_clearValue.htm">clearValue</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkClearAttachment_colorAttachment.htm">colorAttachment</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection">  No memory barriers are needed between <span class="code">vkCmdClearAttachments</span> and
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkClearAttachment_aspectMask.htm">aspectMask</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkClearAttachment_clearValue.htm">clearValue</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkClearAttachment_colorAttachment.htm">colorAttachment</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection">
+
+No memory barriers are needed between <span class="code">vkCmdClearAttachments</span> and
 preceding or subsequent draw or attachment clear commands in the same
-subpass.    The <span class="code">vkCmdClearAttachments</span> command is not affected by the bound
-pipeline state.    Attachments  can  also be cleared at the beginning of a render pass instance
+subpass.
+
+
+The <span class="code">vkCmdClearAttachments</span> command is not affected by the bound
+pipeline state.
+
+
+Attachments can also be cleared at the beginning of a render pass instance
 by setting <span class="code">loadOp</span> (or <span class="code">stencilLoadOp</span>) of
 <a href="T_VkAttachmentDescription.htm">VkAttachmentDescription</a> to <span class="code">VK_ATTACHMENT_LOAD_OP_CLEAR</span>, as
-described for <a href="T_vkCreateRenderPass.htm">vkCreateRenderPass</a>.     Valid Usage  <ul><li> 
-If <span class="code">aspectMask</span> includes <span class="code">VK_IMAGE_ASPECT_COLOR_BIT</span>, it  must 
+described for <a href="T_vkCreateRenderPass.htm">vkCreateRenderPass</a>.
+
+
+
+Valid Usage
+<ul><li>
+
+If <span class="code">aspectMask</span> includes <span class="code">VK_IMAGE_ASPECT_COLOR_BIT</span>, it must 
 not include <span class="code">VK_IMAGE_ASPECT_DEPTH_BIT</span> or
-<span class="code">VK_IMAGE_ASPECT_STENCIL_BIT</span></li><li><span class="code">aspectMask</span> must  not include <span class="code">VK_IMAGE_ASPECT_METADATA_BIT</span></li><li><span class="code">clearValue</span> must  be a valid <span class="code">VkClearValue</span> union </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">aspectMask</span> must  be a valid combination of <a href="T_VkImageAspectFlags.htm">VkImageAspectFlags</a> values </li><li><span class="code">aspectMask</span> must  not be <span class="code">0</span></li></ul>     The <span class="code">VkClearAttachment</span> structure is defined as:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkClearAttachment {
+<span class="code">VK_IMAGE_ASPECT_STENCIL_BIT</span></li><li><span class="code">aspectMask</span> must not include <span class="code">VK_IMAGE_ASPECT_METADATA_BIT</span></li><li><span class="code">clearValue</span> must be a valid <span class="code">VkClearValue</span> union
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">aspectMask</span> must be a valid combination of <a href="T_VkImageAspectFlags.htm">VkImageAspectFlags</a> values
+</li><li><span class="code">aspectMask</span> must not be <span class="code">0</span></li></ul>
+
+
+
+
+The <span class="code">VkClearAttachment</span> structure is defined as:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkClearAttachment {
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkImageAspectFlags    aspectMask;
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    uint32_t              colorAttachment;
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkClearValue          clearValue;

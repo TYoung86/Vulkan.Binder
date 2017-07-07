@@ -10,19 +10,45 @@ The effects of attachment load, store and multisample resolve operations are
 restricted to the pixels whose x and y coordinates fall within the render
 area on all attachments.
 The render area extends to all layers of <span class="code">framebuffer</span>.
-The application  must  ensure (using scissor if necessary) that all rendering
+The application must ensure (using scissor if necessary) that all rendering
 is contained within the render area, otherwise the pixels outside of the
-render area become undefined and shader side effects  may  occur for
+render area become undefined and shader side effects may occur for
 fragments outside the render area.
-The render area  must  be contained within the framebuffer dimensions.   <div class="tableSection"><table /></div>    Valid Usage  <ul><li><span class="code">clearValueCount</span> must  be greater than the largest attachment index
+The render area must be contained within the framebuffer dimensions.
+
+<div class="tableSection"><table /></div>
+
+
+Valid Usage
+<ul><li><span class="code">clearValueCount</span> must be greater than the largest attachment index
 in <span class="code">renderPass</span> that specifies a <span class="code">loadOp</span> (or
 <span class="code">stencilLoadOp</span>, if the attachment has a depth/stencil format) of
-<span class="code">VK_ATTACHMENT_LOAD_OP_CLEAR</span></li><li> 
-If <span class="code">clearValueCount</span> is not <span class="code">0</span>, <span class="code">pClearValues</span> must  be a
+<span class="code">VK_ATTACHMENT_LOAD_OP_CLEAR</span></li><li>
+
+If <span class="code">clearValueCount</span> is not <span class="code">0</span>, <span class="code">pClearValues</span> must be a
 pointer to an array of <span class="code">clearValueCount</span> valid <span class="code">VkClearValue</span>
-unions </li><li><span class="code">renderPass</span> must  be <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#renderpass-compatibility">compatible</a> with
+unions
+</li><li><span class="code">renderPass</span> must be <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#renderpass-compatibility">compatible</a> with
 the <span class="code">renderPass</span> member of the <span class="code">VkFramebufferCreateInfo</span>
-structure specified when creating <span class="code">framebuffer</span>. </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">sType</span> must  be <span class="code">VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO</span></li><li><span class="code">pNext</span> must  be <span class="code">NULL</span></li><li><span class="code">renderPass</span> must  be a valid <span class="code">VkRenderPass</span> handle </li><li><span class="code">framebuffer</span> must  be a valid <span class="code">VkFramebuffer</span> handle </li><li>  Both of <span class="code">framebuffer</span>, and <span class="code">renderPass</span> must  have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>     The <span class="code">VkRenderPassBeginInfo</span> structure is defined as:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAGBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAGBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAGBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkRenderPassBeginInfo {
+structure specified when creating <span class="code">framebuffer</span>.
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">sType</span> must be <span class="code">VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO</span></li><li><span class="code">pNext</span> must be <span class="code">NULL</span></li><li><span class="code">renderPass</span> must be a valid <span class="code">VkRenderPass</span> handle
+</li><li><span class="code">framebuffer</span> must be a valid <span class="code">VkFramebuffer</span> handle
+</li><li>
+ Both of <span class="code">framebuffer</span>, and <span class="code">renderPass</span> must have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>
+
+
+
+
+The <span class="code">VkRenderPassBeginInfo</span> structure is defined as:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAGBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAGBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAGBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkRenderPassBeginInfo {
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkStructureType        sType;
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    <span class="highlight-keyword">const</span> <span class="highlight-keyword">void</span>*            pNext;
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkRenderPass           renderPass;

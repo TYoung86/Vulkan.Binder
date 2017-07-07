@@ -6,47 +6,102 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetQueryPoolResults__ctor.htm">vkGetQueryPoolResults</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkGetQueryPoolResults</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetQueryPoolResults_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  If no bits are set in <span class="code">flags</span>, and all requested queries are in the
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetQueryPoolResults_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+If no bits are set in <span class="code">flags</span>, and all requested queries are in the
 available state, results are written as an array of 32-bit unsigned integer
 values.
 The behavior when not all queries are available, is described
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#queries-wait-bit-not-set">below</a>.    If <span class="code">VK_QUERY_RESULT_64_BIT</span> is not set and the result overflows a 32-bit
-value, the value  may  either wrap or saturate.
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#queries-wait-bit-not-set">below</a>.
+
+
+If <span class="code">VK_QUERY_RESULT_64_BIT</span> is not set and the result overflows a 32-bit
+value, the value may either wrap or saturate.
 Similarly, if <span class="code">VK_QUERY_RESULT_64_BIT</span> is set and the result overflows a
-64-bit value, the value  may  either wrap or saturate.    If <span class="code">VK_QUERY_RESULT_WAIT_BIT</span> is set, Vulkan will wait for each query to
+64-bit value, the value may either wrap or saturate.
+
+
+If <span class="code">VK_QUERY_RESULT_WAIT_BIT</span> is set, Vulkan will wait for each query to
 be in the available state before retrieving the numerical results for that
 query.
 In this case, <span class="code">vkGetQueryPoolResults</span> is guaranteed to succeed and
 return <span class="code">VK_SUCCESS</span> if the queries become available in a finite time
 (i.e. if they have been issued and not reset).
 If queries will never finish (e.g. due to being reset but not issued), then
-<span class="code">vkGetQueryPoolResults</span> may  not return in finite time.    If <span class="code">VK_QUERY_RESULT_WAIT_BIT</span> and <span class="code">VK_QUERY_RESULT_PARTIAL_BIT</span> are
+<span class="code">vkGetQueryPoolResults</span> may not return in finite time.
+
+
+If <span class="code">VK_QUERY_RESULT_WAIT_BIT</span> and <span class="code">VK_QUERY_RESULT_PARTIAL_BIT</span> are
 both not set then no result values are written to <span class="code">pData</span> for queries
 that are in the unavailable state at the time of the call, and
 <span class="code">vkGetQueryPoolResults</span> returns <span class="code">VK_NOT_READY</span>.
 However, availability state is still written to <span class="code">pData</span> for those
-queries if <span class="code">VK_QUERY_RESULT_WITH_AVAILABILITY_BIT</span> is set.   <div class="tableSection"><table /></div><div class="tableSection"><table /></div>   If <span class="code">VK_QUERY_RESULT_PARTIAL_BIT</span> is set, <span class="code">VK_QUERY_RESULT_WAIT_BIT</span>
+queries if <span class="code">VK_QUERY_RESULT_WITH_AVAILABILITY_BIT</span> is set.
+
+<div class="tableSection"><table /></div><div class="tableSection"><table /></div>
+
+If <span class="code">VK_QUERY_RESULT_PARTIAL_BIT</span> is set, <span class="code">VK_QUERY_RESULT_WAIT_BIT</span>
 is not set, and the query&amp;#8217;s status is unavailable, an intermediate result
 value between zero and the final result value is written to <span class="code">pData</span> for
-that query.    <span class="code">VK_QUERY_RESULT_PARTIAL_BIT</span> must  not be used if the pool&amp;#8217;s
-<span class="code">queryType</span> is <span class="code">VK_QUERY_TYPE_TIMESTAMP</span>.    If <span class="code">VK_QUERY_RESULT_WITH_AVAILABILITY_BIT</span> is set, the final integer
+that query.
+
+
+<span class="code">VK_QUERY_RESULT_PARTIAL_BIT</span> must not be used if the pool&amp;#8217;s
+<span class="code">queryType</span> is <span class="code">VK_QUERY_TYPE_TIMESTAMP</span>.
+
+
+If <span class="code">VK_QUERY_RESULT_WITH_AVAILABILITY_BIT</span> is set, the final integer
 value written for each query is non-zero if the query&amp;#8217;s status was available
 or zero if the status was unavailable.
 When <span class="code">VK_QUERY_RESULT_WITH_AVAILABILITY_BIT</span> is used, implementations
- must  guarantee that if they return a non-zero availability value then the
-numerical results  must  be valid, assuming the results are not reset by a
-subsequent command.   <div class="tableSection"><table /></div>    Valid Usage  <ul><li><span class="code">firstQuery</span> must  be less than the number of queries in
-<span class="code">queryPool</span></li><li> 
+ must guarantee that if they return a non-zero availability value then the
+numerical results must be valid, assuming the results are not reset by a
+subsequent command.
+
+<div class="tableSection"><table /></div>
+
+
+Valid Usage
+<ul><li><span class="code">firstQuery</span> must be less than the number of queries in
+<span class="code">queryPool</span></li><li>
+
 If <span class="code">VK_QUERY_RESULT_64_BIT</span> is not set in <span class="code">flags</span> then
-<span class="code">pData</span> and <span class="code">stride</span> must  be multiples of <span class="code">4</span></li><li> 
+<span class="code">pData</span> and <span class="code">stride</span> must be multiples of <span class="code">4</span></li><li>
+
 If <span class="code">VK_QUERY_RESULT_64_BIT</span> is set in <span class="code">flags</span> then <span class="code">pData</span>
-and <span class="code">stride</span> must  be multiples of <span class="code">8</span></li><li> 
-The sum of <span class="code">firstQuery</span> and <span class="code">queryCount</span> must  be less than or
-equal to the number of queries in <span class="code">queryPool</span></li><li><span class="code">dataSize</span> must  be large enough to contain the result of each
-query, as described <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#queries-operation-memorylayout">here</a></li><li> 
+and <span class="code">stride</span> must be multiples of <span class="code">8</span></li><li>
+
+The sum of <span class="code">firstQuery</span> and <span class="code">queryCount</span> must be less than or
+equal to the number of queries in <span class="code">queryPool</span></li><li><span class="code">dataSize</span> must be large enough to contain the result of each
+query, as described <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#queries-operation-memorylayout">here</a></li><li>
+
 If the <span class="code">queryType</span> used to create <span class="code">queryPool</span> was
-<span class="code">VK_QUERY_TYPE_TIMESTAMP</span>, <span class="code">flags</span> must  not contain
-<span class="code">VK_QUERY_RESULT_PARTIAL_BIT</span></li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">device</span> must  be a valid <span class="code">VkDevice</span> handle </li><li><span class="code">queryPool</span> must  be a valid <span class="code">VkQueryPool</span> handle </li><li><span class="code">pData</span> must  be a pointer to an array of <span class="code">dataSize</span> bytes </li><li><span class="code">flags</span> must  be a valid combination of <a href="T_VkQueryResultFlags.htm">VkQueryResultFlags</a> values </li><li><span class="code">dataSize</span> must  be greater than <span class="code">0</span></li><li><span class="code">queryPool</span> must  have been created, allocated, or retrieved from <span class="code">device</span></li></ul>      Return Codes  <dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li><li><span class="code">VK_NOT_READY</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_DEVICE_LOST</span></li></ul></dd></dl>     To retrieve status and results for a set of queries, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkGetQueryPoolResults(
+<span class="code">VK_QUERY_TYPE_TIMESTAMP</span>, <span class="code">flags</span> must not contain
+<span class="code">VK_QUERY_RESULT_PARTIAL_BIT</span></li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">device</span> must be a valid <span class="code">VkDevice</span> handle
+</li><li><span class="code">queryPool</span> must be a valid <span class="code">VkQueryPool</span> handle
+</li><li><span class="code">pData</span> must be a pointer to an array of <span class="code">dataSize</span> bytes
+</li><li><span class="code">flags</span> must be a valid combination of <a href="T_VkQueryResultFlags.htm">VkQueryResultFlags</a> values
+</li><li><span class="code">dataSize</span> must be greater than <span class="code">0</span></li><li><span class="code">queryPool</span> must have been created, allocated, or retrieved from <span class="code">device</span></li></ul>
+
+
+
+
+Return Codes
+<dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li><li><span class="code">VK_NOT_READY</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_DEVICE_LOST</span></li></ul></dd></dl>
+
+
+
+
+To retrieve status and results for a set of queries, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkGetQueryPoolResults(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDevice                                    device,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkQueryPool                                 queryPool,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   uint32_t                                    firstQuery,

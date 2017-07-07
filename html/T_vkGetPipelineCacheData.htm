@@ -6,46 +6,118 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetPipelineCacheData__ctor.htm">vkGetPipelineCacheData</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkGetPipelineCacheData</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetPipelineCacheData_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  If <span class="code">pData</span> is <span class="code">NULL</span>, then the maximum size of the data that  can  be
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetPipelineCacheData_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+If <span class="code">pData</span> is <span class="code">NULL</span>, then the maximum size of the data that can be
 retrieved from the pipeline cache, in bytes, is returned in <span class="code">pDataSize</span>.
-Otherwise, <span class="code">pDataSize</span> must  point to a variable set by the user to the
+Otherwise, <span class="code">pDataSize</span> must point to a variable set by the user to the
 size of the buffer, in bytes, pointed to by <span class="code">pData</span>, and on return the
 variable is overwritten with the amount of data actually written to
-<span class="code">pData</span>.    If <span class="code">pDataSize</span> is less than the maximum size that  can  be retrieved by
+<span class="code">pData</span>.
+
+
+If <span class="code">pDataSize</span> is less than the maximum size that can be retrieved by
 the pipeline cache, at most <span class="code">pDataSize</span> bytes will be written to
 <span class="code">pData</span>, and <span class="code">vkGetPipelineCacheData</span> will return
 <span class="code">VK_INCOMPLETE</span>.
-Any data written to <span class="code">pData</span> is valid and  can  be provided as the
+Any data written to <span class="code">pData</span> is valid and can be provided as the
 <span class="code">pInitialData</span> member of the <span class="code">VkPipelineCacheCreateInfo</span> structure
-passed to <span class="code">vkCreatePipelineCache</span>.    Two calls to <span class="code">vkGetPipelineCacheData</span> with the same parameters  must 
+passed to <span class="code">vkCreatePipelineCache</span>.
+
+
+Two calls to <span class="code">vkGetPipelineCacheData</span> with the same parameters must 
 retrieve the same data unless a command that modifies the contents of the
-cache is called between them.    Applications  can  store the data retrieved from the pipeline cache, and use
+cache is called between them.
+
+
+Applications can store the data retrieved from the pipeline cache, and use
 these data, possibly in a future run of the application, to populate new
 pipeline cache objects.
-The results of pipeline compiles, however,  may  depend on the vendor ID,
+The results of pipeline compiles, however, may depend on the vendor ID,
 device ID, driver version, and other details of the device.
 To enable applications to detect when previously retrieved data is
 incompatible with the device, the initial bytes written to <span class="code">pData</span> must 
-be a header consisting of the following members:  <p>Table 1. Layout for pipeline cache header version <span class="code">VK_PIPELINE_CACHE_HEADER_VERSION_ONE</span></p><div class="tableSection"><table><tr><th>OffsetSizeMeaning</th></tr><tr><td> 0 </td><td> 4 </td><td> length in bytes of the entire pipeline cache header
+be a header consisting of the following members:
+
+<p>Table 1. Layout for pipeline cache header version <span class="code">VK_PIPELINE_CACHE_HEADER_VERSION_ONE</span></p><div class="tableSection"><table><tr><th>OffsetSizeMeaning</th></tr><tr><td>
+0
+</td><td>
+4
+</td><td>
+length in bytes of the entire pipeline cache header
                              written as a stream of bytes, with the least
-                             significant byte first </td></tr><tr><td> 4 </td><td> 4 </td><td> a <a href="T_VkPipelineCacheHeaderVersion.htm">VkPipelineCacheHeaderVersion</a> value
+                             significant byte first
+</td></tr><tr><td>
+4
+</td><td>
+4
+</td><td>
+a <a href="T_VkPipelineCacheHeaderVersion.htm">VkPipelineCacheHeaderVersion</a> value
                              written as a stream of bytes, with the least
-                             significant byte first </td></tr><tr><td> 8 </td><td> 4 </td><td> a vendor ID equal to
+                             significant byte first
+</td></tr><tr><td>
+8
+</td><td>
+4
+</td><td>
+a vendor ID equal to
                              <span class="code">VkPhysicalDeviceProperties</span>::<span class="code">vendorID</span>
                              written as a stream of bytes, with the least
-                             significant byte first </td></tr><tr><td> 12 </td><td> 4 </td><td> a device ID equal to
+                             significant byte first
+</td></tr><tr><td>
+12
+</td><td>
+4
+</td><td>
+a device ID equal to
                              <span class="code">VkPhysicalDeviceProperties</span>::<span class="code">deviceID</span>
                              written as a stream of bytes, with the least
-                             significant byte first </td></tr><tr><td> 16 </td><td><span class="code">VK_UUID_SIZE</span></td><td> a pipeline cache ID equal to
-                             <span class="code">VkPhysicalDeviceProperties</span>::<span class="code">pipelineCacheUUID</span></td></tr></table></div>  The first four bytes encode the length of the entire pipeline header, in
+                             significant byte first
+</td></tr><tr><td>
+16
+</td><td><span class="code">VK_UUID_SIZE</span></td><td>
+a pipeline cache ID equal to
+                             <span class="code">VkPhysicalDeviceProperties</span>::<span class="code">pipelineCacheUUID</span></td></tr></table></div>
+
+The first four bytes encode the length of the entire pipeline header, in
 bytes.
 This value includes all fields in the header including the pipeline cache
-version field and the size of the length field.    The next four bytes encode the pipeline cache version, as described for
+version field and the size of the length field.
+
+
+The next four bytes encode the pipeline cache version, as described for
 <a href="T_VkPipelineCacheHeaderVersion.htm">VkPipelineCacheHeaderVersion</a>.
-A consumer of the pipeline cache  should  use the cache version to interpret
-the remainder of the cache header.    If <span class="code">pDataSize</span> is less than what is necessary to store this header,
+A consumer of the pipeline cache should use the cache version to interpret
+the remainder of the cache header.
+
+
+If <span class="code">pDataSize</span> is less than what is necessary to store this header,
 nothing will be written to <span class="code">pData</span> and zero will be written to
-<span class="code">pDataSize</span>.     Valid Usage (Implicit)  <ul><li><span class="code">device</span> must  be a valid <span class="code">VkDevice</span> handle </li><li><span class="code">pipelineCache</span> must  be a valid <span class="code">VkPipelineCache</span> handle </li><li><span class="code">pDataSize</span> must  be a pointer to a <span class="code">size_t</span> value </li><li>  If the value referenced by <span class="code">pDataSize</span> is not <span class="code">0</span>, and <span class="code">pData</span> is not <span class="code">NULL</span>, <span class="code">pData</span> must  be a pointer to an array of <span class="code">pDataSize</span> bytes </li><li><span class="code">pipelineCache</span> must  have been created, allocated, or retrieved from <span class="code">device</span></li></ul>      Return Codes  <dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li><li><span class="code">VK_INCOMPLETE</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li></ul></dd></dl>     Data  can  be retrieved from a pipeline cache object using the command:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkGetPipelineCacheData(
+<span class="code">pDataSize</span>.
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">device</span> must be a valid <span class="code">VkDevice</span> handle
+</li><li><span class="code">pipelineCache</span> must be a valid <span class="code">VkPipelineCache</span> handle
+</li><li><span class="code">pDataSize</span> must be a pointer to a <span class="code">size_t</span> value
+</li><li>
+ If the value referenced by <span class="code">pDataSize</span> is not <span class="code">0</span>, and <span class="code">pData</span> is not <span class="code">NULL</span>, <span class="code">pData</span> must be a pointer to an array of <span class="code">pDataSize</span> bytes
+</li><li><span class="code">pipelineCache</span> must have been created, allocated, or retrieved from <span class="code">device</span></li></ul>
+
+
+
+
+Return Codes
+<dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li><li><span class="code">VK_INCOMPLETE</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li></ul></dd></dl>
+
+
+
+
+Data can be retrieved from a pipeline cache object using the command:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkGetPipelineCacheData(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDevice                                    device,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkPipelineCache                             pipelineCache,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   size_t*                                     pDataSize,

@@ -6,39 +6,101 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdBeginQuery__ctor.htm">vkCmdBeginQuery</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkCmdBeginQuery</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdBeginQuery_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  If the <span class="code">queryType</span> of the pool is <span class="code">VK_QUERY_TYPE_OCCLUSION</span> and
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdBeginQuery_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+If the <span class="code">queryType</span> of the pool is <span class="code">VK_QUERY_TYPE_OCCLUSION</span> and
 <span class="code">flags</span> contains <span class="code">VK_QUERY_CONTROL_PRECISE_BIT</span>, an implementation
- must  return a result that matches the actual number of samples passed.
-This is described in more detail in <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#queries-occlusion">Occlusion Queries</a>.    After beginning a query, that query is considered  active  within the
+ must return a result that matches the actual number of samples passed.
+This is described in more detail in <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#queries-occlusion">Occlusion Queries</a>.
+
+
+After beginning a query, that query is considered active within the
 command buffer it was called in until that same query is ended.
 Queries active in a primary command buffer when secondary command buffers
-are executed are considered active for those secondary command buffers.     Valid Usage  <ul><li> 
-The query identified by <span class="code">queryPool</span> and <span class="code">query</span> must  currently
-not be <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#queries-operation-active">active</a></li><li> 
-The query identified by <span class="code">queryPool</span> and <span class="code">query</span> must  be
-unavailable </li><li> 
+are executed are considered active for those secondary command buffers.
+
+
+
+Valid Usage
+<ul><li>
+
+The query identified by <span class="code">queryPool</span> and <span class="code">query</span> must currently
+not be <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#queries-operation-active">active</a></li><li>
+
+The query identified by <span class="code">queryPool</span> and <span class="code">query</span> must be
+unavailable
+</li><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-occlusionQueryPrecise">precise occlusion
 queries</a> feature is not enabled, or the <span class="code">queryType</span> used to create
 <span class="code">queryPool</span> was not <span class="code">VK_QUERY_TYPE_OCCLUSION</span>, <span class="code">flags</span> must 
-not contain <span class="code">VK_QUERY_CONTROL_PRECISE_BIT</span></li><li><span class="code">queryPool</span> must  have been created with a <span class="code">queryType</span> that
+not contain <span class="code">VK_QUERY_CONTROL_PRECISE_BIT</span></li><li><span class="code">queryPool</span> must have been created with a <span class="code">queryType</span> that
 differs from that of any other queries that have been made
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#queries-operation-active">active</a>, and are currently still active
-within <span class="code">commandBuffer</span></li><li><span class="code">query</span> must  be less than the number of queries in <span class="code">queryPool</span></li><li> 
+within <span class="code">commandBuffer</span></li><li><span class="code">query</span> must be less than the number of queries in <span class="code">queryPool</span></li><li>
+
 If the <span class="code">queryType</span> used to create <span class="code">queryPool</span> was
 <span class="code">VK_QUERY_TYPE_OCCLUSION</span>, the <span class="code">VkCommandPool</span> that
-<span class="code">commandBuffer</span> was allocated from  must  support graphics operations </li><li> 
+<span class="code">commandBuffer</span> was allocated from must support graphics operations
+</li><li>
+
 If the <span class="code">queryType</span> used to create <span class="code">queryPool</span> was
 <span class="code">VK_QUERY_TYPE_PIPELINE_STATISTICS</span> and any of the
 <span class="code">pipelineStatistics</span> indicate graphics operations, the
-<span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must 
-support graphics operations </li><li> 
+<span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must 
+support graphics operations
+</li><li>
+
 If the <span class="code">queryType</span> used to create <span class="code">queryPool</span> was
 <span class="code">VK_QUERY_TYPE_PIPELINE_STATISTICS</span> and any of the
 <span class="code">pipelineStatistics</span> indicate compute operations, the
-<span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must 
-support compute operations </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">commandBuffer</span> must  be a valid <span class="code">VkCommandBuffer</span> handle </li><li><span class="code">queryPool</span> must  be a valid <span class="code">VkQueryPool</span> handle </li><li><span class="code">flags</span> must  be a valid combination of <a href="T_VkQueryControlFlags.htm">VkQueryControlFlags</a> values </li><li><span class="code">commandBuffer</span> must  be in the  recording state  </li><li>  The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  support graphics, or compute operations </li><li>  Both of <span class="code">commandBuffer</span>, and <span class="code">queryPool</span> must  have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">commandBuffer</span> must  be externally synchronized </li><li> Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  be externally synchronized </li></ul>      Command Properties <div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td> Primary<br />
-Secondary </td><td> Both </td><td> Graphics<br />
-compute </td><td /></tr></table></div>    To begin a query, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdBeginQuery(
+<span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must 
+support compute operations
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">commandBuffer</span> must be a valid <span class="code">VkCommandBuffer</span> handle
+</li><li><span class="code">queryPool</span> must be a valid <span class="code">VkQueryPool</span> handle
+</li><li><span class="code">flags</span> must be a valid combination of <a href="T_VkQueryControlFlags.htm">VkQueryControlFlags</a> values
+</li><li><span class="code">commandBuffer</span> must be in the recording state 
+</li><li>
+ The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must support graphics, or compute operations
+</li><li>
+ Both of <span class="code">commandBuffer</span>, and <span class="code">queryPool</span> must have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">commandBuffer</span> must be externally synchronized
+</li><li>
+Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must be externally synchronized
+</li></ul>
+
+
+
+
+Command Properties
+<div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td>
+Primary<br />
+Secondary
+</td><td>
+Both
+</td><td>
+Graphics<br />
+compute
+</td><td /></tr></table></div>
+
+
+
+To begin a query, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdBeginQuery(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkCommandBuffer                             commandBuffer,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkQueryPool                                 queryPool,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   uint32_t                                    query,

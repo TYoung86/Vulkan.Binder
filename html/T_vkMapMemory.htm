@@ -6,30 +6,77 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkMapMemory__ctor.htm">vkMapMemory</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkMapMemory</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkMapMemory_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  It is an application error to call <span class="code">vkMapMemory</span> on a memory object that
-is already mapped.   <div class="tableSection"><table /></div><span class="code">vkMapMemory</span> does not check whether the device memory is currently in
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkMapMemory_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+It is an application error to call <span class="code">vkMapMemory</span> on a memory object that
+is already mapped.
+
+<div class="tableSection"><table /></div><span class="code">vkMapMemory</span> does not check whether the device memory is currently in
 use before returning the host-accessible pointer.
-The application  must  guarantee that any previously submitted command that
+The application must guarantee that any previously submitted command that
 writes to this range has completed before the host reads from or writes to
 that range, and that any previously submitted command that reads from that
 range has completed before the host writes to that region (see
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-submission-host-writes">here</a> for details on fulfilling
 such a guarantee).
 If the device memory was allocated without the
-<span class="code">VK_MEMORY_PROPERTY_HOST_COHERENT_BIT</span> set, these guarantees  must  be
-made for an extended range: the application  must  round down the start of
+<span class="code">VK_MEMORY_PROPERTY_HOST_COHERENT_BIT</span> set, these guarantees must be
+made for an extended range: the application must round down the start of
 the range to the nearest multiple of
 <span class="code">VkPhysicalDeviceLimits</span>::<span class="code">nonCoherentAtomSize</span>, and round the end
 of the range up to the nearest multiple of
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">nonCoherentAtomSize</span>.    While a range of device memory is mapped for host access, the application is
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">nonCoherentAtomSize</span>.
+
+
+While a range of device memory is mapped for host access, the application is
 responsible for synchronizing both device and host access to that memory
-range.   <div class="tableSection"><table /></div>    Valid Usage  <ul><li><span class="code">memory</span> must  not currently be mapped </li><li><span class="code">offset</span> must  be less than the size of <span class="code">memory</span></li><li> 
-If <span class="code">size</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, <span class="code">size</span> must  be
-greater than <span class="code">0</span></li><li> 
-If <span class="code">size</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, <span class="code">size</span> must  be
-less than or equal to the size of the <span class="code">memory</span> minus <span class="code">offset</span></li><li><span class="code">memory</span> must  have been created with a memory type that reports
-<span class="code">VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT</span></li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">device</span> must  be a valid <span class="code">VkDevice</span> handle </li><li><span class="code">memory</span> must  be a valid <span class="code">VkDeviceMemory</span> handle </li><li><span class="code">flags</span> must  be <span class="code">0</span></li><li><span class="code">ppData</span> must  be a pointer to a pointer </li><li><span class="code">memory</span> must  have been created, allocated, or retrieved from <span class="code">device</span></li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">memory</span> must  be externally synchronized </li></ul>      Return Codes  <dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_MEMORY_MAP_FAILED</span></li></ul></dd></dl>     To retrieve a host virtual address pointer to a region of a mappable memory
-object, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkMapMemory(
+range.
+
+<div class="tableSection"><table /></div>
+
+
+Valid Usage
+<ul><li><span class="code">memory</span> must not currently be mapped
+</li><li><span class="code">offset</span> must be less than the size of <span class="code">memory</span></li><li>
+
+If <span class="code">size</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, <span class="code">size</span> must be
+greater than <span class="code">0</span></li><li>
+
+If <span class="code">size</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, <span class="code">size</span> must be
+less than or equal to the size of the <span class="code">memory</span> minus <span class="code">offset</span></li><li><span class="code">memory</span> must have been created with a memory type that reports
+<span class="code">VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT</span></li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">device</span> must be a valid <span class="code">VkDevice</span> handle
+</li><li><span class="code">memory</span> must be a valid <span class="code">VkDeviceMemory</span> handle
+</li><li><span class="code">flags</span> must be <span class="code">0</span></li><li><span class="code">ppData</span> must be a pointer to a pointer
+</li><li><span class="code">memory</span> must have been created, allocated, or retrieved from <span class="code">device</span></li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">memory</span> must be externally synchronized
+</li></ul>
+
+
+
+
+Return Codes
+<dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_MEMORY_MAP_FAILED</span></li></ul></dd></dl>
+
+
+
+
+To retrieve a host virtual address pointer to a region of a mappable memory
+object, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkMapMemory(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDevice                                    device,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDeviceMemory                              memory,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDeviceSize                                offset,

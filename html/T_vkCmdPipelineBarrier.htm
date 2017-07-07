@@ -6,9 +6,14 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdPipelineBarrier__ctor.htm">vkCmdPipelineBarrier</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkCmdPipelineBarrier</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdPipelineBarrier_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  When <span class="selflink">vkCmdPipelineBarrier</span> is submitted to a queue, it defines a memory
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdPipelineBarrier_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+When <span class="selflink">vkCmdPipelineBarrier</span> is submitted to a queue, it defines a memory
 dependency between commands that were submitted before it, and those
-submitted after it.    If <span class="selflink">vkCmdPipelineBarrier</span> was recorded outside a render pass instance,
+submitted after it.
+
+
+If <span class="selflink">vkCmdPipelineBarrier</span> was recorded outside a render pass instance,
 the first <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-dependencies-scopes">synchronization scope</a>
 includes every command submitted to the same queue before it, including
 those in the same command buffer and batch.
@@ -18,7 +23,10 @@ within the same subpass.
 In either case, the first synchronization scope is limited to operations on
 the pipeline stages determined by the
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-pipeline-stages-masks">source stage mask</a> specified by
-<span class="code">srcStageMask</span>.    If <span class="selflink">vkCmdPipelineBarrier</span> was recorded outside a render pass instance,
+<span class="code">srcStageMask</span>.
+
+
+If <span class="selflink">vkCmdPipelineBarrier</span> was recorded outside a render pass instance,
 the second <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-dependencies-scopes">synchronization scope</a>
 includes every command submitted to the same queue after it, including those
 in the same command buffer and batch.
@@ -28,7 +36,10 @@ within the same subpass.
 In either case, the second synchronization scope is limited to operations on
 the pipeline stages determined by the
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-pipeline-stages-masks">destination stage mask</a> specified
-by <span class="code">dstStageMask</span>.    The first <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-dependencies-access-scopes">access scope</a> is
+by <span class="code">dstStageMask</span>.
+
+
+The first <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-dependencies-access-scopes">access scope</a> is
 limited to access in the pipeline stages determined by the
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-pipeline-stages-masks">source stage mask</a> specified by
 <span class="code">srcStageMask</span>.
@@ -37,7 +48,10 @@ defined by elements of the <span class="code">pMemoryBarriers</span>,
 <span class="code">pBufferMemoryBarriers</span> and <span class="code">pImageMemoryBarriers</span> arrays, which
 each define a set of <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-memory-barriers">memory barriers</a>.
 If no memory barriers are specified, then the first access scope includes no
-accesses.    The second <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-dependencies-access-scopes">access scope</a> is
+accesses.
+
+
+The second <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-dependencies-access-scopes">access scope</a> is
 limited to access in the pipeline stages determined by the
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-pipeline-stages-masks">destination stage mask</a> specified
 by <span class="code">dstStageMask</span>.
@@ -46,89 +60,169 @@ defined by elements of the <span class="code">pMemoryBarriers</span>,
 <span class="code">pBufferMemoryBarriers</span> and <span class="code">pImageMemoryBarriers</span> arrays, which
 each define a set of <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-memory-barriers">memory barriers</a>.
 If no memory barriers are specified, then the second access scope includes
-no accesses.    If <span class="code">dependencyFlags</span> includes <span class="code">VK_DEPENDENCY_BY_REGION_BIT</span>, then
+no accesses.
+
+
+If <span class="code">dependencyFlags</span> includes <span class="code">VK_DEPENDENCY_BY_REGION_BIT</span>, then
 any dependency between <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-framebuffer-regions">framebuffer-space</a> pipeline stages is
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-framebuffer-regions">framebuffer-local</a> - otherwise it is
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-framebuffer-regions">framebuffer-global</a>.     Valid Usage  <ul><li> 
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-framebuffer-regions">framebuffer-global</a>.
+
+
+
+Valid Usage
+<ul><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-geometryShader">geometry shaders</a> feature is
-not enabled, <span class="code">srcStageMask</span> must  not contain
-<span class="code">VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</span></li><li> 
+not enabled, <span class="code">srcStageMask</span> must not contain
+<span class="code">VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</span></li><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-geometryShader">geometry shaders</a> feature is
-not enabled, <span class="code">dstStageMask</span> must  not contain
-<span class="code">VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</span></li><li> 
+not enabled, <span class="code">dstStageMask</span> must not contain
+<span class="code">VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</span></li><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-tessellationShader">tessellation shaders</a>
-feature is not enabled, <span class="code">srcStageMask</span> must  not contain
+feature is not enabled, <span class="code">srcStageMask</span> must not contain
 <span class="code">VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</span> or
-<span class="code">VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</span></li><li> 
+<span class="code">VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</span></li><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-tessellationShader">tessellation shaders</a>
-feature is not enabled, <span class="code">dstStageMask</span> must  not contain
+feature is not enabled, <span class="code">dstStageMask</span> must not contain
 <span class="code">VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</span> or
-<span class="code">VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</span></li><li> 
+<span class="code">VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</span></li><li>
+
 If <span class="code">vkCmdPipelineBarrier</span> is called within a render pass instance,
-the render pass  must  have been created with a <span class="code">VkSubpassDependency</span>
+the render pass must have been created with a <span class="code">VkSubpassDependency</span>
 instance in <span class="code">pDependencies</span> that expresses a dependency from the
-current subpass to itself. </li><li> 
+current subpass to itself.
+</li><li>
+
 If <span class="code">vkCmdPipelineBarrier</span> is called within a render pass instance,
-<span class="code">srcStageMask</span> must  contain a subset of the bit values in the
-<span class="code">srcStageMask</span> member of that instance of <span class="code">VkSubpassDependency</span></li><li> 
+<span class="code">srcStageMask</span> must contain a subset of the bit values in the
+<span class="code">srcStageMask</span> member of that instance of <span class="code">VkSubpassDependency</span></li><li>
+
 If <span class="code">vkCmdPipelineBarrier</span> is called within a render pass instance,
-<span class="code">dstStageMask</span> must  contain a subset of the bit values in the
-<span class="code">dstStageMask</span> member of that instance of <span class="code">VkSubpassDependency</span></li><li> 
+<span class="code">dstStageMask</span> must contain a subset of the bit values in the
+<span class="code">dstStageMask</span> member of that instance of <span class="code">VkSubpassDependency</span></li><li>
+
 If <span class="code">vkCmdPipelineBarrier</span> is called within a render pass instance,
 the <span class="code">srcAccessMask</span> of any element of <span class="code">pMemoryBarriers</span> or
-<span class="code">pImageMemoryBarriers</span> must  contain a subset of the bit values the
-<span class="code">srcAccessMask</span> member of that instance of <span class="code">VkSubpassDependency</span></li><li> 
+<span class="code">pImageMemoryBarriers</span> must contain a subset of the bit values the
+<span class="code">srcAccessMask</span> member of that instance of <span class="code">VkSubpassDependency</span></li><li>
+
 If <span class="code">vkCmdPipelineBarrier</span> is called within a render pass instance,
 the <span class="code">dstAccessMask</span> of any element of <span class="code">pMemoryBarriers</span> or
-<span class="code">pImageMemoryBarriers</span> must  contain a subset of the bit values the
-<span class="code">dstAccessMask</span> member of that instance of <span class="code">VkSubpassDependency</span></li><li> 
+<span class="code">pImageMemoryBarriers</span> must contain a subset of the bit values the
+<span class="code">dstAccessMask</span> member of that instance of <span class="code">VkSubpassDependency</span></li><li>
+
 If <span class="code">vkCmdPipelineBarrier</span> is called within a render pass instance,
-<span class="code">dependencyFlags</span> must  be equal to the <span class="code">dependencyFlags</span> member
-of that instance of <span class="code">VkSubpassDependency</span></li><li> 
+<span class="code">dependencyFlags</span> must be equal to the <span class="code">dependencyFlags</span> member
+of that instance of <span class="code">VkSubpassDependency</span></li><li>
+
 If <span class="code">vkCmdPipelineBarrier</span> is called within a render pass instance,
-<span class="code">bufferMemoryBarrierCount</span> must  be <span class="code">0</span></li><li> 
+<span class="code">bufferMemoryBarrierCount</span> must be <span class="code">0</span></li><li>
+
 If <span class="code">vkCmdPipelineBarrier</span> is called within a render pass instance,
-the <span class="code">image</span> member of any element of <span class="code">pImageMemoryBarriers</span> must  be equal to one of the elements of <span class="code">pAttachments</span> that the
+the <span class="code">image</span> member of any element of <span class="code">pImageMemoryBarriers</span> must be equal to one of the elements of <span class="code">pAttachments</span> that the
 current <span class="code">framebuffer</span> was created with, that is also referred to by
 one of the elements of the <span class="code">pColorAttachments</span>,
 <span class="code">pResolveAttachments</span> or <span class="code">pDepthStencilAttachment</span> members of
 the <span class="code">VkSubpassDescription</span> instance that the current subpass was
-created with </li><li> 
+created with
+</li><li>
+
 If <span class="code">vkCmdPipelineBarrier</span> is called within a render pass instance,
 the <span class="code">oldLayout</span> and <span class="code">newLayout</span> members of any element of
-<span class="code">pImageMemoryBarriers</span> must  be equal to the <span class="code">layout</span> member of
+<span class="code">pImageMemoryBarriers</span> must be equal to the <span class="code">layout</span> member of
 an element of the <span class="code">pColorAttachments</span>, <span class="code">pResolveAttachments</span> or
 <span class="code">pDepthStencilAttachment</span> members of the <span class="code">VkSubpassDescription</span>
 instance that the current subpass was created with, that refers to the
-same <span class="code">image</span></li><li> 
+same <span class="code">image</span></li><li>
+
 If <span class="code">vkCmdPipelineBarrier</span> is called within a render pass instance,
 the <span class="code">oldLayout</span> and <span class="code">newLayout</span> members of an element of
-<span class="code">pImageMemoryBarriers</span> must  be equal </li><li> 
+<span class="code">pImageMemoryBarriers</span> must be equal
+</li><li>
+
 If <span class="code">vkCmdPipelineBarrier</span> is called within a render pass instance,
 the <span class="code">srcQueueFamilyIndex</span> and <span class="code">dstQueueFamilyIndex</span> members of
-any element of <span class="code">pImageMemoryBarriers</span> must  be
-<span class="code">VK_QUEUE_FAMILY_IGNORED</span></li><li> 
-Any pipeline stage included in <span class="code">srcStageMask</span> or <span class="code">dstStageMask</span> must  be supported by the capabilities of the queue family specified by
+any element of <span class="code">pImageMemoryBarriers</span> must be
+<span class="code">VK_QUEUE_FAMILY_IGNORED</span></li><li>
+
+Any pipeline stage included in <span class="code">srcStageMask</span> or <span class="code">dstStageMask</span> must be supported by the capabilities of the queue family specified by
 the <span class="code">queueFamilyIndex</span> member of the <a href="T_IVkCommandPoolCreateInfo.htm">IVkCommandPoolCreateInfo</a>
 structure that was used to create the <span class="code">VkCommandPool</span> that
 <span class="code">commandBuffer</span> was allocated from, as specified in the
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-pipeline-stages-supported">table of supported pipeline
-stages</a>. </li><li> 
+stages</a>.
+</li><li>
+
 Any given element of <span class="code">pMemoryBarriers</span>, <span class="code">pBufferMemoryBarriers</span>
-or <span class="code">pImageMemoryBarriers</span> must  not have any access flag included in
+or <span class="code">pImageMemoryBarriers</span> must not have any access flag included in
 its <span class="code">srcAccessMask</span> member if that bit is not supported by any of
 the pipeline stages in <span class="code">srcStageMask</span>, as specified in the
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-access-types-supported">table of supported access
-types</a>. </li><li> 
+types</a>.
+</li><li>
+
 Any given element of <span class="code">pMemoryBarriers</span>, <span class="code">pBufferMemoryBarriers</span>
-or <span class="code">pImageMemoryBarriers</span> must  not have any access flag included in
+or <span class="code">pImageMemoryBarriers</span> must not have any access flag included in
 its <span class="code">dstAccessMask</span> member if that bit is not supported by any of
 the pipeline stages in <span class="code">dstStageMask</span>, as specified in the
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-access-types-supported">table of supported access
-types</a>. </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">commandBuffer</span> must  be a valid <span class="code">VkCommandBuffer</span> handle </li><li><span class="code">srcStageMask</span> must  be a valid combination of <a href="T_VkPipelineStageFlags.htm">VkPipelineStageFlags</a> values </li><li><span class="code">srcStageMask</span> must  not be <span class="code">0</span></li><li><span class="code">dstStageMask</span> must  be a valid combination of <a href="T_VkPipelineStageFlags.htm">VkPipelineStageFlags</a> values </li><li><span class="code">dstStageMask</span> must  not be <span class="code">0</span></li><li><span class="code">dependencyFlags</span> must  be a valid combination of <a href="T_VkDependencyFlags.htm">VkDependencyFlags</a> values </li><li>  If <span class="code">memoryBarrierCount</span> is not <span class="code">0</span>, <span class="code">pMemoryBarriers</span> must  be a pointer to an array of <span class="code">memoryBarrierCount</span> valid <span class="code">VkMemoryBarrier</span> structures </li><li>  If <span class="code">bufferMemoryBarrierCount</span> is not <span class="code">0</span>, <span class="code">pBufferMemoryBarriers</span> must  be a pointer to an array of <span class="code">bufferMemoryBarrierCount</span> valid <span class="code">VkBufferMemoryBarrier</span> structures </li><li>  If <span class="code">imageMemoryBarrierCount</span> is not <span class="code">0</span>, <span class="code">pImageMemoryBarriers</span> must  be a pointer to an array of <span class="code">imageMemoryBarrierCount</span> valid <span class="code">VkImageMemoryBarrier</span> structures </li><li><span class="code">commandBuffer</span> must  be in the  recording state  </li><li>  The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  support transfer, graphics, or compute operations </li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">commandBuffer</span> must  be externally synchronized </li><li> Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  be externally synchronized </li></ul>      Command Properties <div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td> Primary<br />
-Secondary </td><td> Both </td><td> Transfer<br />
+types</a>.
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">commandBuffer</span> must be a valid <span class="code">VkCommandBuffer</span> handle
+</li><li><span class="code">srcStageMask</span> must be a valid combination of <a href="T_VkPipelineStageFlags.htm">VkPipelineStageFlags</a> values
+</li><li><span class="code">srcStageMask</span> must not be <span class="code">0</span></li><li><span class="code">dstStageMask</span> must be a valid combination of <a href="T_VkPipelineStageFlags.htm">VkPipelineStageFlags</a> values
+</li><li><span class="code">dstStageMask</span> must not be <span class="code">0</span></li><li><span class="code">dependencyFlags</span> must be a valid combination of <a href="T_VkDependencyFlags.htm">VkDependencyFlags</a> values
+</li><li>
+ If <span class="code">memoryBarrierCount</span> is not <span class="code">0</span>, <span class="code">pMemoryBarriers</span> must be a pointer to an array of <span class="code">memoryBarrierCount</span> valid <span class="code">VkMemoryBarrier</span> structures
+</li><li>
+ If <span class="code">bufferMemoryBarrierCount</span> is not <span class="code">0</span>, <span class="code">pBufferMemoryBarriers</span> must be a pointer to an array of <span class="code">bufferMemoryBarrierCount</span> valid <span class="code">VkBufferMemoryBarrier</span> structures
+</li><li>
+ If <span class="code">imageMemoryBarrierCount</span> is not <span class="code">0</span>, <span class="code">pImageMemoryBarriers</span> must be a pointer to an array of <span class="code">imageMemoryBarrierCount</span> valid <span class="code">VkImageMemoryBarrier</span> structures
+</li><li><span class="code">commandBuffer</span> must be in the recording state 
+</li><li>
+ The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must support transfer, graphics, or compute operations
+</li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">commandBuffer</span> must be externally synchronized
+</li><li>
+Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must be externally synchronized
+</li></ul>
+
+
+
+
+Command Properties
+<div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td>
+Primary<br />
+Secondary
+</td><td>
+Both
+</td><td>
+Transfer<br />
 graphics<br />
-compute </td><td /></tr></table></div>    To record a pipeline barrier, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAGBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAGBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAGBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno"> 1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdPipelineBarrier(
+compute
+</td><td /></tr></table></div>
+
+
+
+To record a pipeline barrier, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAGBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAGBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAGBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno"> 1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdPipelineBarrier(
 <span class="highlight-lineno"> 2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkCommandBuffer                             commandBuffer,
 <span class="highlight-lineno"> 3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkPipelineStageFlags                        srcStageMask,
 <span class="highlight-lineno"> 4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkPipelineStageFlags                        dstStageMask,

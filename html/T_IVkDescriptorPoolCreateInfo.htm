@@ -4,27 +4,59 @@
     <strong>Assembly:</strong>
    Vulkan (in Vulkan.dll) Version: 1.0.53<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID1RB')" onkeypress="SectionExpandCollapse_CheckKey('ID1RB', event)" tabindex="0"><img id="ID1RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID1RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID0EACA_tab1" class="codeSnippetContainerTabSingle">C#</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EACA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EACA');return false;" title="Copy">Copy</a></div></div><div id="ID0EACA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="identifier">IVkDescriptorPoolCreateInfo</span></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID0EACA");</script></div><p>The <span class="selflink">IVkDescriptorPoolCreateInfo</span> type exposes the following members.</p><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Properties</span></div><div id="ID2RBSection" class="collapsibleSection"><table class="members" id="propertyList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkDescriptorPoolCreateInfo_flags.htm">flags</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkDescriptorPoolCreateInfo_maxSets.htm">maxSets</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkDescriptorPoolCreateInfo_pNext.htm">pNext</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkDescriptorPoolCreateInfo_poolSizeCount.htm">poolSizeCount</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkDescriptorPoolCreateInfo_pPoolSizes.htm">pPoolSizes</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkDescriptorPoolCreateInfo_sType.htm">sType</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID3RBSection" class="collapsibleSection">  If multiple <span class="code">VkDescriptorPoolSize</span> structures appear in the
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkDescriptorPoolCreateInfo_flags.htm">flags</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkDescriptorPoolCreateInfo_maxSets.htm">maxSets</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkDescriptorPoolCreateInfo_pNext.htm">pNext</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkDescriptorPoolCreateInfo_poolSizeCount.htm">poolSizeCount</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkDescriptorPoolCreateInfo_pPoolSizes.htm">pPoolSizes</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkDescriptorPoolCreateInfo_sType.htm">sType</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID3RBSection" class="collapsibleSection">
+
+If multiple <span class="code">VkDescriptorPoolSize</span> structures appear in the
 <span class="code">pPoolSizes</span> array then the pool will be created with enough storage for
-the total number of descriptors of each type.    Fragmentation of a descriptor pool is possible and  may  lead to descriptor
+the total number of descriptors of each type.
+
+
+Fragmentation of a descriptor pool is possible and may lead to descriptor
 set allocation failures.
 A failure due to fragmentation is defined as failing a descriptor set
 allocation despite the sum of all outstanding descriptor set allocations
 from the pool plus the requested allocation requiring no more than the total
 number of descriptors requested at pool creation.
-Implementations provide certain guarantees of when fragmentation  must  not
-cause allocation failure, as described below.    If a descriptor pool has not had any descriptor sets freed since it was
-created or most recently reset then fragmentation  must  not cause an
+Implementations provide certain guarantees of when fragmentation must not
+cause allocation failure, as described below.
+
+
+If a descriptor pool has not had any descriptor sets freed since it was
+created or most recently reset then fragmentation must not cause an
 allocation failure (note that this is always the case for a pool created
 without the <span class="code">VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT</span> bit
 set).
 Additionally, if all sets allocated from the pool since it was created or
 most recently reset use the same number of descriptors (of each type) and
 the requested allocation also uses that same number of descriptors (of each
-type), then fragmentation  must  not cause an allocation failure.    If an allocation failure occurs due to fragmentation, an application  can 
+type), then fragmentation must not cause an allocation failure.
+
+
+If an allocation failure occurs due to fragmentation, an application can 
 create an additional descriptor pool to perform further descriptor set
-allocations.     Valid Usage  <ul><li><span class="code">maxSets</span> must  be greater than <span class="code">0</span></li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">sType</span> must  be <span class="code">VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO</span></li><li><span class="code">pNext</span> must  be <span class="code">NULL</span></li><li><span class="code">flags</span> must  be a valid combination of <a href="T_VkDescriptorPoolCreateFlags.htm">VkDescriptorPoolCreateFlags</a> values </li><li><span class="code">pPoolSizes</span> must  be a pointer to an array of <span class="code">poolSizeCount</span> valid <span class="code">VkDescriptorPoolSize</span> structures </li><li><span class="code">poolSizeCount</span> must  be greater than <span class="code">0</span></li></ul>     Additional information about the pool is passed in an instance of the
-<span class="code">VkDescriptorPoolCreateInfo</span> structure:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkDescriptorPoolCreateInfo {
+allocations.
+
+
+
+Valid Usage
+<ul><li><span class="code">maxSets</span> must be greater than <span class="code">0</span></li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">sType</span> must be <span class="code">VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO</span></li><li><span class="code">pNext</span> must be <span class="code">NULL</span></li><li><span class="code">flags</span> must be a valid combination of <a href="T_VkDescriptorPoolCreateFlags.htm">VkDescriptorPoolCreateFlags</a> values
+</li><li><span class="code">pPoolSizes</span> must be a pointer to an array of <span class="code">poolSizeCount</span> valid <span class="code">VkDescriptorPoolSize</span> structures
+</li><li><span class="code">poolSizeCount</span> must be greater than <span class="code">0</span></li></ul>
+
+
+
+
+Additional information about the pool is passed in an instance of the
+<span class="code">VkDescriptorPoolCreateInfo</span> structure:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkDescriptorPoolCreateInfo {
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkStructureType                sType;
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    <span class="highlight-keyword">const</span> <span class="highlight-keyword">void</span>*                    pNext;
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkDescriptorPoolCreateFlags    flags;

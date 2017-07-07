@@ -6,19 +6,47 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineColorBlendStateCreateInfo_attachmentCount.htm">attachmentCount</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineColorBlendStateCreateInfo_flags.htm">flags</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineColorBlendStateCreateInfo_logicOp.htm">logicOp</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineColorBlendStateCreateInfo_logicOpEnable.htm">logicOpEnable</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineColorBlendStateCreateInfo_pAttachments.htm">pAttachments</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineColorBlendStateCreateInfo_pNext.htm">pNext</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineColorBlendStateCreateInfo_sType.htm">sType</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID3RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_IVkPipelineColorBlendStateCreateInfo_blendConstants.htm">blendConstants</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection">  Each element of the <span class="code">pAttachments</span> array is a
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_IVkPipelineColorBlendStateCreateInfo_blendConstants.htm">blendConstants</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection">
+
+Each element of the <span class="code">pAttachments</span> array is a
 <a href="T_VkPipelineColorBlendAttachmentState.htm">VkPipelineColorBlendAttachmentState</a> structure specifying per-target
 blending state for each individual color attachment.
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-independentBlend">independent blending</a> feature
 is not enabled on the device, all <a href="T_VkPipelineColorBlendAttachmentState.htm">VkPipelineColorBlendAttachmentState</a>
-elements in the <span class="code">pAttachments</span> array  must  be identical.     Valid Usage  <ul><li> 
+elements in the <span class="code">pAttachments</span> array must be identical.
+
+
+
+Valid Usage
+<ul><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-independentBlend">independent blending</a>
-feature is not enabled, all elements of <span class="code">pAttachments</span> must  be
-identical </li><li> 
+feature is not enabled, all elements of <span class="code">pAttachments</span> must be
+identical
+</li><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-logicOp">logic operations</a> feature is not
-enabled, <span class="code">logicOpEnable</span> must  be <span class="code">VK_FALSE</span></li><li> 
-If <span class="code">logicOpEnable</span> is <span class="code">VK_TRUE</span>, <span class="code">logicOp</span> must  be a valid
-<a href="T_VkLogicOp.htm">VkLogicOp</a> value </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">sType</span> must  be <span class="code">VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO</span></li><li><span class="code">pNext</span> must  be <span class="code">NULL</span></li><li><span class="code">flags</span> must  be <span class="code">0</span></li><li>  If <span class="code">attachmentCount</span> is not <span class="code">0</span>, <span class="code">pAttachments</span> must  be a pointer to an array of <span class="code">attachmentCount</span> valid <span class="code">VkPipelineColorBlendAttachmentState</span> structures </li></ul>     The <span class="code">VkPipelineColorBlendStateCreateInfo</span> structure is defined as:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAFBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAFBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAFBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno"> 1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkPipelineColorBlendStateCreateInfo {
+enabled, <span class="code">logicOpEnable</span> must be <span class="code">VK_FALSE</span></li><li>
+
+If <span class="code">logicOpEnable</span> is <span class="code">VK_TRUE</span>, <span class="code">logicOp</span> must be a valid
+<a href="T_VkLogicOp.htm">VkLogicOp</a> value
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">sType</span> must be <span class="code">VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO</span></li><li><span class="code">pNext</span> must be <span class="code">NULL</span></li><li><span class="code">flags</span> must be <span class="code">0</span></li><li>
+ If <span class="code">attachmentCount</span> is not <span class="code">0</span>, <span class="code">pAttachments</span> must be a pointer to an array of <span class="code">attachmentCount</span> valid <span class="code">VkPipelineColorBlendAttachmentState</span> structures
+</li></ul>
+
+
+
+
+The <span class="code">VkPipelineColorBlendStateCreateInfo</span> structure is defined as:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAFBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAFBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAFBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno"> 1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkPipelineColorBlendStateCreateInfo {
 <span class="highlight-lineno"> 2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkStructureType                               sType;
 <span class="highlight-lineno"> 3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    <span class="highlight-keyword">const</span> <span class="highlight-keyword">void</span>*                                   pNext;
 <span class="highlight-lineno"> 4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkPipelineColorBlendStateCreateFlags          flags;

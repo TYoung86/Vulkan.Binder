@@ -6,11 +6,41 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCreateImage__ctor.htm">vkCreateImage</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkCreateImage</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCreateImage_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">   Valid Usage  <ul><li> 
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCreateImage_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+
+Valid Usage
+<ul><li>
+
 If the <span class="code">flags</span> member of <span class="code">pCreateInfo</span> includes
-<span class="code">VK_IMAGE_CREATE_SPARSE_BINDING_BIT</span>, creating this <span class="code">VkImage</span> must  not cause the total required sparse memory for all currently valid
+<span class="code">VK_IMAGE_CREATE_SPARSE_BINDING_BIT</span>, creating this <span class="code">VkImage</span> must not cause the total required sparse memory for all currently valid
 sparse resources on the device to exceed
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">sparseAddressSpaceSize</span></li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">device</span> must  be a valid <span class="code">VkDevice</span> handle </li><li><span class="code">pCreateInfo</span> must  be a pointer to a valid <span class="code">VkImageCreateInfo</span> structure </li><li>  If <span class="code">pAllocator</span> is not <span class="code">NULL</span>, <span class="code">pAllocator</span> must  be a pointer to a valid <span class="code">VkAllocationCallbacks</span> structure </li><li><span class="code">pImage</span> must  be a pointer to a <span class="code">VkImage</span> handle </li></ul>      Return Codes  <dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li></ul></dd></dl>     To create images, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkCreateImage(
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">sparseAddressSpaceSize</span></li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">device</span> must be a valid <span class="code">VkDevice</span> handle
+</li><li><span class="code">pCreateInfo</span> must be a pointer to a valid <span class="code">VkImageCreateInfo</span> structure
+</li><li>
+ If <span class="code">pAllocator</span> is not <span class="code">NULL</span>, <span class="code">pAllocator</span> must be a pointer to a valid <span class="code">VkAllocationCallbacks</span> structure
+</li><li><span class="code">pImage</span> must be a pointer to a <span class="code">VkImage</span> handle
+</li></ul>
+
+
+
+
+Return Codes
+<dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li></ul></dd></dl>
+
+
+
+
+To create images, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkCreateImage(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDevice                                    device,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">const</span> VkImageCreateInfo*                    pCreateInfo,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">const</span> VkAllocationCallbacks*                pAllocator,

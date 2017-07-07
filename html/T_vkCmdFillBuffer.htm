@@ -8,22 +8,80 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdFillBuffer_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection"><span class="code">vkCmdFillBuffer</span> is treated as &amp;#8220;transfer&amp;#8221; operation for the purposes
 of synchronization barriers.
-The <span class="code">VK_BUFFER_USAGE_TRANSFER_DST_BIT</span> must  be specified in <span class="code">usage</span>
+The <span class="code">VK_BUFFER_USAGE_TRANSFER_DST_BIT</span> must be specified in <span class="code">usage</span>
 of <span class="code">VkBufferCreateInfo</span> in order for the buffer to be compatible with
-<span class="code">vkCmdFillBuffer</span>.     Valid Usage  <ul><li><span class="code">dstOffset</span> must  be less than the size of <span class="code">dstBuffer</span></li><li><span class="code">dstOffset</span> must  be a multiple of <span class="code">4</span></li><li> 
-If <span class="code">size</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, <span class="code">size</span> must  be
-greater than <span class="code">0</span></li><li> 
-If <span class="code">size</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, <span class="code">size</span> must  be
-less than or equal to the size of <span class="code">dstBuffer</span> minus <span class="code">dstOffset</span></li><li> 
-If <span class="code">size</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, <span class="code">size</span> must  be a
-multiple of <span class="code">4</span></li><li><span class="code">dstBuffer</span> must  have been created with
-<span class="code">VK_BUFFER_USAGE_TRANSFER_DST_BIT</span> usage flag </li><li> 
+<span class="code">vkCmdFillBuffer</span>.
+
+
+
+Valid Usage
+<ul><li><span class="code">dstOffset</span> must be less than the size of <span class="code">dstBuffer</span></li><li><span class="code">dstOffset</span> must be a multiple of <span class="code">4</span></li><li>
+
+If <span class="code">size</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, <span class="code">size</span> must be
+greater than <span class="code">0</span></li><li>
+
+If <span class="code">size</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, <span class="code">size</span> must be
+less than or equal to the size of <span class="code">dstBuffer</span> minus <span class="code">dstOffset</span></li><li>
+
+If <span class="code">size</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, <span class="code">size</span> must be a
+multiple of <span class="code">4</span></li><li><span class="code">dstBuffer</span> must have been created with
+<span class="code">VK_BUFFER_USAGE_TRANSFER_DST_BIT</span> usage flag
+</li><li>
+
 The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from
- must  support graphics or compute operations </li><li> 
-If <span class="code">dstBuffer</span> is non-sparse then it  must  be bound completely and
-contiguously to a single <span class="code">VkDeviceMemory</span> object </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">commandBuffer</span> must  be a valid <span class="code">VkCommandBuffer</span> handle </li><li><span class="code">dstBuffer</span> must  be a valid <span class="code">VkBuffer</span> handle </li><li><span class="code">commandBuffer</span> must  be in the  recording state  </li><li>  The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  support graphics or compute operations </li><li>  This command  must  only be called outside of a render pass instance </li><li>  Both of <span class="code">commandBuffer</span>, and <span class="code">dstBuffer</span> must  have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">commandBuffer</span> must  be externally synchronized </li><li> Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  be externally synchronized </li></ul>      Command Properties <div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td> Primary<br />
-Secondary </td><td> Outside </td><td> Graphics<br />
-Compute </td><td> Transfer </td></tr></table></div>    To clear buffer data, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdFillBuffer(
+ must support graphics or compute operations
+</li><li>
+
+If <span class="code">dstBuffer</span> is non-sparse then it must be bound completely and
+contiguously to a single <span class="code">VkDeviceMemory</span> object
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">commandBuffer</span> must be a valid <span class="code">VkCommandBuffer</span> handle
+</li><li><span class="code">dstBuffer</span> must be a valid <span class="code">VkBuffer</span> handle
+</li><li><span class="code">commandBuffer</span> must be in the recording state 
+</li><li>
+ The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must support graphics or compute operations
+</li><li>
+ This command must only be called outside of a render pass instance
+</li><li>
+ Both of <span class="code">commandBuffer</span>, and <span class="code">dstBuffer</span> must have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">commandBuffer</span> must be externally synchronized
+</li><li>
+Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must be externally synchronized
+</li></ul>
+
+
+
+
+Command Properties
+<div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td>
+Primary<br />
+Secondary
+</td><td>
+Outside
+</td><td>
+Graphics<br />
+Compute
+</td><td>
+Transfer
+</td></tr></table></div>
+
+
+
+To clear buffer data, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdFillBuffer(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkCommandBuffer                             commandBuffer,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkBuffer                                    dstBuffer,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDeviceSize                                dstOffset,

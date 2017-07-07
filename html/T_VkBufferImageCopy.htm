@@ -5,83 +5,151 @@
    Vulkan (in Vulkan.dll) Version: 1.0.53<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID2RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID1EACA_tab1" class="codeSnippetContainerTabSingle">C#</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EACA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EACA');return false;" title="Copy">Copy</a></div></div><div id="ID1EACA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">[<a href="http://msdn2.microsoft.com/en-us/library/bcfsa90a" target="_blank">SerializableAttribute</a>]
 <span class="keyword">public</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="identifier">VkBufferImageCopy</span> : <a href="http://msdn2.microsoft.com/en-us/library/aey3s293" target="_blank">ValueType</a></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EACA");</script></div><p>The <span class="selflink">VkBufferImageCopy</span> type exposes the following members.</p><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Fields</span></div><div id="ID3RBSection" class="collapsibleSection"><table class="members" id="fieldList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkBufferImageCopy_bufferImageHeight.htm">bufferImageHeight</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkBufferImageCopy_bufferOffset.htm">bufferOffset</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkBufferImageCopy_bufferRowLength.htm">bufferRowLength</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkBufferImageCopy_imageExtent.htm">imageExtent</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkBufferImageCopy_imageOffset.htm">imageOffset</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkBufferImageCopy_imageSubresource.htm">imageSubresource</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection">  When copying to or from a depth or stencil aspect, the data in buffer memory
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkBufferImageCopy_bufferImageHeight.htm">bufferImageHeight</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkBufferImageCopy_bufferOffset.htm">bufferOffset</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkBufferImageCopy_bufferRowLength.htm">bufferRowLength</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkBufferImageCopy_imageExtent.htm">imageExtent</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkBufferImageCopy_imageOffset.htm">imageOffset</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkBufferImageCopy_imageSubresource.htm">imageSubresource</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection">
+
+When copying to or from a depth or stencil aspect, the data in buffer memory
 uses a layout that is a (mostly) tightly packed representation of the depth
 or stencil data.
-Specifically:   <ul><li> data copied to or from the stencil aspect of any depth/stencil format is
-tightly packed with one <span class="code">VK_FORMAT_S8_UINT</span> value per texel. </li><li> data copied to or from the depth aspect of a <span class="code">VK_FORMAT_D16_UNORM</span>
+Specifically:
+
+<ul><li>
+data copied to or from the stencil aspect of any depth/stencil format is
+tightly packed with one <span class="code">VK_FORMAT_S8_UINT</span> value per texel.
+</li><li>
+data copied to or from the depth aspect of a <span class="code">VK_FORMAT_D16_UNORM</span>
 or <span class="code">VK_FORMAT_D16_UNORM_S8_UINT</span> format is tightly packed with one
-<span class="code">VK_FORMAT_D16_UNORM</span> value per texel. </li><li> data copied to or from the depth aspect of a <span class="code">VK_FORMAT_D32_SFLOAT</span>
+<span class="code">VK_FORMAT_D16_UNORM</span> value per texel.
+</li><li>
+data copied to or from the depth aspect of a <span class="code">VK_FORMAT_D32_SFLOAT</span>
 or <span class="code">VK_FORMAT_D32_SFLOAT_S8_UINT</span> format is tightly packed with one
-<span class="code">VK_FORMAT_D32_SFLOAT</span> value per texel. </li><li> data copied to or from the depth aspect of a
+<span class="code">VK_FORMAT_D32_SFLOAT</span> value per texel.
+</li><li>
+data copied to or from the depth aspect of a
 <span class="code">VK_FORMAT_X8_D24_UNORM_PACK32</span> or <span class="code">VK_FORMAT_D24_UNORM_S8_UINT</span>
 format is packed with one 32-bit word per texel with the D24 value in
-the LSBs of the word, and undefined values in the eight MSBs. </li></ul><div class="tableSection"><table /></div>   Because depth or stencil aspect buffer to image copies  may  require format
+the LSBs of the word, and undefined values in the eight MSBs.
+</li></ul><div class="tableSection"><table /></div>
+
+Because depth or stencil aspect buffer to image copies may require format
 conversions on some implementations, they are not supported on queues that
 do not support graphics.
-When copying to a depth aspect, the data in buffer memory  must  be in the
-the range  [0,1]  or undefined results occur.    Copies are done layer by layer starting with image layer
+When copying to a depth aspect, the data in buffer memory must be in the
+the range [0,1] or undefined results occur.
+
+
+Copies are done layer by layer starting with image layer
 <span class="code">baseArrayLayer</span> member of <span class="code">imageSubresource</span>.
 <span class="code">layerCount</span> layers are copied from the source image or to the
-destination image.     Valid Usage  <ul><li> 
+destination image.
+
+
+
+Valid Usage
+<ul><li>
+
 If the the calling command&amp;#8217;s <span class="code">VkImage</span> parameter&amp;#8217;s format is not a
-depth/stencil format, then <span class="code">bufferOffset</span> must  be a multiple of the
-format&amp;#8217;s element size </li><li><span class="code">bufferOffset</span> must  be a multiple of <span class="code">4</span></li><li><span class="code">bufferRowLength</span> must  be <span class="code">0</span>, or greater than or equal to the
-<span class="code">width</span> member of <span class="code">imageExtent</span></li><li><span class="code">bufferImageHeight</span> must  be <span class="code">0</span>, or greater than or equal to the
-<span class="code">height</span> member of <span class="code">imageExtent</span></li><li><span class="code">imageOffset.x</span> and  (<span class="code">imageExtent.width</span> + 
-<span class="code">imageOffset.x</span>)  must  both be greater than or equal to <span class="code">0</span> and
-less than or equal to the image subresource width </li><li><span class="code">imageOffset.y</span> and  (imageExtent.height + 
-<span class="code">imageOffset.y</span>)  must  both be greater than or equal to <span class="code">0</span> and
-less than or equal to the image subresource height </li><li> 
+depth/stencil format, then <span class="code">bufferOffset</span> must be a multiple of the
+format&amp;#8217;s element size
+</li><li><span class="code">bufferOffset</span> must be a multiple of <span class="code">4</span></li><li><span class="code">bufferRowLength</span> must be <span class="code">0</span>, or greater than or equal to the
+<span class="code">width</span> member of <span class="code">imageExtent</span></li><li><span class="code">bufferImageHeight</span> must be <span class="code">0</span>, or greater than or equal to the
+<span class="code">height</span> member of <span class="code">imageExtent</span></li><li><span class="code">imageOffset.x</span> and (<span class="code">imageExtent.width</span> + 
+<span class="code">imageOffset.x</span>) must both be greater than or equal to <span class="code">0</span> and
+less than or equal to the image subresource width
+</li><li><span class="code">imageOffset.y</span> and (imageExtent.height + 
+<span class="code">imageOffset.y</span>) must both be greater than or equal to <span class="code">0</span> and
+less than or equal to the image subresource height
+</li><li>
+
 If the calling command&amp;#8217;s <span class="code">srcImage</span> (<a href="T_vkCmdCopyImageToBuffer.htm">vkCmdCopyImageToBuffer</a>)
 or <span class="code">dstImage</span> (<a href="T_vkCmdCopyBufferToImage.htm">vkCmdCopyBufferToImage</a>) is of type
-<span class="code">VK_IMAGE_TYPE_1D</span>, then <span class="code">imageOffset.y</span> must  be <span class="code">0</span> and
-<span class="code">imageExtent.height</span> must  be <span class="code">1</span>. </li><li><span class="code">imageOffset.z</span> and  (imageExtent.depth + 
-<span class="code">imageOffset.z</span>)  must  both be greater than or equal to <span class="code">0</span> and
-less than or equal to the image subresource depth </li><li> 
+<span class="code">VK_IMAGE_TYPE_1D</span>, then <span class="code">imageOffset.y</span> must be <span class="code">0</span> and
+<span class="code">imageExtent.height</span> must be <span class="code">1</span>.
+</li><li><span class="code">imageOffset.z</span> and (imageExtent.depth + 
+<span class="code">imageOffset.z</span>) must both be greater than or equal to <span class="code">0</span> and
+less than or equal to the image subresource depth
+</li><li>
+
 If the calling command&amp;#8217;s <span class="code">srcImage</span> (<a href="T_vkCmdCopyImageToBuffer.htm">vkCmdCopyImageToBuffer</a>)
 or <span class="code">dstImage</span> (<a href="T_vkCmdCopyBufferToImage.htm">vkCmdCopyBufferToImage</a>) is of type
 <span class="code">VK_IMAGE_TYPE_1D</span> or <span class="code">VK_IMAGE_TYPE_2D</span>, then
-<span class="code">imageOffset.z</span> must  be <span class="code">0</span> and <span class="code">imageExtent.depth</span> must  be
-<span class="code">1</span>. </li><li> 
+<span class="code">imageOffset.z</span> must be <span class="code">0</span> and <span class="code">imageExtent.depth</span> must be
+<span class="code">1</span>.
+</li><li>
+
 If the calling command&amp;#8217;s <span class="code">VkImage</span> parameter is a compressed format
-image, <span class="code">bufferRowLength</span> must  be a multiple of the compressed texel
-block width </li><li> 
+image, <span class="code">bufferRowLength</span> must be a multiple of the compressed texel
+block width
+</li><li>
+
 If the calling command&amp;#8217;s <span class="code">VkImage</span> parameter is a compressed format
-image, <span class="code">bufferImageHeight</span> must  be a multiple of the compressed
-texel block height </li><li> 
+image, <span class="code">bufferImageHeight</span> must be a multiple of the compressed
+texel block height
+</li><li>
+
 If the calling command&amp;#8217;s <span class="code">VkImage</span> parameter is a compressed format
-image, all members of <span class="code">imageOffset</span> must  be a multiple of the
-corresponding dimensions of the compressed texel block </li><li> 
+image, all members of <span class="code">imageOffset</span> must be a multiple of the
+corresponding dimensions of the compressed texel block
+</li><li>
+
 If the calling command&amp;#8217;s <span class="code">VkImage</span> parameter is a compressed format
-image, <span class="code">bufferOffset</span> must  be a multiple of the compressed texel
-block size in bytes </li><li> 
+image, <span class="code">bufferOffset</span> must be a multiple of the compressed texel
+block size in bytes
+</li><li>
+
 If the calling command&amp;#8217;s <span class="code">VkImage</span> parameter is a compressed format
-image, <span class="code">imageExtent.width</span> must  be a multiple of the compressed
-texel block width or  (<span class="code">imageExtent.width</span> + 
-<span class="code">imageOffset.x</span>)  must  equal the image subresource width </li><li> 
+image, <span class="code">imageExtent.width</span> must be a multiple of the compressed
+texel block width or (<span class="code">imageExtent.width</span> + 
+<span class="code">imageOffset.x</span>) must equal the image subresource width
+</li><li>
+
 If the calling command&amp;#8217;s <span class="code">VkImage</span> parameter is a compressed format
-image, <span class="code">imageExtent.height</span> must  be a multiple of the compressed
-texel block height or  (<span class="code">imageExtent.height</span> + 
-<span class="code">imageOffset.y</span>)  must  equal the image subresource height </li><li> 
+image, <span class="code">imageExtent.height</span> must be a multiple of the compressed
+texel block height or (<span class="code">imageExtent.height</span> + 
+<span class="code">imageOffset.y</span>) must equal the image subresource height
+</li><li>
+
 If the calling command&amp;#8217;s <span class="code">VkImage</span> parameter is a compressed format
-image, <span class="code">imageExtent.depth</span> must  be a multiple of the compressed
-texel block depth or  (<span class="code">imageExtent.depth</span> + 
-<span class="code">imageOffset.z</span>)  must  equal the image subresource depth </li><li><span class="code">bufferOffset</span>, <span class="code">bufferRowLength</span>, <span class="code">bufferImageHeight</span> and
-all members of <span class="code">imageOffset</span> and <span class="code">imageExtent</span> must  respect the
+image, <span class="code">imageExtent.depth</span> must be a multiple of the compressed
+texel block depth or (<span class="code">imageExtent.depth</span> + 
+<span class="code">imageOffset.z</span>) must equal the image subresource depth
+</li><li><span class="code">bufferOffset</span>, <span class="code">bufferRowLength</span>, <span class="code">bufferImageHeight</span> and
+all members of <span class="code">imageOffset</span> and <span class="code">imageExtent</span> must respect the
 image transfer granularity requirements of the queue family that it will
 be submitted against, as described in
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#devsandqueues-physical-device-enumeration">Physical Device
-Enumeration</a></li><li> 
-The <span class="code">aspectMask</span> member of <span class="code">imageSubresource</span> must  specify
-aspects present in the calling command&amp;#8217;s <span class="code">VkImage</span> parameter </li><li> 
-The <span class="code">aspectMask</span> member of <span class="code">imageSubresource</span> must  only have a
-single bit set </li><li> 
+Enumeration</a></li><li>
+
+The <span class="code">aspectMask</span> member of <span class="code">imageSubresource</span> must specify
+aspects present in the calling command&amp;#8217;s <span class="code">VkImage</span> parameter
+</li><li>
+
+The <span class="code">aspectMask</span> member of <span class="code">imageSubresource</span> must only have a
+single bit set
+</li><li>
+
 If the calling command&amp;#8217;s <span class="code">VkImage</span> parameter is of <a href="T_VkImageType.htm">VkImageType</a><span class="code">VK_IMAGE_TYPE_3D</span>, the <span class="code">baseArrayLayer</span> and <span class="code">layerCount</span>
-members of <span class="code">imageSubresource</span> must  be <span class="code">0</span> and <span class="code">1</span>, respectively </li><li> 
+members of <span class="code">imageSubresource</span> must be <span class="code">0</span> and <span class="code">1</span>, respectively
+</li><li>
+
 When copying to the depth aspect of an image subresource, the data in
-the source buffer  must  be in the range  [0,1]  </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">imageSubresource</span> must  be a valid <span class="code">VkImageSubresourceLayers</span> structure </li></ul>     For both <a href="T_vkCmdCopyBufferToImage.htm">vkCmdCopyBufferToImage</a> and <a href="T_vkCmdCopyImageToBuffer.htm">vkCmdCopyImageToBuffer</a>, each
-element of <span class="code">pRegions</span> is a structure defined as:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAFBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAFBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAFBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkBufferImageCopy {
+the source buffer must be in the range [0,1] 
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">imageSubresource</span> must be a valid <span class="code">VkImageSubresourceLayers</span> structure
+</li></ul>
+
+
+
+
+For both <a href="T_vkCmdCopyBufferToImage.htm">vkCmdCopyBufferToImage</a> and <a href="T_vkCmdCopyImageToBuffer.htm">vkCmdCopyImageToBuffer</a>, each
+element of <span class="code">pRegions</span> is a structure defined as:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAFBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAFBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAFBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkBufferImageCopy {
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkDeviceSize                bufferOffset;
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    uint32_t                    bufferRowLength;
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    uint32_t                    bufferImageHeight;

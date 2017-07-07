@@ -6,28 +6,93 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdCopyBufferToImage__ctor.htm">vkCmdCopyBufferToImage</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkCmdCopyBufferToImage</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdCopyBufferToImage_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  Each region in <span class="code">pRegions</span> is copied from the specified region of the
-source buffer to the specified region of the destination image.     Valid Usage  <ul><li> 
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdCopyBufferToImage_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+Each region in <span class="code">pRegions</span> is copied from the specified region of the
+source buffer to the specified region of the destination image.
+
+
+
+Valid Usage
+<ul><li>
+
 The buffer region specified by a given element of <span class="code">pRegions</span> must 
-be a region that is contained within <span class="code">srcBuffer</span></li><li> 
-The image region specified by a given element of <span class="code">pRegions</span> must  be
-a region that is contained within <span class="code">dstImage</span></li><li> 
+be a region that is contained within <span class="code">srcBuffer</span></li><li>
+
+The image region specified by a given element of <span class="code">pRegions</span> must be
+a region that is contained within <span class="code">dstImage</span></li><li>
+
 The union of all source regions, and the union of all destination
-regions, specified by the elements of <span class="code">pRegions</span>,  must  not overlap
-in memory </li><li><span class="code">srcBuffer</span> must  have been created with
-<span class="code">VK_BUFFER_USAGE_TRANSFER_SRC_BIT</span> usage flag </li><li> 
-If <span class="code">srcBuffer</span> is non-sparse then it  must  be bound completely and
-contiguously to a single <span class="code">VkDeviceMemory</span> object </li><li><span class="code">dstImage</span> must  have been created with
-<span class="code">VK_IMAGE_USAGE_TRANSFER_DST_BIT</span> usage flag </li><li> 
-If <span class="code">dstImage</span> is non-sparse then it  must  be bound completely and
-contiguously to a single <span class="code">VkDeviceMemory</span> object </li><li><span class="code">dstImage</span> must  have a sample count equal to
-<span class="code">VK_SAMPLE_COUNT_1_BIT</span></li><li><span class="code">dstImageLayout</span> must  specify the layout of the image subresources
+regions, specified by the elements of <span class="code">pRegions</span>, must not overlap
+in memory
+</li><li><span class="code">srcBuffer</span> must have been created with
+<span class="code">VK_BUFFER_USAGE_TRANSFER_SRC_BIT</span> usage flag
+</li><li>
+
+If <span class="code">srcBuffer</span> is non-sparse then it must be bound completely and
+contiguously to a single <span class="code">VkDeviceMemory</span> object
+</li><li><span class="code">dstImage</span> must have been created with
+<span class="code">VK_IMAGE_USAGE_TRANSFER_DST_BIT</span> usage flag
+</li><li>
+
+If <span class="code">dstImage</span> is non-sparse then it must be bound completely and
+contiguously to a single <span class="code">VkDeviceMemory</span> object
+</li><li><span class="code">dstImage</span> must have a sample count equal to
+<span class="code">VK_SAMPLE_COUNT_1_BIT</span></li><li><span class="code">dstImageLayout</span> must specify the layout of the image subresources
 of <span class="code">dstImage</span> specified in <span class="code">pRegions</span> at the time this command
-is executed on a <span class="code">VkDevice</span></li><li><span class="code">dstImageLayout</span> must  be <span class="code">VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</span>
-or <span class="code">VK_IMAGE_LAYOUT_GENERAL</span></li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">commandBuffer</span> must  be a valid <span class="code">VkCommandBuffer</span> handle </li><li><span class="code">srcBuffer</span> must  be a valid <span class="code">VkBuffer</span> handle </li><li><span class="code">dstImage</span> must  be a valid <span class="code">VkImage</span> handle </li><li><span class="code">dstImageLayout</span> must  be a valid <a href="T_VkImageLayout.htm">VkImageLayout</a> value </li><li><span class="code">pRegions</span> must  be a pointer to an array of <span class="code">regionCount</span> valid <span class="code">VkBufferImageCopy</span> structures </li><li><span class="code">commandBuffer</span> must  be in the  recording state  </li><li>  The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  support transfer, graphics, or compute operations </li><li>  This command  must  only be called outside of a render pass instance </li><li><span class="code">regionCount</span> must  be greater than <span class="code">0</span></li><li>  Each of <span class="code">commandBuffer</span>, <span class="code">dstImage</span>, and <span class="code">srcBuffer</span> must  have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">commandBuffer</span> must  be externally synchronized </li><li> Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  be externally synchronized </li></ul>      Command Properties <div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td> Primary<br />
-Secondary </td><td> Outside </td><td> Transfer<br />
+is executed on a <span class="code">VkDevice</span></li><li><span class="code">dstImageLayout</span> must be <span class="code">VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</span>
+or <span class="code">VK_IMAGE_LAYOUT_GENERAL</span></li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">commandBuffer</span> must be a valid <span class="code">VkCommandBuffer</span> handle
+</li><li><span class="code">srcBuffer</span> must be a valid <span class="code">VkBuffer</span> handle
+</li><li><span class="code">dstImage</span> must be a valid <span class="code">VkImage</span> handle
+</li><li><span class="code">dstImageLayout</span> must be a valid <a href="T_VkImageLayout.htm">VkImageLayout</a> value
+</li><li><span class="code">pRegions</span> must be a pointer to an array of <span class="code">regionCount</span> valid <span class="code">VkBufferImageCopy</span> structures
+</li><li><span class="code">commandBuffer</span> must be in the recording state 
+</li><li>
+ The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must support transfer, graphics, or compute operations
+</li><li>
+ This command must only be called outside of a render pass instance
+</li><li><span class="code">regionCount</span> must be greater than <span class="code">0</span></li><li>
+ Each of <span class="code">commandBuffer</span>, <span class="code">dstImage</span>, and <span class="code">srcBuffer</span> must have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">commandBuffer</span> must be externally synchronized
+</li><li>
+Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must be externally synchronized
+</li></ul>
+
+
+
+
+Command Properties
+<div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td>
+Primary<br />
+Secondary
+</td><td>
+Outside
+</td><td>
+Transfer<br />
 graphics<br />
-compute </td><td> Transfer </td></tr></table></div>    To copy data from a buffer object to an image object, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAFBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAFBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAFBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdCopyBufferToImage(
+compute
+</td><td>
+Transfer
+</td></tr></table></div>
+
+
+
+To copy data from a buffer object to an image object, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAFBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAFBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAFBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdCopyBufferToImage(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkCommandBuffer                             commandBuffer,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkBuffer                                    srcBuffer,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkImage                                     dstImage,

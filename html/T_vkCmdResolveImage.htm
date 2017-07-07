@@ -6,51 +6,124 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdResolveImage__ctor.htm">vkCmdResolveImage</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkCmdResolveImage</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdResolveImage_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  During the resolve the samples corresponding to each pixel location in the
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdResolveImage_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+During the resolve the samples corresponding to each pixel location in the
 source are converted to a single sample before being written to the
 destination.
 If the source formats are floating-point or normalized types, the sample
 values for each pixel are resolved in an implementation-dependent manner.
 If the source formats are integer types, a single sample&amp;#8217;s value is selected
-for each pixel.    <span class="code">srcOffset</span> and <span class="code">dstOffset</span> select the initial x, y, and z offsets
+for each pixel.
+
+
+<span class="code">srcOffset</span> and <span class="code">dstOffset</span> select the initial x, y, and z offsets
 in texels of the sub-regions of the source and destination image data.
 <span class="code">extent</span> is the size in texels of the source image to resolve in
-<span class="code">width</span>, <span class="code">height</span> and <span class="code">depth</span>.    Resolves are done layer by layer starting with <span class="code">baseArrayLayer</span> member
+<span class="code">width</span>, <span class="code">height</span> and <span class="code">depth</span>.
+
+
+Resolves are done layer by layer starting with <span class="code">baseArrayLayer</span> member
 of <span class="code">srcSubresource</span> for the source and <span class="code">dstSubresource</span> for the
 destination.
-<span class="code">layerCount</span> layers are resolved to the destination image.     Valid Usage  <ul><li> 
+<span class="code">layerCount</span> layers are resolved to the destination image.
+
+
+
+Valid Usage
+<ul><li>
+
 The source region specified by a given element of <span class="code">pRegions</span> must 
-be a region that is contained within <span class="code">srcImage</span></li><li> 
-The destination region specified by a given element of <span class="code">pRegions</span> must  be a region that is contained within <span class="code">dstImage</span></li><li> 
+be a region that is contained within <span class="code">srcImage</span></li><li>
+
+The destination region specified by a given element of <span class="code">pRegions</span> must be a region that is contained within <span class="code">dstImage</span></li><li>
+
 The union of all source regions, and the union of all destination
-regions, specified by the elements of <span class="code">pRegions</span>,  must  not overlap
-in memory </li><li> 
-If <span class="code">srcImage</span> is non-sparse then it  must  be bound completely and
-contiguously to a single <span class="code">VkDeviceMemory</span> object </li><li><span class="code">srcImage</span> must  have a sample count equal to any valid sample count
-value other than <span class="code">VK_SAMPLE_COUNT_1_BIT</span></li><li> 
-If <span class="code">dstImage</span> is non-sparse then it  must  be bound completely and
-contiguously to a single <span class="code">VkDeviceMemory</span> object </li><li><span class="code">dstImage</span> must  have a sample count equal to
-<span class="code">VK_SAMPLE_COUNT_1_BIT</span></li><li><span class="code">srcImageLayout</span> must  specify the layout of the image subresources
+regions, specified by the elements of <span class="code">pRegions</span>, must not overlap
+in memory
+</li><li>
+
+If <span class="code">srcImage</span> is non-sparse then it must be bound completely and
+contiguously to a single <span class="code">VkDeviceMemory</span> object
+</li><li><span class="code">srcImage</span> must have a sample count equal to any valid sample count
+value other than <span class="code">VK_SAMPLE_COUNT_1_BIT</span></li><li>
+
+If <span class="code">dstImage</span> is non-sparse then it must be bound completely and
+contiguously to a single <span class="code">VkDeviceMemory</span> object
+</li><li><span class="code">dstImage</span> must have a sample count equal to
+<span class="code">VK_SAMPLE_COUNT_1_BIT</span></li><li><span class="code">srcImageLayout</span> must specify the layout of the image subresources
 of <span class="code">srcImage</span> specified in <span class="code">pRegions</span> at the time this command
-is executed on a <span class="code">VkDevice</span></li><li><span class="code">srcImageLayout</span> must  be <span class="code">VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL</span>
-or <span class="code">VK_IMAGE_LAYOUT_GENERAL</span></li><li><span class="code">dstImageLayout</span> must  specify the layout of the image subresources
+is executed on a <span class="code">VkDevice</span></li><li><span class="code">srcImageLayout</span> must be <span class="code">VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL</span>
+or <span class="code">VK_IMAGE_LAYOUT_GENERAL</span></li><li><span class="code">dstImageLayout</span> must specify the layout of the image subresources
 of <span class="code">dstImage</span> specified in <span class="code">pRegions</span> at the time this command
-is executed on a <span class="code">VkDevice</span></li><li><span class="code">dstImageLayout</span> must  be <span class="code">VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</span>
-or <span class="code">VK_IMAGE_LAYOUT_GENERAL</span></li><li> 
+is executed on a <span class="code">VkDevice</span></li><li><span class="code">dstImageLayout</span> must be <span class="code">VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</span>
+or <span class="code">VK_IMAGE_LAYOUT_GENERAL</span></li><li>
+
 If <span class="code">dstImage</span> was created with <span class="code">tiling</span> equal to
-<span class="code">VK_IMAGE_TILING_LINEAR</span>, <span class="code">dstImage</span> must  have been created
+<span class="code">VK_IMAGE_TILING_LINEAR</span>, <span class="code">dstImage</span> must have been created
 with a <span class="code">format</span> that supports being a color attachment, as specified
 by the <span class="code">VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT</span> flag in
 <span class="code">VkFormatProperties</span>::<span class="code">linearTilingFeatures</span> returned by
-<span class="code">vkGetPhysicalDeviceFormatProperties</span></li><li> 
+<span class="code">vkGetPhysicalDeviceFormatProperties</span></li><li>
+
 If <span class="code">dstImage</span> was created with <span class="code">tiling</span> equal to
-<span class="code">VK_IMAGE_TILING_OPTIMAL</span>, <span class="code">dstImage</span> must  have been created
+<span class="code">VK_IMAGE_TILING_OPTIMAL</span>, <span class="code">dstImage</span> must have been created
 with a <span class="code">format</span> that supports being a color attachment, as specified
 by the <span class="code">VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT</span> flag in
 <span class="code">VkFormatProperties</span>::<span class="code">optimalTilingFeatures</span> returned by
-<span class="code">vkGetPhysicalDeviceFormatProperties</span></li><li><span class="code">srcImage</span> and <span class="code">dstImage</span> must  have been created with the same
-image format </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">commandBuffer</span> must  be a valid <span class="code">VkCommandBuffer</span> handle </li><li><span class="code">srcImage</span> must  be a valid <span class="code">VkImage</span> handle </li><li><span class="code">srcImageLayout</span> must  be a valid <a href="T_VkImageLayout.htm">VkImageLayout</a> value </li><li><span class="code">dstImage</span> must  be a valid <span class="code">VkImage</span> handle </li><li><span class="code">dstImageLayout</span> must  be a valid <a href="T_VkImageLayout.htm">VkImageLayout</a> value </li><li><span class="code">pRegions</span> must  be a pointer to an array of <span class="code">regionCount</span> valid <span class="code">VkImageResolve</span> structures </li><li><span class="code">commandBuffer</span> must  be in the  recording state  </li><li>  The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  support graphics operations </li><li>  This command  must  only be called outside of a render pass instance </li><li><span class="code">regionCount</span> must  be greater than <span class="code">0</span></li><li>  Each of <span class="code">commandBuffer</span>, <span class="code">dstImage</span>, and <span class="code">srcImage</span> must  have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">commandBuffer</span> must  be externally synchronized </li><li> Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  be externally synchronized </li></ul>      Command Properties <div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td> Primary<br />
-Secondary </td><td> Outside </td><td> Graphics </td><td> Transfer </td></tr></table></div>    To resolve a multisample image to a non-multisample image, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdResolveImage(
+<span class="code">vkGetPhysicalDeviceFormatProperties</span></li><li><span class="code">srcImage</span> and <span class="code">dstImage</span> must have been created with the same
+image format
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">commandBuffer</span> must be a valid <span class="code">VkCommandBuffer</span> handle
+</li><li><span class="code">srcImage</span> must be a valid <span class="code">VkImage</span> handle
+</li><li><span class="code">srcImageLayout</span> must be a valid <a href="T_VkImageLayout.htm">VkImageLayout</a> value
+</li><li><span class="code">dstImage</span> must be a valid <span class="code">VkImage</span> handle
+</li><li><span class="code">dstImageLayout</span> must be a valid <a href="T_VkImageLayout.htm">VkImageLayout</a> value
+</li><li><span class="code">pRegions</span> must be a pointer to an array of <span class="code">regionCount</span> valid <span class="code">VkImageResolve</span> structures
+</li><li><span class="code">commandBuffer</span> must be in the recording state 
+</li><li>
+ The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must support graphics operations
+</li><li>
+ This command must only be called outside of a render pass instance
+</li><li><span class="code">regionCount</span> must be greater than <span class="code">0</span></li><li>
+ Each of <span class="code">commandBuffer</span>, <span class="code">dstImage</span>, and <span class="code">srcImage</span> must have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">commandBuffer</span> must be externally synchronized
+</li><li>
+Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must be externally synchronized
+</li></ul>
+
+
+
+
+Command Properties
+<div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td>
+Primary<br />
+Secondary
+</td><td>
+Outside
+</td><td>
+Graphics
+</td><td>
+Transfer
+</td></tr></table></div>
+
+
+
+To resolve a multisample image to a non-multisample image, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdResolveImage(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkCommandBuffer                             commandBuffer,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkImage                                     srcImage,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkImageLayout                               srcImageLayout,

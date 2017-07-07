@@ -6,68 +6,136 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdDispatch__ctor.htm">vkCmdDispatch</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkCmdDispatch</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdDispatch_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  When the command is executed, a global workgroup consisting of
- groupCountX × groupCountY × groupCountZ  local workgroups
-is assembled.     Valid Usage  <ul><li><span class="code">groupCountX</span> must  be less than or equal to
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxComputeWorkGroupCount</span>[0] </li><li><span class="code">groupCountY</span> must  be less than or equal to
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxComputeWorkGroupCount</span>[1] </li><li><span class="code">groupCountZ</span> must  be less than or equal to
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxComputeWorkGroupCount</span>[2] </li><li> 
-For each set  n  that is statically used by the <span class="code">VkPipeline</span>
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkCmdDispatch_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+When the command is executed, a global workgroup consisting of
+ groupCountX × groupCountY × groupCountZ local workgroups
+is assembled.
+
+
+
+Valid Usage
+<ul><li><span class="code">groupCountX</span> must be less than or equal to
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxComputeWorkGroupCount</span>[0]
+</li><li><span class="code">groupCountY</span> must be less than or equal to
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxComputeWorkGroupCount</span>[1]
+</li><li><span class="code">groupCountZ</span> must be less than or equal to
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxComputeWorkGroupCount</span>[2]
+</li><li>
+
+For each set n that is statically used by the <span class="code">VkPipeline</span>
 currently bound to <span class="code">VK_PIPELINE_BIND_POINT_COMPUTE</span>, a descriptor
-set  must  have been bound to  n  at
+set must have been bound to n at
 <span class="code">VK_PIPELINE_BIND_POINT_COMPUTE</span>, with a <span class="code">VkPipelineLayout</span> that
-is compatible for set  n , with the <span class="code">VkPipelineLayout</span> used to
+is compatible for set n , with the <span class="code">VkPipelineLayout</span> used to
 create the current <span class="code">VkPipeline</span>, as described in
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#descriptorsets-compatibility">../../html/vkspec.html#descriptorsets-compatibility</a></li><li> 
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#descriptorsets-compatibility">../../html/vkspec.html#descriptorsets-compatibility</a></li><li>
+
 Descriptors in each bound descriptor set, specified via
-<span class="code">vkCmdBindDescriptorSets</span>,  must  be valid if they are statically
+<span class="code">vkCmdBindDescriptorSets</span>, must be valid if they are statically
 used by the currently bound <span class="code">VkPipeline</span> object, specified via
-<span class="code">vkCmdBindPipeline</span></li><li> 
-A valid compute pipeline  must  be bound to the current command buffer
-with <span class="code">VK_PIPELINE_BIND_POINT_COMPUTE</span></li><li> 
+<span class="code">vkCmdBindPipeline</span></li><li>
+
+A valid compute pipeline must be bound to the current command buffer
+with <span class="code">VK_PIPELINE_BIND_POINT_COMPUTE</span></li><li>
+
 For each push constant that is statically used by the <span class="code">VkPipeline</span>
 currently bound to <span class="code">VK_PIPELINE_BIND_POINT_COMPUTE</span>, a push constant
-value  must  have been set for <span class="code">VK_PIPELINE_BIND_POINT_COMPUTE</span>, with
+value must have been set for <span class="code">VK_PIPELINE_BIND_POINT_COMPUTE</span>, with
 a <span class="code">VkPipelineLayout</span> that is compatible for push constants with the
 one used to create the current <span class="code">VkPipeline</span>, as described in
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#descriptorsets-compatibility">../../html/vkspec.html#descriptorsets-compatibility</a></li><li> 
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#descriptorsets-compatibility">../../html/vkspec.html#descriptorsets-compatibility</a></li><li>
+
 If any <span class="code">VkSampler</span> object that is accessed from a shader by the
 <span class="code">VkPipeline</span> currently bound to <span class="code">VK_PIPELINE_BIND_POINT_COMPUTE</span>
-uses unnormalized coordinates, it  must  not be used to sample from any
+uses unnormalized coordinates, it must not be used to sample from any
 <span class="code">VkImage</span> with a <span class="code">VkImageView</span> of the type
 <span class="code">VK_IMAGE_VIEW_TYPE_3D</span>, <span class="code">VK_IMAGE_VIEW_TYPE_CUBE</span>,
 <span class="code">VK_IMAGE_VIEW_TYPE_1D_ARRAY</span>, <span class="code">VK_IMAGE_VIEW_TYPE_2D_ARRAY</span> or
-<span class="code">VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</span>, in any shader stage </li><li> 
+<span class="code">VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</span>, in any shader stage
+</li><li>
+
 If any <span class="code">VkSampler</span> object that is accessed from a shader by the
 <span class="code">VkPipeline</span> currently bound to <span class="code">VK_PIPELINE_BIND_POINT_COMPUTE</span>
-uses unnormalized coordinates, it  must  not be used with any of the
+uses unnormalized coordinates, it must not be used with any of the
 SPIR-V <span class="code">OpImageSample*</span> or <span class="code">OpImageSparseSample*</span> instructions with
 <span class="code">ImplicitLod</span>, <span class="code">Dref</span> or <span class="code">Proj</span> in their name, in any shader
-stage </li><li> 
+stage
+</li><li>
+
 If any <span class="code">VkSampler</span> object that is accessed from a shader by the
 <span class="code">VkPipeline</span> currently bound to <span class="code">VK_PIPELINE_BIND_POINT_COMPUTE</span>
-uses unnormalized coordinates, it  must  not be used with any of the
+uses unnormalized coordinates, it must not be used with any of the
 SPIR-V <span class="code">OpImageSample*</span> or <span class="code">OpImageSparseSample*</span> instructions that
-includes a LOD bias or any offset values, in any shader stage </li><li> 
+includes a LOD bias or any offset values, in any shader stage
+</li><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-robustBufferAccess">robust buffer access</a>
 feature is not enabled, and any shader stage in the <span class="code">VkPipeline</span>
 object currently bound to <span class="code">VK_PIPELINE_BIND_POINT_COMPUTE</span> accesses
-a uniform buffer, it  must  not access values outside of the range of
-that buffer specified in the currently bound descriptor set </li><li> 
+a uniform buffer, it must not access values outside of the range of
+that buffer specified in the currently bound descriptor set
+</li><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-robustBufferAccess">robust buffer access</a>
 feature is not enabled, and any shader stage in the <span class="code">VkPipeline</span>
 object currently bound to <span class="code">VK_PIPELINE_BIND_POINT_COMPUTE</span> accesses
-a storage buffer, it  must  not access values outside of the range of
-that buffer specified in the currently bound descriptor set </li><li> 
+a storage buffer, it must not access values outside of the range of
+that buffer specified in the currently bound descriptor set
+</li><li>
+
 Any <span class="code">VkImageView</span> being sampled with <span class="code">VK_FILTER_LINEAR</span> as a
-result of this command  must  be of a format which supports linear
+result of this command must be of a format which supports linear
 filtering, as specified by the
 <span class="code">VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</span> flag in
 <span class="code">VkFormatProperties</span>::<span class="code">linearTilingFeatures</span> (for a linear
 image) or <span class="code">VkFormatProperties</span>::<span class="code">optimalTilingFeatures</span>(for an
 optimally tiled image) returned by
-<span class="code">vkGetPhysicalDeviceFormatProperties</span></li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">commandBuffer</span> must  be a valid <span class="code">VkCommandBuffer</span> handle </li><li><span class="code">commandBuffer</span> must  be in the  recording state  </li><li>  The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  support compute operations </li><li>  This command  must  only be called outside of a render pass instance </li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">commandBuffer</span> must  be externally synchronized </li><li> Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  be externally synchronized </li></ul>      Command Properties <div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td> Primary<br />
-Secondary </td><td> Outside </td><td> Compute </td><td> Compute </td></tr></table></div>    To record a dispatch, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAABBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAABBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAABBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdDispatch(
+<span class="code">vkGetPhysicalDeviceFormatProperties</span></li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">commandBuffer</span> must be a valid <span class="code">VkCommandBuffer</span> handle
+</li><li><span class="code">commandBuffer</span> must be in the recording state 
+</li><li>
+ The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must support compute operations
+</li><li>
+ This command must only be called outside of a render pass instance
+</li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">commandBuffer</span> must be externally synchronized
+</li><li>
+Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must be externally synchronized
+</li></ul>
+
+
+
+
+Command Properties
+<div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td>
+Primary<br />
+Secondary
+</td><td>
+Outside
+</td><td>
+Compute
+</td><td>
+Compute
+</td></tr></table></div>
+
+
+
+To record a dispatch, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAABBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAABBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAABBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdDispatch(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkCommandBuffer                             commandBuffer,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   uint32_t                                    groupCountX,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   uint32_t                                    groupCountY,

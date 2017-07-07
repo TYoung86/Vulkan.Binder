@@ -6,23 +6,63 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkAllocateMemory__ctor.htm">vkAllocateMemory</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkAllocateMemory</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkAllocateMemory_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  Allocations returned by <span class="code">vkAllocateMemory</span> are guaranteed to meet any
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkAllocateMemory_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+Allocations returned by <span class="code">vkAllocateMemory</span> are guaranteed to meet any
 alignment requirement by the implementation.
 For example, if an implementation requires 128 byte alignment for images and
 64 byte alignment for buffers, the device memory returned through this
 mechanism would be 128-byte aligned.
-This ensures that applications  can  correctly suballocate objects of
+This ensures that applications can correctly suballocate objects of
 different types (with potentially different alignment requirements) in the
-same memory object.    When memory is allocated, its contents are undefined.    There is an implementation-dependent maximum number of memory allocations
-which  can  be simultaneously created on a device.
+same memory object.
+
+
+When memory is allocated, its contents are undefined.
+
+
+There is an implementation-dependent maximum number of memory allocations
+which can be simultaneously created on a device.
 This is specified by the
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-limits-maxMemoryAllocationCount"><span class="code">maxMemoryAllocationCount</span></a>
 member of the <span class="code">VkPhysicalDeviceLimits</span> structure.
 If <span class="code">maxMemoryAllocationCount</span> is exceeded, <span class="code">vkAllocateMemory</span> will
-return <span class="code">VK_ERROR_TOO_MANY_OBJECTS</span>.   <div class="tableSection"><table /></div>    Valid Usage  <ul><li> 
+return <span class="code">VK_ERROR_TOO_MANY_OBJECTS</span>.
+
+<div class="tableSection"><table /></div>
+
+
+Valid Usage
+<ul><li>
+
 The number of currently valid memory objects, allocated from
-<span class="code">device</span>,  must  be less than
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxMemoryAllocationCount</span></li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">device</span> must  be a valid <span class="code">VkDevice</span> handle </li><li><span class="code">pAllocateInfo</span> must  be a pointer to a valid <span class="code">VkMemoryAllocateInfo</span> structure </li><li>  If <span class="code">pAllocator</span> is not <span class="code">NULL</span>, <span class="code">pAllocator</span> must  be a pointer to a valid <span class="code">VkAllocationCallbacks</span> structure </li><li><span class="code">pMemory</span> must  be a pointer to a <span class="code">VkDeviceMemory</span> handle </li></ul>      Return Codes  <dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_TOO_MANY_OBJECTS</span></li></ul></dd></dl>     To allocate memory objects, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkAllocateMemory(
+<span class="code">device</span>, must be less than
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxMemoryAllocationCount</span></li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">device</span> must be a valid <span class="code">VkDevice</span> handle
+</li><li><span class="code">pAllocateInfo</span> must be a pointer to a valid <span class="code">VkMemoryAllocateInfo</span> structure
+</li><li>
+ If <span class="code">pAllocator</span> is not <span class="code">NULL</span>, <span class="code">pAllocator</span> must be a pointer to a valid <span class="code">VkAllocationCallbacks</span> structure
+</li><li><span class="code">pMemory</span> must be a pointer to a <span class="code">VkDeviceMemory</span> handle
+</li></ul>
+
+
+
+
+Return Codes
+<dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_TOO_MANY_OBJECTS</span></li></ul></dd></dl>
+
+
+
+
+To allocate memory objects, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkAllocateMemory(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDevice                                    device,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">const</span> VkMemoryAllocateInfo*                 pAllocateInfo,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">const</span> VkAllocationCallbacks*                pAllocator,

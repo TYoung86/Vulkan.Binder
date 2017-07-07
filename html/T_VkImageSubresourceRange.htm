@@ -5,50 +5,88 @@
    Vulkan (in Vulkan.dll) Version: 1.0.53<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID2RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID1EACA_tab1" class="codeSnippetContainerTabSingle">C#</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EACA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EACA');return false;" title="Copy">Copy</a></div></div><div id="ID1EACA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">[<a href="http://msdn2.microsoft.com/en-us/library/bcfsa90a" target="_blank">SerializableAttribute</a>]
 <span class="keyword">public</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="identifier">VkImageSubresourceRange</span> : <a href="http://msdn2.microsoft.com/en-us/library/aey3s293" target="_blank">ValueType</a></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EACA");</script></div><p>The <span class="selflink">VkImageSubresourceRange</span> type exposes the following members.</p><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Fields</span></div><div id="ID3RBSection" class="collapsibleSection"><table class="members" id="fieldList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkImageSubresourceRange_aspectMask.htm">aspectMask</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkImageSubresourceRange_baseArrayLayer.htm">baseArrayLayer</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkImageSubresourceRange_baseMipLevel.htm">baseMipLevel</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkImageSubresourceRange_layerCount.htm">layerCount</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkImageSubresourceRange_levelCount.htm">levelCount</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection">  The number of mipmap levels and array layers  must  be a subset of the image
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkImageSubresourceRange_aspectMask.htm">aspectMask</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkImageSubresourceRange_baseArrayLayer.htm">baseArrayLayer</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkImageSubresourceRange_baseMipLevel.htm">baseMipLevel</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkImageSubresourceRange_layerCount.htm">layerCount</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkImageSubresourceRange_levelCount.htm">levelCount</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection">
+
+The number of mipmap levels and array layers must be a subset of the image
 subresources in the image.
 If an application wants to use all mip levels or layers in an image after
-the <span class="code">baseMipLevel</span> or <span class="code">baseArrayLayer</span>, it  can  set <span class="code">levelCount</span>
+the <span class="code">baseMipLevel</span> or <span class="code">baseArrayLayer</span>, it can set <span class="code">levelCount</span>
 and <span class="code">layerCount</span> to the special values <span class="code">VK_REMAINING_MIP_LEVELS</span> and
 <span class="code">VK_REMAINING_ARRAY_LAYERS</span> without knowing the exact number of mip
-levels or layers.    For cube and cube array image views, the layers of the image view starting
+levels or layers.
+
+
+For cube and cube array image views, the layers of the image view starting
 at <span class="code">baseArrayLayer</span> correspond to faces in the order +X, -X, +Y, -Y, +Z,
 -Z.
 For cube arrays, each set of six sequential layers is a single cube, so the
-number of cube maps in a cube map array view is  <span class="code">layerCount</span> / 6 , and
-image array layer  (<span class="code">baseArrayLayer</span> +  i)  is face index
- (i mod 6)  of cube  i / 6 .
+number of cube maps in a cube map array view is <span class="code">layerCount</span> / 6 , and
+image array layer (<span class="code">baseArrayLayer</span> +  i) is face index
+ (i mod 6) of cube i / 6 .
 If the number of layers in the view, whether set explicitly in
 <span class="code">layerCount</span> or implied by <span class="code">VK_REMAINING_ARRAY_LAYERS</span>, is not a
-multiple of 6, behavior when indexing the last cube is undefined.    <span class="code">aspectMask</span> must  be only <span class="code">VK_IMAGE_ASPECT_COLOR_BIT</span>,
+multiple of 6, behavior when indexing the last cube is undefined.
+
+
+<span class="code">aspectMask</span> must be only <span class="code">VK_IMAGE_ASPECT_COLOR_BIT</span>,
 <span class="code">VK_IMAGE_ASPECT_DEPTH_BIT</span> or <span class="code">VK_IMAGE_ASPECT_STENCIL_BIT</span> if
 <span class="code">format</span> is a color, depth-only or stencil-only format, respectively.
 If using a depth/stencil format with both depth and stencil components,
-<span class="code">aspectMask</span> must  include at least one of
+<span class="code">aspectMask</span> must include at least one of
 <span class="code">VK_IMAGE_ASPECT_DEPTH_BIT</span> and <span class="code">VK_IMAGE_ASPECT_STENCIL_BIT</span>, and
- can  include both.    When using an imageView of a depth/stencil image to populate a descriptor
+ can include both.
+
+
+When using an imageView of a depth/stencil image to populate a descriptor
 set (e.g. for sampling in the shader, or for use as an input attachment),
-the <span class="code">aspectMask</span> must  only include one bit and selects whether the
+the <span class="code">aspectMask</span> must only include one bit and selects whether the
 imageView is used for depth reads (i.e. using a floating-point sampler or
 input attachment in the shader) or stencil reads (i.e. using an unsigned
 integer sampler or input attachment in the shader).
 When an imageView of a depth/stencil image is used as a depth/stencil
 framebuffer attachment, the <span class="code">aspectMask</span> is ignored and both depth and
-stencil image subresources are used.    The <span class="code">components</span> member is of type <a href="T_VkComponentMapping.htm">VkComponentMapping</a>, and
+stencil image subresources are used.
+
+
+The <span class="code">components</span> member is of type <a href="T_VkComponentMapping.htm">VkComponentMapping</a>, and
 describes a remapping from components of the image to components of the
 vector returned by shader image instructions.
-This remapping  must  be identity for storage image descriptors, input
-attachment descriptors, and framebuffer attachments.     Valid Usage  <ul><li> 
+This remapping must be identity for storage image descriptors, input
+attachment descriptors, and framebuffer attachments.
+
+
+
+Valid Usage
+<ul><li>
+
 If <span class="code">levelCount</span> is not <span class="code">VK_REMAINING_MIP_LEVELS</span>,
- <span class="code">levelCount</span>  must  be non-zero and  (<span class="code">baseMipLevel</span>
-+  <span class="code">levelCount</span>)  must  be less than or equal to the
+ <span class="code">levelCount</span> must be non-zero and (<span class="code">baseMipLevel</span>
++  <span class="code">levelCount</span>) must be less than or equal to the
 <span class="code">mipLevels</span> specified in <a href="T_IVkImageCreateInfo.htm">IVkImageCreateInfo</a> when the image was
-created </li><li> 
+created
+</li><li>
+
 If <span class="code">layerCount</span> is not <span class="code">VK_REMAINING_ARRAY_LAYERS</span>,
- <span class="code">layerCount</span>  must  be non-zero and  (<span class="code">baseArrayLayer</span>
-+  <span class="code">layerCount</span>)  must  be less than or equal to the
+ <span class="code">layerCount</span> must be non-zero and (<span class="code">baseArrayLayer</span>
++  <span class="code">layerCount</span>) must be less than or equal to the
 <span class="code">arrayLayers</span> specified in <a href="T_IVkImageCreateInfo.htm">IVkImageCreateInfo</a> when the image
-was created </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">aspectMask</span> must  be a valid combination of <a href="T_VkImageAspectFlags.htm">VkImageAspectFlags</a> values </li><li><span class="code">aspectMask</span> must  not be <span class="code">0</span></li></ul>     The <span class="code">VkImageSubresourceRange</span> structure is defined as:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAFBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAFBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAFBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkImageSubresourceRange {
+was created
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">aspectMask</span> must be a valid combination of <a href="T_VkImageAspectFlags.htm">VkImageAspectFlags</a> values
+</li><li><span class="code">aspectMask</span> must not be <span class="code">0</span></li></ul>
+
+
+
+
+The <span class="code">VkImageSubresourceRange</span> structure is defined as:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAFBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAFBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAFBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkImageSubresourceRange {
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkImageAspectFlags    aspectMask;
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    uint32_t              baseMipLevel;
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    uint32_t              levelCount;

@@ -7,11 +7,36 @@
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetImageSubresourceLayout__ctor.htm">vkGetImageSubresourceLayout</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkGetImageSubresourceLayout</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetImageSubresourceLayout_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection"><span class="selflink">vkGetImageSubresourceLayout</span> is invariant for the lifetime of a single
-image.     Valid Usage  <ul><li><span class="code">image</span> must  have been created with <span class="code">tiling</span> equal to
-<span class="code">VK_IMAGE_TILING_LINEAR</span></li><li> 
-The <span class="code">aspectMask</span> member of <span class="code">pSubresource</span> must  only have a
-single bit set </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">device</span> must  be a valid <span class="code">VkDevice</span> handle </li><li><span class="code">image</span> must  be a valid <span class="code">VkImage</span> handle </li><li><span class="code">pSubresource</span> must  be a pointer to a valid <span class="code">VkImageSubresource</span> structure </li><li><span class="code">pLayout</span> must  be a pointer to a <span class="code">VkSubresourceLayout</span> structure </li><li><span class="code">image</span> must  have been created, allocated, or retrieved from <span class="code">device</span></li></ul>     To query the host access layout of an image subresource, for an image
-created with linear tiling, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkGetImageSubresourceLayout(
+image.
+
+
+
+Valid Usage
+<ul><li><span class="code">image</span> must have been created with <span class="code">tiling</span> equal to
+<span class="code">VK_IMAGE_TILING_LINEAR</span></li><li>
+
+The <span class="code">aspectMask</span> member of <span class="code">pSubresource</span> must only have a
+single bit set
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">device</span> must be a valid <span class="code">VkDevice</span> handle
+</li><li><span class="code">image</span> must be a valid <span class="code">VkImage</span> handle
+</li><li><span class="code">pSubresource</span> must be a pointer to a valid <span class="code">VkImageSubresource</span> structure
+</li><li><span class="code">pLayout</span> must be a pointer to a <span class="code">VkSubresourceLayout</span> structure
+</li><li><span class="code">image</span> must have been created, allocated, or retrieved from <span class="code">device</span></li></ul>
+
+
+
+
+To query the host access layout of an image subresource, for an image
+created with linear tiling, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkGetImageSubresourceLayout(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDevice                                    device,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkImage                                     image,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">const</span> VkImageSubresource*                   pSubresource,

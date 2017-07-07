@@ -6,10 +6,37 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkEnumerateDeviceExtensionProperties__ctor.htm">vkEnumerateDeviceExtensionProperties</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkEnumerateDeviceExtensionProperties</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkEnumerateDeviceExtensionProperties_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  When <span class="code">pLayerName</span> parameter is NULL, only extensions provided by the
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkEnumerateDeviceExtensionProperties_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+When <span class="code">pLayerName</span> parameter is NULL, only extensions provided by the
 Vulkan implementation or by implicitly enabled layers are returned.
 When <span class="code">pLayerName</span> is the name of a layer, the device extensions provided
-by that layer are returned.     Valid Usage (Implicit)  <ul><li><span class="code">physicalDevice</span> must  be a valid <span class="code">VkPhysicalDevice</span> handle </li><li>  If <span class="code">pLayerName</span> is not <span class="code">NULL</span>, <span class="code">pLayerName</span> must  be a null-terminated UTF-8 string </li><li><span class="code">pPropertyCount</span> must  be a pointer to a <span class="code">uint32_t</span> value </li><li>  If the value referenced by <span class="code">pPropertyCount</span> is not <span class="code">0</span>, and <span class="code">pProperties</span> is not <span class="code">NULL</span>, <span class="code">pProperties</span> must  be a pointer to an array of <span class="code">pPropertyCount</span><span class="code">VkExtensionProperties</span> structures </li></ul>      Return Codes  <dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li><li><span class="code">VK_INCOMPLETE</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_LAYER_NOT_PRESENT</span></li></ul></dd></dl>     To query the extensions available to a given physical device, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkEnumerateDeviceExtensionProperties(
+by that layer are returned.
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">physicalDevice</span> must be a valid <span class="code">VkPhysicalDevice</span> handle
+</li><li>
+ If <span class="code">pLayerName</span> is not <span class="code">NULL</span>, <span class="code">pLayerName</span> must be a null-terminated UTF-8 string
+</li><li><span class="code">pPropertyCount</span> must be a pointer to a <span class="code">uint32_t</span> value
+</li><li>
+ If the value referenced by <span class="code">pPropertyCount</span> is not <span class="code">0</span>, and <span class="code">pProperties</span> is not <span class="code">NULL</span>, <span class="code">pProperties</span> must be a pointer to an array of <span class="code">pPropertyCount</span><span class="code">VkExtensionProperties</span> structures
+</li></ul>
+
+
+
+
+Return Codes
+<dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li><li><span class="code">VK_INCOMPLETE</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_LAYER_NOT_PRESENT</span></li></ul></dd></dl>
+
+
+
+
+To query the extensions available to a given physical device, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkEnumerateDeviceExtensionProperties(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkPhysicalDevice                            physicalDevice,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">const</span> <span class="highlight-keyword">char</span>*                                 pLayerName,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   uint32_t*                                   pPropertyCount,

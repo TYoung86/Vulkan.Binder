@@ -5,18 +5,23 @@
    Vulkan (in Vulkan.dll) Version: 1.0.53<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID2RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID1EACA_tab1" class="codeSnippetContainerTabSingle">C#</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EACA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EACA');return false;" title="Copy">Copy</a></div></div><div id="ID1EACA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">[<a href="http://msdn2.microsoft.com/en-us/library/bcfsa90a" target="_blank">SerializableAttribute</a>]
 <span class="keyword">public</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="identifier">VkPhysicalDeviceMemoryProperties</span> : <a href="http://msdn2.microsoft.com/en-us/library/aey3s293" target="_blank">ValueType</a></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EACA");</script></div><p>The <span class="selflink">VkPhysicalDeviceMemoryProperties</span> type exposes the following members.</p><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Fields</span></div><div id="ID3RBSection" class="collapsibleSection"><table class="members" id="fieldList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkPhysicalDeviceMemoryProperties_memoryHeapCount.htm">memoryHeapCount</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkPhysicalDeviceMemoryProperties_memoryHeaps.htm">memoryHeaps</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkPhysicalDeviceMemoryProperties_memoryTypeCount.htm">memoryTypeCount</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkPhysicalDeviceMemoryProperties_memoryTypes.htm">memoryTypes</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection">  The <span class="code">VkPhysicalDeviceMemoryProperties</span> structure describes a number of
- memory heaps  as well as a number of  memory types  that  can  be used to
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkPhysicalDeviceMemoryProperties_memoryHeapCount.htm">memoryHeapCount</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkPhysicalDeviceMemoryProperties_memoryHeaps.htm">memoryHeaps</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkPhysicalDeviceMemoryProperties_memoryTypeCount.htm">memoryTypeCount</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkPhysicalDeviceMemoryProperties_memoryTypes.htm">memoryTypes</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection">
+
+The <span class="code">VkPhysicalDeviceMemoryProperties</span> structure describes a number of
+ memory heaps as well as a number of memory types that can be used to
 access memory allocated in those heaps.
 Each heap describes a memory resource of a particular size, and each memory
 type describes a set of memory properties (e.g. host cached vs uncached)
-that  can  be used with a given memory heap.
+that can be used with a given memory heap.
 Allocations using a particular memory type will consume resources from the
 heap indicated by that memory type&amp;#8217;s heap index.
-More than one memory type  may  share each heap, and the heaps and memory
+More than one memory type may share each heap, and the heaps and memory
 types provide a mechanism to advertise an accurate size of the physical
 memory resources while allowing the memory to be used with a variety of
-different properties.    The number of memory heaps is given by <span class="code">memoryHeapCount</span> and is less
+different properties.
+
+
+The number of memory heaps is given by <span class="code">memoryHeapCount</span> and is less
 than or equal to <span class="code">VK_MAX_MEMORY_HEAPS</span>.
 Each heap is described by an element of the <span class="code">memoryHeaps</span> array, as a
 <span class="code">VkMemoryHeap</span> structure.
@@ -24,16 +29,26 @@ The number of memory types available across all memory heaps is given by
 <span class="code">memoryTypeCount</span> and is less than or equal to
 <span class="code">VK_MAX_MEMORY_TYPES</span>.
 Each memory type is described by an element of the <span class="code">memoryTypes</span> array,
-as a <span class="code">VkMemoryType</span> structure.    At least one heap  must  include <span class="code">VK_MEMORY_HEAP_DEVICE_LOCAL_BIT</span> in
+as a <span class="code">VkMemoryType</span> structure.
+
+
+At least one heap must include <span class="code">VK_MEMORY_HEAP_DEVICE_LOCAL_BIT</span> in
 <a href="T_VkMemoryHeap.htm">VkMemoryHeap</a>::<span class="code">flags</span>.
 If there are multiple heaps that all have similar performance
-characteristics, they  may  all include
+characteristics, they may all include
 <span class="code">VK_MEMORY_HEAP_DEVICE_LOCAL_BIT</span>.
 In a unified memory architecture (UMA) system, there is often only a single
 memory heap which is considered to be equally &amp;#8220;local&amp;#8221; to the host and to
-the device, and such an implementation  must  advertise the heap as
-device-local.    Each memory type returned by <a href="T_vkGetPhysicalDeviceMemoryProperties.htm">vkGetPhysicalDeviceMemoryProperties</a> must 
-have its <span class="code">propertyFlags</span> set to one of the following values:   <ul><li> 0 </li><li><span class="code">VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT</span> |
+the device, and such an implementation must advertise the heap as
+device-local.
+
+
+Each memory type returned by <a href="T_vkGetPhysicalDeviceMemoryProperties.htm">vkGetPhysicalDeviceMemoryProperties</a> must 
+have its <span class="code">propertyFlags</span> set to one of the following values:
+
+<ul><li>
+0
+</li><li><span class="code">VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT</span> |
 <span class="code">VK_MEMORY_PROPERTY_HOST_COHERENT_BIT</span></li><li><span class="code">VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT</span> |
 <span class="code">VK_MEMORY_PROPERTY_HOST_CACHED_BIT</span></li><li><span class="code">VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT</span> |
 <span class="code">VK_MEMORY_PROPERTY_HOST_CACHED_BIT</span> |
@@ -45,25 +60,41 @@ have its <span class="code">propertyFlags</span> set to one of the following val
 <span class="code">VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT</span> |
 <span class="code">VK_MEMORY_PROPERTY_HOST_CACHED_BIT</span> |
 <span class="code">VK_MEMORY_PROPERTY_HOST_COHERENT_BIT</span></li><li><span class="code">VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT</span> |
-<span class="code">VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT</span></li></ul>   There  must  be at least one memory type with both the
+<span class="code">VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT</span></li></ul>
+
+There must be at least one memory type with both the
 <span class="code">VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT</span> and
 <span class="code">VK_MEMORY_PROPERTY_HOST_COHERENT_BIT</span> bits set in its
 <span class="code">propertyFlags</span>.
-There  must  be at least one memory type with the
+There must be at least one memory type with the
 <span class="code">VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT</span> bit set in its
-<span class="code">propertyFlags</span>.    The memory types are sorted according to a preorder which serves to aid in
+<span class="code">propertyFlags</span>.
+
+
+The memory types are sorted according to a preorder which serves to aid in
 easily selecting an appropriate memory type.
-Given two memory types X and Y, the preorder defines  X ≤ Y  if:   <ul><li> the memory property bits set for X are a strict subset of the memory
+Given two memory types X and Y, the preorder defines X ≤ Y if:
+
+<ul><li>
+the memory property bits set for X are a strict subset of the memory
 property bits set for Y.
-Or, </li><li> the memory property bits set for X are the same as the memory property
+Or,
+</li><li>
+the memory property bits set for X are the same as the memory property
 bits set for Y, and X uses a memory heap with greater or equal
-performance (as determined in an implementation-specific manner). </li></ul>   Memory types are ordered in the list such that X is assigned a lesser
-<span class="code">memoryTypeIndex</span> than Y if  (X ≤ Y) ∧ ¬ (Y ≤ X) 
+performance (as determined in an implementation-specific manner).
+</li></ul>
+
+Memory types are ordered in the list such that X is assigned a lesser
+<span class="code">memoryTypeIndex</span> than Y if (X ≤ Y) ∧ ¬ (Y ≤ X) 
 according to the preorder.
 Note that the list of all allowed memory property flag combinations above
 satisfies this preorder, but other orders would as well.
 The goal of this ordering is to enable applications to use a simple search
-loop in selecting the proper memory type, along the lines of:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAIDBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAIDBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAIDBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno"> 1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-comment">// Find a memory type in "memoryTypeBits" that includes all of "properties"</span>
+loop in selecting the proper memory type, along the lines of:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAIDBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAIDBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAIDBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno"> 1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-comment">// Find a memory type in "memoryTypeBits" that includes all of "properties"</span>
 <span class="highlight-lineno"> 2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>int32_t FindProperties(uint32_t memoryTypeBits, VkMemoryPropertyFlags properties)
 <span class="highlight-lineno"> 3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>{
 <span class="highlight-lineno"> 4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    <span class="highlight-keyword">for</span> (int32_t i = <span class="highlight-number">0</span>; i &lt; memoryTypeCount; ++i)
@@ -81,16 +112,26 @@ loop in selecting the proper memory type, along the lines of:    <div class="cod
 <span class="highlight-lineno">16</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>vkGetImageMemoryRequirements(device, image, &amp;memoryRequirements);
 <span class="highlight-lineno">17</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>int32_t memoryType = FindProperties(memoryRequirements.memoryTypeBits, optimalProperties);
 <span class="highlight-lineno">18</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">if</span> (memoryType == <span class="highlight-number">-1</span>)
-<span class="highlight-lineno">19</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    memoryType = FindProperties(memoryRequirements.memoryTypeBits, requiredProperties);</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EAIDBA");</script>    The loop will find the first supported memory type that has all bits
+<span class="highlight-lineno">19</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    memoryType = FindProperties(memoryRequirements.memoryTypeBits, requiredProperties);</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EAIDBA");</script>
+
+
+The loop will find the first supported memory type that has all bits
 requested in <span class="code">properties</span> set.
 If there is no exact match, it will find a closest match (i.e. a memory type
 with the fewest additional bits set), which has some additional bits set but
 which are not detrimental to the behaviors requested by <span class="code">properties</span>.
-The application  can  first search for the optimal properties, e.g. a memory
+The application can first search for the optimal properties, e.g. a memory
 type that is device-local or supports coherent cached accesses, as
 appropriate for the intended usage, and if such a memory type is not present
- can  fallback to searching for a less optimal but guaranteed set of
-properties such as "0" or "host-visible and coherent".    The <span class="code">VkPhysicalDeviceMemoryProperties</span> structure is defined as:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkPhysicalDeviceMemoryProperties {
+ can fallback to searching for a less optimal but guaranteed set of
+properties such as "0" or "host-visible and coherent".
+
+
+
+The <span class="code">VkPhysicalDeviceMemoryProperties</span> structure is defined as:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkPhysicalDeviceMemoryProperties {
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    uint32_t        memoryTypeCount;
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkMemoryType    memoryTypes[VK_MAX_MEMORY_TYPES];
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    uint32_t        memoryHeapCount;

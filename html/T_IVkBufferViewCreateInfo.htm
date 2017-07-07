@@ -4,34 +4,62 @@
     <strong>Assembly:</strong>
    Vulkan (in Vulkan.dll) Version: 1.0.53<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID1RB')" onkeypress="SectionExpandCollapse_CheckKey('ID1RB', event)" tabindex="0"><img id="ID1RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID1RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID0EACA_tab1" class="codeSnippetContainerTabSingle">C#</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EACA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EACA');return false;" title="Copy">Copy</a></div></div><div id="ID0EACA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="identifier">IVkBufferViewCreateInfo</span></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID0EACA");</script></div><p>The <span class="selflink">IVkBufferViewCreateInfo</span> type exposes the following members.</p><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Properties</span></div><div id="ID2RBSection" class="collapsibleSection"><table class="members" id="propertyList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkBufferViewCreateInfo_buffer.htm">buffer</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkBufferViewCreateInfo_flags.htm">flags</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkBufferViewCreateInfo_format.htm">format</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkBufferViewCreateInfo_offset.htm">offset</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkBufferViewCreateInfo_pNext.htm">pNext</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkBufferViewCreateInfo_range.htm">range</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkBufferViewCreateInfo_sType.htm">sType</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID3RBSection" class="collapsibleSection">   Valid Usage  <ul><li><span class="code">offset</span> must  be less than the size of <span class="code">buffer</span></li><li><span class="code">offset</span> must  be a multiple of
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">minTexelBufferOffsetAlignment</span></li><li> 
-If <span class="code">range</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, <span class="code">range</span> must  be
-greater than <span class="code">0</span></li><li> 
-If <span class="code">range</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, <span class="code">range</span> must  be
-a multiple of the element size of <span class="code">format</span></li><li> 
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkBufferViewCreateInfo_buffer.htm">buffer</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkBufferViewCreateInfo_flags.htm">flags</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkBufferViewCreateInfo_format.htm">format</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkBufferViewCreateInfo_offset.htm">offset</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkBufferViewCreateInfo_pNext.htm">pNext</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkBufferViewCreateInfo_range.htm">range</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkBufferViewCreateInfo_sType.htm">sType</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID3RBSection" class="collapsibleSection">
+
+
+Valid Usage
+<ul><li><span class="code">offset</span> must be less than the size of <span class="code">buffer</span></li><li><span class="code">offset</span> must be a multiple of
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">minTexelBufferOffsetAlignment</span></li><li>
+
+If <span class="code">range</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, <span class="code">range</span> must be
+greater than <span class="code">0</span></li><li>
+
+If <span class="code">range</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, <span class="code">range</span> must be
+a multiple of the element size of <span class="code">format</span></li><li>
+
 If <span class="code">range</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, <span class="code">range</span> divided
-by the element size of <span class="code">format</span> must  be less than or equal to
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxTexelBufferElements</span></li><li> 
+by the element size of <span class="code">format</span> must be less than or equal to
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxTexelBufferElements</span></li><li>
+
 If <span class="code">range</span> is not equal to <span class="code">VK_WHOLE_SIZE</span>, the sum of
-<span class="code">offset</span> and <span class="code">range</span> must  be less than or equal to the size of
-<span class="code">buffer</span></li><li><span class="code">buffer</span> must  have been created with a <span class="code">usage</span> value containing
+<span class="code">offset</span> and <span class="code">range</span> must be less than or equal to the size of
+<span class="code">buffer</span></li><li><span class="code">buffer</span> must have been created with a <span class="code">usage</span> value containing
 at least one of <span class="code">VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT</span> or
-<span class="code">VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT</span></li><li> 
+<span class="code">VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT</span></li><li>
+
 If <span class="code">buffer</span> was created with <span class="code">usage</span> containing
-<span class="code">VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT</span>, <span class="code">format</span> must  be
+<span class="code">VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT</span>, <span class="code">format</span> must be
 supported for uniform texel buffers, as specified by the
 <span class="code">VK_FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT</span> flag in
 <span class="code">VkFormatProperties</span>::<span class="code">bufferFeatures</span> returned by
-<span class="code">vkGetPhysicalDeviceFormatProperties</span></li><li> 
+<span class="code">vkGetPhysicalDeviceFormatProperties</span></li><li>
+
 If <span class="code">buffer</span> was created with <span class="code">usage</span> containing
-<span class="code">VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT</span>, <span class="code">format</span> must  be
+<span class="code">VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT</span>, <span class="code">format</span> must be
 supported for storage texel buffers, as specified by the
 <span class="code">VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT</span> flag in
 <span class="code">VkFormatProperties</span>::<span class="code">bufferFeatures</span> returned by
-<span class="code">vkGetPhysicalDeviceFormatProperties</span></li><li> 
-If <span class="code">buffer</span> is non-sparse then it  must  be bound completely and
-contiguously to a single <span class="code">VkDeviceMemory</span> object </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">sType</span> must  be <span class="code">VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO</span></li><li><span class="code">pNext</span> must  be <span class="code">NULL</span></li><li><span class="code">flags</span> must  be <span class="code">0</span></li><li><span class="code">buffer</span> must  be a valid <span class="code">VkBuffer</span> handle </li><li><span class="code">format</span> must  be a valid <a href="T_VkFormat.htm">VkFormat</a> value </li></ul>     The <span class="code">VkBufferViewCreateInfo</span> structure is defined as:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAFBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAFBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAFBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkBufferViewCreateInfo {
+<span class="code">vkGetPhysicalDeviceFormatProperties</span></li><li>
+
+If <span class="code">buffer</span> is non-sparse then it must be bound completely and
+contiguously to a single <span class="code">VkDeviceMemory</span> object
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">sType</span> must be <span class="code">VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO</span></li><li><span class="code">pNext</span> must be <span class="code">NULL</span></li><li><span class="code">flags</span> must be <span class="code">0</span></li><li><span class="code">buffer</span> must be a valid <span class="code">VkBuffer</span> handle
+</li><li><span class="code">format</span> must be a valid <a href="T_VkFormat.htm">VkFormat</a> value
+</li></ul>
+
+
+
+
+The <span class="code">VkBufferViewCreateInfo</span> structure is defined as:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAFBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAFBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAFBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkBufferViewCreateInfo {
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkStructureType            sType;
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    <span class="highlight-keyword">const</span> <span class="highlight-keyword">void</span>*                pNext;
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkBufferViewCreateFlags    flags;

@@ -6,23 +6,45 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_PFN_vkReallocationFunction__ctor.htm">PFN_vkReallocationFunction</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">PFN_vkReallocationFunction</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_PFN_vkReallocationFunction_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection"><span class="code">pfnReallocation</span> must  return an allocation with enough space for
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_PFN_vkReallocationFunction_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection"><span class="code">pfnReallocation</span> must return an allocation with enough space for
 <span class="code">size</span> bytes, and the contents of the original allocation from bytes
-zero to  min(original size, new size) - 1  must  be preserved in the
+zero to min(original size, new size) - 1 must be preserved in the
 returned allocation.
 If <span class="code">size</span> is larger than the old size, the contents of the additional
 space are undefined.
 If satisfying these requirements involves creating a new allocation, then
-the old allocation  should  be freed.    If <span class="code">pOriginal</span> is <span class="code">NULL</span>, then <span class="code">pfnReallocation</span> must  behave
+the old allocation should be freed.
+
+
+If <span class="code">pOriginal</span> is <span class="code">NULL</span>, then <span class="code">pfnReallocation</span> must behave
 equivalently to a call to <a href="T_PFN_vkAllocationFunction.htm">PFN_vkAllocationFunction</a> with the same
-parameter values (without <span class="code">pOriginal</span>).    If <span class="code">size</span> is zero, then <span class="code">pfnReallocation</span> must  behave equivalently
+parameter values (without <span class="code">pOriginal</span>).
+
+
+If <span class="code">size</span> is zero, then <span class="code">pfnReallocation</span> must behave equivalently
 to a call to <a href="T_PFN_vkFreeFunction.htm">PFN_vkFreeFunction</a> with the same <span class="code">pUserData</span>
-parameter value, and <span class="code">pMemory</span> equal to <span class="code">pOriginal</span>.    If <span class="code">pOriginal</span> is non-<span class="code">NULL</span>, the implementation  must  ensure that
+parameter value, and <span class="code">pMemory</span> equal to <span class="code">pOriginal</span>.
+
+
+If <span class="code">pOriginal</span> is non-<span class="code">NULL</span>, the implementation must ensure that
 <span class="code">alignment</span> is equal to the <span class="code">alignment</span> used to originally allocate
-<span class="code">pOriginal</span>.    If this function fails and <span class="code">pOriginal</span> is non-<span class="code">NULL</span> the application
- must  not free the old allocation.    <span class="code">pfnReallocation</span> must  follow the same
+<span class="code">pOriginal</span>.
+
+
+If this function fails and <span class="code">pOriginal</span> is non-<span class="code">NULL</span> the application
+ must not free the old allocation.
+
+
+<span class="code">pfnReallocation</span> must follow the same
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#vkAllocationFunction_return_rules">rules for return values as
-<span class="code">PFN_vkAllocationFunction</span></a>.    The type of <span class="code">pfnReallocation</span> is:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAABBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAABBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAABBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">typedef</span> <span class="highlight-keyword">void</span>* (VKAPI_PTR *PFN_vkReallocationFunction)(
+<span class="code">PFN_vkAllocationFunction</span></a>.
+
+
+
+The type of <span class="code">pfnReallocation</span> is:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAABBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAABBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAABBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">typedef</span> <span class="highlight-keyword">void</span>* (VKAPI_PTR *PFN_vkReallocationFunction)(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">void</span>*                                       pUserData,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">void</span>*                                       pOriginal,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   size_t                                      size,

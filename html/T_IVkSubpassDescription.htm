@@ -4,44 +4,103 @@
     <strong>Assembly:</strong>
    Vulkan (in Vulkan.dll) Version: 1.0.53<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID1RB')" onkeypress="SectionExpandCollapse_CheckKey('ID1RB', event)" tabindex="0"><img id="ID1RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID1RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID0EACA_tab1" class="codeSnippetContainerTabSingle">C#</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EACA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EACA');return false;" title="Copy">Copy</a></div></div><div id="ID0EACA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="identifier">IVkSubpassDescription</span></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID0EACA");</script></div><p>The <span class="selflink">IVkSubpassDescription</span> type exposes the following members.</p><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Properties</span></div><div id="ID2RBSection" class="collapsibleSection"><table class="members" id="propertyList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_colorAttachmentCount.htm">colorAttachmentCount</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_flags.htm">flags</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_inputAttachmentCount.htm">inputAttachmentCount</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_pColorAttachments.htm">pColorAttachments</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_pDepthStencilAttachment.htm">pDepthStencilAttachment</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_pInputAttachments.htm">pInputAttachments</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_pipelineBindPoint.htm">pipelineBindPoint</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_pPreserveAttachments.htm">pPreserveAttachments</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_preserveAttachmentCount.htm">preserveAttachmentCount</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_pResolveAttachments.htm">pResolveAttachments</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID3RBSection" class="collapsibleSection">  The contents of an attachment within the render area become undefined at the
-start of a subpass  S  if all of the following conditions are true:   <ul><li> The attachment is used as a color, depth/stencil, or resolve attachment
-in any subpass in the render pass. </li><li> There is a subpass  S<sub>1</sub>  that uses or preserves the attachment, and a
-subpass dependency from  S<sub>1</sub>  to  S . </li><li> The attachment is not used or preserved in subpass  S . </li></ul>   Once the contents of an attachment become undefined in subpass  S , they
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_colorAttachmentCount.htm">colorAttachmentCount</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_flags.htm">flags</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_inputAttachmentCount.htm">inputAttachmentCount</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_pColorAttachments.htm">pColorAttachments</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_pDepthStencilAttachment.htm">pDepthStencilAttachment</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_pInputAttachments.htm">pInputAttachments</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_pipelineBindPoint.htm">pipelineBindPoint</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_pPreserveAttachments.htm">pPreserveAttachments</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_preserveAttachmentCount.htm">preserveAttachmentCount</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkSubpassDescription_pResolveAttachments.htm">pResolveAttachments</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID3RBSection" class="collapsibleSection">
+
+The contents of an attachment within the render area become undefined at the
+start of a subpass S if all of the following conditions are true:
+
+<ul><li>
+The attachment is used as a color, depth/stencil, or resolve attachment
+in any subpass in the render pass.
+</li><li>
+There is a subpass S<sub>1</sub> that uses or preserves the attachment, and a
+subpass dependency from S<sub>1</sub> to S .
+</li><li>
+The attachment is not used or preserved in subpass S .
+</li></ul>
+
+Once the contents of an attachment become undefined in subpass S , they
 remain undefined for subpasses in subpass dependency chains starting with
-subpass  S  until they are written again.
+subpass S until they are written again.
 However, they remain valid for subpasses in other subpass dependency chains
-starting with subpass  S<sub>1</sub>  if those subpasses use or preserve the
-attachment.     Valid Usage  <ul><li><span class="code">pipelineBindPoint</span> must  be <span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span></li><li><span class="code">colorAttachmentCount</span> must  be less than or equal to
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxColorAttachments</span></li><li> 
+starting with subpass S<sub>1</sub> if those subpasses use or preserve the
+attachment.
+
+
+
+Valid Usage
+<ul><li><span class="code">pipelineBindPoint</span> must be <span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span></li><li><span class="code">colorAttachmentCount</span> must be less than or equal to
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxColorAttachments</span></li><li>
+
 If the first use of an attachment in this render pass is as an input
 attachment, and the attachment is not also used as a color or
 depth/stencil attachment in the same subpass, then <span class="code">loadOp</span> must 
-not be <span class="code">VK_ATTACHMENT_LOAD_OP_CLEAR</span></li><li> 
+not be <span class="code">VK_ATTACHMENT_LOAD_OP_CLEAR</span></li><li>
+
 If <span class="code">pResolveAttachments</span> is not <span class="code">NULL</span>, for each resolve attachment
 that does not have the value <span class="code">VK_ATTACHMENT_UNUSED</span>, the
-corresponding color attachment  must  not have the value
-<span class="code">VK_ATTACHMENT_UNUSED</span></li><li> 
+corresponding color attachment must not have the value
+<span class="code">VK_ATTACHMENT_UNUSED</span></li><li>
+
 If <span class="code">pResolveAttachments</span> is not <span class="code">NULL</span>, the sample count of each
-element of <span class="code">pColorAttachments</span> must  be anything other than
-<span class="code">VK_SAMPLE_COUNT_1_BIT</span></li><li> 
-Any given element of <span class="code">pResolveAttachments</span> must  have a sample count
-of <span class="code">VK_SAMPLE_COUNT_1_BIT</span></li><li> 
-Any given element of <span class="code">pResolveAttachments</span> must  have the same
-<a href="T_VkFormat.htm">VkFormat</a> as its corresponding color attachment </li><li> 
+element of <span class="code">pColorAttachments</span> must be anything other than
+<span class="code">VK_SAMPLE_COUNT_1_BIT</span></li><li>
+
+Any given element of <span class="code">pResolveAttachments</span> must have a sample count
+of <span class="code">VK_SAMPLE_COUNT_1_BIT</span></li><li>
+
+Any given element of <span class="code">pResolveAttachments</span> must have the same
+<a href="T_VkFormat.htm">VkFormat</a> as its corresponding color attachment
+</li><li>
+
 All attachments in <span class="code">pColorAttachments</span> that are not
-<span class="code">VK_ATTACHMENT_UNUSED</span> must  have the same sample count </li><li> 
+<span class="code">VK_ATTACHMENT_UNUSED</span> must have the same sample count
+</li><li>
+
 If <span class="code">pDepthStencilAttachment</span> is not <span class="code">VK_ATTACHMENT_UNUSED</span> and
 any attachments in <span class="code">pColorAttachments</span> are not
-<span class="code">VK_ATTACHMENT_UNUSED</span>, they  must  have the same sample count </li><li> 
+<span class="code">VK_ATTACHMENT_UNUSED</span>, they must have the same sample count
+</li><li>
+
 If any input attachments are <span class="code">VK_ATTACHMENT_UNUSED</span>, then any
-pipelines bound during the subpass  must  not access those input
-attachments from the fragment shader </li><li> 
-The <span class="code">attachment</span> member of any element of <span class="code">pPreserveAttachments</span> must  not be <span class="code">VK_ATTACHMENT_UNUSED</span></li><li> 
-Any given element of <span class="code">pPreserveAttachments</span> must  not also be an
-element of any other member of the subpass description </li><li> 
+pipelines bound during the subpass must not access those input
+attachments from the fragment shader
+</li><li>
+
+The <span class="code">attachment</span> member of any element of <span class="code">pPreserveAttachments</span> must not be <span class="code">VK_ATTACHMENT_UNUSED</span></li><li>
+
+Any given element of <span class="code">pPreserveAttachments</span> must not also be an
+element of any other member of the subpass description
+</li><li>
+
 If any attachment is used as both an input attachment and a color or
-depth/stencil attachment, then each use  must  use the same <span class="code">layout</span></li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">flags</span> must  be a valid combination of <a href="T_VkSubpassDescriptionFlags.htm">VkSubpassDescriptionFlags</a> values </li><li><span class="code">pipelineBindPoint</span> must  be a valid <a href="T_VkPipelineBindPoint.htm">VkPipelineBindPoint</a> value </li><li>  If <span class="code">inputAttachmentCount</span> is not <span class="code">0</span>, <span class="code">pInputAttachments</span> must  be a pointer to an array of <span class="code">inputAttachmentCount</span> valid <span class="code">VkAttachmentReference</span> structures </li><li>  If <span class="code">colorAttachmentCount</span> is not <span class="code">0</span>, <span class="code">pColorAttachments</span> must  be a pointer to an array of <span class="code">colorAttachmentCount</span> valid <span class="code">VkAttachmentReference</span> structures </li><li>  If <span class="code">colorAttachmentCount</span> is not <span class="code">0</span>, and <span class="code">pResolveAttachments</span> is not <span class="code">NULL</span>, <span class="code">pResolveAttachments</span> must  be a pointer to an array of <span class="code">colorAttachmentCount</span> valid <span class="code">VkAttachmentReference</span> structures </li><li>  If <span class="code">pDepthStencilAttachment</span> is not <span class="code">NULL</span>, <span class="code">pDepthStencilAttachment</span> must  be a pointer to a valid <span class="code">VkAttachmentReference</span> structure </li><li>  If <span class="code">preserveAttachmentCount</span> is not <span class="code">0</span>, <span class="code">pPreserveAttachments</span> must  be a pointer to an array of <span class="code">preserveAttachmentCount</span><span class="code">uint32_t</span> values </li></ul>     The <span class="code">VkSubpassDescription</span> structure is defined as:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno"> 1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkSubpassDescription {
+depth/stencil attachment, then each use must use the same <span class="code">layout</span></li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">flags</span> must be a valid combination of <a href="T_VkSubpassDescriptionFlags.htm">VkSubpassDescriptionFlags</a> values
+</li><li><span class="code">pipelineBindPoint</span> must be a valid <a href="T_VkPipelineBindPoint.htm">VkPipelineBindPoint</a> value
+</li><li>
+ If <span class="code">inputAttachmentCount</span> is not <span class="code">0</span>, <span class="code">pInputAttachments</span> must be a pointer to an array of <span class="code">inputAttachmentCount</span> valid <span class="code">VkAttachmentReference</span> structures
+</li><li>
+ If <span class="code">colorAttachmentCount</span> is not <span class="code">0</span>, <span class="code">pColorAttachments</span> must be a pointer to an array of <span class="code">colorAttachmentCount</span> valid <span class="code">VkAttachmentReference</span> structures
+</li><li>
+ If <span class="code">colorAttachmentCount</span> is not <span class="code">0</span>, and <span class="code">pResolveAttachments</span> is not <span class="code">NULL</span>, <span class="code">pResolveAttachments</span> must be a pointer to an array of <span class="code">colorAttachmentCount</span> valid <span class="code">VkAttachmentReference</span> structures
+</li><li>
+ If <span class="code">pDepthStencilAttachment</span> is not <span class="code">NULL</span>, <span class="code">pDepthStencilAttachment</span> must be a pointer to a valid <span class="code">VkAttachmentReference</span> structure
+</li><li>
+ If <span class="code">preserveAttachmentCount</span> is not <span class="code">0</span>, <span class="code">pPreserveAttachments</span> must be a pointer to an array of <span class="code">preserveAttachmentCount</span><span class="code">uint32_t</span> values
+</li></ul>
+
+
+
+
+The <span class="code">VkSubpassDescription</span> structure is defined as:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno"> 1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkSubpassDescription {
 <span class="highlight-lineno"> 2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkSubpassDescriptionFlags       flags;
 <span class="highlight-lineno"> 3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkPipelineBindPoint             pipelineBindPoint;
 <span class="highlight-lineno"> 4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    uint32_t                        inputAttachmentCount;

@@ -5,27 +5,69 @@
    Vulkan (in Vulkan.dll) Version: 1.0.53<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID2RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID1EACA_tab1" class="codeSnippetContainerTabSingle">C#</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EACA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EACA');return false;" title="Copy">Copy</a></div></div><div id="ID1EACA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">[<a href="http://msdn2.microsoft.com/en-us/library/bcfsa90a" target="_blank">SerializableAttribute</a>]
 <span class="keyword">public</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="identifier">VkSparseMemoryBind</span> : <a href="http://msdn2.microsoft.com/en-us/library/aey3s293" target="_blank">ValueType</a></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EACA");</script></div><p>The <span class="selflink">VkSparseMemoryBind</span> type exposes the following members.</p><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Fields</span></div><div id="ID3RBSection" class="collapsibleSection"><table class="members" id="fieldList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseMemoryBind_flags.htm">flags</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseMemoryBind_memory.htm">memory</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseMemoryBind_memoryOffset.htm">memoryOffset</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseMemoryBind_resourceOffset.htm">resourceOffset</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseMemoryBind_size.htm">size</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection">  The  binding range  [<span class="code">resourceOffset</span>, <span class="code">resourceOffset</span> + 
-<span class="code">size</span>)  has different constraints based on <span class="code">flags</span>.
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseMemoryBind_flags.htm">flags</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseMemoryBind_memory.htm">memory</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseMemoryBind_memoryOffset.htm">memoryOffset</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseMemoryBind_resourceOffset.htm">resourceOffset</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkSparseMemoryBind_size.htm">size</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection">
+
+The binding range [<span class="code">resourceOffset</span>, <span class="code">resourceOffset</span> + 
+<span class="code">size</span>) has different constraints based on <span class="code">flags</span>.
 If <span class="code">flags</span> contains <span class="code">VK_SPARSE_MEMORY_BIND_METADATA_BIT</span>, the
-binding range  must  be within the mip tail region of the metadata aspect.
-This metadata region is defined by:   <dl><dt /><dd>  metadataRegion = [base, base +  <span class="code">imageMipTailSize</span>)  </dd><dt /><dd>  base = <span class="code">imageMipTailOffset</span> +  <span class="code">imageMipTailStride</span>
-× n  </dd></dl>   and <span class="code">imageMipTailOffset</span>, <span class="code">imageMipTailSize</span>, and
+binding range must be within the mip tail region of the metadata aspect.
+This metadata region is defined by:
+
+<dl><dt /><dd>
+ metadataRegion = [base, base +  <span class="code">imageMipTailSize</span>) 
+</dd><dt /><dd>
+ base = <span class="code">imageMipTailOffset</span> +  <span class="code">imageMipTailStride</span>
+× n 
+</dd></dl>
+
+and <span class="code">imageMipTailOffset</span>, <span class="code">imageMipTailSize</span>, and
 <span class="code">imageMipTailStride</span> values are from the
 <a href="T_VkSparseImageMemoryRequirements.htm">VkSparseImageMemoryRequirements</a> corresponding to the metadata aspect
-of the image, and  n  is a valid array layer index for the image,    <span class="code">imageMipTailStride</span> is considered to be zero for aspects where
+of the image, and n is a valid array layer index for the image,
+
+
+<span class="code">imageMipTailStride</span> is considered to be zero for aspects where
 <span class="code">VkSparseImageMemoryRequirements</span>::<span class="code">formatProperties.flags</span> contains
-<span class="code">VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT</span>.    If <span class="code">flags</span> does not contain <span class="code">VK_SPARSE_MEMORY_BIND_METADATA_BIT</span>,
-the binding range  must  be within the range
- [0,<a href="T_VkMemoryRequirements.htm">VkMemoryRequirements</a>::<span class="code">size</span>) .     Valid Usage  <ul><li> 
+<span class="code">VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT</span>.
+
+
+If <span class="code">flags</span> does not contain <span class="code">VK_SPARSE_MEMORY_BIND_METADATA_BIT</span>,
+the binding range must be within the range
+ [0,<a href="T_VkMemoryRequirements.htm">VkMemoryRequirements</a>::<span class="code">size</span>) .
+
+
+
+Valid Usage
+<ul><li>
+
 If <span class="code">memory</span> is not <span class="nolink">[!:VK_NULL_HANDLE]</span>, <span class="code">memory</span> and
-<span class="code">memoryOffset</span> must  match the memory requirements of the resource,
-as described in section <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#resources-association">../../html/vkspec.html#resources-association</a></li><li> 
-If <span class="code">memory</span> is not <span class="nolink">[!:VK_NULL_HANDLE]</span>, <span class="code">memory</span> must  not have
+<span class="code">memoryOffset</span> must match the memory requirements of the resource,
+as described in section <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#resources-association">../../html/vkspec.html#resources-association</a></li><li>
+
+If <span class="code">memory</span> is not <span class="nolink">[!:VK_NULL_HANDLE]</span>, <span class="code">memory</span> must not have
 been created with a memory type that reports
-<span class="code">VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT</span> bit set </li><li><span class="code">size</span> must  be greater than <span class="code">0</span></li><li><span class="code">resourceOffset</span> must  be less than the size of the resource </li><li><span class="code">size</span> must  be less than or equal to the size of the resource minus
-<span class="code">resourceOffset</span></li><li><span class="code">memoryOffset</span> must  be less than the size of <span class="code">memory</span></li><li><span class="code">size</span> must  be less than or equal to the size of <span class="code">memory</span> minus
-<span class="code">memoryOffset</span></li></ul>      Valid Usage (Implicit)  <ul><li>  If <span class="code">memory</span> is not <span class="nolink">[!:VK_NULL_HANDLE]</span>, <span class="code">memory</span> must  be a valid <span class="code">VkDeviceMemory</span> handle </li><li><span class="code">flags</span> must  be a valid combination of <a href="T_VkSparseMemoryBindFlags.htm">VkSparseMemoryBindFlags</a> values </li></ul>     The <span class="code">VkSparseMemoryBind</span> structure is defined as:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkSparseMemoryBind {
+<span class="code">VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT</span> bit set
+</li><li><span class="code">size</span> must be greater than <span class="code">0</span></li><li><span class="code">resourceOffset</span> must be less than the size of the resource
+</li><li><span class="code">size</span> must be less than or equal to the size of the resource minus
+<span class="code">resourceOffset</span></li><li><span class="code">memoryOffset</span> must be less than the size of <span class="code">memory</span></li><li><span class="code">size</span> must be less than or equal to the size of <span class="code">memory</span> minus
+<span class="code">memoryOffset</span></li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li>
+ If <span class="code">memory</span> is not <span class="nolink">[!:VK_NULL_HANDLE]</span>, <span class="code">memory</span> must be a valid <span class="code">VkDeviceMemory</span> handle
+</li><li><span class="code">flags</span> must be a valid combination of <a href="T_VkSparseMemoryBindFlags.htm">VkSparseMemoryBindFlags</a> values
+</li></ul>
+
+
+
+
+The <span class="code">VkSparseMemoryBind</span> structure is defined as:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkSparseMemoryBind {
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkDeviceSize               resourceOffset;
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkDeviceSize               size;
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkDeviceMemory             memory;

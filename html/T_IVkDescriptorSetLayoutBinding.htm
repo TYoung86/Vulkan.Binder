@@ -7,7 +7,7 @@
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkDescriptorSetLayoutBinding_binding.htm">binding</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkDescriptorSetLayoutBinding_descriptorCount.htm">descriptorCount</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkDescriptorSetLayoutBinding_descriptorType.htm">descriptorType</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkDescriptorSetLayoutBinding_pImmutableSamplers.htm">pImmutableSamplers</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkDescriptorSetLayoutBinding_stageFlags.htm">stageFlags</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID3RBSection" class="collapsibleSection"><ul><li><span class="code">pImmutableSamplers</span> affects initialization of samplers.
 If <span class="code">descriptorType</span> specifies a <span class="code">VK_DESCRIPTOR_TYPE_SAMPLER</span> or
 <span class="code">VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER</span> type descriptor, then
-<span class="code">pImmutableSamplers</span> can  be used to initialize a set of  immutable
+<span class="code">pImmutableSamplers</span> can be used to initialize a set of immutable
 samplers .
 Immutable samplers are permanently bound into the set layout; later
 binding a sampler into an immutable sampler slot in a descriptor set is
@@ -16,27 +16,55 @@ If <span class="code">pImmutableSamplers</span> is not <span class="code">NULL</
 pointer to an array of sampler handles that will be consumed by the set
 layout and used for the corresponding binding.
 If <span class="code">pImmutableSamplers</span> is <span class="code">NULL</span>, then the sampler slots are
-dynamic and sampler handles  must  be bound into descriptor sets using
+dynamic and sampler handles must be bound into descriptor sets using
 this layout.
 If <span class="code">descriptorType</span> is not one of these descriptor types, then
-<span class="code">pImmutableSamplers</span> is ignored. </li></ul>   The above layout definition allows the descriptor bindings to be specified
+<span class="code">pImmutableSamplers</span> is ignored.
+</li></ul>
+
+The above layout definition allows the descriptor bindings to be specified
 sparsely such that not all binding numbers between 0 and the maximum binding
 number need to be specified in the <span class="code">pBindings</span> array.
 Bindings that are not specified have a <span class="code">descriptorCount</span> and
 <span class="code">stageFlags</span> of zero, and the <span class="code">descriptorType</span> is treated as
 undefined.
 However, all binding numbers between 0 and the maximum binding number in the
-<a href="T_IVkDescriptorSetLayoutCreateInfo.htm">IVkDescriptorSetLayoutCreateInfo</a>::<span class="code">pBindings</span> array  may  consume
+<a href="T_IVkDescriptorSetLayoutCreateInfo.htm">IVkDescriptorSetLayoutCreateInfo</a>::<span class="code">pBindings</span> array may consume
 memory in the descriptor set layout even if not all descriptor bindings are
-used, though it  should  not consume additional memory from the descriptor
-pool.   <div class="tableSection"><table /></div>    Valid Usage  <ul><li> 
+used, though it should not consume additional memory from the descriptor
+pool.
+
+<div class="tableSection"><table /></div>
+
+
+Valid Usage
+<ul><li>
+
 If <span class="code">descriptorType</span> is <span class="code">VK_DESCRIPTOR_TYPE_SAMPLER</span> or
 <span class="code">VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER</span>, and
 <span class="code">descriptorCount</span> is not <span class="code">0</span> and <span class="code">pImmutableSamplers</span> is not
-<span class="code">NULL</span>, <span class="code">pImmutableSamplers</span> must  be a pointer to an array of
-<span class="code">descriptorCount</span> valid <span class="code">VkSampler</span> handles </li><li> 
-If <span class="code">descriptorCount</span> is not <span class="code">0</span>, <span class="code">stageFlags</span> must  be a valid
-combination of <a href="T_VkShaderStageFlags.htm">VkShaderStageFlags</a> values </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">descriptorType</span> must  be a valid <a href="T_VkDescriptorType.htm">VkDescriptorType</a> value </li></ul>     The <span class="code">VkDescriptorSetLayoutBinding</span> structure is defined as:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkDescriptorSetLayoutBinding {
+<span class="code">NULL</span>, <span class="code">pImmutableSamplers</span> must be a pointer to an array of
+<span class="code">descriptorCount</span> valid <span class="code">VkSampler</span> handles
+</li><li>
+
+If <span class="code">descriptorCount</span> is not <span class="code">0</span>, <span class="code">stageFlags</span> must be a valid
+combination of <a href="T_VkShaderStageFlags.htm">VkShaderStageFlags</a> values
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">descriptorType</span> must be a valid <a href="T_VkDescriptorType.htm">VkDescriptorType</a> value
+</li></ul>
+
+
+
+
+The <span class="code">VkDescriptorSetLayoutBinding</span> structure is defined as:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkDescriptorSetLayoutBinding {
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    uint32_t              binding;
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkDescriptorType      descriptorType;
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    uint32_t              descriptorCount;

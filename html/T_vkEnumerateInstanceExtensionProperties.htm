@@ -6,12 +6,17 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkEnumerateInstanceExtensionProperties__ctor.htm">vkEnumerateInstanceExtensionProperties</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkEnumerateInstanceExtensionProperties</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkEnumerateInstanceExtensionProperties_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  When <span class="code">pLayerName</span> parameter is NULL, only extensions provided by the
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkEnumerateInstanceExtensionProperties_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+When <span class="code">pLayerName</span> parameter is NULL, only extensions provided by the
 Vulkan implementation or by implicitly enabled layers are returned.
 When <span class="code">pLayerName</span> is the name of a layer, the instance extensions
-provided by that layer are returned.    If <span class="code">pProperties</span> is <span class="code">NULL</span>, then the number of extensions properties
+provided by that layer are returned.
+
+
+If <span class="code">pProperties</span> is <span class="code">NULL</span>, then the number of extensions properties
 available is returned in <span class="code">pPropertyCount</span>.
-Otherwise, <span class="code">pPropertyCount</span> must  point to a variable set by the user to
+Otherwise, <span class="code">pPropertyCount</span> must point to a variable set by the user to
 the number of elements in the <span class="code">pProperties</span> array, and on return the
 variable is overwritten with the number of structures actually written to
 <span class="code">pProperties</span>.
@@ -19,13 +24,40 @@ If <span class="code">pPropertyCount</span> is less than the number of extension
 available, at most <span class="code">pPropertyCount</span> structures will be written.
 If <span class="code">pPropertyCount</span> is smaller than the number of extensions available,
 <span class="code">VK_INCOMPLETE</span> will be returned instead of <span class="code">VK_SUCCESS</span>, to
-indicate that not all the available properties were returned.    Because the list of available layers may change externally between calls to
+indicate that not all the available properties were returned.
+
+
+Because the list of available layers may change externally between calls to
 <span class="code">vkEnumerateInstanceExtensionProperties</span>, two calls may retrieve
 different results if a <span class="code">pLayerName</span> is available in one call but not in
 another.
 The extensions supported by a layer may also change between two calls, e.g.
 if the layer implementation is replaced by a different version between those
-calls.     Valid Usage (Implicit)  <ul><li>  If <span class="code">pLayerName</span> is not <span class="code">NULL</span>, <span class="code">pLayerName</span> must  be a null-terminated UTF-8 string </li><li><span class="code">pPropertyCount</span> must  be a pointer to a <span class="code">uint32_t</span> value </li><li>  If the value referenced by <span class="code">pPropertyCount</span> is not <span class="code">0</span>, and <span class="code">pProperties</span> is not <span class="code">NULL</span>, <span class="code">pProperties</span> must  be a pointer to an array of <span class="code">pPropertyCount</span><span class="code">VkExtensionProperties</span> structures </li></ul>      Return Codes  <dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li><li><span class="code">VK_INCOMPLETE</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_LAYER_NOT_PRESENT</span></li></ul></dd></dl>     To query the available instance extensions, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAABBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAABBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAABBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkEnumerateInstanceExtensionProperties(
+calls.
+
+
+
+Valid Usage (Implicit)
+<ul><li>
+ If <span class="code">pLayerName</span> is not <span class="code">NULL</span>, <span class="code">pLayerName</span> must be a null-terminated UTF-8 string
+</li><li><span class="code">pPropertyCount</span> must be a pointer to a <span class="code">uint32_t</span> value
+</li><li>
+ If the value referenced by <span class="code">pPropertyCount</span> is not <span class="code">0</span>, and <span class="code">pProperties</span> is not <span class="code">NULL</span>, <span class="code">pProperties</span> must be a pointer to an array of <span class="code">pPropertyCount</span><span class="code">VkExtensionProperties</span> structures
+</li></ul>
+
+
+
+
+Return Codes
+<dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li><li><span class="code">VK_INCOMPLETE</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_LAYER_NOT_PRESENT</span></li></ul></dd></dl>
+
+
+
+
+To query the available instance extensions, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAABBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAABBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAABBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkEnumerateInstanceExtensionProperties(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">const</span> <span class="highlight-keyword">char</span>*                                 pLayerName,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   uint32_t*                                   pPropertyCount,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkExtensionProperties*                      pProperties);</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EAABBA");</script></div><div class="collapsibleAreaRegion" id="seeAlsoSection"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID6RB')" onkeypress="SectionExpandCollapse_CheckKey('ID6RB', event)" tabindex="0"><img id="ID6RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />See Also</span></div><div id="ID6RBSection" class="collapsibleSection"><h4 class="subHeading">Reference</h4><div class="seeAlsoStyle"><a href="N_.htm">(Default Namespace) Namespace</a></div><div class="seeAlsoStyle"><a href="T_VkExtensionProperties.htm">(Default Namespace)<span id="LST428590B4_2"></span><script type="text/javascript">AddLanguageSpecificTextSet("LST428590B4_2?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>VkExtensionProperties</a></div></div></div></div><div id="pageFooter" class="pageFooter"> </div></body></html>

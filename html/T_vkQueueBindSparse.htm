@@ -10,31 +10,116 @@
 command</a>, with each batch defined by an element of <span class="code">pBindInfo</span> as an
 instance of the <a href="T_IVkBindSparseInfo.htm">IVkBindSparseInfo</a> structure.
 Batches begin execution in the order they appear in <span class="code">pBindInfo</span>, but
- may  complete out of order.    Within a batch, a given range of a resource  must  not be bound more than
+ may complete out of order.
+
+
+Within a batch, a given range of a resource must not be bound more than
 once.
 Across batches, if a range is to be bound to one allocation and offset and
-then to another allocation and offset, then the application  must  guarantee
+then to another allocation and offset, then the application must guarantee
 (usually using semaphores) that the binding operations are executed in the
 correct order, as well as to order binding operations against the execution
-of command buffer submissions.    As no operation to <span class="selflink">vkQueueBindSparse</span> causes any pipeline stage to
+of command buffer submissions.
+
+
+As no operation to <span class="selflink">vkQueueBindSparse</span> causes any pipeline stage to
 access memory, synchronization primitives used in this command effectively
-only define execution dependencies.    Additional information about fence and semaphore operation is described in
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization">the synchronization chapter</a>.     Valid Usage  <ul><li> 
-If <span class="code">fence</span> is not <span class="nolink">[!:VK_NULL_HANDLE]</span>, <span class="code">fence</span> must  be
-unsignaled </li><li> 
-If <span class="code">fence</span> is not <span class="nolink">[!:VK_NULL_HANDLE]</span>, <span class="code">fence</span> must  not be
+only define execution dependencies.
+
+
+Additional information about fence and semaphore operation is described in
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization">the synchronization chapter</a>.
+
+
+
+Valid Usage
+<ul><li>
+
+If <span class="code">fence</span> is not <span class="nolink">[!:VK_NULL_HANDLE]</span>, <span class="code">fence</span> must be
+unsignaled
+</li><li>
+
+If <span class="code">fence</span> is not <span class="nolink">[!:VK_NULL_HANDLE]</span>, <span class="code">fence</span> must not be
 associated with any other queue command that has not yet completed
-execution on that queue </li><li> 
+execution on that queue
+</li><li>
+
 Any given element of the <span class="code">pSignalSemaphores</span> member of any element
-of <span class="code">pBindInfo</span> must  be unsignaled when the semaphore signal
-operation it defines is executed on the device </li><li> 
+of <span class="code">pBindInfo</span> must be unsignaled when the semaphore signal
+operation it defines is executed on the device
+</li><li>
+
 When a semaphore unsignal operation defined by any element of the
 <span class="code">pWaitSemaphores</span> member of any element of <span class="code">pBindInfo</span> executes
-on <span class="code">queue</span>, no other queue  must  be waiting on the same semaphore. </li><li> 
+on <span class="code">queue</span>, no other queue must be waiting on the same semaphore.
+</li><li>
+
 All elements of the <span class="code">pWaitSemaphores</span> member of all elements of
-<span class="code">pBindInfo</span> must  be semaphores that are signaled, or have
+<span class="code">pBindInfo</span> must be semaphores that are signaled, or have
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-semaphores-signaling">semaphore signal operations</a>
-previously submitted for execution. </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">queue</span> must  be a valid <span class="code">VkQueue</span> handle </li><li>  If <span class="code">bindInfoCount</span> is not <span class="code">0</span>, <span class="code">pBindInfo</span> must  be a pointer to an array of <span class="code">bindInfoCount</span> valid <span class="code">VkBindSparseInfo</span> structures </li><li>  If <span class="code">fence</span> is not <span class="nolink">[!:VK_NULL_HANDLE]</span>, <span class="code">fence</span> must  be a valid <span class="code">VkFence</span> handle </li><li>  The <span class="code">queue</span> must  support sparse binding operations </li><li>  Both of <span class="code">fence</span>, and <span class="code">queue</span> that are valid handles  must  have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">queue</span> must  be externally synchronized </li><li> Host access to <span class="code">pBindInfo</span>[].pWaitSemaphores[]  must  be externally synchronized </li><li> Host access to <span class="code">pBindInfo</span>[].pSignalSemaphores[]  must  be externally synchronized </li><li> Host access to <span class="code">pBindInfo</span>[].pBufferBinds[].buffer  must  be externally synchronized </li><li> Host access to <span class="code">pBindInfo</span>[].pImageOpaqueBinds[].image  must  be externally synchronized </li><li> Host access to <span class="code">pBindInfo</span>[].pImageBinds[].image  must  be externally synchronized </li><li> Host access to <span class="code">fence</span> must  be externally synchronized </li></ul>      Command Properties <div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td> - </td><td> - </td><td> SPARSE_BINDING </td><td> - </td></tr></table></div>     Return Codes  <dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_DEVICE_LOST</span></li></ul></dd></dl>     To submit sparse binding operations to a queue, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkQueueBindSparse(
+previously submitted for execution.
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">queue</span> must be a valid <span class="code">VkQueue</span> handle
+</li><li>
+ If <span class="code">bindInfoCount</span> is not <span class="code">0</span>, <span class="code">pBindInfo</span> must be a pointer to an array of <span class="code">bindInfoCount</span> valid <span class="code">VkBindSparseInfo</span> structures
+</li><li>
+ If <span class="code">fence</span> is not <span class="nolink">[!:VK_NULL_HANDLE]</span>, <span class="code">fence</span> must be a valid <span class="code">VkFence</span> handle
+</li><li>
+ The <span class="code">queue</span> must support sparse binding operations
+</li><li>
+ Both of <span class="code">fence</span>, and <span class="code">queue</span> that are valid handles must have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">queue</span> must be externally synchronized
+</li><li>
+Host access to <span class="code">pBindInfo</span>[].pWaitSemaphores[] must be externally synchronized
+</li><li>
+Host access to <span class="code">pBindInfo</span>[].pSignalSemaphores[] must be externally synchronized
+</li><li>
+Host access to <span class="code">pBindInfo</span>[].pBufferBinds[].buffer must be externally synchronized
+</li><li>
+Host access to <span class="code">pBindInfo</span>[].pImageOpaqueBinds[].image must be externally synchronized
+</li><li>
+Host access to <span class="code">pBindInfo</span>[].pImageBinds[].image must be externally synchronized
+</li><li>
+Host access to <span class="code">fence</span> must be externally synchronized
+</li></ul>
+
+
+
+
+Command Properties
+<div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td>
+-
+</td><td>
+-
+</td><td>
+SPARSE_BINDING
+</td><td>
+-
+</td></tr></table></div>
+
+
+
+Return Codes
+<dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_DEVICE_LOST</span></li></ul></dd></dl>
+
+
+
+
+To submit sparse binding operations to a queue, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkQueueBindSparse(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkQueue                                     queue,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   uint32_t                                    bindInfoCount,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">const</span> VkBindSparseInfo*                     pBindInfo,

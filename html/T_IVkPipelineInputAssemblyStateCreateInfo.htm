@@ -4,31 +4,56 @@
     <strong>Assembly:</strong>
    Vulkan (in Vulkan.dll) Version: 1.0.53<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID1RB')" onkeypress="SectionExpandCollapse_CheckKey('ID1RB', event)" tabindex="0"><img id="ID1RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID1RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID0EACA_tab1" class="codeSnippetContainerTabSingle">C#</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EACA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EACA');return false;" title="Copy">Copy</a></div></div><div id="ID0EACA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="identifier">IVkPipelineInputAssemblyStateCreateInfo</span></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID0EACA");</script></div><p>The <span class="selflink">IVkPipelineInputAssemblyStateCreateInfo</span> type exposes the following members.</p><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Properties</span></div><div id="ID2RBSection" class="collapsibleSection"><table class="members" id="propertyList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineInputAssemblyStateCreateInfo_flags.htm">flags</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineInputAssemblyStateCreateInfo_pNext.htm">pNext</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineInputAssemblyStateCreateInfo_primitiveRestartEnable.htm">primitiveRestartEnable</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineInputAssemblyStateCreateInfo_sType.htm">sType</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineInputAssemblyStateCreateInfo_topology.htm">topology</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID3RBSection" class="collapsibleSection">  Restarting the assembly of primitives discards the most recent index values
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineInputAssemblyStateCreateInfo_flags.htm">flags</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineInputAssemblyStateCreateInfo_pNext.htm">pNext</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineInputAssemblyStateCreateInfo_primitiveRestartEnable.htm">primitiveRestartEnable</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineInputAssemblyStateCreateInfo_sType.htm">sType</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_IVkPipelineInputAssemblyStateCreateInfo_topology.htm">topology</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID3RBSection" class="collapsibleSection">
+
+Restarting the assembly of primitives discards the most recent index values
 if those elements formed an incomplete primitive, and restarts the primitive
 assembly using the subsequent indices, but only assembling the immediately
 following element through the end of the originally specified elements.
 The primitive restart index value comparison is performed before adding the
-<span class="code">vertexOffset</span> value to the index value.     Valid Usage  <ul><li> 
+<span class="code">vertexOffset</span> value to the index value.
+
+
+
+Valid Usage
+<ul><li>
+
 If <span class="code">topology</span> is <span class="code">VK_PRIMITIVE_TOPOLOGY_POINT_LIST</span>,
 <span class="code">VK_PRIMITIVE_TOPOLOGY_LINE_LIST</span>,
 <span class="code">VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST</span>,
 <span class="code">VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY</span>,
 <span class="code">VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY</span> or
-<span class="code">VK_PRIMITIVE_TOPOLOGY_PATCH_LIST</span>, <span class="code">primitiveRestartEnable</span> must  be <span class="code">VK_FALSE</span></li><li> 
+<span class="code">VK_PRIMITIVE_TOPOLOGY_PATCH_LIST</span>, <span class="code">primitiveRestartEnable</span> must be <span class="code">VK_FALSE</span></li><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-geometryShader">geometry shaders</a> feature is
-not enabled, <span class="code">topology</span> must  not be any of
+not enabled, <span class="code">topology</span> must not be any of
 <span class="code">VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY</span>,
 <span class="code">VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY</span>,
 <span class="code">VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY</span> or
-<span class="code">VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY</span></li><li> 
+<span class="code">VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY</span></li><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-tessellationShader">tessellation shaders</a>
-feature is not enabled, <span class="code">topology</span> must  not be
-<span class="code">VK_PRIMITIVE_TOPOLOGY_PATCH_LIST</span></li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">sType</span> must  be <span class="code">VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO</span></li><li><span class="code">pNext</span> must  be <span class="code">NULL</span></li><li><span class="code">flags</span> must  be <span class="code">0</span></li><li><span class="code">topology</span> must  be a valid <a href="T_VkPrimitiveTopology.htm">VkPrimitiveTopology</a> value </li></ul>     Each draw is made up of zero or more vertices and zero or more instances,
+feature is not enabled, <span class="code">topology</span> must not be
+<span class="code">VK_PRIMITIVE_TOPOLOGY_PATCH_LIST</span></li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">sType</span> must be <span class="code">VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO</span></li><li><span class="code">pNext</span> must be <span class="code">NULL</span></li><li><span class="code">flags</span> must be <span class="code">0</span></li><li><span class="code">topology</span> must be a valid <a href="T_VkPrimitiveTopology.htm">VkPrimitiveTopology</a> value
+</li></ul>
+
+
+
+
+Each draw is made up of zero or more vertices and zero or more instances,
 which are processed by the device and result in the assembly of primitives.
 Primitives are assembled according to the <span class="code">pInputAssemblyState</span> member
 of the <span class="code">VkGraphicsPipelineCreateInfo</span> structure, which is of type
-<span class="code">VkPipelineInputAssemblyStateCreateInfo</span>:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkPipelineInputAssemblyStateCreateInfo {
+<span class="code">VkPipelineInputAssemblyStateCreateInfo</span>:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID0EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID0EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkPipelineInputAssemblyStateCreateInfo {
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkStructureType                            sType;
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    <span class="highlight-keyword">const</span> <span class="highlight-keyword">void</span>*                                pNext;
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkPipelineInputAssemblyStateCreateFlags    flags;

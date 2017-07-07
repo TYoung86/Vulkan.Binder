@@ -6,18 +6,42 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetImageSparseMemoryRequirements__ctor.htm">vkGetImageSparseMemoryRequirements</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkGetImageSparseMemoryRequirements</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetImageSparseMemoryRequirements_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  If <span class="code">pSparseMemoryRequirements</span> is <span class="code">NULL</span>, then the number of sparse
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetImageSparseMemoryRequirements_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+If <span class="code">pSparseMemoryRequirements</span> is <span class="code">NULL</span>, then the number of sparse
 memory requirements available is returned in
 <span class="code">pSparseMemoryRequirementCount</span>.
-Otherwise, <span class="code">pSparseMemoryRequirementCount</span> must  point to a variable set
+Otherwise, <span class="code">pSparseMemoryRequirementCount</span> must point to a variable set
 by the user to the number of elements in the <span class="code">pSparseMemoryRequirements</span>
 array, and on return the variable is overwritten with the number of
 structures actually written to <span class="code">pSparseMemoryRequirements</span>.
 If <span class="code">pSparseMemoryRequirementCount</span> is less than the number of sparse
 memory requirements available, at most <span class="code">pSparseMemoryRequirementCount</span>
-structures will be written.    If the image was not created with <span class="code">VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</span>
+structures will be written.
+
+
+If the image was not created with <span class="code">VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</span>
 then <span class="code">pSparseMemoryRequirementCount</span> will be set to zero and
-<span class="code">pSparseMemoryRequirements</span> will not be written to.   <div class="tableSection"><table /></div>    Valid Usage (Implicit)  <ul><li><span class="code">device</span> must  be a valid <span class="code">VkDevice</span> handle </li><li><span class="code">image</span> must  be a valid <span class="code">VkImage</span> handle </li><li><span class="code">pSparseMemoryRequirementCount</span> must  be a pointer to a <span class="code">uint32_t</span> value </li><li>  If the value referenced by <span class="code">pSparseMemoryRequirementCount</span> is not <span class="code">0</span>, and <span class="code">pSparseMemoryRequirements</span> is not <span class="code">NULL</span>, <span class="code">pSparseMemoryRequirements</span> must  be a pointer to an array of <span class="code">pSparseMemoryRequirementCount</span><span class="code">VkSparseImageMemoryRequirements</span> structures </li><li><span class="code">image</span> must  have been created, allocated, or retrieved from <span class="code">device</span></li></ul>     To query sparse memory requirements for an image, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkGetImageSparseMemoryRequirements(
+<span class="code">pSparseMemoryRequirements</span> will not be written to.
+
+<div class="tableSection"><table /></div>
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">device</span> must be a valid <span class="code">VkDevice</span> handle
+</li><li><span class="code">image</span> must be a valid <span class="code">VkImage</span> handle
+</li><li><span class="code">pSparseMemoryRequirementCount</span> must be a pointer to a <span class="code">uint32_t</span> value
+</li><li>
+ If the value referenced by <span class="code">pSparseMemoryRequirementCount</span> is not <span class="code">0</span>, and <span class="code">pSparseMemoryRequirements</span> is not <span class="code">NULL</span>, <span class="code">pSparseMemoryRequirements</span> must be a pointer to an array of <span class="code">pSparseMemoryRequirementCount</span><span class="code">VkSparseImageMemoryRequirements</span> structures
+</li><li><span class="code">image</span> must have been created, allocated, or retrieved from <span class="code">device</span></li></ul>
+
+
+
+
+To query sparse memory requirements for an image, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkGetImageSparseMemoryRequirements(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDevice                                    device,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkImage                                     image,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   uint32_t*                                   pSparseMemoryRequirementCount,

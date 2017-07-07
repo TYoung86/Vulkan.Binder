@@ -5,23 +5,66 @@
    Vulkan (in Vulkan.dll) Version: 1.0.53<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID2RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID1EACA_tab1" class="codeSnippetContainerTabSingle">C#</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EACA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EACA');return false;" title="Copy">Copy</a></div></div><div id="ID1EACA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">[<a href="http://msdn2.microsoft.com/en-us/library/bcfsa90a" target="_blank">SerializableAttribute</a>]
 <span class="keyword">public</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="identifier">VkViewport</span> : <a href="http://msdn2.microsoft.com/en-us/library/aey3s293" target="_blank">ValueType</a></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EACA");</script></div><p>The <span class="selflink">VkViewport</span> type exposes the following members.</p><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Fields</span></div><div id="ID3RBSection" class="collapsibleSection"><table class="members" id="fieldList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkViewport_height.htm">height</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkViewport_maxDepth.htm">maxDepth</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkViewport_minDepth.htm">minDepth</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkViewport_width.htm">width</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkViewport_x.htm">x</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkViewport_y.htm">y</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection">  The framebuffer depth coordinate  <span class="code">z</span><sub>f</sub>  may  be represented using
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkViewport_height.htm">height</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkViewport_maxDepth.htm">maxDepth</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkViewport_minDepth.htm">minDepth</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkViewport_width.htm">width</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkViewport_x.htm">x</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkViewport_y.htm">y</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection">
+
+The framebuffer depth coordinate <span class="code">z</span><sub>f</sub> may be represented using
 either a fixed-point or floating-point representation.
-However, a floating-point representation  must  be used if the depth/stencil
+However, a floating-point representation must be used if the depth/stencil
 attachment has a floating-point depth component.
-If an  m -bit fixed-point representation is used, we assume that it
-represents each value \(\frac{k}{2^m - 1}\), where  k ∈ {
-0, 1, &amp;#8230;&amp;#8203;, 2<sup>m</sup>-1 } , as  k  (e.g. 1.0 is represented in binary as a
-string of all ones).    The viewport parameters shown in the above equations are found from these
-values as   <dl><dt /><dd>  o<sub>x</sub> = <span class="code">x</span> +  <span class="code">width</span> / 2  </dd><dt /><dd>  o<sub>y</sub> = <span class="code">y</span> +  <span class="code">height</span> / 2  </dd><dt /><dd>  o<sub>z</sub> = <span class="code">minDepth</span></dd><dt /><dd>  p<sub>x</sub> = <span class="code">width</span></dd><dt /><dd>  p<sub>y</sub> = <span class="code">height</span></dd><dt /><dd>  p<sub>z</sub> = <span class="code">maxDepth</span> - <span class="code">minDepth</span> . </dd></dl>   The width and height of the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-limits-maxViewportDimensions">implementation-dependent maximum viewport dimensions</a> must  be greater than
-or equal to the width and height of the largest image which  can  be created
-and attached to a framebuffer.    The floating-point viewport bounds are represented with an
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-limits-viewportSubPixelBits">implementation-dependent precision</a>.     Valid Usage  <ul><li><span class="code">width</span> must  be greater than <span class="code">0.0</span> and less than or equal to
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxViewportDimensions</span>[0] </li><li><span class="code">height</span> must  be greater than <span class="code">0.0</span> and less than or equal to
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxViewportDimensions</span>[1] </li><li><span class="code">x</span> and <span class="code">y</span> must  each be between <span class="code">viewportBoundsRange</span>[0]
-and <span class="code">viewportBoundsRange</span>[1], inclusive </li><li>  (<span class="code">x</span> +  <span class="code">width</span>)  must  be less than or equal to
-<span class="code">viewportBoundsRange</span>[1] </li><li>  (<span class="code">y</span> +  <span class="code">height</span>)  must  be less than or equal to
-<span class="code">viewportBoundsRange</span>[1] </li><li><span class="code">minDepth</span> must  be between <span class="code">0.0</span> and <span class="code">1.0</span>, inclusive </li><li><span class="code">maxDepth</span> must  be between <span class="code">0.0</span> and <span class="code">1.0</span>, inclusive </li></ul>     The <span class="code">VkViewport</span> structure is defined as:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkViewport {
+If an m -bit fixed-point representation is used, we assume that it
+represents each value \(\frac{k}{2^m - 1}\), where k ∈ {
+0, 1, &amp;#8230;&amp;#8203;, 2<sup>m</sup>-1 } , as k (e.g. 1.0 is represented in binary as a
+string of all ones).
+
+
+The viewport parameters shown in the above equations are found from these
+values as
+
+<dl><dt /><dd>
+ o<sub>x</sub> = <span class="code">x</span> +  <span class="code">width</span> / 2 
+</dd><dt /><dd>
+ o<sub>y</sub> = <span class="code">y</span> +  <span class="code">height</span> / 2 
+</dd><dt /><dd>
+ o<sub>z</sub> = <span class="code">minDepth</span></dd><dt /><dd>
+ p<sub>x</sub> = <span class="code">width</span></dd><dt /><dd>
+ p<sub>y</sub> = <span class="code">height</span></dd><dt /><dd>
+ p<sub>z</sub> = <span class="code">maxDepth</span> - <span class="code">minDepth</span> .
+</dd></dl>
+
+The width and height of the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-limits-maxViewportDimensions">implementation-dependent maximum viewport dimensions</a> must be greater than
+or equal to the width and height of the largest image which can be created
+and attached to a framebuffer.
+
+
+The floating-point viewport bounds are represented with an
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-limits-viewportSubPixelBits">implementation-dependent precision</a>.
+
+
+
+Valid Usage
+<ul><li><span class="code">width</span> must be greater than <span class="code">0.0</span> and less than or equal to
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxViewportDimensions</span>[0]
+</li><li><span class="code">height</span> must be greater than <span class="code">0.0</span> and less than or equal to
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxViewportDimensions</span>[1]
+</li><li><span class="code">x</span> and <span class="code">y</span> must each be between <span class="code">viewportBoundsRange</span>[0]
+and <span class="code">viewportBoundsRange</span>[1], inclusive
+</li><li>
+ (<span class="code">x</span> +  <span class="code">width</span>) must be less than or equal to
+<span class="code">viewportBoundsRange</span>[1]
+</li><li>
+ (<span class="code">y</span> +  <span class="code">height</span>) must be less than or equal to
+<span class="code">viewportBoundsRange</span>[1]
+</li><li><span class="code">minDepth</span> must be between <span class="code">0.0</span> and <span class="code">1.0</span>, inclusive
+</li><li><span class="code">maxDepth</span> must be between <span class="code">0.0</span> and <span class="code">1.0</span>, inclusive
+</li></ul>
+
+
+
+
+The <span class="code">VkViewport</span> structure is defined as:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkViewport {
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    <span class="highlight-keyword">float</span>    x;
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    <span class="highlight-keyword">float</span>    y;
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    <span class="highlight-keyword">float</span>    width;

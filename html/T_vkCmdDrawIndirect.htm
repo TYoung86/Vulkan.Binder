@@ -13,103 +13,186 @@ from <span class="code">buffer</span> starting at <span class="code">offset</spa
 bytes for each successive draw.
 The parameters of each draw are encoded in an array of
 <a href="T_VkDrawIndirectCommand.htm">VkDrawIndirectCommand</a> structures.
-If <span class="code">drawCount</span> is less than or equal to one, <span class="code">stride</span> is ignored.     Valid Usage  <ul><li> 
-If <span class="code">buffer</span> is non-sparse then it  must  be bound completely and
-contiguously to a single <span class="code">VkDeviceMemory</span> object </li><li><span class="code">offset</span> must  be a multiple of <span class="code">4</span></li><li> 
-If <span class="code">drawCount</span> is greater than <span class="code">1</span>, <span class="code">stride</span> must  be a multiple
-of <span class="code">4</span> and  must  be greater than or equal to
-sizeof(<span class="code">VkDrawIndirectCommand</span>) </li><li> 
+If <span class="code">drawCount</span> is less than or equal to one, <span class="code">stride</span> is ignored.
+
+
+
+Valid Usage
+<ul><li>
+
+If <span class="code">buffer</span> is non-sparse then it must be bound completely and
+contiguously to a single <span class="code">VkDeviceMemory</span> object
+</li><li><span class="code">offset</span> must be a multiple of <span class="code">4</span></li><li>
+
+If <span class="code">drawCount</span> is greater than <span class="code">1</span>, <span class="code">stride</span> must be a multiple
+of <span class="code">4</span> and must be greater than or equal to
+sizeof(<span class="code">VkDrawIndirectCommand</span>)
+</li><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-multiDrawIndirect">multi-draw indirect</a>
-feature is not enabled, <span class="code">drawCount</span> must  be <span class="code">0</span> or <span class="code">1</span></li><li> 
+feature is not enabled, <span class="code">drawCount</span> must be <span class="code">0</span> or <span class="code">1</span></li><li>
+
 If the
 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-drawIndirectFirstInstance">drawIndirectFirstInstance</a>
 feature is not enabled, all the <span class="code">firstInstance</span> members of the
-<span class="code">VkDrawIndirectCommand</span> structures accessed by this command  must  be
-<span class="code">0</span></li><li> 
-The current render pass  must  be <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#renderpass-compatibility">compatible</a>
+<span class="code">VkDrawIndirectCommand</span> structures accessed by this command must be
+<span class="code">0</span></li><li>
+
+The current render pass must be <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#renderpass-compatibility">compatible</a>
 with the <span class="code">renderPass</span> member of the
 <span class="code">VkGraphicsPipelineCreateInfo</span> structure specified when creating the
 <span class="code">VkPipeline</span> currently bound to
-<span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span>. </li><li> 
-The subpass index of the current render pass  must  be equal to the
+<span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span>.
+</li><li>
+
+The subpass index of the current render pass must be equal to the
 <span class="code">subpass</span> member of the <span class="code">VkGraphicsPipelineCreateInfo</span> structure
 specified when creating the <span class="code">VkPipeline</span> currently bound to
-<span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span>. </li><li> 
-For each set  n  that is statically used by the <span class="code">VkPipeline</span>
+<span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span>.
+</li><li>
+
+For each set n that is statically used by the <span class="code">VkPipeline</span>
 currently bound to <span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span>, a descriptor
-set  must  have been bound to  n  at
+set must have been bound to n at
 <span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span>, with a <span class="code">VkPipelineLayout</span>
-that is compatible for set  n , with the <span class="code">VkPipelineLayout</span> used to
+that is compatible for set n , with the <span class="code">VkPipelineLayout</span> used to
 create the current <span class="code">VkPipeline</span>, as described in
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#descriptorsets-compatibility">../../html/vkspec.html#descriptorsets-compatibility</a></li><li> 
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#descriptorsets-compatibility">../../html/vkspec.html#descriptorsets-compatibility</a></li><li>
+
 For each push constant that is statically used by the <span class="code">VkPipeline</span>
 currently bound to <span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span>, a push
-constant value  must  have been set for
+constant value must have been set for
 <span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span>, with a <span class="code">VkPipelineLayout</span>
 that is compatible for push constants, with the <span class="code">VkPipelineLayout</span>
 used to create the current <span class="code">VkPipeline</span>, as described in
-<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#descriptorsets-compatibility">../../html/vkspec.html#descriptorsets-compatibility</a></li><li> 
+<a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#descriptorsets-compatibility">../../html/vkspec.html#descriptorsets-compatibility</a></li><li>
+
 Descriptors in each bound descriptor set, specified via
-<span class="code">vkCmdBindDescriptorSets</span>,  must  be valid if they are statically
+<span class="code">vkCmdBindDescriptorSets</span>, must be valid if they are statically
 used by the currently bound <span class="code">VkPipeline</span> object, specified via
-<span class="code">vkCmdBindPipeline</span></li><li> 
+<span class="code">vkCmdBindPipeline</span></li><li>
+
 All vertex input bindings accessed via vertex input variables declared
-in the vertex shader entry point&amp;#8217;s interface  must  have valid buffers
-bound </li><li> 
-A valid graphics pipeline  must  be bound to the current command buffer
-with <span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span></li><li> 
+in the vertex shader entry point&amp;#8217;s interface must have valid buffers
+bound
+</li><li>
+
+A valid graphics pipeline must be bound to the current command buffer
+with <span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span></li><li>
+
 If the <span class="code">VkPipeline</span> object currently bound to
 <span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span> requires any dynamic state, that
-state  must  have been set on the current command buffer </li><li> 
-If <span class="code">drawCount</span> is equal to <span class="code">1</span>,  (<span class="code">offset</span> + 
-sizeof(<a href="T_VkDrawIndirectCommand.htm">VkDrawIndirectCommand</a>))  must  be less than or equal to the
-size of <span class="code">buffer</span></li><li> 
-If <span class="code">drawCount</span> is greater than <span class="code">1</span>,  (<span class="code">stride</span> ×
+state must have been set on the current command buffer
+</li><li>
+
+If <span class="code">drawCount</span> is equal to <span class="code">1</span>, (<span class="code">offset</span> + 
+sizeof(<a href="T_VkDrawIndirectCommand.htm">VkDrawIndirectCommand</a>)) must be less than or equal to the
+size of <span class="code">buffer</span></li><li>
+
+If <span class="code">drawCount</span> is greater than <span class="code">1</span>, (<span class="code">stride</span> ×
 (<span class="code">drawCount</span> - 1) +  <span class="code">offset</span> + 
-sizeof(<a href="T_VkDrawIndirectCommand.htm">VkDrawIndirectCommand</a>))  must  be less than or equal to the
-size of <span class="code">buffer</span></li><li><span class="code">drawCount</span> must  be less than or equal to
-<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxDrawIndirectCount</span></li><li> 
-Every input attachment used by the current subpass  must  be bound to the
-pipeline via a descriptor set </li><li> 
+sizeof(<a href="T_VkDrawIndirectCommand.htm">VkDrawIndirectCommand</a>)) must be less than or equal to the
+size of <span class="code">buffer</span></li><li><span class="code">drawCount</span> must be less than or equal to
+<span class="code">VkPhysicalDeviceLimits</span>::<span class="code">maxDrawIndirectCount</span></li><li>
+
+Every input attachment used by the current subpass must be bound to the
+pipeline via a descriptor set
+</li><li>
+
 If any <span class="code">VkSampler</span> object that is accessed from a shader by the
 <span class="code">VkPipeline</span> currently bound to
 <span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span> uses unnormalized coordinates, it
- must  not be used to sample from any <span class="code">VkImage</span> with a
+ must not be used to sample from any <span class="code">VkImage</span> with a
 <span class="code">VkImageView</span> of the type <span class="code">VK_IMAGE_VIEW_TYPE_3D</span>,
 <span class="code">VK_IMAGE_VIEW_TYPE_CUBE</span>, <span class="code">VK_IMAGE_VIEW_TYPE_1D_ARRAY</span>,
 <span class="code">VK_IMAGE_VIEW_TYPE_2D_ARRAY</span> or
-<span class="code">VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</span>, in any shader stage </li><li> 
+<span class="code">VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</span>, in any shader stage
+</li><li>
+
 If any <span class="code">VkSampler</span> object that is accessed from a shader by the
 <span class="code">VkPipeline</span> currently bound to
 <span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span> uses unnormalized coordinates, it
- must  not be used with any of the SPIR-V <span class="code">OpImageSample*</span> or
+ must not be used with any of the SPIR-V <span class="code">OpImageSample*</span> or
 <span class="code">OpImageSparseSample*</span> instructions with <span class="code">ImplicitLod</span>, <span class="code">Dref</span> or
-<span class="code">Proj</span> in their name, in any shader stage </li><li> 
+<span class="code">Proj</span> in their name, in any shader stage
+</li><li>
+
 If any <span class="code">VkSampler</span> object that is accessed from a shader by the
 <span class="code">VkPipeline</span> currently bound to
 <span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span> uses unnormalized coordinates, it
- must  not be used with any of the SPIR-V <span class="code">OpImageSample*</span> or
+ must not be used with any of the SPIR-V <span class="code">OpImageSample*</span> or
 <span class="code">OpImageSparseSample*</span> instructions that includes a LOD bias or any
-offset values, in any shader stage </li><li> 
+offset values, in any shader stage
+</li><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-robustBufferAccess">robust buffer access</a>
 feature is not enabled, and any shader stage in the <span class="code">VkPipeline</span>
 object currently bound to <span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span> accesses
-a uniform buffer, it  must  not access values outside of the range of
-that buffer specified in the currently bound descriptor set </li><li> 
+a uniform buffer, it must not access values outside of the range of
+that buffer specified in the currently bound descriptor set
+</li><li>
+
 If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-features-robustBufferAccess">robust buffer access</a>
 feature is not enabled, and any shader stage in the <span class="code">VkPipeline</span>
 object currently bound to <span class="code">VK_PIPELINE_BIND_POINT_GRAPHICS</span> accesses
-a storage buffer, it  must  not access values outside of the range of
-that buffer specified in the currently bound descriptor set </li><li> 
+a storage buffer, it must not access values outside of the range of
+that buffer specified in the currently bound descriptor set
+</li><li>
+
 Any <span class="code">VkImageView</span> being sampled with <span class="code">VK_FILTER_LINEAR</span> as a
-result of this command  must  be of a format which supports linear
+result of this command must be of a format which supports linear
 filtering, as specified by the
 <span class="code">VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</span> flag in
 <span class="code">VkFormatProperties</span>::<span class="code">linearTilingFeatures</span> (for a linear
 image) or <span class="code">VkFormatProperties</span>::<span class="code">optimalTilingFeatures</span>(for an
 optimally tiled image) returned by
-<span class="code">vkGetPhysicalDeviceFormatProperties</span></li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">commandBuffer</span> must  be a valid <span class="code">VkCommandBuffer</span> handle </li><li><span class="code">buffer</span> must  be a valid <span class="code">VkBuffer</span> handle </li><li><span class="code">commandBuffer</span> must  be in the  recording state  </li><li>  The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  support graphics operations </li><li>  This command  must  only be called inside of a render pass instance </li><li>  Both of <span class="code">buffer</span>, and <span class="code">commandBuffer</span> must  have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>      Host Synchronization  <ul><li> Host access to <span class="code">commandBuffer</span> must  be externally synchronized </li><li> Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from  must  be externally synchronized </li></ul>      Command Properties <div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td> Primary<br />
-Secondary </td><td> Inside </td><td> Graphics </td><td> Graphics </td></tr></table></div>    To record a non-indexed indirect draw, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdDrawIndirect(
+<span class="code">vkGetPhysicalDeviceFormatProperties</span></li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">commandBuffer</span> must be a valid <span class="code">VkCommandBuffer</span> handle
+</li><li><span class="code">buffer</span> must be a valid <span class="code">VkBuffer</span> handle
+</li><li><span class="code">commandBuffer</span> must be in the recording state 
+</li><li>
+ The <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must support graphics operations
+</li><li>
+ This command must only be called inside of a render pass instance
+</li><li>
+ Both of <span class="code">buffer</span>, and <span class="code">commandBuffer</span> must have been created, allocated, or retrieved from the same <span class="code">VkDevice</span></li></ul>
+
+
+
+
+Host Synchronization
+<ul><li>
+Host access to <span class="code">commandBuffer</span> must be externally synchronized
+</li><li>
+Host access to the <span class="code">VkCommandPool</span> that <span class="code">commandBuffer</span> was allocated from must be externally synchronized
+</li></ul>
+
+
+
+
+Command Properties
+<div class="tableSection"><table><tr><th> Command Buffer Levels  Render Pass Scope  Supported Queue Types  Pipeline Type </th></tr><tr><td>
+Primary<br />
+Secondary
+</td><td>
+Inside
+</td><td>
+Graphics
+</td><td>
+Graphics
+</td></tr></table></div>
+
+
+
+To record a non-indexed indirect draw, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkCmdDrawIndirect(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkCommandBuffer                             commandBuffer,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkBuffer                                    buffer,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDeviceSize                                offset,

@@ -11,7 +11,29 @@ memory ranges described by <span class="code">pMemoryRanges</span>, which have b
 to the <span class="code">VK_ACCESS_HOST_WRITE_BIT</span> and <span class="code">VK_ACCESS_HOST_READ_BIT</span><a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-access-types">access types</a>, are made visible to the
 host.
 If a range of non-coherent memory is written by the host and then
-invalidated without first being flushed, its contents are undefined.   <div class="tableSection"><table /></div>    Valid Usage (Implicit)  <ul><li><span class="code">device</span> must  be a valid <span class="code">VkDevice</span> handle </li><li><span class="code">pMemoryRanges</span> must  be a pointer to an array of <span class="code">memoryRangeCount</span> valid <span class="code">VkMappedMemoryRange</span> structures </li><li><span class="code">memoryRangeCount</span> must  be greater than <span class="code">0</span></li></ul>      Return Codes  <dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li></ul></dd></dl>     To invalidate ranges of non-coherent memory from the host caches, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkInvalidateMappedMemoryRanges(
+invalidated without first being flushed, its contents are undefined.
+
+<div class="tableSection"><table /></div>
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">device</span> must be a valid <span class="code">VkDevice</span> handle
+</li><li><span class="code">pMemoryRanges</span> must be a pointer to an array of <span class="code">memoryRangeCount</span> valid <span class="code">VkMappedMemoryRange</span> structures
+</li><li><span class="code">memoryRangeCount</span> must be greater than <span class="code">0</span></li></ul>
+
+
+
+
+Return Codes
+<dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li></ul></dd></dl>
+
+
+
+
+To invalidate ranges of non-coherent memory from the host caches, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAACBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAACBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAACBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkInvalidateMappedMemoryRanges(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkDevice                                    device,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   uint32_t                                    memoryRangeCount,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">const</span> VkMappedMemoryRange*                  pMemoryRanges);</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EAACBA");</script></div><div class="collapsibleAreaRegion" id="seeAlsoSection"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID6RB')" onkeypress="SectionExpandCollapse_CheckKey('ID6RB', event)" tabindex="0"><img id="ID6RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />See Also</span></div><div id="ID6RBSection" class="collapsibleSection"><h4 class="subHeading">Reference</h4><div class="seeAlsoStyle"><a href="N_.htm">(Default Namespace) Namespace</a></div><div class="seeAlsoStyle"><a href="T_VkDevice.htm">(Default Namespace)<span id="LSTB538D9D0_2"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTB538D9D0_2?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>VkDevice</a></div><div class="seeAlsoStyle"><a href="T_IVkMappedMemoryRange.htm">(Default Namespace)<span id="LSTB538D9D0_3"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTB538D9D0_3?cs=.|vb=.|cpp=::|nu=.|fs=.");</script>IVkMappedMemoryRange</a></div></div></div></div><div id="pageFooter" class="pageFooter"> </div></body></html>

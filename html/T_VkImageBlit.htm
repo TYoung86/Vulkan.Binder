@@ -5,45 +5,90 @@
    Vulkan (in Vulkan.dll) Version: 1.0.53<div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID2RB')" onkeypress="SectionExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Syntax</span></div><div id="ID2RBSection" class="collapsibleSection"><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID1EACA_tab1" class="codeSnippetContainerTabSingle">C#</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EACA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EACA');return false;" title="Copy">Copy</a></div></div><div id="ID1EACA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve">[<a href="http://msdn2.microsoft.com/en-us/library/bcfsa90a" target="_blank">SerializableAttribute</a>]
 <span class="keyword">public</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="identifier">VkImageBlit</span> : <a href="http://msdn2.microsoft.com/en-us/library/aey3s293" target="_blank">ValueType</a></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EACA");</script></div><p>The <span class="selflink">VkImageBlit</span> type exposes the following members.</p><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Fields</span></div><div id="ID3RBSection" class="collapsibleSection"><table class="members" id="fieldList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkImageBlit_dstOffsets.htm">dstOffsets</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkImageBlit_dstSubresource.htm">dstSubresource</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkImageBlit_srcOffsets.htm">srcOffsets</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkImageBlit_srcSubresource.htm">srcSubresource</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection">  For each element of the <span class="code">pRegions</span> array, a blit operation is performed
-the specified source and destination regions.     Valid Usage  <ul><li> 
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkImageBlit_dstOffsets.htm">dstOffsets</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkImageBlit_dstSubresource.htm">dstSubresource</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkImageBlit_srcOffsets.htm">srcOffsets</a></td><td /></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubfield.gif" alt="Public field" title="Public field" /></td><td><a href="F_VkImageBlit_srcSubresource.htm">srcSubresource</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID4RBSection" class="collapsibleSection">
+
+For each element of the <span class="code">pRegions</span> array, a blit operation is performed
+the specified source and destination regions.
+
+
+
+Valid Usage
+<ul><li>
+
 The <span class="code">aspectMask</span> member of <span class="code">srcSubresource</span> and
-<span class="code">dstSubresource</span> must  match </li><li> 
+<span class="code">dstSubresource</span> must match
+</li><li>
+
 The <span class="code">layerCount</span> member of <span class="code">srcSubresource</span> and
-<span class="code">dstSubresource</span> must  match </li><li> 
+<span class="code">dstSubresource</span> must match
+</li><li>
+
 If either of the calling command&amp;#8217;s <span class="code">srcImage</span> or <span class="code">dstImage</span>
 parameters are of <a href="T_VkImageType.htm">VkImageType</a><span class="code">VK_IMAGE_TYPE_3D</span>, the
 <span class="code">baseArrayLayer</span> and <span class="code">layerCount</span> members of both
-<span class="code">srcSubresource</span> and <span class="code">dstSubresource</span> must  be <span class="code">0</span> and <span class="code">1</span>,
-respectively </li><li> 
-The <span class="code">aspectMask</span> member of <span class="code">srcSubresource</span> must  specify
-aspects present in the calling command&amp;#8217;s <span class="code">srcImage</span></li><li> 
-The <span class="code">aspectMask</span> member of <span class="code">dstSubresource</span> must  specify
-aspects present in the calling command&amp;#8217;s <span class="code">dstImage</span></li><li><span class="code">srcOffset</span>[0].<span class="code">x</span> and <span class="code">srcOffset</span>[1].<span class="code">x</span> must  both be
+<span class="code">srcSubresource</span> and <span class="code">dstSubresource</span> must be <span class="code">0</span> and <span class="code">1</span>,
+respectively
+</li><li>
+
+The <span class="code">aspectMask</span> member of <span class="code">srcSubresource</span> must specify
+aspects present in the calling command&amp;#8217;s <span class="code">srcImage</span></li><li>
+
+The <span class="code">aspectMask</span> member of <span class="code">dstSubresource</span> must specify
+aspects present in the calling command&amp;#8217;s <span class="code">dstImage</span></li><li><span class="code">srcOffset</span>[0].<span class="code">x</span> and <span class="code">srcOffset</span>[1].<span class="code">x</span> must both be
 greater than or equal to <span class="code">0</span> and less than or equal to the source image
-subresource width </li><li><span class="code">srcOffset</span>[0].<span class="code">y</span> and <span class="code">srcOffset</span>[1].<span class="code">y</span> must  both be
+subresource width
+</li><li><span class="code">srcOffset</span>[0].<span class="code">y</span> and <span class="code">srcOffset</span>[1].<span class="code">y</span> must both be
 greater than or equal to <span class="code">0</span> and less than or equal to the source image
-subresource height </li><li> 
+subresource height
+</li><li>
+
 If the calling command&amp;#8217;s <span class="code">srcImage</span> is of type
-<span class="code">VK_IMAGE_TYPE_1D</span>, then <span class="code">srcOffset</span>[0].y  must  be <span class="code">0</span> and
-<span class="code">srcOffset</span>[1].y  must  be <span class="code">1</span>. </li><li><span class="code">srcOffset</span>[0].<span class="code">z</span> and <span class="code">srcOffset</span>[1].<span class="code">z</span> must  both be
+<span class="code">VK_IMAGE_TYPE_1D</span>, then <span class="code">srcOffset</span>[0].y must be <span class="code">0</span> and
+<span class="code">srcOffset</span>[1].y must be <span class="code">1</span>.
+</li><li><span class="code">srcOffset</span>[0].<span class="code">z</span> and <span class="code">srcOffset</span>[1].<span class="code">z</span> must both be
 greater than or equal to <span class="code">0</span> and less than or equal to the source image
-subresource depth </li><li> 
+subresource depth
+</li><li>
+
 If the calling command&amp;#8217;s <span class="code">srcImage</span> is of type
 <span class="code">VK_IMAGE_TYPE_1D</span> or <span class="code">VK_IMAGE_TYPE_2D</span>, then
-<span class="code">srcOffset</span>[0].z  must  be <span class="code">0</span> and <span class="code">srcOffset</span>[1].z  must  be <span class="code">1</span>. </li><li><span class="code">dstOffset</span>[0].<span class="code">x</span> and <span class="code">dstOffset</span>[1].<span class="code">x</span> must  both be
+<span class="code">srcOffset</span>[0].z must be <span class="code">0</span> and <span class="code">srcOffset</span>[1].z must be <span class="code">1</span>.
+</li><li><span class="code">dstOffset</span>[0].<span class="code">x</span> and <span class="code">dstOffset</span>[1].<span class="code">x</span> must both be
 greater than or equal to <span class="code">0</span> and less than or equal to the destination
-image subresource width </li><li><span class="code">dstOffset</span>[0].<span class="code">y</span> and <span class="code">dstOffset</span>[1].<span class="code">y</span> must  both be
+image subresource width
+</li><li><span class="code">dstOffset</span>[0].<span class="code">y</span> and <span class="code">dstOffset</span>[1].<span class="code">y</span> must both be
 greater than or equal to <span class="code">0</span> and less than or equal to the destination
-image subresource height </li><li> 
+image subresource height
+</li><li>
+
 If the calling command&amp;#8217;s <span class="code">dstImage</span> is of type
-<span class="code">VK_IMAGE_TYPE_1D</span>, then <span class="code">dstOffset</span>[0].y  must  be <span class="code">0</span> and
-<span class="code">dstOffset</span>[1].y  must  be <span class="code">1</span>. </li><li><span class="code">dstOffset</span>[0].<span class="code">z</span> and <span class="code">dstOffset</span>[1].<span class="code">z</span> must  both be
+<span class="code">VK_IMAGE_TYPE_1D</span>, then <span class="code">dstOffset</span>[0].y must be <span class="code">0</span> and
+<span class="code">dstOffset</span>[1].y must be <span class="code">1</span>.
+</li><li><span class="code">dstOffset</span>[0].<span class="code">z</span> and <span class="code">dstOffset</span>[1].<span class="code">z</span> must both be
 greater than or equal to <span class="code">0</span> and less than or equal to the destination
-image subresource depth </li><li> 
+image subresource depth
+</li><li>
+
 If the calling command&amp;#8217;s <span class="code">dstImage</span> is of type
 <span class="code">VK_IMAGE_TYPE_1D</span> or <span class="code">VK_IMAGE_TYPE_2D</span>, then
-<span class="code">dstOffset</span>[0].z  must  be <span class="code">0</span> and <span class="code">dstOffset</span>[1].z  must  be <span class="code">1</span>. </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">srcSubresource</span> must  be a valid <span class="code">VkImageSubresourceLayers</span> structure </li><li><span class="code">dstSubresource</span> must  be a valid <span class="code">VkImageSubresourceLayers</span> structure </li></ul>     The <span class="code">VkImageBlit</span> structure is defined as:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkImageBlit {
+<span class="code">dstOffset</span>[0].z must be <span class="code">0</span> and <span class="code">dstOffset</span>[1].z must be <span class="code">1</span>.
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">srcSubresource</span> must be a valid <span class="code">VkImageSubresourceLayers</span> structure
+</li><li><span class="code">dstSubresource</span> must be a valid <span class="code">VkImageSubresourceLayers</span> structure
+</li></ul>
+
+
+
+
+The <span class="code">VkImageBlit</span> structure is defined as:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAADBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAADBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAADBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span> <span class="highlight-keyword">typedef</span> <span class="highlight-keyword">struct</span> VkImageBlit {
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkImageSubresourceLayers    srcSubresource;
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkOffset3D                  srcOffsets[<span class="highlight-number">2</span>];
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>    VkImageSubresourceLayers    dstSubresource;

@@ -6,33 +6,68 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetPhysicalDeviceSparseImageFormatProperties__ctor.htm">vkGetPhysicalDeviceSparseImageFormatProperties</a></td><td><div class="summary">Initializes a new instance of the <span class="selflink">vkGetPhysicalDeviceSparseImageFormatProperties</span> class</div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Methods</span></div><div id="ID4RBSection" class="collapsibleSection"><table class="members" id="methodList"><tr><th class="iconColumn">
 								 
-							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetPhysicalDeviceSparseImageFormatProperties_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">  If <span class="code">pProperties</span> is <span class="code">NULL</span>, then the number of sparse format properties
+							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_vkGetPhysicalDeviceSparseImageFormatProperties_Invoke.htm">Invoke</a></td><td /></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Remarks</span></div><div id="ID5RBSection" class="collapsibleSection">
+
+If <span class="code">pProperties</span> is <span class="code">NULL</span>, then the number of sparse format properties
 available is returned in <span class="code">pPropertyCount</span>.
-Otherwise, <span class="code">pPropertyCount</span> must  point to a variable set by the user to
+Otherwise, <span class="code">pPropertyCount</span> must point to a variable set by the user to
 the number of elements in the <span class="code">pProperties</span> array, and on return the
 variable is overwritten with the number of structures actually written to
 <span class="code">pProperties</span>.
 If <span class="code">pPropertyCount</span> is less than the number of sparse format properties
-available, at most <span class="code">pPropertyCount</span> structures will be written.    If <span class="code">VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</span> is not supported for the given
+available, at most <span class="code">pPropertyCount</span> structures will be written.
+
+
+If <span class="code">VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</span> is not supported for the given
 arguments, <span class="code">pPropertyCount</span> will be set to zero upon return, and no data
-will be written to <span class="code">pProperties</span>.    Multiple aspects are returned for depth/stencil images that are implemented
+will be written to <span class="code">pProperties</span>.
+
+
+Multiple aspects are returned for depth/stencil images that are implemented
 as separate planes by the implementation.
 The depth and stencil data planes each have unique
-<span class="code">VkSparseImageFormatProperties</span> data.    Depth/stencil images with depth and stencil data interleaved into a single
+<span class="code">VkSparseImageFormatProperties</span> data.
+
+
+Depth/stencil images with depth and stencil data interleaved into a single
 plane will return a single <span class="code">VkSparseImageFormatProperties</span> structure
 with the <span class="code">aspectMask</span> set to <span class="code">VK_IMAGE_ASPECT_DEPTH_BIT</span> |
-<span class="code">VK_IMAGE_ASPECT_STENCIL_BIT</span>.     Valid Usage  <ul><li><span class="code">samples</span> must  be a bit value that is set in
+<span class="code">VK_IMAGE_ASPECT_STENCIL_BIT</span>.
+
+
+
+Valid Usage
+<ul><li><span class="code">samples</span> must be a bit value that is set in
 <span class="code">VkImageFormatProperties</span>::<span class="code">sampleCounts</span> returned by
 <span class="code">vkGetPhysicalDeviceImageFormatProperties</span> with <span class="code">format</span>,
 <span class="code">type</span>, <span class="code">tiling</span>, and <span class="code">usage</span> equal to those in this command
 and <span class="code">flags</span> equal to the value that is set in
-<span class="code">VkImageCreateInfo</span>::<span class="code">flags</span> when the image is created </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">physicalDevice</span> must  be a valid <span class="code">VkPhysicalDevice</span> handle </li><li><span class="code">format</span> must  be a valid <a href="T_VkFormat.htm">VkFormat</a> value </li><li><span class="code">type</span> must  be a valid <a href="T_VkImageType.htm">VkImageType</a> value </li><li><span class="code">samples</span> must  be a valid <a href="T_VkSampleCountFlags.htm">VkSampleCountFlags</a> value </li><li><span class="code">usage</span> must  be a valid combination of <a href="T_VkImageUsageFlags.htm">VkImageUsageFlags</a> values </li><li><span class="code">usage</span> must  not be <span class="code">0</span></li><li><span class="code">tiling</span> must  be a valid <a href="T_VkImageTiling.htm">VkImageTiling</a> value </li><li><span class="code">pPropertyCount</span> must  be a pointer to a <span class="code">uint32_t</span> value </li><li>  If the value referenced by <span class="code">pPropertyCount</span> is not <span class="code">0</span>, and <span class="code">pProperties</span> is not <span class="code">NULL</span>, <span class="code">pProperties</span> must  be a pointer to an array of <span class="code">pPropertyCount</span><span class="code">VkSparseImageFormatProperties</span> structures </li></ul><span class="code">vkGetPhysicalDeviceSparseImageFormatProperties</span> returns an array of
+<span class="code">VkImageCreateInfo</span>::<span class="code">flags</span> when the image is created
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">physicalDevice</span> must be a valid <span class="code">VkPhysicalDevice</span> handle
+</li><li><span class="code">format</span> must be a valid <a href="T_VkFormat.htm">VkFormat</a> value
+</li><li><span class="code">type</span> must be a valid <a href="T_VkImageType.htm">VkImageType</a> value
+</li><li><span class="code">samples</span> must be a valid <a href="T_VkSampleCountFlags.htm">VkSampleCountFlags</a> value
+</li><li><span class="code">usage</span> must be a valid combination of <a href="T_VkImageUsageFlags.htm">VkImageUsageFlags</a> values
+</li><li><span class="code">usage</span> must not be <span class="code">0</span></li><li><span class="code">tiling</span> must be a valid <a href="T_VkImageTiling.htm">VkImageTiling</a> value
+</li><li><span class="code">pPropertyCount</span> must be a pointer to a <span class="code">uint32_t</span> value
+</li><li>
+ If the value referenced by <span class="code">pPropertyCount</span> is not <span class="code">0</span>, and <span class="code">pProperties</span> is not <span class="code">NULL</span>, <span class="code">pProperties</span> must be a pointer to an array of <span class="code">pPropertyCount</span><span class="code">VkSparseImageFormatProperties</span> structures
+</li></ul><span class="code">vkGetPhysicalDeviceSparseImageFormatProperties</span> returns an array of
 <a href="T_VkSparseImageFormatProperties.htm">VkSparseImageFormatProperties</a>.
 Each element will describe properties for one set of image aspects that are
 bound simultaneously in the image.
 This is usually one element for each aspect in the image, but for
 interleaved depth/stencil images there is only one element describing the
-combined aspects.    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAHBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAHBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAHBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkGetPhysicalDeviceSparseImageFormatProperties(
+combined aspects.
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAHBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAHBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAHBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span><span class="highlight-keyword">void</span> vkGetPhysicalDeviceSparseImageFormatProperties(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkPhysicalDevice                            physicalDevice,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkFormat                                    format,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkImageType                                 type,

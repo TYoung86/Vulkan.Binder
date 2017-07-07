@@ -11,25 +11,63 @@
 <span class="code">pCreateInfo</span>, respectively, are supported by the implementation.
 If any requested extension is not supported, <span class="code">vkCreateDevice</span> must 
 return <span class="code">VK_ERROR_EXTENSION_NOT_PRESENT</span>.
-If any requested feature is not supported, <span class="code">vkCreateDevice</span> must  return
+If any requested feature is not supported, <span class="code">vkCreateDevice</span> must return
 <span class="code">VK_ERROR_FEATURE_NOT_PRESENT</span>.
-Support for extensions  can  be checked before creating a device by querying
+Support for extensions can be checked before creating a device by querying
 <a href="T_vkEnumerateDeviceExtensionProperties.htm">vkEnumerateDeviceExtensionProperties</a>.
-Support for features  can  similarly be checked by querying
-<a href="T_vkGetPhysicalDeviceFeatures.htm">vkGetPhysicalDeviceFeatures</a>.    After verifying and enabling the extensions the <span class="code">VkDevice</span> object is
+Support for features can similarly be checked by querying
+<a href="T_vkGetPhysicalDeviceFeatures.htm">vkGetPhysicalDeviceFeatures</a>.
+
+
+After verifying and enabling the extensions the <span class="code">VkDevice</span> object is
 created and returned to the application.
 If a requested extension is only supported by a layer, both the layer and
 the extension need to be specified at <span class="code">vkCreateInstance</span> time for the
-creation to succeed.    Multiple logical devices  can  be created from the same physical device.
-Logical device creation  may  fail due to lack of device-specific resources
+creation to succeed.
+
+
+Multiple logical devices can be created from the same physical device.
+Logical device creation may fail due to lack of device-specific resources
 (in addition to the other errors).
 If that occurs, <span class="code">vkCreateDevice</span> will return
-<span class="code">VK_ERROR_TOO_MANY_OBJECTS</span>.     Valid Usage  <ul><li> 
+<span class="code">VK_ERROR_TOO_MANY_OBJECTS</span>.
+
+
+
+Valid Usage
+<ul><li>
+
 All <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#extended-functionality-extensions-dependencies">required
 extensions</a> for each extension in the
-<a href="T_IVkDeviceCreateInfo.htm">IVkDeviceCreateInfo</a>::<span class="code">ppEnabledExtensionNames</span> list  must  also
-be present in that list. </li></ul>      Valid Usage (Implicit)  <ul><li><span class="code">physicalDevice</span> must  be a valid <span class="code">VkPhysicalDevice</span> handle </li><li><span class="code">pCreateInfo</span> must  be a pointer to a valid <span class="code">VkDeviceCreateInfo</span> structure </li><li>  If <span class="code">pAllocator</span> is not <span class="code">NULL</span>, <span class="code">pAllocator</span> must  be a pointer to a valid <span class="code">VkAllocationCallbacks</span> structure </li><li><span class="code">pDevice</span> must  be a pointer to a <span class="code">VkDevice</span> handle </li></ul>      Return Codes  <dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_INITIALIZATION_FAILED</span></li><li><span class="code">VK_ERROR_EXTENSION_NOT_PRESENT</span></li><li><span class="code">VK_ERROR_FEATURE_NOT_PRESENT</span></li><li><span class="code">VK_ERROR_TOO_MANY_OBJECTS</span></li><li><span class="code">VK_ERROR_DEVICE_LOST</span></li></ul></dd></dl>     A logical device is created as a  connection  to a physical device.
-To create a logical device, call:    <div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkCreateDevice(
+<a href="T_IVkDeviceCreateInfo.htm">IVkDeviceCreateInfo</a>::<span class="code">ppEnabledExtensionNames</span> list must also
+be present in that list.
+</li></ul>
+
+
+
+
+Valid Usage (Implicit)
+<ul><li><span class="code">physicalDevice</span> must be a valid <span class="code">VkPhysicalDevice</span> handle
+</li><li><span class="code">pCreateInfo</span> must be a pointer to a valid <span class="code">VkDeviceCreateInfo</span> structure
+</li><li>
+ If <span class="code">pAllocator</span> is not <span class="code">NULL</span>, <span class="code">pAllocator</span> must be a pointer to a valid <span class="code">VkAllocationCallbacks</span> structure
+</li><li><span class="code">pDevice</span> must be a pointer to a <span class="code">VkDevice</span> handle
+</li></ul>
+
+
+
+
+Return Codes
+<dl><dt>On success, this command returns</dt><dd><ul><li><span class="code">VK_SUCCESS</span></li></ul></dd><dt>On failure, this command returns</dt><dd><ul><li><span class="code">VK_ERROR_OUT_OF_HOST_MEMORY</span></li><li><span class="code">VK_ERROR_OUT_OF_DEVICE_MEMORY</span></li><li><span class="code">VK_ERROR_INITIALIZATION_FAILED</span></li><li><span class="code">VK_ERROR_EXTENSION_NOT_PRESENT</span></li><li><span class="code">VK_ERROR_FEATURE_NOT_PRESENT</span></li><li><span class="code">VK_ERROR_TOO_MANY_OBJECTS</span></li><li><span class="code">VK_ERROR_DEVICE_LOST</span></li></ul></dd></dl>
+
+
+
+
+A logical device is created as a connection to a physical device.
+To create a logical device, call:
+
+
+<div class="codeSnippetContainer"><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAEBA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID1EAAEBA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAEBA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-lineno">1</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>VkResult vkCreateDevice(
 <span class="highlight-lineno">2</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   VkPhysicalDevice                            physicalDevice,
 <span class="highlight-lineno">3</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">const</span> VkDeviceCreateInfo*                   pCreateInfo,
 <span class="highlight-lineno">4</span><span class="highlight-lnborder"></span><span class="highlight-spacerShort"></span>   <span class="highlight-keyword">const</span> VkAllocationCallbacks*                pAllocator,
