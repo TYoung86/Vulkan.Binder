@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Security;
 using ClangSharp;
@@ -231,6 +232,11 @@ namespace Vulkan.Binder {
 				AttributeInfo.Create(() => new UnverifiableCodeAttribute())
 				.GetCecilCustomAttribute(Module));
 			*/
+			MarshalTypeRef = typeof(Marshal).Import(Module);
+			GetDelegateForFpMethodGtd = MarshalTypeRef.Resolve().GetMethods()
+				.First(md => md.Name == "GetDelegateForFunctionPointer" && md.HasGenericParameters);
+			GetFpForDelegateMethodGtd = MarshalTypeRef.Resolve().GetMethods()
+				.First(md => md.Name == "GetFunctionPointerForDelegate" && md.HasGenericParameters);
 		}
 
 		public void Compile() {

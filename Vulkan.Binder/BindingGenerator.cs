@@ -155,7 +155,7 @@ namespace Vulkan.Binder {
 					Console.WriteLine(state);
 				else {
 					var progress = (double) done / total;
-					Console.Write("{0} {1:P} ({2}/{3})\r",
+					Console.Write("\r{0} {1:P} ({2}/{3})",
 						state, progress, done, total);
 					LogWrite(".");
 				}
