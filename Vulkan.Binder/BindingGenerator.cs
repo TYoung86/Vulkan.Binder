@@ -25,6 +25,7 @@ using Mono.Cecil.Rocks;
 using Vulkan.Binder.Extensions;
 using FieldAttributes = Mono.Cecil.FieldAttributes;
 using MethodAttributes = Mono.Cecil.MethodAttributes;
+using MethodImplAttributes = Mono.Cecil.MethodImplAttributes;
 using TypeAttributes = Mono.Cecil.TypeAttributes;
 
 namespace Vulkan.Binder {
@@ -281,14 +282,19 @@ namespace Vulkan.Binder {
 				vkGetInstanceProcAddrParams
 			);
 
+			vkGetInstanceProcAddrMethod.SetImplementationFlags(
+				MethodImplAttributes.PreserveSig );
+
 			// TODO: generate dllmap config setter or something
 			//vkGetInstanceProcAddrMethod.SetCustomAttribute(() => new DllImportAttribute("vulkan-1")
 			//	{ BestFitMapping = false, CharSet = CharSet.Ansi });
 			var nativeVulkanModuleRef = new ModuleReference("vulkan-1");
 			_asmBuilder.Module.ModuleReferences.Add(nativeVulkanModuleRef);
 			vkGetInstanceProcAddrMethod.PInvokeInfo = new PInvokeInfo(
-				PInvokeAttributes.CharSetAnsi | PInvokeAttributes.NoMangle
-				| PInvokeAttributes.CallConvStdCall,
+				PInvokeAttributes.BestFitDisabled
+				| PInvokeAttributes.CallConvWinapi
+				| PInvokeAttributes.CharSetAnsi
+				| PInvokeAttributes.ThrowOnUnmappableCharDisabled,
 				"vkGetInstanceProcAddr", nativeVulkanModuleRef);
 
 			var moduleInit = moduleType.DefineConstructor(MethodAttributes.Static | MethodAttributes.Assembly);

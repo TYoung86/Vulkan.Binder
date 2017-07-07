@@ -44,15 +44,15 @@ namespace Vulkan.Binder {
 				MulticastDelegateType );
 			funcDef.SetCustomAttribute(() => new BinderGeneratedAttribute());
 
-			var umfpDef = new TypeDefinition("", "Pointer",
+			var umfpDef = new TypeDefinition(funcDef.Namespace, funcDef.Name + "Unmanaged",
 				TypeAttributes.Sealed
+				| TypeAttributes.BeforeFieldInit
 				| TypeAttributes.SequentialLayout
-				| TypeAttributes.NestedPublic,
+				| TypeAttributes.Public,
 				Module.TypeSystem.ValueType) {
 				DeclaringType = funcDef
 			};
-
-			funcDef.NestedTypes.Add(umfpDef);
+			Module.Types.Add(umfpDef);
 
 			// todo: add implicit conversion ops using Marshal
 
@@ -162,7 +162,8 @@ namespace Vulkan.Binder {
 				var retTypeDef = retType.Resolve();
 				if (retTypeDef.BaseType != null && retTypeDef.BaseType.Is(MulticastDelegateType)) {
 					// todo: marshalas umfp marshaller
-					var ufpSpecTypeRef = retTypeDef.NestedTypes.Single();
+					var ufpSpecTypeRef = Module.GetType( retTypeDef.FullName + "Unmanaged");
+					Debug.Assert(ufpSpecTypeRef != null);
 					retType = ufpSpecTypeRef;
 				}
 
@@ -173,7 +174,8 @@ namespace Vulkan.Binder {
 					if (!argTypeDef.BaseType.Is(MulticastDelegateType))
 						continue;
 					// todo: marshalas umfp marshaller
-					var ufpSpecTypeRef = retTypeDef.NestedTypes.Single();
+					var ufpSpecTypeRef = Module.GetType( argTypeDef.FullName + "Unmanaged");
+					Debug.Assert(ufpSpecTypeRef != null);
 					argTypes[i] = ufpSpecTypeRef;
 				}
 
