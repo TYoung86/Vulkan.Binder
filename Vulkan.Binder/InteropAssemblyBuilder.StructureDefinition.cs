@@ -41,7 +41,7 @@ namespace Vulkan.Binder {
 				return null;
 			// handle type
 			var handleDef = Module.DefineType(structName,
-				PublicSealedStructTypeAttributes);
+				PublicSealedStructTypeAttributes, size: 0);
 			handleDef.SetCustomAttribute(() => new BinderGeneratedAttribute());
 			//handleDef.SetCustomAttribute(StructLayoutSequentialAttributeInfo);
 			var handleInterface = IHandleGtd.MakeGenericInstanceType(handleDef);
@@ -303,7 +303,7 @@ namespace Vulkan.Binder {
 						return;
 					}
 
-					if (propType.Is(ObjectType)) {
+					if (propType.Is(Module.TypeSystem.Object)) {
 						// TODO: boxing reference
 						throw new NotImplementedException();
 					}

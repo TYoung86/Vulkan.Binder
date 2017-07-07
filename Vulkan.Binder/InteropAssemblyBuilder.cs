@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Security;
 using ClangSharp;
@@ -62,17 +63,8 @@ namespace Vulkan.Binder {
 		//public TypeBuilder Delegates { get; }
 
 		public readonly TypeReference VoidPointerType;
-		public readonly TypeReference ObjectType;
 		public readonly TypeReference MulticastDelegateType;
 		public readonly TypeReference BinderGeneratedAttributeType;
-
-		public readonly TypeReference IntType;
-		public readonly TypeReference UIntType;
-		public readonly TypeReference LongType;
-		public readonly TypeReference ULongType;
-		public readonly TypeReference IntPtrType;
-		public readonly TypeReference UIntPtrType;
-		public readonly TypeReference ValueTypeType;
 
 		public readonly TypeReference HandleInt32Gtd;
 		public readonly TypeReference HandleUInt32Gtd;
@@ -152,20 +144,10 @@ namespace Vulkan.Binder {
 
 			NonVersionableAttribute = NonVersionableAttributeInfo?
 				.GetCecilCustomAttribute(Module);
-			MethodImplAggressiveInliningAttribute = MethodImplAggressiveInliningAttributeInfo
-				.GetCecilCustomAttribute(Module);
 			FlagsAttribute = FlagsAttributeInfo
 				.GetCecilCustomAttribute(Module);
 
 			VoidPointerType = Module.TypeSystem.Void.MakePointerType();
-			ObjectType = Module.TypeSystem.Object;
-			IntType = Module.TypeSystem.Int32;
-			UIntType = Module.TypeSystem.UInt32;
-			LongType = Module.TypeSystem.Int64;
-			ULongType = Module.TypeSystem.UInt64;
-			IntPtrType = Module.TypeSystem.IntPtr;
-			UIntPtrType = Module.TypeSystem.UIntPtr;
-			ValueTypeType = Module.TypeSystem.ValueType;
 
 			MulticastDelegateType = typeof(MulticastDelegate).Import(Module);
 
@@ -194,15 +176,7 @@ namespace Vulkan.Binder {
 			if (targetFramework == null)
 				targetFramework = DefaultTargetFramework;
 
-			var targetFrameworkAttr = typeof(TargetFrameworkAttribute).Import(Module);
-			var asmInfoVersionAttr = typeof(AssemblyInformationalVersionAttribute).Import(Module);
-			var asmFileVersionAttr = typeof(AssemblyFileVersionAttribute).Import(Module);
-			var asmDescriptionAttr = typeof(AssemblyDescriptionAttribute).Import(Module);
-			var asmProductAttr = typeof(AssemblyProductAttribute).Import(Module);
-			var asmTitleAttr = typeof(AssemblyTitleAttribute).Import(Module);
-			var stringType = Module.TypeSystem.String;
-
-			var custAttrs = new[] {
+			var asmCustAttrs = new[] {
 				AttributeInfo.Create
 					(() => new CompilationRelaxationsAttribute(8)),
 				AttributeInfo.Create
@@ -227,15 +201,26 @@ namespace Vulkan.Binder {
 					(() => new AssemblyTitleAttribute(Name.Name)),
 			}.Select(ca => ca.GetCecilCustomAttribute(Module));
 
+			/* where the hell did this go...
+			var unverifiableCodeAttributeTypeRef = new TypeReference("System.Security", "UnverifiableCodeAttribute",
+				Module.TypeSystem.IntPtr.Resolve().Module,
+				Module.TypeSystem.CoreLibrary, false);
+			var unverifiableCodeAttributeTypeDef = unverifiableCodeAttributeTypeRef.Resolve();
+			var unverifiableCodeAttributeCtor = unverifiableCodeAttributeTypeDef.GetConstructors().Single();
+
+			var unverifiableCodeAttribute = new CustomAttribute(unverifiableCodeAttributeCtor);
+			*/
 			while (Assembly.HasCustomAttributes)
 				Assembly.CustomAttributes.RemoveAt(0);
 			Assembly.CustomAttributes.Clear();
 			while (Module.HasCustomAttributes)
 				Module.CustomAttributes.RemoveAt(0);
 			Module.CustomAttributes.Clear();
-
-			foreach (var custAttr in custAttrs)
+			
+			foreach (var custAttr in asmCustAttrs)
 				Assembly.CustomAttributes.Add(custAttr);
+
+			//Module.CustomAttributes.Add(unverifiableCodeAttribute);
 
 			/*
 			Assembly.SecurityDeclarations.Add(new SecurityDeclaration(SecurityAction.RequestMinimum) {
@@ -247,6 +232,11 @@ namespace Vulkan.Binder {
 				AttributeInfo.Create(() => new UnverifiableCodeAttribute())
 				.GetCecilCustomAttribute(Module));
 			*/
+			MarshalTypeRef = typeof(Marshal).Import(Module);
+			GetDelegateForFpMethodGtd = MarshalTypeRef.Resolve().GetMethods()
+				.First(md => md.Name == "GetDelegateForFunctionPointer" && md.HasGenericParameters);
+			GetFpForDelegateMethodGtd = MarshalTypeRef.Resolve().GetMethods()
+				.First(md => md.Name == "GetFunctionPointerForDelegate" && md.HasGenericParameters);
 		}
 
 		public void Compile() {
@@ -375,7 +365,7 @@ namespace Vulkan.Binder {
 			Handle
 		}
 
-		public Action<string, int, int> ProgressReportFunc { get; set; } = null;
+		public Action<string, int, int> ProgressReportFunc { get; set; }
 
 		private void ReportProgress(string state, int workDone = -1, int workTotal = -1) {
 			ProgressReportFunc?.Invoke(state, workDone, workTotal);

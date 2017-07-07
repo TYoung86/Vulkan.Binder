@@ -9,6 +9,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Runtime.Loader;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
@@ -19,8 +21,11 @@ using HtmlAgilityPack.CssSelectors.NetCore;
 using Interop;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
+using Mono.Cecil.Rocks;
 using Vulkan.Binder.Extensions;
+using FieldAttributes = Mono.Cecil.FieldAttributes;
 using MethodAttributes = Mono.Cecil.MethodAttributes;
+using MethodImplAttributes = Mono.Cecil.MethodImplAttributes;
 using TypeAttributes = Mono.Cecil.TypeAttributes;
 
 namespace Vulkan.Binder {
@@ -151,7 +156,7 @@ namespace Vulkan.Binder {
 					Console.WriteLine(state);
 				else {
 					var progress = (double) done / total;
-					Console.Write("{0} {1:P} ({2}/{3})\r",
+					Console.Write("\r{0} {1:P} ({2}/{3})",
 						state, progress, done, total);
 					LogWrite(".");
 				}
@@ -256,15 +261,45 @@ namespace Vulkan.Binder {
 				| TypeAttributes.Sealed
 				| TypeAttributes.Public
 			);
-			var staticLinkInit = staticLinkType.DefineConstructor(MethodAttributes.Static | MethodAttributes.Assembly);
-			staticLinkInit.GenerateIL(il => {
-				// 
+			/*
+			var staticLinkCtor = staticLinkType
+				.DefineConstructor(MethodAttributes.Static | MethodAttributes.Assembly);
+			staticLinkCtor.GenerateIL(il => {
+				// todo: implement static ctor
 				il.Emit(OpCodes.Ret);
 			});
+			*/
+			
+			var vkGetInstanceProcAddrDlgt = _asmBuilder.Module.GetType("vkGetInstanceProcAddr");
+			var vkGetInstanceProcAddrRetType = vkGetInstanceProcAddrDlgt.GetMethod("Invoke").ReturnType;
+			var vkGetInstanceProcAddrParams = vkGetInstanceProcAddrDlgt.GetMethod("Invoke").Parameters;
+
+			var vkGetInstanceProcAddrMethod = staticLinkType.DefineMethod("vkGetInstanceProcAddr",
+				MethodAttributes.Public | MethodAttributes.Static
+				| MethodAttributes.HideBySig | MethodAttributes.PInvokeImpl,
+				//_asmBuilder.Module.TypeSystem.UIntPtr,
+				vkGetInstanceProcAddrRetType,
+				vkGetInstanceProcAddrParams
+			);
+
+			vkGetInstanceProcAddrMethod.SetImplementationFlags(
+				MethodImplAttributes.PreserveSig );
+
+			// TODO: generate dllmap config setter or something
+			//vkGetInstanceProcAddrMethod.SetCustomAttribute(() => new DllImportAttribute("vulkan-1")
+			//	{ BestFitMapping = false, CharSet = CharSet.Ansi });
+			var nativeVulkanModuleRef = new ModuleReference("vulkan-1");
+			_asmBuilder.Module.ModuleReferences.Add(nativeVulkanModuleRef);
+			vkGetInstanceProcAddrMethod.PInvokeInfo = new PInvokeInfo(
+				PInvokeAttributes.BestFitDisabled
+				| PInvokeAttributes.CallConvWinapi
+				| PInvokeAttributes.CharSetAnsi
+				| PInvokeAttributes.ThrowOnUnmappableCharDisabled,
+				"vkGetInstanceProcAddr", nativeVulkanModuleRef);
 
 			var moduleInit = moduleType.DefineConstructor(MethodAttributes.Static | MethodAttributes.Assembly);
 			moduleInit.GenerateIL(il => {
-				il.Emit(OpCodes.Call, staticLinkInit);
+				//il.Emit(OpCodes.Call, staticLinkInit);
 				il.Emit(OpCodes.Ret);
 			});
 
@@ -606,11 +641,15 @@ namespace Vulkan.Binder {
 			}
 			return cref ?? "!:" + refName;
 		}
-
+		
 		private static readonly XNode SpaceTextNode = new XText(" ");
 		private static readonly IEnumerable<XNode> SpaceTextNodeCombiner = new[] {SpaceTextNode};
+		private static readonly XNode NewLineTextNode = new XText("\n");
+		private static readonly IEnumerable<XNode> NewLineTextNodeCombiner = new[] {NewLineTextNode};
+		private static readonly IEnumerable<XNode> EmptyCombiner = new XNode[0];
 		private static InteropAssemblyBuilder _asmBuilder;
 		private static ImmutableArray<TypeDefinition> _enumDefs;
+		private static readonly XNodeEqualityComparer XNodeEqualityComparer = new XNodeEqualityComparer();
 
 		private static void StripByXPath(XNode xe, string xpath) {
 			ForEachByXPath(xe, xpath, RemoveKeepingDescendants);
@@ -622,15 +661,27 @@ namespace Vulkan.Binder {
 					var elems = xe.XPathSelectElements(xpath)
 						.OrderByDescending(elem => elem.Ancestors().Count())
 						.ToArray();
-					var i = 0;
+					const int recursionLimit = 64;
+					var recursion = 0;
+					var nodeHashes = elems.Select(elem =>
+						XNodeEqualityComparer.GetHashCode(elem))
+						.ToArray();
+
+					bool unchanged;
 					do {
 						foreach (var elem in elems)
 							action(elem);
-						++i;
+						++recursion;
 						elems = xe.XPathSelectElements(xpath)
 							.OrderByDescending(elem => elem.Ancestors().Count())
 							.ToArray();
-					} while (elems.Any() && i < 8);
+						
+						var newNodeHashes = elems.Select(elem =>
+							XNodeEqualityComparer.GetHashCode(elem))
+							.ToArray();
+						unchanged = nodeHashes.SequenceEqual(newNodeHashes);
+						nodeHashes = newNodeHashes;
+					} while (elems.Any() && unchanged && recursion < recursionLimit);
 					return;
 				}
 				catch {
@@ -646,9 +697,45 @@ namespace Vulkan.Binder {
 				if (elem.Parent == null)
 					break;
 				try {
-					var children = SpaceTextNodeCombiner
+					IEnumerable<XNode> combiningPrefix;
+					IEnumerable<XNode> combiningSuffix;
+
+					switch (elem.Name.LocalName) {
+						case "p":
+						case "div":
+						case "thead":
+						case "tbody": {
+							combiningPrefix = combiningSuffix = NewLineTextNodeCombiner;
+							if (elem.PreviousNode is XText prevText) {
+								var prevTextValue = prevText.Value;
+								if (prevTextValue.EndsWith("\n"))
+									combiningPrefix = EmptyCombiner;
+							}
+							if (elem.NextNode is XText nextText) {
+								var nextTextValue = nextText.Value;
+								if (nextTextValue.StartsWith("\n"))
+									combiningSuffix = EmptyCombiner;
+							}
+							break;
+						}
+						default: {
+							combiningPrefix = combiningSuffix = SpaceTextNodeCombiner;
+							if (elem.PreviousNode is XText prevText) {
+								var prevTextValue = prevText.Value;
+								if (prevTextValue.EndsWith(" "))
+									combiningPrefix = EmptyCombiner;
+							}
+							if (elem.NextNode is XText nextText) {
+								var nextTextValue = nextText.Value;
+								if (nextTextValue.StartsWith(" "))
+									combiningSuffix = EmptyCombiner;
+							}
+							break;
+						}
+					}
+					var children = combiningPrefix
 						.Concat(elem.Nodes())
-						.Concat(SpaceTextNodeCombiner);
+						.Concat(combiningSuffix);
 					if (children.Any()) {
 						// threading syncs
 						Thread.Sleep(1);

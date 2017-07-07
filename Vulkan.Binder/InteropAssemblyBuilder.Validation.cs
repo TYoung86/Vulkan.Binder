@@ -6,7 +6,7 @@ namespace Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
 
 		private bool IsIntPtrOrUIntPtr(TypeReference t) {
-			return t.Is(IntPtrType) || t.Is(UIntPtrType);
+			return t.Is(Module.TypeSystem.IntPtr) || t.Is(Module.TypeSystem.UIntPtr);
 		}
 
 		private bool IsHandleType(TypeReference t) {
