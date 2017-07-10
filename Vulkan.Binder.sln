@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.26621.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vulkan.Binder", "Vulkan.Binder\Vulkan.Binder.csproj", "{5EF279D4-EF0A-4C1E-A872-EC4CDDE63621}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interop", "Interop\Interop.csproj", "{27AC73DB-C274-4EE1-BF0F-F4CBBC239283}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VulkanTests", "VulkanTests\VulkanTests.csproj", "{7533E509-FB8B-4B0B-AD9B-69A106DEE544}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VulkanTests", "VulkanTests\VulkanTests.csproj", "{7533E509-FB8B-4B0B-AD9B-69A106DEE544}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClangSharp", "ClangSharp\ClangSharp.csproj", "{6091B9F6-D75E-4457-BF5B-89076FCB262B}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mono.Cecil", "Mono.Cecil\Mono.Cecil.csproj", "{D68133BD-1E63-496E-9EDE-4FBDBF77B486}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mono.Cecil.Rocks", "Mono.Cecil\rocks\Mono.Cecil.Rocks.csproj", "{FBC6DD59-D09D-499C-B03C-99C1C78FF2AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulkan.Sandcastle.Presentation", "Vulkan.Sandcastle.Presentation\Vulkan.Sandcastle.Presentation.csproj", "{DF77BB28-4B9A-4C0B-A86B-85D05C991CCA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,8 +53,18 @@ Global
 		{FBC6DD59-D09D-499C-B03C-99C1C78FF2AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBC6DD59-D09D-499C-B03C-99C1C78FF2AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBC6DD59-D09D-499C-B03C-99C1C78FF2AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF77BB28-4B9A-4C0B-A86B-85D05C991CCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF77BB28-4B9A-4C0B-A86B-85D05C991CCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF77BB28-4B9A-4C0B-A86B-85D05C991CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF77BB28-4B9A-4C0B-A86B-85D05C991CCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9F836047-EF4E-45CB-81AD-D850EE3BA145}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

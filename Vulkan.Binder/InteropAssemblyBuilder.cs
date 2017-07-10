@@ -171,6 +171,10 @@ namespace Vulkan.Binder {
 			SplitPointerGtd = typeof(SplitPointer<,,>).Import(Module);
 			BinderGeneratedAttributeType = typeof(BinderGeneratedAttribute).Import(Module);
 
+			TypeArrayOfSingularVoidPointer = new [] {VoidPointerType};
+			TypeArrayOfSingularUInt = new [] {Module.TypeSystem.UInt32};
+			TypeArrayOfSingularULong = new [] {Module.TypeSystem.UInt64};
+
 			IntegrateInteropTypes(Module.Types);
 
 			if (targetFramework == null)

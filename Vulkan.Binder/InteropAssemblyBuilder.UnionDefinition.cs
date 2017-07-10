@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using Interop;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
+using Mono.Cecil.Rocks;
 using Vulkan.Binder.Extensions;
 
 namespace Vulkan.Binder {
@@ -21,7 +22,7 @@ namespace Vulkan.Binder {
 			}
 			if (Module.GetType(unionName)?.Resolve() != null)
 				return null;
-			TypeDefinition unionDef = Module.DefineType(unionName,
+			var unionDef = Module.DefineType(unionName,
 				PublicSealedUnionTypeAttributes, null,
 				(int) unionInfo.Alignment,
 				(int) unionInfo.Size);
@@ -59,9 +60,11 @@ namespace Vulkan.Binder {
 							.Offset = fieldParam.Position + i * offsetPer;
 						}
 
+						var fieldRefType = fieldType.MakeByReferenceType().Import(Module);
+
 						var unionGetter = unionDef.DefineMethod(fieldName,
-							PublicInterfaceImplementationMethodAttributes,
-							fieldType, typeof(int));
+							PublicHideBySigMethodAttributes,
+							fieldRefType, Module.TypeSystem.Int32);
 
 						unionGetter.DefineParameter(1, ParameterAttributes.In, "index");
 						SetMethodInliningAttributes(unionGetter);

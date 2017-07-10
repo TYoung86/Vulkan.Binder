@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DF77BB28-4B9A-4C0B-A86B-85D05C991CCA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Vulkan.Sandcastle.Presentation</RootNamespace>
+    <AssemblyName>VulkanSandcastlePresentation</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>.\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Sandcastle.Core">
+      <HintPath>$(SHFBROOT)\Sandcastle.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Vulkan.Sandcastle.PresentationPresentationStyle.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="VulkanSandcastlePresentation\Configuration\BuildAssembler.config" />
+    <None Include="VulkanSandcastlePresentation\Configuration\xamlSyntax.config" />
+    <None Include="VulkanSandcastlePresentation\Web\Web.Config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="VulkanSandcastlePresentation\Content\conceptual_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\de-DE\conceptual_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\de-DE\reference_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\de-DE\shared_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\de-DE\shared_content_mshc.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\es-ES\conceptual_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\es-ES\reference_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\es-ES\shared_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\es-ES\shared_content_mshc.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\fr-FR\conceptual_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\fr-FR\reference_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\fr-FR\shared_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\fr-FR\shared_content_mshc.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\it-IT\conceptual_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\it-IT\reference_content.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="VulkanSandcastlePresentation\Content\it-IT\shared_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\it-IT\shared_content_mshc.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\ja-JP\conceptual_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\ja-JP\reference_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\ja-JP\shared_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\ja-JP\shared_content_mshc.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\pt-BR\conceptual_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\pt-BR\reference_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\pt-BR\shared_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\pt-BR\shared_content_mshc.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\reference_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\ru-RU\conceptual_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\ru-RU\reference_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\ru-RU\shared_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\ru-RU\shared_content_mshc.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\shared_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\shared_content_mshc.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\zh-CN\conceptual_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\zh-CN\reference_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\zh-CN\shared_content.xml" />
+    <Content Include="VulkanSandcastlePresentation\Content\zh-CN\shared_content_mshc.xml" />
+    <Content Include="VulkanSandcastlePresentation\Data\bibliography.xml" />
+    <Content Include="VulkanSandcastlePresentation\scripts\branding.js" />
+    <Content Include="VulkanSandcastlePresentation\SHFBContent\de-DE.xml" />
+    <Content Include="VulkanSandcastlePresentation\SHFBContent\en-US.xml" />
+    <Content Include="VulkanSandcastlePresentation\SHFBContent\es-ES.xml" />
+    <Content Include="VulkanSandcastlePresentation\SHFBContent\fr-FR.xml" />
+    <Content Include="VulkanSandcastlePresentation\SHFBContent\it-IT.xml" />
+    <Content Include="VulkanSandcastlePresentation\SHFBContent\ja-JP.xml" />
+    <Content Include="VulkanSandcastlePresentation\SHFBContent\ko-KR.xml" />
+    <Content Include="VulkanSandcastlePresentation\SHFBContent\pt-BR.xml" />
+    <Content Include="VulkanSandcastlePresentation\SHFBContent\ru-RU.xml" />
+    <Content Include="VulkanSandcastlePresentation\SHFBContent\zh-CHS.xml" />
+    <Content Include="VulkanSandcastlePresentation\SHFBContent\zh-CN.xml" />
+    <Content Include="VulkanSandcastlePresentation\StopWordList\de-DE.txt" />
+    <Content Include="VulkanSandcastlePresentation\StopWordList\en-US.txt" />
+    <Content Include="VulkanSandcastlePresentation\StopWordList\es-ES.txt" />
+    <Content Include="VulkanSandcastlePresentation\StopWordList\fr-FR.txt" />
+    <Content Include="VulkanSandcastlePresentation\StopWordList\it-IT.txt" />
+    <Content Include="VulkanSandcastlePresentation\StopWordList\ja-JP.txt" />
+    <Content Include="VulkanSandcastlePresentation\StopWordList\ko-KR.txt" />
+    <Content Include="VulkanSandcastlePresentation\StopWordList\pt-BR.txt" />
+    <Content Include="VulkanSandcastlePresentation\StopWordList\ru-RU.txt" />
+    <Content Include="VulkanSandcastlePresentation\StopWordList\zh-CHS.txt" />
+    <Content Include="VulkanSandcastlePresentation\StopWordList\zh-CN.txt" />
+    <Content Include="VulkanSandcastlePresentation\styles\branding-cs-CZ.css" />
+    <Content Include="VulkanSandcastlePresentation\styles\branding-de-DE.css" />
+    <Content Include="VulkanSandcastlePresentation\styles\branding-en-US.css" />
+    <Content Include="VulkanSandcastlePresentation\styles\branding-es-ES.css" />
+    <Content Include="VulkanSandcastlePresentation\styles\branding-fr-FR.css" />
+    <Content Include="VulkanSandcastlePresentation\styles\branding-Help1.css" />
+    <Content Include="VulkanSandcastlePresentation\styles\branding-HelpViewer.css" />
+    <Content Include="VulkanSandcastlePresentation\styles\branding-it-IT.css" />
+    <Content Include="VulkanSandcastlePresentation\styles\branding-ja-JP.css" />
+    <Content Include="VulkanSandcastlePresentation\styles\branding-ko-KR.css" />
+    <Content Include="VulkanSandcastlePresentation\styles\branding-pl-PL.css" />
+    <Content Include="VulkanSandcastlePresentation\styles\branding-pt-BR.css" />
+    <Content Include="VulkanSandcastlePresentation\styles\branding-ru-RU.css" />
+    <Content Include="VulkanSandcastlePresentation\styles\branding-tr-TR.css" />
+    <Content Include="VulkanSandcastlePresentation\styles\branding-Website.css" />
+    <Content Include="VulkanSandcastlePresentation\styles\branding-zh-CN.css" />
+    <Content Include="VulkanSandcastlePresentation\styles\branding-zh-TW.css" />
+    <Content Include="VulkanSandcastlePresentation\styles\branding.css" />
+    <Content Include="VulkanSandcastlePresentation\Transforms\codeTemplates.xsl" />
+    <Content Include="VulkanSandcastlePresentation\Transforms\conceptualMetadataHelp20.xsl" />
+    <Content Include="VulkanSandcastlePresentation\Transforms\conceptualMetadataHelp30.xsl" />
+    <Content Include="VulkanSandcastlePresentation\Transforms\conceptualTopicTypes.xsl" />
+    <Content Include="VulkanSandcastlePresentation\Transforms\globalTemplates.xsl">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="VulkanSandcastlePresentation\Transforms\main_conceptual.xsl" />
+    <Content Include="VulkanSandcastlePresentation\Transforms\main_sandcastle.xsl" />
+    <Content Include="VulkanSandcastlePresentation\Transforms\metadataHelp20.xsl" />
+    <Content Include="VulkanSandcastlePresentation\Transforms\metadataHelp30.xsl" />
+    <Content Include="VulkanSandcastlePresentation\Transforms\seealso_dduexml.xsl" />
+    <Content Include="VulkanSandcastlePresentation\Transforms\skeleton.xml" />
+    <Content Include="VulkanSandcastlePresentation\Transforms\skeleton_conceptual.xml" />
+    <Content Include="VulkanSandcastlePresentation\Transforms\utilities_bibliography.xsl" />
+    <Content Include="VulkanSandcastlePresentation\Transforms\utilities_dduexml.xsl" />
+    <Content Include="VulkanSandcastlePresentation\Transforms\utilities_metadata.xsl" />
+    <Content Include="VulkanSandcastlePresentation\Transforms\utilities_reference.xsl">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="VulkanSandcastlePresentation\Transforms\xpathFunctions.xsl" />
+    <Content Include="VulkanSandcastlePresentation\Web\html\GeneralError.htm" />
+    <Content Include="VulkanSandcastlePresentation\Web\html\PageNotFound.htm" />
+    <Content Include="VulkanSandcastlePresentation\Web\icons\Search.png" />
+    <Content Include="VulkanSandcastlePresentation\Web\icons\TocClose.gif" />
+    <Content Include="VulkanSandcastlePresentation\Web\icons\TocCollapsed.gif" />
+    <Content Include="VulkanSandcastlePresentation\Web\icons\TocExpanded.gif" />
+    <Content Include="VulkanSandcastlePresentation\Web\icons\TocOpen.gif" />
+    <Content Include="VulkanSandcastlePresentation\Web\index.html" />
+    <Content Include="VulkanSandcastlePresentation\Web\scripts\branding-Website.js" />
+    <Content Include="VulkanSandcastlePresentation\Web\scripts\clipboard.min.js" />
+    <Content Include="VulkanSandcastlePresentation\Web\scripts\jquery-1.11.0.min.js" />
+    <Content Include="VulkanSandcastlePresentation\Web\search.html" />
+    <Content Include="VulkanSandcastlePresentation\Web\SearchHelp.aspx" />
+    <Content Include="VulkanSandcastlePresentation\Web\SearchHelp.inc.php" />
+    <Content Include="VulkanSandcastlePresentation\Web\SearchHelp.php" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="LegacyWeb\" />
+    <Folder Include="VulkanSandcastlePresentation\icons\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

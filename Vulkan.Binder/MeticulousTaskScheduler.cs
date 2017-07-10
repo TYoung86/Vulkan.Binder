@@ -13,6 +13,9 @@ using static System.Math;
 
 namespace Vulkan.Binder {
 	internal sealed class MeticulousTaskScheduler : TaskScheduler, IDisposable {
+		private const int WatchdogWaitCount = 3;
+		private const int WatchdogWaitTimeMs = 5;
+
 		[ThreadStatic] private static bool _threadIsWorking;
 
 		private readonly CancellationTokenSource _cts
@@ -37,8 +40,10 @@ namespace Vulkan.Binder {
 		private readonly Thread[] _threads;
 
 		private readonly Thread _watchdog;
-
+		
 		private readonly ManualResetEventSlim _workReadyEvent
+			= new ManualResetEventSlim(false);
+		private readonly ManualResetEventSlim _reliefNotNeeded
 			= new ManualResetEventSlim(false);
 
 		public MeticulousTaskScheduler(int dop) {
@@ -92,20 +97,7 @@ namespace Vulkan.Binder {
 					var reliefThreads = new LinkedList<Thread>();
 					var waitedCount = 0;
 					for (; ;) {
-						try {
-							_cts.Token.ThrowIfCancellationRequested();
-						}
-						catch (OperationCanceledException) {
-							break;
-						}
-						Thread.Sleep(5);
-						var dop = workerThreads;
-						var waitCount = 0;
-						for (var i = 0 ; i < workerThreads ; ++i) {
-							if (_threads[i].ThreadState == ThreadState.WaitSleepJoin)
-								++waitCount;
-						}
-
+						// before sleeping, make sure relief threads are accounted
 						var reliefThreadNode = reliefThreads.First;
 						while (reliefThreadNode != null) {
 							var reliefThread = reliefThreadNode.Value;
@@ -115,19 +107,73 @@ namespace Vulkan.Binder {
 								reliefThreads.Remove(deadNode);
 								continue;
 							}
-							++dop;
-							if (reliefThread.ThreadState == ThreadState.WaitSleepJoin)
-								++waitCount;
 							reliefThreadNode = reliefThreadNode.Next;
 						}
+						// signal to let workers continue ig relief was active
+						if (reliefThreads.Count == 0)
+							_reliefNotNeeded.Set();
 
+
+						try {
+							_cts.Token.ThrowIfCancellationRequested();
+						}
+						catch (OperationCanceledException) {
+							break;
+						}
+
+						Thread.Sleep(WatchdogWaitTimeMs);
+
+						var dop = workerThreads;
+						var waitCount = 0;
+						for (var i = 0 ; i < workerThreads ; ++i) {
+							switch (_threads[i].ThreadState) {
+								case ThreadState.WaitSleepJoin:
+									++waitCount;
+									break;
+							}
+						}
+
+						// account for relief threads in dop count
+						reliefThreadNode = reliefThreads.First;
+						while (reliefThreadNode != null) {
+							var reliefThread = reliefThreadNode.Value;
+							if (!reliefThread.IsAlive) {
+								var deadNode = reliefThreadNode;
+								reliefThreadNode = reliefThreadNode.Next;
+								reliefThreads.Remove(deadNode);
+								continue;
+							}
+							++dop;
+							
+							switch (reliefThread.ThreadState) {
+								case ThreadState.WaitSleepJoin:
+									++waitCount;
+									break;
+							}
+
+							reliefThreadNode = reliefThreadNode.Next;
+						}
+						// if all the threads are active and waiting,
+						// we need to spawn a relief thread if there are more
+						// tasks left to process...
 						var newTaskCount = _priorityTasks.Count;
-						if (waitCount == dop && lastTaskCount == newTaskCount) {
-							if (waitedCount < 3)
+						if (waitCount == dop
+							&& _threadsWorking == dop
+							&& lastTaskCount == newTaskCount) {
+
+							if (_priorityTasks.IsEmpty
+								|| _backloggedTasks.IsEmpty) {
+								// if no tasks to queue, reset wait count...
+								waitedCount = 0;
+							} else if (waitedCount < WatchdogWaitCount)
 								++waitedCount;
 							else {
+								// begin a relief bubble...
 								waitedCount = 0;
-								var newReliefWorker = new Thread(ReliefWorkerAction);
+								// reduce bubble burst effect when relief completes
+								_reliefNotNeeded.Reset();
+								var newReliefWorker
+									= new Thread(ReliefWorkerAction);
 								newReliefWorker.Start();
 								reliefThreads.AddLast(newReliefWorker);
 							}
@@ -171,18 +217,20 @@ namespace Vulkan.Binder {
 					_threadIsWorking = true;
 					Interlocked.Increment(ref _threadsWorking);
 					Task task;
-
+					bool worked = false;
 					while (_priorityTasks.TryDequeue(out task))
 						if (!IsDequeued(task))
 							try {
-								if (!TryExecuteTask(task))
+								if (!TryExecuteTask(task)) {
 									_priorityTasks.Enqueue(task);
+									worked = true;
+								}
 							}
 							catch {
 								/* throw it away */
 							}
 
-					if (!_priorityTasks.TryPeek(out task)
+					if (!worked && !_priorityTasks.TryPeek(out task)
 						&& _backloggedTasks.TryDequeue(out task))
 						if (!IsDequeued(task))
 							try {
@@ -226,6 +274,7 @@ namespace Vulkan.Binder {
 				for (; ;) {
 					try {
 						_workReadyEvent.Wait(_cts.Token);
+						_reliefNotNeeded.Wait(_cts.Token);
 					}
 					catch (OperationCanceledException) {
 						break;
@@ -239,7 +288,7 @@ namespace Vulkan.Binder {
 
 					bool priorityTasksAvailable;
 					do {
-						while (_priorityTasks.TryDequeue(out task))
+						while (_priorityTasks.TryDequeue(out task)) {
 							if (!IsDequeued(task))
 								try {
 									if (!TryExecuteTask(task))
@@ -248,8 +297,15 @@ namespace Vulkan.Binder {
 								catch {
 									/* throw it away */
 								}
+							try {
+								_reliefNotNeeded.Wait(_cts.Token);
+							}
+							catch (OperationCanceledException) {
+								break;
+							}
+						}
 						while (!(priorityTasksAvailable = _priorityTasks.TryPeek(out task))
-								&& _backloggedTasks.TryDequeue(out task))
+								&& _backloggedTasks.TryDequeue(out task)) {
 							if (!IsDequeued(task))
 								try {
 									if (!TryExecuteTask(task))
@@ -258,6 +314,13 @@ namespace Vulkan.Binder {
 								catch {
 									/* throw it away */
 								}
+							try {
+								_reliefNotNeeded.Wait(_cts.Token);
+							}
+							catch (OperationCanceledException) {
+								break;
+							}
+						}
 					} while (priorityTasksAvailable);
 
 
