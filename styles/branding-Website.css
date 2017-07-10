@@ -7,14 +7,25 @@
 }
 
 /* Lightweight TOC */
+.tocCollapsed:before, .tocExpanded:before {
+	content: "\25b6";
+	transition: all .5s;
+	margin-left: 0.2em;
+	display: inline-block;
+	transform: rotate(0deg);
+}
+
+.tocExpanded:before {
+	transform: rotate(90deg);
+}
 .tocCollapsed {
-	background: url('../icons/TocCollapsed.gif') no-repeat scroll center;
+	/*background: url('../icons/TocCollapsed.gif') no-repeat scroll center;*/
 	width: 17px;
 	height: 20px;
 	overflow: hidden;
 }
 .tocExpanded {
-	background: url('../icons/TocExpanded.gif') no-repeat scroll center;
+	/*background: url('../icons/TocExpanded.gif') no-repeat scroll center;*/
 	width: 17px;
 	height: 20px;
 	overflow: hidden;
@@ -37,7 +48,7 @@ div#leftNav {
 	width: 280px;
 	min-height: 10px;
 	position: relative;
-	border-right: 1px solid #b6b6b6;
+	border-right: 1px solid #2d2d2d;
 	padding-left: 10px;
 	padding-top: 15px;
 }
@@ -53,12 +64,15 @@ div#tocNav > div {
 	width: auto;
 	margin-bottom: 5px;
 }
-div#leftNav a, div#leftNav a:link, div#leftNav a:visited {
-	color: #1364c4;
-	text-decoration: none;
+div#leftNav a, div#leftNav a:link {
+	/* color: #1364c4; */
+	color: #569cd6;
+}
+div#leftNav a:visited {
+	color: #3390b1;
 }
 div#leftNav a:hover {
-	color: #3390b1;
+	/* color: #3390b1; */
 }
 div#tocNav > div > a, div#tocNav > div > a:link, div#tocNav > div > a:visited {
 	display: block;
@@ -66,7 +80,7 @@ div#tocNav > div > a, div#tocNav > div > a:link, div#tocNav > div > a:visited {
 	overflow: hidden;
 }
 div#tocNav > div.current > a, div#tocNav > div.current > a:link, div#tocNav > div.current > a:visited {
-	color: #000;
+	color: #dcdcdc;
 	font-weight: bold;
 	text-decoration: none;
 }
@@ -123,30 +137,41 @@ div#tocNav > div.toclevel10 {
 /* Search form */
 form#SearchForm {
 	float: right;
-	background-color: #eee;
+	background-color: #333;
 	width: 280px;
 }
 form#SearchForm input {
-	background-color: #eee;
+	background-color: #333;
 	border: 0;
 	height: 22px;
 	width: 230px;
-	color: #3b3b3b;
+	color: #f1f1f1;
 	display: inline-block;
 	margin: 1px 0 0 0;
 	padding: 1px 4px 1px 10px;
 }
 form#SearchForm button {
-	background: url('../icons/Search.png') no-repeat scroll center;
-	background-color: #eee;
+	background-color: #333;
 	float: right;
 	border: 0;
 	margin: 3px 2px 0 0;
 	cursor: pointer;
-	color: #3b3b3b;
+	color: #f1f1f1;
 	width: 19px;
 	height: 18px;
 	overflow: hidden;
+}
+form#SearchForm button:before {
+    content: "\26B2";
+    transform: rotate(45deg);
+    font-size: 1.5em;
+    display: inline-block;
+    line-height: 0;
+    margin-left: -0.2em;
+    /*
+	content: "\2315";
+	display: inline-block;
+	*/
 }
 .searchContainer {
 	width: 700px;

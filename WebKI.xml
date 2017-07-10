@@ -283,6 +283,8 @@
   <HelpKINode Title="bufferImageHeight field" Url="html/F_VkBufferImageCopy_bufferImageHeight.htm" />
   <HelpKINode Title="bufferOffset field" Url="html/F_VkBufferImageCopy_bufferOffset.htm" />
   <HelpKINode Title="bufferRowLength field" Url="html/F_VkBufferImageCopy_bufferRowLength.htm" />
+  <HelpKINode Title="ByteLength property" Url="html/P_Interop_Utf8String_ByteLength.htm" />
+  <HelpKINode Title="CalculateHash method" Url="html/Overload_Interop_XxHash32_CalculateHash.htm" />
   <HelpKINode Title="Cast method">
     <HelpKINode Title="VkBuffer.Cast Method " Url="html/M_VkBuffer_Cast.htm" />
     <HelpKINode Title="VkBufferView.Cast Method " Url="html/M_VkBufferView_Cast.htm" />
@@ -318,6 +320,7 @@
     <HelpKINode Title="VkSurfaceKHR.Cast Method " Url="html/M_VkSurfaceKHR_Cast.htm" />
     <HelpKINode Title="VkSwapchainKHR.Cast Method " Url="html/M_VkSwapchainKHR_Cast.htm" />
   </HelpKINode>
+  <HelpKINode Title="CharCount property" Url="html/P_Interop_Utf8String_CharCount.htm" />
   <HelpKINode Title="clearValue field" Url="html/F_VkClearAttachment_clearValue.htm" />
   <HelpKINode Title="clearValueCount field">
     <HelpKINode Title="VkRenderPassBeginInfo32.clearValueCount Field" Url="html/F_VkRenderPassBeginInfo32_clearValueCount.htm" />
@@ -379,6 +382,7 @@
     <HelpKINode Title="VkStencilOpState.compareOp Field" Url="html/F_VkStencilOpState_compareOp.htm" />
   </HelpKINode>
   <HelpKINode Title="compareOp property" Url="html/P_IVkSamplerCreateInfo_compareOp.htm" />
+  <HelpKINode Title="CompareTo method" Url="html/Overload_Interop_Utf8String_CompareTo.htm" />
   <HelpKINode Title="compatibleHandleTypes field">
     <HelpKINode Title="VkExternalImageFormatPropertiesNV.compatibleHandleTypes Field" Url="html/F_VkExternalImageFormatPropertiesNV_compatibleHandleTypes.htm" />
     <HelpKINode Title="VkExternalMemoryPropertiesKHX.compatibleHandleTypes Field" Url="html/F_VkExternalMemoryPropertiesKHX_compatibleHandleTypes.htm" />
@@ -658,6 +662,7 @@
     <HelpKINode Title="VkPhysicalDeviceIDPropertiesKHX32.deviceUUID Method " Url="html/M_VkPhysicalDeviceIDPropertiesKHX32_deviceUUID.htm" />
     <HelpKINode Title="VkPhysicalDeviceIDPropertiesKHX64.deviceUUID Method " Url="html/M_VkPhysicalDeviceIDPropertiesKHX64_deviceUUID.htm" />
   </HelpKINode>
+  <HelpKINode Title="Digest method" Url="html/M_Interop_XxHash32_Digest.htm" />
   <HelpKINode Title="disabledValidationCheckCount field">
     <HelpKINode Title="VkValidationFlagsEXT32.disabledValidationCheckCount Field" Url="html/F_VkValidationFlagsEXT32_disabledValidationCheckCount.htm" />
     <HelpKINode Title="VkValidationFlagsEXT64.disabledValidationCheckCount Field" Url="html/F_VkValidationFlagsEXT64_disabledValidationCheckCount.htm" />
@@ -862,6 +867,7 @@
     <HelpKINode Title="HandleUInt32(T).Equals Method " Url="html/Overload_Interop_HandleUInt32_1_Equals.htm" />
     <HelpKINode Title="HandleUInt64(T).Equals Method " Url="html/Overload_Interop_HandleUInt64_1_Equals.htm" />
     <HelpKINode Title="HandleUIntPtr(T).Equals Method " Url="html/Overload_Interop_HandleUIntPtr_1_Equals.htm" />
+    <HelpKINode Title="Utf8String.Equals Method " Url="html/Overload_Interop_Utf8String_Equals.htm" />
   </HelpKINode>
   <HelpKINode Title="exportFromImportedHandleTypes field">
     <HelpKINode Title="VkExternalImageFormatPropertiesNV.exportFromImportedHandleTypes Field" Url="html/F_VkExternalImageFormatPropertiesNV_exportFromImportedHandleTypes.htm" />
@@ -1178,7 +1184,9 @@
     <HelpKINode Title="HandleUInt32(T).GetHashCode Method " Url="html/M_Interop_HandleUInt32_1_GetHashCode.htm" />
     <HelpKINode Title="HandleUInt64(T).GetHashCode Method " Url="html/M_Interop_HandleUInt64_1_GetHashCode.htm" />
     <HelpKINode Title="HandleUIntPtr(T).GetHashCode Method " Url="html/M_Interop_HandleUIntPtr_1_GetHashCode.htm" />
+    <HelpKINode Title="Utf8String.GetHashCode Method " Url="html/M_Interop_Utf8String_GetHashCode.htm" />
   </HelpKINode>
+  <HelpKINode Title="GetTypeCode method" Url="html/M_Interop_Utf8String_GetTypeCode.htm" />
   <HelpKINode Title="globalAlpha field">
     <HelpKINode Title="VkDisplaySurfaceCreateInfoKHR32.globalAlpha Field" Url="html/F_VkDisplaySurfaceCreateInfoKHR32_globalAlpha.htm" />
     <HelpKINode Title="VkDisplaySurfaceCreateInfoKHR64.globalAlpha Field" Url="html/F_VkDisplaySurfaceCreateInfoKHR64_globalAlpha.htm" />
@@ -1594,6 +1602,8 @@
   <HelpKINode Title="Interop.ITypedHandle&lt;T&gt; interface" Url="html/T_Interop_ITypedHandle_1.htm" />
   <HelpKINode Title="Interop.SplitPointer(Of TI, T32, T64) class" Url="html/T_Interop_SplitPointer_3.htm" />
   <HelpKINode Title="Interop.SplitPointer&lt;TI, T32, T64&gt; class" Url="html/T_Interop_SplitPointer_3.htm" />
+  <HelpKINode Title="Interop.Utf8String class" Url="html/T_Interop_Utf8String.htm" />
+  <HelpKINode Title="Interop.XxHash32 class" Url="html/T_Interop_XxHash32.htm" />
   <HelpKINode Title="IntPtr to HandleIntPtr(Of T) conversion" Url="html/M_Interop_HandleIntPtr_1_op_Implicit_1.htm" />
   <HelpKINode Title="IntPtr to HandleIntPtr&lt;T&gt; conversion" Url="html/M_Interop_HandleIntPtr_1_op_Implicit_1.htm" />
   <HelpKINode Title="IntPtr to PFN_vkAllocationFunctionUnmanaged conversion" Url="html/M_PFN_vkAllocationFunctionUnmanaged_op_Implicit_3.htm" />
@@ -5578,6 +5588,7 @@
     <HelpKINode Title="VkDebugMarkerObjectNameInfoEXT64.pObjectName Field" Url="html/F_VkDebugMarkerObjectNameInfoEXT64_pObjectName.htm" />
   </HelpKINode>
   <HelpKINode Title="pObjectName property" Url="html/P_IVkDebugMarkerObjectNameInfoEXT_pObjectName.htm" />
+  <HelpKINode Title="Pointer field" Url="html/F_Interop_Utf8String_Pointer.htm" />
   <HelpKINode Title="pointSizeGranularity field">
     <HelpKINode Title="VkPhysicalDeviceLimits32.pointSizeGranularity Field" Url="html/F_VkPhysicalDeviceLimits32_pointSizeGranularity.htm" />
     <HelpKINode Title="VkPhysicalDeviceLimits64.pointSizeGranularity Field" Url="html/F_VkPhysicalDeviceLimits64_pointSizeGranularity.htm" />
@@ -6065,6 +6076,8 @@
     <HelpKINode Title="VkPipelineMultisampleStateCreateInfo64.sampleShadingEnable Field" Url="html/F_VkPipelineMultisampleStateCreateInfo64_sampleShadingEnable.htm" />
   </HelpKINode>
   <HelpKINode Title="sampleShadingEnable property" Url="html/P_IVkPipelineMultisampleStateCreateInfo_sampleShadingEnable.htm" />
+  <HelpKINode Title="SByte* to Utf8String conversion" Url="html/M_Interop_Utf8String_op_Implicit_2.htm" />
+  <HelpKINode Title="SBytes property" Url="html/P_Interop_Utf8String_SBytes.htm" />
   <HelpKINode Title="scissorCount field">
     <HelpKINode Title="VkPipelineViewportStateCreateInfo32.scissorCount Field" Url="html/F_VkPipelineViewportStateCreateInfo32_scissorCount.htm" />
     <HelpKINode Title="VkPipelineViewportStateCreateInfo64.scissorCount Field" Url="html/F_VkPipelineViewportStateCreateInfo64_scissorCount.htm" />
@@ -6333,6 +6346,7 @@
     <HelpKINode Title="VkVertexInputBindingDescription.stride Field" Url="html/F_VkVertexInputBindingDescription_stride.htm" />
   </HelpKINode>
   <HelpKINode Title="stride property" Url="html/P_IVkDescriptorUpdateTemplateEntryKHR_stride.htm" />
+  <HelpKINode Title="String to Utf8String conversion" Url="html/M_Interop_Utf8String_op_Implicit_3.htm" />
   <HelpKINode Title="sType field">
     <HelpKINode Title="VkAcquireNextImageInfoKHX32.sType Field" Url="html/F_VkAcquireNextImageInfoKHX32_sType.htm" />
     <HelpKINode Title="VkAcquireNextImageInfoKHX64.sType Field" Url="html/F_VkAcquireNextImageInfoKHX64_sType.htm" />
@@ -6940,6 +6954,15 @@
   </HelpKINode>
   <HelpKINode Title="timestampPeriod property" Url="html/P_IVkPhysicalDeviceLimits_timestampPeriod.htm" />
   <HelpKINode Title="timestampValidBits field" Url="html/F_VkQueueFamilyProperties_timestampValidBits.htm" />
+  <HelpKINode Title="ToBoolean method" Url="html/M_Interop_Utf8String_ToBoolean.htm" />
+  <HelpKINode Title="ToByte method" Url="html/M_Interop_Utf8String_ToByte.htm" />
+  <HelpKINode Title="ToChar method" Url="html/M_Interop_Utf8String_ToChar.htm" />
+  <HelpKINode Title="ToDateTime method" Url="html/M_Interop_Utf8String_ToDateTime.htm" />
+  <HelpKINode Title="ToDecimal method" Url="html/M_Interop_Utf8String_ToDecimal.htm" />
+  <HelpKINode Title="ToDouble method" Url="html/M_Interop_Utf8String_ToDouble.htm" />
+  <HelpKINode Title="ToInt16 method" Url="html/M_Interop_Utf8String_ToInt16.htm" />
+  <HelpKINode Title="ToInt32 method" Url="html/M_Interop_Utf8String_ToInt32.htm" />
+  <HelpKINode Title="ToInt64 method" Url="html/M_Interop_Utf8String_ToInt64.htm" />
   <HelpKINode Title="tokenCount field">
     <HelpKINode Title="VkIndirectCommandsLayoutCreateInfoNVX32.tokenCount Field" Url="html/F_VkIndirectCommandsLayoutCreateInfoNVX32_tokenCount.htm" />
     <HelpKINode Title="VkIndirectCommandsLayoutCreateInfoNVX64.tokenCount Field" Url="html/F_VkIndirectCommandsLayoutCreateInfoNVX64_tokenCount.htm" />
@@ -6954,6 +6977,13 @@
     <HelpKINode Title="VkPipelineInputAssemblyStateCreateInfo64.topology Field" Url="html/F_VkPipelineInputAssemblyStateCreateInfo64_topology.htm" />
   </HelpKINode>
   <HelpKINode Title="topology property" Url="html/P_IVkPipelineInputAssemblyStateCreateInfo_topology.htm" />
+  <HelpKINode Title="ToSByte method" Url="html/M_Interop_Utf8String_ToSByte.htm" />
+  <HelpKINode Title="ToSingle method" Url="html/M_Interop_Utf8String_ToSingle.htm" />
+  <HelpKINode Title="ToString method" Url="html/Overload_Interop_Utf8String_ToString.htm" />
+  <HelpKINode Title="ToType method" Url="html/M_Interop_Utf8String_ToType.htm" />
+  <HelpKINode Title="ToUInt16 method" Url="html/M_Interop_Utf8String_ToUInt16.htm" />
+  <HelpKINode Title="ToUInt32 method" Url="html/M_Interop_Utf8String_ToUInt32.htm" />
+  <HelpKINode Title="ToUInt64 method" Url="html/M_Interop_Utf8String_ToUInt64.htm" />
   <HelpKINode Title="transform field">
     <HelpKINode Title="VkDisplaySurfaceCreateInfoKHR32.transform Field" Url="html/F_VkDisplaySurfaceCreateInfoKHR32_transform.htm" />
     <HelpKINode Title="VkDisplaySurfaceCreateInfoKHR64.transform Field" Url="html/F_VkDisplaySurfaceCreateInfoKHR64_transform.htm" />
@@ -6988,6 +7018,7 @@
     <HelpKINode Title="VkSamplerCreateInfo64.unnormalizedCoordinates Field" Url="html/F_VkSamplerCreateInfo64_unnormalizedCoordinates.htm" />
   </HelpKINode>
   <HelpKINode Title="unnormalizedCoordinates property" Url="html/P_IVkSamplerCreateInfo_unnormalizedCoordinates.htm" />
+  <HelpKINode Title="Update method" Url="html/Overload_Interop_XxHash32_Update.htm" />
   <HelpKINode Title="usage field">
     <HelpKINode Title="VkBufferCreateInfo32.usage Field" Url="html/F_VkBufferCreateInfo32_usage.htm" />
     <HelpKINode Title="VkBufferCreateInfo64.usage Field" Url="html/F_VkBufferCreateInfo64_usage.htm" />
@@ -7007,6 +7038,42 @@
     <HelpKINode Title="IVkPhysicalDeviceImageFormatInfo2KHR.usage Property " Url="html/P_IVkPhysicalDeviceImageFormatInfo2KHR_usage.htm" />
     <HelpKINode Title="IVkPhysicalDeviceSparseImageFormatInfo2KHR.usage Property " Url="html/P_IVkPhysicalDeviceSparseImageFormatInfo2KHR_usage.htm" />
   </HelpKINode>
+  <HelpKINode Title="Utf8String class">
+    <HelpKINode Title="Utf8String Class" Url="html/T_Interop_Utf8String.htm" />
+    <HelpKINode Title="about Utf8String class" Url="html/T_Interop_Utf8String.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_Interop_Utf8String__ctor.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_Interop_Utf8String.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Interop_Utf8String.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Interop_Utf8String.htm" />
+    <HelpKINode Title="type conversions" Url="html/Operators_T_Interop_Utf8String.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Utf8String to SByte* conversion" Url="html/M_Interop_Utf8String_op_Implicit_1.htm" />
+  <HelpKINode Title="Utf8String to String conversion" Url="html/M_Interop_Utf8String_op_Implicit.htm" />
+  <HelpKINode Title="Utf8String.ByteLength property" Url="html/P_Interop_Utf8String_ByteLength.htm" />
+  <HelpKINode Title="Utf8String.CharCount property" Url="html/P_Interop_Utf8String_CharCount.htm" />
+  <HelpKINode Title="Utf8String.CompareTo method" Url="html/Overload_Interop_Utf8String_CompareTo.htm" />
+  <HelpKINode Title="Utf8String.Equals method" Url="html/Overload_Interop_Utf8String_Equals.htm" />
+  <HelpKINode Title="Utf8String.GetHashCode method" Url="html/M_Interop_Utf8String_GetHashCode.htm" />
+  <HelpKINode Title="Utf8String.GetTypeCode method" Url="html/M_Interop_Utf8String_GetTypeCode.htm" />
+  <HelpKINode Title="Utf8String.Pointer field" Url="html/F_Interop_Utf8String_Pointer.htm" />
+  <HelpKINode Title="Utf8String.SBytes property" Url="html/P_Interop_Utf8String_SBytes.htm" />
+  <HelpKINode Title="Utf8String.ToBoolean method" Url="html/M_Interop_Utf8String_ToBoolean.htm" />
+  <HelpKINode Title="Utf8String.ToByte method" Url="html/M_Interop_Utf8String_ToByte.htm" />
+  <HelpKINode Title="Utf8String.ToChar method" Url="html/M_Interop_Utf8String_ToChar.htm" />
+  <HelpKINode Title="Utf8String.ToDateTime method" Url="html/M_Interop_Utf8String_ToDateTime.htm" />
+  <HelpKINode Title="Utf8String.ToDecimal method" Url="html/M_Interop_Utf8String_ToDecimal.htm" />
+  <HelpKINode Title="Utf8String.ToDouble method" Url="html/M_Interop_Utf8String_ToDouble.htm" />
+  <HelpKINode Title="Utf8String.ToInt16 method" Url="html/M_Interop_Utf8String_ToInt16.htm" />
+  <HelpKINode Title="Utf8String.ToInt32 method" Url="html/M_Interop_Utf8String_ToInt32.htm" />
+  <HelpKINode Title="Utf8String.ToInt64 method" Url="html/M_Interop_Utf8String_ToInt64.htm" />
+  <HelpKINode Title="Utf8String.ToSByte method" Url="html/M_Interop_Utf8String_ToSByte.htm" />
+  <HelpKINode Title="Utf8String.ToSingle method" Url="html/M_Interop_Utf8String_ToSingle.htm" />
+  <HelpKINode Title="Utf8String.ToString method" Url="html/Overload_Interop_Utf8String_ToString.htm" />
+  <HelpKINode Title="Utf8String.ToType method" Url="html/M_Interop_Utf8String_ToType.htm" />
+  <HelpKINode Title="Utf8String.ToUInt16 method" Url="html/M_Interop_Utf8String_ToUInt16.htm" />
+  <HelpKINode Title="Utf8String.ToUInt32 method" Url="html/M_Interop_Utf8String_ToUInt32.htm" />
+  <HelpKINode Title="Utf8String.ToUInt64 method" Url="html/M_Interop_Utf8String_ToUInt64.htm" />
+  <HelpKINode Title="Utf8String.Utf8String constructor" Url="html/Overload_Interop_Utf8String__ctor.htm" />
   <HelpKINode Title="Value field">
     <HelpKINode Title="HandleInt32(T).Value Field" Url="html/F_Interop_HandleInt32_1_Value.htm" />
     <HelpKINode Title="HandleInt64(T).Value Field" Url="html/F_Interop_HandleInt64_1_Value.htm" />
@@ -19041,6 +19108,16 @@
     <HelpKINode Title="VkXYColorEXT.x Field" Url="html/F_VkXYColorEXT_x.htm" />
   </HelpKINode>
   <HelpKINode Title="xcoeff field" Url="html/F_VkViewportWScalingNV_xcoeff.htm" />
+  <HelpKINode Title="XxHash32 class">
+    <HelpKINode Title="XxHash32 Class" Url="html/T_Interop_XxHash32.htm" />
+    <HelpKINode Title="about XxHash32 class" Url="html/T_Interop_XxHash32.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_Interop_XxHash32__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Interop_XxHash32.htm" />
+  </HelpKINode>
+  <HelpKINode Title="XxHash32.CalculateHash method" Url="html/Overload_Interop_XxHash32_CalculateHash.htm" />
+  <HelpKINode Title="XxHash32.Digest method" Url="html/M_Interop_XxHash32_Digest.htm" />
+  <HelpKINode Title="XxHash32.Update method" Url="html/Overload_Interop_XxHash32_Update.htm" />
+  <HelpKINode Title="XxHash32.XxHash32 constructor" Url="html/Overload_Interop_XxHash32__ctor.htm" />
   <HelpKINode Title="y field">
     <HelpKINode Title="VkDispatchIndirectCommand.y Field" Url="html/F_VkDispatchIndirectCommand_y.htm" />
     <HelpKINode Title="VkOffset2D.y Field" Url="html/F_VkOffset2D_y.htm" />

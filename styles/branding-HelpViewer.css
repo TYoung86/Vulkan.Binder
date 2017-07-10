@@ -35,14 +35,14 @@ td p {
 }
 
 .codeSnippetContainerTab a:visited {
-	color: #000000;
+	/* color: #000000; */
 }
 
 .codeSnippetContainerTabActive a:visited {
-	color: #000000;
+	/* color: #000000; */
 }
 
 span.keyword {
-	color: #0000ff;
-	font-weight: normal;
+	/* color: #0000ff; */
+	/* font-weight: normal; */
 }

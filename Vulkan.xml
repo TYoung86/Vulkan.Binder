@@ -10520,5 +10520,108 @@
         </markup>
       </summary>
     </member>
+    <member name="T:Interop.Utf8String"></member>
+    <member name="M:Interop.Utf8String.#ctor(System.SByte*)">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Interop.Utf8String</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Interop.Utf8String.#ctor(System.SByte*,System.UInt32)">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Interop.Utf8String</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Interop.Utf8String.#ctor(System.String)">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Interop.Utf8String</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="P:Interop.Utf8String.ByteLength"></member>
+    <member name="P:Interop.Utf8String.CharCount"></member>
+    <member name="M:Interop.Utf8String.CompareTo(Interop.Utf8String)"></member>
+    <member name="M:Interop.Utf8String.CompareTo(System.String)"></member>
+    <member name="M:Interop.Utf8String.Equals(Interop.Utf8String)"></member>
+    <member name="M:Interop.Utf8String.Equals(System.SByte*)"></member>
+    <member name="M:Interop.Utf8String.Equals(System.String)"></member>
+    <member name="M:Interop.Utf8String.GetHashCode"></member>
+    <member name="M:Interop.Utf8String.GetTypeCode"></member>
+    <member name="M:Interop.Utf8String.op_Implicit(Interop.Utf8String)~System.String"></member>
+    <member name="M:Interop.Utf8String.op_Implicit(Interop.Utf8String)~System.SByte*"></member>
+    <member name="M:Interop.Utf8String.op_Implicit(System.SByte*)~Interop.Utf8String"></member>
+    <member name="M:Interop.Utf8String.op_Implicit(System.String)~Interop.Utf8String"></member>
+    <member name="F:Interop.Utf8String.Pointer"></member>
+    <member name="P:Interop.Utf8String.SBytes"></member>
+    <member name="M:Interop.Utf8String.ToBoolean(System.IFormatProvider)"></member>
+    <member name="M:Interop.Utf8String.ToByte(System.IFormatProvider)"></member>
+    <member name="M:Interop.Utf8String.ToChar(System.IFormatProvider)"></member>
+    <member name="M:Interop.Utf8String.ToDateTime(System.IFormatProvider)"></member>
+    <member name="M:Interop.Utf8String.ToDecimal(System.IFormatProvider)"></member>
+    <member name="M:Interop.Utf8String.ToDouble(System.IFormatProvider)"></member>
+    <member name="M:Interop.Utf8String.ToInt16(System.IFormatProvider)"></member>
+    <member name="M:Interop.Utf8String.ToInt32(System.IFormatProvider)"></member>
+    <member name="M:Interop.Utf8String.ToInt64(System.IFormatProvider)"></member>
+    <member name="M:Interop.Utf8String.ToSByte(System.IFormatProvider)"></member>
+    <member name="M:Interop.Utf8String.ToSingle(System.IFormatProvider)"></member>
+    <member name="M:Interop.Utf8String.ToString"></member>
+    <member name="M:Interop.Utf8String.ToString(System.IFormatProvider)"></member>
+    <member name="M:Interop.Utf8String.ToType(System.Type,System.IFormatProvider)"></member>
+    <member name="M:Interop.Utf8String.ToUInt16(System.IFormatProvider)"></member>
+    <member name="M:Interop.Utf8String.ToUInt32(System.IFormatProvider)"></member>
+    <member name="M:Interop.Utf8String.ToUInt64(System.IFormatProvider)"></member>
+    <member name="T:Interop.XxHash32"></member>
+    <member name="M:Interop.XxHash32.#ctor(System.Byte*,System.UInt32,System.UInt32)">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Interop.XxHash32</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Interop.XxHash32.#ctor(System.Byte[],System.UInt32)">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Interop.XxHash32</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Interop.XxHash32.#ctor(System.Byte[],System.UInt32,System.UInt32,System.UInt32)">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Interop.XxHash32</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Interop.XxHash32.#ctor(System.UInt32)">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Interop.XxHash32</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Interop.XxHash32.CalculateHash(System.Byte*,System.UInt32,System.UInt32)"></member>
+    <member name="M:Interop.XxHash32.CalculateHash(System.Byte[],System.UInt32)"></member>
+    <member name="M:Interop.XxHash32.CalculateHash(System.Byte[],System.UInt32,System.UInt32,System.UInt32)"></member>
+    <member name="M:Interop.XxHash32.Digest"></member>
+    <member name="M:Interop.XxHash32.Update(System.Byte*,System.UInt32)"></member>
+    <member name="M:Interop.XxHash32.Update(System.Byte[],System.UInt32)"></member>
   </members>
 </doc>
