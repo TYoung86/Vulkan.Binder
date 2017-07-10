@@ -296,3 +296,5 @@ __pycache__/
 /Documentation
 /vulkan.binder.snk
 *.pgo
+/Vulkan.Binder/Vulkan.config
+/Vulkan.Binder/Vulkan.xml
