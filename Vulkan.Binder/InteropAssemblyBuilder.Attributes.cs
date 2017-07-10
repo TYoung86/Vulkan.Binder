@@ -55,6 +55,10 @@ namespace Vulkan.Binder {
 			| MethodAttributes.Abstract
 			| MethodAttributes.Virtual;
 
+		private const MethodAttributes PublicHideBySigMethodAttributes
+			= MethodAttributes.Public
+			| MethodAttributes.HideBySig;
+
 		private const MethodAttributes DelegateInvokeMethodAttributes
 			= MethodAttributes.Public
 			| MethodAttributes.HideBySig

@@ -1,0 +1,14 @@
+Vulkan Logo
+Revised December 2016
+
+Colors
+	RGB: 164, 30, 34
+	Hex: #A41E22
+	CMYK: 24, 100, 99, 18
+	PMS: 187
+
+Fonts	
+	Main Font: Helvetica Neue 75 Bold
+	TM/Registered TM: Helvetica Neue 75 Bold
+
+See included style guide PDF for usage guidelines.

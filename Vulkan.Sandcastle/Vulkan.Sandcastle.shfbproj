@@ -21,21 +21,22 @@
       <DocumentationSource sourceFile="..\Vulkan.Binder\Vulkan.dll" />
       <DocumentationSource sourceFile="..\Vulkan.Binder\Vulkan.xml" />
     </DocumentationSources>
-    <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
-    <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
+    <SaveComponentCacheCapacity>0</SaveComponentCacheCapacity>
+    <BuildAssemblerVerbosity>OnlyErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>Website</HelpFileFormat>
     <IndentHtml>False</IndentHtml>
     <KeepLogFile>True</KeepLogFile>
     <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
     <CleanIntermediates>True</CleanIntermediates>
-    <HelpFileVersion>1.5.3.2</HelpFileVersion>
+    <HelpFileVersion>1.5.6</HelpFileVersion>
     <MaximumGroupParts>2</MaximumGroupParts>
     <NamespaceGrouping>False</NamespaceGrouping>
     <SyntaxFilters>C#</SyntaxFilters>
     <SdkLinkTarget>Blank</SdkLinkTarget>
-    <RootNamespaceTitle>Generated .NET Standard Vulkan Bindings</RootNamespaceTitle>
+    <RootNamespaceTitle>
+    </RootNamespaceTitle>
     <RootNamespaceContainer>True</RootNamespaceContainer>
-    <PresentationStyle>VS2013</PresentationStyle>
+    <PresentationStyle>VulkanSandcastlePresentation</PresentationStyle>
     <Preliminary>False</Preliminary>
     <NamingMethod>MemberName</NamingMethod>
     <HelpTitle>Vulkan Bindings for .NET Standard</HelpTitle>
@@ -54,6 +55,7 @@
       <NamespaceSummaryItem name="(global)" isDocumented="True">Generated Vulkan bindings are created at the global namespace.</NamespaceSummaryItem>
       <NamespaceSummaryItem name="Interop" isDocumented="True">Interop components intended to aid in interaction with native types.</NamespaceSummaryItem>
       <NamespaceSummaryItem name="System.Runtime.CompilerServices" isDocumented="False" />
+      <NamespaceSummaryItem name="System.Runtime.Versioning" isDocumented="False" />
     </NamespaceSummaries>
     <MissingTags>AutoDocumentCtors, AutoDocumentDispose</MissingTags>
     <WarnOnMissingSourceContext>False</WarnOnMissingSourceContext>
@@ -144,18 +146,20 @@
     </ComponentConfigurations>
     <WorkingPath>Help\</WorkingPath>
     <TransformComponentArguments>
-      <Argument Key="logoFile" Value="" xmlns="" />
-      <Argument Key="logoHeight" Value="" xmlns="" />
-      <Argument Key="logoWidth" Value="" xmlns="" />
-      <Argument Key="logoAltText" Value="" xmlns="" />
-      <Argument Key="logoPlacement" Value="left" xmlns="" />
-      <Argument Key="logoAlignment" Value="left" xmlns="" />
-      <Argument Key="maxVersionParts" Value="3" xmlns="" />
-      <Argument Key="defaultLanguage" Value="cs" xmlns="" />
-      <Argument Key="includeEnumValues" Value="true" xmlns="" />
-      <Argument Key="baseSourceCodeUrl" Value="https://github.com/TYoung86/Vulkan.Binder" xmlns="" />
-      <Argument Key="requestExampleUrl" Value="https://github.com/TYoung86/Vulkan.Binder/issues/new" xmlns="" />
+      <Argument Key="logoFile" Value="Vulkan_100px_Dec16.png" />
+      <Argument Key="logoFileSvg" Value="Vulkan_RGB_Dec16.svg" />
+      <Argument Key="logoHeight" Value="100" />
+      <Argument Key="logoWidth" Value="" />
+      <Argument Key="logoAltText" Value="Vulkan" />
+      <Argument Key="logoPlacement" Value="left" />
+      <Argument Key="logoAlignment" Value="left" />
+      <Argument Key="maxVersionParts" Value="3" />
+      <Argument Key="defaultLanguage" Value="cs" />
+      <Argument Key="includeEnumValues" Value="true" />
+      <Argument Key="baseSourceCodeUrl" Value="https://github.com/TYoung86/Vulkan.Binder/blob/master/" />
+      <Argument Key="requestExampleUrl" Value="https://github.com/TYoung86/Vulkan.Binder/issues/new" />
     </TransformComponentArguments>
+    <ComponentPath>..\Vulkan.Sandcastle.Presentation\</ComponentPath>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
@@ -186,4 +190,63 @@
     </PostBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="styles\" />
+    <Folder Include="icons\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="styles\highlight.css" />
+    <Content Include="icons\Vulkan_White_500px_Dec16.png">
+      <ImageId>Vulkan_White_500px_Dec16</ImageId>
+      <AlternateText>Vulkan</AlternateText>
+    </Content>
+    <Content Include="icons\Vulkan_White_170px_Dec16.png">
+      <ImageId>Vulkan_White_170px_Dec16</ImageId>
+      <AlternateText>Vulkan</AlternateText>
+    </Content>
+    <Content Include="icons\Vulkan_White_100px_Dec16.png">
+      <ImageId>Vulkan_White_100px_Dec16</ImageId>
+      <AlternateText>Vulkan</AlternateText>
+    </Content>
+    <Content Include="icons\Vulkan_500px_Dec16.png">
+      <ImageId>Vulkan_500px_Dec16</ImageId>
+      <AlternateText>Vulkan</AlternateText>
+    </Content>
+    <Content Include="icons\Vulkan_500px_Dec16.jpg">
+      <ImageId>Vulkan_500px_Dec16</ImageId>
+      <AlternateText>Vulkan</AlternateText>
+    </Content>
+    <Content Include="icons\Vulkan_170px_Dec16.png">
+      <ImageId>Vulkan_170px_Dec16</ImageId>
+      <AlternateText>Vulkan</AlternateText>
+    </Content>
+    <Content Include="icons\Vulkan_170px_Dec16.jpg">
+      <ImageId>Vulkan_170px_Dec16</ImageId>
+      <AlternateText>Vulkan</AlternateText>
+    </Content>
+    <Content Include="icons\Vulkan_100px_Dec16.png">
+      <ImageId>Vulkan_100px_Dec16</ImageId>
+      <AlternateText>Vulkan</AlternateText>
+    </Content>
+    <Content Include="icons\Vulkan_100px_Dec16.jpg">
+      <ImageId>Vulkan_100px_Dec16</ImageId>
+      <AlternateText>Vulkan</AlternateText>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icons\Vulkan_White_Dec16.svg">
+      <ImageId>Vulkan_White_Dec16</ImageId>
+      <AlternateText>Vulkan</AlternateText>
+    </Content>
+    <Content Include="icons\Vulkan_RGB_Dec16.svg">
+      <ImageId>Vulkan_RGB_Dec16</ImageId>
+      <AlternateText>Vulkan</AlternateText>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icons\favicon.ico">
+      <ImageId>favicon</ImageId>
+      <AlternateText>favicon</AlternateText>
+    </Content>
+  </ItemGroup>
 </Project>

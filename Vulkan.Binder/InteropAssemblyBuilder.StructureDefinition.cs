@@ -73,9 +73,9 @@ namespace Vulkan.Binder {
 		public readonly MethodReference ArgumentOutOfRangeCtor;
 
 		// TODO: convert to TypeReferences
-		private static readonly Type[] TypeArrayOfSingularVoidPointer = {typeof(void*)};
-		private static readonly Type[] TypeArrayOfSingularULong = {typeof(ulong)};
-		private static readonly Type[] TypeArrayOfSingularUInt = {typeof(uint)};
+		private readonly TypeReference[] TypeArrayOfSingularVoidPointer;
+		private readonly TypeReference[] TypeArrayOfSingularULong;
+		private readonly TypeReference[] TypeArrayOfSingularUInt;
 
 		private Func<TypeDefinition[]> DefineClrStructInternal(ClangStructInfo structInfo32, ClangStructInfo structInfo64) {
 			if (structInfo32.Size == 0 && structInfo64.Size == 0) {
@@ -216,7 +216,7 @@ namespace Vulkan.Binder {
 							var fixedBufSize = fieldParam.ArraySize;
 							var structGetter = structDef.DefineMethod(fieldName,
 								PublicInterfaceImplementationMethodAttributes,
-								intfMethodType, typeof(int));
+								intfMethodType, Module.TypeSystem.Int32);
 							structDef.DefineMethodOverride(structGetter, intfMethodInfo);
 							structGetter.DefineParameter(1, ParameterAttributes.In, "index");
 							SetMethodInliningAttributes(structGetter);

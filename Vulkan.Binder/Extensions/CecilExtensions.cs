@@ -16,6 +16,7 @@ using TypeAttributes = Mono.Cecil.TypeAttributes;
 
 namespace Vulkan.Binder.Extensions {
 	public static class CecilExtensions {
+
 		private const TypeAttributes StructTypeAttributeMask
 			= TypeAttributes.ExplicitLayout
 			| TypeAttributes.SequentialLayout;
@@ -30,9 +31,9 @@ namespace Vulkan.Binder.Extensions {
 				td.ClassSize = size;
 			if (baseType == null) {
 				if ((typeAttrs & StructTypeAttributeMask) != 0) {
-					if ( packing <= 0 )
+					if (packing <= 0)
 						td.PackingSize = 1;
-					if ( size <= 0 )
+					if (size <= 0)
 						td.ClassSize = 1;
 					td.BaseType = module.TypeSystem.ValueType;
 					td.Attributes |= TypeAttributes.Serializable | TypeAttributes.BeforeFieldInit;
@@ -50,6 +51,7 @@ namespace Vulkan.Binder.Extensions {
 				else
 					td.BaseType = baseType.Import(module);
 			}
+
 			//td.Scope = module;
 			module.Types.Add(td);
 			return td;
@@ -69,6 +71,7 @@ namespace Vulkan.Binder.Extensions {
 				| FieldAttributes.SpecialName
 				| FieldAttributes.RTSpecialName, underlyingType.Import(module));
 			td.Fields.Add(enumField);
+
 			//td.Scope = module;
 			module.Types.Add(td);
 			return td;
@@ -77,6 +80,7 @@ namespace Vulkan.Binder.Extensions {
 		public static void ChangeUnderlyingType(this TypeDefinition td, TypeReference underlyingType) {
 			if (!td.IsEnum)
 				throw new NotImplementedException();
+
 			var valueField = td.Fields.First(fd => !fd.IsStatic && fd.Name == "value__");
 			valueField.FieldType = underlyingType.Import(td.Module);
 			if (td.Fields.Any(fd => fd.IsLiteral))
@@ -101,6 +105,7 @@ namespace Vulkan.Binder.Extensions {
 		public static TypeReference GetUnderlyingType(this TypeDefinition td) {
 			if (!td.IsEnum)
 				throw new NotImplementedException();
+
 			var valueField = td.Fields.First(fd => !fd.IsStatic && fd.Name == "value__");
 			return valueField.FieldType;
 		}
@@ -120,15 +125,18 @@ namespace Vulkan.Binder.Extensions {
 
 			typeDef.Fields.Add(fd);
 			fd.Constant = value;
+
 			//var bytes = value as byte[] ?? BitConverter.GetBytes((dynamic) value);
 			//fd.InitialValue = bytes;
 			return fd;
 		}
 
 		public static FieldDefinition DefineField(this TypeDefinition typeDef, string name, TypeReference fieldType, FieldAttributes fieldAttrs) {
-			if ( ((fieldType as ByReferenceType)?.ElementType as ByReferenceType) != null )
+			if (((fieldType as ByReferenceType)?.ElementType as ByReferenceType) != null)
 				throw new NotImplementedException();
-			var fd = new FieldDefinition(name, fieldAttrs, fieldType.Import(typeDef.Module));
+
+			var typeRef = fieldType.Import(typeDef.Module);
+			var fd = new FieldDefinition(name, fieldAttrs, typeRef);
 			typeDef.Fields.Add(fd);
 			return fd;
 		}
@@ -170,6 +178,7 @@ namespace Vulkan.Binder.Extensions {
 				.Select(typeRef => new ParameterDefinition(typeRef));
 			foreach (var pd in pds)
 				methodDef.Parameters.Add(pd);
+
 			typeDef.Methods.Add(methodDef);
 			return methodDef;
 		}
@@ -194,6 +203,7 @@ namespace Vulkan.Binder.Extensions {
 				.Select(typeRef => new ParameterDefinition(typeRef));
 			foreach (var pd in pds)
 				methodDef.Parameters.Add(pd);
+
 			typeDef.Methods.Add(methodDef);
 			return methodDef;
 		}
@@ -207,6 +217,7 @@ namespace Vulkan.Binder.Extensions {
 					pd.ParameterType.Import(typeDef.Module)));
 			foreach (var pd in pds)
 				methodDef.Parameters.Add(pd);
+
 			typeDef.Methods.Add(methodDef);
 			return methodDef;
 		}
@@ -218,6 +229,7 @@ namespace Vulkan.Binder.Extensions {
 			var pds = CreateParametersDefinitions(module, paramTypes);
 			foreach (var pd in pds)
 				methodDef.Parameters.Add(pd);
+
 			typeDef.Methods.Add(methodDef);
 			return methodDef;
 		}
@@ -252,6 +264,7 @@ namespace Vulkan.Binder.Extensions {
 		public static ParameterDefinition DefineParameter(this MethodDefinition methodDef, int position, ParameterAttributes paramAttrs, string name) {
 			if (position == 0)
 				throw new NotImplementedException();
+
 			var param = methodDef.Parameters[position - 1];
 			param.Attributes = paramAttrs;
 			param.Name = name;
@@ -281,25 +294,29 @@ namespace Vulkan.Binder.Extensions {
 		}
 
 		public static PropertyDefinition DefineProperty(this TypeDefinition typeDef, string name, PropertyAttributes propAttrs, TypeReference propType, params TypeReference[] paramTypes) {
-			if ( ((propType as ByReferenceType)?.ElementType as ByReferenceType) != null )
+			if (((propType as ByReferenceType)?.ElementType as ByReferenceType) != null)
 				throw new NotImplementedException();
+
 			var module = typeDef.Module;
 			var propDef = new PropertyDefinition(name, propAttrs, propType.Import(module));
 			var paramDefs = CreateParametersDefinitions(paramTypes);
 			foreach (var paramDef in paramDefs)
 				propDef.Parameters.Add(paramDef);
+
 			typeDef.Properties.Add(propDef);
 			return propDef;
 		}
 
 		public static PropertyDefinition DefineProperty(this TypeDefinition typeDef, string name, PropertyAttributes propAttrs, TypeReference propType, params Type[] paramTypes) {
-			if ( ((propType as ByReferenceType)?.ElementType as ByReferenceType) != null )
+			if (((propType as ByReferenceType)?.ElementType as ByReferenceType) != null)
 				throw new NotImplementedException();
+
 			var module = typeDef.Module;
 			var propDef = new PropertyDefinition(name, propAttrs, propType.Import(module));
 			var paramDefs = CreateParametersDefinitions(module, paramTypes);
 			foreach (var paramDef in paramDefs)
 				propDef.Parameters.Add(paramDef);
+
 			typeDef.Properties.Add(propDef);
 			return propDef;
 		}
@@ -310,6 +327,7 @@ namespace Vulkan.Binder.Extensions {
 			var paramDefs = CreateParametersDefinitions(module, paramTypes);
 			foreach (var paramDef in paramDefs)
 				propDef.Parameters.Add(paramDef);
+
 			typeDef.Properties.Add(propDef);
 			return propDef;
 		}
@@ -326,6 +344,7 @@ namespace Vulkan.Binder.Extensions {
 		public static MethodReference GetMethod(this TypeDefinition typeDef, string methodName, BindingFlags bf = AnyAccessInstanceOrStaticBindingFlags) {
 			if ((AnyAccessInstanceOrStaticBindingFlags & bf) == AnyAccessInstanceOrStaticBindingFlags)
 				return typeDef.Methods.SingleOrDefault(md => md.Name == methodName);
+
 			return typeDef.Methods.SingleOrDefault
 			(md => md.Name == methodName
 					&& (
@@ -341,7 +360,9 @@ namespace Vulkan.Binder.Extensions {
 		public delegate void TypeIndirectionTransform(ref Type t);
 
 		public static void TypeMakePointer(ref Type t) => t = t.MakePointerType();
+
 		public static void TypeMakeArray(ref Type t) => t = t.MakeArrayType();
+
 		public static void TypeMakeByRef(ref Type t) => t = t.MakeByRefType();
 
 		public static Type GetInteriorType(this Type t, out IEnumerable<TypeIndirectionTransform> transforms) {
@@ -359,8 +380,10 @@ namespace Vulkan.Binder.Extensions {
 				}
 				else
 					break;
+
 				t = t.GetElementType();
 			} while (t.HasElementType);
+
 			return t;
 		}
 
@@ -386,8 +409,10 @@ namespace Vulkan.Binder.Extensions {
 				return null;
 			if (transforms == null)
 				return typeRef;
+
 			foreach (var transform in transforms)
 				transform(ref typeRef);
+
 			return typeRef;
 		}
 
@@ -399,6 +424,7 @@ namespace Vulkan.Binder.Extensions {
 				.SingleOrDefault(md => CecilTypeComparer.IsEqual(method, md));
 			if (match == null)
 				throw new NotImplementedException();
+
 			var methodImport = match.IndirectMethodReference(module, import);
 			var imported = methodImport.ImportInternal(module);
 			return imported;
@@ -412,6 +438,7 @@ namespace Vulkan.Binder.Extensions {
 				.SingleOrDefault(md => CecilTypeComparer.IsEqual(method, md));
 			if (match == null)
 				throw new NotImplementedException();
+
 			var methodImport = match.IndirectMethodReference(module, import);
 			var imported = methodImport.ImportInternal(module);
 			return imported;
@@ -425,6 +452,7 @@ namespace Vulkan.Binder.Extensions {
 				.SingleOrDefault(md => md.IsConstructor && CecilTypeComparer.IsEqual(method, md));
 			if (match == null)
 				throw new NotImplementedException();
+
 			var methodImport = match.IndirectMethodReference(module, import);
 			var imported = methodImport.ImportInternal(module);
 			return imported;
@@ -438,8 +466,9 @@ namespace Vulkan.Binder.Extensions {
 				var param = method.GenericParameters[i];
 				var paramImport = param.Import(module) as GenericParameter;
 				method.GenericParameters[i] = paramImport
-					?? throw new NotImplementedException();
+											?? throw new NotImplementedException();
 			}
+
 			var imported = module.ImportReference(method);
 			return imported;
 		}
@@ -449,6 +478,7 @@ namespace Vulkan.Binder.Extensions {
 				CallingConvention = methodDef.CallingConvention,
 				ExplicitThis = methodDef.ExplicitThis,
 				HasThis = methodDef.HasThis,
+
 				//MetadataToken = import.MetadataToken,
 				ReturnType = methodDef.ReturnType,
 				MethodReturnType = methodDef.MethodReturnType,
@@ -460,6 +490,7 @@ namespace Vulkan.Binder.Extensions {
 			}
 			foreach (var p in methodDef.GenericParameters)
 				mr.GenericParameters.Add(p);
+
 			return mr;
 		}
 
@@ -476,6 +507,7 @@ namespace Vulkan.Binder.Extensions {
 				txf(ref interiorType);
 				interiorType = module.ImportReference(interiorType);
 			}
+
 			return interiorType;
 		}
 
@@ -510,6 +542,7 @@ namespace Vulkan.Binder.Extensions {
 				var asm = module.AssemblyResolver.Resolve(asmRef);
 				if (asm == null)
 					continue;
+
 				tr = asm.MainModule.GetType(type.FullName);
 				if (tr != null)
 					return module.ImportReference(tr);
@@ -542,10 +575,12 @@ namespace Vulkan.Binder.Extensions {
 				var asm = module.AssemblyResolver.Resolve(asmRef);
 				if (asm == null)
 					continue;
+
 				tr = asm.MainModule.GetType(type.FullName);
 				if (tr != null)
 					return tr.Import(module);
 			}
+
 			var typeInfo = type.GetTypeInfo();
 
 			if (typeInfo.Assembly.FullName.StartsWith("System.Private")) {
@@ -559,7 +594,7 @@ namespace Vulkan.Binder.Extensions {
 		}
 
 		private static TypeReference FindNonPrivateForwarder(ModuleDefinition module, string privateTypeRef) {
-			var typeNestings = privateTypeRef.Split('+','/');
+			var typeNestings = privateTypeRef.Split('+', '/');
 			var baseTypeRef = typeNestings[0];
 			TypeReference tr = null;
 			TypeDefinition td = null;
@@ -588,30 +623,31 @@ namespace Vulkan.Binder.Extensions {
 					tr = CreateTypeReference(td, asmMod, scope);
 					break;
 				}
+
 				if (tr != null)
 					break;
 			}
+
 			if (tr == null)
 				return null;
 
 			if (typeNestings.Length == 1)
 				return tr;
-			
-			if ( td == null || td.FullName != tr.FullName)
+
+			if (td == null || td.FullName != tr.FullName)
 				td = tr.Resolve();
 			td = typeNestings.Skip(1).Aggregate(td,
 				(current, typeNesting) => current?.NestedTypes
 					.FirstOrDefault(nt => nt.Name == typeNesting));
 			if (td == null)
 				return null;
+
 			tr = CreateTypeReference(td, tr.Module);
 			return tr;
 		}
 
-		
-		public static TypeReference CreateTypeReference(TypeReference type, ModuleDefinition module, IMetadataScope scope = null)
-		{
 
+		public static TypeReference CreateTypeReference(TypeReference type, ModuleDefinition module, IMetadataScope scope = null) {
 			if (!type.IsNested) {
 				return new TypeReference(
 					type.Namespace,
@@ -620,8 +656,8 @@ namespace Vulkan.Binder.Extensions {
 					scope ?? module,
 					type.IsValueType);
 			}
-			
-			return new TypeReference (
+
+			return new TypeReference(
 				"",
 				type.Name,
 				module,
@@ -629,7 +665,6 @@ namespace Vulkan.Binder.Extensions {
 				type.IsValueType) {
 				DeclaringType = CreateTypeReference(type.DeclaringType, module)
 			};
-
 		}
 
 		public static TypeReference FindInTypeSystem(this ModuleDefinition module, Type interiorType)
@@ -672,7 +707,7 @@ namespace Vulkan.Binder.Extensions {
 																					: interiorType == typeof(Enum)
 																						? module.TypeSystem.Enum
 																						: null;
-		
+
 
 		public static TypeReference FindInTypeSystem(this ModuleDefinition module, string typeName)
 			=> typeName == typeof(void).FullName
@@ -742,10 +777,11 @@ namespace Vulkan.Binder.Extensions {
 
 		public static Type GetRuntimeType(this TypeReference type) {
 			var t = Type.GetType(type.FullName, false);
-			if ( t == null )
-				t = Type.GetType(type.FullName.Replace('/','+'), false);
-			if ( t == null )
+			if (t == null)
+				t = Type.GetType(type.FullName.Replace('/', '+'), false);
+			if (t == null)
 				throw new NotImplementedException(type.FullName);
+
 			return t;
 		}
 
@@ -780,6 +816,7 @@ namespace Vulkan.Binder.Extensions {
 				case MetadataType.FunctionPointer:
 					return true;
 			}
+
 			return false;
 		}
 
@@ -787,10 +824,12 @@ namespace Vulkan.Binder.Extensions {
 		public static bool IsPrimitive(this TypeReference typeRef) {
 			if (typeRef.IsPrimitive)
 				return true;
+
 			switch (typeRef.MetadataType) {
 				case MetadataType.ValueType: {
 					if (typeRef is TypeDefinition)
 						return false;
+
 					var typeDef = typeRef.Resolve();
 					return typeDef.IsPrimitive
 							|| typeDef.IsPrimitive();
@@ -821,6 +860,7 @@ namespace Vulkan.Binder.Extensions {
 				case MetadataType.Pointer:
 					return false;
 			}
+
 			throw new NotImplementedException();
 		}
 
@@ -841,21 +881,23 @@ namespace Vulkan.Binder.Extensions {
 		public static PropertyReference GetProperty(this TypeDefinition typeDef, string propName, BindingFlags bf) {
 			if ((AnyAccessInstanceOrStaticBindingFlags & bf) == AnyAccessInstanceOrStaticBindingFlags)
 				return typeDef.Properties.Single(md => md.Name == propName);
+
 			return typeDef.Properties.Single
+
 				// ReSharper disable once CyclomaticComplexity
-			(md => md.Name == propName
-					&& (
-						bf.HasFlag(BindingFlags.Public)
-						&& (md.GetMethod?.IsPublic ?? md.SetMethod?.IsPublic ?? false)
-						|| bf.HasFlag(BindingFlags.NonPublic)
-						&& !(md.GetMethod?.IsPublic ?? md.SetMethod?.IsPublic ?? false)
-					)
-					&& (
-						bf.HasFlag(BindingFlags.Static)
-						&& (md.GetMethod?.IsStatic ?? md.SetMethod?.IsStatic ?? false)
-						|| bf.HasFlag(BindingFlags.Instance)
-						&& !(md.GetMethod?.IsStatic ?? md.SetMethod?.IsStatic ?? false)
-					));
+				(md => md.Name == propName
+						&& (
+							bf.HasFlag(BindingFlags.Public)
+							&& (md.GetMethod?.IsPublic ?? md.SetMethod?.IsPublic ?? false)
+							|| bf.HasFlag(BindingFlags.NonPublic)
+							&& !(md.GetMethod?.IsPublic ?? md.SetMethod?.IsPublic ?? false)
+						)
+						&& (
+							bf.HasFlag(BindingFlags.Static)
+							&& (md.GetMethod?.IsStatic ?? md.SetMethod?.IsStatic ?? false)
+							|| bf.HasFlag(BindingFlags.Instance)
+							&& !(md.GetMethod?.IsStatic ?? md.SetMethod?.IsStatic ?? false)
+						));
 		}
 
 		public static bool Contains(this IEnumerable<TypeReference> typeRefs, TypeReference otherRef) {
@@ -967,6 +1009,7 @@ namespace Vulkan.Binder.Extensions {
 						typeRef = typeRef.DescendElementType();
 						otherRef = otherRef.DescendElementType();
 					} while (typeRef.IsByReference && otherRef.IsByReference);
+
 					continue;
 				}
 
@@ -978,6 +1021,7 @@ namespace Vulkan.Binder.Extensions {
 						typeRef = typeRef.DescendElementType();
 						otherRef = otherRef.DescendElementType();
 					} while (typeRef.IsPointer && otherRef.IsPointer);
+
 					continue;
 				}
 
@@ -989,6 +1033,7 @@ namespace Vulkan.Binder.Extensions {
 						typeRef = typeRef.DescendElementType();
 						otherRef = otherRef.DescendElementType();
 					} while (typeRef.IsArray && otherRef.IsArray);
+
 					continue;
 				}
 
@@ -1034,6 +1079,7 @@ namespace Vulkan.Binder.Extensions {
 				else
 					return type;
 			}
+
 			return type;
 		}
 
@@ -1059,6 +1105,7 @@ namespace Vulkan.Binder.Extensions {
 						break;
 					}
 				}
+
 				// type.MetadataType == MetadataType.Array
 				else if (type.IsArray) {
 					type = (type as ArrayType ?? throw new NotImplementedException()).ElementType;
@@ -1072,6 +1119,7 @@ namespace Vulkan.Binder.Extensions {
 				else
 					break;
 			}
+
 			return type;
 		}
 
@@ -1082,9 +1130,11 @@ namespace Vulkan.Binder.Extensions {
 					var etype = ((PointerType) type).ElementType;
 					if (etype.MetadataType != MetadataType.Void && !directVoids)
 						break;
+
 					transform.AddFirst(MakePointerType);
 					type = etype;
 				}
+
 				// type.MetadataType == MetadataType.Array
 				else if (type.IsArray) {
 					transform.AddFirst(MakeArrayType);
@@ -1100,7 +1150,9 @@ namespace Vulkan.Binder.Extensions {
 				else
 					break;
 			}
+
 			return type;
 		}
+
 	}
 }

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0"?>
+<configuration>
+	<dllmap dll="vulkan-1">
+		<!-- os: linux, osx, solaris, freebsd, openbsd, netbsd, windows, aix, hpux -->
+		<dllentry os="!windows,osx" dll="libvulkan.so" />
+		<dllentry os="osx" dll="libMoltenVK.dylib" />
+	</dllmap>
+</configuration>

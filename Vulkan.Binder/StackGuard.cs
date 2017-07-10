@@ -8,13 +8,13 @@ namespace Vulkan.Binder {
 		public static bool LimitEntry(int i) {
 			var offsetStackFrames = GetOffsetStackFrames();
 			var caller = offsetStackFrames[0].GetMethod();
-			var called = Enumerable.Count<StackFrame>(offsetStackFrames, sf => Object.Equals(sf.GetMethod(), caller));
+			var called = offsetStackFrames.Count(sf => Equals(sf.GetMethod(), caller));
 			return called > i;
 		}
 		public static bool LimitRecursion(int i) {
 			var offsetStackFrames = GetOffsetStackFrames();
 			var caller = offsetStackFrames[0].GetMethod();
-			var recursed = Enumerable.TakeWhile<StackFrame>(offsetStackFrames, sf => Object.Equals(sf.GetMethod(), caller)).Count();
+			var recursed = offsetStackFrames.TakeWhile(sf => Equals(sf.GetMethod(), caller)).Count();
 			return recursed > i;
 		}
 
@@ -31,6 +31,7 @@ namespace Vulkan.Binder {
 		}
 
 		[Conditional("DEBUG")]
+		// ReSharper disable once RedundantAssignment // can't use out on conditional method
 		public static void DebugLimitEntry(int i, ref bool hit) {
 			hit = LimitEntry(i);
 		}
@@ -41,6 +42,7 @@ namespace Vulkan.Binder {
 		}
 
 		[Conditional("DEBUG")]
+		// ReSharper disable once RedundantAssignment // can't use out on conditional method
 		public static void DebugLimitRecursion(int i, ref bool hit) {
 			hit = LimitRecursion(i);
 		}

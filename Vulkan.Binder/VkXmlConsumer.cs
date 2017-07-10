@@ -27,7 +27,11 @@ namespace Vulkan.Binder {
 	    public readonly IDictionary<string, XElement> Features = new ConcurrentDictionary<string, XElement>();
 	    public readonly IDictionary<string, Dictionary<string, string>> Enums = new ConcurrentDictionary<string, Dictionary<string, string>>();
 	    public readonly IDictionary<string, Dictionary<string, int>> Bitmasks = new ConcurrentDictionary<string, Dictionary<string, int>>();
-
+		
+	    public static void ForEach<T>(IEnumerable<T> collection, Action<T> act)
+		    => Task.WaitAll(collection.Select(
+			    item => Task.Run(() => act(item))
+		    ).ToArray());
 
         public VkXmlConsumer(XDocument document) {
             var registryElem = document.Root
@@ -41,7 +45,7 @@ namespace Vulkan.Binder {
 
             var typeElems = typesElem.Elements("type");
 
-	        Parallel.ForEach(typeElems, typeElem => {
+	        ForEach(typeElems, typeElem => {
 		        var category = typeElem.Attribute("category")?.Value;
 		        var name = typeElem.Element("name")?.Value
 							?? typeElem.Attribute("name")?.Value;
@@ -89,7 +93,7 @@ namespace Vulkan.Binder {
             var commandElems = commandsElem.Elements("command");
 
 
-	        Parallel.ForEach(commandElems, commandElem => {
+	        ForEach(commandElems, commandElem => {
 		        var name = commandElem.Element("proto")?.Element("name")?.Value
 							?? commandElem.Attribute("name")?.Value;
 		        Commands.Add(name, commandElem);
@@ -101,7 +105,7 @@ namespace Vulkan.Binder {
 	        var featureReqireElems = featureElem.Elements("require");
 
 
-	        Parallel.ForEach(featureReqireElems, requireElem => {
+	        ForEach(featureReqireElems, requireElem => {
 		        var name = requireElem.Element("name")?.Value
 					?? requireElem.Attribute("comment")?.Value;
 				if ( name != null )
@@ -114,7 +118,7 @@ namespace Vulkan.Binder {
             var extensionElems = extensionsElem.Elements("extension");
 
 
-	        Parallel.ForEach(extensionElems, extensionElem => {
+	        ForEach(extensionElems, extensionElem => {
 		        var supported = extensionElem.Attribute("supported")?.Value;
 		        if (supported == "disabled")
 			        return;
@@ -136,7 +140,7 @@ namespace Vulkan.Binder {
 
             var enumsElems = registryElem.Elements("enums");
 
-	        Parallel.ForEach(enumsElems, enumsElem => {
+	        ForEach(enumsElems, enumsElem => {
 		        var name = enumsElem.Attribute("name")?.Value;
 		        var type = enumsElem.Attribute("type")?.Value;
 
@@ -144,7 +148,7 @@ namespace Vulkan.Binder {
 			        case null:
 				        if (name != "API Constants")
 					        throw new NotSupportedException("Encountered untyped enumeration element.");
-				        Parallel.ForEach(enumsElem.Elements("enum"), e
+				        ForEach(enumsElem.Elements("enum"), e
 					        => Constants.Add(new KeyValuePair<string, string>(
 						        e.Attribute("name")?.Value
 						        ?? throw new NotSupportedException("Encountered constant enumeration member without a name attribute."),

@@ -5,6 +5,7 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
@@ -32,7 +33,8 @@ namespace Vulkan.Binder {
 	public static class BindingGenerator {
 		public const string VkManBasePath = "https://www.khronos.org/registry/vulkan/specs/1.0/man/html/";
 		public static readonly Uri VkManBasePathUri = new Uri(VkManBasePath);
-		public static readonly string LocalVulkanHtmlManPages = Environment.GetEnvironmentVariable("VULKAN_HTMLMANPAGES");
+		public static readonly string LocalVulkanHtmlManPages
+			= Environment.GetEnvironmentVariable("VULKAN_HTMLMANPAGES");
 
 		public static class Cdn {
 			private const string CdnBasePath = "https://cdn.rawgit.com/";
@@ -58,19 +60,27 @@ namespace Vulkan.Binder {
 				fileName,
 				await Task.Run(async () => {
 					WriteLine("Fetching: {0}", fileName);
-					var response = await HttpClient.GetAsync(filePath,
-						HttpCompletionOption.ResponseHeadersRead)
-						.ConfigureAwait(false);
-					var content = response.Content;
-					var stream = await content.ReadAsStreamAsync().ConfigureAwait(false);
-					return stream;
+					try {
+						var response = await HttpClient.GetAsync(filePath,
+								HttpCompletionOption.ResponseHeadersRead)
+							.ConfigureAwait(false);
+						var content = response.Content;
+						var stream = await content.ReadAsStreamAsync().ConfigureAwait(false);
+						return stream;
+					}
+					catch (HttpRequestException) {
+						WriteLine("Fetch failed for: {0}", fileName);
+						throw;
+					}
 				}).ConfigureAwait(false)
 			));
 		}
 
+		private static readonly TypeInfo TypeInfo = typeof(BindingGenerator).GetTypeInfo();
+
 		private static StreamWriter LogWriter
 			= new StreamWriter(new FileStream(
-				$"{typeof(BindingGenerator).Namespace}.{Process.GetCurrentProcess().Id}.log",
+				$"{TypeInfo.Namespace}.{Process.GetCurrentProcess().Id}.log",
 				FileMode.Append, FileAccess.Write, FileShare.Read, 32768)) {
 				AutoFlush = true,
 				NewLine = "\r\n"
@@ -103,7 +113,7 @@ namespace Vulkan.Binder {
 		public static readonly HttpClient HttpClient = new HttpClient();
 
 		public static async Task RunAsync() {
-			var tempDirName = $"{typeof(BindingGenerator).Namespace}.{Process.GetCurrentProcess().Id}";
+			var tempDirName = $"{TypeInfo.Namespace}.{Process.GetCurrentProcess().Id}";
 			var tempPath = Path.Combine(Path.GetTempPath(), tempDirName);
 			if (Directory.Exists(tempPath)) Directory.Delete(tempPath, true);
 			var workDirectory = Directory.CreateDirectory(tempPath);
@@ -135,6 +145,19 @@ namespace Vulkan.Binder {
 						});
 				});
 			}).ConfigureAwait(false));
+
+			Console.WriteLine();
+			LogWriteLine("Writing default configuration (Vulkan.config) XML file.");
+			// trying to get rid of multi-versioned UnmanagedMemoryStream
+			var asm = Assembly.Load(new AssemblyName(TypeInfo.Assembly.GetName().FullName));
+			var vulkanConfigPath = Path.Combine(startingDirectory, "Vulkan.config");
+			using (var s = asm.GetManifestResourceStream($"{TypeInfo.Namespace}.DefaultConfig.xml"))
+			using (var fm = MemoryMappedFile.CreateFromFile(vulkanConfigPath, FileMode.Create, null, s.Length)) {
+				using (var fmv = fm.CreateViewStream(0, s.Length)) {
+					fmv.Consume(s);
+					fmv.Flush();
+				}
+			}
 
 
 			var xml = xmlTask.Result;
@@ -269,7 +292,7 @@ namespace Vulkan.Binder {
 				il.Emit(OpCodes.Ret);
 			});
 			*/
-			
+
 			var vkGetInstanceProcAddrDlgt = _asmBuilder.Module.GetType("vkGetInstanceProcAddr");
 			var vkGetInstanceProcAddrRetType = vkGetInstanceProcAddrDlgt.GetMethod("Invoke").ReturnType;
 			var vkGetInstanceProcAddrParams = vkGetInstanceProcAddrDlgt.GetMethod("Invoke").Parameters;
@@ -283,7 +306,7 @@ namespace Vulkan.Binder {
 			);
 
 			vkGetInstanceProcAddrMethod.SetImplementationFlags(
-				MethodImplAttributes.PreserveSig );
+				MethodImplAttributes.PreserveSig);
 
 			// TODO: generate dllmap config setter or something
 			//vkGetInstanceProcAddrMethod.SetCustomAttribute(() => new DllImportAttribute("vulkan-1")
@@ -305,7 +328,7 @@ namespace Vulkan.Binder {
 
 			Console.WriteLine();
 			WriteLine("Saving constructed assembly.");
-			var asm = _asmBuilder.Save(startingDirectory);
+			var asmFile = _asmBuilder.Save(startingDirectory);
 
 			var compilerGeneratedTypes = _asmBuilder.Module.Types
 				.Select(et => et.Resolve())
@@ -333,7 +356,8 @@ namespace Vulkan.Binder {
 			using (var fs = File.Open(Path.Combine(startingDirectory, "Vulkan.xml"), FileMode.Create))
 				xdoc.Save(fs);
 
-			if (!asm.Exists)
+
+			if (!asmFile.Exists)
 				throw new NotImplementedException();
 
 			Console.WriteLine();
@@ -556,7 +580,7 @@ namespace Vulkan.Binder {
 						elem.RemoveAttributes();
 						elem.SetAttributeValue("type", "table");
 					});
-					
+
 					ForEachByXPath(htmlfrag, "//table/thead/tr", RemoveKeepingDescendants);
 					ForEachByXPath(htmlfrag, "//table/tbody", RemoveKeepingDescendants);
 
@@ -631,7 +655,7 @@ namespace Vulkan.Binder {
 				cref = "T:" + typeDefName;
 			}
 			else {
-				if ( _enumDefs == null )
+				if (_enumDefs == null)
 					_enumDefs = _asmBuilder.Module.Types.Where(td => td.IsEnum).ToImmutableArray();
 				var fieldRefName = _enumDefs
 					.SelectMany(td => td.Fields.Where(fd => fd.IsLiteral && fd.Name == refName))
@@ -641,7 +665,7 @@ namespace Vulkan.Binder {
 			}
 			return cref ?? "!:" + refName;
 		}
-		
+
 		private static readonly XNode SpaceTextNode = new XText(" ");
 		private static readonly IEnumerable<XNode> SpaceTextNodeCombiner = new[] {SpaceTextNode};
 		private static readonly XNode NewLineTextNode = new XText("\n");
@@ -664,7 +688,7 @@ namespace Vulkan.Binder {
 					const int recursionLimit = 64;
 					var recursion = 0;
 					var nodeHashes = elems.Select(elem =>
-						XNodeEqualityComparer.GetHashCode(elem))
+							XNodeEqualityComparer.GetHashCode(elem))
 						.ToArray();
 
 					bool unchanged;
@@ -675,9 +699,9 @@ namespace Vulkan.Binder {
 						elems = xe.XPathSelectElements(xpath)
 							.OrderByDescending(elem => elem.Ancestors().Count())
 							.ToArray();
-						
+
 						var newNodeHashes = elems.Select(elem =>
-							XNodeEqualityComparer.GetHashCode(elem))
+								XNodeEqualityComparer.GetHashCode(elem))
 							.ToArray();
 						unchanged = nodeHashes.SequenceEqual(newNodeHashes);
 						nodeHashes = newNodeHashes;
@@ -708,13 +732,29 @@ namespace Vulkan.Binder {
 							combiningPrefix = combiningSuffix = NewLineTextNodeCombiner;
 							if (elem.PreviousNode is XText prevText) {
 								var prevTextValue = prevText.Value;
-								if (prevTextValue.EndsWith("\n"))
+								var lastChar = prevTextValue.Length > 0
+									? prevTextValue[prevTextValue.Length - 1] : -1;
+								var secondToLastChar = prevTextValue.Length > 1
+									? prevTextValue[prevTextValue.Length - 2] : -1;
+								if (lastChar == '\n') {
 									combiningPrefix = EmptyCombiner;
+									if (secondToLastChar == '\n') {
+										combiningSuffix = EmptyCombiner;
+									}
+								}
 							}
 							if (elem.NextNode is XText nextText) {
 								var nextTextValue = nextText.Value;
-								if (nextTextValue.StartsWith("\n"))
+								var lastChar = nextTextValue.Length > 0
+									? nextTextValue[nextTextValue.Length - 1] : -1;
+								var secondToLastChar = nextTextValue.Length > 1
+									? nextTextValue[nextTextValue.Length - 2] : -1;
+								if (lastChar == '\n') {
 									combiningSuffix = EmptyCombiner;
+									if (secondToLastChar == '\n') {
+										combiningPrefix = EmptyCombiner;
+									}
+								}
 							}
 							break;
 						}
@@ -722,12 +762,16 @@ namespace Vulkan.Binder {
 							combiningPrefix = combiningSuffix = SpaceTextNodeCombiner;
 							if (elem.PreviousNode is XText prevText) {
 								var prevTextValue = prevText.Value;
-								if (prevTextValue.EndsWith(" "))
-									combiningPrefix = EmptyCombiner;
+								var lastChar = prevTextValue.Length > 0
+										? prevTextValue[prevTextValue.Length - 1] : -1;
+								if (lastChar == ' ' || lastChar == '\n')
+									combiningSuffix = EmptyCombiner;
 							}
 							if (elem.NextNode is XText nextText) {
 								var nextTextValue = nextText.Value;
-								if (nextTextValue.StartsWith(" "))
+								var lastChar = nextTextValue.Length > 0
+									? nextTextValue[nextTextValue.Length - 1] : -1;
+								if (lastChar == ' ' || lastChar == '\n')
 									combiningSuffix = EmptyCombiner;
 							}
 							break;
