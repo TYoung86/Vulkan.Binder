@@ -13,6 +13,9 @@ namespace Interop {
 		IReadOnlyList<sbyte>, IReadOnlyCollection<char>, IReadOnlyCollection<int>,
 		IConvertible {
 
+		public static sbyte* GetPointer(string value)
+			=> new Utf8String(value);
+
 		public readonly sbyte* Pointer;
 
 		public IReadOnlyList<sbyte> SBytes => this;
@@ -28,7 +31,8 @@ namespace Interop {
 		}
 
 		public Utf8String(string str) {
-			if (Interned.TryGetValue(str, out var duplicate)) {
+			if ( string.IsInterned(str) != null
+				&& Interned.TryGetValue(str, out var duplicate)) {
 				Pointer = duplicate.Pointer;
 				return;
 			}
@@ -36,8 +40,9 @@ namespace Interop {
 			var utf8 = Encoding.UTF8;
 			var byteCount = utf8.GetByteCount(str);
 			Pointer = (sbyte*) Marshal.AllocHGlobal(byteCount);
-			Allocated[this] = ByteLength;
+			Allocated[this] = CountBytes();
 			CharCountCache[this] = (uint) str.Length;
+			StringCache[this] = str;
 			fixed (char* pch = str)
 				utf8.GetBytes(pch, str.Length, (byte*) Pointer, byteCount);
 		}
@@ -45,20 +50,20 @@ namespace Interop {
 		private static readonly ConcurrentDictionary<string, Utf8String> Interned
 			= new ConcurrentDictionary<string, Utf8String>();
 
-		private static readonly ConcurrentDictionary<Utf8String, uint> Allocated
-			= new ConcurrentDictionary<Utf8String, uint>();
+		private static readonly ConcurrentDictionary<IntPtr, uint> Allocated
+			= new ConcurrentDictionary<IntPtr, uint>();
 
-		private static readonly ConcurrentDictionary<Utf8String, uint> ByteLengthCache
-			= new ConcurrentDictionary<Utf8String, uint>();
+		private static readonly ConcurrentDictionary<IntPtr, uint> ByteLengthCache
+			= new ConcurrentDictionary<IntPtr, uint>();
 
-		private static readonly ConcurrentDictionary<Utf8String, uint> CharCountCache
-			= new ConcurrentDictionary<Utf8String, uint>();
+		private static readonly ConcurrentDictionary<IntPtr, uint> CharCountCache
+			= new ConcurrentDictionary<IntPtr, uint>();
 
-		private static readonly ConcurrentDictionary<Utf8String, string> StringCache
-			= new ConcurrentDictionary<Utf8String, string>();
+		private static readonly ConcurrentDictionary<IntPtr, string> StringCache
+			= new ConcurrentDictionary<IntPtr, string>();
 
-		private static readonly ConcurrentDictionary<Utf8String, int> HashCodeCache
-			= new ConcurrentDictionary<Utf8String, int>();
+		private static readonly ConcurrentDictionary<IntPtr, int> HashCodeCache
+			= new ConcurrentDictionary<IntPtr, int>();
 
 		public uint ByteLength
 			=> Allocated.TryGetValue(this, out var length)
@@ -85,6 +90,13 @@ namespace Interop {
 				? str
 				: Decode();
 
+		public void Refresh() {
+			StringCache.TryRemove(this, out var _);
+			HashCodeCache.TryRemove(this, out var _);
+			CharCountCache.TryRemove(this, out var _);
+			ByteLengthCache.TryRemove(this, out var _);
+		}
+
 		private uint CountBytes() {
 			var length = 0;
 			while (SBytes[length] != 0)
@@ -102,7 +114,8 @@ namespace Interop {
 		private string Decode() {
 			var s = Encoding.UTF8.GetString((byte*) Pointer, (int) ByteLength);
 			StringCache[this] = s;
-			Interned[s] = this;
+			if ( string.IsInterned(s) != null )
+				Interned[s] = this;
 			return s;
 		}
 
@@ -265,11 +278,20 @@ namespace Interop {
 		public static implicit operator Utf8String(string s)
 			=> new Utf8String(s);
 
+		public static implicit operator Utf8String(sbyte* s)
+			=> new Utf8String(s);
+
 		public static implicit operator sbyte*(Utf8String s)
 			=> s.Pointer;
 
-		public static implicit operator Utf8String(sbyte* s)
-			=> new Utf8String(s);
+		public static implicit operator void*(Utf8String s)
+			=> s.Pointer;
+
+		public static implicit operator IntPtr(Utf8String s)
+			=> (IntPtr)s.Pointer;
+
+		public static implicit operator UIntPtr(Utf8String s)
+			=> (UIntPtr)s.Pointer;
 
 		int IReadOnlyCollection<sbyte>.Count
 			=> (int) ByteLength;
