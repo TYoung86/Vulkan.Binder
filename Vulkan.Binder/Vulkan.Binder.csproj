@@ -26,9 +26,10 @@
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="IncompleteTypeReference.cs" />
-  </ItemGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+	</PropertyGroup>
+
 
   <ItemGroup>
     <None Remove="DefaultConfig.xml" />
@@ -106,11 +107,8 @@
 		<SignAssembly>True</SignAssembly>
 		<DelaySign>True</DelaySign>
 		<AssemblyOriginatorKeyFile>../vulkan.binder.pub.snk</AssemblyOriginatorKeyFile>
-		<PostBuildEvent>sn -Ra "$(TargetPath)" "$(ProjectDir)..\vulkan.binder.snk"</PostBuildEvent>
+		<PostBuildEvent>
+			sn -Ra "$(TargetPath)" "$(SolutionDir)vulkan.binder.snk"
+		</PostBuildEvent>
 	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-	</PropertyGroup>
-
 </Project>

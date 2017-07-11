@@ -31,25 +31,34 @@ using TypeAttributes = Mono.Cecil.TypeAttributes;
 
 namespace Vulkan.Binder {
 	public static class BindingGenerator {
+
 		public const string VkManBasePath = "https://www.khronos.org/registry/vulkan/specs/1.0/man/html/";
+
 		public static readonly Uri VkManBasePathUri = new Uri(VkManBasePath);
+
 		public static readonly string LocalVulkanHtmlManPages
 			= Environment.GetEnvironmentVariable("VULKAN_HTMLMANPAGES");
 
 		public static class Cdn {
+
 			private const string CdnBasePath = "https://cdn.rawgit.com/";
 
 			private const string LlvmClang = CdnBasePath + "llvm-mirror/clang/master";
 
 			public const string StdDef = LlvmClang + "/lib/Headers/stddef.h";
+
 			public const string StdInt = LlvmClang + "/lib/Headers/stdint.h";
+
 			public const string StdDefMaxAlignT = LlvmClang + "/lib/Headers/__stddef_max_align_t.h";
 
 			private const string VulkanDocs = CdnBasePath + "KhronosGroup/Vulkan-Docs/1.0";
 
 			public const string VkPlatform = VulkanDocs + "/src/vulkan/vk_platform.h";
+
 			public const string Vulcan = VulkanDocs + "/src/vulkan/vulkan.h";
+
 			public const string VkXml = VulkanDocs + "/src/spec/vk.xml";
+
 		}
 
 		private static Task<KeyValuePair<string, Stream>> HttpFetchAsync(string filePath) {
@@ -148,6 +157,7 @@ namespace Vulkan.Binder {
 
 			Console.WriteLine();
 			LogWriteLine("Writing default configuration (Vulkan.config) XML file.");
+
 			// trying to get rid of multi-versioned UnmanagedMemoryStream
 			var asm = Assembly.Load(new AssemblyName(TypeInfo.Assembly.GetName().FullName));
 			var vulkanConfigPath = Path.Combine(startingDirectory, "Vulkan.config");
@@ -228,6 +238,7 @@ namespace Vulkan.Binder {
 					var otherName = name.Replace("Flags", "FlagBits");
 					if (!knownTypes.TryGetValue(otherName, out var otherType))
 						continue;
+
 					if (otherType == InteropAssemblyBuilder.KnownType.Bitmask)
 						knownTypes[name] = InteropAssemblyBuilder.KnownType.Bitmask;
 					knownTypes.Remove(otherName);
@@ -238,6 +249,7 @@ namespace Vulkan.Binder {
 					var otherName = name.Replace("FlagBits", "Flags");
 					if (!knownTypes.TryGetValue(name, out var knownType))
 						continue;
+
 					if (knownType == InteropAssemblyBuilder.KnownType.Bitmask)
 						knownTypes[otherName] = InteropAssemblyBuilder.KnownType.Bitmask;
 					knownTypes.Remove(name);
@@ -253,6 +265,7 @@ namespace Vulkan.Binder {
 			foreach (var funcName in xml.Commands.Keys) {
 				if (funcName.StartsWith("PFN_"))
 					throw new NotImplementedException();
+
 				typeRedirs.Add("PFN_" + funcName, funcName);
 			}
 
@@ -284,14 +297,10 @@ namespace Vulkan.Binder {
 				| TypeAttributes.Sealed
 				| TypeAttributes.Public
 			);
-			/*
+
 			var staticLinkCtor = staticLinkType
 				.DefineConstructor(MethodAttributes.Static | MethodAttributes.Assembly);
-			staticLinkCtor.GenerateIL(il => {
-				// todo: implement static ctor
-				il.Emit(OpCodes.Ret);
-			});
-			*/
+
 
 			var vkGetInstanceProcAddrDlgt = _asmBuilder.Module.GetType("vkGetInstanceProcAddr");
 			var vkGetInstanceProcAddrRetType = vkGetInstanceProcAddrDlgt.GetMethod("Invoke").ReturnType;
@@ -300,10 +309,56 @@ namespace Vulkan.Binder {
 			var vkGetInstanceProcAddrMethod = staticLinkType.DefineMethod("vkGetInstanceProcAddr",
 				MethodAttributes.Public | MethodAttributes.Static
 				| MethodAttributes.HideBySig | MethodAttributes.PInvokeImpl,
+
 				//_asmBuilder.Module.TypeSystem.UIntPtr,
 				vkGetInstanceProcAddrRetType,
 				vkGetInstanceProcAddrParams
 			);
+			var vkGetInstanceProcAddrMethodRef = vkGetInstanceProcAddrMethod.Import(_asmBuilder.Module);
+
+			var vkEnumerateInstanceExtensionPropertiesField = staticLinkType.DefineField(
+				"vkEnumerateInstanceExtensionProperties",
+				_asmBuilder.Module.GetType("vkEnumerateInstanceExtensionProperties"),
+				FieldAttributes.Public | FieldAttributes.InitOnly | FieldAttributes.Static);
+
+			var vkEnumerateInstanceLayerPropertiesField = staticLinkType.DefineField(
+				"vkEnumerateInstanceLayerProperties",
+				_asmBuilder.Module.GetType("vkEnumerateInstanceLayerProperties"),
+				FieldAttributes.Public | FieldAttributes.InitOnly | FieldAttributes.Static);
+
+			var vkCreateInstanceField = staticLinkType.DefineField(
+				"vkCreateInstance",
+				_asmBuilder.Module.GetType("vkCreateInstance"),
+				FieldAttributes.Public | FieldAttributes.InitOnly | FieldAttributes.Static);
+
+			var utf8StringTypeDef = _asmBuilder.Module.GetType("Interop", "Utf8String");
+			var utf8StringGetPointerMethodRef = utf8StringTypeDef.GetMethod("GetPointer");
+
+			//.Import(_asmBuilder.Module);
+
+			staticLinkCtor.GenerateIL(il => {
+				// perform automatic dynamic linkage on other methods
+				il.Emit(OpCodes.Ldnull);
+				il.Emit(OpCodes.Ldstr, "vkEnumerateInstanceExtensionProperties");
+				il.Emit(OpCodes.Call, utf8StringGetPointerMethodRef);
+				il.Emit(OpCodes.Call, vkGetInstanceProcAddrMethodRef);
+				il.Emit(OpCodes.Stfld, vkEnumerateInstanceExtensionPropertiesField);
+
+				il.Emit(OpCodes.Ldnull);
+				il.Emit(OpCodes.Ldstr, "vkEnumerateInstanceLayerProperties");
+				il.Emit(OpCodes.Call, utf8StringGetPointerMethodRef);
+				il.Emit(OpCodes.Call, vkGetInstanceProcAddrMethodRef);
+				il.Emit(OpCodes.Stfld, vkEnumerateInstanceLayerPropertiesField);
+
+
+				il.Emit(OpCodes.Ldnull);
+				il.Emit(OpCodes.Ldstr, "vkCreateInstance");
+				il.Emit(OpCodes.Call, utf8StringGetPointerMethodRef);
+				il.Emit(OpCodes.Call, vkGetInstanceProcAddrMethodRef);
+				il.Emit(OpCodes.Stfld, vkCreateInstanceField);
+
+				il.Emit(OpCodes.Ret);
+			});
 
 			vkGetInstanceProcAddrMethod.SetImplementationFlags(
 				MethodImplAttributes.PreserveSig);
@@ -322,7 +377,7 @@ namespace Vulkan.Binder {
 
 			var moduleInit = moduleType.DefineConstructor(MethodAttributes.Static | MethodAttributes.Assembly);
 			moduleInit.GenerateIL(il => {
-				//il.Emit(OpCodes.Call, staticLinkInit);
+				// TODO: perform any eager load ops
 				il.Emit(OpCodes.Ret);
 			});
 
@@ -393,26 +448,31 @@ namespace Vulkan.Binder {
 				// strip 'I' prefix
 				if (name[0] != 'I')
 					throw new NotImplementedException();
+
 				name = name.Substring(1);
 				FetchAndParseHtmlDoc(name, typeDesc);
 				return typeDesc;
 			}
+
 			var baseType = et.BaseType;
 			if (baseType.Is(_asmBuilder.MulticastDelegateType)) {
 				// function
 				FetchAndParseHtmlDoc(name, typeDesc);
 				return typeDesc;
 			}
+
 			var @interface = et.Interfaces.FirstOrDefault();
 			if (@interface != null && !@interface.InterfaceType.IsGenericInstance) {
 				var crefAttr = new XAttribute("cref",
 					$"T:{@interface.InterfaceType.FullName}");
+
 				//typeDesc.Add(new XElement("inheritdoc", crefAttr));
 				typeDesc.Add(new XElement("summary",
 					new XText("See: "), new XElement("see", crefAttr)));
 				typeDesc.Add(new XElement("seealso", crefAttr));
 				return typeDesc;
 			}
+
 			// handle or struct
 			FetchAndParseHtmlDoc(name, typeDesc);
 			return typeDesc;
@@ -429,6 +489,7 @@ namespace Vulkan.Binder {
 						WriteLine("No local doc for: {0}", name);
 						return;
 					}
+
 					stream = File.OpenRead(localHtmlPath);
 				}
 				else {
@@ -440,6 +501,7 @@ namespace Vulkan.Binder {
 				WriteLine("No remote doc for: {0}", name);
 				return;
 			}
+
 			using (stream)
 				hdoc.Load(stream);
 			WriteLine("Fetched doc for: {0}", name);
@@ -481,6 +543,7 @@ namespace Vulkan.Binder {
 				if (href.StartsWith("#")) {
 					continue;
 				}
+
 				if (href.StartsWith(".")) {
 					cref = $"!:{new Uri(VkManBasePathUri, href).AbsoluteUri}";
 				}
@@ -492,11 +555,14 @@ namespace Vulkan.Binder {
 				}
 				else if (href.EndsWith(".html")) {
 					var refName = href.Substring(0, href.Length - 5);
+
 					// todo: namespace support
 					cref = GetDocCref(refName);
 				}
+
 				if (cref == null)
 					throw new NotImplementedException();
+
 				typeDesc.Add(new XElement("seealso", new XAttribute("cref", cref)));
 			}
 		}
@@ -517,6 +583,7 @@ namespace Vulkan.Binder {
 					var htmlfrag = XElement.Load(sr);
 
 					var attrsToRemove = (IEnumerable) htmlfrag.XPathEvaluate("//@class|//@id|//@style");
+
 					// ReSharper disable once ConditionIsAlwaysTrueOrFalse
 					if (attrsToRemove != null)
 						foreach (var attr in attrsToRemove.OfType<XAttribute>())
@@ -541,6 +608,7 @@ namespace Vulkan.Binder {
 						Thread.Sleep(0);
 						if (elem.Parent == null)
 							return;
+
 						elem.Name = "description";
 						elem.ReplaceWith(new XElement("item", elem));
 					});
@@ -549,6 +617,7 @@ namespace Vulkan.Binder {
 						Thread.Sleep(0);
 						if (elem.Parent == null)
 							return;
+
 						elem.Name = "para";
 						elem.RemoveAttributes();
 						var table = elem.Parent;
@@ -556,6 +625,7 @@ namespace Vulkan.Binder {
 							// logically this should never happen
 							throw new NotImplementedException();
 						}
+
 						elem.Remove();
 						table.AddBeforeSelf(elem);
 					});
@@ -595,37 +665,45 @@ namespace Vulkan.Binder {
 						Thread.Sleep(0);
 						if (anchor.Parent == null)
 							return;
+
 						var hrefAttr = anchor.Attribute("href");
 						if (hrefAttr == null) {
 							// likely a target anchor with id removed
 							anchor.Remove();
 							return;
 						}
+
 						var href = hrefAttr.Value;
 						if (href.StartsWith(".")) {
 							// translate relative uris
 							var newHref = new Uri(VkManBasePathUri, href).AbsoluteUri;
 							if (newHref.StartsWith("."))
 								throw new NotImplementedException();
+
 							hrefAttr.Value = newHref;
 							return;
 						}
+
 						if (href.StartsWith("#")) {
 							// translate relative uris
 							RemoveKeepingDescendants(anchor);
 							return;
 						}
+
 						if (href.StartsWith("http://") || href.StartsWith("https://")) {
 							// passthrough absolute uris
 							return;
 						}
+
 						if (href.StartsWith("/")) {
 							throw new NotImplementedException();
 						}
 						if (!href.EndsWith(".html")) {
 							throw new NotImplementedException();
 						}
+
 						var refName = href.Substring(0, href.Length - 5);
+
 						// todo: namespace support
 						var cref = GetDocCref(refName);
 						anchor.Name = "see";
@@ -667,12 +745,19 @@ namespace Vulkan.Binder {
 		}
 
 		private static readonly XNode SpaceTextNode = new XText(" ");
+
 		private static readonly IEnumerable<XNode> SpaceTextNodeCombiner = new[] {SpaceTextNode};
+
 		private static readonly XNode NewLineTextNode = new XText("\n");
+
 		private static readonly IEnumerable<XNode> NewLineTextNodeCombiner = new[] {NewLineTextNode};
+
 		private static readonly IEnumerable<XNode> EmptyCombiner = new XNode[0];
+
 		private static InteropAssemblyBuilder _asmBuilder;
+
 		private static ImmutableArray<TypeDefinition> _enumDefs;
+
 		private static readonly XNodeEqualityComparer XNodeEqualityComparer = new XNodeEqualityComparer();
 
 		private static void StripByXPath(XNode xe, string xpath) {
@@ -695,6 +780,7 @@ namespace Vulkan.Binder {
 					do {
 						foreach (var elem in elems)
 							action(elem);
+
 						++recursion;
 						elems = xe.XPathSelectElements(xpath)
 							.OrderByDescending(elem => elem.Ancestors().Count())
@@ -706,6 +792,7 @@ namespace Vulkan.Binder {
 						unchanged = nodeHashes.SequenceEqual(newNodeHashes);
 						nodeHashes = newNodeHashes;
 					} while (elems.Any() && unchanged && recursion < recursionLimit);
+
 					return;
 				}
 				catch {
@@ -720,6 +807,7 @@ namespace Vulkan.Binder {
 			for (; ;) {
 				if (elem.Parent == null)
 					break;
+
 				try {
 					IEnumerable<XNode> combiningPrefix;
 					IEnumerable<XNode> combiningSuffix;
@@ -733,9 +821,11 @@ namespace Vulkan.Binder {
 							if (elem.PreviousNode is XText prevText) {
 								var prevTextValue = prevText.Value;
 								var lastChar = prevTextValue.Length > 0
-									? prevTextValue[prevTextValue.Length - 1] : -1;
+									? prevTextValue[prevTextValue.Length - 1]
+									: -1;
 								var secondToLastChar = prevTextValue.Length > 1
-									? prevTextValue[prevTextValue.Length - 2] : -1;
+									? prevTextValue[prevTextValue.Length - 2]
+									: -1;
 								if (lastChar == '\n') {
 									combiningPrefix = EmptyCombiner;
 									if (secondToLastChar == '\n') {
@@ -746,9 +836,11 @@ namespace Vulkan.Binder {
 							if (elem.NextNode is XText nextText) {
 								var nextTextValue = nextText.Value;
 								var lastChar = nextTextValue.Length > 0
-									? nextTextValue[nextTextValue.Length - 1] : -1;
+									? nextTextValue[nextTextValue.Length - 1]
+									: -1;
 								var secondToLastChar = nextTextValue.Length > 1
-									? nextTextValue[nextTextValue.Length - 2] : -1;
+									? nextTextValue[nextTextValue.Length - 2]
+									: -1;
 								if (lastChar == '\n') {
 									combiningSuffix = EmptyCombiner;
 									if (secondToLastChar == '\n') {
@@ -763,20 +855,23 @@ namespace Vulkan.Binder {
 							if (elem.PreviousNode is XText prevText) {
 								var prevTextValue = prevText.Value;
 								var lastChar = prevTextValue.Length > 0
-										? prevTextValue[prevTextValue.Length - 1] : -1;
+									? prevTextValue[prevTextValue.Length - 1]
+									: -1;
 								if (lastChar == ' ' || lastChar == '\n')
 									combiningSuffix = EmptyCombiner;
 							}
 							if (elem.NextNode is XText nextText) {
 								var nextTextValue = nextText.Value;
 								var lastChar = nextTextValue.Length > 0
-									? nextTextValue[nextTextValue.Length - 1] : -1;
+									? nextTextValue[nextTextValue.Length - 1]
+									: -1;
 								if (lastChar == ' ' || lastChar == '\n')
 									combiningSuffix = EmptyCombiner;
 							}
 							break;
 						}
 					}
+
 					var children = combiningPrefix
 						.Concat(elem.Nodes())
 						.Concat(combiningSuffix);
@@ -787,6 +882,7 @@ namespace Vulkan.Binder {
 							break;
 						if (!elem.Parent.Elements().Contains(elem))
 							break;
+
 						var cts = new CancellationTokenSource(5000);
 						Task.Run(() => elem.ReplaceWith(children), cts.Token)
 							.Wait(cts.Token);
@@ -797,10 +893,13 @@ namespace Vulkan.Binder {
 				catch (InvalidOperationException) {
 					if (elem.Parent == null)
 						break;
+
 					continue;
 				}
+
 				break;
 			}
 		}
+
 	}
 }
