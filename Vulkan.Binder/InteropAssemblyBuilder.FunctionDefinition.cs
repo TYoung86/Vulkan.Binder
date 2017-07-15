@@ -12,9 +12,12 @@ using Vulkan.Binder.Extensions;
 
 namespace Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
+
 		private readonly TypeReference MarshalTypeRef;
-		private readonly MethodDefinition GetDelegateForFpMethodGtd;
-		private readonly MethodDefinition GetFpForDelegateMethodGtd;
+
+		private readonly MethodReference GetDelegateForFpMethodGtd;
+
+		private readonly MethodReference GetFpForDelegateMethodGtd;
 
 		private Func<TypeDefinition[]> DefineClrType(ClangFunctionInfoBase funcInfo32, ClangFunctionInfoBase funcInfo64) {
 			if (funcInfo32 == funcInfo64) {
@@ -26,13 +29,13 @@ namespace Vulkan.Binder {
 
 		private Func<TypeDefinition[]> DefineClrType(ClangFunctionInfoBase funcInfo) {
 			var funcName = funcInfo.Name;
-			
+
 			Debug.WriteLine($"Defining function {funcName}");
 
 			if (TypeRedirects.TryGetValue(funcName, out var rename)) {
 				funcName = rename;
 			}
-			
+
 			var funcRef = Module.GetType(funcName, true);
 			var funcDef = funcRef.Resolve();
 
@@ -41,7 +44,7 @@ namespace Vulkan.Binder {
 
 			funcDef = Module.DefineType(funcName,
 				DelegateTypeAttributes,
-				MulticastDelegateType );
+				MulticastDelegateType);
 			funcDef.SetCustomAttribute(() => new BinderGeneratedAttribute());
 
 			var umfpDef = new TypeDefinition(funcDef.Namespace, funcDef.Name + "Unmanaged",
@@ -49,9 +52,7 @@ namespace Vulkan.Binder {
 				| TypeAttributes.BeforeFieldInit
 				| TypeAttributes.SequentialLayout
 				| TypeAttributes.Public,
-				Module.TypeSystem.ValueType) {
-				DeclaringType = funcDef
-			};
+				Module.TypeSystem.ValueType);
 			Module.Types.Add(umfpDef);
 
 			// todo: add implicit conversion ops using Marshal
@@ -66,13 +67,12 @@ namespace Vulkan.Binder {
 			var argParams = new LinkedList<ParameterInfo>(funcInfo.Parameters.Select(p => ResolveParameter(p.Type, p.Name, (int) p.Index)));
 
 			return () => {
-			
-				retParam.Complete(TypeRedirects,true);
+				retParam.Complete(TypeRedirects, true);
 
 				var retType = retParam.Type;
 
 				foreach (var argParam in argParams)
-					argParam.Complete(TypeRedirects,true);
+					argParam.Complete(TypeRedirects, true);
 
 				Debug.WriteLine($"Completed dependencies for function {funcName}");
 
@@ -84,12 +84,12 @@ namespace Vulkan.Binder {
 
 				var getDelegateForFpMethodDef = Module.ImportReference(
 					new GenericInstanceMethod(GetDelegateForFpMethodGtd) {
-						GenericArguments = { funcDef }
+						GenericArguments = {funcDef}
 					});
 
 				var getFpForDelegateMethodDef = Module.ImportReference(
 					new GenericInstanceMethod(GetFpForDelegateMethodGtd) {
-						GenericArguments = { funcDef }
+						GenericArguments = {funcDef}
 					});
 
 				var umfpDlgt = umfpDef.DefineMethod("op_Implicit",
@@ -99,10 +99,28 @@ namespace Vulkan.Binder {
 				var umfpValueRef = Module.ImportReference(umfpValue);
 
 				umfpDlgt.GenerateIL(il => {
+					var argNull = default(CecilLabel);
+					if (EmitNullChecks) {
+						argNull = il.DefineLabel();
+					}
 					il.Emit(OpCodes.Ldarg_0);
+
+					if (EmitNullChecks) {
+						il.Emit(OpCodes.Dup);
+						il.Emit(OpCodes.Brfalse, argNull);
+					}
 					il.Emit(OpCodes.Ldfld, umfpValueRef);
 					il.Emit(OpCodes.Call, getDelegateForFpMethodDef);
 					il.Emit(OpCodes.Ret);
+
+					if (EmitNullChecks) {
+						il.MarkLabel(argNull);
+						il.Emit(OpCodes.Newobj, ArgumentNullCtor);
+						il.Emit(OpCodes.Throw);
+
+						// ReSharper disable once PossibleNullReferenceException
+						argNull.Cleanup();
+					}
 				});
 
 				var dlgtUmfp = umfpDef.DefineMethod("op_Implicit",
@@ -114,16 +132,35 @@ namespace Vulkan.Binder {
 				dlgtUmfp.Body.InitLocals = true;
 
 				dlgtUmfp.GenerateIL(il => {
+					var argNull = default(CecilLabel);
+					if (EmitNullChecks) {
+						argNull = il.DefineLabel();
+					}
+
 					il.Emit(OpCodes.Ldloca_S, dlgtUmfpV0);
 					il.Emit(OpCodes.Initobj, umfpRef);
 
 					il.Emit(OpCodes.Ldloca_S, dlgtUmfpV0);
 					il.Emit(OpCodes.Ldarg_0);
+
+					if (EmitNullChecks) {
+						il.Emit(OpCodes.Dup);
+						il.Emit(OpCodes.Brfalse, argNull);
+					}
 					il.Emit(OpCodes.Call, getFpForDelegateMethodDef);
 					il.Emit(OpCodes.Stfld, umfpValueRef);
 
 					il.Emit(OpCodes.Ldloc_0);
 					il.Emit(OpCodes.Ret);
+
+					if (EmitNullChecks) {
+						il.MarkLabel(argNull);
+						il.Emit(OpCodes.Newobj, ArgumentNullCtor);
+						il.Emit(OpCodes.Throw);
+
+						// ReSharper disable once PossibleNullReferenceException
+						argNull.Cleanup();
+					}
 				});
 
 				var umfpPtr = umfpDef.DefineMethod("op_Implicit",
@@ -131,9 +168,26 @@ namespace Vulkan.Binder {
 					Module.TypeSystem.IntPtr, umfpRef);
 
 				umfpPtr.GenerateIL(il => {
+					var argNull = default(CecilLabel);
+					if (EmitNullChecks) {
+						argNull = il.DefineLabel();
+					}
 					il.Emit(OpCodes.Ldarg_0);
+					if (EmitNullChecks) {
+						il.Emit(OpCodes.Dup);
+						il.Emit(OpCodes.Brfalse, argNull);
+					}
 					il.Emit(OpCodes.Ldfld, umfpValueRef);
 					il.Emit(OpCodes.Ret);
+
+					if (EmitNullChecks) {
+						il.MarkLabel(argNull);
+						il.Emit(OpCodes.Newobj, ArgumentNullCtor);
+						il.Emit(OpCodes.Throw);
+
+						// ReSharper disable once PossibleNullReferenceException
+						argNull.Cleanup();
+					}
 				});
 
 				var ptrUmfp = umfpDef.DefineMethod("op_Implicit",
@@ -145,24 +199,41 @@ namespace Vulkan.Binder {
 				ptrUmfp.Body.InitLocals = true;
 
 				ptrUmfp.GenerateIL(il => {
+					var argNull = default(CecilLabel);
+					if (EmitNullChecks) {
+						argNull = il.DefineLabel();
+					}
 					il.Emit(OpCodes.Ldloca_S, ptrUmfpV0);
 					il.Emit(OpCodes.Initobj, umfpRef);
 
 					il.Emit(OpCodes.Ldloca_S, ptrUmfpV0);
 					il.Emit(OpCodes.Ldarg_0);
+					if (EmitNullChecks) {
+						il.Emit(OpCodes.Dup);
+						il.Emit(OpCodes.Brfalse, argNull);
+					}
 					il.Emit(OpCodes.Stfld, umfpValueRef);
 
 					il.Emit(OpCodes.Ldloc_0);
 					il.Emit(OpCodes.Ret);
+
+					if (EmitNullChecks) {
+						il.MarkLabel(argNull);
+						il.Emit(OpCodes.Newobj, ArgumentNullCtor);
+						il.Emit(OpCodes.Throw);
+
+						// ReSharper disable once PossibleNullReferenceException
+						argNull.Cleanup();
+					}
 				});
 
 				var argTypes = argParams.Select(p => p.Type).ToArray();
-				
-				
+
+
 				var retTypeDef = retType.Resolve();
 				if (retTypeDef.BaseType != null && retTypeDef.BaseType.Is(MulticastDelegateType)) {
 					// todo: marshalas umfp marshaller
-					var ufpSpecTypeRef = Module.GetType( retTypeDef.FullName + "Unmanaged");
+					var ufpSpecTypeRef = Module.GetType(retTypeDef.FullName + "Unmanaged");
 					Debug.Assert(ufpSpecTypeRef != null);
 					retType = ufpSpecTypeRef;
 				}
@@ -173,8 +244,9 @@ namespace Vulkan.Binder {
 					if (argTypeDef.BaseType == null) continue;
 					if (!argTypeDef.BaseType.Is(MulticastDelegateType))
 						continue;
+
 					// todo: marshalas umfp marshaller
-					var ufpSpecTypeRef = Module.GetType( argTypeDef.FullName + "Unmanaged");
+					var ufpSpecTypeRef = Module.GetType(argTypeDef.FullName + "Unmanaged");
 					Debug.Assert(ufpSpecTypeRef != null);
 					argTypes[i] = ufpSpecTypeRef;
 				}
@@ -190,6 +262,7 @@ namespace Vulkan.Binder {
 						retType, argTypes);
 
 					method.SetImplementationFlags(MethodImplAttributes.CodeTypeMask);
+
 					// todo: figure out why the attribute is jacked up
 					//method.SetCustomAttribute(callConvAttr);
 
@@ -201,11 +274,10 @@ namespace Vulkan.Binder {
 					return new[] {funcDef.CreateType()};
 				}
 				catch (Exception ex) {
-
-
 					throw new InvalidProgramException("Critical function type definition failure.", ex);
 				}
 			};
 		}
+
 	}
 }

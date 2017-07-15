@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Interop {
+	using static Utf8StringInternal;
 	public unsafe struct Utf8String :
 		IEquatable<string>, IComparable<string>,
 		IEquatable<Utf8String>, IComparable<Utf8String>,
@@ -31,43 +31,33 @@ namespace Interop {
 		}
 
 		public Utf8String(string str) {
+#if NETSTANDARD2_0
 			if ( string.IsInterned(str) != null
 				&& Interned.TryGetValue(str, out var duplicate)) {
 				Pointer = duplicate.Pointer;
 				return;
 			}
+#endif
 
 			var utf8 = Encoding.UTF8;
 			var byteCount = utf8.GetByteCount(str);
-			Pointer = (sbyte*) Marshal.AllocHGlobal(byteCount);
-			Allocated[this] = CountBytes();
+			var allocSize = byteCount + 1;
+			Pointer = (sbyte*) Marshal.AllocHGlobal(allocSize);
+			//Pointer = (sbyte*) Marshal.AllocCoTaskMem(allocSize);
+			fixed (char* pch = str) {
+				utf8.GetBytes(pch, str.Length, (byte*) Pointer, byteCount);
+				Pointer[byteCount] = 0;
+			}
+			Allocated[this] = (uint)allocSize;
+			//ByteLengthCache[this] = (uint)byteCount;
 			CharCountCache[this] = (uint) str.Length;
 			StringCache[this] = str;
-			fixed (char* pch = str)
-				utf8.GetBytes(pch, str.Length, (byte*) Pointer, byteCount);
+
 		}
-
-		private static readonly ConcurrentDictionary<string, Utf8String> Interned
-			= new ConcurrentDictionary<string, Utf8String>();
-
-		private static readonly ConcurrentDictionary<IntPtr, uint> Allocated
-			= new ConcurrentDictionary<IntPtr, uint>();
-
-		private static readonly ConcurrentDictionary<IntPtr, uint> ByteLengthCache
-			= new ConcurrentDictionary<IntPtr, uint>();
-
-		private static readonly ConcurrentDictionary<IntPtr, uint> CharCountCache
-			= new ConcurrentDictionary<IntPtr, uint>();
-
-		private static readonly ConcurrentDictionary<IntPtr, string> StringCache
-			= new ConcurrentDictionary<IntPtr, string>();
-
-		private static readonly ConcurrentDictionary<IntPtr, int> HashCodeCache
-			= new ConcurrentDictionary<IntPtr, int>();
 
 		public uint ByteLength
 			=> Allocated.TryGetValue(this, out var length)
-				? length
+				? length-1
 				: ByteLengthCache.TryGetValue(this, out length)
 					? length
 					: CountBytes();
@@ -99,7 +89,7 @@ namespace Interop {
 
 		private uint CountBytes() {
 			var length = 0;
-			while (SBytes[length] != 0)
+			while (Pointer[length] != 0)
 				++length;
 
 			return ByteLengthCache[this] = (uint)length;
@@ -114,11 +104,13 @@ namespace Interop {
 		private string Decode() {
 			var s = Encoding.UTF8.GetString((byte*) Pointer, (int) ByteLength);
 			StringCache[this] = s;
+#if NETSTANDARD2_0
 			if ( string.IsInterned(s) != null )
 				Interned[s] = this;
+#endif
 			return s;
 		}
-
+		
 		private UnmanagedMemoryStream GetUnmanagedMemoryStream()
 			=> new UnmanagedMemoryStream((byte*) Pointer, ByteLength, ByteLength, FileAccess.Read);
 

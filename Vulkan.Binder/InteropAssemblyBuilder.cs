@@ -57,8 +57,9 @@ namespace Vulkan.Binder {
 		public ModuleDefinition Module { get; }
 
 		public string Namespace { get; }
-
+		
 		public bool EmitBoundsChecks { get; set; } = true;
+		public bool EmitNullChecks { get; set; } = true;
 
 		//public TypeBuilder Delegates { get; }
 
@@ -138,9 +139,11 @@ namespace Vulkan.Binder {
 			Module = Assembly.MainModule;
 			ModuleName = $"{Name.Name}.dll";
 			Module.Name = ModuleName;
-
+			
 			if (EmitBoundsChecks)
 				ArgumentOutOfRangeCtor = ArgumentOutOfRangeCtorInfo.Import(Module);
+			if (EmitNullChecks)
+				ArgumentNullCtor = ArgumentNullCtorInfo.Import(Module);
 
 			NonVersionableAttribute = NonVersionableAttributeInfo?
 				.GetCecilCustomAttribute(Module);
@@ -238,9 +241,11 @@ namespace Vulkan.Binder {
 			*/
 			MarshalTypeRef = typeof(Marshal).Import(Module);
 			GetDelegateForFpMethodGtd = MarshalTypeRef.Resolve().GetMethods()
-				.First(md => md.Name == "GetDelegateForFunctionPointer" && md.HasGenericParameters);
+				.First(md => md.Name == "GetDelegateForFunctionPointer" && md.HasGenericParameters)
+				.Import(Module);
 			GetFpForDelegateMethodGtd = MarshalTypeRef.Resolve().GetMethods()
-				.First(md => md.Name == "GetFunctionPointerForDelegate" && md.HasGenericParameters);
+				.First(md => md.Name == "GetFunctionPointerForDelegate" && md.HasGenericParameters)
+				.Import(Module);
 		}
 
 		public void Compile() {

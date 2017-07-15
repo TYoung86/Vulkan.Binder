@@ -50,7 +50,7 @@
 		<PackageReference Include="Microsoft.CSharp" Version="4.4.0-preview2-25405-01" />
 		<PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />
 		<PackageReference Include="System.Collections.Immutable" Version="1.4.0-preview2-25405-01" />
-		<PackageReference Include="System.CommandLine" Version="0.1.0-e170708-1" />
+		<PackageReference Include="System.CommandLine" Version="0.1.0-e170711-4" />
 		<PackageReference Include="System.ComponentModel.EventBasedAsync" Version="4.3.0" />
 		<PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.4.0" />
 		<PackageReference Include="System.Diagnostics.StackTrace" Version="4.3.0" />
@@ -96,9 +96,10 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\ClangSharp\ClangSharp.csproj" />
-	  <ProjectReference Include="..\Interop\Interop.csproj" />
+	  <ProjectReference Include="..\Interop\InteropBaseAssembly.csproj" />
 	  <ProjectReference Include="..\Mono.Cecil\Mono.Cecil.csproj" />
 	  <ProjectReference Include="..\Mono.Cecil\rocks\Mono.Cecil.Rocks.csproj" />
+	  <ProjectReference Include="..\Vulkan.Interop\Vulkan.Interop.csproj" />
 	</ItemGroup>
 
 	<Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />

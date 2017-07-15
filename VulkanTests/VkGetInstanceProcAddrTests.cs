@@ -6,10 +6,48 @@ using Xunit;
 
 namespace VulkanTests {
 	public class VkGetInstanceProcAddrTests {
+
+		[Fact]
+		public unsafe void Utf8StringTest() {
+			var procNames = new[] {
+				"vkCreateInstance",
+				"vkEnumerateInstanceLayerProperties",
+				"vkEnumerateInstanceExtensionProperties"
+			};
+			var procNamesUtf8 = procNames
+				.Select(s => new Utf8String(s))
+				.ToArray();
+			var procNamesAlloc = procNames
+				.Select(Marshal.StringToCoTaskMemUTF8)
+				.ToArray();
+
+			try {
+				for ( var i = 0; i < procNamesUtf8.Length; ++i ) {
+					var procName = procNames[i];
+					var procNameUtf8 = procNamesUtf8[i];
+					Assert.StrictEqual(procName.Length, (int)procNameUtf8.ByteLength);
+					Assert.StrictEqual(procName.Length, (int)procNameUtf8.CharCount);
+					var procNameAlloc = (sbyte*)procNamesAlloc[i];
+					for (var c = 0 ; c < procNameUtf8.ByteLength ; ++c) {
+						Assert.StrictEqual((sbyte)procName[c], procNameUtf8.SBytes[c]);
+						Assert.StrictEqual(procNameAlloc[c], procNameUtf8.SBytes[c]);
+					}
+
+					var nullTerminatorIndex = procNameUtf8.ByteLength;
+					Assert.StrictEqual((sbyte)0, procNameAlloc[nullTerminatorIndex]);
+					Assert.StrictEqual((sbyte)0, procNameUtf8.Pointer[nullTerminatorIndex]);
+				}
+			}
+			finally {
+				foreach (var procName in procNamesAlloc)
+					Marshal.FreeCoTaskMem(procName);
+			}
+		}
+
 		[Fact]
 		public unsafe void StaticCallVkGetInstanceProcAddr() {
 			var vkCreateInstanceStr = Marshal.StringToCoTaskMemUTF8("vkCreateInstance");
-			var result = Vulkan.vkGetInstanceProcAddr((VkInstance*) (IntPtr) 0, (sbyte*) vkCreateInstanceStr);
+			var result = Vulkan.vkGetInstanceProcAddr((VkInstance*) default(IntPtr), (sbyte*) vkCreateInstanceStr);
 			Marshal.FreeCoTaskMem(vkCreateInstanceStr);
 			Assert.NotStrictEqual(default(IntPtr), result.Value);
 		}
@@ -20,7 +58,7 @@ namespace VulkanTests {
 			var pProc = Native.GetProcAddr(pLib, "vkGetInstanceProcAddr");
 			var vkGetInstanceProcAddr = Marshal.GetDelegateForFunctionPointer<vkGetInstanceProcAddr>(pProc);
 			var vkCreateInstanceStr = Marshal.StringToCoTaskMemUTF8("vkCreateInstance");
-			var result = vkGetInstanceProcAddr((VkInstance*) (IntPtr) 0, (sbyte*) vkCreateInstanceStr);
+			var result = vkGetInstanceProcAddr((VkInstance*) default(IntPtr), (sbyte*) vkCreateInstanceStr);
 			Marshal.FreeCoTaskMem(vkCreateInstanceStr);
 			Assert.NotStrictEqual(default(IntPtr), result.Value);
 		}
@@ -28,16 +66,16 @@ namespace VulkanTests {
 		[Fact]
 		public unsafe void DynamicAndStaticVkGetInstanceProcAddrGetSamePointer() {
 			var procNames = new[] {
-				"vkGetInstanceProcAddr",
-				"vkEnumerateInstanceLayerProperties",
-				"vkEnumerateInstanceExtensionProperties"
-			}.Select(Marshal.StringToCoTaskMemUTF8)
-			.ToArray();
+					"vkCreateInstance",
+					"vkEnumerateInstanceLayerProperties",
+					"vkEnumerateInstanceExtensionProperties"
+				}.Select(Marshal.StringToCoTaskMemUTF8)
+				.ToArray();
 			try {
 				var pLib = Native.LoadLibrary("vulkan-1", "libvulkan.so", "libMoltenVK.dylib");
 				var pProc = Native.GetProcAddr(pLib, "vkGetInstanceProcAddr");
 				var vkGetInstanceProcAddr = Marshal.GetDelegateForFunctionPointer<vkGetInstanceProcAddr>(pProc);
-				
+
 				var nullVkInstance = default(VkInstance*);
 				foreach (var procName in procNames) {
 					var resultStatic = Vulkan.vkGetInstanceProcAddr
@@ -49,28 +87,48 @@ namespace VulkanTests {
 				}
 			}
 			finally {
-				foreach ( var procName in procNames )
+				foreach (var procName in procNames)
 					Marshal.FreeCoTaskMem(procName);
 			}
 		}
 
-		
 		[Fact]
-		public unsafe void Utf8StringVkGetInstanceProcAddr() {
+		public unsafe void Utf8StringStaticVkGetInstanceProcAddr() {
 			var procNames = new[] {
-					"vkGetInstanceProcAddr",
+					"vkCreateInstance",
 					"vkEnumerateInstanceLayerProperties",
 					"vkEnumerateInstanceExtensionProperties"
 				}.Select(s => new Utf8String(s))
 				.ToArray();
-			
-			var nullVkInstance = default(VkInstance*);
+
+			var nullVkInstance = (VkInstance*) default(IntPtr);
 			foreach (var procName in procNames) {
 				var resultStatic = Vulkan.vkGetInstanceProcAddr
-					(nullVkInstance, procName);
+					(nullVkInstance, procName.Pointer);
 
-				Assert.NotNull(resultStatic.Value);
+				Assert.NotStrictEqual(default(IntPtr), resultStatic.Value);
 			}
 		}
+
+		[Fact]
+		public unsafe void Utf8StringDynamicVkGetInstanceProcAddr() {
+			var procNames = new[] {
+					"vkCreateInstance",
+					"vkEnumerateInstanceLayerProperties",
+					"vkEnumerateInstanceExtensionProperties"
+				}.Select(s => new Utf8String(s))
+				.ToArray();
+
+
+			var nullVkInstance = default(VkInstance*);
+			foreach (var procName in procNames) {
+				var pLib = Native.LoadLibrary("vulkan-1.dll", "libvulkan.so", "libMoltenVK.dylib");
+				var pProc = Native.GetProcAddr(pLib, "vkGetInstanceProcAddr");
+				var vkGetInstanceProcAddr = Marshal.GetDelegateForFunctionPointer<vkGetInstanceProcAddr>(pProc);
+				var result = vkGetInstanceProcAddr(nullVkInstance, procName);
+				Assert.NotStrictEqual(default(IntPtr), result.Value);
+			}
+		}
+
 	}
 }

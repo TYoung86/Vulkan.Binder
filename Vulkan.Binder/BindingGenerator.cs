@@ -314,54 +314,72 @@ namespace Vulkan.Binder {
 				vkGetInstanceProcAddrRetType,
 				vkGetInstanceProcAddrParams
 			);
-			var vkGetInstanceProcAddrMethodRef = vkGetInstanceProcAddrMethod.Import(_asmBuilder.Module);
-
-			var vkEnumerateInstanceExtensionPropertiesField = staticLinkType.DefineField(
-				"vkEnumerateInstanceExtensionProperties",
-				_asmBuilder.Module.GetType("vkEnumerateInstanceExtensionProperties"),
-				FieldAttributes.Public | FieldAttributes.InitOnly | FieldAttributes.Static);
-
-			var vkEnumerateInstanceLayerPropertiesField = staticLinkType.DefineField(
-				"vkEnumerateInstanceLayerProperties",
-				_asmBuilder.Module.GetType("vkEnumerateInstanceLayerProperties"),
-				FieldAttributes.Public | FieldAttributes.InitOnly | FieldAttributes.Static);
-
-			var vkCreateInstanceField = staticLinkType.DefineField(
-				"vkCreateInstance",
-				_asmBuilder.Module.GetType("vkCreateInstance"),
-				FieldAttributes.Public | FieldAttributes.InitOnly | FieldAttributes.Static);
-
-			var utf8StringTypeDef = _asmBuilder.Module.GetType("Interop", "Utf8String");
-			var utf8StringGetPointerMethodRef = utf8StringTypeDef.GetMethod("GetPointer");
-
-			//.Import(_asmBuilder.Module);
-
-			staticLinkCtor.GenerateIL(il => {
-				// perform automatic dynamic linkage on other methods
-				il.Emit(OpCodes.Ldnull);
-				il.Emit(OpCodes.Ldstr, "vkEnumerateInstanceExtensionProperties");
-				il.Emit(OpCodes.Call, utf8StringGetPointerMethodRef);
-				il.Emit(OpCodes.Call, vkGetInstanceProcAddrMethodRef);
-				il.Emit(OpCodes.Stfld, vkEnumerateInstanceExtensionPropertiesField);
-
-				il.Emit(OpCodes.Ldnull);
-				il.Emit(OpCodes.Ldstr, "vkEnumerateInstanceLayerProperties");
-				il.Emit(OpCodes.Call, utf8StringGetPointerMethodRef);
-				il.Emit(OpCodes.Call, vkGetInstanceProcAddrMethodRef);
-				il.Emit(OpCodes.Stfld, vkEnumerateInstanceLayerPropertiesField);
-
-
-				il.Emit(OpCodes.Ldnull);
-				il.Emit(OpCodes.Ldstr, "vkCreateInstance");
-				il.Emit(OpCodes.Call, utf8StringGetPointerMethodRef);
-				il.Emit(OpCodes.Call, vkGetInstanceProcAddrMethodRef);
-				il.Emit(OpCodes.Stfld, vkCreateInstanceField);
-
-				il.Emit(OpCodes.Ret);
-			});
 
 			vkGetInstanceProcAddrMethod.SetImplementationFlags(
 				MethodImplAttributes.PreserveSig);
+
+			var vkGetInstanceProcAddrMethodRef = vkGetInstanceProcAddrMethod.Import(_asmBuilder.Module);
+
+			var intPtrTypeRef = _asmBuilder.Module.TypeSystem.IntPtr;
+			
+			var utf8StringTypeRef = typeof(Utf8String).Import(_asmBuilder.Module);
+			var utf8StringTypeDef = utf8StringTypeRef.Resolve();
+			var utf8StringGetPointerMethodRef = utf8StringTypeDef.GetMethod("GetPointer");
+			utf8StringGetPointerMethodRef = utf8StringGetPointerMethodRef.Import(_asmBuilder.Module);
+
+			var pfnVoidFnUmfpTypeDef = _asmBuilder.Module.GetType("PFN_vkVoidFunctionUnmanaged");
+			var pfnVoidFnUmfpValueFieldDef = pfnVoidFnUmfpTypeDef.Fields.First();
+			var pfnVoidFnUmfpValueFieldRef = _asmBuilder.Module.ImportReference( pfnVoidFnUmfpValueFieldDef );
+
+			void WriteAutomaticLinkageIL(MethodDefinition importMethodDef, string name) {
+				
+				var delegateTypeDef
+					= _asmBuilder.Module.GetType(name);
+				var delegateTypeRef
+					= delegateTypeDef.Import(_asmBuilder.Module);
+				
+				var staticField = staticLinkType.DefineField(
+					name, delegateTypeDef,
+					FieldAttributes.Public | FieldAttributes.InitOnly | FieldAttributes.Static);
+
+				var umfpTypeDef
+					= _asmBuilder.Module.GetType($"{name}Unmanaged");
+				var umfpTypeRef
+					= umfpTypeDef.Import(_asmBuilder.Module);
+
+				var umfpFromPtrMethodRef
+					= umfpTypeDef.Methods.First(md =>
+						md.Name == "op_Implicit"
+						&& md.ReturnType.Is(umfpTypeRef)
+						&& md.Parameters.Single().ParameterType.Is(intPtrTypeRef));
+
+				var umfpToDlgtMethodRef
+					= umfpTypeDef.Methods.First(md =>
+						md.Name == "op_Implicit"
+						&& md.ReturnType.Is(delegateTypeRef)
+						&& md.Parameters.Single().ParameterType.Is(umfpTypeRef));
+
+				importMethodDef.GenerateIL(il => {
+					
+					il.Emit(OpCodes.Ldc_I4_0);
+					il.Emit(OpCodes.Conv_U);
+					il.Emit(OpCodes.Ldstr, name);
+					il.Emit(OpCodes.Call, utf8StringGetPointerMethodRef);
+					il.Emit(OpCodes.Call, vkGetInstanceProcAddrMethodRef);
+					il.Emit(OpCodes.Ldfld, pfnVoidFnUmfpValueFieldRef);
+					il.Emit(OpCodes.Call, umfpFromPtrMethodRef);
+					il.Emit(OpCodes.Call, umfpToDlgtMethodRef);
+					il.Emit(OpCodes.Stsfld, staticField);
+
+				});
+			}
+			
+			WriteAutomaticLinkageIL(staticLinkCtor, "vkEnumerateInstanceLayerProperties");
+			WriteAutomaticLinkageIL(staticLinkCtor, "vkEnumerateInstanceExtensionProperties");
+			WriteAutomaticLinkageIL(staticLinkCtor, "vkCreateInstance");
+			staticLinkCtor.GenerateIL(il => {
+				il.Emit(OpCodes.Ret);
+			});
 
 			// TODO: generate dllmap config setter or something
 			//vkGetInstanceProcAddrMethod.SetCustomAttribute(() => new DllImportAttribute("vulkan-1")
