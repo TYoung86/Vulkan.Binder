@@ -301,7 +301,9 @@ namespace Vulkan.Binder {
 							PropertyAttributes.SpecialName,
 							propType, Type.EmptyTypes);
 						*/
-						var structGetter = structDef.DefineMethod("get_" + fieldName, HiddenPropertyMethodAttributes | MethodAttributes.Virtual, propType, Type.EmptyTypes);
+						var structGetter = structDef.DefineMethod("get_" + fieldName,
+							HiddenPropertyMethodAttributes
+							| MethodAttributes.Virtual, propType);
 						SetMethodInliningAttributes(structGetter);
 
 						//structProp.SetGetMethod(structGetter);

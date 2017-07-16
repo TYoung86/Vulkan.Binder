@@ -165,9 +165,6 @@
     <Content Include="VulkanSandcastlePresentation\Web\scripts\clipboard.min.js" />
     <Content Include="VulkanSandcastlePresentation\Web\scripts\jquery-1.11.0.min.js" />
     <Content Include="VulkanSandcastlePresentation\Web\search.html" />
-    <Content Include="VulkanSandcastlePresentation\Web\SearchHelp.aspx" />
-    <Content Include="VulkanSandcastlePresentation\Web\SearchHelp.inc.php" />
-    <Content Include="VulkanSandcastlePresentation\Web\SearchHelp.php" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="LegacyWeb\" />

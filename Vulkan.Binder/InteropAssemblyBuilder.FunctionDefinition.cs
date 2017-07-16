@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -18,6 +19,9 @@ namespace Vulkan.Binder {
 		private readonly MethodReference GetDelegateForFpMethodGtd;
 
 		private readonly MethodReference GetFpForDelegateMethodGtd;
+
+		private readonly ConcurrentDictionary<string,TypeDefinition> MarshallableSplitPointers
+			= new ConcurrentDictionary<string,TypeDefinition>();
 
 		private Func<TypeDefinition[]> DefineClrType(ClangFunctionInfoBase funcInfo32, ClangFunctionInfoBase funcInfo64) {
 			if (funcInfo32 == funcInfo64) {
@@ -55,6 +59,11 @@ namespace Vulkan.Binder {
 				Module.TypeSystem.ValueType);
 			Module.Types.Add(umfpDef);
 
+			var umfpRef = Module.ImportReference(umfpDef);
+			var iumfpGtd = IUnmanagedFunctionPointerGtd.MakeGenericInstanceType(funcDef);
+			var iumfpRef = iumfpGtd.Import(Module);
+			umfpDef.AddInterfaceImplementation(iumfpRef);
+
 			// todo: add implicit conversion ops using Marshal
 
 			var retParam = ResolveParameter(funcInfo.ReturnType);
@@ -76,11 +85,10 @@ namespace Vulkan.Binder {
 
 				Debug.WriteLine($"Completed dependencies for function {funcName}");
 
-				var umfpRef = Module.ImportReference(umfpDef);
-
 				var umfpValue = umfpDef.DefineField("Value", Module.TypeSystem.IntPtr,
-					FieldAttributes.Public
-					| FieldAttributes.InitOnly);
+					FieldAttributes.Public | FieldAttributes.InitOnly);
+				var umfpValueRef = Module.ImportReference(umfpValue);
+				
 
 				var getDelegateForFpMethodDef = Module.ImportReference(
 					new GenericInstanceMethod(GetDelegateForFpMethodGtd) {
@@ -96,31 +104,11 @@ namespace Vulkan.Binder {
 					PublicStaticMethodAttributes | MethodAttributes.SpecialName,
 					funcDef, umfpRef);
 
-				var umfpValueRef = Module.ImportReference(umfpValue);
-
 				umfpDlgt.GenerateIL(il => {
-					var argNull = default(CecilLabel);
-					if (EmitNullChecks) {
-						argNull = il.DefineLabel();
-					}
 					il.Emit(OpCodes.Ldarg_0);
-
-					if (EmitNullChecks) {
-						il.Emit(OpCodes.Dup);
-						il.Emit(OpCodes.Brfalse, argNull);
-					}
 					il.Emit(OpCodes.Ldfld, umfpValueRef);
 					il.Emit(OpCodes.Call, getDelegateForFpMethodDef);
 					il.Emit(OpCodes.Ret);
-
-					if (EmitNullChecks) {
-						il.MarkLabel(argNull);
-						il.Emit(OpCodes.Newobj, ArgumentNullCtor);
-						il.Emit(OpCodes.Throw);
-
-						// ReSharper disable once PossibleNullReferenceException
-						argNull.Cleanup();
-					}
 				});
 
 				var dlgtUmfp = umfpDef.DefineMethod("op_Implicit",
@@ -132,35 +120,19 @@ namespace Vulkan.Binder {
 				dlgtUmfp.Body.InitLocals = true;
 
 				dlgtUmfp.GenerateIL(il => {
-					var argNull = default(CecilLabel);
-					if (EmitNullChecks) {
-						argNull = il.DefineLabel();
-					}
 
 					il.Emit(OpCodes.Ldloca_S, dlgtUmfpV0);
 					il.Emit(OpCodes.Initobj, umfpRef);
 
 					il.Emit(OpCodes.Ldloca_S, dlgtUmfpV0);
-					il.Emit(OpCodes.Ldarg_0);
 
-					if (EmitNullChecks) {
-						il.Emit(OpCodes.Dup);
-						il.Emit(OpCodes.Brfalse, argNull);
-					}
+					il.Emit(OpCodes.Ldarg_0);
 					il.Emit(OpCodes.Call, getFpForDelegateMethodDef);
 					il.Emit(OpCodes.Stfld, umfpValueRef);
 
 					il.Emit(OpCodes.Ldloc_0);
 					il.Emit(OpCodes.Ret);
 
-					if (EmitNullChecks) {
-						il.MarkLabel(argNull);
-						il.Emit(OpCodes.Newobj, ArgumentNullCtor);
-						il.Emit(OpCodes.Throw);
-
-						// ReSharper disable once PossibleNullReferenceException
-						argNull.Cleanup();
-					}
 				});
 
 				var umfpPtr = umfpDef.DefineMethod("op_Implicit",
@@ -168,31 +140,14 @@ namespace Vulkan.Binder {
 					Module.TypeSystem.IntPtr, umfpRef);
 
 				umfpPtr.GenerateIL(il => {
-					var argNull = default(CecilLabel);
-					if (EmitNullChecks) {
-						argNull = il.DefineLabel();
-					}
 					il.Emit(OpCodes.Ldarg_0);
-					if (EmitNullChecks) {
-						il.Emit(OpCodes.Dup);
-						il.Emit(OpCodes.Brfalse, argNull);
-					}
 					il.Emit(OpCodes.Ldfld, umfpValueRef);
 					il.Emit(OpCodes.Ret);
-
-					if (EmitNullChecks) {
-						il.MarkLabel(argNull);
-						il.Emit(OpCodes.Newobj, ArgumentNullCtor);
-						il.Emit(OpCodes.Throw);
-
-						// ReSharper disable once PossibleNullReferenceException
-						argNull.Cleanup();
-					}
 				});
 
 				var ptrUmfp = umfpDef.DefineMethod("op_Implicit",
 					PublicStaticMethodAttributes | MethodAttributes.SpecialName,
-					umfpDef, Module.TypeSystem.IntPtr);
+					umfpRef, Module.TypeSystem.IntPtr);
 
 				var ptrUmfpV0 = new VariableDefinition(umfpRef);
 				ptrUmfp.Body.Variables.Add(ptrUmfpV0);
@@ -208,6 +163,7 @@ namespace Vulkan.Binder {
 
 					il.Emit(OpCodes.Ldloca_S, ptrUmfpV0);
 					il.Emit(OpCodes.Ldarg_0);
+
 					if (EmitNullChecks) {
 						il.Emit(OpCodes.Dup);
 						il.Emit(OpCodes.Brfalse, argNull);
@@ -227,6 +183,7 @@ namespace Vulkan.Binder {
 					}
 				});
 
+				
 				var argTypes = argParams.Select(p => p.Type).ToArray();
 
 
@@ -241,6 +198,71 @@ namespace Vulkan.Binder {
 				for (var i = 0 ; i < argTypes.Length ; i++) {
 					var argType = argTypes[i];
 					var argTypeDef = argType.Resolve();
+					if (argType.IsPointer) {
+						var interiorArgType = argType.GetInteriorType(out var transforms);
+						if (interiorArgType.Resolve().IsInterface) {
+							if (!argType.Name.StartsWith("I"))
+								throw new NotImplementedException();
+							var argTypeNameBase = interiorArgType.Name.Substring(1);
+							if (!MarshallableSplitPointers.TryGetValue(argTypeNameBase, out var marshallable)) {
+								TypeReference splitPtrTypeRef;
+								if (_splitPointerDefs.TryGetValue(interiorArgType.FullName, out var splitPtrType)) {
+									splitPtrTypeRef = splitPtrType;
+								}
+								else {
+									var argType32 = Module.GetType(interiorArgType.Namespace, argTypeNameBase + "32");
+									Debug.Assert(argType32 != null);
+									var argType64 = Module.GetType(interiorArgType.Namespace, argTypeNameBase + "64");
+									Debug.Assert(argType64 != null);
+									splitPtrType = SplitPointerGtd.MakeGenericInstanceType(interiorArgType, argType32, argType64);
+									if (!_splitPointerDefs.TryAdd(interiorArgType.FullName, splitPtrType))
+										throw new NotImplementedException();
+									splitPtrTypeRef = splitPtrType.Import(Module);
+								}
+
+								marshallable = Module.DefineType(argTypeNameBase+"Ptr", PublicSealedStructTypeAttributes);
+								var valueField = marshallable.DefineField("Value", splitPtrTypeRef,
+									FieldAttributes.Public | FieldAttributes.InitOnly);
+
+								// implicit conversion from split pointer to marshallable for use as params
+								var asSplitPtrOp = marshallable.DefineMethod("op_Implicit",
+									PublicStaticMethodAttributes | MethodAttributes.SpecialName,
+									splitPtrTypeRef, marshallable);
+								asSplitPtrOp.GenerateIL(il => {
+									il.Emit(OpCodes.Ldarg_0);
+									il.Emit(OpCodes.Ldfld, valueField);
+									il.Emit(OpCodes.Ret);
+								});
+								
+								// implicit conversion from marshallable to split pointer for use as returns
+								var toSplitPtrOp = marshallable.DefineMethod("op_Implicit",
+									PublicStaticMethodAttributes | MethodAttributes.SpecialName,
+									marshallable, splitPtrTypeRef);
+								var toSplitPtrOpV0 = new VariableDefinition(marshallable);
+								toSplitPtrOp.Body.Variables.Add(toSplitPtrOpV0);
+								toSplitPtrOp.Body.InitLocals = true;
+								toSplitPtrOp.GenerateIL(il => {
+									il.Emit(OpCodes.Ldloca_S, ptrUmfpV0);
+									il.Emit(OpCodes.Initobj, marshallable);
+									il.Emit(OpCodes.Ldloca_S, ptrUmfpV0);
+									il.Emit(OpCodes.Ldarg_0);
+									il.Emit(OpCodes.Stfld, valueField);
+									il.Emit(OpCodes.Ldloc_0);
+									il.Emit(OpCodes.Ret);
+								});
+
+								if (!MarshallableSplitPointers.TryAdd(argTypeNameBase, marshallable))
+									throw new NotImplementedException();
+							}
+							Debug.Assert(marshallable != null);
+							argTypes[i] = marshallable.Import(Module)
+								.ApplyTransforms(transforms.Skip(1));
+
+
+
+							continue;
+						}
+					}
 					if (argTypeDef.BaseType == null) continue;
 					if (!argTypeDef.BaseType.Is(MulticastDelegateType))
 						continue;

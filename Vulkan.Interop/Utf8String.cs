@@ -10,7 +10,7 @@ namespace Interop {
 	public unsafe struct Utf8String :
 		IEquatable<string>, IComparable<string>,
 		IEquatable<Utf8String>, IComparable<Utf8String>,
-		IReadOnlyList<sbyte>, IReadOnlyCollection<char>, IReadOnlyCollection<int>,
+		IReadOnlyList<sbyte>, IReadOnlyCollection<char>,
 		IConvertible {
 
 		public static sbyte* GetPointer(string value)
@@ -20,8 +20,13 @@ namespace Interop {
 
 		public IReadOnlyList<sbyte> SBytes => this;
 		
-		sbyte IReadOnlyList<sbyte>.this[int index]
-			=> Pointer[index];
+		sbyte IReadOnlyList<sbyte>.this[int index] {
+			get {
+				if (index < 0 || index > ByteLength)
+					return 0;
+				return Pointer[index];
+			}
+		}
 
 		public Utf8String(sbyte* sBytes) => Pointer = sBytes;
 
@@ -96,43 +101,46 @@ namespace Interop {
 		}
 
 		private uint CountChars() {
-			var count = (uint) Encoding.UTF8.GetCharCount((byte*) Pointer, (int) ByteLength);
-			CharCountCache[this] = count;
-			return count;
+			try {
+				var count = (uint) Encoding.UTF8.GetCharCount((byte*) Pointer, (int) ByteLength);
+				CharCountCache[this] = count;
+				return count;
+			}
+			catch (Exception ex) {
+				throw new NotImplementedException("Can't count characters in this Utf8String!",ex);
+			}
 		}
 
 		private string Decode() {
-			var s = Encoding.UTF8.GetString((byte*) Pointer, (int) ByteLength);
-			StringCache[this] = s;
+			try {
+				var s = Encoding.UTF8.GetString((byte*) Pointer, (int) ByteLength);
+				StringCache[this] = s;
 #if NETSTANDARD2_0
 			if ( string.IsInterned(s) != null )
 				Interned[s] = this;
 #endif
-			return s;
-		}
-		
-		private UnmanagedMemoryStream GetUnmanagedMemoryStream()
-			=> new UnmanagedMemoryStream((byte*) Pointer, ByteLength, ByteLength, FileAccess.Read);
-
-		private StreamReader GetStreamReader()
-			=> new StreamReader(GetUnmanagedMemoryStream(), Encoding.UTF8, false, Math.Min(16, (int) ByteLength));
-
-		IEnumerator<int> IEnumerable<int>.GetEnumerator() {
-			using (var sr = GetStreamReader()) {
-				var c = sr.Read();
-				if (c == -1) yield break;
-
-				yield return c;
+				return s;
+			}
+			catch (Exception ex) {
+				throw new NotImplementedException("Can't decode characters in this Utf8String!",ex);
 			}
 		}
 
 		IEnumerator<char> IEnumerable<char>.GetEnumerator() {
-			using (var sr = GetStreamReader()) {
-				var c = sr.Read();
-				if (c == -1) yield break;
-
-				yield return (char) c;
+			var decoder = Encoding.UTF8.GetDecoder();
+			var byteBuf = new byte[1];
+			var charBuf = new char[1];
+			int charsRead;
+			foreach (var sb in (IEnumerable<sbyte>) this) {
+				charsRead = decoder.GetChars(byteBuf, 0, 1, charBuf, 0, false);
+				if (charsRead != 0)
+					yield return charBuf[0];
 			}
+			do {
+				charsRead = decoder.GetChars(byteBuf, 0, 0, charBuf, 0, true);
+				if (charsRead != 0)
+					yield return charBuf[0];
+			} while (charsRead != 0);
 		}
 
 		IEnumerator<sbyte> IEnumerable<sbyte>.GetEnumerator() {
@@ -289,9 +297,6 @@ namespace Interop {
 			=> (int) ByteLength;
 
 		int IReadOnlyCollection<char>.Count
-			=> (int) CharCount;
-
-		int IReadOnlyCollection<int>.Count
 			=> (int) CharCount;
 
 	}

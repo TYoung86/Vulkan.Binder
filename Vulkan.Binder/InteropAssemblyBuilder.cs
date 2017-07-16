@@ -77,6 +77,7 @@ namespace Vulkan.Binder {
 		public readonly TypeReference ITypedHandleGtd;
 		public readonly TypeReference ITypedHandleType;
 		public readonly TypeReference SplitPointerGtd;
+		public readonly TypeReference IUnmanagedFunctionPointerGtd;
 
 		private static readonly ModuleParameters DefaultModuleParameters = new ModuleParameters {
 			Architecture = TargetArchitecture.I386,
@@ -173,6 +174,7 @@ namespace Vulkan.Binder {
 			HandleUIntPtrGtd = typeof(HandleUIntPtr<>).Import(Module);
 			SplitPointerGtd = typeof(SplitPointer<,,>).Import(Module);
 			BinderGeneratedAttributeType = typeof(BinderGeneratedAttribute).Import(Module);
+			IUnmanagedFunctionPointerGtd = typeof(IUnmanagedFunctionPointer<>).Import(Module);
 
 			TypeArrayOfSingularVoidPointer = new [] {VoidPointerType};
 			TypeArrayOfSingularUInt = new [] {Module.TypeSystem.UInt32};

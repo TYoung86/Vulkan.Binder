@@ -32,11 +32,14 @@ namespace Vulkan.Binder {
 			= TypeAttributes.Public
 			| TypeAttributes.Abstract
 			| TypeAttributes.Interface;
+		
+		private const MethodAttributes InterfaceImplementationMethodAttributes
+			= MethodAttributes.Virtual
+			| MethodAttributes.HideBySig;
 
 		private const MethodAttributes PublicInterfaceImplementationMethodAttributes
 			= MethodAttributes.Public
-			| MethodAttributes.Virtual
-			| MethodAttributes.HideBySig;
+			| InterfaceImplementationMethodAttributes;
 
 		private const MethodAttributes PublicStaticMethodAttributes
 			= MethodAttributes.Public

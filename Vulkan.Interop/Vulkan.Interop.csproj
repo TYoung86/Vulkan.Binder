@@ -1,9 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard1.6</TargetFramework>
     <RootNamespace>Interop</RootNamespace>
     <Configurations>Release</Configurations>
+    <Version>1.6.0</Version>
+    <Description>Hardy, efficient (low level), portable .NET Standard 1.6 bindings for Vulkan with integrated documentation. Generated directly from Vulkan C headers and docs. Uses ClangSharp, supports 32-bit, 64-bit, agnostic (AnyCPU) interfaces. Incorporates Vulkan Docs and XML from official github repo.</Description>
+    <Authors>Tyler Young</Authors>
+    <Company>Artilect</Company>
+    <PackageProjectUrl>https://github.com/TYoung86/Vulkan.Binder</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/TYoung86/Vulkan.Binder.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Vulkan</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -12,6 +20,13 @@
 
   <ItemGroup>
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.4.0-preview2-25405-01" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Vulkan">
+      <HintPath>..\Vulkan.Binder\Vulkan.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
   </ItemGroup>
 
 </Project>

@@ -22,20 +22,20 @@ namespace VulkanTests {
 				.ToArray();
 
 			try {
-				for ( var i = 0; i < procNamesUtf8.Length; ++i ) {
+				for (var i = 0 ; i < procNamesUtf8.Length ; ++i) {
 					var procName = procNames[i];
 					var procNameUtf8 = procNamesUtf8[i];
-					Assert.StrictEqual(procName.Length, (int)procNameUtf8.ByteLength);
-					Assert.StrictEqual(procName.Length, (int)procNameUtf8.CharCount);
-					var procNameAlloc = (sbyte*)procNamesAlloc[i];
+					Assert.StrictEqual(procName.Length, (int) procNameUtf8.ByteLength);
+					Assert.StrictEqual(procName.Length, (int) procNameUtf8.CharCount);
+					var procNameAlloc = (sbyte*) procNamesAlloc[i];
 					for (var c = 0 ; c < procNameUtf8.ByteLength ; ++c) {
-						Assert.StrictEqual((sbyte)procName[c], procNameUtf8.SBytes[c]);
+						Assert.StrictEqual((sbyte) procName[c], procNameUtf8.SBytes[c]);
 						Assert.StrictEqual(procNameAlloc[c], procNameUtf8.SBytes[c]);
 					}
 
 					var nullTerminatorIndex = procNameUtf8.ByteLength;
-					Assert.StrictEqual((sbyte)0, procNameAlloc[nullTerminatorIndex]);
-					Assert.StrictEqual((sbyte)0, procNameUtf8.Pointer[nullTerminatorIndex]);
+					Assert.StrictEqual((sbyte) 0, procNameAlloc[nullTerminatorIndex]);
+					Assert.StrictEqual((sbyte) 0, procNameUtf8.Pointer[nullTerminatorIndex]);
 				}
 			}
 			finally {
@@ -49,18 +49,22 @@ namespace VulkanTests {
 			var vkCreateInstanceStr = Marshal.StringToCoTaskMemUTF8("vkCreateInstance");
 			var result = Vulkan.vkGetInstanceProcAddr((VkInstance*) default(IntPtr), (sbyte*) vkCreateInstanceStr);
 			Marshal.FreeCoTaskMem(vkCreateInstanceStr);
-			Assert.NotStrictEqual(default(IntPtr), result.Value);
+			Assert.NotStrictEqual(default(IntPtr), (IntPtr) result);
 		}
-
+		
 		[Fact]
 		public unsafe void DynamicCallVkGetInstanceProcAddr() {
 			var pLib = Native.LoadLibrary("vulkan-1.dll", "libvulkan.so", "libMoltenVK.dylib");
 			var pProc = Native.GetProcAddr(pLib, "vkGetInstanceProcAddr");
-			var vkGetInstanceProcAddr = Marshal.GetDelegateForFunctionPointer<vkGetInstanceProcAddr>(pProc);
 			var vkCreateInstanceStr = Marshal.StringToCoTaskMemUTF8("vkCreateInstance");
-			var result = vkGetInstanceProcAddr((VkInstance*) default(IntPtr), (sbyte*) vkCreateInstanceStr);
-			Marshal.FreeCoTaskMem(vkCreateInstanceStr);
-			Assert.NotStrictEqual(default(IntPtr), result.Value);
+			try {
+				var vkGetInstanceProcAddr = Marshal.GetDelegateForFunctionPointer<vkGetInstanceProcAddr>(pProc);
+				var result = vkGetInstanceProcAddr((VkInstance*) default(IntPtr), (sbyte*) vkCreateInstanceStr);
+				Assert.NotStrictEqual(default(IntPtr), (IntPtr) result);
+			}
+			finally {
+				Marshal.FreeCoTaskMem(vkCreateInstanceStr);
+			}
 		}
 
 		[Fact]
@@ -83,7 +87,7 @@ namespace VulkanTests {
 					var resultDynamic = vkGetInstanceProcAddr
 						(nullVkInstance, (sbyte*) procName);
 
-					Assert.StrictEqual(resultStatic.Value, resultDynamic.Value);
+					Assert.StrictEqual(resultStatic, resultDynamic);
 				}
 			}
 			finally {
@@ -106,7 +110,7 @@ namespace VulkanTests {
 				var resultStatic = Vulkan.vkGetInstanceProcAddr
 					(nullVkInstance, procName.Pointer);
 
-				Assert.NotStrictEqual(default(IntPtr), resultStatic.Value);
+				Assert.NotStrictEqual(default(IntPtr), (IntPtr) resultStatic);
 			}
 		}
 
@@ -126,8 +130,16 @@ namespace VulkanTests {
 				var pProc = Native.GetProcAddr(pLib, "vkGetInstanceProcAddr");
 				var vkGetInstanceProcAddr = Marshal.GetDelegateForFunctionPointer<vkGetInstanceProcAddr>(pProc);
 				var result = vkGetInstanceProcAddr(nullVkInstance, procName);
-				Assert.NotStrictEqual(default(IntPtr), result.Value);
+				Assert.NotStrictEqual(default(IntPtr), (IntPtr) result);
 			}
+		}
+
+		[Fact]
+		public void AutomaticLinkage() {
+			
+			Assert.NotNull(Vulkan.vkCreateInstance);
+			Assert.NotNull(Vulkan.vkEnumerateInstanceExtensionProperties);
+			Assert.NotNull(Vulkan.vkEnumerateInstanceLayerProperties);
 		}
 
 	}

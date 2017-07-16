@@ -287,6 +287,7 @@ namespace Vulkan.Binder {
 
 			_asmBuilder.Compile();
 
+			/*
 			Console.WriteLine();
 			WriteLine("Adding customizations...");
 
@@ -327,9 +328,8 @@ namespace Vulkan.Binder {
 			var utf8StringGetPointerMethodRef = utf8StringTypeDef.GetMethod("GetPointer");
 			utf8StringGetPointerMethodRef = utf8StringGetPointerMethodRef.Import(_asmBuilder.Module);
 
-			var pfnVoidFnUmfpTypeDef = _asmBuilder.Module.GetType("PFN_vkVoidFunctionUnmanaged");
+			var pfnVoidFnUmfpTypeDef = vkGetInstanceProcAddrMethod.ReturnType.Resolve();
 			var pfnVoidFnUmfpValueFieldDef = pfnVoidFnUmfpTypeDef.Fields.First();
-			var pfnVoidFnUmfpValueFieldRef = _asmBuilder.Module.ImportReference( pfnVoidFnUmfpValueFieldDef );
 
 			void WriteAutomaticLinkageIL(MethodDefinition importMethodDef, string name) {
 				
@@ -366,7 +366,7 @@ namespace Vulkan.Binder {
 					il.Emit(OpCodes.Ldstr, name);
 					il.Emit(OpCodes.Call, utf8StringGetPointerMethodRef);
 					il.Emit(OpCodes.Call, vkGetInstanceProcAddrMethodRef);
-					il.Emit(OpCodes.Ldfld, pfnVoidFnUmfpValueFieldRef);
+					il.Emit(OpCodes.Ldfld, pfnVoidFnUmfpValueFieldDef);
 					il.Emit(OpCodes.Call, umfpFromPtrMethodRef);
 					il.Emit(OpCodes.Call, umfpToDlgtMethodRef);
 					il.Emit(OpCodes.Stsfld, staticField);
@@ -381,7 +381,7 @@ namespace Vulkan.Binder {
 				il.Emit(OpCodes.Ret);
 			});
 
-			// TODO: generate dllmap config setter or something
+
 			//vkGetInstanceProcAddrMethod.SetCustomAttribute(() => new DllImportAttribute("vulkan-1")
 			//	{ BestFitMapping = false, CharSet = CharSet.Ansi });
 			var nativeVulkanModuleRef = new ModuleReference("vulkan-1");
@@ -398,6 +398,7 @@ namespace Vulkan.Binder {
 				// TODO: perform any eager load ops
 				il.Emit(OpCodes.Ret);
 			});
+			*/
 
 			Console.WriteLine();
 			WriteLine("Saving constructed assembly.");
