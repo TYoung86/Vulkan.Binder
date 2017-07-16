@@ -201,6 +201,7 @@ namespace Vulkan.Binder {
 			var typeRedirs = ImmutableDictionary.CreateBuilder<string, string>();
 
 			typeRedirs.Add("VkBool32", "Interop.Bool32");
+			knownTypes.Add("Interop.Bool32", InteropAssemblyBuilder.KnownType.Struct);
 
 			foreach (var enumType in xml.EnumTypes) {
 				knownTypes.Add(enumType.Key, InteropAssemblyBuilder.KnownType.Enum);

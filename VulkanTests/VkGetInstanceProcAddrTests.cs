@@ -135,7 +135,7 @@ namespace VulkanTests {
 		}
 
 		[Fact]
-		public void AutomaticLinkage() {
+		public unsafe void AutomaticLinkage() {
 			
 			Assert.NotNull(Vulkan.vkCreateInstance);
 			Assert.NotNull(Vulkan.vkEnumerateInstanceExtensionProperties);

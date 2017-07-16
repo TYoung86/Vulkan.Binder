@@ -162,34 +162,42 @@ namespace Vulkan.Binder {
 				if (primitiveType == null)
 					throw new NotImplementedException();
 				var originalTypeName = originalType.ToString();
+				var typeName = originalTypeName;
+				if (TypeRedirects.TryGetValue(originalTypeName, out renamed)) {
+					typeName = renamed;
+				}
 
 				if (originalType.kind == CXTypeKind.CXType_Typedef) {
-					if (TypeRedirects.TryGetValue(originalTypeName, out renamed)) {
-						originalTypeName = renamed;
-					}
 
-					if (KnownTypes.ContainsKey(originalTypeName)) {
-						var knownType = Module.GetType(originalType.ToString());
-						if (knownType == null)
-							throw new NotImplementedException();
+					if (KnownTypes.ContainsKey(typeName)) {
+						var knownType = Module.GetType(typeName)
+							?? Module.GetType(originalTypeName)
+							?? throw new NotImplementedException();
+
 						return new ParameterInfo(name, knownType, index);
+					}
+				}
+				else {
+					var found = Module.GetType(typeName);
+					if (found != null) {
+						return new ParameterInfo(name, found, index);
 					}
 				}
 				return new ParameterInfo(name, primitiveType.Import(Module), index);
 			}
 
-			var typeName = typeDeclCursor.ToString();
+			var typeDeclName = typeDeclCursor.ToString();
 
-			if (TypeRedirects.TryGetValue(typeName, out renamed)) {
-				typeName = renamed;
+			if (TypeRedirects.TryGetValue(typeDeclName, out renamed)) {
+				typeDeclName = renamed;
 			}
 
-			var possibleType = Module.GetType(typeName);
+			var possibleType = Module.GetType(typeDeclName);
 			if (possibleType != null)
 				return new ParameterInfo(name, possibleType, index);
 
 			return new ParameterInfo(name,
-				IncompleteTypeReference.Get(Module, null, typeName), index);
+				IncompleteTypeReference.Get(Module, null, typeDeclName), index);
 		}
 
 		private ParameterInfo ResolveParameter(CXType originalType, string name = null, int index = 0) {
@@ -237,34 +245,41 @@ namespace Vulkan.Binder {
 				if (primitiveType == null)
 					throw new NotImplementedException();
 				var originalTypeName = originalType.ToString();
-
+				var typeName = originalTypeName;
+				
+				if (TypeRedirects.TryGetValue(originalTypeName, out renamed)) {
+					typeName = renamed;
+				}
 				if (originalType.kind == CXTypeKind.CXType_Typedef) {
-					if (TypeRedirects.TryGetValue(originalTypeName, out renamed)) {
-						originalTypeName = renamed;
-					}
-					if (KnownTypes.ContainsKey(originalTypeName)) {
-						var knownType = Module.GetType(originalType.ToString());
-						if (knownType == null)
-							throw new NotImplementedException();
+					if (KnownTypes.ContainsKey(typeName)) {
+						var knownType = Module.GetType(typeName)
+							?? Module.GetType(originalTypeName)
+							?? throw new NotImplementedException();
 						return new ParameterInfo(name, knownType, index);
+					}
+				}
+				else {
+					var found = Module.GetType(typeName);
+					if (found != null) {
+						return new ParameterInfo(name, found, index);
 					}
 				}
 
 				return new ParameterInfo(name, primitiveType.Import(Module), index);
 			}
 
-			var typeName = typeDeclCursor.ToString();
+			var typeDeclName = typeDeclCursor.ToString();
 
-			if (TypeRedirects.TryGetValue(typeName, out renamed)) {
-				typeName = renamed;
+			if (TypeRedirects.TryGetValue(typeDeclName, out renamed)) {
+				typeDeclName = renamed;
 			}
 
-			var possibleType = Module.GetType(typeName);
+			var possibleType = Module.GetType(typeDeclName);
 			if (possibleType != null)
 				return new ParameterInfo(name, possibleType, index);
 
 			return new ParameterInfo(name,
-				IncompleteTypeReference.Get(Module, null, typeName), index);
+				IncompleteTypeReference.Get(Module, null, typeDeclName), index);
 		}
 
 		private static bool IsTypeSigned(Type type)

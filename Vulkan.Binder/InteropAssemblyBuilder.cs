@@ -16,6 +16,7 @@ using Interop;
 using Mono.Cecil;
 using Mono.Cecil.Rocks;
 using Vulkan.Binder.Extensions;
+
 //using System.Reflection;
 //using System.Reflection.Emit;
 using SAssembly = System.Reflection.Assembly;
@@ -23,6 +24,7 @@ using TypeAttributes = Mono.Cecil.TypeAttributes;
 
 namespace Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
+
 		private static ConcurrentStack<Func<TypeDefinition[]>> DefinitionFuncs {
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			get;
@@ -57,26 +59,39 @@ namespace Vulkan.Binder {
 		public ModuleDefinition Module { get; }
 
 		public string Namespace { get; }
-		
+
 		public bool EmitBoundsChecks { get; set; } = true;
+
 		public bool EmitNullChecks { get; set; } = true;
 
 		//public TypeBuilder Delegates { get; }
 
 		public readonly TypeReference VoidPointerType;
+
 		public readonly TypeReference MulticastDelegateType;
+
 		public readonly TypeReference BinderGeneratedAttributeType;
 
 		public readonly TypeReference HandleInt32Gtd;
+
 		public readonly TypeReference HandleUInt32Gtd;
+
 		public readonly TypeReference HandleInt64Gtd;
+
 		public readonly TypeReference HandleUInt64Gtd;
+
 		public readonly TypeReference HandleIntPtrGtd;
+
 		public readonly TypeReference HandleUIntPtrGtd;
+
 		public readonly TypeReference IHandleGtd;
+
 		public readonly TypeReference ITypedHandleGtd;
+
 		public readonly TypeReference ITypedHandleType;
+
 		public readonly TypeReference SplitPointerGtd;
+
 		public readonly TypeReference IUnmanagedFunctionPointerGtd;
 
 		private static readonly ModuleParameters DefaultModuleParameters = new ModuleParameters {
@@ -86,9 +101,13 @@ namespace Vulkan.Binder {
 		};
 
 		private const string DefaultTargetFramework = ".NETStandard,Version=v1.6";
+
 		private static readonly SAssembly BaseInteropAssembly = typeof(IHandle<>).GetTypeInfo().Assembly;
+
 		private static readonly string BaseInteropAsmName = BaseInteropAssembly.GetName().Name;
+
 		private static readonly string InteropAsmCodeBase = BaseInteropAssembly.CodeBase;
+
 		private static readonly string BaseInteropAsmPath = new Uri(InteropAsmCodeBase).LocalPath;
 
 		public ImmutableDictionary<string, KnownType> KnownTypes
@@ -128,9 +147,11 @@ namespace Vulkan.Binder {
 				ReadWrite = true,
 				ReadingMode = ReadingMode.Immediate,
 				AssemblyResolver = asmResolver,
+
 				//MetadataResolver = mdResolver,
 				ReadSymbols = false,
 				ApplyWindowsRuntimeProjections = false,
+
 				//SymbolReaderProvider = null,
 				//MetadataImporterProvider = null,
 				//ReflectionImporterProvider = null,
@@ -140,7 +161,7 @@ namespace Vulkan.Binder {
 			Module = Assembly.MainModule;
 			ModuleName = $"{Name.Name}.dll";
 			Module.Name = ModuleName;
-			
+
 			if (EmitBoundsChecks)
 				ArgumentOutOfRangeCtor = ArgumentOutOfRangeCtorInfo.Import(Module);
 			if (EmitNullChecks)
@@ -176,9 +197,9 @@ namespace Vulkan.Binder {
 			BinderGeneratedAttributeType = typeof(BinderGeneratedAttribute).Import(Module);
 			IUnmanagedFunctionPointerGtd = typeof(IUnmanagedFunctionPointer<>).Import(Module);
 
-			TypeArrayOfSingularVoidPointer = new [] {VoidPointerType};
-			TypeArrayOfSingularUInt = new [] {Module.TypeSystem.UInt32};
-			TypeArrayOfSingularULong = new [] {Module.TypeSystem.UInt64};
+			TypeArrayOfSingularVoidPointer = new[] {VoidPointerType};
+			TypeArrayOfSingularUInt = new[] {Module.TypeSystem.UInt32};
+			TypeArrayOfSingularULong = new[] {Module.TypeSystem.UInt64};
 
 			IntegrateInteropTypes(Module.Types);
 
@@ -221,11 +242,13 @@ namespace Vulkan.Binder {
 			*/
 			while (Assembly.HasCustomAttributes)
 				Assembly.CustomAttributes.RemoveAt(0);
+
 			Assembly.CustomAttributes.Clear();
 			while (Module.HasCustomAttributes)
 				Module.CustomAttributes.RemoveAt(0);
+
 			Module.CustomAttributes.Clear();
-			
+
 			foreach (var custAttr in asmCustAttrs)
 				Assembly.CustomAttributes.Add(custAttr);
 
@@ -265,26 +288,29 @@ namespace Vulkan.Binder {
 				if (TypeRedirects.TryGetValue(name, out var renamed)) {
 					name = renamed;
 				}
-				if (Module.GetType(name) != null)
-					throw new NotImplementedException();
-				switch (knownType.Value) {
-					case KnownType.Enum: {
-						Module.DefineEnum(name, TypeAttributes.Public);
-						break;
+				if (Module.GetType(name) == null)
+					switch (knownType.Value) {
+						case KnownType.Enum: {
+							Module.DefineEnum(name, TypeAttributes.Public);
+							break;
+						}
+						case KnownType.Bitmask: {
+							var def = Module.DefineEnum(name, TypeAttributes.Public);
+							def.CustomAttributes.Add(FlagsAttribute);
+							break;
+						}
+						case KnownType.Handle: {
+							throw new NotImplementedException();
+						}
+						case KnownType.Struct: {
+							throw new NotImplementedException();
+						}
+						default: {
+							throw new NotImplementedException();
+						}
 					}
-					case KnownType.Bitmask: {
-						var def = Module.DefineEnum(name, TypeAttributes.Public);
-						def.CustomAttributes.Add(FlagsAttribute);
-						break;
-					}
-					case KnownType.Handle: {
-						throw new NotImplementedException();
-					}
-					case KnownType.Struct: {
-						throw new NotImplementedException();
-					}
-				}
 			}
+
 			ReportProgress("Preparing known types", index, total);
 		}
 
@@ -293,6 +319,7 @@ namespace Vulkan.Binder {
 			var writerParams = new WriterParameters {
 				// TODO: strong name key
 			};
+
 			// coalesce assembly references
 			var typeRefs = Module.GetTypeReferences().ToArray();
 			var coreLib = (AssemblyNameReference) Module.TypeSystem.CoreLibrary;
@@ -306,23 +333,28 @@ namespace Vulkan.Binder {
 				}
 				if (!collided.Skip(1).Any())
 					continue;
+
 				var usedAsm = AssemblyResolver.GetKnownAssembly(name);
 				if (usedAsm == null)
 					throw new NotImplementedException();
+
 				var preferredVersion = collided.Min(anr => anr.Version);
 				var preferred = collided.First(anr => anr.Version == preferredVersion);
 
 				foreach (var tr in typeRefs) {
 					if (!(tr.Scope is AssemblyNameReference anr))
 						throw new NotImplementedException();
+
 					var refScopeName = anr.Name;
 					if (refScopeName != name)
 						continue;
+
 					foreach (var anrRef in collided) {
 						tr.MetadataToken = new MetadataToken(TokenType.TypeRef, 0);
 						tr.Scope = anrRef;
 						if (tr.Resolve() == null)
 							continue;
+
 						if (preferred.Version < anr.Version)
 							preferred = anr;
 						break;
@@ -336,15 +368,18 @@ namespace Vulkan.Binder {
 				foreach (var tr in typeRefs) {
 					if (!(tr.Scope is AssemblyNameReference anr))
 						throw new NotImplementedException();
+
 					var refScopeName = anr.Name;
 					if (refScopeName != name)
 						continue;
 					if (anr.Version == preferredVersion)
 						continue;
+
 					tr.MetadataToken = new MetadataToken(TokenType.TypeRef, 0);
 					tr.Scope = preferred;
 					if (tr.Resolve() == null)
 						throw new NotImplementedException();
+
 					ReportProgress($"Retargeting {tr.FullName} from {preferred.Name} v{anr.Version} to v{preferred.Version}");
 				}
 
@@ -370,10 +405,15 @@ namespace Vulkan.Binder {
 
 
 		public enum KnownType {
+
 			Enum,
+
 			Bitmask,
+
 			Struct,
+
 			Handle
+
 		}
 
 		public Action<string, int, int> ProgressReportFunc { get; set; }
@@ -381,5 +421,6 @@ namespace Vulkan.Binder {
 		private void ReportProgress(string state, int workDone = -1, int workTotal = -1) {
 			ProgressReportFunc?.Invoke(state, workDone, workTotal);
 		}
+
 	}
 }
