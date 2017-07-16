@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
 
 namespace Interop {
-	[SuppressMessage("ReSharper", "UnusedTypeParameter")]
 	public struct HandleIntPtr<T> : ITypedHandle<IntPtr> where T : IHandle<T> {
 
 		public HandleIntPtr(IntPtr value) => Value = value;

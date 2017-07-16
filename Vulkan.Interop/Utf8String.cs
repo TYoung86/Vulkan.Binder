@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Interop {
+	using static Utf8StringInternal;
 	public unsafe struct Utf8String :
 		IEquatable<string>, IComparable<string>,
 		IEquatable<Utf8String>, IComparable<Utf8String>,
-		IReadOnlyList<sbyte>, IReadOnlyCollection<char>, IReadOnlyCollection<int>,
+		IReadOnlyList<sbyte>, IReadOnlyCollection<char>,
 		IConvertible {
 
 		public static sbyte* GetPointer(string value)
@@ -20,8 +20,13 @@ namespace Interop {
 
 		public IReadOnlyList<sbyte> SBytes => this;
 		
-		sbyte IReadOnlyList<sbyte>.this[int index]
-			=> Pointer[index];
+		sbyte IReadOnlyList<sbyte>.this[int index] {
+			get {
+				if (index < 0 || index > ByteLength)
+					return 0;
+				return Pointer[index];
+			}
+		}
 
 		public Utf8String(sbyte* sBytes) => Pointer = sBytes;
 
@@ -31,43 +36,33 @@ namespace Interop {
 		}
 
 		public Utf8String(string str) {
+#if NETSTANDARD2_0
 			if ( string.IsInterned(str) != null
 				&& Interned.TryGetValue(str, out var duplicate)) {
 				Pointer = duplicate.Pointer;
 				return;
 			}
+#endif
 
 			var utf8 = Encoding.UTF8;
 			var byteCount = utf8.GetByteCount(str);
-			Pointer = (sbyte*) Marshal.AllocHGlobal(byteCount);
-			Allocated[this] = CountBytes();
+			var allocSize = byteCount + 1;
+			Pointer = (sbyte*) Marshal.AllocHGlobal(allocSize);
+			//Pointer = (sbyte*) Marshal.AllocCoTaskMem(allocSize);
+			fixed (char* pch = str) {
+				utf8.GetBytes(pch, str.Length, (byte*) Pointer, byteCount);
+				Pointer[byteCount] = 0;
+			}
+			Allocated[this] = (uint)allocSize;
+			//ByteLengthCache[this] = (uint)byteCount;
 			CharCountCache[this] = (uint) str.Length;
 			StringCache[this] = str;
-			fixed (char* pch = str)
-				utf8.GetBytes(pch, str.Length, (byte*) Pointer, byteCount);
+
 		}
-
-		private static readonly ConcurrentDictionary<string, Utf8String> Interned
-			= new ConcurrentDictionary<string, Utf8String>();
-
-		private static readonly ConcurrentDictionary<IntPtr, uint> Allocated
-			= new ConcurrentDictionary<IntPtr, uint>();
-
-		private static readonly ConcurrentDictionary<IntPtr, uint> ByteLengthCache
-			= new ConcurrentDictionary<IntPtr, uint>();
-
-		private static readonly ConcurrentDictionary<IntPtr, uint> CharCountCache
-			= new ConcurrentDictionary<IntPtr, uint>();
-
-		private static readonly ConcurrentDictionary<IntPtr, string> StringCache
-			= new ConcurrentDictionary<IntPtr, string>();
-
-		private static readonly ConcurrentDictionary<IntPtr, int> HashCodeCache
-			= new ConcurrentDictionary<IntPtr, int>();
 
 		public uint ByteLength
 			=> Allocated.TryGetValue(this, out var length)
-				? length
+				? length-1
 				: ByteLengthCache.TryGetValue(this, out length)
 					? length
 					: CountBytes();
@@ -99,48 +94,53 @@ namespace Interop {
 
 		private uint CountBytes() {
 			var length = 0;
-			while (SBytes[length] != 0)
+			while (Pointer[length] != 0)
 				++length;
 
 			return ByteLengthCache[this] = (uint)length;
 		}
 
 		private uint CountChars() {
-			var count = (uint) Encoding.UTF8.GetCharCount((byte*) Pointer, (int) ByteLength);
-			CharCountCache[this] = count;
-			return count;
+			try {
+				var count = (uint) Encoding.UTF8.GetCharCount((byte*) Pointer, (int) ByteLength);
+				CharCountCache[this] = count;
+				return count;
+			}
+			catch (Exception ex) {
+				throw new NotImplementedException("Can't count characters in this Utf8String!",ex);
+			}
 		}
 
 		private string Decode() {
-			var s = Encoding.UTF8.GetString((byte*) Pointer, (int) ByteLength);
-			StringCache[this] = s;
+			try {
+				var s = Encoding.UTF8.GetString((byte*) Pointer, (int) ByteLength);
+				StringCache[this] = s;
+#if NETSTANDARD2_0
 			if ( string.IsInterned(s) != null )
 				Interned[s] = this;
-			return s;
-		}
-
-		private UnmanagedMemoryStream GetUnmanagedMemoryStream()
-			=> new UnmanagedMemoryStream((byte*) Pointer, ByteLength, ByteLength, FileAccess.Read);
-
-		private StreamReader GetStreamReader()
-			=> new StreamReader(GetUnmanagedMemoryStream(), Encoding.UTF8, false, Math.Min(16, (int) ByteLength));
-
-		IEnumerator<int> IEnumerable<int>.GetEnumerator() {
-			using (var sr = GetStreamReader()) {
-				var c = sr.Read();
-				if (c == -1) yield break;
-
-				yield return c;
+#endif
+				return s;
+			}
+			catch (Exception ex) {
+				throw new NotImplementedException("Can't decode characters in this Utf8String!",ex);
 			}
 		}
 
 		IEnumerator<char> IEnumerable<char>.GetEnumerator() {
-			using (var sr = GetStreamReader()) {
-				var c = sr.Read();
-				if (c == -1) yield break;
-
-				yield return (char) c;
+			var decoder = Encoding.UTF8.GetDecoder();
+			var byteBuf = new byte[1];
+			var charBuf = new char[1];
+			int charsRead;
+			foreach (var sb in (IEnumerable<sbyte>) this) {
+				charsRead = decoder.GetChars(byteBuf, 0, 1, charBuf, 0, false);
+				if (charsRead != 0)
+					yield return charBuf[0];
 			}
+			do {
+				charsRead = decoder.GetChars(byteBuf, 0, 0, charBuf, 0, true);
+				if (charsRead != 0)
+					yield return charBuf[0];
+			} while (charsRead != 0);
 		}
 
 		IEnumerator<sbyte> IEnumerable<sbyte>.GetEnumerator() {
@@ -297,9 +297,6 @@ namespace Interop {
 			=> (int) ByteLength;
 
 		int IReadOnlyCollection<char>.Count
-			=> (int) CharCount;
-
-		int IReadOnlyCollection<int>.Count
 			=> (int) CharCount;
 
 	}

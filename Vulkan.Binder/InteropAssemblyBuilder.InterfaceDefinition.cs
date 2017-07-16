@@ -63,10 +63,10 @@ namespace Vulkan.Binder {
 		private PropertyDefinition DefineInterfaceGetProperty(TypeDefinition interfaceDef, TypeReference propType, string propName) {
 			var propDef = interfaceDef.DefineProperty(propName,
 				PropertyAttributes.None,
-				propType, Type.EmptyTypes);
+				propType);
 			var propGetter = interfaceDef.DefineMethod("get_" + propName,
 				InterfaceMethodAttributes,
-				propType, Type.EmptyTypes);
+				propType);
 			SetMethodInliningAttributes(propGetter);
 			propDef.SetGetMethod(propGetter);
 			return propDef;
@@ -327,9 +327,8 @@ namespace Vulkan.Binder {
 				// common interface, boxing reference
 				var commonInterface = commonInterfaces.First();
 				splitPointerDefs.TryGetValue(commonInterface.FullName, out var splitPointerDef);
-				var splitPtrTypeGti = SplitPointerGtd.MakeGenericInstanceType(commonInterface, interiorType32, interiorType64);
 				var propType = splitPointerDef
-					?? splitPtrTypeGti.Import(module);
+					?? SplitPointerGtd.MakeGenericInstanceType(commonInterface, interiorType32, interiorType64).Import(module);
 				foreach (var transform in transforms32.Skip(1))
 					transform(ref propType);
 				var propRefType = propType.MakeByReferenceType();

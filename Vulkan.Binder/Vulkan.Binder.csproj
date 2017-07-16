@@ -9,7 +9,7 @@
 	<ApplicationIcon />
 	<OutputTypeEx>exe</OutputTypeEx>
 	<StartupObject>Vulkan.Binder.EntryPoint</StartupObject>
-	<Version>1.5.6</Version>
+	<Version>1.6.0</Version>
 	<Company>Artilect</Company>
 	<Authors>Tyler Young</Authors>
 	<Description>Hardy, efficient (low level), portable .NET Standard 1.6 bindings for Vulkan with integrated documentation. Generated directly from Vulkan C headers and docs. Uses ClangSharp, supports 32-bit, 64-bit, agnostic (AnyCPU) interfaces. Incorporates Vulkan Docs and XML from official github repo.</Description>
@@ -17,8 +17,8 @@
 	<RepositoryType>git</RepositoryType>
 	<PackageProjectUrl>https://github.com/TYoung86/Vulkan.Binder</PackageProjectUrl>
 	<PackageTags>Vulkan</PackageTags>
-	<AssemblyVersion>1.5.6.0</AssemblyVersion>
-	<FileVersion>1.5.6.0</FileVersion>
+	<AssemblyVersion>1.6.0.0</AssemblyVersion>
+	<FileVersion>1.6.0.0</FileVersion>
   </PropertyGroup>
 
 
@@ -26,9 +26,10 @@
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="IncompleteTypeReference.cs" />
-  </ItemGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+	</PropertyGroup>
+
 
   <ItemGroup>
     <None Remove="DefaultConfig.xml" />
@@ -49,7 +50,7 @@
 		<PackageReference Include="Microsoft.CSharp" Version="4.4.0-preview2-25405-01" />
 		<PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />
 		<PackageReference Include="System.Collections.Immutable" Version="1.4.0-preview2-25405-01" />
-		<PackageReference Include="System.CommandLine" Version="0.1.0-e170708-1" />
+		<PackageReference Include="System.CommandLine" Version="0.1.0-e170711-4" />
 		<PackageReference Include="System.ComponentModel.EventBasedAsync" Version="4.3.0" />
 		<PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.4.0" />
 		<PackageReference Include="System.Diagnostics.StackTrace" Version="4.3.0" />
@@ -95,9 +96,10 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\ClangSharp\ClangSharp.csproj" />
-	  <ProjectReference Include="..\Interop\Interop.csproj" />
+	  <ProjectReference Include="..\Interop\InteropBaseAssembly.csproj" />
 	  <ProjectReference Include="..\Mono.Cecil\Mono.Cecil.csproj" />
 	  <ProjectReference Include="..\Mono.Cecil\rocks\Mono.Cecil.Rocks.csproj" />
+	  <ProjectReference Include="..\Vulkan.Interop\Vulkan.Interop.csproj" />
 	</ItemGroup>
 
 	<Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />
@@ -106,11 +108,8 @@
 		<SignAssembly>True</SignAssembly>
 		<DelaySign>True</DelaySign>
 		<AssemblyOriginatorKeyFile>../vulkan.binder.pub.snk</AssemblyOriginatorKeyFile>
-		<PostBuildEvent>sn -Ra "$(TargetPath)" "$(ProjectDir)..\vulkan.binder.snk"</PostBuildEvent>
+		<PostBuildEvent>
+			sn -Ra "$(TargetPath)" "$(SolutionDir)vulkan.binder.snk"
+		</PostBuildEvent>
 	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-	</PropertyGroup>
-
 </Project>

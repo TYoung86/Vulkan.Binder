@@ -1,15 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard1.6</TargetFramework>
     <PackageId>Interop</PackageId>
     <Authors>Tyler Young</Authors>
     <Company>Artilect</Company>
     <Description>Unmanaged Interop Assembly</Description>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <Configurations>Release</Configurations>
+    <RootNamespace>Interop</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -19,12 +17,6 @@
   <ItemGroup>
     <PackageReference Include="System.Runtime" Version="4.3.0" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.3.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="System.IO.UnmanagedMemoryStream">
-      <HintPath>..\..\..\..\..\..\.nuget\packages\system.io.unmanagedmemorystream\4.3.0\ref\netstandard1.3\System.IO.UnmanagedMemoryStream.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

@@ -19,6 +19,7 @@ using ParameterAttributes = Mono.Cecil.ParameterAttributes;
 
 namespace Vulkan.Binder {
 	public partial class InteropAssemblyBuilder {
+
 		private Func<TypeDefinition[]> DefineClrType(ClangStructInfo structInfo32, ClangStructInfo structInfo64) {
 			if (structInfo32 == null) {
 				return DefineClrHandleStructInternal(structInfo64, 64);
@@ -26,12 +27,14 @@ namespace Vulkan.Binder {
 			if (structInfo64 == null) {
 				return DefineClrHandleStructInternal(structInfo32, 32);
 			}
+
 			return DefineClrStructInternal(structInfo32, structInfo64);
 		}
 
 		private Func<TypeDefinition[]> DefineClrHandleStructInternal(ClangStructInfo structInfo, int? bits = null) {
 			if (structInfo.Size > 0)
 				throw new NotImplementedException();
+
 			var structName = structInfo.Name;
 
 			if (TypeRedirects.TryGetValue(structName, out var rename)) {
@@ -39,10 +42,12 @@ namespace Vulkan.Binder {
 			}
 			if (Module.GetType(structName)?.Resolve() != null)
 				return null;
+
 			// handle type
 			var handleDef = Module.DefineType(structName,
 				PublicSealedStructTypeAttributes, size: 0);
 			handleDef.SetCustomAttribute(() => new BinderGeneratedAttribute());
+
 			//handleDef.SetCustomAttribute(StructLayoutSequentialAttributeInfo);
 			var handleInterface = IHandleGtd.MakeGenericInstanceType(handleDef);
 			handleDef.AddInterfaceImplementation(handleInterface);
@@ -65,16 +70,21 @@ namespace Vulkan.Binder {
 
 		private readonly ConcurrentDictionary<string, GenericInstanceType> _splitPointerDefs
 			= new ConcurrentDictionary<string, GenericInstanceType>();
-
+		
 		private static readonly SConstructorInfo ArgumentOutOfRangeCtorInfo
 			= typeof(ArgumentOutOfRangeException).GetTypeInfo().GetConstructor(Type.EmptyTypes);
+		private static readonly SConstructorInfo ArgumentNullCtorInfo
+			= typeof(ArgumentNullException).GetTypeInfo().GetConstructor(Type.EmptyTypes);
 
-
+		
 		public readonly MethodReference ArgumentOutOfRangeCtor;
+		public readonly MethodReference ArgumentNullCtor;
 
 		// TODO: convert to TypeReferences
 		private readonly TypeReference[] TypeArrayOfSingularVoidPointer;
+
 		private readonly TypeReference[] TypeArrayOfSingularULong;
+
 		private readonly TypeReference[] TypeArrayOfSingularUInt;
 
 		private Func<TypeDefinition[]> DefineClrStructInternal(ClangStructInfo structInfo32, ClangStructInfo structInfo64) {
@@ -250,6 +260,7 @@ namespace Vulkan.Binder {
 									il.MarkLabel(argOutOfRange);
 									il.Emit(OpCodes.Newobj, ArgumentOutOfRangeCtor);
 									il.Emit(OpCodes.Throw);
+
 									// ReSharper disable once PossibleNullReferenceException
 									argOutOfRange.Cleanup();
 								}
@@ -259,11 +270,13 @@ namespace Vulkan.Binder {
 
 						throw new NotImplementedException();
 					}
+
 					fieldRefType = fieldType.MakeByReferenceType();
 
 					var propInfo = interfaceType.GetProperty(fieldName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 					if (propInfo == null)
 						throw new NotImplementedException();
+
 					TypeReference propType;
 					try {
 						propType = propInfo.PropertyType;
@@ -272,7 +285,7 @@ namespace Vulkan.Binder {
 						propType = interfacePropDefs[fieldName].PropertyType;
 					}
 					var propInteriorType = propType.GetInteriorType(out var propTransforms).Resolve();
-					if ( propInteriorType == null )
+					if (propInteriorType == null)
 						throw new NotImplementedException();
 
 
@@ -288,8 +301,11 @@ namespace Vulkan.Binder {
 							PropertyAttributes.SpecialName,
 							propType, Type.EmptyTypes);
 						*/
-						var structGetter = structDef.DefineMethod("get_" + fieldName, HiddenPropertyMethodAttributes | MethodAttributes.Virtual, propType, Type.EmptyTypes);
+						var structGetter = structDef.DefineMethod("get_" + fieldName,
+							HiddenPropertyMethodAttributes
+							| MethodAttributes.Virtual, propType);
 						SetMethodInliningAttributes(structGetter);
+
 						//structProp.SetGetMethod(structGetter);
 						structDef.DefineMethodOverride(structGetter, propInfo.Resolve().GetMethod);
 						structGetter.GenerateIL(il => {
@@ -311,6 +327,7 @@ namespace Vulkan.Binder {
 						// TODO: boxed interface
 						throw new NotImplementedException();
 					}
+
 					throw new NotImplementedException();
 				}
 
@@ -355,8 +372,8 @@ namespace Vulkan.Binder {
 
 			if ((fieldInteriorType as TypeDefinition)?.IsCreated() ?? false) {
 				//if (fieldInteriorType.IsDirect()) {
-					//fieldInteriorType = Module.GetType(fieldInteriorType.FullName);
-					//Module.ResolveType(Module.GetTypeToken(fieldInteriorType).Token);
+				//fieldInteriorType = Module.GetType(fieldInteriorType.FullName);
+				//Module.ResolveType(Module.GetTypeToken(fieldInteriorType).Token);
 				//}
 
 				//if (IsHandleType(fieldInteriorType))
@@ -376,6 +393,7 @@ namespace Vulkan.Binder {
 			if (structInfo.Size == 0) {
 				return DefineClrHandleStructInternal(structInfo);
 			}
+
 			var structName = structInfo.Name;
 			Debug.WriteLine($"Defining simple structure {structName}");
 			if (TypeRedirects.TryGetValue(structName, out var rename)) {
@@ -383,6 +401,7 @@ namespace Vulkan.Binder {
 			}
 			if (Module.GetType(structName)?.Resolve() != null)
 				return null;
+
 			TypeDefinition structDef = Module.DefineType(structName,
 				PublicSealedStructTypeAttributes, null,
 				(int) structInfo.Alignment,
@@ -393,19 +412,83 @@ namespace Vulkan.Binder {
 				.Select(f => ResolveField(f.Type, f.Name, (int) f.Offset)));
 			return () => {
 				foreach (var fieldParam in fieldParams)
-					fieldParam.Complete(TypeRedirects,true);
+					fieldParam.Complete(TypeRedirects, true);
+
 				Debug.WriteLine($"Completed dependencies for simple structure {structName}");
 				fieldParams.ConsumeLinkedList(fieldParam => {
 					var fieldName = fieldParam.Name;
 
 					var fieldType = fieldParam.Type;
 
-					var fieldDef = structDef.DefineField(fieldName, fieldType, FieldAttributes.Public);
+					if (!fieldType.IsArray) {
+						var fieldDef = structDef.DefineField(fieldName, fieldType, FieldAttributes.Public);
+					}
+					else {
+						var arraySize = fieldParam.ArraySize;
+						fieldType = fieldType.DescendElementType();
+						var offsetPer = fieldType.SizeOf();
+						if (offsetPer == -1)
+							throw new NotImplementedException();
+
+						var fieldDef = structDef.DefineField($"{fieldName}[0]",
+							fieldType, FieldAttributes.Private);
+						fieldDef.Offset = fieldParam.Position;
+						for (var i = 1 ; i < arraySize ; ++i) {
+							structDef.DefineField($"{fieldName}[{i}]",
+									fieldType, FieldAttributes.Private)
+								.Offset = fieldParam.Position + i * offsetPer;
+						}
+
+						var fieldRefType = fieldType.MakeByReferenceType().Import(Module);
+
+						var unionGetter = structDef.DefineMethod(fieldName,
+							PublicHideBySigMethodAttributes,
+							fieldRefType, Module.TypeSystem.Int32);
+
+						unionGetter.DefineParameter(1, ParameterAttributes.In, "index");
+						SetMethodInliningAttributes(unionGetter);
+						unionGetter.GenerateIL(il => {
+							var argOutOfRange = default(CecilLabel);
+
+							if (EmitBoundsChecks) {
+								argOutOfRange = il.DefineLabel();
+								il.Emit(OpCodes.Ldarg_1); // index
+								il.EmitPushConst(0); // underflow
+								il.Emit(OpCodes.Blt, argOutOfRange);
+
+								il.Emit(OpCodes.Ldarg_1); // index
+								il.EmitPushConst(arraySize); // overflow
+								il.Emit(OpCodes.Bge, argOutOfRange);
+							}
+
+							il.Emit(OpCodes.Ldarg_0); // this
+							il.Emit(OpCodes.Ldflda, fieldDef);
+							il.Emit(OpCodes.Ldarg_1); // index
+
+							il.Emit(OpCodes.Sizeof, fieldType);
+							il.Emit(OpCodes.Mul);
+							il.Emit(OpCodes.Add);
+							if (fieldType.Resolve().IsInterface) {
+								il.Emit(OpCodes.Box, fieldType);
+							}
+							il.Emit(OpCodes.Ret);
+
+							if (EmitBoundsChecks) {
+								il.MarkLabel(argOutOfRange);
+								il.Emit(OpCodes.Newobj, ArgumentOutOfRangeCtor);
+								il.Emit(OpCodes.Throw);
+
+								// ReSharper disable once PossibleNullReferenceException
+								argOutOfRange.Cleanup();
+							}
+						});
+					}
 				});
 				return new[] {
 					structDef.CreateType()
 				};
 			};
 		}
+
 	}
 }

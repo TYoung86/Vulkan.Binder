@@ -1,8 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
-
-namespace Interop {
-	[SuppressMessage("ReSharper", "UnusedTypeParameter")]
+﻿namespace Interop {
 	public struct HandleUInt64<T> : ITypedHandle<ulong> where T : IHandle<T> {
 
 		public HandleUInt64(ulong value) => Value = value;

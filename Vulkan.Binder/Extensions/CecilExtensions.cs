@@ -37,6 +37,7 @@ namespace Vulkan.Binder.Extensions {
 						td.ClassSize = 1;
 					td.BaseType = module.TypeSystem.ValueType;
 					td.Attributes |= TypeAttributes.Serializable | TypeAttributes.BeforeFieldInit;
+					td.IsValueType = true;
 				}
 				if (td.BaseType == null) {
 					if ((typeAttrs & TypeAttributes.Interface) != 0)
@@ -187,11 +188,7 @@ namespace Vulkan.Binder.Extensions {
 		public static void SetImplementationFlags(this MethodDefinition methodDef, MethodImplAttributes attrs) {
 			methodDef.ImplAttributes = attrs;
 		}
-
-		public static MethodDefinition DefineMethod(this TypeDefinition typeDef, string name, MethodAttributes methodAttrs, TypeReference retType, params Type[] paramTypes) {
-			return DefineMethod(typeDef, name, methodAttrs, retType, paramTypes.Import(typeDef.Module));
-		}
-
+		
 		public static MethodDefinition DefineMethod(this TypeDefinition typeDef, string name, MethodAttributes methodAttrs, TypeReference retType, params TypeReference[] paramTypes) {
 			return DefineMethod(typeDef, name, methodAttrs, retType, (IEnumerable<TypeReference>) paramTypes);
 		}
@@ -307,20 +304,6 @@ namespace Vulkan.Binder.Extensions {
 			return propDef;
 		}
 
-		public static PropertyDefinition DefineProperty(this TypeDefinition typeDef, string name, PropertyAttributes propAttrs, TypeReference propType, params Type[] paramTypes) {
-			if (((propType as ByReferenceType)?.ElementType as ByReferenceType) != null)
-				throw new NotImplementedException();
-
-			var module = typeDef.Module;
-			var propDef = new PropertyDefinition(name, propAttrs, propType.Import(module));
-			var paramDefs = CreateParametersDefinitions(module, paramTypes);
-			foreach (var paramDef in paramDefs)
-				propDef.Parameters.Add(paramDef);
-
-			typeDef.Properties.Add(propDef);
-			return propDef;
-		}
-
 		public static PropertyDefinition DefineProperty(this TypeDefinition typeDef, string name, PropertyAttributes propAttrs, Type propType, params Type[] paramTypes) {
 			var module = typeDef.Module;
 			var propDef = new PropertyDefinition(name, propAttrs, propType.Import(module));
@@ -426,7 +409,7 @@ namespace Vulkan.Binder.Extensions {
 				throw new NotImplementedException();
 
 			var methodImport = match.IndirectMethodReference(module, import);
-			var imported = methodImport.ImportInternal(module);
+			var imported = methodImport.ImportInternal(module, import);
 			return imported;
 		}
 
@@ -440,7 +423,7 @@ namespace Vulkan.Binder.Extensions {
 				throw new NotImplementedException();
 
 			var methodImport = match.IndirectMethodReference(module, import);
-			var imported = methodImport.ImportInternal(module);
+			var imported = methodImport.ImportInternal(module, import);
 			return imported;
 		}
 
@@ -454,11 +437,13 @@ namespace Vulkan.Binder.Extensions {
 				throw new NotImplementedException();
 
 			var methodImport = match.IndirectMethodReference(module, import);
-			var imported = methodImport.ImportInternal(module);
+			var imported = methodImport.ImportInternal(module, import);
 			return imported;
 		}
 
-		private static MethodReference ImportInternal(this MethodReference method, ModuleDefinition module) {
+		private static MethodReference ImportInternal(this MethodReference method, ModuleDefinition module, TypeReference import) {
+			if ( method is MethodDefinition )
+				throw new NotSupportedException();
 			method.ReturnType = method.ReturnType.Import(module);
 			foreach (var param in method.Parameters)
 				param.ParameterType = param.ParameterType.Import(module);
@@ -469,20 +454,19 @@ namespace Vulkan.Binder.Extensions {
 											?? throw new NotImplementedException();
 			}
 
+			method.DeclaringType = import;
 			var imported = module.ImportReference(method);
 			return imported;
 		}
 
 		public static MethodReference IndirectMethodReference(this MethodDefinition methodDef, ModuleDefinition module, TypeReference import) {
-			var mr = new MethodReference(methodDef.Name, module.TypeSystem.Void, import) {
+			var mr = new MethodReference(methodDef.Name, methodDef.ReturnType, import.Import(module)) {
 				CallingConvention = methodDef.CallingConvention,
 				ExplicitThis = methodDef.ExplicitThis,
 				HasThis = methodDef.HasThis,
 
 				//MetadataToken = import.MetadataToken,
-				ReturnType = methodDef.ReturnType,
-				MethodReturnType = methodDef.MethodReturnType,
-				DeclaringType = import
+				//MethodReturnType = methodDef.MethodReturnType,
 			};
 			foreach (var p in methodDef.Parameters) {
 				var pr = p.Import(methodDef, module);
@@ -501,6 +485,9 @@ namespace Vulkan.Binder.Extensions {
 		}
 
 		public static TypeReference Import(this TypeReference type, ModuleDefinition module) {
+			if (type.IsGenericParameter)
+				return type;
+
 			var interiorType = type.GetInteriorType(out var txfs);
 			interiorType = ImportInternal(module, interiorType);
 			foreach (var txf in txfs) {
@@ -549,6 +536,12 @@ namespace Vulkan.Binder.Extensions {
 			}
 
 			tr = module.ImportReference(type);
+
+			if (tr.Scope.Name.StartsWith("System.Private")) {
+				// try to import a forwarded type reference instead
+				tr = FindNonPrivateForwarder(module, tr.FullName)
+					.Import(module);
+			}
 			return tr;
 		}
 
@@ -590,7 +583,8 @@ namespace Vulkan.Binder.Extensions {
 				return tr;
 			}
 
-			throw new NotImplementedException();
+			tr = module.ImportReference(typeInfo);
+			return tr;
 		}
 
 		private static TypeReference FindNonPrivateForwarder(ModuleDefinition module, string privateTypeRef) {
@@ -1088,9 +1082,9 @@ namespace Vulkan.Binder.Extensions {
 				? typeSpec.ElementType
 				: throw new NotImplementedException();
 
-		public static TypeReference GetInteriorType(this TypeReference exterior, out LinkedList<TypeReferenceTransform> transform, bool directVoids = false) {
-			transform = new LinkedList<TypeReferenceTransform>();
-			return FindInteriorType(exterior, ref transform, directVoids);
+		public static TypeReference GetInteriorType(this TypeReference exterior, out LinkedList<TypeReferenceTransform> transforms, bool directVoids = false) {
+			transforms = new LinkedList<TypeReferenceTransform>();
+			return FindInteriorType(exterior, ref transforms, directVoids);
 		}
 
 		public static TypeReference GetInteriorType(this TypeReference exterior, bool directVoids = false) {
@@ -1128,7 +1122,7 @@ namespace Vulkan.Binder.Extensions {
 			for (; ;) {
 				if (type.IsPointer) {
 					var etype = ((PointerType) type).ElementType;
-					if (etype.MetadataType != MetadataType.Void && !directVoids)
+					if (etype.MetadataType == MetadataType.Void && !directVoids)
 						break;
 
 					transform.AddFirst(MakePointerType);
@@ -1150,7 +1144,7 @@ namespace Vulkan.Binder.Extensions {
 				else
 					break;
 			}
-
+			Debug.Assert(type.IsDirectOrArray() || type.Name=="Void*");
 			return type;
 		}
 
